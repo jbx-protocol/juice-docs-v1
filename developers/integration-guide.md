@@ -2,6 +2,8 @@
 
 ## Hooking up your contract to a Juicebox project
 
+This guide is for users who would like to hook up their contract to a pre-existing Juicebox project. Right now, the primary use case for this is to route funds to a Juicebox project when certain events occur \(e.g., minting an ERC721 token\).
+
 Add the Juicebox contract dependency to your project:
 
 ```text
