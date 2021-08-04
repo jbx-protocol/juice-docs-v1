@@ -1,14 +1,14 @@
 # Integration Guide
 
-## Creating a Juicebox project
+## Hooking up your contract to a Juicebox project
 
-Add the Juice contract dependency to your project:
+Add the Juicebox contract dependency to your project:
 
-```
+```text
 $ yarn add @jbox/sol
 ```
 
-Inherit from `JuiceboxProject` in your contract. You will need to provide a `Project ID` and `Terminal Directory` address in the `JuiceboxProject` constructor. More on what this means below.
+Inherit from `JuiceboxProject` in your contract. You will need to provide a `Project ID` and `Terminal Directory` address in the `JuiceboxProject` constructor.
 
 In the meantime, feel free to refer to some examples:
 
@@ -23,7 +23,7 @@ import "@jbox/sol/contracts/abstract/JuiceboxProject.sol";
 
 contract HelloWorldContract is JuiceboxProject {
   ...
-    
+
   constructor(
       uint256 _projectID,
       ITerminalDirectory _terminalDirectory
