@@ -12,8 +12,8 @@ Inherit from `JuiceboxProject` in your contract. You will need to provide a `Pro
 
 In the meantime, feel free to refer to some examples:
 
-* [https://github.com/TileDAO/tiles/blob/main/contracts/Tiles.sol](https://github.com/TileDAO/tiles/blob/main/contracts/Tiles.sol)
-* [https://github.com/odd-amphora/wiki.token/blob/main/packages/hardhat/contracts/Token.sol](https://github.com/odd-amphora/wiki.token/blob/main/packages/hardhat/contracts/Token.sol)
+* [TileDAO](https://github.com/TileDAO/tiles/blob/main/contracts/Tiles.sol)
+* [WikiToken](https://github.com/odd-amphora/wiki.token/blob/main/packages/hardhat/contracts/Token.sol)
 
 ```text
 // SPDX-License-Identifier: MIT
