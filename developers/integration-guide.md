@@ -8,12 +8,7 @@ Add the Juicebox contract dependency to your project:
 $ yarn add @jbox/sol
 ```
 
-Inherit from `JuiceboxProject` in your contract. You will need to provide a `Project ID` and `Terminal Directory` address in the `JuiceboxProject` constructor.
-
-In the meantime, feel free to refer to some examples:
-
-* [TileDAO](https://github.com/TileDAO/tiles/blob/main/contracts/Tiles.sol)
-* [WikiToken](https://github.com/odd-amphora/wiki.token/blob/main/packages/hardhat/contracts/Token.sol)
+Inherit from `JuiceboxProject` in your contract. You will need to provide a `Project ID` and `Terminal Directory` address in the `JuiceboxProject` constructor:
 
 ```text
 // SPDX-License-Identifier: MIT
@@ -33,5 +28,8 @@ contract HelloWorldContract is JuiceboxProject {
 }
 ```
 
-TODO
+In the meantime, while we are in the midst of writing docs, feel free to refer to some examples:
+
+* [TileDAO](https://github.com/TileDAO/tiles/blob/main/contracts/Tiles.sol)
+* [WikiToken](https://github.com/odd-amphora/wiki.token/blob/main/packages/hardhat/contracts/Token.sol)
 
