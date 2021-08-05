@@ -4,7 +4,8 @@
 
 ## Contracts
 
-* [Terminal Directory](contracts/terminal-directory.md)
+* [V1](contracts/v1/README.md)
+  * [Terminal Directory](contracts/v1/terminal-directory.md)
 
 ## Getting Started
 
