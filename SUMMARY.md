@@ -2,6 +2,10 @@
 
 * [Initial page](README.md)
 
+## Contracts
+
+* [Terminal Directory](contracts/terminal-directory.md)
+
 ## Getting Started
 
 * [Create a Juicebox Project](getting-started/create-a-juicebox-project.md)
