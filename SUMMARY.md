@@ -18,4 +18,5 @@
 * [Juicebox.money](https://juicebox.money)
 * [Github](https://github.com/jbx-protocol)
 * [Twitter](https://twitter.com/juiceboxETH)
+* [Discord](https://discord.gg/5JsDvuyCPd)
 
