@@ -6,6 +6,10 @@
 
 * [Create a Juicebox Project](getting-started/create-a-juicebox-project.md)
 
+## Resources
+
+* [FAQ](resources/faq.md)
+
 ## Developers
 
 * [Integration Guide](developers/integration-guide.md)
