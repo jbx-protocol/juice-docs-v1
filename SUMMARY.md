@@ -14,6 +14,7 @@
 
 * [V1](contracts/v1/README.md)
   * [Terminal Directory](contracts/v1/terminal-directory.md)
+  * [Mods](contracts/v1/mods.md)
 
 ## Developers
 
