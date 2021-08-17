@@ -4,7 +4,7 @@ description: 'Interfaces the contracts and the user, working as a top-level cont
 
 # TerminalV1
 
-Content
+## Content
 
 On this page you'll find the documentation for the constructor and the events, for the read and write functions of the terminal follow the links:
 
@@ -54,6 +54,8 @@ constructor(
     governance = _governance;
 }
 ```
+
+## Events
 
 
 

@@ -1,64 +1,36 @@
 # Read
 
-### 
+### canPrintPreminedTickets
 
-### currentOverflowOf
-
-Gets the current overflowed amount for a specified project.   
+Whether or not a project can still print premined tickets.
 
 **Params:**
 
-*  \_projectId The ID of the project to get overflow for.  
+*  \_projectId The ID of the project to get the status of.
 
-**@return** overflow The current overflow of funds for the project.
-
-```lua
-
-function currentOverflowOf(uint256 _projectId)
-    external
-    view
-    override
-    returns (uint256 overflow)
-{
-    // Get a reference to the project's current funding cycle.
-    FundingCycle memory _fundingCycle = fundingCycles.currentOf(_projectId);
-
-    // There's no overflow if there's no funding cycle.
-    if (_fundingCycle.id == 0) return 0;
-
-    return _overflowFrom(_fundingCycle);
-}
-```
-
-
-
-### reservedTicketBalanceOf
-
-Gets the amount of reserved tickets that a project has.
-
-  **Params:**
-
-* \_projectId The ID of the project to get overflow for.
-* \_reservedRate The reserved rate to use to make the calculation.  
-
-**@return** amount overflow The current overflow of funds for the project.
+**@return** Boolean flag.
 
 ```lua
 
-function reservedTicketBalanceOf(uint256 _projectId, uint256 _reservedRate)
-    external
+function canPrintPreminedTickets(uint256 _projectId)
+    public
     view
     override
-    returns (uint256)
+    returns (bool)
 {
     return
-        _reservedTicketAmountFrom(
-            _processedTicketTrackerOf[_projectId],
-            _reservedRate,
-            ticketBooth.totalSupplyOf(_projectId)
-        );
+        // The total supply of tickets must equal the preconfigured ticket count.
+        ticketBooth.totalSupplyOf(_projectId) ==
+        _preconfigureTicketCountOf[_projectId] &&
+        // The above condition is still possible after post-configured tickets have been printed due to ticket redeeming.
+        // The only case when processedTicketTracker is 0 is before redeeming and printing reserved tickets.
+        _processedTicketTrackerOf[_projectId] >= 0 &&
+        uint256(_processedTicketTrackerOf[_projectId]) ==
+        _preconfigureTicketCountOf[_projectId];
 }
 ```
+
+
 
 ### claimableOverflowOf
 
@@ -147,35 +119,96 @@ function claimableOverflowOf(
             200
         );
 }
+
 ```
 
-### canPrintPreminedTickets
+### currentOverflowOf
 
-Whether or not a project can still print premined tickets.
+Gets the current overflowed amount for a specified project.   
 
 **Params:**
 
-*  \_projectId The ID of the project to get the status of.
+*  \_projectId The ID of the project to get overflow for.  
 
-**@return** Boolean flag.
+**@return** overflow The current overflow of funds for the project.
 
 ```lua
 
-function canPrintPreminedTickets(uint256 _projectId)
-    public
+function currentOverflowOf(uint256 _projectId)
+    external
     view
     override
-    returns (bool)
+    returns (uint256 overflow)
+{
+    // Get a reference to the project's current funding cycle.
+    FundingCycle memory _fundingCycle = fundingCycles.currentOf(_projectId);
+
+    // There's no overflow if there's no funding cycle.
+    if (_fundingCycle.id == 0) return 0;
+
+    return _overflowFrom(_fundingCycle);
+}
+
+```
+
+### reservedTicketBalanceOf
+
+Gets the amount of reserved tickets that a project has.
+
+  **Params:**
+
+* \_projectId The ID of the project to get overflow for.
+* \_reservedRate The reserved rate to use to make the calculation.  
+
+**@return** amount overflow The current overflow of funds for the project.
+
+```lua
+
+function reservedTicketBalanceOf(uint256 _projectId, uint256 _reservedRate)
+    external
+    view
+    override
+    returns (uint256)
 {
     return
-        // The total supply of tickets must equal the preconfigured ticket count.
-        ticketBooth.totalSupplyOf(_projectId) ==
-        _preconfigureTicketCountOf[_projectId] &&
-        // The above condition is still possible after post-configured tickets have been printed due to ticket redeeming.
-        // The only case when processedTicketTracker is 0 is before redeeming and printing reserved tickets.
-        _processedTicketTrackerOf[_projectId] >= 0 &&
-        uint256(_processedTicketTrackerOf[_projectId]) ==
-        _preconfigureTicketCountOf[_projectId];
+        _reservedTicketAmountFrom(
+            _processedTicketTrackerOf[_projectId],
+            _reservedRate,
+            ticketBooth.totalSupplyOf(_projectId)
+        );
 }
+```
+
+### 
+
+### TO-DO
+
+Read functions yet to be documented
+
+```text
+function governance() external view returns (address payable);
+
+function pendingGovernance() external view returns (address payable);
+
+function projects() external view returns (IProjects);
+
+function fundingCycles() external view returns (IFundingCycles);
+
+function ticketBooth() external view returns (ITicketBooth);
+
+function prices() external view returns (IPrices);
+
+function modStore() external view returns (IModStore);
+
+function balanceOf(uint256 _projectId) external view returns (uint256);
+
+function fee() external view returns (uint256);
+
+function terminalDirectory() external view returns (ITerminalDirectory);
+
+function migrationIsAllowed(ITerminal _terminal)
+    external
+    view
+    returns (bool);
 ```
 
