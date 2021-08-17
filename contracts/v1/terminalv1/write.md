@@ -304,20 +304,6 @@ function tap(
 
 
 
-### 
-
-### 
-
-### 
-
-
-
-### 
-
-
-
-### 
-
 ### TO-DO
 
 Write functions yet to be documented.
