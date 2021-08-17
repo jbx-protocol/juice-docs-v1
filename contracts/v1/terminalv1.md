@@ -265,49 +265,15 @@ Anyone can deploy a project on an owner's behalf.
 * \_ticketMods Any ticket mods to set.
 
 ```lua
-
-function deploy(
-    address _owner,
-    bytes32 _handle,
-    string calldata _uri,
-    FundingCycleProperties calldata _properties,
-    FundingCycleMetadata calldata _metadata,
-    PayoutMod[] memory _payoutMods,
-    TicketMod[] memory _ticketMods
-) external override {
-    // Make sure the metadata checks out. If it does, return a packed version of it.
-    uint256 _packedMetadata = _validateAndPackFundingCycleMetadata(
-        _metadata
-    );
-
-    // Create the project for the owner.
-    uint256 _projectId = projects.create(_owner, _handle, _uri, this);
-
-    // Configure the funding stage's state.
-    FundingCycle memory _fundingCycle = fundingCycles.configure(
-        _projectId,
-        _properties,
-        _packedMetadata,
-        fee,
-        true
-    );
-
-    // Set payout mods if there are any.
-    if (_payoutMods.length > 0)
-        modStore.setPayoutMods(
-            _projectId,
-            _fundingCycle.configured,
-            _payoutMods
-        );
-
-    // Set ticket mods if there are any.
-    if (_ticketMods.length > 0)
-        modStore.setTicketMods(
-            _projectId,
-            _fundingCycle.configured,
-            _ticketMods
-        );
-}
+    function deploy(
+        address _owner,
+        bytes32 _handle,
+        string calldata _uri,
+        FundingCycleProperties calldata _properties,
+        FundingCycleMetadata calldata _metadata,
+        PayoutMod[] memory _payoutMods,
+        TicketMod[] memory _ticketMods
+    ) external;
 ```
 
 
@@ -340,57 +306,13 @@ Only a project's owner or a designated operator can configure its funding cycles
  **@return** The ID of the funding cycle that was successfully configured.
 
 ```lua
-function configure(
-    uint256 _projectId,
-    FundingCycleProperties calldata _properties,
-    FundingCycleMetadata calldata _metadata,
-    PayoutMod[] memory _payoutMods,
-    TicketMod[] memory _ticketMods
-)
-    external
-    override
-    requirePermission(
-        projects.ownerOf(_projectId),
-        _projectId,
-        Operations.Configure
-    )
-    returns (uint256)
-{
-    // Make sure the metadata is validated, and pack it into a uint256.
-    uint256 _packedMetadata = _validateAndPackFundingCycleMetadata(
-        _metadata
-    );
-
-    // If the project can still print premined tickets configure the active funding cycle instead of creating a standby one.
-    bool _shouldConfigureActive = canPrintPreminedTickets(_projectId);
-
-    // Configure the funding stage's state.
-    FundingCycle memory _fundingCycle = fundingCycles.configure(
-        _projectId,
-        _properties,
-        _packedMetadata,
-        fee,
-        _shouldConfigureActive
-    );
-
-    // Set payout mods for the new configuration if there are any.
-    if (_payoutMods.length > 0)
-        modStore.setPayoutMods(
-            _projectId,
-            _fundingCycle.configured,
-            _payoutMods
-        );
-
-    // Set payout mods for the new configuration if there are any.
-    if (_ticketMods.length > 0)
-        modStore.setTicketMods(
-            _projectId,
-            _fundingCycle.configured,
-            _ticketMods
-        );
-
-    return _fundingCycle.id;
-}
+    function configure(
+        uint256 _projectId,
+        FundingCycleProperties calldata _properties,
+        FundingCycleMetadata calldata _metadata,
+        PayoutMod[] memory _payoutMods,
+        TicketMod[] memory _ticketMods
+    ) external returns (uint256);
 ```
 
 ### 
@@ -411,85 +333,13 @@ Only a project's owner or a designated operator can print premined tickets.
 
 ```lua
 function printPreminedTickets(
-    uint256 _projectId,
-    uint256 _amount,
-    uint256 _currency,
-    address _beneficiary,
-    string memory _memo,
-    bool _preferUnstakedTickets
-)
-    external
-    override
-    requirePermission(
-        projects.ownerOf(_projectId),
-        _projectId,
-        Operations.PrintPreminedTickets
-    )
-{
-    // Can't send to the zero address.
-    require(
-        _beneficiary != address(0),
-        "TerminalV1::printTickets: ZERO_ADDRESS"
-    );
-
-    // Get the current funding cycle to read the weight and currency from.
-    uint256 _weight = fundingCycles.BASE_WEIGHT();
-
-    // Get the current funding cycle to read the weight and currency from.
-    // Get the currency price of ETH.
-    uint256 _ethPrice = prices.getETHPriceFor(_currency);
-
-    // Multiply the amount by the funding cycle's weight to determine the amount of tickets to print.
-    uint256 _weightedAmount = PRBMathUD60x18.mul(
-        PRBMathUD60x18.div(_amount, _ethPrice),
-        _weight
-    );
-
-    // Make sure the project hasnt printed tickets that werent preconfigure.
-    // Do this check after the external calls above.
-    require(
-        canPrintPreminedTickets(_projectId),
-        "TerminalV1::printTickets: ALREADY_ACTIVE"
-    );
-
-    // Set the preconfigure tickets as processed so that reserved tickets cant be minted against them.
-    // Make sure int casting isnt overflowing the int. 2^255 - 1 is the largest number that can be stored in an int.
-    require(
-        _processedTicketTrackerOf[_projectId] < 0 ||
-            uint256(_processedTicketTrackerOf[_projectId]) +
-                uint256(_weightedAmount) <=
-            uint256(type(int256).max),
-        "TerminalV1::printTickets: INT_LIMIT_REACHED"
-    );
-
-    _processedTicketTrackerOf[_projectId] =
-        _processedTi    ​
-
-  @devcketTrackerOf[_projectId] +
-        int256(_weightedAmount);
-
-    // Set the count of preconfigure tickets this project has printed.
-    _preconfigureTicketCountOf[_projectId] =
-        _preconfigureTicketCountOf[_projectId] +
-        _weightedAmount;
-
-    // Print the project's tickets for the beneficiary.
-    ticketBooth.print(
-        _beneficiary,
-        _projectId,
-        _weightedAmount,
-        _preferUnstakedTickets
-    );
-
-    emit PrintPreminedTickets(
-        _projectId,
-        _beneficiary,
-        _amount,
-        _currency,
-        _memo,
-        msg.sender
-    );
-}
+        uint256 _projectId,
+        uint256 _amount,
+        uint256 _currency,
+        address _beneficiary,
+        string memory _memo,
+        bool _preferUnstakedTickets
+) external;
 ```
 
 
@@ -507,34 +357,16 @@ The msg.value is the amount of the contribution in wei.
 *  \_beneficiary The address to print Tickets for.  \_memo A memo that will be included in the published event.
 *  \_preferUnstakedTickets Whether ERC20's should be unstaked automatically if they have been issued.
 
-**@return** The ID of the funding cycle that the payment was made during.
+**@return** The ID of the funding cycle that the payment was made durin
 
-```lua
-
+```text
 function pay(
     uint256 _projectId,
     address _beneficiary,
     string calldata _memo,
     bool _preferUnstakedTickets
-) external payable override returns (uint256) {
-    // Positive payments only.
-    require(msg.value > 0, "TerminalV1::pay: BAD_AMOUNT");
-
-    // Cant send tickets to the zero address.
-    require(_beneficiary != address(0), "TerminalV1::pay: ZERO_ADDRESS");
-
-    return
-        _pay(
-            _projectId,
-            msg.value,
-            _beneficiary,
-            _memo,
-            _preferUnstakedTickets
-        );
-}
+) external payable returns (uint256 fundingCycleId);
 ```
-
-### \*\*\*\*
 
 ### **tap**
 
@@ -551,101 +383,16 @@ Anyone can tap funds on a project's behalf.
 
 **@return** The ID of the funding cycle that was tapped.
 
-```lua
+```text
 function tap(
     uint256 _projectId,
     uint256 _amount,
     uint256 _currency,
     uint256 _minReturnedWei
-) external override nonReentrant returns (uint256) {
-    // Register the funds as tapped. Get the ID of the funding cycle that was tapped.
-    FundingCycle memory _fundingCycle = fundingCycles.tap(
-        _projectId,
-        _amount
-    );
-
-    // If there's no funding cycle, there are no funds to tap.
-    if (_fundingCycle.id == 0) return 0;
-
-    // Make sure the currency's match.
-    require(
-        _currency == _fundingCycle.currency,
-        "TerminalV1::tap: UNEXPECTED_CURRENCY"
-    );
-
-    // Get a reference to this project's current balance, including any earned yield.
-    // Get the currency price of ETH.
-    uint256 _ethPrice = prices.getETHPriceFor(_fundingCycle.currency);
-
-    // Get the price of ETH.
-    // The amount of ETH that is being tapped.
-    uint256 _tappedWeiAmount = PRBMathUD60x18.div(_amount, _ethPrice);
-
-    // The amount being tapped must be at least as much as was expected.
-    require(
-        _minReturnedWei <= _tappedWeiAmount,
-        "TerminalV1::tap: INADEQUATE"
-    );
-
-    // Get a reference to this project's current balance, including any earned yield.
-    uint256 _balance = balanceOf[_fundingCycle.projectId];
-
-    // The amount being tapped must be available.
-    require(
-        _tappedWeiAmount <= _balance,
-        "TerminalV1::tap: INSUFFICIENT_FUNDS"
-    );
-
-    // Removed the tapped funds from the project's balance.
-    balanceOf[_projectId] = _balance - _tappedWeiAmount;
-
-    // Get a reference to the project owner, which will receive the admin's tickets from paying the fee,
-    // and receive any extra tapped funds not allocated to mods.
-    address payable _projectOwner = payable(
-        projects.ownerOf(_fundingCycle.projectId)
-    );
-
-    // Get a reference to the handle of the project paying the fee and sending payouts.
-    bytes32 _handle = projects.handleOf(_projectId);
-
-    // Take a fee from the _tappedWeiAmount, if needed.
-    // The project's owner will be the beneficiary of the resulting printed tickets from the governance project.
-    uint256 _feeAmount = _fundingCycle.fee > 0
-        ? _takeFee(
-            _tappedWeiAmount,
-            _fundingCycle.fee,
-            _projectOwner,
-            string(bytes.concat("Fee from @", _handle))
-        )
-        : 0;
-
-    // Payout to mods and get a reference to the leftover transfer amount after all mods have been paid.
-    // The net transfer amount is the tapped amount minus the fee.
-    uint256 _leftoverTransferAmount = _distributeToPayoutMods(
-        _fundingCycle,
-        _tappedWeiAmount - _feeAmount,
-        string(bytes.concat("Payout from @", _handle))
-    );
-
-    // Transfer any remaining balance to the beneficiary.
-    if (_leftoverTransferAmount > 0)
-        Address.sendValue(_projectOwner, _leftoverTransferAmount);
-
-    emit Tap(
-        _fundingCycle.id,
-        _fundingCycle.projectId,
-        _projectOwner,
-        _amount,
-        _fundingCycle.currency,
-        _tappedWeiAmount - _feeAmount,
-        _leftoverTransferAmount,
-        _feeAmount,
-        msg.sender
-    );
-
-    return _fundingCycle.id;
-}
+) external returns (uint256);
 ```
+
+
 
 ### 
 
@@ -667,75 +414,15 @@ Only a ticket's holder or a designated operator can redeem it.
   **@return** amount The amount of ETH that the tickets were redeemed for.
 
 ```text
- 
-function redeem(
-    address _account,
-    uint256 _projectId,
-    uint256 _count,
-    uint256 _minReturnedWei,
-    address payable _beneficiary,
-    bool _preferUnstaked
-)
-    external
-    override
-    nonReentrant
-    requirePermissionAllowingWildcardDomain(
-        _account,
-        _projectId,
-        Operations.Redeem
-    )
-    returns (uint256 amount)
-{
-    // There must be an amount specified to redeem.
-    require(_count > 0, "TerminalV1::redeem: NO_OP");
-
-    // Can't send claimed funds to the zero address.
-    require(_beneficiary != address(0), "TerminalV1::redeem: ZERO_ADDRESS");
-
-    // The amount of ETH claimable by the message sender from the specified project by redeeming the specified number of tickets.
-    amount = claimableOverflowOf(_account, _projectId, _count);
-
-    // Nothing to do if the amount is 0.
-    require(amount > 0, "TerminalV1::redeem: NO_OP");
-
-    // The amount being claimed must be at least as much as was expected.
-    require(amount >= _minReturnedWei, "TerminalV1::redeem: INADEQUATE");
-
-    // Remove the redeemed funds from the project's balance.
-    balanceOf[_projectId] = balanceOf[_projectId] - amount;
-
-    // Get a reference to the processed ticket tracker for the project.
-    int256 _processedTicketTracker = _processedTicketTrackerOf[_projectId];
-
-    // Subtract the count from the processed ticket tracker.
-    // Subtract from processed tickets so that the difference between whats been processed and the
-    // total supply remains the same.
-    // If there are at least as many processed tickets as there are tickets being redeemed,
-    // the processed ticket tracker of the project will be positive. Otherwise it will be negative.
-    _processedTicketTrackerOf[_projectId] = _processedTicketTracker < 0 // If the tracker is negative, add the count and reverse it.
-        ? -int256(uint256(-_processedTicketTracker) + _count) // the tracker is less than the count, subtract it from the count and reverse it.
-        : _processedTicketTracker < int256(_count)
-        ? -(int256(_count) - _processedTicketTracker) // simply subtract otherwise.
-        : _processedTicketTracker - int256(_count);
-
-    // Redeem the tickets, which burns them.
-    ticketBooth.redeem(_account, _projectId, _count, _preferUnstaked);
-
-    // Transfer funds to the specified address.
-    Address.sendValue(_beneficiary, amount);
-
-    emit Redeem(
-        _account,
-        _beneficiary,
-        _projectId,
-        _count,
-        amount,
-        msg.sender
-    );
-}
+    function redeem(
+        address _account,
+        uint256 _projectId,
+        uint256 _amount,
+        uint256 _minReturnedWei,
+        address payable _beneficiary,
+        bool _preferUnstaked
+    ) external returns (uint256 returnAmount);
 ```
-
-
 
 ### **setFee**
 
@@ -749,15 +436,7 @@ Only governance can set a new fee.
 * \_fee The new fee percent. Out of 200.
 
 ```text
-function setFee(uint256 _fee) external override onlyGov {
-    // Fee must be under 100%.
-    require(_fee <= 200, "TerminalV1::setFee: BAD_FEE");
-
-    // Set the fee.
-    fee = _fee;
-
-    emit SetFee(_fee);
-}
+function setFee(uint256 _fee) external;
 ```
 
 
@@ -766,7 +445,7 @@ function setFee(uint256 _fee) external override onlyGov {
 
 Allows governance to transfer its privileges to another contract.
 
-Only the currency governance can appoint a new governance.
+Only the current governance can appoint a new governance.
 
 **Params:**
 
@@ -774,50 +453,91 @@ Only the currency governance can appoint a new governance.
   * This address will have to accept the responsibility in a subsequent transaction.
 
 ```text
-function appointGovernance(address payable _pendingGovernance)
-    external
-    override
-    onlyGov
-{
-    // The new governance can't be the zero address.
-    require(
-        _pendingGovernance != address(0),
-        "TerminalV1::appointGovernance: ZERO_ADDRESS"
-    );
-    // The new governance can't be the same as the current governance.
-    require(
-        _pendingGovernance != governance,
-        "TerminalV1::appointGovernance: NO_OP"
-    );
-
-    // Set the appointed governance as pending.
-    pendingGovernance = _pendingGovernance;
-
-    emit AppointGovernance(_pendingGovernance);
-}
+function appointGovernance(address payable _pendingGovernance) external;
 ```
 
 ### acceptGovernance
 
-Allows contract to accept its appointment as the new governance.
+Allows contract to accept its appointment as the new governance.  
+Only the pending governance can accept.
 
 ```text
-function acceptGovernance() external override {
-    // Only the pending governance address can accept.
-    require(
-        msg.sender == pendingGovernance,
-        "TerminalV1::acceptGovernance: UNAUTHORIZED"
-    );
-
-    // Get a reference to the pending governance.
-    address payable _pendingGovernance = pendingGovernance;
-
-    // Set the govenance to the pending value.
-    governance = _pendingGovernance;
-
-    emit AcceptGovernance(_pendingGovernance);
-}
+function acceptGovernance() external;
 ```
+
+### migrate
+
+Allows a project owner to migrate its funds and operations to a new contract.
+
+Only a project's owner or a designated operator can migrate it.
+
+**Params:**
+
+*  \_projectId The ID of the project being migrated. 
+* \_to The contract that will gain the project's funds.
+
+```text
+event Migrate(
+    uint256 indexed projectId,
+    ITerminal indexed to,
+    uint256 _amount,
+    address caller
+);
+```
+
+
+
+### addToBalance
+
+   Receives and allocates funds belonging to the specified project.
+
+**Params:**
+
+*  \_projectId The ID of the project to which the funds received belong.
+
+```text
+event AddToBalance(
+    uint256 indexed projectId,
+    uint256 value,
+    address caller
+);
+```
+
+
+
+### allowMigration
+
+Adds to the contract addresses that projects can migrate their Tickets to.
+
+Only governance can add a contract to the migration allow list.
+
+**Params:**
+
+*  \_contract The contract to allow.
+
+```text
+function allowMigration(ITerminal _contract) external;
+```
+
+
+
+### printReservedTickets
+
+Prints all reserved tickets for a project.
+
+**Params:**
+
+*  \_projectId The ID of the project to which the reserved tickets belong.
+
+      **@return** amount The amount of tickets that are being printed
+
+```text
+function printReservedTickets(uint256 _projectId)
+    external
+    returns (uint256 reservedTicketsToPrint);
+```
+
+
 
 
 
