@@ -6,9 +6,9 @@ Whether or not a project can still print premined tickets.
 
 **Params:**
 
-*  \_projectId The ID of the project to get the status of.
+*  \_projectId: The ID of the project to get the status of.
 
-**@return** Boolean flag.
+**@return:** Boolean flag.
 
 ```lua
 
@@ -41,11 +41,11 @@ If there is a funding cycle reconfiguration ballot open for the project, the pro
 
 **Params:**
 
-*  \_account The address to get an amount for.  
-* \_projectId The ID of the project to get a claimable amount for.  
-* \_count The number of Tickets that would be redeemed to get the resulting amount.
+*  \_account: The address to get an amount for.  
+* \_projectId: The ID of the project to get a claimable amount for.  
+* \_count: The number of Tickets that would be redeemed to get the resulting amount.
 
-  **@return** amount The amount of tokens that can be claimed
+  **@return** amount: The amount of tokens that can be claimed
 
 ```lua
 function claimableOverflowOf(
@@ -130,7 +130,7 @@ Gets the current overflowed amount for a specified project.
 
 *  \_projectId The ID of the project to get overflow for.  
 
-**@return** overflow The current overflow of funds for the project.
+**@return** overflow: The current overflow of funds for the project.
 
 ```lua
 
@@ -148,7 +148,14 @@ function currentOverflowOf(uint256 _projectId)
 
     return _overflowFrom(_fundingCycle);
 }
+```
 
+### governance
+
+**@return** payable: The adress of the current governance
+
+```text
+function governance() external view returns (address payable);
 ```
 
 ### reservedTicketBalanceOf
@@ -157,10 +164,10 @@ Gets the amount of reserved tickets that a project has.
 
   **Params:**
 
-* \_projectId The ID of the project to get overflow for.
-* \_reservedRate The reserved rate to use to make the calculation.  
+* \_projectId: The ID of the project to get overflow for.
+* \_reservedRate: The reserved rate to use to make the calculation.  
 
-**@return** amount overflow The current overflow of funds for the project.
+**@return:** amount overflow The current overflow of funds for the project.
 
 ```lua
 
@@ -186,7 +193,7 @@ function reservedTicketBalanceOf(uint256 _projectId, uint256 _reservedRate)
 Read functions yet to be documented
 
 ```text
-function governance() external view returns (address payable);
+
 
 function pendingGovernance() external view returns (address payable);
 
