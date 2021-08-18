@@ -16,13 +16,13 @@ On this page you'll find the documentation for the constructor and the events, f
 
 **Params:**
 
-*   **\_projects** A Projects contract which mints ERC-721's that represent project ownership and transfers**.** 
-*   **\_fundingCycles** A funding cycle configuration store.
-*   **\_ticketBooth** A contract that manages Ticket printing and redeeming.
-*   **\_operatorStore** A contract storing operator assignments.
-*   **\_modStore** A storage for a project's mods.
-*   **\_prices** A price feed contract to use.
-*   **\_terminalDirectory** A directory of a project's current Juicebox terminal to receive payments in.
+*   **\_projects**: A Projects contract which mints ERC-721's that represent project ownership and transfers**.** 
+*   **\_fundingCycles**: A funding cycle configuration store.
+*   **\_ticketBooth**: A contract that manages Ticket printing and redeeming.
+*   **\_operatorStore**: A contract storing operator assignments.
+*   **\_modStore**: A storage for a project's mods.
+*   **\_prices**: A price feed contract to use.
+*   **\_terminalDirectory**: A directory of a project's current Juicebox terminal to receive payments in.
 
 ```text
 
