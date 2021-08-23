@@ -15,12 +15,11 @@
 * [TicketBooth](contracts/ticketbooth/README.md)
   * [Write](contracts/ticketbooth/write.md)
   * [Read](contracts/ticketbooth/read.md)
-* [V1](contracts/v1/README.md)
-  * [TerminalV1](contracts/v1/terminalv1/README.md)
-    * [Read](contracts/v1/terminalv1/read.md)
-    * [Write](contracts/v1/terminalv1/write.md)
-  * [Terminal Directory](contracts/v1/terminal-directory.md)
-  * [Mods](contracts/v1/mods.md)
+* [Terminal Directory](contracts/terminal-directory.md)
+* [Mods](contracts/mods.md)
+* [TerminalV1](contracts/terminalv1/README.md)
+  * [Read](contracts/terminalv1/read.md)
+  * [Write](contracts/terminalv1/write.md)
 
 ## Developers
 
