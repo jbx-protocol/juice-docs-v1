@@ -12,10 +12,13 @@
 
 ## Contracts
 
+* [TicketBooth](contracts/ticketbooth/README.md)
+  * [Write](contracts/ticketbooth/write.md)
+  * [Read](contracts/ticketbooth/read.md)
 * [V1](contracts/v1/README.md)
   * [TerminalV1](contracts/v1/terminalv1/README.md)
-    * [Write](contracts/v1/terminalv1/write.md)
     * [Read](contracts/v1/terminalv1/read.md)
+    * [Write](contracts/v1/terminalv1/write.md)
   * [Terminal Directory](contracts/v1/terminal-directory.md)
   * [Mods](contracts/v1/mods.md)
 
