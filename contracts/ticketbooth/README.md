@@ -20,9 +20,7 @@ constructor(
     IProjects _projects,
     IOperatorStore _operatorStore,
     ITerminalDirectory _terminalDirectory
-) Operatable(_operatorStore) TerminalUtility(_terminalDirectory) {
-    projects = _projects;
-}
+);
 ```
 
 
