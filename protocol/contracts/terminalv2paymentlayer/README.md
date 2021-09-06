@@ -23,13 +23,168 @@ description: >-
 
 ## Events
 
-* `AddToBalance`
-* `Migrate`
-* `DistributePayouts`
-* `UseAllowance`
-* `Pay`
-* `Redeem`
-* `DistributeToPayoutSplit`
+<table>
+  <thead>
+    <tr>
+      <th style="text-align:left">Event</th>
+      <th style="text-align:left">Data</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align:left"><code>AddToBalance</code>
+      </td>
+      <td style="text-align:left">
+        <ul>
+          <li><code>uint256 indexed projectId</code>
+          </li>
+          <li><code>uint256 value</code>
+          </li>
+          <li><code>address caller</code>
+          </li>
+        </ul>
+      </td>
+    </tr>
+    <tr>
+      <td style="text-align:left"><code>Migrate</code>
+      </td>
+      <td style="text-align:left">
+        <ul>
+          <li><code>uint256 indexed projectId</code>
+          </li>
+          <li><code>ITerminal indexed to</code>
+          </li>
+          <li><code>uint256 amount</code>
+          </li>
+          <li><code>address caller</code>
+          </li>
+        </ul>
+      </td>
+    </tr>
+    <tr>
+      <td style="text-align:left"><code>DistributePayouts</code>
+      </td>
+      <td style="text-align:left">
+        <ul>
+          <li><code>uint256 indexed fundingCycleId</code>
+          </li>
+          <li><code>uint256 indexed projectId</code>
+          </li>
+          <li><code>address projectOwner</code>
+          </li>
+          <li><code>uint256 amount</code>
+          </li>
+          <li><code>uint256 tappedAmount</code>
+          </li>
+          <li><code>uint256 feeAmount</code>
+          </li>
+          <li><code>uint256 projectOwnerTransferAmount</code>
+          </li>
+          <li><code>string memo</code>
+          </li>
+          <li><code>address caller</code>
+          </li>
+        </ul>
+      </td>
+    </tr>
+    <tr>
+      <td style="text-align:left"><code>UseAllowance</code>
+      </td>
+      <td style="text-align:left">
+        <ul>
+          <li><code>uint256 indexed fundingCycleNumber</code>
+          </li>
+          <li><code>uint256 indexed configuration</code>
+          </li>
+          <li><code>uint256 indexed projectId</code>
+          </li>
+          <li><code>address beneficiary</code>
+          </li>
+          <li><code>uint256 amount</code>
+          </li>
+          <li><code>uint256 feeAmount</code>
+          </li>
+          <li><code>uint256 transferAmount</code>
+          </li>
+          <li><code>address caller</code>
+          </li>
+        </ul>
+      </td>
+    </tr>
+    <tr>
+      <td style="text-align:left"><code>Pay</code>
+      </td>
+      <td style="text-align:left">
+        <ul>
+          <li><code>uint256 indexed fundingCycleNumber</code>
+          </li>
+          <li><code>uint256 indexed projectId</code>
+          </li>
+          <li><code>address indexed beneficiary</code>
+          </li>
+          <li><code>FundingCycle fundingCycle</code>
+          </li>
+          <li><code>uint256 amount</code>
+          </li>
+          <li><code>uint256 weight</code>
+          </li>
+          <li><code>uint256 tokenCount</code>
+          </li>
+          <li><code>string memo</code>
+          </li>
+          <li><code>address caller</code>
+          </li>
+        </ul>
+      </td>
+    </tr>
+    <tr>
+      <td style="text-align:left"><code>Redeem</code>
+      </td>
+      <td style="text-align:left">
+        <ul>
+          <li><code>uint256 indexed fundingCycleNumber</code>
+          </li>
+          <li><code>uint256 indexed projectId</code>
+          </li>
+          <li><code>address indexed holder</code>
+          </li>
+          <li><code>FundingCycle fundingCycle</code>
+          </li>
+          <li><code>address beneficiary</code>
+          </li>
+          <li><code>uint256 tokenCount</code>
+          </li>
+          <li><code>uint256 claimedAmount</code>
+          </li>
+          <li><code>string memo</code>
+          </li>
+          <li><code>address caller</code>
+          </li>
+        </ul>
+      </td>
+    </tr>
+    <tr>
+      <td style="text-align:left"><code>DistributeToPayoutSplit</code>
+      </td>
+      <td style="text-align:left">
+        <ul>
+          <li><code>uint256 indexed fundingCycleNumber</code>
+          </li>
+          <li><code>uint256 indexed fundingCycleId</code>
+          </li>
+          <li><code>uint256 indexed projectId</code>
+          </li>
+          <li><code>Split split</code>
+          </li>
+          <li><code>uint256 amount</code>
+          </li>
+          <li><code>address caller</code>
+          </li>
+        </ul>
+      </td>
+    </tr>
+  </tbody>
+</table>
 
 ## Read
 
