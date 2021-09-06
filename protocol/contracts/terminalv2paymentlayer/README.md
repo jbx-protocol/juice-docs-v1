@@ -147,7 +147,7 @@ description: >-
           </li>
           <li><code>bool _preferUnstakedTokens</code>
           </li>
-          <li><code>string</code>  <code>_memo</code>
+          <li><code>string _memo</code>
           </li>
           <li><code>bytes _delegateMetadata</code>
           </li>
