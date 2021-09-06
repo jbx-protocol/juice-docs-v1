@@ -1,3 +1,9 @@
+---
+description: >-
+  The following terms are used frequently to describe ideas and mechanisms
+  within the Juicebox protocol.
+---
+
 # Terminology
 
 <table>

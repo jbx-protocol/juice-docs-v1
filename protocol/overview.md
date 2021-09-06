@@ -9,7 +9,5 @@ description: >-
 
 {% page-ref page="terminology.md" %}
 
-{% page-ref page="architecture.md" %}
-
 
 
