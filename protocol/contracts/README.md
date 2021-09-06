@@ -60,7 +60,7 @@ description: 'Juicebox is composed of the following contracts:'
       </td>
     </tr>
     <tr>
-      <td style="text-align:left"><b>FundingCycles</b>
+      <td style="text-align:left"><b><code>FundingCycles</code></b>
       </td>
       <td style="text-align:left">
         <p>Manage funding cycle configurations, ballots, accounting, and scheduling.</p>
