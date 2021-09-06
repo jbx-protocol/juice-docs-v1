@@ -186,7 +186,8 @@ description: >-
         <ul>
           <li><code>nonReentrant</code>
           </li>
-          <li><code>requirePermission</code>()</li>
+          <li><code>requirePermission</code>
+          </li>
         </ul>
         <p>
           <br />params:</p>
