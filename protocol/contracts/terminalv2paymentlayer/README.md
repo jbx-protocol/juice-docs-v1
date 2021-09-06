@@ -45,12 +45,14 @@ description: >-
       <td style="text-align:left"><code>projects</code>
       </td>
       <td style="text-align:left">
-        <p>traits:</p>
+        <p><b>Traits</b>
+        </p>
         <ul>
           <li><code>immutable</code>
           </li>
         </ul>
-        <p>returns:</p>
+        <p><b>Returns</b>
+        </p>
         <ul>
           <li><code>IProjects projects</code>
           </li>
@@ -61,12 +63,14 @@ description: >-
       <td style="text-align:left"><code>splitStore</code>
       </td>
       <td style="text-align:left">
-        <p>traits:</p>
+        <p><b>Traits</b>
+        </p>
         <ul>
           <li><code>immutable</code>
           </li>
         </ul>
-        <p>returns:</p>
+        <p><b>Returns</b>
+        </p>
         <ul>
           <li><code>ISplitsStore splitsStore</code>
           </li>
@@ -77,12 +81,14 @@ description: >-
       <td style="text-align:left"><code>terminalDirectory</code>
       </td>
       <td style="text-align:left">
-        <p>traits:</p>
+        <p><b>Traits</b>
+        </p>
         <ul>
           <li><code>immutable</code>
           </li>
         </ul>
-        <p>returns:</p>
+        <p><b>Returns</b>
+        </p>
         <ul>
           <li><code>ITerminalDirectory terminalDirectory</code>
           </li>
@@ -93,12 +99,14 @@ description: >-
       <td style="text-align:left"><code>dataLayer</code>
       </td>
       <td style="text-align:left">
-        <p>traits:</p>
+        <p><b>Traits</b>
+        </p>
         <ul>
           <li><code>immutable</code>
           </li>
         </ul>
-        <p>returns:</p>
+        <p><b>Returns</b>
+        </p>
         <ul>
           <li><code>ITerminalV2DataLayer dataLayer</code>
           </li>
@@ -122,12 +130,14 @@ description: >-
       <td style="text-align:left"><code>pay</code>
       </td>
       <td style="text-align:left">
-        <p>traits:</p>
+        <p><b>Traits</b>
+        </p>
         <ul>
           <li><code>payable</code>
           </li>
         </ul>
-        <p>params:</p>
+        <p><b>Params</b>
+        </p>
         <ul>
           <li><code>uint256 projectId</code>
           </li>
@@ -142,7 +152,8 @@ description: >-
           <li><code>bytes _delegateMetadata</code>
           </li>
         </ul>
-        <p>returns:</p>
+        <p><b>Returns</b>
+        </p>
         <ul>
           <li><code>uint256 fundingCycleNumber</code> 
           </li>
@@ -153,12 +164,14 @@ description: >-
       <td style="text-align:left"><code>distributePayouts</code>
       </td>
       <td style="text-align:left">
-        <p>traits:</p>
+        <p><b>Traits</b>
+        </p>
         <ul>
           <li><code>nonReentrant</code>
           </li>
         </ul>
-        <p>params:</p>
+        <p><b>Params</b>
+        </p>
         <ul>
           <li><code>uint256 _projectId</code>
           </li>
@@ -171,7 +184,8 @@ description: >-
           <li><code>string _memo</code>
           </li>
         </ul>
-        <p>returns:</p>
+        <p><b>Returns</b>
+        </p>
         <ul>
           <li><code>uint256 fundingCycleId</code>
           </li>
@@ -182,7 +196,8 @@ description: >-
       <td style="text-align:left"><code>useAllowance</code>
       </td>
       <td style="text-align:left">
-        <p>traits:</p>
+        <p><b>Traits</b>
+        </p>
         <ul>
           <li><code>nonReentrant</code>
           </li>
@@ -190,7 +205,8 @@ description: >-
           </li>
         </ul>
         <p>
-          <br />params:</p>
+          <br /><b>Params</b>
+        </p>
         <ul>
           <li><code>uint256 _projectId</code>
           </li>
@@ -203,7 +219,8 @@ description: >-
           <li><code>address payable _beneficiary</code>
           </li>
         </ul>
-        <p>returns:</p>
+        <p><b>Returns</b>
+        </p>
         <ul>
           <li><code>uint256 fundingCycleConfiguration</code>
           </li>
@@ -214,14 +231,16 @@ description: >-
       <td style="text-align:left"><code>redeemTokens</code>
       </td>
       <td style="text-align:left">
-        <p>traits:</p>
+        <p><b>Traits</b>
+        </p>
         <ul>
           <li><code>nonReentrant</code>
           </li>
           <li><code>requirePermission</code>
           </li>
         </ul>
-        <p>params:</p>
+        <p><b>Params</b>
+        </p>
         <ul>
           <li><code>address _holder</code>
           </li>
@@ -238,7 +257,8 @@ description: >-
           <li><code>bytes _delegateMetadata</code>
           </li>
         </ul>
-        <p>returns:</p>
+        <p><b>Returns</b>
+        </p>
         <ul>
           <li><code>uint256 claimAmount</code>
           </li>
@@ -249,14 +269,16 @@ description: >-
       <td style="text-align:left"><code>migrate</code>
       </td>
       <td style="text-align:left">
-        <p>traits:</p>
+        <p><b>Traits</b>
+        </p>
         <ul>
           <li><code>nonReentrant</code>
           </li>
           <li><code>requirePermission</code>
           </li>
         </ul>
-        <p>params:</p>
+        <p><b>Params</b>
+        </p>
         <ul>
           <li><code>uint256 _projectId</code>
           </li>
@@ -269,12 +291,14 @@ description: >-
       <td style="text-align:left"><code>addToBalance</code>
       </td>
       <td style="text-align:left">
-        <p>traits:</p>
+        <p><b>Traits</b>
+        </p>
         <ul>
           <li><code>payable</code>
           </li>
         </ul>
-        <p>params:</p>
+        <p><b>Params</b>
+        </p>
         <ul>
           <li><code>uint256 _projectId</code>
           </li>
