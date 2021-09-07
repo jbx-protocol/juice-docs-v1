@@ -4,20 +4,24 @@ description: 'Manages ownership over projects, which are represented as ERC-721 
 
 # Projects
 
-## Addresses
+## Overview
+
+### Code
+
+[https://github.com/jbx-protocol/juice-juicehouse/blob/version/2/packages/hardhat/contracts/Projects.sol](https://github.com/jbx-protocol/juice-juicehouse/blob/version/2/packages/hardhat/contracts/Projects.sol)
+
+### **Addresses**
 
 Ethereum mainnet: [0x9b5a4053FfBB11cA9cd858AAEE43cc95ab435418](https://etherscan.io/address/0x9b5a4053FfBB11cA9cd858AAEE43cc95ab435418)  
 Rinkeby testnet: [0x34A1d33e49907ADFE05fb4E21411a06a8c4300eE](https://rinkeby.etherscan.io/address/0x34A1d33e49907ADFE05fb4E21411a06a8c4300eE)
 
-## Overview
-
-**Interfaces:**
+### **Interfaces**
 
 | Name\` | Description |
 | :--- | :--- |
 | **`IProjects`** | General interface for the methods in this contract that change the blockchain's state according to the Juicebox protocol's rules. |
 
-**Inheritance:**
+### **Inheritance**
 
 | **Contract** | Description |
 | :--- | :--- |

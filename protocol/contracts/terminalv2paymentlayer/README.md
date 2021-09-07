@@ -6,20 +6,24 @@ description: >-
 
 # TerminalV2PaymentLayer
 
-## Addresses
+## Overview
+
+### Code
+
+[https://github.com/jbx-protocol/juice-juicehouse/blob/version/2/packages/hardhat/contracts/TerminalV2PaymentLayer.sol](https://github.com/jbx-protocol/juice-juicehouse/blob/version/2/packages/hardhat/contracts/TerminalV2PaymentLayer.sol)
+
+### **Addresses**
 
 Ethereum mainnet: _Not yet deployed_  
 Rinkeby testnet: _Not yet deployed_
 
-## Overview
-
-**Interfaces:**
+### **Interfaces**
 
 | Name | Description |
 | :--- | :--- |
 | **`ITerminalV2PaymentLayer`** | General interface for the methods in this contract that send and receive funds according to the Juicebox protocol's rules. |
 
-**Inheritance:**
+### **Inheritance**
 
 | Contract | Description |
 | :--- | :--- |

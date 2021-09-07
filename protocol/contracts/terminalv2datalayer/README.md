@@ -6,21 +6,25 @@ description: >-
 
 # TerminalV2DataLayer
 
-## Addresses
+## Overview
+
+### Code
+
+[https://github.com/jbx-protocol/juice-juicehouse/blob/version/2/packages/hardhat/contracts/TerminalV2DataLayer.sol](https://github.com/jbx-protocol/juice-juicehouse/blob/version/2/packages/hardhat/contracts/TerminalV2DataLayer.sol)
+
+### **Addresses**
 
 Ethereum mainnet: _Not yet deployed_  
 Rinkeby testnet: _Not yet deployed_
 
-## Overview
-
-**Interfaces:**
+### **Interfaces**
 
 | Name | Description |
 | :--- | :--- |
 | **`ITerminalV2DataLayer`** | General interface for the methods in this contract that change the blockchain's state according to the Juicebox protocol's rules. |
 | **`ITerminalDataLayer`** | Conforms to ITerminal, which allows projects to migrate to this contract from other ITerminals \(like TerminalV1\), and to facilitate a project's future migration decisions. |
 
-**Inheritance:**
+### **Inheritance**
 
 | **Contract** | Description |
 | :--- | :--- |

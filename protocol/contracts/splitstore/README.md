@@ -4,20 +4,24 @@ description: Stores splits information for all groups of each project.
 
 # SplitStore
 
-## Addresses
+## Overview
+
+### Code
+
+[https://github.com/jbx-protocol/juice-juicehouse/blob/version/2/packages/hardhat/contracts/SplitStore.sol](https://github.com/jbx-protocol/juice-juicehouse/blob/version/2/packages/hardhat/contracts/SplitStore.sol)
+
+### **Addresses**
 
 Ethereum mainnet: _Not yet deployed_  
 Rinkeby testnet: _Not yet deployed_
 
-## Overview
-
-**Interfaces:**
+### **Interfaces**
 
 | **Name** | Description |
 | :--- | :--- |
 | **`ISplitStore`** | General interface for the methods in this contract that change the blockchain's state according to the Juicebox protocol's rules. |
 
-**Inheritance:**
+### **Inheritance**
 
 | **Name** | Description |
 | :--- | :--- |

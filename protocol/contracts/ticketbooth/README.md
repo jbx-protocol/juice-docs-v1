@@ -6,20 +6,24 @@ description: >-
 
 # TicketBooth
 
-## Addresses
+## Overview
+
+### Code
+
+[https://github.com/jbx-protocol/juice-juicehouse/blob/version/2/packages/hardhat/contracts/TicketBooth.sol](https://github.com/jbx-protocol/juice-juicehouse/blob/version/2/packages/hardhat/contracts/TicketBooth.sol)
+
+### **Addresses**
 
 Ethereum mainnet: [0xee2eBCcB7CDb34a8A822b589F9E8427C24351bfc](https://etherscan.io/address/0xee2eBCcB7CDb34a8A822b589F9E8427C24351bfc)  
 Rinkeby testnet: [0x0d038636a670E8bd8cF7D56BC4626f2a6446cF11](https://rinkeby.etherscan.io/address/0x0d038636a670E8bd8cF7D56BC4626f2a6446cF11)
 
-## Overview
-
-**Interfaces:**
+### **Interfaces**
 
 | **Name** | Description |
 | :--- | :--- |
 | **`ITicketBooth`** | General interface for the methods in this contract that change the blockchain's state according to the Juicebox protocol's rules. |
 
-**Inheritance**:
+### **Inheritance**
 
 | **Name** | Description |
 | :--- | :--- |

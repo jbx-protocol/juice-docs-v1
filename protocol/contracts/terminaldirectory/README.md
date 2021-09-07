@@ -7,20 +7,24 @@ description: >-
 
 # TerminalDirectory
 
-## Addresses
+## Overview
+
+### Code
+
+[https://github.com/jbx-protocol/juice-juicehouse/blob/version/2/packages/hardhat/contracts/TerminalDirectory.sol](https://github.com/jbx-protocol/juice-juicehouse/blob/version/2/packages/hardhat/contracts/TerminalDirectory.sol)
+
+### **Addresses**
 
 Ethereum mainnet: [0x46C9999A2EDCD5aA177ed7E8af90c68b7d75Ba46](https://etherscan.io/address/0x46C9999A2EDCD5aA177ed7E8af90c68b7d75Ba46)  
 Rinkeby testnet: [0x88d8c9E98E6EdE75252c2473abc9724965fe7474](https://rinkeby.etherscan.io/address/0x88d8c9E98E6EdE75252c2473abc9724965fe7474)
 
-## Overview
-
-**Interfaces:**
+### **Interfaces**
 
 | **Name** | Description |
 | :--- | :--- |
 | **`ITerminalDirectory`** | General interface for the methods in this contract that change the blockchain's state according to the Juicebox protocol's rules. |
 
-**Inheritance**:
+### **Inheritance**
 
 | **Name** | Description |
 | :--- | :--- |

@@ -4,20 +4,24 @@ description: Manage and normalizes ETH price feeds.
 
 # Prices
 
-## Addresses
+## Overview
+
+### Code
+
+[https://github.com/jbx-protocol/juice-juicehouse/blob/version/2/packages/hardhat/contracts/Prices.sol](https://github.com/jbx-protocol/juice-juicehouse/blob/version/2/packages/hardhat/contracts/Prices.sol)
+
+### **Addresses**
 
 Ethereum mainnet: [0xa9537Cc42555564206D4E57c0eb6943d56E83A30](https://etherscan.io/address/0xa9537Cc42555564206D4E57c0eb6943d56E83A30)  
 Rinkeby testnet: [0x22c2580c58D2F84165CD5af02729Af344cE7d637](https://rinkeby.etherscan.io/address/0x22c2580c58D2F84165CD5af02729Af344cE7d637)
 
-## Overview
-
-**Interfaces:**
+### **Interfaces**
 
 | Name | Description |
 | :--- | :--- |
-| `IPrices` | General interface for the methods in this contract that change the blockchain's state according to the Juicebox protocol's rules. |
+| **`IPrices`** | General interface for the methods in this contract that change the blockchain's state according to the Juicebox protocol's rules. |
 
-**Inheritance:**
+### **Inheritance**
 
 | **Contract** | Description |
 | :--- | :--- |
