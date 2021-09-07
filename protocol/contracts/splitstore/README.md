@@ -4,6 +4,11 @@ description: Stores splits information for all groups of each project.
 
 # SplitStore
 
+## Addresses
+
+Ethereum mainnet: _Not yet deployed_  
+Rinkeby testnet: _Not yet deployed_
+
 ## Overview
 
 **Interfaces:**

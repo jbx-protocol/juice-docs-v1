@@ -6,6 +6,11 @@ description: >-
 
 # TerminalV2DataLayer
 
+## Addresses
+
+Ethereum mainnet: _Not yet deployed_  
+Rinkeby testnet: _Not yet deployed_
+
 ## Overview
 
 **Interfaces:**

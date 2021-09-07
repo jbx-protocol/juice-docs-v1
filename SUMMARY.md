@@ -28,6 +28,7 @@
     * [Events](protocol/contracts/terminaldirectory/events.md)
     * [Read](protocol/contracts/terminaldirectory/read.md)
     * [Write](protocol/contracts/terminaldirectory/write.md)
+  * [Projects](protocol/contracts/projects.md)
   * [TicketBooth](protocol/contracts/ticketbooth/README.md)
     * [Events](protocol/contracts/ticketbooth/events.md)
     * [Read](protocol/contracts/ticketbooth/read.md)

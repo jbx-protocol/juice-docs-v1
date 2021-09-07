@@ -49,6 +49,16 @@ description: 'Juicebox is composed of the following contracts:'
       </td>
     </tr>
     <tr>
+      <td style="text-align:left"><b><code>Projects</code></b>
+      </td>
+      <td style="text-align:left">
+        <p>Manages ownership over projects, which are represented as ERC-721 tokens.</p>
+        <p></p>
+        <p><a href="projects.md">more</a>
+        </p>
+      </td>
+    </tr>
+    <tr>
       <td style="text-align:left"><b><code>TicketBooth</code></b>
       </td>
       <td style="text-align:left">

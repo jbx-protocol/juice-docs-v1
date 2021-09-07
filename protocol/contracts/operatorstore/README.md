@@ -7,6 +7,11 @@ description: >-
 
 # OperatorStore
 
+## Addresses
+
+Ethereum mainnet: [0xab47304D987390E27Ce3BC0fA4Fe31E3A98B0db2](https://etherscan.io/address/0xab47304D987390E27Ce3BC0fA4Fe31E3A98B0db2)  
+Rinkeby testnet: [0x5dA2E4Ba83569fb7A22a4aDE14bBEf1236168406](https://rinkeby.etherscan.io/address/0x5dA2E4Ba83569fb7A22a4aDE14bBEf1236168406)
+
 ## Overview
 
 **Interfaces:**
