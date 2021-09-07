@@ -1,7 +1,3 @@
----
-description: 'Juicebox is composed of the following contracts:'
----
-
 # Contracts
 
 
@@ -9,7 +5,7 @@ description: 'Juicebox is composed of the following contracts:'
 <table>
   <thead>
     <tr>
-      <th style="text-align:left">Contract</th>
+      <th style="text-align:left">Name</th>
       <th style="text-align:left">Description</th>
     </tr>
   </thead>
