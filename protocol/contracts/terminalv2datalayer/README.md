@@ -1,7 +1,7 @@
 ---
 description: >-
-  Stitches together funding cycles and treasury tokens. It makes sure all
-  activity is accounted for and correct.
+  Stitches together funding cycles and treasury tokens, making sure all activity
+  is accounted for and correct.
 ---
 
 # TerminalV2DataLayer
@@ -419,6 +419,12 @@ description: >-
 
 ## Write
 
+### launchProject
+
+|  |  |
+| :--- | :--- |
+|  |  |
+
 <table>
   <thead>
     <tr>
@@ -472,7 +478,7 @@ description: >-
           </li>
           <li><code>FundingCycleProperties _properties</code>
           </li>
-          <li> <code>FundingCycleMetadataV2 _metadata</code> 
+          <li><code>FundingCycleMetadataV2 _metadata</code> 
           </li>
           <li><code>uint256 _overflowAllowance</code> 
           </li>
@@ -620,7 +626,7 @@ description: >-
           </li>
           <li><code>uint256 _preferUnstakedTokensAndBeneficiary</code>
           </li>
-          <li> <code>uint256 _minReturnedTokens</code> 
+          <li><code>uint256 _minReturnedTokens</code> 
           </li>
           <li><code>string _memo</code> 
           </li>

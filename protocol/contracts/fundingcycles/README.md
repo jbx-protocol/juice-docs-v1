@@ -1,19 +1,313 @@
+---
+description: 'Manage funding cycle configurations, ballots, accounting, and scheduling.'
+---
+
 # FundingCycles
 
+## Overview
 
+**Interfaces:**
+
+| Name | Description |
+| :--- | :--- |
+| **`IFundingCycles`** | General interface for the methods in this contract that change the blockchain's state according to the Juicebox protocol's rules. |
+
+**Inheritance:** 
 
 | Contract | Description |
 | :--- | :--- |
-| **\`\`**[**`TerminalV2PaymentLayer`**](../terminalv2paymentlayer/)**\`\`** | Manages all inflows and outflows of funds into the Juicebox ecosystem. This contract also stores all treasury funds for all projects. |
-| **\`\`**[**`TerminalV2DataLayer`**](../terminalv2datalayer/)**\`\`** | Stitches together funding cycles and treasury tokens, making sure all activity is accounted for and correct. |
-| **\`\`**[**`TerminalDirectory`**](../terminaldirectory/)**\`\`** | Keeps a reference of which terminal contract each project is currently accepting funds through. When a project migrates from one terminal to another, the change is reflected in this contract.  |
-| **\`\`**[**`TicketBooth`**](../ticketbooth/)**\`\`** | Manages token minting and burning for all projects, while keeping track of staked/unstaked and locked/unlock token balances for all accounts. |
-| \*\*\*\*[**`FundingCycles`**](./)**\`\`** | Manage funding cycle configurations, ballots, accounting, and scheduling. |
-| **\`\`**[**`SplitStore`**](../splitstore/)**\`\`** | Stores splits information for all groups of each project. Projects can create split groups for directing percents of a total token allocation to any address, any other Juicebox project, or any contract that inherits from the ISplitAllocator interface. |
-| **\`\`**[**`OperatorStore`**](../operatorstore/)**\`\`** | Stores operator permissions for all addresses. Addresses can give permissions to any other address to take specific actions throughout the Juicebox ecosystem on their behalf. |
-| **\`\`**[**`Prices`**](../prices/)**\`\`** | Manage and normalizes ETH price feeds. |
+| **`TerminalUtility`** | Includes convenience functionality for checking if the message sender is the current terminal of the project who data is being manipulated. |
 
-A full architecture diagram showing the paths through which each contract's transactions can be called is found [here](https://www.figma.com/file/YIf64bRfSXjCDSPb49uAwv/Juicebox-Technical-Docs-Copy?node-id=262%3A8).
+## Events
 
-![](../../../.gitbook/assets/architecture%20%282%29.png)
+<table>
+  <thead>
+    <tr>
+      <th style="text-align:left">Name</th>
+      <th style="text-align:left">Data</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align:left"><b><code>Configure</code></b>
+      </td>
+      <td style="text-align:left">
+        <ul>
+          <li><code>uint256 indexed fundingCycleId</code> 
+          </li>
+          <li><code>uint256 indexed projectId</code> 
+          </li>
+          <li><code>uint256 reconfigured</code> 
+          </li>
+          <li><code>FundingCycleProperties _properties</code> 
+          </li>
+          <li><code>uint256 metadata</code> 
+          </li>
+          <li><code>address caller</code>
+          </li>
+        </ul>
+      </td>
+    </tr>
+    <tr>
+      <td style="text-align:left"><b><code>Tap</code></b>
+      </td>
+      <td style="text-align:left">
+        <ul>
+          <li><code>uint256 indexed fundingCycleId</code> 
+          </li>
+          <li><code>uint256 indexed projectId</code> 
+          </li>
+          <li><code>uint256 amount</code> 
+          </li>
+          <li><code>uint256 newTappedAmount</code> 
+          </li>
+          <li><code>address caller</code>
+          </li>
+        </ul>
+      </td>
+    </tr>
+    <tr>
+      <td style="text-align:left"><b><code>Init</code></b>
+      </td>
+      <td style="text-align:left">
+        <ul>
+          <li><code>uint256 indexed fundingCycleId</code> 
+          </li>
+          <li><code>uint256 indexed projectId</code> 
+          </li>
+          <li><code>uint256 number</code> 
+          </li>
+          <li><code>uint256 previous</code> 
+          </li>
+          <li><code>uint256 weight</code> 
+          </li>
+          <li><code>uint256 start</code>
+          </li>
+        </ul>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+## Read
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align:left">Function</th>
+      <th style="text-align:left">Definition</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align:left"><b><code>BASE_WEIGHT</code></b>
+      </td>
+      <td style="text-align:left">
+        <p><b>Traits</b>
+        </p>
+        <ul>
+          <li><code>constant</code>
+          </li>
+        </ul>
+        <p><b>Returns</b>
+        </p>
+        <ul>
+          <li><code>uint256 1E24</code>
+          </li>
+        </ul>
+      </td>
+    </tr>
+    <tr>
+      <td style="text-align:left"><b><code>MAX_CYCLE_LIMIT</code></b>
+      </td>
+      <td style="text-align:left">
+        <p><b>Traits</b>
+        </p>
+        <ul>
+          <li><code>constant</code>
+          </li>
+        </ul>
+        <p><b>Returns</b>
+        </p>
+        <ul>
+          <li><code>uint256 32</code>
+          </li>
+        </ul>
+      </td>
+    </tr>
+    <tr>
+      <td style="text-align:left"><b><code>latestIdOf</code></b>
+      </td>
+      <td style="text-align:left">
+        <p><b>Params</b>
+        </p>
+        <ul>
+          <li><code>uint256 _projectId</code>
+          </li>
+        </ul>
+        <p><b>Returns</b>
+        </p>
+        <ul>
+          <li><code>uint256 _latestIdOf</code>
+          </li>
+        </ul>
+      </td>
+    </tr>
+    <tr>
+      <td style="text-align:left"><b><code>count</code></b>
+      </td>
+      <td style="text-align:left">
+        <p><b>Returns</b>
+        </p>
+        <ul>
+          <li><code>uint256 count</code>
+          </li>
+        </ul>
+      </td>
+    </tr>
+    <tr>
+      <td style="text-align:left"><b><code>get</code></b>
+      </td>
+      <td style="text-align:left">
+        <p><b>Params</b>
+        </p>
+        <ul>
+          <li><code>uint256 _fundingCycleId</code>
+          </li>
+        </ul>
+        <p><b>Returns</b>
+        </p>
+        <ul>
+          <li><code>FundingCycle _fundingCycle</code>
+          </li>
+        </ul>
+      </td>
+    </tr>
+    <tr>
+      <td style="text-align:left"><b><code>queuedOf</code></b>
+      </td>
+      <td style="text-align:left">
+        <p><b>Params</b>
+        </p>
+        <ul>
+          <li><code>uint256 _projectId</code>
+          </li>
+        </ul>
+        <p><b>Returns</b>
+        </p>
+        <ul>
+          <li><code>FundingCycle _fundingCycle</code>
+          </li>
+        </ul>
+      </td>
+    </tr>
+    <tr>
+      <td style="text-align:left"><b><code>currentOf</code></b>
+      </td>
+      <td style="text-align:left">
+        <p><b>Params</b>
+        </p>
+        <ul>
+          <li><code>uint256 _projectId</code>
+          </li>
+        </ul>
+        <p><b>Returns</b>
+        </p>
+        <ul>
+          <li><code>FundingCycle _fundingCycle</code>
+          </li>
+        </ul>
+      </td>
+    </tr>
+    <tr>
+      <td style="text-align:left"><b><code>currentBallotStateOf</code></b>
+      </td>
+      <td style="text-align:left">
+        <p><b>Params</b>
+        </p>
+        <ul>
+          <li><code>uint256 _projectId</code>
+          </li>
+        </ul>
+        <p><b>Returns</b>
+        </p>
+        <ul>
+          <li><code>BallotState _ballotState</code>
+          </li>
+        </ul>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+## Write
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align:left">Function</th>
+      <th style="text-align:left">Definition</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align:left"><b><code>configure</code></b>
+      </td>
+      <td style="text-align:left">
+        <p><b>Traits</b>
+        </p>
+        <ul>
+          <li><code>onlyTerminal</code>
+          </li>
+        </ul>
+        <p><b>Params</b>
+        </p>
+        <ul>
+          <li><code>uint256 _projectId</code> 
+          </li>
+          <li><code>FundingCycleProperties _properties</code> 
+          </li>
+          <li><code>uint256 _metadata</code> 
+          </li>
+          <li><code>uint256 _fee</code> 
+          </li>
+          <li><code>bool _configureActiveFundingCycle</code>
+          </li>
+        </ul>
+        <p><b>Returns</b>
+        </p>
+        <ul>
+          <li><code>FundingCycle _fundingCycle</code>
+          </li>
+        </ul>
+      </td>
+    </tr>
+    <tr>
+      <td style="text-align:left"><b><code>tap</code></b>
+      </td>
+      <td style="text-align:left">
+        <p><b>Traits</b>
+        </p>
+        <ul>
+          <li><code>onlyTerminal</code>
+          </li>
+        </ul>
+        <p><b>Params</b>
+        </p>
+        <ul>
+          <li><code>uint256 _projectId</code> 
+          </li>
+          <li><code>uint256 _amount</code>
+          </li>
+        </ul>
+        <p><b>Returns</b>
+        </p>
+        <ul>
+          <li><code>FundingCycle fundingCycle</code>
+          </li>
+        </ul>
+      </td>
+    </tr>
+  </tbody>
+</table>
 
