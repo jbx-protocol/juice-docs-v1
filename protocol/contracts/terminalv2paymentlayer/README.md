@@ -10,7 +10,7 @@ description: >-
 
 **Interfaces:**
 
-| Interface | Description |
+| Name | Description |
 | :--- | :--- |
 | **`ITerminalV2PaymentLayer`** | General interface for the methods in this contract that send and receive funds according to the Juicebox protocol's rules. |
 
@@ -18,21 +18,21 @@ description: >-
 
 | Contract | Description |
 | :--- | :--- |
-| **`Operatable`** | Includes convenience modifiers for checking a message sender's permissions before executing certain transactions.  |
-| **`ReentrancyGuard`** | Includes convenience modifiers for preventing access to certain functions while certain other functions are being executed.  |
+| **`Operatable`** | Includes convenience functionality for checking a message sender's permissions before executing certain transactions.  |
+| **`ReentrancyGuard`** | Includes convenience functionality for preventing access to certain functions while certain other functions are being executed.  |
 
 ## Events
 
 <table>
   <thead>
     <tr>
-      <th style="text-align:left">Event</th>
+      <th style="text-align:left">Name</th>
       <th style="text-align:left">Data</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td style="text-align:left"><code>AddToBalance</code>
+      <td style="text-align:left"><b><code>AddToBalance</code></b>
       </td>
       <td style="text-align:left">
         <ul>
@@ -46,7 +46,7 @@ description: >-
       </td>
     </tr>
     <tr>
-      <td style="text-align:left"><code>Migrate</code>
+      <td style="text-align:left"><b><code>Migrate</code></b>
       </td>
       <td style="text-align:left">
         <ul>
@@ -62,7 +62,7 @@ description: >-
       </td>
     </tr>
     <tr>
-      <td style="text-align:left"><code>DistributePayouts</code>
+      <td style="text-align:left"><b><code>DistributePayouts</code></b>
       </td>
       <td style="text-align:left">
         <ul>
@@ -88,7 +88,7 @@ description: >-
       </td>
     </tr>
     <tr>
-      <td style="text-align:left"><code>UseAllowance</code>
+      <td style="text-align:left"><b><code>UseAllowance</code></b>
       </td>
       <td style="text-align:left">
         <ul>
@@ -112,7 +112,7 @@ description: >-
       </td>
     </tr>
     <tr>
-      <td style="text-align:left"><code>Pay</code>
+      <td style="text-align:left"><b><code>Pay</code></b>
       </td>
       <td style="text-align:left">
         <ul>
@@ -138,7 +138,7 @@ description: >-
       </td>
     </tr>
     <tr>
-      <td style="text-align:left"><code>Redeem</code>
+      <td style="text-align:left"><b><code>Redeem</code></b>
       </td>
       <td style="text-align:left">
         <ul>
@@ -164,7 +164,7 @@ description: >-
       </td>
     </tr>
     <tr>
-      <td style="text-align:left"><code>DistributeToPayoutSplit</code>
+      <td style="text-align:left"><b><code>DistributeToPayoutSplit</code></b>
       </td>
       <td style="text-align:left">
         <ul>
@@ -191,13 +191,13 @@ description: >-
 <table>
   <thead>
     <tr>
+      <th style="text-align:left">Function</th>
       <th style="text-align:left">Definition</th>
-      <th style="text-align:left"></th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td style="text-align:left"><code>projects</code>
+      <td style="text-align:left"><b><code>projects</code></b>
       </td>
       <td style="text-align:left">
         <p><b>Traits</b>
@@ -215,7 +215,7 @@ description: >-
       </td>
     </tr>
     <tr>
-      <td style="text-align:left"><code>splitStore</code>
+      <td style="text-align:left"><b><code>splitStore</code></b>
       </td>
       <td style="text-align:left">
         <p><b>Traits</b>
@@ -233,7 +233,7 @@ description: >-
       </td>
     </tr>
     <tr>
-      <td style="text-align:left"><code>terminalDirectory</code>
+      <td style="text-align:left"><b><code>terminalDirectory</code></b>
       </td>
       <td style="text-align:left">
         <p><b>Traits</b>
@@ -251,7 +251,7 @@ description: >-
       </td>
     </tr>
     <tr>
-      <td style="text-align:left"><code>dataLayer</code>
+      <td style="text-align:left"><b><code>dataLayer</code></b>
       </td>
       <td style="text-align:left">
         <p><b>Traits</b>
@@ -282,7 +282,7 @@ description: >-
   </thead>
   <tbody>
     <tr>
-      <td style="text-align:left"><code>pay</code>
+      <td style="text-align:left"><b><code>pay</code></b>
       </td>
       <td style="text-align:left">
         <p><b>Traits</b>
@@ -316,7 +316,7 @@ description: >-
       </td>
     </tr>
     <tr>
-      <td style="text-align:left"><code>distributePayouts</code>
+      <td style="text-align:left"><b><code>distributePayouts</code></b>
       </td>
       <td style="text-align:left">
         <p><b>Traits</b>
@@ -348,7 +348,7 @@ description: >-
       </td>
     </tr>
     <tr>
-      <td style="text-align:left"><code>useAllowance</code>
+      <td style="text-align:left"><b><code>useAllowance</code></b>
       </td>
       <td style="text-align:left">
         <p><b>Traits</b>
@@ -383,7 +383,7 @@ description: >-
       </td>
     </tr>
     <tr>
-      <td style="text-align:left"><code>redeemTokens</code>
+      <td style="text-align:left"><b><code>redeemTokens</code></b>
       </td>
       <td style="text-align:left">
         <p><b>Traits</b>
@@ -421,7 +421,7 @@ description: >-
       </td>
     </tr>
     <tr>
-      <td style="text-align:left"><code>migrate</code>
+      <td style="text-align:left"><b><code>migrate</code></b>
       </td>
       <td style="text-align:left">
         <p><b>Traits</b>
@@ -443,7 +443,7 @@ description: >-
       </td>
     </tr>
     <tr>
-      <td style="text-align:left"><code>addToBalance</code>
+      <td style="text-align:left"><b><code>addToBalance</code></b>
       </td>
       <td style="text-align:left">
         <p><b>Traits</b>
