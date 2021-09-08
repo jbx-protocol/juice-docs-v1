@@ -221,6 +221,8 @@ Rinkeby testnet: _Not yet deployed_
           <li><code>IProjects projects</code>
           </li>
         </ul>
+        <p><a href="read/projects.md">more</a>
+        </p>
       </td>
     </tr>
     <tr>
@@ -239,6 +241,8 @@ Rinkeby testnet: _Not yet deployed_
           <li><code>ISplitsStore splitsStore</code>
           </li>
         </ul>
+        <p><a href="read/splitstore.md">more</a>
+        </p>
       </td>
     </tr>
     <tr>
@@ -257,6 +261,8 @@ Rinkeby testnet: _Not yet deployed_
           <li><code>ITerminalDirectory terminalDirectory</code>
           </li>
         </ul>
+        <p><a href="read/terminaldirectory.md">more</a>
+        </p>
       </td>
     </tr>
     <tr>
@@ -275,6 +281,8 @@ Rinkeby testnet: _Not yet deployed_
           <li><code>ITerminalV2DataLayer dataLayer</code>
           </li>
         </ul>
+        <p><a href="read/datalayer.md">more</a>
+        </p>
       </td>
     </tr>
   </tbody>
@@ -319,9 +327,11 @@ Rinkeby testnet: _Not yet deployed_
         <p><b>Returns</b>
         </p>
         <ul>
-          <li><code>uint256 fundingCycleNumber</code> 
+          <li><code>uint256 fundingCycleNumber</code>
           </li>
         </ul>
+        <p><a href="write/pay-1.md">more</a> 
+        </p>
       </td>
     </tr>
     <tr>
@@ -354,6 +364,8 @@ Rinkeby testnet: _Not yet deployed_
           <li><code>uint256 fundingCycleId</code>
           </li>
         </ul>
+        <p><a href="write/distributepayouts.md">more</a>
+        </p>
       </td>
     </tr>
     <tr>
@@ -389,6 +401,8 @@ Rinkeby testnet: _Not yet deployed_
           <li><code>uint256 fundingCycleConfiguration</code>
           </li>
         </ul>
+        <p><a href="write/useallowance.md">more</a>
+        </p>
       </td>
     </tr>
     <tr>
@@ -427,6 +441,8 @@ Rinkeby testnet: _Not yet deployed_
           <li><code>uint256 claimAmount</code>
           </li>
         </ul>
+        <p><a href="write/redeemtokens.md">more</a>
+        </p>
       </td>
     </tr>
     <tr>
@@ -449,6 +465,8 @@ Rinkeby testnet: _Not yet deployed_
           <li><code>ITerminalDataLayer _to</code>
           </li>
         </ul>
+        <p><a href="write/migrate.md">more</a>
+        </p>
       </td>
     </tr>
     <tr>
@@ -467,6 +485,8 @@ Rinkeby testnet: _Not yet deployed_
           <li><code>uint256 _projectId</code>
           </li>
         </ul>
+        <p><a href="write/addtobalance.md">more</a>
+        </p>
       </td>
     </tr>
   </tbody>

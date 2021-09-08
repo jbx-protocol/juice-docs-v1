@@ -111,6 +111,8 @@ Rinkeby testnet: [0x88d8c9E98E6EdE75252c2473abc9724965fe7474](https://rinkeby.et
           <li><code>IProjects projects</code>
           </li>
         </ul>
+        <p><a href="read/projects.md">more</a>
+        </p>
       </td>
     </tr>
     <tr>
@@ -129,6 +131,8 @@ Rinkeby testnet: [0x88d8c9E98E6EdE75252c2473abc9724965fe7474](https://rinkeby.et
           <li><code>ITerminal terminalOf</code>
           </li>
         </ul>
+        <p><a href="read/terminalof.md">more</a>
+        </p>
       </td>
     </tr>
     <tr>
@@ -147,6 +151,8 @@ Rinkeby testnet: [0x88d8c9E98E6EdE75252c2473abc9724965fe7474](https://rinkeby.et
           <li><code>address beneficiaryOf</code>
           </li>
         </ul>
+        <p><a href="read/beneficiaryof.md">more</a>
+        </p>
       </td>
     </tr>
     <tr>
@@ -165,6 +171,8 @@ Rinkeby testnet: [0x88d8c9E98E6EdE75252c2473abc9724965fe7474](https://rinkeby.et
           <li><code>bool unstakedTicketsPrefrenceOf</code>
           </li>
         </ul>
+        <p><a href="read/unstakedticketspreferenceof.md">more</a>
+        </p>
       </td>
     </tr>
     <tr>
@@ -183,6 +191,8 @@ Rinkeby testnet: [0x88d8c9E98E6EdE75252c2473abc9724965fe7474](https://rinkeby.et
           <li><code>IDirectPaymentAddress[] addressesOf</code>
           </li>
         </ul>
+        <p><a href="read/addressesof.md">more</a>
+        </p>
       </td>
     </tr>
   </tbody>
@@ -210,6 +220,8 @@ Rinkeby testnet: [0x88d8c9E98E6EdE75252c2473abc9724965fe7474](https://rinkeby.et
           <li><code>string _memo</code>
           </li>
         </ul>
+        <p><a href="write/deployaddress.md">more</a>
+        </p>
       </td>
     </tr>
     <tr>
@@ -224,19 +236,24 @@ Rinkeby testnet: [0x88d8c9E98E6EdE75252c2473abc9724965fe7474](https://rinkeby.et
           <li><code>ITerminal _terminal</code>
           </li>
         </ul>
+        <p><a href="write/setterminal.md">more</a>
+        </p>
       </td>
     </tr>
     <tr>
       <td style="text-align:left"><b><code>setPayerPreferences</code></b>
       </td>
       <td style="text-align:left">
-        <p>Params</p>
+        <p><b>Params</b>
+        </p>
         <ul>
           <li><code>address _beneficiary</code> 
           </li>
           <li><code>bool _preferUnstakedTickets</code>
           </li>
         </ul>
+        <p><a href="write/setpayerpreferences.md">more</a>
+        </p>
       </td>
     </tr>
   </tbody>
