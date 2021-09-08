@@ -2,19 +2,19 @@
 
 * [Initial page](README.md)
 
-## Getting Started
+## 🌱Getting Started
 
 * [Create a Juicebox Project](getting-started/create-a-juicebox-project.md)
 
-## Resources
+## 📚Resources
 
 * [FAQ](resources/faq.md)
 
-## Protocol
+## 👾Protocol
 
 * [Overview](protocol/overview.md)
 * [Terminology](protocol/terminology.md)
-* [Contracts](protocol/contracts/README.md)
+* [Contract APIs](protocol/contracts/README.md)
   * [TerminalV2PaymentLayer](protocol/contracts/terminalv2paymentlayer/README.md)
     * [Events](protocol/contracts/terminalv2paymentlayer/events/README.md)
       * [AddToBalance](protocol/contracts/terminalv2paymentlayer/events/addtobalance.md)
