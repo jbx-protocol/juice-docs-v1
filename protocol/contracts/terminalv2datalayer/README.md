@@ -428,17 +428,11 @@ Rinkeby testnet: _Not yet deployed_
 
 ## Write
 
-### launchProject
-
-|  |  |
-| :--- | :--- |
-|  |  |
-
 <table>
   <thead>
     <tr>
-      <th style="text-align:left">Function</th>
       <th style="text-align:left">Definition</th>
+      <th style="text-align:left"></th>
     </tr>
   </thead>
   <tbody>
