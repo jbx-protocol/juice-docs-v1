@@ -193,6 +193,8 @@ Rinkeby testnet: _Not yet deployed_
           <li><code>IProjects projects</code>
           </li>
         </ul>
+        <p><a href="read/projects.md">more</a>
+        </p>
       </td>
     </tr>
     <tr>
@@ -211,6 +213,8 @@ Rinkeby testnet: _Not yet deployed_
           <li><code>IFundingCycles fundingCycles</code>
           </li>
         </ul>
+        <p><a href="read/fundingcycles.md">more</a>
+        </p>
       </td>
     </tr>
     <tr>
@@ -229,6 +233,8 @@ Rinkeby testnet: _Not yet deployed_
           <li><code>ITicketBooth ticketBooth</code>
           </li>
         </ul>
+        <p><a href="read/ticketbooth.md">more</a>
+        </p>
       </td>
     </tr>
     <tr>
@@ -247,6 +253,8 @@ Rinkeby testnet: _Not yet deployed_
           <li><code>ISplitStore splitStore</code>
           </li>
         </ul>
+        <p><a href="read/splitsstore.md">more</a>
+        </p>
       </td>
     </tr>
     <tr>
@@ -265,6 +273,8 @@ Rinkeby testnet: _Not yet deployed_
           <li><code>IPrices prices</code>
           </li>
         </ul>
+        <p><a href="read/prices.md">more</a>
+        </p>
       </td>
     </tr>
     <tr>
@@ -283,6 +293,8 @@ Rinkeby testnet: _Not yet deployed_
           <li><code>ITerminalDirectory terminalDirectory</code>
           </li>
         </ul>
+        <p><a href="read/terminaldirectory.md">more</a>
+        </p>
       </td>
     </tr>
     <tr>
@@ -301,6 +313,8 @@ Rinkeby testnet: _Not yet deployed_
           <li><code>uint256 balanceOf</code>
           </li>
         </ul>
+        <p><a href="read/balanceof.md">more</a>
+        </p>
       </td>
     </tr>
     <tr>
@@ -319,6 +333,8 @@ Rinkeby testnet: _Not yet deployed_
           <li><code>bool migrationIsAllowed</code>
           </li>
         </ul>
+        <p><a href="read/migrationisallowed.md">more</a>
+        </p>
       </td>
     </tr>
     <tr>
@@ -339,6 +355,8 @@ Rinkeby testnet: _Not yet deployed_
           <li><code>uint256 remainingOverflowAllowanceOf</code>
           </li>
         </ul>
+        <p><a href="read/remainingoverflowallowanceof.md">more</a>
+        </p>
       </td>
     </tr>
     <tr>
@@ -351,6 +369,8 @@ Rinkeby testnet: _Not yet deployed_
           <li><code>ITerminalV2PaymentLayer paymentLayer</code>
           </li>
         </ul>
+        <p><a href="read/paymentlayer.md">more</a>
+        </p>
       </td>
     </tr>
     <tr>
@@ -363,6 +383,8 @@ Rinkeby testnet: _Not yet deployed_
           <li><code>uint256 fee</code>
           </li>
         </ul>
+        <p><a href="read/fee.md">more</a>
+        </p>
       </td>
     </tr>
     <tr>
@@ -381,6 +403,8 @@ Rinkeby testnet: _Not yet deployed_
           <li><code>uint256 currentOverflowOf</code>
           </li>
         </ul>
+        <p><a href="read/currentoverflowof.md">more</a>
+        </p>
       </td>
     </tr>
     <tr>
@@ -401,6 +425,8 @@ Rinkeby testnet: _Not yet deployed_
           <li><code>uint256 reservedTokenBalanceOf</code>
           </li>
         </ul>
+        <p><a href="read/reservedtokenbalanceof.md">more</a>
+        </p>
       </td>
     </tr>
     <tr>
@@ -421,6 +447,8 @@ Rinkeby testnet: _Not yet deployed_
           <li><code>uint256 claimableOverflowOf</code>
           </li>
         </ul>
+        <p><a href="read/claimableoverflowof.md">more</a>
+        </p>
       </td>
     </tr>
   </tbody>
@@ -460,6 +488,8 @@ Rinkeby testnet: _Not yet deployed_
           <li><code>Split[] _reservedTokenSplits</code>
           </li>
         </ul>
+        <p><a href="write/launchproject.md">more</a>
+        </p>
       </td>
     </tr>
     <tr>
@@ -496,6 +526,8 @@ Rinkeby testnet: _Not yet deployed_
           <li><code>uint256 fundingCycleId</code>
           </li>
         </ul>
+        <p><a href="write/reconfigurefundingcycles.md">more</a>
+        </p>
       </td>
     </tr>
     <tr>
@@ -534,6 +566,8 @@ Rinkeby testnet: _Not yet deployed_
           <li><code>uint256 tokenCount</code>
           </li>
         </ul>
+        <p><a href="write/minttokens.md">more</a>
+        </p>
       </td>
     </tr>
     <tr>
@@ -562,6 +596,8 @@ Rinkeby testnet: _Not yet deployed_
           <li><code>bool _preferUnstakedTokens</code>
           </li>
         </ul>
+        <p><a href="write/burntokens.md">more</a>
+        </p>
       </td>
     </tr>
     <tr>
@@ -588,6 +624,8 @@ Rinkeby testnet: _Not yet deployed_
           <li><code>uint256 tokenCount</code>
           </li>
         </ul>
+        <p><a href="write/distributereservedtokens.md">more</a>
+        </p>
       </td>
     </tr>
     <tr>
@@ -606,6 +644,8 @@ Rinkeby testnet: _Not yet deployed_
           <li><code>uint256 _projectId</code>
           </li>
         </ul>
+        <p><a href="write/prepformigrationof.md">more</a>
+        </p>
       </td>
     </tr>
     <tr>
@@ -648,6 +688,8 @@ Rinkeby testnet: _Not yet deployed_
           <li><code>string memo</code>
           </li>
         </ul>
+        <p><a href="write/recordpayment.md">more</a>
+        </p>
       </td>
     </tr>
     <tr>
@@ -680,6 +722,8 @@ Rinkeby testnet: _Not yet deployed_
           <li><code>uint256 withdrawnAmount</code>
           </li>
         </ul>
+        <p><a href="write/recordwithdrawal.md">more</a>
+        </p>
       </td>
     </tr>
     <tr>
@@ -712,6 +756,8 @@ Rinkeby testnet: _Not yet deployed_
           <li><code>uint256 withdrawnAmount</code>
           </li>
         </ul>
+        <p><a href="write/recordusedallowance.md">more</a>
+        </p>
       </td>
     </tr>
     <tr>
@@ -752,6 +798,8 @@ Rinkeby testnet: _Not yet deployed_
           <li><code>string memo</code>
           </li>
         </ul>
+        <p><a href="write/recordredemption.md">more</a>
+        </p>
       </td>
     </tr>
     <tr>
@@ -778,6 +826,8 @@ Rinkeby testnet: _Not yet deployed_
           <li><code>uint256 balance</code>
           </li>
         </ul>
+        <p><a href="write/recordmigration.md">more</a>
+        </p>
       </td>
     </tr>
     <tr>
@@ -798,6 +848,8 @@ Rinkeby testnet: _Not yet deployed_
           <li><code>uint256 _projectId</code>
           </li>
         </ul>
+        <p><a href="write/recordaddedbalance.md">more</a>
+        </p>
       </td>
     </tr>
     <tr>
@@ -816,6 +868,8 @@ Rinkeby testnet: _Not yet deployed_
           <li><code>ITerminal _terminal</code>
           </li>
         </ul>
+        <p><a href="write/allowmigration.md">more</a>
+        </p>
       </td>
     </tr>
     <tr>
@@ -834,6 +888,8 @@ Rinkeby testnet: _Not yet deployed_
           <li><code>ITerminalV2PaymentLayer _paymentLayer</code>
           </li>
         </ul>
+        <p><a href="write/setpaymentlayer.md">more</a>
+        </p>
       </td>
     </tr>
     <tr>
@@ -867,6 +923,8 @@ Rinkeby testnet: _Not yet deployed_
           <li><code>uint256 fundingCycleNumber</code>
           </li>
         </ul>
+        <p><a href="write/pay.md">more</a>
+        </p>
       </td>
     </tr>
     <tr>
@@ -889,6 +947,8 @@ Rinkeby testnet: _Not yet deployed_
           <li><code>uint256 _projectId</code>
           </li>
         </ul>
+        <p><a href="write/addtobalance.md">more</a>
+        </p>
       </td>
     </tr>
   </tbody>
