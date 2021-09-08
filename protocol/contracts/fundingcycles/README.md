@@ -55,6 +55,8 @@ Rinkeby testnet: [0x234985c467E90483bA42fB2C7C2f71A1874D805D](https://rinkeby.et
           <li><code>address caller</code>
           </li>
         </ul>
+        <p><a href="events/configure.md">more</a>
+        </p>
       </td>
     </tr>
     <tr>
@@ -73,6 +75,8 @@ Rinkeby testnet: [0x234985c467E90483bA42fB2C7C2f71A1874D805D](https://rinkeby.et
           <li><code>address caller</code>
           </li>
         </ul>
+        <p><a href="events/tap.md">more</a>
+        </p>
       </td>
     </tr>
     <tr>
@@ -93,6 +97,8 @@ Rinkeby testnet: [0x234985c467E90483bA42fB2C7C2f71A1874D805D](https://rinkeby.et
           <li><code>uint256 start</code>
           </li>
         </ul>
+        <p><a href="events/init.md">more</a>
+        </p>
       </td>
     </tr>
   </tbody>

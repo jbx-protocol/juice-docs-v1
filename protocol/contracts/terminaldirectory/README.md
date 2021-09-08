@@ -52,6 +52,8 @@ Rinkeby testnet: [0x88d8c9E98E6EdE75252c2473abc9724965fe7474](https://rinkeby.et
           <li><code>address caller</code>
           </li>
         </ul>
+        <p><a href="events/setterminal.md">more</a>
+        </p>
       </td>
     </tr>
     <tr>
@@ -66,6 +68,8 @@ Rinkeby testnet: [0x88d8c9E98E6EdE75252c2473abc9724965fe7474](https://rinkeby.et
           <li><code>bool preferUnstakedTickets</code>
           </li>
         </ul>
+        <p><a href="events/setpayerpreferences.md">more</a>
+        </p>
       </td>
     </tr>
     <tr>
@@ -80,6 +84,8 @@ Rinkeby testnet: [0x88d8c9E98E6EdE75252c2473abc9724965fe7474](https://rinkeby.et
           <li><code>address indexed caller</code>
           </li>
         </ul>
+        <p><a href="events/deployaddress.md">more</a>
+        </p>
       </td>
     </tr>
   </tbody>

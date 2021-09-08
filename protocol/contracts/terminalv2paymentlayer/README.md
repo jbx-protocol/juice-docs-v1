@@ -52,6 +52,8 @@ Rinkeby testnet: _Not yet deployed_
           <li><code>address caller</code>
           </li>
         </ul>
+        <p><a href="events/addtobalance.md">more</a>
+        </p>
       </td>
     </tr>
     <tr>
@@ -68,6 +70,8 @@ Rinkeby testnet: _Not yet deployed_
           <li><code>address caller</code>
           </li>
         </ul>
+        <p><a href="events/migrate.md">more</a>
+        </p>
       </td>
     </tr>
     <tr>
@@ -94,6 +98,8 @@ Rinkeby testnet: _Not yet deployed_
           <li><code>address caller</code>
           </li>
         </ul>
+        <p><a href="events/distributepayouts.md">more</a>
+        </p>
       </td>
     </tr>
     <tr>
@@ -118,6 +124,8 @@ Rinkeby testnet: _Not yet deployed_
           <li><code>address caller</code>
           </li>
         </ul>
+        <p><a href="events/useallowance.md">more</a>
+        </p>
       </td>
     </tr>
     <tr>
@@ -144,6 +152,8 @@ Rinkeby testnet: _Not yet deployed_
           <li><code>address caller</code>
           </li>
         </ul>
+        <p><a href="events/pay.md">more</a>
+        </p>
       </td>
     </tr>
     <tr>
@@ -170,6 +180,8 @@ Rinkeby testnet: _Not yet deployed_
           <li><code>address caller</code>
           </li>
         </ul>
+        <p><a href="events/redeem.md">more</a>
+        </p>
       </td>
     </tr>
     <tr>
@@ -190,6 +202,8 @@ Rinkeby testnet: _Not yet deployed_
           <li><code>address caller</code>
           </li>
         </ul>
+        <p><a href="events/distributetopayoutsplit.md">more</a>
+        </p>
       </td>
     </tr>
   </tbody>

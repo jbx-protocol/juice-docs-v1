@@ -47,6 +47,8 @@ Rinkeby testnet: [0x22c2580c58D2F84165CD5af02729Af344cE7d637](https://rinkeby.et
           <li><code>AggregatorV3Interface indexed feed</code>
           </li>
         </ul>
+        <p><a href="events/addfeed.md">more</a>
+        </p>
       </td>
     </tr>
   </tbody>

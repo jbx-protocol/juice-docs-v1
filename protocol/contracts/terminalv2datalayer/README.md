@@ -56,6 +56,8 @@ Rinkeby testnet: _Not yet deployed_
           <li><code>address caller</code>
           </li>
         </ul>
+        <p><a href="events/setoverflowallowance.md">more</a>
+        </p>
       </td>
     </tr>
     <tr>
@@ -78,6 +80,8 @@ Rinkeby testnet: _Not yet deployed_
           <li><code>address caller</code>
           </li>
         </ul>
+        <p><a href="events/distributereservedtokens.md">more</a>
+        </p>
       </td>
     </tr>
     <tr>
@@ -98,6 +102,8 @@ Rinkeby testnet: _Not yet deployed_
           <li><code>address caller</code>
           </li>
         </ul>
+        <p><a href="events/distributetoreservedtokensplit.md">more</a>
+        </p>
       </td>
     </tr>
     <tr>
@@ -108,10 +114,12 @@ Rinkeby testnet: _Not yet deployed_
           <li><code>ITerminal terminal</code>
           </li>
         </ul>
+        <p><a href="events/allowmigration.md">more</a>
+        </p>
       </td>
     </tr>
     <tr>
-      <td style="text-align:left"><b><code>Mint</code></b>
+      <td style="text-align:left"><b><code>MintTokens</code></b>
       </td>
       <td style="text-align:left">
         <ul>
@@ -132,10 +140,12 @@ Rinkeby testnet: _Not yet deployed_
           <li><code>address caller</code>
           </li>
         </ul>
+        <p><a href="events/minttokens.md">more</a>
+        </p>
       </td>
     </tr>
     <tr>
-      <td style="text-align:left"><b><code>Burn</code></b>
+      <td style="text-align:left"><b><code>BurnTokens</code></b>
       </td>
       <td style="text-align:left">
         <ul>
@@ -150,6 +160,8 @@ Rinkeby testnet: _Not yet deployed_
           <li><code>address caller</code>
           </li>
         </ul>
+        <p><a href="events/burntokens.md">more</a>
+        </p>
       </td>
     </tr>
     <tr>
@@ -162,6 +174,8 @@ Rinkeby testnet: _Not yet deployed_
           <li><code>address caller</code>
           </li>
         </ul>
+        <p><a href="events/setpaymentlayer.md">more</a>
+        </p>
       </td>
     </tr>
   </tbody>

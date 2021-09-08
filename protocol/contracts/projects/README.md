@@ -56,6 +56,8 @@ Rinkeby testnet: [0x34A1d33e49907ADFE05fb4E21411a06a8c4300eE](https://rinkeby.et
           <li><code>address caller</code>
           </li>
         </ul>
+        <p><a href="events/create.md">more</a>
+        </p>
       </td>
     </tr>
     <tr>
@@ -70,6 +72,8 @@ Rinkeby testnet: [0x34A1d33e49907ADFE05fb4E21411a06a8c4300eE](https://rinkeby.et
           <li><code>address caller</code>
           </li>
         </ul>
+        <p><a href="events/sethandle.md">more</a>
+        </p>
       </td>
     </tr>
     <tr>
@@ -84,6 +88,8 @@ Rinkeby testnet: [0x34A1d33e49907ADFE05fb4E21411a06a8c4300eE](https://rinkeby.et
           <li><code>address caller</code>
           </li>
         </ul>
+        <p><a href="events/seturi.md">more</a>
+        </p>
       </td>
     </tr>
     <tr>
@@ -102,6 +108,8 @@ Rinkeby testnet: [0x34A1d33e49907ADFE05fb4E21411a06a8c4300eE](https://rinkeby.et
           <li><code>address caller</code>
           </li>
         </ul>
+        <p><a href="events/transferhandle.md">more</a>
+        </p>
       </td>
     </tr>
     <tr>
@@ -118,6 +126,8 @@ Rinkeby testnet: [0x34A1d33e49907ADFE05fb4E21411a06a8c4300eE](https://rinkeby.et
           <li><code>address caller</code>
           </li>
         </ul>
+        <p><a href="events/claimhandle.md">more</a>
+        </p>
       </td>
     </tr>
     <tr>
@@ -132,6 +142,8 @@ Rinkeby testnet: [0x34A1d33e49907ADFE05fb4E21411a06a8c4300eE](https://rinkeby.et
           <li><code>address caller</code>
           </li>
         </ul>
+        <p><a href="events/challengehandle.md">more</a>
+        </p>
       </td>
     </tr>
     <tr>
@@ -146,6 +158,8 @@ Rinkeby testnet: [0x34A1d33e49907ADFE05fb4E21411a06a8c4300eE](https://rinkeby.et
           <li><code>address caller</code>
           </li>
         </ul>
+        <p><a href="events/renewhandle.md">more</a>
+        </p>
       </td>
     </tr>
   </tbody>

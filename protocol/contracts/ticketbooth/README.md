@@ -54,6 +54,8 @@ Rinkeby testnet: [0x0d038636a670E8bd8cF7D56BC4626f2a6446cF11](https://rinkeby.et
           <li><code>address caller</code>
           </li>
         </ul>
+        <p><a href="events/issue.md">more</a>
+        </p>
       </td>
     </tr>
     <tr>
@@ -74,6 +76,8 @@ Rinkeby testnet: [0x0d038636a670E8bd8cF7D56BC4626f2a6446cF11](https://rinkeby.et
           <li><code>address controller</code>
           </li>
         </ul>
+        <p><a href="events/print.md">more</a>
+        </p>
       </td>
     </tr>
     <tr>
@@ -94,6 +98,8 @@ Rinkeby testnet: [0x0d038636a670E8bd8cF7D56BC4626f2a6446cF11](https://rinkeby.et
           <li><code>address controller</code>
           </li>
         </ul>
+        <p><a href="../terminalv2paymentlayer/events/redeem.md">more</a>
+        </p>
       </td>
     </tr>
     <tr>
@@ -110,6 +116,8 @@ Rinkeby testnet: [0x0d038636a670E8bd8cF7D56BC4626f2a6446cF11](https://rinkeby.et
           <li><code>address caller</code>
           </li>
         </ul>
+        <p><a href="events/stake.md">more</a>
+        </p>
       </td>
     </tr>
     <tr>
@@ -126,6 +134,8 @@ Rinkeby testnet: [0x0d038636a670E8bd8cF7D56BC4626f2a6446cF11](https://rinkeby.et
           <li><code>address caller</code>
           </li>
         </ul>
+        <p><a href="events/unstake.md">more</a>
+        </p>
       </td>
     </tr>
     <tr>
@@ -142,6 +152,8 @@ Rinkeby testnet: [0x0d038636a670E8bd8cF7D56BC4626f2a6446cF11](https://rinkeby.et
           <li><code>address caller</code>
           </li>
         </ul>
+        <p><a href="events/lock.md">more</a>
+        </p>
       </td>
     </tr>
     <tr>
@@ -158,6 +170,8 @@ Rinkeby testnet: [0x0d038636a670E8bd8cF7D56BC4626f2a6446cF11](https://rinkeby.et
           <li><code>address caller</code>
           </li>
         </ul>
+        <p><a href="events/unlock.md">more</a>
+        </p>
       </td>
     </tr>
     <tr>
@@ -176,6 +190,8 @@ Rinkeby testnet: [0x0d038636a670E8bd8cF7D56BC4626f2a6446cF11](https://rinkeby.et
           <li><code>address caller</code>
           </li>
         </ul>
+        <p><a href="events/transfer.md">more</a>
+        </p>
       </td>
     </tr>
   </tbody>

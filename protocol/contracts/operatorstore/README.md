@@ -50,6 +50,8 @@ Rinkeby testnet: [0x5dA2E4Ba83569fb7A22a4aDE14bBEf1236168406](https://rinkeby.et
           <li><code>uint256 packed</code>
           </li>
         </ul>
+        <p><a href="events/setoperator.md">more</a>
+        </p>
       </td>
     </tr>
   </tbody>
