@@ -80,6 +80,8 @@ Rinkeby testnet: _Not yet deployed_
           <li><code>IProjects projects</code>
           </li>
         </ul>
+        <p><a href="read/projects.md">more</a>
+        </p>
       </td>
     </tr>
     <tr>
@@ -102,6 +104,8 @@ Rinkeby testnet: _Not yet deployed_
           <li><code>Split[] splits</code>
           </li>
         </ul>
+        <p><a href="read/get.md">more</a>
+        </p>
       </td>
     </tr>
   </tbody>
@@ -139,6 +143,8 @@ Rinkeby testnet: _Not yet deployed_
           <li><code>Split[] _splits</code>
           </li>
         </ul>
+        <p><a href="write/set.md">more</a>
+        </p>
       </td>
     </tr>
   </tbody>

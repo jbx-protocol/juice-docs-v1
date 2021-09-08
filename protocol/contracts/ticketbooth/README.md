@@ -207,6 +207,8 @@ Rinkeby testnet: [0x0d038636a670E8bd8cF7D56BC4626f2a6446cF11](https://rinkeby.et
           <li><code>IProjects projects</code>
           </li>
         </ul>
+        <p><a href="read/projects.md">more</a>
+        </p>
       </td>
     </tr>
     <tr>
@@ -225,6 +227,8 @@ Rinkeby testnet: [0x0d038636a670E8bd8cF7D56BC4626f2a6446cF11](https://rinkeby.et
           <li><code>ITickets ticketsOf</code>
           </li>
         </ul>
+        <p><a href="read/ticketsof.md">more</a>
+        </p>
       </td>
     </tr>
     <tr>
@@ -245,6 +249,8 @@ Rinkeby testnet: [0x0d038636a670E8bd8cF7D56BC4626f2a6446cF11](https://rinkeby.et
           <li><code>uint256 stakedBalanceOf</code>
           </li>
         </ul>
+        <p><a href="read/stakedbalanceof.md">more</a>
+        </p>
       </td>
     </tr>
     <tr>
@@ -263,6 +269,8 @@ Rinkeby testnet: [0x0d038636a670E8bd8cF7D56BC4626f2a6446cF11](https://rinkeby.et
           <li><code>uint256 stakedTotalSupplyOf</code>
           </li>
         </ul>
+        <p><a href="read/stakedtotalsupplyof.md">more</a>
+        </p>
       </td>
     </tr>
     <tr>
@@ -283,6 +291,8 @@ Rinkeby testnet: [0x0d038636a670E8bd8cF7D56BC4626f2a6446cF11](https://rinkeby.et
           <li><code>uint256 lockedBalanceOf</code>
           </li>
         </ul>
+        <p><a href="read/lockedbalanceof.md">more</a>
+        </p>
       </td>
     </tr>
     <tr>
@@ -305,6 +315,8 @@ Rinkeby testnet: [0x0d038636a670E8bd8cF7D56BC4626f2a6446cF11](https://rinkeby.et
           <li><code>uint256 lockedBalanceBy</code>
           </li>
         </ul>
+        <p><a href="read/lockedbalanceby.md">more</a>
+        </p>
       </td>
     </tr>
     <tr>
@@ -323,6 +335,8 @@ Rinkeby testnet: [0x0d038636a670E8bd8cF7D56BC4626f2a6446cF11](https://rinkeby.et
           <li><code>uint256 totalSupplyOf</code>
           </li>
         </ul>
+        <p><a href="read/totalsupplyof.md">more</a>
+        </p>
       </td>
     </tr>
     <tr>
@@ -343,6 +357,8 @@ Rinkeby testnet: [0x0d038636a670E8bd8cF7D56BC4626f2a6446cF11](https://rinkeby.et
           <li><code>uint256 balanceOf</code>
           </li>
         </ul>
+        <p><a href="../terminalv2datalayer/read/balanceof.md">more</a>
+        </p>
       </td>
     </tr>
   </tbody>
@@ -378,6 +394,8 @@ Rinkeby testnet: [0x0d038636a670E8bd8cF7D56BC4626f2a6446cF11](https://rinkeby.et
           <li><code>string _symbol</code>
           </li>
         </ul>
+        <p><a href="write/issue.md">more</a>
+        </p>
       </td>
     </tr>
     <tr>
@@ -402,6 +420,8 @@ Rinkeby testnet: [0x0d038636a670E8bd8cF7D56BC4626f2a6446cF11](https://rinkeby.et
           <li><code>bool _preferUnstakedTickets</code>
           </li>
         </ul>
+        <p><a href="write/print.md">more</a>
+        </p>
       </td>
     </tr>
     <tr>
@@ -426,6 +446,8 @@ Rinkeby testnet: [0x0d038636a670E8bd8cF7D56BC4626f2a6446cF11](https://rinkeby.et
           <li><code>bool _preferUnstaked</code>
           </li>
         </ul>
+        <p><a href="write/redeem.md">more</a>
+        </p>
       </td>
     </tr>
     <tr>
@@ -448,6 +470,8 @@ Rinkeby testnet: [0x0d038636a670E8bd8cF7D56BC4626f2a6446cF11](https://rinkeby.et
           <li><code>uint256 _amount</code>
           </li>
         </ul>
+        <p><a href="write/stake.md">more</a>
+        </p>
       </td>
     </tr>
     <tr>
@@ -470,6 +494,8 @@ Rinkeby testnet: [0x0d038636a670E8bd8cF7D56BC4626f2a6446cF11](https://rinkeby.et
           <li><code>uint256 _amount</code>
           </li>
         </ul>
+        <p><a href="write/unstake.md">more</a>
+        </p>
       </td>
     </tr>
     <tr>
@@ -492,6 +518,8 @@ Rinkeby testnet: [0x0d038636a670E8bd8cF7D56BC4626f2a6446cF11](https://rinkeby.et
           <li><code>uint256 _amount</code>
           </li>
         </ul>
+        <p><a href="write/lock.md">more</a>
+        </p>
       </td>
     </tr>
     <tr>
@@ -508,6 +536,8 @@ Rinkeby testnet: [0x0d038636a670E8bd8cF7D56BC4626f2a6446cF11](https://rinkeby.et
           <li><code>uint256 _amount</code>
           </li>
         </ul>
+        <p><a href="write/unlock.md">more</a>
+        </p>
       </td>
     </tr>
     <tr>
@@ -532,6 +562,8 @@ Rinkeby testnet: [0x0d038636a670E8bd8cF7D56BC4626f2a6446cF11](https://rinkeby.et
           <li><code>address _recipient</code>
           </li>
         </ul>
+        <p><a href="write/transfer.md">more</a>
+        </p>
       </td>
     </tr>
   </tbody>

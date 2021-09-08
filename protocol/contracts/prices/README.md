@@ -78,6 +78,8 @@ Rinkeby testnet: [0x22c2580c58D2F84165CD5af02729Af344cE7d637](https://rinkeby.et
           <li><code>uint256 18</code>
           </li>
         </ul>
+        <p><a href="read/targetdecimals.md">more</a>
+        </p>
       </td>
     </tr>
     <tr>
@@ -96,6 +98,8 @@ Rinkeby testnet: [0x22c2580c58D2F84165CD5af02729Af344cE7d637](https://rinkeby.et
           <li><code>uint256 adjustmentAmount</code>
           </li>
         </ul>
+        <p><a href="read/feeddecimaladjuster.md">more</a>
+        </p>
       </td>
     </tr>
     <tr>
@@ -114,6 +118,8 @@ Rinkeby testnet: [0x22c2580c58D2F84165CD5af02729Af344cE7d637](https://rinkeby.et
           <li><code>AggregatorV3Interface feed</code>
           </li>
         </ul>
+        <p><a href="read/feedfor.md">more</a>
+        </p>
       </td>
     </tr>
     <tr>
@@ -132,6 +138,8 @@ Rinkeby testnet: [0x22c2580c58D2F84165CD5af02729Af344cE7d637](https://rinkeby.et
           <li><code>uint256 _price</code>
           </li>
         </ul>
+        <p><a href="read/getethpricefor.md">more</a>
+        </p>
       </td>
     </tr>
   </tbody>
@@ -165,6 +173,8 @@ Rinkeby testnet: [0x22c2580c58D2F84165CD5af02729Af344cE7d637](https://rinkeby.et
           <li><code>uint256 _currency</code>
           </li>
         </ul>
+        <p><a href="write/addfeed.md">more</a>
+        </p>
       </td>
     </tr>
   </tbody>

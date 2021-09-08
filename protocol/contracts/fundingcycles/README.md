@@ -124,6 +124,8 @@ Rinkeby testnet: [0x234985c467E90483bA42fB2C7C2f71A1874D805D](https://rinkeby.et
           <li><code>uint256 1E24</code>
           </li>
         </ul>
+        <p><a href="read/base_weight.md">more</a>
+        </p>
       </td>
     </tr>
     <tr>
@@ -142,6 +144,8 @@ Rinkeby testnet: [0x234985c467E90483bA42fB2C7C2f71A1874D805D](https://rinkeby.et
           <li><code>uint256 32</code>
           </li>
         </ul>
+        <p><a href="read/max_cycle_limit.md">more</a>
+        </p>
       </td>
     </tr>
     <tr>
@@ -160,6 +164,8 @@ Rinkeby testnet: [0x234985c467E90483bA42fB2C7C2f71A1874D805D](https://rinkeby.et
           <li><code>uint256 _latestIdOf</code>
           </li>
         </ul>
+        <p><a href="read/latestidof.md">more</a>
+        </p>
       </td>
     </tr>
     <tr>
@@ -172,6 +178,8 @@ Rinkeby testnet: [0x234985c467E90483bA42fB2C7C2f71A1874D805D](https://rinkeby.et
           <li><code>uint256 count</code>
           </li>
         </ul>
+        <p><a href="../projects/read/count.md">more</a>
+        </p>
       </td>
     </tr>
     <tr>
@@ -190,6 +198,8 @@ Rinkeby testnet: [0x234985c467E90483bA42fB2C7C2f71A1874D805D](https://rinkeby.et
           <li><code>FundingCycle _fundingCycle</code>
           </li>
         </ul>
+        <p><a href="read/get.md">more</a>
+        </p>
       </td>
     </tr>
     <tr>
@@ -208,6 +218,8 @@ Rinkeby testnet: [0x234985c467E90483bA42fB2C7C2f71A1874D805D](https://rinkeby.et
           <li><code>FundingCycle _fundingCycle</code>
           </li>
         </ul>
+        <p><a href="read/queuedof.md">more</a>
+        </p>
       </td>
     </tr>
     <tr>
@@ -226,6 +238,8 @@ Rinkeby testnet: [0x234985c467E90483bA42fB2C7C2f71A1874D805D](https://rinkeby.et
           <li><code>FundingCycle _fundingCycle</code>
           </li>
         </ul>
+        <p><a href="read/currentof.md">more</a>
+        </p>
       </td>
     </tr>
     <tr>
@@ -244,6 +258,8 @@ Rinkeby testnet: [0x234985c467E90483bA42fB2C7C2f71A1874D805D](https://rinkeby.et
           <li><code>BallotState _ballotState</code>
           </li>
         </ul>
+        <p><a href="read/currentballotstateof.md">more</a>
+        </p>
       </td>
     </tr>
   </tbody>
@@ -289,6 +305,8 @@ Rinkeby testnet: [0x234985c467E90483bA42fB2C7C2f71A1874D805D](https://rinkeby.et
           <li><code>FundingCycle _fundingCycle</code>
           </li>
         </ul>
+        <p><a href="write/configure.md">more</a>
+        </p>
       </td>
     </tr>
     <tr>
@@ -315,6 +333,8 @@ Rinkeby testnet: [0x234985c467E90483bA42fB2C7C2f71A1874D805D](https://rinkeby.et
           <li><code>FundingCycle fundingCycle</code>
           </li>
         </ul>
+        <p><a href="write/tap.md">more</a>
+        </p>
       </td>
     </tr>
   </tbody>

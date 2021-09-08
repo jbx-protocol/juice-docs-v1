@@ -85,6 +85,8 @@ Rinkeby testnet: [0x5dA2E4Ba83569fb7A22a4aDE14bBEf1236168406](https://rinkeby.et
           <li><code>uint256 permissions</code>
           </li>
         </ul>
+        <p><a href="read/permissionsof.md">more</a>
+        </p>
       </td>
     </tr>
     <tr>
@@ -109,6 +111,8 @@ Rinkeby testnet: [0x5dA2E4Ba83569fb7A22a4aDE14bBEf1236168406](https://rinkeby.et
           <li><code>bool hasPermission</code>
           </li>
         </ul>
+        <p><a href="read/haspermission.md">more</a>
+        </p>
       </td>
     </tr>
     <tr>
@@ -133,6 +137,8 @@ Rinkeby testnet: [0x5dA2E4Ba83569fb7A22a4aDE14bBEf1236168406](https://rinkeby.et
           <li><code>bool hasPermissions</code>
           </li>
         </ul>
+        <p><a href="read/haspermissions.md">more</a>
+        </p>
       </td>
     </tr>
   </tbody>
@@ -162,6 +168,8 @@ Rinkeby testnet: [0x5dA2E4Ba83569fb7A22a4aDE14bBEf1236168406](https://rinkeby.et
           <li><code>uint256[] _permissionIndexes</code>
           </li>
         </ul>
+        <p><a href="write/setoperator.md">more</a>
+        </p>
       </td>
     </tr>
     <tr>
@@ -178,6 +186,8 @@ Rinkeby testnet: [0x5dA2E4Ba83569fb7A22a4aDE14bBEf1236168406](https://rinkeby.et
           <li><code>uint256[][] _permissionIndexes</code>
           </li>
         </ul>
+        <p><a href="write/setoperators.md">more</a>
+        </p>
       </td>
     </tr>
   </tbody>

@@ -171,6 +171,8 @@ Rinkeby testnet: [0x34A1d33e49907ADFE05fb4E21411a06a8c4300eE](https://rinkeby.et
           <li><code>uint256 count</code>
           </li>
         </ul>
+        <p><a href="read/count.md">more</a>
+        </p>
       </td>
     </tr>
     <tr>
@@ -189,6 +191,8 @@ Rinkeby testnet: [0x34A1d33e49907ADFE05fb4E21411a06a8c4300eE](https://rinkeby.et
           <li><code>string _uri</code>
           </li>
         </ul>
+        <p><a href="read/uriof.md">more</a>
+        </p>
       </td>
     </tr>
     <tr>
@@ -207,6 +211,8 @@ Rinkeby testnet: [0x34A1d33e49907ADFE05fb4E21411a06a8c4300eE](https://rinkeby.et
           <li><code>bytes32 _handle</code>
           </li>
         </ul>
+        <p><a href="read/handleof.md">more</a>
+        </p>
       </td>
     </tr>
     <tr>
@@ -225,6 +231,8 @@ Rinkeby testnet: [0x34A1d33e49907ADFE05fb4E21411a06a8c4300eE](https://rinkeby.et
           <li><code>uint256 _projectId</code>
           </li>
         </ul>
+        <p><a href="read/projectfor.md">more</a>
+        </p>
       </td>
     </tr>
     <tr>
@@ -243,6 +251,8 @@ Rinkeby testnet: [0x34A1d33e49907ADFE05fb4E21411a06a8c4300eE](https://rinkeby.et
           <li><code>address _transferAddress</code>
           </li>
         </ul>
+        <p><a href="read/transferaddressfor.md">more</a>
+        </p>
       </td>
     </tr>
     <tr>
@@ -261,6 +271,8 @@ Rinkeby testnet: [0x34A1d33e49907ADFE05fb4E21411a06a8c4300eE](https://rinkeby.et
           <li><code>uint256 _challengeExpiryTimestamp</code>
           </li>
         </ul>
+        <p><a href="read/challengeexpiryof.md">more</a>
+        </p>
       </td>
     </tr>
     <tr>
@@ -279,6 +291,8 @@ Rinkeby testnet: [0x34A1d33e49907ADFE05fb4E21411a06a8c4300eE](https://rinkeby.et
           <li><code>bool exists</code>
           </li>
         </ul>
+        <p><a href="read/exists.md">more</a>
+        </p>
       </td>
     </tr>
   </tbody>
@@ -316,6 +330,8 @@ Rinkeby testnet: [0x34A1d33e49907ADFE05fb4E21411a06a8c4300eE](https://rinkeby.et
           <li><code>uint256 projectId</code>
           </li>
         </ul>
+        <p><a href="write/create.md">more</a>
+        </p>
       </td>
     </tr>
     <tr>
@@ -336,6 +352,8 @@ Rinkeby testnet: [0x34A1d33e49907ADFE05fb4E21411a06a8c4300eE](https://rinkeby.et
           <li><code>bytes32 _handle</code>
           </li>
         </ul>
+        <p><a href="write/sethandle.md">more</a>
+        </p>
       </td>
     </tr>
     <tr>
@@ -356,6 +374,8 @@ Rinkeby testnet: [0x34A1d33e49907ADFE05fb4E21411a06a8c4300eE](https://rinkeby.et
           <li><code>string _uri</code>
           </li>
         </ul>
+        <p><a href="write/seturi.md">more</a>
+        </p>
       </td>
     </tr>
     <tr>
@@ -384,6 +404,8 @@ Rinkeby testnet: [0x34A1d33e49907ADFE05fb4E21411a06a8c4300eE](https://rinkeby.et
           <li><code>bytes32 handle</code>
           </li>
         </ul>
+        <p><a href="write/transferhandle.md">more</a>
+        </p>
       </td>
     </tr>
     <tr>
@@ -406,6 +428,8 @@ Rinkeby testnet: [0x34A1d33e49907ADFE05fb4E21411a06a8c4300eE](https://rinkeby.et
           <li><code>uint256 _projectId</code>
           </li>
         </ul>
+        <p><a href="write/claimhandle.md">more</a>
+        </p>
       </td>
     </tr>
     <tr>
@@ -418,6 +442,8 @@ Rinkeby testnet: [0x34A1d33e49907ADFE05fb4E21411a06a8c4300eE](https://rinkeby.et
           <li><code>bytes32 _handle</code>
           </li>
         </ul>
+        <p><a href="write/challengehandle.md">more</a>
+        </p>
       </td>
     </tr>
     <tr>
@@ -436,6 +462,8 @@ Rinkeby testnet: [0x34A1d33e49907ADFE05fb4E21411a06a8c4300eE](https://rinkeby.et
           <li><code>uint256 _projectId</code>
           </li>
         </ul>
+        <p><a href="write/renewhandle.md">more</a>
+        </p>
       </td>
     </tr>
   </tbody>
