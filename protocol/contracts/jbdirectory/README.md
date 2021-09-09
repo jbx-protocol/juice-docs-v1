@@ -1,6 +1,6 @@
 ---
 description: >-
-  Keeps a reference of which terminal contract each project is currently
+  Keeps a reference of which payment terminal contract each project is currently
   accepting funds through. When a project migrates from one terminal to another,
   the change is reflected in this contract.
 ---
