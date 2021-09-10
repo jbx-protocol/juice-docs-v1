@@ -103,7 +103,7 @@
       * [recordWithdrawalFor](protocol/contracts/jbpaymentterminaldata/write/recordwithdrawalfor.md)
       * [recordUsedAllowanceOf](protocol/contracts/jbpaymentterminaldata/write/recordusedallowanceof.md)
       * [recordRedemptionFor](protocol/contracts/jbpaymentterminaldata/write/recordredemptionfor.md)
-      * [recordPrepForBalanceTransferOf](protocol/contracts/jbpaymentterminaldata/write/recordprepforbalancetransferof.md)
+      * [recordPrepForBalanceTransferOf](protocol/contracts/jbpaymentterminaldata/write/recordprepformigration.md)
       * [recordBalanceTransferFor](protocol/contracts/jbpaymentterminaldata/write/recordbalancetransferfor.md)
       * [recordAddedBalanceFor](protocol/contracts/jbpaymentterminaldata/write/recordaddedbalancefor.md)
       * [setPaymentTerminalOf](protocol/contracts/jbpaymentterminaldata/write/setpaymentterminalof.md)
