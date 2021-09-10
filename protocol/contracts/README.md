@@ -5,7 +5,7 @@
 <table>
   <thead>
     <tr>
-      <th style="text-align:left">Name</th>
+      <th style="text-align:left">Contract</th>
       <th style="text-align:left">Description</th>
     </tr>
   </thead>
@@ -16,7 +16,7 @@
       <td style="text-align:left">
         <p>Manages ownership over projects, which are represented as ERC-721 tokens.</p>
         <p></p>
-        <p><a href="jbprojects/">more</a>
+        <p><a href="jbprojects/">view API</a>
         </p>
       </td>
     </tr>
@@ -27,7 +27,7 @@
         <p>Manages all inflows and outflows of funds into the Juicebox ecosystem.
           This contract also stores all treasury funds for all projects.</p>
         <p></p>
-        <p><a href="jbpaymentterminal/">more</a>
+        <p><a href="jbpaymentterminal/">view API</a>
         </p>
       </td>
     </tr>
@@ -38,7 +38,7 @@
         <p>Stitches together funding cycles and treasury tokens, making sure all
           activity is accounted for and correct.</p>
         <p></p>
-        <p><a href="jbpaymentterminaldata/">more</a>
+        <p><a href="jbpaymentterminaldata/">view API</a>
         </p>
       </td>
     </tr>
@@ -50,7 +50,7 @@
           accepting funds through. When a project migrates from one terminal to another,
           the change is reflected in this contract.</p>
         <p></p>
-        <p><a href="jbdirectory/">more</a>
+        <p><a href="jbdirectory/">view API</a>
         </p>
       </td>
     </tr>
@@ -61,7 +61,7 @@
         <p>Manages token minting and burning for all projects, while keeping track
           of staked/unstaked and locked/unlock token balances for all accounts.</p>
         <p></p>
-        <p><a href="jbtokenstore/">more</a>
+        <p><a href="jbtokenstore/">view API</a>
         </p>
       </td>
     </tr>
@@ -71,7 +71,7 @@
       <td style="text-align:left">
         <p>Manage funding cycle configurations, ballots, accounting, and scheduling.</p>
         <p></p>
-        <p><a href="jbfundingcyclestore/">more</a>
+        <p><a href="jbfundingcyclestore/">view API</a>
         </p>
       </td>
     </tr>
@@ -84,7 +84,7 @@
           to any address, any other Juicebox project, or any contract that inherits
           from the IJBSplitAllocator interface.</p>
         <p></p>
-        <p><a href="jbsplitstore/">more</a>
+        <p><a href="jbsplitstore/">view API</a>
         </p>
       </td>
     </tr>
@@ -96,7 +96,7 @@
           to any other address to take specific actions throughout the Juicebox ecosystem
           on their behalf.</p>
         <p></p>
-        <p><a href="jboperatorstore/">more</a>
+        <p><a href="jboperatorstore/">view API</a>
         </p>
       </td>
     </tr>
@@ -106,7 +106,7 @@
       <td style="text-align:left">
         <p>Manage and normalizes ETH price feeds.</p>
         <p></p>
-        <p><a href="jbprices/">more</a>
+        <p><a href="jbprices/">view API</a>
         </p>
       </td>
     </tr>
