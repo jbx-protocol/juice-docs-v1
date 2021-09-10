@@ -47,16 +47,8 @@ description: >-
           around Web3.</p>
         <p></p>
         <p>Treasury tokens can also be called Community tokens, or they may be referred
-          to simply as a project&apos;s tokens. Some core contracts refer to these
-          tokens as &quot;tickets&quot;, but this terminology is no longer encouraged
-          in user interfaces or documentation.</p>
+          to simply as a project&apos;s tokens.</p>
       </td>
-    </tr>
-    <tr>
-      <td style="text-align:left"><b>Tickets</b>
-      </td>
-      <td style="text-align:left">Some core contracts refer to treasury tokens as &quot;tickets&quot;. This
-        terminology is no longer encouraged in user interfaces or documentation.</td>
     </tr>
     <tr>
       <td style="text-align:left"><b>Splits</b>
