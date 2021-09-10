@@ -1,10 +1,12 @@
 # createFor
 
-
-
 {% tabs %}
 {% tab title="Step by step" %}
-The function has the following definition:
+**Creates a new project for the specified owner.**
+
+_Anyone can create a project on an owner's behalf._  
+  
+Definition:
 
 ```javascript
 function createFor(
@@ -43,6 +45,10 @@ require(
 
 3. Increment the count to include the new project being created. 
 
+Internal references:
+
+* [`count`](../read/count.md)
+
 ```javascript
 // Increment the count, which will be used as the ID.
 count++;
@@ -57,6 +63,10 @@ _safeMint(_owner, count);
 
 5. Store the provided `_handle` as the as the `handleOf` the newly created project.
 
+Internal references:
+
+* [`handleOf`](../read/handleof.md)
+
 ```javascript
 // Set the handle stored values.
 handleOf[count] = _handle;
@@ -64,11 +74,19 @@ handleOf[count] = _handle;
 
 6. Store the newly created project's ID as the `projectFor` the provided `_handle` to allow for project lookup using the handle.
 
+Internal references:
+
+* [`idFor`](../read/idfor.md)
+
 ```javascript
   idFor[_handle] = count;
 ```
 
 7. If a URI was provided,  store it as the `uriOf` the newly created project. 
+
+Internal references:
+
+* [`uriOf`](../read/uriof.md)
 
 ```javascript
 // Set the URI if one was provided.
@@ -79,13 +97,22 @@ if (bytes(_uri).length > 0) uriOf[count] = _uri;
 
 This will let other people/contracts around Web3 know where to send funds to your project, and will also let the `TokenStore` and `FundingCycleStore` know which terminal contract has the authority to manipulate data pertaining to the project.
 
+External references:
+
+* [`directory`](../../jbpaymentterminal/read/directory.md) 
+* [`setTerminalOf`](../../jbdirectory/write/setterminalof.md) 
+
 ```javascript
 // Set the project's terminal if needed.
 if (_terminal != IJBTerminal(address(0)))
     _terminal.directory().setTerminalOf(count, _terminal);
 ```
 
-9. Emit a [`Create`](../events/create.md) event that records the fact that this transaction happened with the given parameters. 
+9. Emit an event that records the fact that this transaction happened with the given parameters. 
+
+Event references:
+
+* [`Create`](../events/create.md) 
 
 ```
 emit Create(count, _owner, _handle, _uri, _terminal, msg.sender);
