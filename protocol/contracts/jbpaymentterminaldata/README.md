@@ -151,7 +151,7 @@ Rinkeby testnet: _Not yet deployed_
       </td>
     </tr>
     <tr>
-      <td style="text-align:left"><b><code>SetPaymentLayerd</code></b>
+      <td style="text-align:left"><b><code>SetPaymentLayer</code></b>
       </td>
       <td style="text-align:left">
         <ul>
@@ -473,7 +473,7 @@ Rinkeby testnet: _Not yet deployed_
   </thead>
   <tbody>
     <tr>
-      <td style="text-align:left"><b><code>launchProject</code></b>
+      <td style="text-align:left"><b><code>launchProjectFor</code></b>
       </td>
       <td style="text-align:left">
         <p><b>Params</b>
@@ -496,12 +496,12 @@ Rinkeby testnet: _Not yet deployed_
           <li><code>Split[] _reservedTokenSplits</code>
           </li>
         </ul>
-        <p><a href="write/launchproject.md">more</a>
+        <p><a href="write/launchprojectfor.md">more</a>
         </p>
       </td>
     </tr>
     <tr>
-      <td style="text-align:left"><b><code>reconfigureFundingCycles</code></b>
+      <td style="text-align:left"><b><code>reconfigureFundingCyclesOf</code></b>
       </td>
       <td style="text-align:left">
         <p><b>Traits</b>
@@ -534,12 +534,12 @@ Rinkeby testnet: _Not yet deployed_
           <li><code>uint256 fundingCycleId</code>
           </li>
         </ul>
-        <p><a href="write/reconfigurefundingcycles.md">more</a>
+        <p><a href>more</a>
         </p>
       </td>
     </tr>
     <tr>
-      <td style="text-align:left"><b><code>mintTokens</code></b>
+      <td style="text-align:left"><b><code>mintTokensOf</code></b>
       </td>
       <td style="text-align:left">
         <p><b>Traits</b>
@@ -574,12 +574,12 @@ Rinkeby testnet: _Not yet deployed_
           <li><code>uint256 tokenCount</code>
           </li>
         </ul>
-        <p><a href="write/minttokens.md">more</a>
+        <p><a href="write/minttokensof.md">more</a>
         </p>
       </td>
     </tr>
     <tr>
-      <td style="text-align:left"><b><code>burnTokens</code></b>
+      <td style="text-align:left"><b><code>burnTokensOf</code></b>
       </td>
       <td style="text-align:left">
         <p><b>Traits</b>
@@ -604,12 +604,12 @@ Rinkeby testnet: _Not yet deployed_
           <li><code>bool _preferUnstakedTokens</code>
           </li>
         </ul>
-        <p><a href="write/burntokens.md">more</a>
+        <p><a href="write/burntokensof.md">more</a>
         </p>
       </td>
     </tr>
     <tr>
-      <td style="text-align:left"><b><code>distributeReservedTokens</code></b>
+      <td style="text-align:left"><b><code>distributeReservedTokensOf</code></b>
       </td>
       <td style="text-align:left">
         <p><b>Traits</b>
@@ -632,12 +632,12 @@ Rinkeby testnet: _Not yet deployed_
           <li><code>uint256 tokenCount</code>
           </li>
         </ul>
-        <p><a href="write/distributereservedtokens.md">more</a>
+        <p><a href="write/distributereservedtokensof.md">more</a>
         </p>
       </td>
     </tr>
     <tr>
-      <td style="text-align:left"><b><code>recordPayment</code></b>
+      <td style="text-align:left"><b><code>recordPaymentFrom</code></b>
       </td>
       <td style="text-align:left">
         <p><b>Traits</b>
@@ -676,12 +676,12 @@ Rinkeby testnet: _Not yet deployed_
           <li><code>string memo</code>
           </li>
         </ul>
-        <p><a href="write/recordpayment.md">more</a>
+        <p><a href="write/recordpaymentfrom.md">more</a>
         </p>
       </td>
     </tr>
     <tr>
-      <td style="text-align:left"><b><code>recordWithdrawal</code></b>
+      <td style="text-align:left"><b><code>recordWithdrawalFor</code></b>
       </td>
       <td style="text-align:left">
         <p><b>Traits</b>
@@ -710,12 +710,12 @@ Rinkeby testnet: _Not yet deployed_
           <li><code>uint256 withdrawnAmount</code>
           </li>
         </ul>
-        <p><a href="write/recordwithdrawal.md">more</a>
+        <p><a href="write/recordwithdrawalfor.md">more</a>
         </p>
       </td>
     </tr>
     <tr>
-      <td style="text-align:left"><b><code>recordUsedAllowance</code></b>
+      <td style="text-align:left"><b><code>recordUsedAllowanceOf</code></b>
       </td>
       <td style="text-align:left">
         <p><b>Traits</b>
@@ -744,12 +744,12 @@ Rinkeby testnet: _Not yet deployed_
           <li><code>uint256 withdrawnAmount</code>
           </li>
         </ul>
-        <p><a href="write/recordusedallowance.md">more</a>
+        <p><a href="write/recordusedallowanceof.md">more</a>
         </p>
       </td>
     </tr>
     <tr>
-      <td style="text-align:left"><b><code>recordRedemption</code></b>
+      <td style="text-align:left"><b><code>recordRedemptionFor</code></b>
       </td>
       <td style="text-align:left">
         <p><b>Traits</b>
@@ -786,12 +786,12 @@ Rinkeby testnet: _Not yet deployed_
           <li><code>string memo</code>
           </li>
         </ul>
-        <p><a href="write/recordredemption.md">more</a>
+        <p><a href="write/recordredemptionfor.md">more</a>
         </p>
       </td>
     </tr>
     <tr>
-      <td style="text-align:left"><b><code>recordPrepForMigration</code></b>
+      <td style="text-align:left"><b><code>recordPrepForBalanceTransferOf</code></b>
       </td>
       <td style="text-align:left">
         <p><b>Traits</b>
@@ -810,7 +810,7 @@ Rinkeby testnet: _Not yet deployed_
       </td>
     </tr>
     <tr>
-      <td style="text-align:left"><b><code>recordMigration</code></b>
+      <td style="text-align:left"><b><code>recordBalanceTransferFor</code></b>
       </td>
       <td style="text-align:left">
         <p><b>Traits</b>
@@ -831,12 +831,12 @@ Rinkeby testnet: _Not yet deployed_
           <li><code>uint256 balance</code>
           </li>
         </ul>
-        <p><a href="write/recordmigration.md">more</a>
+        <p><a href="write/recordbalancetransferfor.md">more</a>
         </p>
       </td>
     </tr>
     <tr>
-      <td style="text-align:left"><b><code>recordAddedBalance</code></b>
+      <td style="text-align:left"><b><code>recordAddedBalanceFor</code></b>
       </td>
       <td style="text-align:left">
         <p><b>Traits</b>
@@ -845,20 +845,20 @@ Rinkeby testnet: _Not yet deployed_
           <li><code>onlyPaymentTerminal</code>
           </li>
         </ul>
-        <p><b>Params</b>
+        <p><b>Params</b> 
         </p>
         <ul>
-          <li><code>uint256 _amount</code> 
-          </li>
           <li><code>uint256 _projectId</code>
           </li>
+          <li><code>uint256 _amount</code>
+          </li>
         </ul>
-        <p><a href="write/recordaddedbalance.md">more</a>
+        <p><a href="write/recordaddedbalancefor.md">more</a>
         </p>
       </td>
     </tr>
     <tr>
-      <td style="text-align:left"><b><code>setPaymentTerminal</code></b>
+      <td style="text-align:left"><b><code>setPaymentTerminalOf</code></b>
       </td>
       <td style="text-align:left">
         <p><b>Traits</b>
@@ -873,7 +873,7 @@ Rinkeby testnet: _Not yet deployed_
           <li><code>IJBTerminal _paymentTerminal</code>
           </li>
         </ul>
-        <p><a href="write/setpaymentterminal.md">more</a>
+        <p><a href="write/setpaymentterminalof.md">more</a>
         </p>
       </td>
     </tr>

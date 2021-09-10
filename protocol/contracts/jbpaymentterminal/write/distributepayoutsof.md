@@ -1,4 +1,4 @@
-# prepForBalanceTransferOf
+# distributePayoutsOf
 
 {% tabs %}
 {% tab title="Step by step" %}
@@ -9,4 +9,6 @@
 
 {% endtab %}
 {% endtabs %}
+
+
 

@@ -60,20 +60,20 @@ Rinkeby testnet: _Not yet deployed_
       </td>
     </tr>
     <tr>
-      <td style="text-align:left"><b><code>Migrate</code></b>
+      <td style="text-align:left"><b><code>TransferBalance</code></b>
       </td>
       <td style="text-align:left">
         <ul>
           <li><code>uint256 indexed projectId</code>
           </li>
-          <li><code>IJBTerminal indexed to</code>
+          <li><code>IJBTerminal indexed terminal</code>
           </li>
           <li><code>uint256 amount</code>
           </li>
           <li><code>address caller</code>
           </li>
         </ul>
-        <p><a href="events/migrate.md">more</a>
+        <p><a href="events/transferbalance.md">more</a>
         </p>
       </td>
     </tr>
@@ -208,7 +208,7 @@ Rinkeby testnet: _Not yet deployed_
       </td>
     </tr>
     <tr>
-      <td style="text-align:left"><b><code>AllowMigration</code></b>
+      <td style="text-align:left"><b><code>AllowBalanceTransfer</code></b>
       </td>
       <td style="text-align:left">
         <ul>
@@ -313,7 +313,7 @@ Rinkeby testnet: _Not yet deployed_
       </td>
     </tr>
     <tr>
-      <td style="text-align:left"><b><code>migrationIsAllowed</code></b>
+      <td style="text-align:left"><b><code>balanceTransferIsAllowedTo</code></b>
       </td>
       <td style="text-align:left">
         <p><b>Params</b>
@@ -328,7 +328,7 @@ Rinkeby testnet: _Not yet deployed_
           <li><code>bool migrationIsAllowed</code>
           </li>
         </ul>
-        <p><a href="read/migrationisallowed.md">more</a>
+        <p><a href="read/balancetransferisallowedto.md">more</a>
         </p>
       </td>
     </tr>
@@ -396,7 +396,7 @@ Rinkeby testnet: _Not yet deployed_
       </td>
     </tr>
     <tr>
-      <td style="text-align:left"><b><code>distributePayouts</code></b>
+      <td style="text-align:left"><b><code>distributePayoutsOf</code></b>
       </td>
       <td style="text-align:left">
         <p><b>Traits</b>
@@ -425,12 +425,12 @@ Rinkeby testnet: _Not yet deployed_
           <li><code>uint256 fundingCycleId</code>
           </li>
         </ul>
-        <p><a href="write/distributepayouts.md">more</a>
+        <p><a href="write/distributepayoutsof.md">more</a>
         </p>
       </td>
     </tr>
     <tr>
-      <td style="text-align:left"><b><code>useAllowance</code></b>
+      <td style="text-align:left"><b><code>useAllowanceOf</code></b>
       </td>
       <td style="text-align:left">
         <p><b>Traits</b>
@@ -462,12 +462,12 @@ Rinkeby testnet: _Not yet deployed_
           <li><code>uint256 fundingCycleId</code>
           </li>
         </ul>
-        <p><a href="write/useallowance.md">more</a>
+        <p><a href="write/useallowanceof.md">more</a>
         </p>
       </td>
     </tr>
     <tr>
-      <td style="text-align:left"><b><code>redeemTokens</code></b>
+      <td style="text-align:left"><b><code>redeemTokensOf</code></b>
       </td>
       <td style="text-align:left">
         <p><b>Traits</b>
@@ -502,12 +502,12 @@ Rinkeby testnet: _Not yet deployed_
           <li><code>uint256 claimAmount</code>
           </li>
         </ul>
-        <p><a href="write/redeemtokens.md">more</a>
+        <p><a href="write/redeemtokensof.md">more</a>
         </p>
       </td>
     </tr>
     <tr>
-      <td style="text-align:left"><b><code>migrate</code></b>
+      <td style="text-align:left"><b><code>transferBalanceOf</code></b>
       </td>
       <td style="text-align:left">
         <p><b>Traits</b>
@@ -523,7 +523,7 @@ Rinkeby testnet: _Not yet deployed_
         <ul>
           <li><code>uint256 _projectId</code>
           </li>
-          <li><code>IJBTerminal _to</code>
+          <li><code>IJBTerminal _terminal</code>
           </li>
         </ul>
         <p><a href="write/migrate.md">more</a>
@@ -531,7 +531,7 @@ Rinkeby testnet: _Not yet deployed_
       </td>
     </tr>
     <tr>
-      <td style="text-align:left"><b><code>addToBalance</code></b>
+      <td style="text-align:left"><b><code>addToBalanceOf</code></b>
       </td>
       <td style="text-align:left">
         <p><b>Traits</b>
@@ -548,12 +548,12 @@ Rinkeby testnet: _Not yet deployed_
           <li><code>string _memo</code>
           </li>
         </ul>
-        <p><a href="write/addtobalance.md">more</a>
+        <p><a href="write/addtobalanceof.md">more</a>
         </p>
       </td>
     </tr>
     <tr>
-      <td style="text-align:left"><b><code>allowMigration</code></b>
+      <td style="text-align:left"><b><code>allowBalanceTransferTo</code></b>
       </td>
       <td style="text-align:left">
         <p><b>Traits</b>
@@ -573,7 +573,7 @@ Rinkeby testnet: _Not yet deployed_
       </td>
     </tr>
     <tr>
-      <td style="text-align:left"><b><code>prepForMigrationOf</code></b>
+      <td style="text-align:left"><b><code>prepForBalanceTransferOf</code></b>
       </td>
       <td style="text-align:left">
         <p><b>Traits</b>

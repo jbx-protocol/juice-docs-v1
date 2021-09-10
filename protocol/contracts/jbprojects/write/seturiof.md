@@ -1,4 +1,4 @@
-# prepForBalanceTransferOf
+# setUriOf
 
 {% tabs %}
 {% tab title="Step by step" %}

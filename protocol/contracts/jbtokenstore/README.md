@@ -393,7 +393,7 @@ Rinkeby testnet: _Not yet deployed_
   </thead>
   <tbody>
     <tr>
-      <td style="text-align:left"><b><code>issue</code></b>
+      <td style="text-align:left"><b><code>issueFor</code></b>
       </td>
       <td style="text-align:left">
         <p><b>Traits</b>
@@ -418,12 +418,12 @@ Rinkeby testnet: _Not yet deployed_
           <li><code>IJBToken token</code>
           </li>
         </ul>
-        <p><a href="write/issue.md">more</a>
+        <p><a href="write/issuefor.md">more</a>
         </p>
       </td>
     </tr>
     <tr>
-      <td style="text-align:left"><b><code>mint</code></b>
+      <td style="text-align:left"><b><code>mintFor</code></b>
       </td>
       <td style="text-align:left">
         <p><b>Traits</b>
@@ -449,7 +449,7 @@ Rinkeby testnet: _Not yet deployed_
       </td>
     </tr>
     <tr>
-      <td style="text-align:left"><b><code>burn</code></b>
+      <td style="text-align:left"><b><code>burnFrom</code></b>
       </td>
       <td style="text-align:left">
         <p><b>Traits</b>
@@ -475,7 +475,7 @@ Rinkeby testnet: _Not yet deployed_
       </td>
     </tr>
     <tr>
-      <td style="text-align:left"><b><code>stake</code></b>
+      <td style="text-align:left"><b><code>stakeFor</code></b>
       </td>
       <td style="text-align:left">
         <p><b>Traits</b>
@@ -494,12 +494,12 @@ Rinkeby testnet: _Not yet deployed_
           <li><code>uint256 _amount</code>
           </li>
         </ul>
-        <p><a href="write/stake.md">more</a>
+        <p><a href="write/stakefor.md">more</a>
         </p>
       </td>
     </tr>
     <tr>
-      <td style="text-align:left"><b><code>unstake</code></b>
+      <td style="text-align:left"><b><code>unstakeFor</code></b>
       </td>
       <td style="text-align:left">
         <p><b>Traits</b>
@@ -518,12 +518,12 @@ Rinkeby testnet: _Not yet deployed_
           <li><code>uint256 _amount</code>
           </li>
         </ul>
-        <p><a href="write/unstake.md">more</a>
+        <p><a href="write/unstakefor.md">more</a>
         </p>
       </td>
     </tr>
     <tr>
-      <td style="text-align:left"><b><code>lock</code></b>
+      <td style="text-align:left"><b><code>lockFor</code></b>
       </td>
       <td style="text-align:left">
         <p><b>Traits</b>
@@ -542,12 +542,12 @@ Rinkeby testnet: _Not yet deployed_
           <li><code>uint256 _amount</code>
           </li>
         </ul>
-        <p><a href="write/lock.md">more</a>
+        <p><a href="write/lockfor.md">more</a>
         </p>
       </td>
     </tr>
     <tr>
-      <td style="text-align:left"><b><code>unlock</code></b>
+      <td style="text-align:left"><b><code>unlockFor</code></b>
       </td>
       <td style="text-align:left">
         <p><b>Params</b>
@@ -560,12 +560,12 @@ Rinkeby testnet: _Not yet deployed_
           <li><code>uint256 _amount</code>
           </li>
         </ul>
-        <p><a href="write/unlock.md">more</a>
+        <p><a href="write/unlockfor.md">more</a>
         </p>
       </td>
     </tr>
     <tr>
-      <td style="text-align:left"><b><code>transfer</code></b>
+      <td style="text-align:left"><b><code>transferTo</code></b>
       </td>
       <td style="text-align:left">
         <p><b>Traits</b>
@@ -577,16 +577,16 @@ Rinkeby testnet: _Not yet deployed_
         <p><b>Params</b>
         </p>
         <ul>
+          <li><code>address _recipient</code>
+          </li>
           <li><code>address _holder</code> 
           </li>
           <li><code>uint256 _projectId</code> 
           </li>
           <li><code>uint256 _amount</code> 
           </li>
-          <li><code>address _recipient</code>
-          </li>
         </ul>
-        <p><a href="write/transfer.md">more</a>
+        <p><a href="write/transferto.md">more</a>
         </p>
       </td>
     </tr>

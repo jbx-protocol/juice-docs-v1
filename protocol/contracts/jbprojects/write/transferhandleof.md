@@ -1,4 +1,4 @@
-# prepForBalanceTransferOf
+# transferHandleOf
 
 {% tabs %}
 {% tab title="Step by step" %}

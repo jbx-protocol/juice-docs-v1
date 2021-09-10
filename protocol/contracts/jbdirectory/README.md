@@ -123,7 +123,7 @@ Rinkeby testnet: _Not yet deployed_
   </thead>
   <tbody>
     <tr>
-      <td style="text-align:left"><b><code>setTerminal</code></b>
+      <td style="text-align:left"><b><code>setTerminalOf</code></b>
       </td>
       <td style="text-align:left">
         <p><b>Params</b>
@@ -134,7 +134,7 @@ Rinkeby testnet: _Not yet deployed_
           <li><code>IJBTerminal _terminal</code>
           </li>
         </ul>
-        <p><a href="write/setterminal.md">more</a>
+        <p><a href="write/setterminalof.md">more</a>
         </p>
       </td>
     </tr>

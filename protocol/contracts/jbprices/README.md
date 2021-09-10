@@ -158,7 +158,7 @@ Rinkeby testnet: _Not yet deployed_
   </thead>
   <tbody>
     <tr>
-      <td style="text-align:left"><b><code>addFeed</code></b>
+      <td style="text-align:left"><b><code>addFeedFor</code></b>
       </td>
       <td style="text-align:left">
         <p><b>Traits</b>
@@ -170,9 +170,9 @@ Rinkeby testnet: _Not yet deployed_
         <p><b>Params</b>
         </p>
         <ul>
-          <li><code>AggregatorV3Interface _feed</code> 
-          </li>
           <li><code>uint256 _currency</code>
+          </li>
+          <li><code>AggregatorV3Interface _feed</code> 
           </li>
         </ul>
         <p><a href="write/addfeed.md">more</a>

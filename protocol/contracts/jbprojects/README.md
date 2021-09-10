@@ -230,7 +230,7 @@ Rinkeby testnet: _Not yet deployed_
       </td>
     </tr>
     <tr>
-      <td style="text-align:left"><b><code>projectFor</code></b>
+      <td style="text-align:left"><b><code>idFor</code></b>
       </td>
       <td style="text-align:left">
         <p><b>Params</b>
@@ -245,7 +245,7 @@ Rinkeby testnet: _Not yet deployed_
           <li><code>uint256 _projectId</code>
           </li>
         </ul>
-        <p><a href="read/projectfor.md">more</a>
+        <p><a href="read/idfor.md">more</a>
         </p>
       </td>
     </tr>
@@ -323,7 +323,7 @@ Rinkeby testnet: _Not yet deployed_
   </thead>
   <tbody>
     <tr>
-      <td style="text-align:left"><b><code>create</code></b>
+      <td style="text-align:left"><b><code>createFor</code></b>
       </td>
       <td style="text-align:left">
         <p><b>Params</b>
@@ -344,12 +344,12 @@ Rinkeby testnet: _Not yet deployed_
           <li><code>uint256 projectId</code>
           </li>
         </ul>
-        <p><a href="write/create.md">more</a>
+        <p><a href="write/createfor.md">more</a>
         </p>
       </td>
     </tr>
     <tr>
-      <td style="text-align:left"><b><code>setHandle</code></b>
+      <td style="text-align:left"><b><code>setHandleOf</code></b>
       </td>
       <td style="text-align:left">
         <p><b>Traits</b>
@@ -366,12 +366,12 @@ Rinkeby testnet: _Not yet deployed_
           <li><code>bytes32 _handle</code>
           </li>
         </ul>
-        <p><a href="write/sethandle.md">more</a>
+        <p><a href="write/sethandleof.md">more</a>
         </p>
       </td>
     </tr>
     <tr>
-      <td style="text-align:left"><b><code>setUri</code></b>
+      <td style="text-align:left"><b><code>setUriOf</code></b>
       </td>
       <td style="text-align:left">
         <p><b>Traits</b>
@@ -388,12 +388,12 @@ Rinkeby testnet: _Not yet deployed_
           <li><code>string _uri</code>
           </li>
         </ul>
-        <p><a href="write/seturi.md">more</a>
+        <p><a href="write/seturiof.md">more</a>
         </p>
       </td>
     </tr>
     <tr>
-      <td style="text-align:left"><b><code>transferHandle</code></b>
+      <td style="text-align:left"><b><code>transferHandleOf</code></b>
       </td>
       <td style="text-align:left">
         <p><b>Traits</b>
@@ -418,7 +418,7 @@ Rinkeby testnet: _Not yet deployed_
           <li><code>bytes32 handle</code>
           </li>
         </ul>
-        <p><a href="write/transferhandle.md">more</a>
+        <p><a href="write/transferhandleof.md">more</a>
         </p>
       </td>
     </tr>
@@ -461,7 +461,7 @@ Rinkeby testnet: _Not yet deployed_
       </td>
     </tr>
     <tr>
-      <td style="text-align:left"><b><code>renewHandle</code></b>
+      <td style="text-align:left"><b><code>renewHandleOf</code></b>
       </td>
       <td style="text-align:left">
         <p><b>Traits</b>
@@ -476,7 +476,7 @@ Rinkeby testnet: _Not yet deployed_
           <li><code>uint256 _projectId</code>
           </li>
         </ul>
-        <p><a href="write/renewhandle.md">more</a>
+        <p><a href="write/renewhandleof.md">more</a>
         </p>
       </td>
     </tr>

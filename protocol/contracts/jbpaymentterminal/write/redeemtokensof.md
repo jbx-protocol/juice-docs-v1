@@ -1,4 +1,4 @@
-# prepForBalanceTransferOf
+# redeemTokensOf
 
 {% tabs %}
 {% tab title="Step by step" %}

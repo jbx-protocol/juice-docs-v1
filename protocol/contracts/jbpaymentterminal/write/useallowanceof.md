@@ -1,4 +1,4 @@
-# prepForBalanceTransferOf
+# useAllowanceOf
 
 {% tabs %}
 {% tab title="Step by step" %}

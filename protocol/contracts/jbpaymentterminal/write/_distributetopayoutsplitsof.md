@@ -1,4 +1,4 @@
-# prepForBalanceTransferOf
+# \_distributeToPayoutSplitsOf
 
 {% tabs %}
 {% tab title="Step by step" %}

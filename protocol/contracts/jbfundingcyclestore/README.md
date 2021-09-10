@@ -268,7 +268,7 @@ Rinkeby testnet: _Not yet deployed_
   </thead>
   <tbody>
     <tr>
-      <td style="text-align:left"><b><code>configure</code></b>
+      <td style="text-align:left"><b><code>configureFor</code></b>
       </td>
       <td style="text-align:left">
         <p><b>Traits</b>
@@ -297,12 +297,12 @@ Rinkeby testnet: _Not yet deployed_
           <li><code>FundingCycle fundingCycle</code>
           </li>
         </ul>
-        <p><a href="write/configure.md">more</a>
+        <p><a href="write/configurefor.md">more</a>
         </p>
       </td>
     </tr>
     <tr>
-      <td style="text-align:left"><b><code>tap</code></b>
+      <td style="text-align:left"><b><code>tapFrom</code></b>
       </td>
       <td style="text-align:left">
         <p><b>Traits</b>
@@ -325,7 +325,7 @@ Rinkeby testnet: _Not yet deployed_
           <li><code>FundingCycle fundingCycle</code>
           </li>
         </ul>
-        <p><a href="write/tap.md">more</a>
+        <p><a href="write/tapfrom.md">more</a>
         </p>
       </td>
     </tr>

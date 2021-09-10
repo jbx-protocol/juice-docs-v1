@@ -1,2 +1,2 @@
-# burn
+# burnFrom
 
