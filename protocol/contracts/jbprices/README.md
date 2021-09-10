@@ -8,7 +8,7 @@ description: Manage and normalizes ETH price feeds.
 
 ### Code
 
-[https://github.com/jbx-protocol/juice-juicehouse/blob/version/2.1/packages/hardhat/contracts/JBPrices.sol](https://github.com/jbx-protocol/juice-juicehouse/blob/version/2/packages/hardhat/contracts/Prices.sol)
+{% embed url="https://github.com/jbx-protocol/juice-juicehouse/blob/version/2.1/packages/hardhat/contracts/JBPrices.sol" %}
 
 ### **Addresses**
 

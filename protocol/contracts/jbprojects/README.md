@@ -8,7 +8,7 @@ description: 'Manages ownership over projects, which are represented as ERC-721 
 
 ### Code
 
-[https://github.com/jbx-protocol/juice-juicehouse/blob/version/2.1/packages/hardhat/contracts/JBProjects.sol](https://github.com/jbx-protocol/juice-juicehouse/blob/version/2/packages/hardhat/contracts/Projects.sol)
+{% embed url="https://github.com/jbx-protocol/juice-juicehouse/blob/version/2.1/packages/hardhat/contracts/JBProjects.sol" %}
 
 ### **Addresses**
 
@@ -23,10 +23,33 @@ Rinkeby testnet: _Not yet deployed_
 
 ### **Inheritance**
 
-| **Contract** | Description |
-| :--- | :--- |
-| **`ERC721`** | A standard definition for non-fungible tokens \(NFTs\) |
-| **`JBOperatable`** | Includes convenience functionality for checking a message sender's permissions before executing certain transactions.  |
+<table>
+  <thead>
+    <tr>
+      <th style="text-align:left"><b>Contract</b>
+      </th>
+      <th style="text-align:left">Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align:left"><b><code>ERC721</code></b>
+      </td>
+      <td style="text-align:left">A standard definition for non-fungible tokens (NFTs)</td>
+    </tr>
+    <tr>
+      <td style="text-align:left"><b><code>JBOperatable</code></b>
+      </td>
+      <td style="text-align:left">
+        <p>Includes convenience functionality for checking a message sender&apos;s
+          permissions before executing certain transactions.</p>
+        <p></p>
+        <p><a href="../jboperatable/">more</a>
+        </p>
+      </td>
+    </tr>
+  </tbody>
+</table>
 
 ## Events
 

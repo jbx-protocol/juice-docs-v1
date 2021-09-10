@@ -10,7 +10,7 @@ description: >-
 
 ### Code
 
-[https://github.com/jbx-protocol/juice-juicehouse/blob/version/2.1/packages/hardhat/contracts/JBPaymentTerminal.sol](https://github.com/jbx-protocol/juice-juicehouse/blob/version/2/packages/hardhat/contracts/TerminalV2PaymentLayer.sol)
+{% embed url="https://github.com/jbx-protocol/juice-juicehouse/blob/version/2.1/packages/hardhat/contracts/JBPaymentTerminal.sol" %}
 
 ### **Addresses**
 
@@ -26,10 +26,33 @@ Rinkeby testnet: _Not yet deployed_
 
 ### **Inheritance**
 
-| Contract | Description |
-| :--- | :--- |
-| **`JBOperatable`** | Includes convenience functionality for checking a message sender's permissions before executing certain transactions.  |
-| **`ReentrancyGuard`** | Includes convenience functionality for preventing access to certain functions while certain other functions are being executed.  |
+<table>
+  <thead>
+    <tr>
+      <th style="text-align:left">Contract</th>
+      <th style="text-align:left">Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align:left"><b><code>JBOperatable</code></b>
+      </td>
+      <td style="text-align:left">
+        <p>Includes convenience functionality for checking a message sender&apos;s
+          permissions before executing certain transactions.</p>
+        <p></p>
+        <p><a href="../jboperatable/">more</a>
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td style="text-align:left"><b><code>ReentrancyGuard</code></b>
+      </td>
+      <td style="text-align:left">Includes convenience functionality for preventing access to certain functions
+        while certain other functions are being executed.</td>
+    </tr>
+  </tbody>
+</table>
 
 ## Events
 

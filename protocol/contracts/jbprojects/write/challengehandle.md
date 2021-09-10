@@ -1,5 +1,9 @@
 # challengeHandle
 
+**Contract:**[`JBProjects`](../)
+
+**Interface:** `IJBProjects`
+
 {% tabs %}
 {% tab title="Step by step" %}
 

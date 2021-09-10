@@ -31,102 +31,110 @@ function createFor(
 
 1. Check that the provided `_handle` is not empty.
 
-```javascript
-// Handle must exist.
-require(_handle != bytes32(0), "JBProjects::createFor: EMPTY_HANDLE");
-```
+   ```javascript
+   // Handle must exist.
+   require(_handle != bytes32(0), "JBProjects::createFor: EMPTY_HANDLE");
+   ```
 
 2. Check that the `_handle` is unique. This is done by making sure the handle isn't currently mapped to a project, and isn't currently being transferred.
 
-```javascript
-// Handle must be unique.
-require(
-    projectFor[_handle] == 0 &&
-        transferAddressFor[_handle] == address(0),
-    "JBProjects::createFor: HANDLE_TAKEN"
-);
-```
+   ```javascript
+   // Handle must be unique.
+   require(
+       projectFor[_handle] == 0 &&
+           transferAddressFor[_handle] == address(0),
+       "JBProjects::createFor: HANDLE_TAKEN"
+   );
+   ```
 
-3. Increment the count to include the new project being created. 
+3. Increment the count to include the new project being created.   
 
-_Internal references:_
 
-* [`count`](../read/count.md)
+   _Internal references:_
 
-```javascript
-// Increment the count, which will be used as the ID.
-count++;
-```
+   * [`count`](../read/count.md)
+
+   ```javascript
+   // Increment the count, which will be used as the ID.
+   count++;
+   ```
 
 4. Mint a new NFT token belonging to the `_owner` using the `count` as the token ID. 
 
-```javascript
-// Mint the project.
-_safeMint(_owner, count);
-```
+   ```javascript
+   // Mint the project.
+   _safeMint(_owner, count);
+   ```
 
-5. Store the provided `_handle` as the as the `handleOf` the newly created project.
+5. Store the provided `_handle` as the as the `handleOf` the newly created project.  
 
-_Internal references:_
 
-* [`handleOf`](../read/handleof.md)
+   _Internal references:_
 
-```javascript
-// Set the handle stored values.
-handleOf[count] = _handle;
-```
+   * [`handleOf`](../read/handleof.md)
 
-6. Store the newly created project's ID as the `projectFor` the provided `_handle` to allow for project lookup using the handle.
+   ```javascript
+   // Set the handle stored values.
+   handleOf[count] = _handle;
+   ```
 
-_Internal references:_
+6. Store the newly created project's ID as the `projectFor` the provided `_handle` to allow for project lookup using the handle.  
 
-* [`idFor`](../read/idfor.md)
 
-```javascript
-idFor[_handle] = count;
-```
+   _Internal references:_
 
-7. If a URI was provided \(meaning it's not an empty string\),  store it as the `uriOf` the newly created project. 
+   * [`idFor`](../read/idfor.md)
 
-_Internal references:_
+   ```javascript
+   idFor[_handle] = count;
+   ```
 
-* [`uriOf`](../read/uriof.md)
+7. If a URI was provided \(meaning it's not an empty string\),  store it as the `uriOf` the newly created project.   
 
-```javascript
-// Set the URI if one was provided.
-if (bytes(_uri).length > 0) uriOf[count] = _uri;
-```
 
-8. If a terminal address was provided \(meaning it's not the zero address\), set it as the terminal of the newly created project in the directory of the terminal. 
+   _Internal references:_
 
-This will let other people/contracts around Web3 know where to send funds to your project, and will also let the `TokenStore` and `FundingCycleStore` know which terminal contract has the authority to manipulate data pertaining to the project.
+   * [`uriOf`](../read/uriof.md)
 
-_External references:_
+   ```javascript
+   // Set the URI if one was provided.
+   if (bytes(_uri).length > 0) uriOf[count] = _uri;
 
-* [`directory`](../../jbpaymentterminal/read/directory.md) 
-* [`setTerminalOf`](../../jbdirectory/write/setterminalof.md) 
+   ```
 
-```javascript
-// Set the project's terminal if needed.
-if (_terminal != IJBTerminal(address(0)))
-    _terminal.directory().setTerminalOf(count, _terminal);
-```
+8. If a terminal address was provided \(meaning it's not the zero address\), set it as the terminal of the newly created project in the directory of the terminal.   
 
-9. Emit a `Create` event with the all relevant parameters. 
 
-_Event references:_
+   This will let other people/contracts around Web3 know where to send funds to your project, and will also let the `TokenStore` and `FundingCycleStore` know which terminal contract has the authority to manipulate data pertaining to the project.  
 
-* [`Create`](../events/create.md) 
 
-```
-emit Create(count, _owner, _handle, _uri, _terminal, msg.sender);
-```
+   _External references:_
+
+   * [`directory`](../../jbpaymentterminal/read/directory.md) 
+   * [`setTerminalOf`](../../jbdirectory/write/setterminalof.md) 
+
+   ```javascript
+   // Set the project's terminal if needed.
+   if (_terminal != IJBTerminal(address(0)))
+       _terminal.directory().setTerminalOf(count, _terminal);
+   ```
+
+9. Emit a `Create` event with the all relevant parameters.   
+
+
+   _Event references:_
+
+   * [`Create`](../events/create.md) 
+
+   ```
+   emit Create(count, _owner, _handle, _uri, _terminal, msg.sender);
+   ```
 
 10. Return the newly created project's token ID.
 
-```javascript
-return count;
-```
+    ```javascript
+    return count;
+    ```
 {% endtab %}
 
 {% tab title="Only code" %}

@@ -8,7 +8,7 @@ description: Stores splits information for all groups of each project.
 
 ### Code
 
-[https://github.com/jbx-protocol/juice-juicehouse/blob/version/2.1/packages/hardhat/contracts/JBSplitStore.sol](https://github.com/jbx-protocol/juice-juicehouse/blob/version/2/packages/hardhat/contracts/SplitStore.sol)
+{% embed url="https://github.com/jbx-protocol/juice-juicehouse/blob/version/2.1/packages/hardhat/contracts/JBSplitStore.sol" %}
 
 ### **Addresses**
 
@@ -23,10 +23,34 @@ Rinkeby testnet: _Not yet deployed_
 
 ### **Inheritance**
 
-| **Name** | Description |
-| :--- | :--- |
-| **`JBOperatable`** | Includes convenience functionality for checking a message sender's permissions before executing certain transactions.  |
-| **`JBTerminalUtility`** | Includes convenience functionality for checking if the message sender is the current terminal of the project who data is being manipulated. |
+<table>
+  <thead>
+    <tr>
+      <th style="text-align:left"><b>Name</b>
+      </th>
+      <th style="text-align:left">Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align:left"><b><code>JBOperatable</code></b>
+      </td>
+      <td style="text-align:left">
+        <p>Includes convenience functionality for checking a message sender&apos;s
+          permissions before executing certain transactions.</p>
+        <p></p>
+        <p><a href="../jboperatable/">more</a>
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td style="text-align:left"><b><code>JBTerminalUtility</code></b>
+      </td>
+      <td style="text-align:left">Includes convenience functionality for checking if the message sender
+        is the current terminal of the project who data is being manipulated.</td>
+    </tr>
+  </tbody>
+</table>
 
 ## Events
 

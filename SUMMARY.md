@@ -161,7 +161,6 @@
       * [configureFor](protocol/contracts/jbfundingcyclestore/write/configurefor.md)
       * [tapFrom](protocol/contracts/jbfundingcyclestore/write/tapfrom.md)
   * [JBSplitStore](protocol/contracts/jbsplitstore/README.md)
-    * [Untitled](protocol/contracts/jbsplitstore/untitled.md)
     * [Events](protocol/contracts/jbsplitstore/events/README.md)
       * [SetSplit](protocol/contracts/jbsplitstore/events/setsplit.md)
     * [Read](protocol/contracts/jbsplitstore/read/README.md)
@@ -189,6 +188,13 @@
       * [getETHPriceFor](protocol/contracts/jbprices/read/getethpricefor.md)
     * [Write](protocol/contracts/jbprices/write/README.md)
       * [addFeed](protocol/contracts/jbprices/write/addfeed.md)
+  * [JBOperatable](protocol/contracts/jboperatable/README.md)
+    * [Modifiers](protocol/contracts/jboperatable/modifiers/README.md)
+      * [requirePermission](protocol/contracts/jboperatable/modifiers/requirepermission.md)
+      * [requirePermissionAllowingWildcardDomain](protocol/contracts/jboperatable/modifiers/requirepermissionallowingwildcarddomain.md)
+      * [requirePermissionAcceptingAlternateAddress](protocol/contracts/jboperatable/modifiers/requirepermissionacceptingalternateaddress.md)
+    * [Read](protocol/contracts/jboperatable/read/README.md)
+      * [operatorStore](protocol/contracts/jboperatable/read/operatorstore.md)
 
 ## Contracts
 
