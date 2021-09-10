@@ -112,7 +112,7 @@ if (_terminal != IJBTerminal(address(0)))
     _terminal.directory().setTerminalOf(count, _terminal);
 ```
 
-9. Emit an event that records the fact that this transaction happened with the given parameters. 
+9. Emit a `Create` event with the all relevant parameters. 
 
 _Event references:_
 
