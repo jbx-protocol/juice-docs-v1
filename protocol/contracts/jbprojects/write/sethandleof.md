@@ -64,6 +64,7 @@ function setHandleOf(uint256 _projectId, bytes32 _handle)
    * [`handleOf`](../read/handleof.md)
 
    ```javascript
+   // Store the handle for the project.
    handleOf[_projectId] = _handle;
    ```
 
@@ -75,6 +76,7 @@ function setHandleOf(uint256 _projectId, bytes32 _handle)
    * [`idFor`](../read/idfor.md)
 
    ```javascript
+   // Store the project for the handle.
    idFor[_handle] = _projectId;
    ```
 
@@ -120,7 +122,9 @@ function setHandleOf(uint256 _projectId, bytes32 _handle)
     // Register the change in the resolver.
     idFor[handleOf[_projectId]] = 0;
 
+    // Store the handle for the project.
     idFor[_handle] = _projectId;
+    // Store the project for the handle.
     handleOf[_projectId] = _handle;
 
     emit SetHandle(_projectId, _handle, msg.sender);
