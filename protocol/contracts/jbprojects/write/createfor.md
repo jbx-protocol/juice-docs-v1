@@ -32,8 +32,8 @@ function createFor(
 1. Check that the provided `_handle` is not empty.
 
 ```javascript
-    // Handle must exist.
-    require(_handle != bytes32(0), "JBProjects::createFor: EMPTY_HANDLE");
+// Handle must exist.
+require(_handle != bytes32(0), "JBProjects::createFor: EMPTY_HANDLE");
 ```
 
 2. Check that the `_handle` is unique. This is done by making sure the handle isn't currently mapped to a project, and isn't currently being transferred.
@@ -83,7 +83,7 @@ _Internal references:_
 * [`idFor`](../read/idfor.md)
 
 ```javascript
-  idFor[_handle] = count;
+idFor[_handle] = count;
 ```
 
 7. If a URI was provided \(meaning it's not an empty string\),  store it as the `uriOf` the newly created project. 
@@ -125,7 +125,7 @@ emit Create(count, _owner, _handle, _uri, _terminal, msg.sender);
 10. Return the newly created project's token ID.
 
 ```javascript
- return count;
+return count;
 ```
 {% endtab %}
 
