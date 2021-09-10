@@ -1,5 +1,9 @@
 # createFor
 
+**Contract:**[`JBProjects`](../)
+
+**Interface:** `IJBProjects`
+
 {% tabs %}
 {% tab title="Step by step" %}
 **Creates a new project for the specified owner.**
@@ -221,6 +225,14 @@ function createFor(
     </tr>
   </tbody>
 </table>
+{% endtab %}
+
+{% tab title="Bug bounty" %}
+| Category | Description | Reward |
+| :--- | :--- | :--- |
+| **Optimization** | Help make this operation more efficient. | 0.25ETH |
+| **Low severity** | Identify a vulnerability that could lead to an inconvenience for a user of the protocol or for a protocol developer. | 0.75ETH |
+| **High severity** | Identify a vulnerability that could lead to data corruption or loss of funds. | 3+ETH |
 {% endtab %}
 {% endtabs %}
 
