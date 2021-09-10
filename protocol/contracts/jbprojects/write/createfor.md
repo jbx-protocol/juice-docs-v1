@@ -36,12 +36,12 @@ function createFor(
    require(_handle != bytes32(0), "JBProjects::createFor: EMPTY_HANDLE");
    ```
 
-2. Check that the `_handle` is unique. This is done by making sure the handle isn't currently mapped to a project, and isn't currently being transferred.
+2. Check that the `_handle` is unique. This is done by making sure there isn't yet an `idFor` the handle, and making sure it isn't currently being transferred to an address.
 
    ```javascript
    // Handle must be unique.
    require(
-       projectFor[_handle] == 0 &&
+       idFor[_handle] == 0 &&
            transferAddressFor[_handle] == address(0),
        "JBProjects::createFor: HANDLE_TAKEN"
    );
@@ -78,7 +78,7 @@ function createFor(
    handleOf[count] = _handle;
    ```
 
-6. Store the newly created project's ID as the `projectFor` the provided `_handle` to allow for project lookup using the handle.  
+6. Store the newly created project's ID as the `idFor` the provided `_handle` to allow for project lookup using the handle.  
 
 
    _Internal references:_
@@ -99,7 +99,6 @@ function createFor(
    ```javascript
    // Set the URI if one was provided.
    if (bytes(_uri).length > 0) uriOf[count] = _uri;
-
    ```
 
 8. If a terminal address was provided \(meaning it's not the zero address\), set it as the terminal of the newly created project in the directory of the terminal.   

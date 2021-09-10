@@ -32,7 +32,62 @@ function setHandleOf(uint256 _projectId, bytes32 _handle)
    require(_handle != bytes32(0), "JBProjects::setHandleOf: EMPTY_HANDLE");
    ```
 
-2. 
+2. Check that the `_handle` is unique. This is done by making sure there isn't yet an `idFor` the handle, and making sure it isn't currently being transferred to an address.
+
+   ```javascript
+
+   // Handle must be unique.
+   require(
+       idFor[_handle] == 0 && transferAddressFor[_handle] == address(0),
+       "JBProjects::setHandleOf: HANDLE_TAKEN"
+   );
+   ```
+
+3. Free up the mapping from the current`handleOf` the project so that others can use it.  
+
+
+   _Internal references:_
+
+   * [`handleOf`](../read/handleof.md)
+   * [`idFor`](../read/idfor.md)
+
+   ```javascript
+   // Register the change in the resolver.
+   idFor[handleOf[_projectId]] = 0;
+   ```
+
+4. Store the provided `_handle` as the as the `handleOf` the project.  
+
+
+   _Internal references:_
+
+   * [`handleOf`](../read/handleof.md)
+
+   ```javascript
+   handleOf[_projectId] = _handle;
+   ```
+
+5. Store the project's ID as the `idFor` the provided `_handle` to allow for project lookup using the handle.  
+
+
+   _Internal references:_
+
+   * [`idFor`](../read/idfor.md)
+
+   ```javascript
+   idFor[_handle] = _projectId;
+   ```
+
+6. Emit a `SetHandle` event with the all relevant parameters.   
+
+
+   _Event references:_
+
+   * [`SetHandle`](../events/sethandle.md) 
+
+   ```javascript
+   emit SetHandle(_projectId, _handle, msg.sender);
+   ```
 {% endtab %}
 
 {% tab title="Only code" %}
