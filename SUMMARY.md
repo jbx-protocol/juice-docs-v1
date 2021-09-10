@@ -74,6 +74,8 @@
       * [MintTokens](protocol/contracts/jbpaymentterminaldata/events/minttokens.md)
       * [BurnTokens](protocol/contracts/jbpaymentterminaldata/events/burntokens.md)
       * [SetPaymentLayer](protocol/contracts/jbpaymentterminaldata/events/setpaymentlayer.md)
+      * [DelegateDidPay](protocol/contracts/jbpaymentterminaldata/events/delegatedidpay.md)
+      * [DelegateDidRedeem](protocol/contracts/jbpaymentterminaldata/events/delegatedidredeem.md)
     * [Read](protocol/contracts/jbpaymentterminaldata/read/README.md)
       * [projects](protocol/contracts/jbpaymentterminaldata/read/projects.md)
       * [fundingCycles](protocol/contracts/jbpaymentterminaldata/read/fundingcycles.md)

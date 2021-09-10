@@ -151,7 +151,7 @@ Rinkeby testnet: _Not yet deployed_
       </td>
     </tr>
     <tr>
-      <td style="text-align:left"><b><code>SetPaymentLayer</code></b>
+      <td style="text-align:left"><b><code>SetPaymentLayerd</code></b>
       </td>
       <td style="text-align:left">
         <ul>
@@ -161,6 +161,34 @@ Rinkeby testnet: _Not yet deployed_
           </li>
         </ul>
         <p><a href="events/setpaymentlayer.md">more</a>
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td style="text-align:left"><b><code>DelegateDidPay</code></b>
+      </td>
+      <td style="text-align:left">
+        <ul>
+          <li><code>IJBPayDelegate indexed delegate</code> 
+          </li>
+          <li><code>DidPayParam param</code>
+          </li>
+        </ul>
+        <p><a href="events/delegatedidpay.md">more</a>
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td style="text-align:left"><b><code>DelegateDidRedeem</code></b>
+      </td>
+      <td style="text-align:left">
+        <ul>
+          <li><code>IJBRedemptionDelegate indexed delegate</code>
+          </li>
+          <li><code>DidRedeemParam param</code>
+          </li>
+        </ul>
+        <p><a href="events/delegatedidredeem.md">more</a>
         </p>
       </td>
     </tr>
