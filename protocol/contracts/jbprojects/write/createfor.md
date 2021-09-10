@@ -49,7 +49,7 @@ require(
 
 3. Increment the count to include the new project being created. 
 
-Internal references:
+_Internal references:_
 
 * [`count`](../read/count.md)
 
@@ -67,7 +67,7 @@ _safeMint(_owner, count);
 
 5. Store the provided `_handle` as the as the `handleOf` the newly created project.
 
-Internal references:
+_Internal references:_
 
 * [`handleOf`](../read/handleof.md)
 
@@ -78,7 +78,7 @@ handleOf[count] = _handle;
 
 6. Store the newly created project's ID as the `projectFor` the provided `_handle` to allow for project lookup using the handle.
 
-Internal references:
+_Internal references:_
 
 * [`idFor`](../read/idfor.md)
 
@@ -88,7 +88,7 @@ Internal references:
 
 7. If a URI was provided,  store it as the `uriOf` the newly created project. 
 
-Internal references:
+_Internal references:_
 
 * [`uriOf`](../read/uriof.md)
 
@@ -101,7 +101,7 @@ if (bytes(_uri).length > 0) uriOf[count] = _uri;
 
 This will let other people/contracts around Web3 know where to send funds to your project, and will also let the `TokenStore` and `FundingCycleStore` know which terminal contract has the authority to manipulate data pertaining to the project.
 
-External references:
+_External references:_
 
 * [`directory`](../../jbpaymentterminal/read/directory.md) 
 * [`setTerminalOf`](../../jbdirectory/write/setterminalof.md) 
@@ -114,7 +114,7 @@ if (_terminal != IJBTerminal(address(0)))
 
 9. Emit an event that records the fact that this transaction happened with the given parameters. 
 
-Event references:
+_Event references:_
 
 * [`Create`](../events/create.md) 
 
