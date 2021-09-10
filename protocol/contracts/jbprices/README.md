@@ -19,7 +19,7 @@ Rinkeby testnet: _Not yet deployed_
 
 | Name | Description |
 | :--- | :--- |
-| **`IPrices`** | General interface for the methods in this contract that change the blockchain's state according to the Juicebox protocol's rules. |
+| **`IJBPrices`** | General interface for the methods in this contract that change the blockchain's state according to the Juicebox protocol's rules. |
 
 ### **Inheritance**
 

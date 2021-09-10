@@ -19,14 +19,14 @@ Rinkeby testnet: _Not yet deployed_
 
 | **Name** | Description |
 | :--- | :--- |
-| **`ISplitStore`** | General interface for the methods in this contract that change the blockchain's state according to the Juicebox protocol's rules. |
+| **`IJBSplitStore`** | General interface for the methods in this contract that change the blockchain's state according to the Juicebox protocol's rules. |
 
 ### **Inheritance**
 
 | **Name** | Description |
 | :--- | :--- |
-| **`Operatable`** | Includes convenience functionality for checking a message sender's permissions before executing certain transactions.  |
-| **`TerminalUtility`** | Includes convenience functionality for checking if the message sender is the current terminal of the project who data is being manipulated. |
+| **`JBOperatable`** | Includes convenience functionality for checking a message sender's permissions before executing certain transactions.  |
+| **`JBTerminalUtility`** | Includes convenience functionality for checking if the message sender is the current terminal of the project who data is being manipulated. |
 
 ## Events
 
@@ -79,7 +79,7 @@ Rinkeby testnet: _Not yet deployed_
         <p><b>Returns</b>
         </p>
         <ul>
-          <li><code>IProjects projects</code>
+          <li><code>IJBProjects projects</code>
           </li>
         </ul>
         <p><a href="read/projects.md">more</a>

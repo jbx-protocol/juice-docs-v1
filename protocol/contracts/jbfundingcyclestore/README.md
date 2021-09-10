@@ -19,13 +19,13 @@ Rinkeby testnet: _Not yet deployed_
 
 | Name | Description |
 | :--- | :--- |
-| **`IFundingCycleStore`** | General interface for the methods in this contract that change the blockchain's state according to the Juicebox protocol's rules. |
+| **`IJBFundingCycleStore`** | General interface for the methods in this contract that change the blockchain's state according to the Juicebox protocol's rules. |
 
 ### **Inheritance**
 
 | Contract | Description |
 | :--- | :--- |
-| **`TerminalUtility`** | Includes convenience functionality for checking if the message sender is the current terminal of the project who data is being manipulated. |
+| **`JBTerminalUtility`** | Includes convenience functionality for checking if the message sender is the current terminal of the project who data is being manipulated. |
 
 ## Events
 
@@ -48,7 +48,7 @@ Rinkeby testnet: _Not yet deployed_
           </li>
           <li><code>uint256 reconfigured</code> 
           </li>
-          <li><code>FundingCycleProperties _properties</code> 
+          <li><code>FundingCycleProperties properties</code> 
           </li>
           <li><code>uint256 metadata</code> 
           </li>
@@ -167,7 +167,7 @@ Rinkeby testnet: _Not yet deployed_
         <p><b>Returns</b>
         </p>
         <ul>
-          <li><code>uint256 _latestIdOf</code>
+          <li><code>uint256 latestId</code>
           </li>
         </ul>
         <p><a href="read/latestidof.md">more</a>
@@ -187,7 +187,7 @@ Rinkeby testnet: _Not yet deployed_
         <p><b>Returns</b>
         </p>
         <ul>
-          <li><code>FundingCycle _fundingCycle</code>
+          <li><code>FundingCycle fundingCycle</code>
           </li>
         </ul>
         <p><a href="read/get.md">more</a>
@@ -207,7 +207,7 @@ Rinkeby testnet: _Not yet deployed_
         <p><b>Returns</b>
         </p>
         <ul>
-          <li><code>FundingCycle _fundingCycle</code>
+          <li><code>FundingCycle fundingCycle</code>
           </li>
         </ul>
         <p><a href="read/queuedof.md">more</a>
@@ -227,7 +227,7 @@ Rinkeby testnet: _Not yet deployed_
         <p><b>Returns</b>
         </p>
         <ul>
-          <li><code>FundingCycle _fundingCycle</code>
+          <li><code>FundingCycle fundingCycle</code>
           </li>
         </ul>
         <p><a href="read/currentof.md">more</a>
@@ -247,7 +247,7 @@ Rinkeby testnet: _Not yet deployed_
         <p><b>Returns</b>
         </p>
         <ul>
-          <li><code>BallotState _ballotState</code>
+          <li><code>BallotState ballotState</code>
           </li>
         </ul>
         <p><a href="read/currentballotstateof.md">more</a>
@@ -294,7 +294,7 @@ Rinkeby testnet: _Not yet deployed_
         <p><b>Returns</b>
         </p>
         <ul>
-          <li><code>FundingCycle _fundingCycle</code>
+          <li><code>FundingCycle fundingCycle</code>
           </li>
         </ul>
         <p><a href="write/configure.md">more</a>

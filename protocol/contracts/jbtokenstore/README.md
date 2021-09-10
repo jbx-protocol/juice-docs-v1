@@ -21,13 +21,13 @@ Rinkeby testnet: _Not yet deployed_
 
 | **Name** | Description |
 | :--- | :--- |
-| **`ITokenStore`** | General interface for the methods in this contract that change the blockchain's state according to the Juicebox protocol's rules. |
+| **`IJBTokenStore`** | General interface for the methods in this contract that change the blockchain's state according to the Juicebox protocol's rules. |
 
 ### **Inheritance**
 
 | **Name** | Description |
 | :--- | :--- |
-| **`Operatable`** | Includes convenience functionality for checking a message sender's permissions before executing certain transactions.  |
+| **`JBOperatable`** | Includes convenience functionality for checking a message sender's permissions before executing certain transactions.  |
 | **`TerminalUtility`** | Includes convenience functionality for checking if the message sender is the current terminal of the project who data is being manipulated. |
 
 ## Events
@@ -45,7 +45,9 @@ Rinkeby testnet: _Not yet deployed_
       </td>
       <td style="text-align:left">
         <ul>
-          <li><code>uint256 indexed projectId</code> 
+          <li><code>uint256 indexed projectId</code>
+          </li>
+          <li><code>IJBToken indexed token</code> 
           </li>
           <li><code>string name</code> 
           </li>
@@ -69,11 +71,11 @@ Rinkeby testnet: _Not yet deployed_
           </li>
           <li><code>uint256 amount</code> 
           </li>
-          <li><code>bool convertedTickets</code> 
+          <li><code>bool shouldUnstakeTokens</code> 
           </li>
-          <li><code>bool preferUnstakedTickets</code> 
+          <li><code>bool preferUnstakedTokens</code> 
           </li>
-          <li><code>address controller</code>
+          <li><code>address caller</code>
           </li>
         </ul>
         <p><a href="events/print.md">more</a>
@@ -91,11 +93,11 @@ Rinkeby testnet: _Not yet deployed_
           </li>
           <li><code>uint256 amount</code> 
           </li>
-          <li><code>uint256 stakedTickets</code> 
+          <li><code>uint256 inlockedStakedBalance</code> 
           </li>
-          <li><code>bool preferUnstaked</code> 
+          <li><code>bool preferUnstakedTokens</code> 
           </li>
-          <li><code>address controller</code>
+          <li><code>address caller</code>
           </li>
         </ul>
         <p><a href="../jbpaymentterminal/events/redeem.md">more</a>
@@ -220,7 +222,7 @@ Rinkeby testnet: _Not yet deployed_
         <p><b>Returns</b>
         </p>
         <ul>
-          <li><code>IProjects projects</code>
+          <li><code>IJBProjects projects</code>
           </li>
         </ul>
         <p><a href="read/projects.md">more</a>
@@ -240,7 +242,7 @@ Rinkeby testnet: _Not yet deployed_
         <p><b>Returns</b>
         </p>
         <ul>
-          <li><code>IToken tokenOf</code>
+          <li><code>IJBToken token</code>
           </li>
         </ul>
         <p><a href="read/ticketsof.md">more</a>
@@ -262,7 +264,7 @@ Rinkeby testnet: _Not yet deployed_
         <p><b>Returns</b>
         </p>
         <ul>
-          <li><code>uint256 stakedBalanceOf</code>
+          <li><code>uint256 stakedBalance</code>
           </li>
         </ul>
         <p><a href="read/stakedbalanceof.md">more</a>
@@ -282,7 +284,7 @@ Rinkeby testnet: _Not yet deployed_
         <p><b>Returns</b>
         </p>
         <ul>
-          <li><code>uint256 stakedTotalSupplyOf</code>
+          <li><code>uint256 stakedTotalSupply</code>
           </li>
         </ul>
         <p><a href="read/stakedtotalsupplyof.md">more</a>
@@ -304,7 +306,7 @@ Rinkeby testnet: _Not yet deployed_
         <p><b>Returns</b>
         </p>
         <ul>
-          <li><code>uint256 lockedBalanceOf</code>
+          <li><code>uint256 lockedBalance</code>
           </li>
         </ul>
         <p><a href="read/lockedbalanceof.md">more</a>
@@ -328,7 +330,7 @@ Rinkeby testnet: _Not yet deployed_
         <p><b>Returns</b>
         </p>
         <ul>
-          <li><code>uint256 lockedBalanceBy</code>
+          <li><code>uint256 lockedBalance</code>
           </li>
         </ul>
         <p><a href="read/lockedbalanceby.md">more</a>
@@ -348,7 +350,7 @@ Rinkeby testnet: _Not yet deployed_
         <p><b>Returns</b>
         </p>
         <ul>
-          <li><code>uint256 totalSupplyOf</code>
+          <li><code>uint256 totalSupply</code>
           </li>
         </ul>
         <p><a href="read/totalsupplyof.md">more</a>
@@ -370,7 +372,7 @@ Rinkeby testnet: _Not yet deployed_
         <p><b>Returns</b>
         </p>
         <ul>
-          <li><code>uint256 balanceOf</code>
+          <li><code>uint256 balance</code>
           </li>
         </ul>
         <p><a href="../jbpaymentterminaldata/read/balanceof.md">more</a>
@@ -410,6 +412,12 @@ Rinkeby testnet: _Not yet deployed_
           <li><code>string _symbol</code>
           </li>
         </ul>
+        <p><b>Returns</b>
+        </p>
+        <ul>
+          <li><code>IJBToken token</code>
+          </li>
+        </ul>
         <p><a href="write/issue.md">more</a>
         </p>
       </td>
@@ -436,12 +444,12 @@ Rinkeby testnet: _Not yet deployed_
           <li><code>bool _preferUnstakedTokens</code>
           </li>
         </ul>
-        <p><a href="write/print.md">more</a>
+        <p><a href="write/mint.md">more</a>
         </p>
       </td>
     </tr>
     <tr>
-      <td style="text-align:left"><b><code>redeem</code></b>
+      <td style="text-align:left"><b><code>burn</code></b>
       </td>
       <td style="text-align:left">
         <p><b>Traits</b>
@@ -462,7 +470,7 @@ Rinkeby testnet: _Not yet deployed_
           <li><code>bool _preferUnstakedTokens</code>
           </li>
         </ul>
-        <p><a href="write/redeem.md">more</a>
+        <p><a href="write/burn.md">more</a>
         </p>
       </td>
     </tr>

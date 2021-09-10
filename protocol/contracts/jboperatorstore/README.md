@@ -22,7 +22,7 @@ Rinkeby testnet: [0x5dA2E4Ba83569fb7A22a4aDE14bBEf1236168406](https://rinkeby.et
 
 | **Name** | Description |
 | :--- | :--- |
-| **`IOperatorStore`** | General interface for the methods in this contract that change the blockchain's state according to the Juicebox protocol's rules. |
+| **`IJBOperatorStore`** | General interface for the methods in this contract that change the blockchain's state according to the Juicebox protocol's rules. |
 
 ## Events
 

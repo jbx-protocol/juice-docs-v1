@@ -22,12 +22,13 @@ Rinkeby testnet: _Not yet deployed_
 | Name | Description |
 | :--- | :--- |
 | **`IJBPaymentTerminal`** | General interface for the methods in this contract that send and receive funds according to the Juicebox protocol's rules. |
+| **`IJBTerminal`** | Allows projects to migrate to this contract from other IJBTerminals \(like TerminalV1\), and to facilitate a project's future migration decisions. |
 
 ### **Inheritance**
 
 | Contract | Description |
 | :--- | :--- |
-| **`Operatable`** | Includes convenience functionality for checking a message sender's permissions before executing certain transactions.  |
+| **`JBOperatable`** | Includes convenience functionality for checking a message sender's permissions before executing certain transactions.  |
 | **`ReentrancyGuard`** | Includes convenience functionality for preventing access to certain functions while certain other functions are being executed.  |
 
 ## Events
@@ -65,7 +66,7 @@ Rinkeby testnet: _Not yet deployed_
         <ul>
           <li><code>uint256 indexed projectId</code>
           </li>
-          <li><code>IMigratablePaymentTerminal indexed to</code>
+          <li><code>IJBTerminal indexed to</code>
           </li>
           <li><code>uint256 amount</code>
           </li>
@@ -109,7 +110,7 @@ Rinkeby testnet: _Not yet deployed_
       </td>
       <td style="text-align:left">
         <ul>
-          <li><code>uint256 indexed fundingCycleNumber</code>
+          <li><code>uint256 indexed fundingCycleId</code>
           </li>
           <li><code>uint256 indexed configuration</code>
           </li>
@@ -135,7 +136,7 @@ Rinkeby testnet: _Not yet deployed_
       </td>
       <td style="text-align:left">
         <ul>
-          <li><code>uint256 indexed fundingCycleNumber</code>
+          <li><code>uint256 indexed fundingCycleId</code>
           </li>
           <li><code>uint256 indexed projectId</code>
           </li>
@@ -163,7 +164,7 @@ Rinkeby testnet: _Not yet deployed_
       </td>
       <td style="text-align:left">
         <ul>
-          <li><code>uint256 indexed fundingCycleNumber</code>
+          <li><code>uint256 indexed fundingCycleId</code>
           </li>
           <li><code>uint256 indexed projectId</code>
           </li>
@@ -191,8 +192,6 @@ Rinkeby testnet: _Not yet deployed_
       </td>
       <td style="text-align:left">
         <ul>
-          <li><code>uint256 indexed fundingCycleNumber</code>
-          </li>
           <li><code>uint256 indexed fundingCycleId</code>
           </li>
           <li><code>uint256 indexed projectId</code>
@@ -205,6 +204,18 @@ Rinkeby testnet: _Not yet deployed_
           </li>
         </ul>
         <p><a href="events/distributetopayoutsplit.md">more</a>
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td style="text-align:left"><b><code>AllowMigration</code></b>
+      </td>
+      <td style="text-align:left">
+        <ul>
+          <li><code>IJBTerminal terminal</code>
+          </li>
+        </ul>
+        <p><a href="events/allowmigration.md">more</a>
         </p>
       </td>
     </tr>
@@ -234,7 +245,7 @@ Rinkeby testnet: _Not yet deployed_
         <p><b>Returns</b>
         </p>
         <ul>
-          <li><code>IProjects projects</code>
+          <li><code>IJBProjects projects</code>
           </li>
         </ul>
         <p><a href="read/projects.md">more</a>
@@ -254,7 +265,7 @@ Rinkeby testnet: _Not yet deployed_
         <p><b>Returns</b>
         </p>
         <ul>
-          <li><code>ISplitsStore splitsStore</code>
+          <li><code>IJBSplitsStore splitsStore</code>
           </li>
         </ul>
         <p><a href="read/splitstore.md">more</a>
@@ -274,10 +285,10 @@ Rinkeby testnet: _Not yet deployed_
         <p><b>Returns</b>
         </p>
         <ul>
-          <li><code>IJBDirectory jBDirectory</code>
+          <li><code>IJBDirectory directory</code>
           </li>
         </ul>
-        <p><a href="read/terminaldirectory.md">more</a>
+        <p><a href="read/directory.md">more</a>
         </p>
       </td>
     </tr>
@@ -297,7 +308,41 @@ Rinkeby testnet: _Not yet deployed_
           <li><code>IJBPaymentTerminalData data</code>
           </li>
         </ul>
-        <p><a href="read/datalayer.md">more</a>
+        <p><a href="read/data.md">more</a>
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td style="text-align:left"><b><code>migrationIsAllowed</code></b>
+      </td>
+      <td style="text-align:left">
+        <p><b>Params</b>
+        </p>
+        <ul>
+          <li><code>IJBTerminal _terminal</code>
+          </li>
+        </ul>
+        <p><b>Returns</b>
+        </p>
+        <ul>
+          <li><code>bool migrationIsAllowed</code>
+          </li>
+        </ul>
+        <p><a href="read/migrationisallowed.md">more</a>
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td style="text-align:left"><b><code>dataAuthority</code></b>
+      </td>
+      <td style="text-align:left">
+        <p><b>Returns</b>
+        </p>
+        <ul>
+          <li><code>address dataAuthority</code>
+          </li>
+        </ul>
+        <p><a href="read/dataauthority.md">more</a>
         </p>
       </td>
     </tr>
@@ -478,7 +523,7 @@ Rinkeby testnet: _Not yet deployed_
         <ul>
           <li><code>uint256 _projectId</code>
           </li>
-          <li><code>IMigratablePaymentTerminal _to</code>
+          <li><code>IJBTerminal _to</code>
           </li>
         </ul>
         <p><a href="write/migrate.md">more</a>
@@ -500,8 +545,50 @@ Rinkeby testnet: _Not yet deployed_
         <ul>
           <li><code>uint256 _projectId</code>
           </li>
+          <li><code>string _memo</code>
+          </li>
         </ul>
         <p><a href="write/addtobalance.md">more</a>
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td style="text-align:left"><b><code>allowMigration</code></b>
+      </td>
+      <td style="text-align:left">
+        <p><b>Traits</b>
+        </p>
+        <ul>
+          <li><code>onlyOwner</code>
+          </li>
+        </ul>
+        <p><b>Params</b>
+        </p>
+        <ul>
+          <li><code>IJBTerminal _terminal</code>
+          </li>
+        </ul>
+        <p><a href="write/allowmigration.md">more</a>
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td style="text-align:left"><b><code>prepForMigrationOf</code></b>
+      </td>
+      <td style="text-align:left">
+        <p><b>Traits</b>
+        </p>
+        <ul>
+          <li><code>nonReentrant</code>
+          </li>
+        </ul>
+        <p><b>Params</b>
+        </p>
+        <ul>
+          <li><code>uint256 _projectId</code>
+          </li>
+        </ul>
+        <p><a href="write/prepformigrationof.md">more</a>
         </p>
       </td>
     </tr>

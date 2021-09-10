@@ -21,14 +21,14 @@ Rinkeby testnet: _Not yet deployed_
 
 | Name | Description |
 | :--- | :--- |
-| **`IJBPaymentTerminal`** | General interface for the methods in this contract that change the blockchain's state according to the Juicebox protocol's rules. |
+| **`IJBPaymentTerminalData`** | General interface for the methods in this contract that change the blockchain's state according to the Juicebox protocol's rules. |
 | **`ITerminalDataLayer`** | Conforms to ITerminal, which allows projects to migrate to this contract from other ITerminals \(like TerminalV1\), and to facilitate a project's future migration decisions. |
 
 ### **Inheritance**
 
 | **Contract** | Description |
 | :--- | :--- |
-| **`Operatable`** | Includes convenience functionality for checking a message sender's permissions before executing certain transactions.  |
+| **`JBOperatable`** | Includes convenience functionality for checking a message sender's permissions before executing certain transactions.  |
 | **`Ownable`** | Includes convenience functionality for specifying an address that owns the contract, with modifiers that only allow access by the owner. |
 | **`ReentrancyGuard`** | Includes convenience functionality for preventing access to certain functions while certain other functions are being executed.   |
 
@@ -65,7 +65,7 @@ Rinkeby testnet: _Not yet deployed_
       </td>
       <td style="text-align:left">
         <ul>
-          <li><code>uint256 indexed fundingCycleNumber</code> 
+          <li><code>uint256 indexed fundingCycleId</code> 
           </li>
           <li><code>uint256 indexed projectId</code>
           </li>
@@ -89,9 +89,7 @@ Rinkeby testnet: _Not yet deployed_
       </td>
       <td style="text-align:left">
         <ul>
-          <li><code>uint256 indexed fundingCycleNumber</code> 
-          </li>
-          <li><code>uint256 indexed fundingCycleId</code>
+          <li><code>uint256 indexed fundingCycleId</code> 
           </li>
           <li><code>uint256 indexed projectId</code> 
           </li>
@@ -103,18 +101,6 @@ Rinkeby testnet: _Not yet deployed_
           </li>
         </ul>
         <p><a href="events/distributetoreservedtokensplit.md">more</a>
-        </p>
-      </td>
-    </tr>
-    <tr>
-      <td style="text-align:left"><b><code>AllowMigration</code></b>
-      </td>
-      <td style="text-align:left">
-        <ul>
-          <li><code>ITerminal terminal</code>
-          </li>
-        </ul>
-        <p><a href="events/allowmigration.md">more</a>
         </p>
       </td>
     </tr>
@@ -169,7 +155,7 @@ Rinkeby testnet: _Not yet deployed_
       </td>
       <td style="text-align:left">
         <ul>
-          <li><code>ITerminalV2PaymentLayer paymentLayer</code>
+          <li><code>IJBTerminal terminal</code>
           </li>
           <li><code>address caller</code>
           </li>
@@ -204,7 +190,7 @@ Rinkeby testnet: _Not yet deployed_
         <p><b>Returns</b>
         </p>
         <ul>
-          <li><code>IProjects projects</code>
+          <li><code>IJBProjects projects</code>
           </li>
         </ul>
         <p><a href="read/projects.md">more</a>
@@ -212,7 +198,7 @@ Rinkeby testnet: _Not yet deployed_
       </td>
     </tr>
     <tr>
-      <td style="text-align:left"><b><code>fundingCycles</code></b>
+      <td style="text-align:left"><b><code>fundingCycleStore</code></b>
       </td>
       <td style="text-align:left">
         <p><b>Traits</b>
@@ -224,7 +210,7 @@ Rinkeby testnet: _Not yet deployed_
         <p><b>Returns</b>
         </p>
         <ul>
-          <li><code>IFundingCycles fundingCycles</code>
+          <li><code>IJBFundingCycleStore fundingCycleStore</code>
           </li>
         </ul>
         <p><a href="read/fundingcycles.md">more</a>
@@ -232,7 +218,7 @@ Rinkeby testnet: _Not yet deployed_
       </td>
     </tr>
     <tr>
-      <td style="text-align:left"><b><code>ticketBooth</code></b>
+      <td style="text-align:left"><b><code>tokenStore</code></b>
       </td>
       <td style="text-align:left">
         <p><b>Traits</b>
@@ -244,7 +230,7 @@ Rinkeby testnet: _Not yet deployed_
         <p><b>Returns</b>
         </p>
         <ul>
-          <li><code>ITicketBooth ticketBooth</code>
+          <li><code>IJBTokenStore tokenStore</code>
           </li>
         </ul>
         <p><a href="read/ticketbooth.md">more</a>
@@ -264,7 +250,7 @@ Rinkeby testnet: _Not yet deployed_
         <p><b>Returns</b>
         </p>
         <ul>
-          <li><code>ISplitStore splitStore</code>
+          <li><code>IJBSplitStore splitStore</code>
           </li>
         </ul>
         <p><a href="read/splitsstore.md">more</a>
@@ -284,7 +270,7 @@ Rinkeby testnet: _Not yet deployed_
         <p><b>Returns</b>
         </p>
         <ul>
-          <li><code>IPrices prices</code>
+          <li><code>IJBPrices prices</code>
           </li>
         </ul>
         <p><a href="read/prices.md">more</a>
@@ -332,26 +318,6 @@ Rinkeby testnet: _Not yet deployed_
       </td>
     </tr>
     <tr>
-      <td style="text-align:left"><b><code>migrationIsAllowed</code></b>
-      </td>
-      <td style="text-align:left">
-        <p><b>Params</b>
-        </p>
-        <ul>
-          <li><code>ITerminal _terminal</code>
-          </li>
-        </ul>
-        <p><b>Returns</b>
-        </p>
-        <ul>
-          <li><code>bool migrationIsAllowed</code>
-          </li>
-        </ul>
-        <p><a href="read/migrationisallowed.md">more</a>
-        </p>
-      </td>
-    </tr>
-    <tr>
       <td style="text-align:left"><b><code>remainingOverflowAllowanceOf</code></b>
       </td>
       <td style="text-align:left">
@@ -374,13 +340,13 @@ Rinkeby testnet: _Not yet deployed_
       </td>
     </tr>
     <tr>
-      <td style="text-align:left"><b><code>paymentLayer</code></b>
+      <td style="text-align:left"><b><code>paymentTerminal</code></b>
       </td>
       <td style="text-align:left">
         <p><b>Returns</b>
         </p>
         <ul>
-          <li><code>ITerminalV2PaymentLayer paymentLayer</code>
+          <li><code>IJBTerminal paymentTerminal</code>
           </li>
         </ul>
         <p><a href="read/paymentlayer.md">more</a>
@@ -643,33 +609,13 @@ Rinkeby testnet: _Not yet deployed_
       </td>
     </tr>
     <tr>
-      <td style="text-align:left"><b><code>prepForMigrationOf</code></b>
-      </td>
-      <td style="text-align:left">
-        <p><b>Traits</b>
-        </p>
-        <ul>
-          <li><code>nonReentrant</code>
-          </li>
-        </ul>
-        <p><b>Params</b>
-        </p>
-        <ul>
-          <li><code>uint256 _projectId</code>
-          </li>
-        </ul>
-        <p><a href="write/prepformigrationof.md">more</a>
-        </p>
-      </td>
-    </tr>
-    <tr>
       <td style="text-align:left"><b><code>recordPayment</code></b>
       </td>
       <td style="text-align:left">
         <p><b>Traits</b>
         </p>
         <ul>
-          <li><code>onlyPaymentLayer</code>
+          <li><code>onlyPaymentTerminal</code>
           </li>
         </ul>
         <p><b>Params</b>
@@ -713,7 +659,7 @@ Rinkeby testnet: _Not yet deployed_
         <p><b>Traits</b>
         </p>
         <ul>
-          <li><code>onlyPaymentLayer</code>
+          <li><code>onlyPaymentTerminal</code>
           </li>
         </ul>
         <p><b>Params</b>
@@ -747,7 +693,7 @@ Rinkeby testnet: _Not yet deployed_
         <p><b>Traits</b>
         </p>
         <ul>
-          <li><code>onlyPaymentLayer</code>
+          <li><code>onlyPaymentTerminal</code>
           </li>
         </ul>
         <p><b>Params</b>
@@ -781,7 +727,7 @@ Rinkeby testnet: _Not yet deployed_
         <p><b>Traits</b>
         </p>
         <ul>
-          <li><code>onlyPaymentLayer</code>
+          <li><code>onlyPaymentTerminal</code>
           </li>
         </ul>
         <p><b>Params</b>
@@ -817,21 +763,38 @@ Rinkeby testnet: _Not yet deployed_
       </td>
     </tr>
     <tr>
+      <td style="text-align:left"><b><code>recordPrepForMigration</code></b>
+      </td>
+      <td style="text-align:left">
+        <p><b>Traits</b>
+        </p>
+        <ul>
+          <li><code>onlyPaymentTerminal</code>
+          </li>
+        </ul>
+        <p><b>Params</b>
+        </p>
+        <ul>
+          <li><code>uint256 _projectId</code>
+          </li>
+        </ul>
+        <p>more</p>
+      </td>
+    </tr>
+    <tr>
       <td style="text-align:left"><b><code>recordMigration</code></b>
       </td>
       <td style="text-align:left">
         <p><b>Traits</b>
         </p>
         <ul>
-          <li><code>onlyPaymentLayer</code>
+          <li><code>onlyPaymentTerminal</code>
           </li>
         </ul>
         <p><b>Params</b>
         </p>
         <ul>
-          <li><code>uint256 _projectId</code> 
-          </li>
-          <li><code>ITerminal _to</code>
+          <li><code>uint256 _projectId</code>
           </li>
         </ul>
         <p><b>Returns</b>
@@ -851,7 +814,7 @@ Rinkeby testnet: _Not yet deployed_
         <p><b>Traits</b>
         </p>
         <ul>
-          <li><code>onlyPaymentLayer</code>
+          <li><code>onlyPaymentTerminal</code>
           </li>
         </ul>
         <p><b>Params</b>
@@ -867,7 +830,7 @@ Rinkeby testnet: _Not yet deployed_
       </td>
     </tr>
     <tr>
-      <td style="text-align:left"><b><code>allowMigration</code></b>
+      <td style="text-align:left"><b><code>setPaymentTerminal</code></b>
       </td>
       <td style="text-align:left">
         <p><b>Traits</b>
@@ -879,89 +842,10 @@ Rinkeby testnet: _Not yet deployed_
         <p><b>Params</b>
         </p>
         <ul>
-          <li><code>ITerminal _terminal</code>
+          <li><code>IJBTerminal _paymentTerminal</code>
           </li>
         </ul>
-        <p><a href="write/allowmigration.md">more</a>
-        </p>
-      </td>
-    </tr>
-    <tr>
-      <td style="text-align:left"><b><code>setPaymentLayer</code></b>
-      </td>
-      <td style="text-align:left">
-        <p><b>Traits</b>
-        </p>
-        <ul>
-          <li><code>onlyOwner</code>
-          </li>
-        </ul>
-        <p><b>Params</b>
-        </p>
-        <ul>
-          <li><code>ITerminalV2PaymentLayer _paymentLayer</code>
-          </li>
-        </ul>
-        <p><a href="write/setpaymentlayer.md">more</a>
-        </p>
-      </td>
-    </tr>
-    <tr>
-      <td style="text-align:left"><b><code>pay</code></b>
-      </td>
-      <td style="text-align:left">
-        <p><b>Note: This call forwards the payment and all params to <code>TerminalV2PaymentLayer.pay(...).</code></b>
-        </p>
-        <p>
-          <br /><b>Traits</b>
-        </p>
-        <ul>
-          <li><code>payable</code>
-          </li>
-        </ul>
-        <p><b>Params</b>
-        </p>
-        <ul>
-          <li><code>uint256 _projectId</code> 
-          </li>
-          <li><code>address _beneficiary</code> 
-          </li>
-          <li><code>string _memo</code> 
-          </li>
-          <li><code>bool _preferUnstakedTokens</code>
-          </li>
-        </ul>
-        <p><b>Returns</b>
-        </p>
-        <ul>
-          <li><code>uint256 fundingCycleNumber</code>
-          </li>
-        </ul>
-        <p><a href="write/pay.md">more</a>
-        </p>
-      </td>
-    </tr>
-    <tr>
-      <td style="text-align:left"><b><code>addToBalance</code></b>
-      </td>
-      <td style="text-align:left">
-        <p><b>Note: This call forwards the payment and all params to <code>TerminalV2PaymentLayer.addToBalance(...).</code></b>
-          <br
-          />
-        </p>
-        <p><b>Traits</b>
-        </p>
-        <ul>
-          <li><code>payable</code>
-          </li>
-        </ul>
-        <p><b>Params</b>
-        </p>
-        <ul>
-          <li><code>uint256 _projectId</code>
-          </li>
-        </ul>
-        <p><a href="write/addtobalance.md">more</a>
+        <p><a href="write/setpaymentterminal.md">more</a>
         </p>
       </td>
     </tr>

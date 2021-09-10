@@ -19,14 +19,14 @@ Rinkeby testnet: _Not yet deployed_
 
 | Name\` | Description |
 | :--- | :--- |
-| **`IProjects`** | General interface for the methods in this contract that change the blockchain's state according to the Juicebox protocol's rules. |
+| **`IJBProjects`** | General interface for the methods in this contract that change the blockchain's state according to the Juicebox protocol's rules. |
 
 ### **Inheritance**
 
 | **Contract** | Description |
 | :--- | :--- |
 | **`ERC721`** | A standard definition for non-fungible tokens \(NFTs\) |
-| **`Operatable`** | Includes convenience functionality for checking a message sender's permissions before executing certain transactions.  |
+| **`JBOperatable`** | Includes convenience functionality for checking a message sender's permissions before executing certain transactions.  |
 
 ## Events
 
@@ -51,7 +51,7 @@ Rinkeby testnet: _Not yet deployed_
           </li>
           <li><code>string uri</code> 
           </li>
-          <li><code>ITerminal terminal</code> 
+          <li><code>IJBTerminal terminal</code> 
           </li>
           <li><code>address caller</code>
           </li>
@@ -335,7 +335,7 @@ Rinkeby testnet: _Not yet deployed_
           </li>
           <li><code>string _uri</code> 
           </li>
-          <li><code>ITerminal _terminal</code>
+          <li><code>IJBTerminal _terminal</code>
           </li>
         </ul>
         <p><b>Returns</b>

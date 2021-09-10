@@ -28,7 +28,7 @@ Rinkeby testnet: _Not yet deployed_
 
 | **Name** | Description |
 | :--- | :--- |
-| **`Operatable`** | Includes convenience functionality for checking a message sender's permissions before executing certain transactions.  |
+| **`JBOperatable`** | Includes convenience functionality for checking a message sender's permissions before executing certain transactions.  |
 
 ## Events
 
@@ -47,7 +47,7 @@ Rinkeby testnet: _Not yet deployed_
         <ul>
           <li><code>uint256 indexed projectId</code> 
           </li>
-          <li><code>ITerminal indexed terminal</code> 
+          <li><code>IJBTerminal indexed terminal</code> 
           </li>
           <li><code>address caller</code>
           </li>
@@ -82,7 +82,7 @@ Rinkeby testnet: _Not yet deployed_
         <p><b>Returns</b>
         </p>
         <ul>
-          <li><code>IProjects projects</code>
+          <li><code>IJBProjects projects</code>
           </li>
         </ul>
         <p><a href="read/projects.md">more</a>
@@ -102,7 +102,7 @@ Rinkeby testnet: _Not yet deployed_
         <p><b>Returns</b>
         </p>
         <ul>
-          <li><code>ITerminal terminalOf</code>
+          <li><code>IJBTerminal terminalOf</code>
           </li>
         </ul>
         <p><a href="read/terminalof.md">more</a>
@@ -131,7 +131,7 @@ Rinkeby testnet: _Not yet deployed_
         <ul>
           <li><code>uint256 _projectId</code> 
           </li>
-          <li><code>ITerminal _terminal</code>
+          <li><code>IJBTerminal _terminal</code>
           </li>
         </ul>
         <p><a href="write/setterminal.md">more</a>
