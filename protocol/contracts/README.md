@@ -1,7 +1,5 @@
 # Contract APIs
 
-
-
 <table>
   <thead>
     <tr>
