@@ -141,8 +141,6 @@ function setHandleOf(uint256 _projectId, bytes32 _handle)
 {% endtab %}
 
 {% tab title="Events" %}
-
-
 <table>
   <thead>
     <tr>
