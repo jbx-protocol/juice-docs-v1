@@ -124,6 +124,7 @@ function setHandleOf(uint256 _projectId, bytes32 _handle)
 
     // Store the handle for the project.
     idFor[_handle] = _projectId;
+    
     // Store the project for the handle.
     handleOf[_projectId] = _handle;
 
