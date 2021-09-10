@@ -21,7 +21,7 @@ Rinkeby testnet: _Not yet deployed_
 
 | **Name** | Description |
 | :--- | :--- |
-| **`IJBTokenStore`** | General interface for the methods in this contract that change the blockchain's state according to the Juicebox protocol's rules. |
+| **`IJBTokenStore`** | General interface for the methods in this contract that interact with the blockchain's state according to the Juicebox protocol's rules. |
 
 ### **Inheritance**
 

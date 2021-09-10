@@ -82,7 +82,7 @@
         <p>Stores splits information for all groups of each project. Projects can
           create split groups for directing percents of a total token allocation
           to any address, any other Juicebox project, or any contract that inherits
-          from the ISplitAllocator interface.</p>
+          from the IJBSplitAllocator interface.</p>
         <p></p>
         <p><a href="jbsplitstore/">more</a>
         </p>

@@ -21,7 +21,7 @@ Rinkeby testnet: _Not yet deployed_
 
 | Name | Description |
 | :--- | :--- |
-| **`IJBPaymentTerminalData`** | General interface for the methods in this contract that change the blockchain's state according to the Juicebox protocol's rules. |
+| **`IJBPaymentTerminalData`** | General interface for the methods in this contract that interact with the blockchain's state according to the Juicebox protocol's rules. |
 | **`ITerminalDataLayer`** | Conforms to ITerminal, which allows projects to migrate to this contract from other ITerminals \(like TerminalV1\), and to facilitate a project's future migration decisions. |
 
 ### **Inheritance**
