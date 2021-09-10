@@ -372,7 +372,7 @@ Rinkeby testnet: _Not yet deployed_
         <p><b>Params</b>
         </p>
         <ul>
-          <li><code>uint256 projectId</code>
+          <li><code>uint256 _projectId</code>
           </li>
           <li><code>address _beneficiary</code>
           </li>
