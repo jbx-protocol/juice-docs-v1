@@ -86,7 +86,7 @@ _Internal references:_
   idFor[_handle] = count;
 ```
 
-7. If a URI was provided,  store it as the `uriOf` the newly created project. 
+7. If a URI was provided \(meaning it's not an empty string\),  store it as the `uriOf` the newly created project. 
 
 _Internal references:_
 
@@ -97,7 +97,7 @@ _Internal references:_
 if (bytes(_uri).length > 0) uriOf[count] = _uri;
 ```
 
-8. If a terminal address was provided, set it as the terminal of the newly created project in the directory of the terminal. 
+8. If a terminal address was provided \(meaning it's not the zero address\), set it as the terminal of the newly created project in the directory of the terminal. 
 
 This will let other people/contracts around Web3 know where to send funds to your project, and will also let the `TokenStore` and `FundingCycleStore` know which terminal contract has the authority to manipulate data pertaining to the project.
 
