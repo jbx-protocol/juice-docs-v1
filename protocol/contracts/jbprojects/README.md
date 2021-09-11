@@ -313,39 +313,6 @@ Rinkeby testnet: _Not yet deployed_
   </tbody>
 </table>
 
-## Read
-
-<table>
-  <thead>
-    <tr>
-      <th style="text-align:left">Function</th>
-      <th style="text-align:left">Definition</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td style="text-align:left"><b><code>exists</code></b>
-      </td>
-      <td style="text-align:left">
-        <p><b>Params</b>
-        </p>
-        <ul>
-          <li><code>uint256 _projectId</code>
-          </li>
-        </ul>
-        <p><b>Returns</b>
-        </p>
-        <ul>
-          <li><code>bool exists</code>
-          </li>
-        </ul>
-        <p><a href="read/exists.md">more</a>
-        </p>
-      </td>
-    </tr>
-  </tbody>
-</table>
-
 ## Write
 
 <table>

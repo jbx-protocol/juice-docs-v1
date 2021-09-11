@@ -32,8 +32,6 @@
       * [transferAddressFor](protocol/contracts/jbprojects/properties/transferaddressfor.md)
       * [challengeExpiryOf](protocol/contracts/jbprojects/properties/challengeexpiryof.md)
       * [\_SECONDS\_IN\_YEAR](protocol/contracts/jbprojects/properties/_seconds_in_year.md)
-    * [Read](protocol/contracts/jbprojects/read/README.md)
-      * [exists](protocol/contracts/jbprojects/read/exists.md)
     * [Write](protocol/contracts/jbprojects/write/README.md)
       * [createFor](protocol/contracts/jbprojects/write/createfor.md)
       * [setHandleOf](protocol/contracts/jbprojects/write/sethandleof.md)
