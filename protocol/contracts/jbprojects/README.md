@@ -74,8 +74,6 @@ Rinkeby testnet: _Not yet deployed_
           </li>
           <li><code>string uri</code> 
           </li>
-          <li><code>IJBTerminal terminal</code> 
-          </li>
           <li><code>address caller</code>
           </li>
         </ul>
@@ -122,7 +120,7 @@ Rinkeby testnet: _Not yet deployed_
         <ul>
           <li><code>uint256 indexed projectId</code> 
           </li>
-          <li><code>address indexed to</code> 
+          <li><code>address indexed transferAddress</code> 
           </li>
           <li><code>bytes32 indexed handle</code> 
           </li>
@@ -140,9 +138,9 @@ Rinkeby testnet: _Not yet deployed_
       </td>
       <td style="text-align:left">
         <ul>
-          <li><code>address indexed account</code> 
+          <li><code>uint256 indexed projectId</code>
           </li>
-          <li><code>uint256 indexed projectId</code> 
+          <li><code>address indexed transferAddress</code> 
           </li>
           <li><code>bytes32 indexed handle</code> 
           </li>
@@ -208,7 +206,7 @@ Rinkeby testnet: _Not yet deployed_
           <li><code>uint256 count</code>
           </li>
         </ul>
-        <p><a href="../jbfundingcyclestore/read/count.md">more</a>
+        <p><a href="properties/count.md">more</a>
         </p>
       </td>
     </tr>
@@ -228,7 +226,7 @@ Rinkeby testnet: _Not yet deployed_
           <li><code>string _uri</code>
           </li>
         </ul>
-        <p><a href="read/uriof.md">more</a>
+        <p><a href="properties/uriof.md">more</a>
         </p>
       </td>
     </tr>
@@ -248,7 +246,7 @@ Rinkeby testnet: _Not yet deployed_
           <li><code>bytes32 _handle</code>
           </li>
         </ul>
-        <p><a href="read/handleof.md">more</a>
+        <p><a href="properties/handleof.md">more</a>
         </p>
       </td>
     </tr>
@@ -268,7 +266,7 @@ Rinkeby testnet: _Not yet deployed_
           <li><code>uint256 _projectId</code>
           </li>
         </ul>
-        <p><a href="read/idfor.md">more</a>
+        <p><a href="properties/idfor.md">more</a>
         </p>
       </td>
     </tr>
@@ -288,7 +286,7 @@ Rinkeby testnet: _Not yet deployed_
           <li><code>address _transferAddress</code>
           </li>
         </ul>
-        <p><a href="read/transferaddressfor.md">more</a>
+        <p><a href="properties/transferaddressfor.md">more</a>
         </p>
       </td>
     </tr>
@@ -308,7 +306,7 @@ Rinkeby testnet: _Not yet deployed_
           <li><code>uint256 _challengeExpiryTimestamp</code>
           </li>
         </ul>
-        <p><a href="read/challengeexpiryof.md">more</a>
+        <p><a href="properties/challengeexpiryof.md">more</a>
         </p>
       </td>
     </tr>
@@ -443,7 +441,7 @@ Rinkeby testnet: _Not yet deployed_
         <ul>
           <li><code>uint256 _projectId</code> 
           </li>
-          <li><code>address _to</code> 
+          <li><code>address _transferAddress</code> 
           </li>
           <li><code>bytes32 _newHandle</code>
           </li>

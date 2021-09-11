@@ -32,7 +32,13 @@ function setHandleOf(uint256 _projectId, bytes32 _handle)
    require(_handle != bytes32(0), "JBProjects::setHandleOf: EMPTY_HANDLE");
    ```
 
-2. Check that the `_handle` is unique. This is done by making sure there isn't yet an `idFor` the handle, and making sure it isn't currently being transferred to an address.
+2. Check that the `_handle` is unique. This is done by making sure there isn't yet an `idFor` the handle, and making sure it isn't currently being transferred to an address.  
+
+
+   _Internal references:_
+
+   * [`idFor`](../properties/idfor.md)
+   * [`transferAddressFor`](../properties/transferaddressfor.md)
 
    ```javascript
 
@@ -48,8 +54,8 @@ function setHandleOf(uint256 _projectId, bytes32 _handle)
 
    _Internal references:_
 
-   * [`handleOf`](../read/handleof.md)
-   * [`idFor`](../read/idfor.md)
+   * [`handleOf`](../properties/handleof.md)
+   * [`idFor`](../properties/idfor.md)
 
    ```javascript
    // Register the change in the resolver.
@@ -61,10 +67,10 @@ function setHandleOf(uint256 _projectId, bytes32 _handle)
 
    _Internal references:_
 
-   * [`handleOf`](../read/handleof.md)
+   * [`handleOf`](../properties/handleof.md)
 
    ```javascript
-   // Store the handle for the project.
+   // Store the handle for the project ID.
    handleOf[_projectId] = _handle;
    ```
 
@@ -73,10 +79,10 @@ function setHandleOf(uint256 _projectId, bytes32 _handle)
 
    _Internal references:_
 
-   * [`idFor`](../read/idfor.md)
+   * [`idFor`](../properties/idfor.md)
 
    ```javascript
-   // Store the project for the handle.
+   // Store the project ID for the handle.
    idFor[_handle] = _projectId;
    ```
 
@@ -122,10 +128,10 @@ function setHandleOf(uint256 _projectId, bytes32 _handle)
     // Register the change in the resolver.
     idFor[handleOf[_projectId]] = 0;
 
-    // Store the handle for the project.
+    // Store the handle for the project ID.
     idFor[_handle] = _projectId;
     
-    // Store the project for the handle.
+    // Store the project ID for the handle.
     handleOf[_projectId] = _handle;
 
     emit SetHandle(_projectId, _handle, msg.sender);
@@ -172,9 +178,9 @@ function setHandleOf(uint256 _projectId, bytes32 _handle)
 {% tab title="Bug bounty" %}
 | Category | Description | Reward |
 | :--- | :--- | :--- |
-| **Optimization** | Help make this operation more efficient. | 0.25ETH |
-| **Low severity** | Identify a vulnerability in this operation that could lead to an inconvenience for a user of the protocol or for a protocol developer. | 0.75ETH |
-| **High severity** | Identify a vulnerability in this operation that could lead to data corruption or loss of funds. | 3+ETH |
+| **Optimization** | Help make this operation more efficient. | 0.5ETH |
+| **Low severity** | Identify a vulnerability in this operation that could lead to an inconvenience for a user of the protocol or for a protocol developer. | 1ETH |
+| **High severity** | Identify a vulnerability in this operation that could lead to data corruption or loss of funds. | 5+ETH |
 {% endtab %}
 {% endtabs %}
 

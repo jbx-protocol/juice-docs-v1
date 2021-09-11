@@ -16,15 +16,13 @@ Definition:
 function createFor(
     address _owner,
     bytes32 _handle,
-    string calldata _uri,
-    IJBTerminal _terminal
+    string calldata _uri
 ) external override returns (uint256);
 ```
 
 * `_owner` is the address that will be the owner of the project.
 * `_handle` is a unique string to associate with the project that will resolve to its token ID.
 * `_uri` is an IPFS CID hash where metadata about the project has been uploaded. An empty string is acceptable if no metadata is being provided.
-* `_terminal` is the terminal contract that should be set as the project's current payment terminal, through which is will be able to manage funds. The zero address is acceptable if the project should not yet be associated with a terminal.
 * The function can be accessed externally by anyone. 
 * The function overrides a function definition from the `IJBProjects` interface.
 * Returns the token ID of the newly created project.
@@ -36,7 +34,13 @@ function createFor(
    require(_handle != bytes32(0), "JBProjects::createFor: EMPTY_HANDLE");
    ```
 
-2. Check that the `_handle` is unique. This is done by making sure there isn't yet an `idFor` the handle, and making sure it isn't currently being transferred to an address.
+2. Check that the `_handle` is unique. This is done by making sure there isn't yet an `idFor` the handle, and making sure it isn't currently being transferred to an address.  
+
+
+   _Internal references:_
+
+   * [`idFor`](../properties/idfor.md)
+   * [`transferAddressFor`](../properties/transferaddressfor.md)
 
    ```javascript
    // Handle must be unique.
@@ -52,7 +56,7 @@ function createFor(
 
    _Internal references:_
 
-   * [`count`](../../jbfundingcyclestore/read/count.md)
+   * [`count`](../properties/count.md)
 
    ```javascript
    // Increment the count, which will be used as the ID.
@@ -71,10 +75,10 @@ function createFor(
 
    _Internal references:_
 
-   * [`handleOf`](../read/handleof.md)
+   * [`handleOf`](../properties/handleof.md)
 
    ```javascript
-   // Set the handle stored values.
+   // Store the handle for the project ID.
    handleOf[count] = _handle;
    ```
 
@@ -83,9 +87,10 @@ function createFor(
 
    _Internal references:_
 
-   * [`idFor`](../read/idfor.md)
+   * [`idFor`](../properties/idfor.md)
 
    ```javascript
+   // Store the project ID for the handle.
    idFor[_handle] = count;
    ```
 
@@ -94,31 +99,14 @@ function createFor(
 
    _Internal references:_
 
-   * [`uriOf`](../read/uriof.md)
+   * [`uriOf`](../properties/uriof.md)
 
    ```javascript
    // Set the URI if one was provided.
    if (bytes(_uri).length > 0) uriOf[count] = _uri;
    ```
 
-8. If a terminal address was provided \(meaning it's not the zero address\), set it as the terminal of the newly created project in the directory of the terminal.   
-
-
-   This will let other people/contracts around Web3 know where to send funds to your project, and will also let the `TokenStore` and `FundingCycleStore` know which terminal contract has the authority to manipulate data pertaining to the project.  
-
-
-   _External references:_
-
-   * [`directory`](../../jbpaymentterminal/read/directory.md) 
-   * [`setTerminalOf`](../../jbdirectory/write/setterminalof.md) 
-
-   ```javascript
-   // Set the project's terminal if needed.
-   if (_terminal != IJBTerminal(address(0)))
-       _terminal.directory().setTerminalOf(count, _terminal);
-   ```
-
-9. Emit a `Create` event with all relevant parameters.   
+8. Emit a `Create` event with all relevant parameters.   
 
 
    _Event references:_
@@ -129,11 +117,11 @@ function createFor(
    emit Create(count, _owner, _handle, _uri, _terminal, msg.sender);
    ```
 
-10. Return the newly created project's token ID.
+9. Return the newly created project's token ID.
 
-    ```javascript
-    return count;
-    ```
+   ```javascript
+   return count;
+   ```
 {% endtab %}
 
 {% tab title="Only code" %}
@@ -148,15 +136,13 @@ function createFor(
     @param _owner The address that will be the owner of the project.
     @param _handle A unique string to associate with the project that will resolve to its token ID.
     @param _uri An IPFS CID hash where metadata about the project has been uploaded. An empty string is acceptable if no metadata is being provided.
-    @param _terminal The terminal contract that should be set as the project's current payment terminal, through which is will be able to manage funds. The zero address is acceptable if the project should not yet be associated with a terminal.
 
     @return The token ID of the newly created project.
 */
 function createFor(
     address _owner,
     bytes32 _handle,
-    string calldata _uri,
-    IJBTerminal _terminal
+    string calldata _uri
 ) external override returns (uint256) {
     // Handle must exist.
     require(_handle != bytes32(0), "JBProjects::createFor: EMPTY_HANDLE");
@@ -174,18 +160,16 @@ function createFor(
     // Mint the project.
     _safeMint(_owner, count);
 
-    // Set the handle stored values.
+    // Store the handle for the project ID.
     handleOf[count] = _handle;
+    
+    // Store the project ID for the handle.
     idFor[_handle] = count;
 
     // Set the URI if one was provided.
     if (bytes(_uri).length > 0) uriOf[count] = _uri;
 
-    // Set the project's terminal if needed.
-    if (_terminal != IJBTerminal(address(0)))
-        _terminal.directory().setTerminalOf(count, _terminal);
-
-    emit Create(count, _owner, _handle, _uri, _terminal, msg.sender);
+    emit Create(count, _owner, _handle, _uri, msg.sender);
 
     return count;
 }
@@ -221,8 +205,6 @@ function createFor(
           </li>
           <li><code>string uri</code> 
           </li>
-          <li><code>IJBTerminal terminal</code> 
-          </li>
           <li><code>address caller</code>
           </li>
         </ul>
@@ -237,9 +219,9 @@ function createFor(
 {% tab title="Bug bounty" %}
 | Category | Description | Reward |
 | :--- | :--- | :--- |
-| **Optimization** | Help make this operation more efficient. | 0.25ETH |
-| **Low severity** | Identify a vulnerability in this operation that could lead to an inconvenience for a user of the protocol or for a protocol developer. | 0.75ETH |
-| **High severity** | Identify a vulnerability in this operation that could lead to data corruption or loss of funds. | 3+ETH |
+| **Optimization** | Help make this operation more efficient. | 0.5ETH |
+| **Low severity** | Identify a vulnerability in this operation that could lead to an inconvenience for a user of the protocol or for a protocol developer. | 1ETH |
+| **High severity** | Identify a vulnerability in this operation that could lead to data corruption or loss of funds. | 5+ETH |
 {% endtab %}
 {% endtabs %}
 

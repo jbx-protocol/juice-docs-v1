@@ -245,7 +245,7 @@ Rinkeby testnet: _Not yet deployed_
   </tbody>
 </table>
 
-## Read
+## Properties
 
 <table>
   <thead>

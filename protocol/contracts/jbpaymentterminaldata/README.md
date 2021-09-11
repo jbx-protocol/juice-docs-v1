@@ -853,6 +853,8 @@ Rinkeby testnet: _Not yet deployed_
         <ul>
           <li><code>uint256 _projectId</code>
           </li>
+          <li><code>IJBTerminal _terminal</code>
+          </li>
         </ul>
         <p><b>Returns</b>
         </p>
