@@ -208,7 +208,7 @@ Rinkeby testnet: _Not yet deployed_
           <li><code>uint256 count</code>
           </li>
         </ul>
-        <p><a href="read/count.md">more</a>
+        <p><a href="../jbfundingcyclestore/read/count.md">more</a>
         </p>
       </td>
     </tr>

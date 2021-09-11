@@ -52,7 +52,7 @@ function createFor(
 
    _Internal references:_
 
-   * [`count`](../read/count.md)
+   * [`count`](../../jbfundingcyclestore/read/count.md)
 
    ```javascript
    // Increment the count, which will be used as the ID.
