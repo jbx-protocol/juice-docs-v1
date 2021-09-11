@@ -16,7 +16,7 @@ Definition:
 function setHandleOf(uint256 _projectId, bytes32 _handle)
     external
     override
-    requirePermission(ownerOf(_projectId), _projectId, JBOperations.SetHandle)
+    requirePermission(ownerOf(_projectId), _projectId, JBOperations.SetHandle) { ... }
 ```
 
 * `_projectId` is the ID of the project who's handle is being changed.

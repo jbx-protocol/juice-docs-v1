@@ -25,7 +25,7 @@ function transferHandleOf(
         _projectId,
         JBOperations.SetHandle
     )
-    returns (bytes32 handle)
+    returns (bytes32 handle) { ... }
 ```
 
 * `_projectId` is the ID of the project to transfer the handle from.

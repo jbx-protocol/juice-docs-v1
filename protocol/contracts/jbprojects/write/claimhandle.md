@@ -31,7 +31,7 @@ function claimHandle(
         ownerOf(_projectId),
         _projectId,
         JBOperations.ClaimHandle
-    )
+    ) { ... }
 ```
 
 * `_handle` is the handle being claimed.

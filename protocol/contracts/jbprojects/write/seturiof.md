@@ -16,7 +16,7 @@ Definition:
 function setUriOf(uint256 _projectId, string calldata _uri)
     external
     override
-    requirePermission(ownerOf(_projectId), _projectId, JBOperations.SetUri)
+    requirePermission(ownerOf(_projectId), _projectId, JBOperations.SetUri) { ... }
 ```
 
 * `_projectId` is the ID of the project who's URI is being changed.

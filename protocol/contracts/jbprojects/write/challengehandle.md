@@ -6,13 +6,172 @@
 
 {% tabs %}
 {% tab title="Step by step" %}
+**Allows anyone to challenge a project's handle.   
+  
+After one year, the handle can be claimed by the public if the challenge isn't answered by the handle's project. This can be used to make sure a handle belonging to an unattended to project isn't lost forever.**  
+  
+Definition:
 
+```javascript
+function challengeHandle(bytes32 _handle) external override { ... }
+```
+
+* `_handle` is the handle being challenged.
+* The function can be accessed externally by anyone. 
+* The function overrides a function definition from the `IJBProjects` interface.
+* The function doesn't return anything.
+
+1. Check if the handle is being used.  
+
+
+   _Internal references:_
+
+   * [`idFor`](../properties/idfor.md)
+
+   ```javascript
+   // No need to challenge a handle that's not taken.
+   require(
+       idFor[_handle] > 0,
+       "JBProjects::challengeHandle: HANDLE_NOT_TAKEN"
+   );
+   ```
+
+2. Check if the handle is already being challenged.  
+
+
+   _Internal references:_
+
+   * [`challengeExpiryOf`](../properties/challengeexpiryof.md)
+
+   ```javascript
+   // No need to challenge again if a handle is already being challenged.
+   require(
+       challengeExpiryOf[_handle] == 0,
+       "JBProjects::challengeHandle: HANDLE_ALREADY_BEING_CHALLENGED"
+   );
+   ```
+
+3. The challenge will expire one year from the current timestamp. If the `_handle` is not renewed before then, anyone will be able to claim the handle by calling [`claimHandle`](claimhandle.md).  
+
+
+   _Internal references:_
+
+   * [`_SECONDS_IN_YEAR`](../properties/_seconds_in_year.md)
+
+   ```javascript
+   // The challenge will expire in a year, at which point the handle can be claimed if it has yet to be renewed.
+   uint256 _challengeExpiry = block.timestamp + _SECONDS_IN_YEAR;
+   ```
+
+4. Store the `_challengeExipiry` as the `challengeExpiryOf` the provided `_handle`.  
+
+
+   _Internal references:_
+
+   * [`challengeExpiryOf`](../properties/challengeexpiryof.md)
+
+   ```javascript
+   // Store the challenge expiry for the handle.
+   challengeExpiryOf[_handle] = _challengeExpiry;
+   ```
+
+5. Emit a `ChallengeHandle` event with the all relevant parameters.   
+
+
+   _Event references:_
+
+   * [`ChallengeHandle`](../events/challengehandle.md)
+
+   ```javascript
+   emit ChallengeHandle(_handle, _challengeExpiry, msg.sender);
+   ```
 {% endtab %}
 
 {% tab title="Only code" %}
+```javascript
+/** 
+  @notice
+  Allows anyone to challenge a project's handle. After one year, the handle can be claimed by the public if the challenge isn't answered by the handle's project.
+  This can be used to make sure a handle belonging to an unattended to project isn't lost forever.
 
+  @param _handle The handle to challenge.
+*/
+function challengeHandle(bytes32 _handle) external override {
+    // No need to challenge a handle that's not taken.
+    require(
+        idFor[_handle] > 0,
+        "JBProjects::challengeHandle: HANDLE_NOT_TAKEN"
+    );
+
+    // No need to challenge again if a handle is already being challenged.
+    require(
+        challengeExpiryOf[_handle] == 0,
+        "JBProjects::challengeHandle: HANDLE_ALREADY_BEING_CHALLENGED"
+    );
+
+    // The challenge will expire in a year, at which point the handle can be claimed if it has yet to be renewed.
+    uint256 _challengeExpiry = block.timestamp + _SECONDS_IN_YEAR;
+   
+    // Store the challenge expiry for the handle.
+    challengeExpiryOf[_handle] = _challengeExpiry;
+
+    emit ChallengeHandle(_handle, _challengeExpiry, msg.sender);
+}
+```
+{% endtab %}
+
+{% tab title="Errors" %}
+| String | Description |
+| :--- | :--- |
+| **`JBProjects::challengeHandle: HANDLE_NOT_TAKE`** | Thrown if the handle isn't yet taken. |
+| **`JBProjects::challengeHandle: HANDLE_ALREADY_BEING_CHALLENGED`** | Thrown if the handle is already being challenged. |
+{% endtab %}
+
+{% tab title="Events" %}
+<table>
+  <thead>
+    <tr>
+      <th style="text-align:left">Name</th>
+      <th style="text-align:left">Data</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align:left"><b><code>ChallengeHandle</code></b>
+      </td>
+      <td style="text-align:left">
+        <ul>
+          <li><code>bytes32 indexed handle</code> 
+          </li>
+          <li><code>uint256 challengeExpiry</code> 
+          </li>
+          <li><code>address caller</code>
+          </li>
+        </ul>
+        <p><a href="../events/challengehandle.md">more</a>
+        </p>
+      </td>
+    </tr>
+  </tbody>
+</table>
+{% endtab %}
+
+{% tab title="Bug bounty" %}
+| Category | Description | Reward |
+| :--- | :--- | :--- |
+| **Optimization** | Help make this operation more efficient. | 0.5ETH |
+| **Low severity** | Identify a vulnerability in this operation that could lead to an inconvenience for a user of the protocol or for a protocol developer. | 1ETH |
+| **High severity** | Identify a vulnerability in this operation that could lead to data corruption or loss of funds. | 5+ETH |
 {% endtab %}
 {% endtabs %}
+
+
+
+
+
+
+
+
 
 
 
