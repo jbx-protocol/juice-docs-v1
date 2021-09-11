@@ -16,6 +16,7 @@
 * [Terminology](protocol/terminology.md)
 * [Contract APIs](protocol/contracts/README.md)
   * [JBProjects](protocol/contracts/jbprojects/README.md)
+    * [Properties](protocol/contracts/jbprojects/properties.md)
     * [Events](protocol/contracts/jbprojects/events/README.md)
       * [Create](protocol/contracts/jbprojects/events/create.md)
       * [SetHandle](protocol/contracts/jbprojects/events/sethandle.md)

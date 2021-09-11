@@ -188,12 +188,12 @@ Rinkeby testnet: _Not yet deployed_
   </tbody>
 </table>
 
-## Read
+## Properties
 
 <table>
   <thead>
     <tr>
-      <th style="text-align:left">Function</th>
+      <th style="text-align:left">Name</th>
       <th style="text-align:left">Definition</th>
     </tr>
   </thead>
@@ -312,6 +312,19 @@ Rinkeby testnet: _Not yet deployed_
         </p>
       </td>
     </tr>
+  </tbody>
+</table>
+
+## Read
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align:left">Function</th>
+      <th style="text-align:left">Definition</th>
+    </tr>
+  </thead>
+  <tbody>
     <tr>
       <td style="text-align:left"><b><code>exists</code></b>
       </td>

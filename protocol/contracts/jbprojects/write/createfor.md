@@ -118,7 +118,7 @@ function createFor(
        _terminal.directory().setTerminalOf(count, _terminal);
    ```
 
-9. Emit a `Create` event with the all relevant parameters.   
+9. Emit a `Create` event with all relevant parameters.   
 
 
    _Event references:_
