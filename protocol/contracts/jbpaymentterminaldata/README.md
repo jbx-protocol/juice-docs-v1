@@ -508,8 +508,6 @@ Rinkeby testnet: _Not yet deployed_
         <p><b>Params</b>
         </p>
         <ul>
-          <li><code>address _owner</code> 
-          </li>
           <li><code>bytes32 _handle</code> 
           </li>
           <li><code>string _uri</code>
