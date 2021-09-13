@@ -184,6 +184,7 @@
     * [Write](protocol/contracts/jboperatorstore/write/README.md)
       * [setOperator](protocol/contracts/jboperatorstore/write/setoperator.md)
       * [setOperators](protocol/contracts/jboperatorstore/write/setoperators.md)
+      * [\_packedPermissions](protocol/contracts/jboperatorstore/write/_packedpermissions.md)
   * [JBPrices](protocol/contracts/jbprices/README.md)
     * [Events](protocol/contracts/jbprices/events/README.md)
       * [AddFeed](protocol/contracts/jbprices/events/addfeed.md)

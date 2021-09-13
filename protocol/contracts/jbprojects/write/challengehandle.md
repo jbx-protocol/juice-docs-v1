@@ -153,6 +153,8 @@ function challengeHandle(bytes32 _handle) external override {
         <ul>
           <li><code>bytes32 indexed handle</code> 
           </li>
+          <li><code>uint256 indexed projectId</code>
+          </li>
           <li><code>uint256 challengeExpiry</code> 
           </li>
           <li><code>address caller</code>

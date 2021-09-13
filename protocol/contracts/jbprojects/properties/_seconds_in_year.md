@@ -1,5 +1,7 @@
 # \_SECONDS\_IN\_YEAR
 
+Contract: [`JBProjects`](../)
+
 **365 days worth of seconds.**
 
 ```javascript
