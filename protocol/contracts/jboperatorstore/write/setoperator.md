@@ -44,7 +44,7 @@ function setOperator(
 
    _Internal references:_
 
-   * [`permissionsOf`](../read/permissionsof.md)
+   * [`permissionsOf`](../properties/permissionsof.md)
 
    ```javascript
    // Store the new value.

@@ -63,7 +63,7 @@ function setOperators(
 
       _Internal references:_
 
-      * [`permissionsOf`](../read/permissionsof.md)
+      * [`permissionsOf`](../properties/permissionsof.md)
 
       ```text
       // Store the new value.

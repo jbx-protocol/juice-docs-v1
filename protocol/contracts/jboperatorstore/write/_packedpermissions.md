@@ -33,14 +33,14 @@ function _packedPermissions(uint256[] calldata _indexes)
    1. Get a reference to the `_permissionIndex` being iterated on.
 
       ```text
-      uint256 _permissionIndex = _indexes[_i];
+      uint256 _index = _indexes[_i];
       ```
 
-   2. Make sure the `_permissionIndex` is at most 255. 
+   2. Make sure the `_permissionIndex` is one of the 255 indexes in a `uint256`. 
 
       ```text
       require(
-          _permissionIndex <= 255,
+          _index <= 255,
           "JBOperatorStore::_packedPermissions: INDEX_OUT_OF_BOUNDS"
       );
       ```
@@ -49,7 +49,7 @@ function _packedPermissions(uint256[] calldata _indexes)
 
       ```text
       // Turn the bit at the index on.
-      packed |= 1 << _permissionIndex;
+      packed |= 1 << _index;
       ```
 {% endtab %}
 
@@ -69,13 +69,13 @@ function _packedPermissions(uint256[] calldata _indexes)
     returns (uint256 packed)
 {
     for (uint256 _i = 0; _i < _indexes.length; _i++) {
-        uint256 _permissionIndex = _indexes[_i];
+        uint256 _index = _indexes[_i];
         require(
-            _permissionIndex <= 255,
+            _index <= 255,
             "JBOperatorStore::_packedPermissions: INDEX_OUT_OF_BOUNDS"
         );
         // Turn the bit at the index on.
-        packed |= 1 << _permissionIndex;
+        packed |= 1 << _index;
     }
 }
 ```

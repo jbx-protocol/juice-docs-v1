@@ -9,3 +9,5 @@ Contract: [`JBProjects`](../)
 uint256 private constant _SECONDS_IN_YEAR = 31536000;
 ```
 
+* The resulting function is private to this contract.
+

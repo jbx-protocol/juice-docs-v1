@@ -87,7 +87,7 @@ Rinkeby testnet: _Not yet deployed_
           <li><code>uint256 permissions</code>
           </li>
         </ul>
-        <p><a href="read/permissionsof.md">more</a>
+        <p><a href="properties/permissionsof.md">more</a>
         </p>
       </td>
     </tr>

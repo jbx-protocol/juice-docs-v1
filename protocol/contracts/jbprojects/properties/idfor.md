@@ -17,4 +17,6 @@ mapping(bytes32 => uint256) public override idFor;
 ```
 
 * `bytes32` is the handle from which the project ID can be referenced.
+* The resulting view function can be accessed externally by anyone. 
+* The resulting function overrides a function definition from the `IJBProjects` interface.
 

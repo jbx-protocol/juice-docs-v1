@@ -22,6 +22,8 @@ mapping(bytes32 => uint256) public override challengeExpiryOf;
 ```
 
 * `bytes32` is the handle to look for the challenge expiry of.
+* The resulting view function can be accessed externally by anyone. 
+* The resulting function overrides a function definition from the `IJBProjects` interface.
 
 
 
