@@ -32,13 +32,13 @@ function _packedPermissions(uint256[] calldata _indexes)
 
    1. Get a reference to the `_permissionIndex` being iterated on.
 
-      ```text
+      ```javascript
       uint256 _index = _indexes[_i];
       ```
 
    2. Make sure the `_permissionIndex` is one of the 255 indexes in a `uint256`. 
 
-      ```text
+      ```javascript
       require(
           _index <= 255,
           "JBOperatorStore::_packedPermissions: INDEX_OUT_OF_BOUNDS"
@@ -47,7 +47,7 @@ function _packedPermissions(uint256[] calldata _indexes)
 
    3. Flip the bit at the specified index of the `packed` value being returned to indicate a truthy permission.
 
-      ```text
+      ```javascript
       // Turn the bit at the index on.
       packed |= 1 << _index;
       ```
