@@ -8,10 +8,10 @@ Interface: `IJBOperatorStore`
 {% tab title="Step by step" %}
 **Sets permissions for many operators.**
 
-_Only an address can set its own operators.  
-  
-Each element of each provided array should matches up, so each array must be of the same length._   
-  
+\_Only an address can set its own operators.
+
+Each element of each provided array should matches up, so each array must be of the same length.\_
+
 Definition:
 
 ```javascript
@@ -46,46 +46,46 @@ function setOperators(
    for (uint256 _i = 0; _i < _operators.length; _i++) { ... }
    ```
 
-   1. Pack the provided permissions into a `uint256`. Each bit of the resulting value represents whether or not permission has been granted for that index.  
+3. Pack the provided permissions into a `uint256`. Each bit of the resulting value represents whether or not permission has been granted for that index.    
 
 
-      _Internal references:_
+   Internal references:
 
-      * [`_packedPermissons`](_packedpermissions.md)
+   * [`_packedPermissions`](_packedpermissions.md)
 
-      ```javascript
-      // Pack the indexes into a uint256.
-      uint256 _packed = _packedPermissions(_permissionIndexes[_i]);
-      ```
+   ```javascript
+   // Pack the indexes into a uint256.
+   uint256 _packed = _packedPermissions(_permissionIndexes[_i]);
+   ```
 
-   2. Store the packed permissions as the `permissionsOf` the provided `_operator`, on behalf of the `msg.sender`, specifically for the provided `_domain`.  
-
-
-      _Internal references:_
-
-      * [`permissionsOf`](../properties/permissionsof.md)
-
-      ```javascript
-      // Store the new value.
-      permissionsOf[_operators[_i]][msg.sender][_domains[_i]] = _packed;
-      ```
-
-   3. Emit a `SetOperator` event with the all relevant parameters.   
+4. Store the packed permissions as the `permissionsOf` the provided `_operator`, on behalf of the `msg.sender`, specifically for the provided `_domain`.    
 
 
-      _Event references:_
+   _Internal references:_
 
-      * [`SetOperator`](../events/setoperator.md)
+   * [`permissionsOf`](../properties/permissionsof.md)
 
-      ```javascript
-      emit SetOperator(
-          _operators[_i],
-          msg.sender,
-          _domains[_i],
-          _permissionIndexes[_i],
-          _packed
-      );
-      ```
+   ```javascript
+   // Store the new value.
+   permissionsOf[_operators[_i]][msg.sender][_domains[_i]] = _packed;
+   ```
+
+5. Emit a `SetOperator` event with the all relevant parameters.     
+
+
+   _Event references:_
+
+   * [`SetOperator`](../events/setoperator.md)
+
+   ```javascript
+   emit SetOperator(
+       _operators[_i],
+       msg.sender,
+       _domains[_i],
+       _permissionIndexes[_i],
+       _packed
+   );
+   ```
 {% endtab %}
 
 {% tab title="Only code" %}
@@ -93,10 +93,10 @@ function setOperators(
 /** 
   @notice 
   Sets permissions for many operators.
-        
+
   @dev
   Only an address can set its own operators.
-  
+
   @dev
   Each element of each provided array should matches up, so each array must be of the same length. 
 
@@ -138,40 +138,39 @@ function setOperators(
 {% tab title="Errors" %}
 | String | Description |
 | :--- | :--- |
-| **`JBOperatorStore::setOperators: BAD_ARGS`** | Thrown if the arrays passed in are not of the same length.  |
+| **`JBOperatorStore::setOperators: BAD_ARGS`** | Thrown if the arrays passed in are not of the same length. |
 | **`JBOperatorStore::_packedPermissions: INDEX_OUT_OF_BOUNDS`** | Thrown if the provided index is more than whats supported in a `uint256`. |
 {% endtab %}
 
 {% tab title="Events" %}
+| Name | Data |
+| :--- | :--- |
+
+
 <table>
   <thead>
     <tr>
-      <th style="text-align:left">Name</th>
-      <th style="text-align:left">Data</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td style="text-align:left"><b><code>SetOperator</code></b>
-      </td>
-      <td style="text-align:left">
+      <th style="text-align:left"><b><code>SetOperator</code></b>
+      </th>
+      <th style="text-align:left">
         <ul>
-          <li><code>address indexed operator</code> 
+          <li><code>address indexed operator</code>
           </li>
-          <li><code>address indexed account</code> 
+          <li><code>address indexed account</code>
           </li>
-          <li><code>uint256 indexed domain</code> 
+          <li><code>uint256 indexed domain</code>
           </li>
-          <li><code>uint256[] permissionIndexes</code> 
+          <li><code>uint256[] permissionIndexes</code>
           </li>
           <li><code>uint256 packed</code>
           </li>
         </ul>
         <p><a href="../events/setoperator.md">more</a>
         </p>
-      </td>
+      </th>
     </tr>
-  </tbody>
+  </thead>
+  <tbody></tbody>
 </table>
 {% endtab %}
 
@@ -183,10 +182,4 @@ function setOperators(
 | **High severity** | Identify a vulnerability in this operation that could lead to data corruption or loss of funds. | 5+ETH |
 {% endtab %}
 {% endtabs %}
-
-
-
-
-
-
 

@@ -34,31 +34,31 @@ function hasPermissions(
    for (uint256 _i = 0; _i < _permissionIndexes.length; _i++) { ... }
    ```
 
-   1. Get a reference to the `_permissionIndex` being iterated on.
+2. Get a reference to the `_permissionIndex` being iterated on.
 
-      ```javascript
-      uint256 _permissionIndex = _permissionIndexes[_i];
-      ```
+   ```javascript
+   uint256 _permissionIndex = _permissionIndexes[_i];
+   ```
 
-   2. Make sure the `_permissionIndex` is one of the 255 indexes in a `uint256`. 
+3. Make sure the `_permissionIndex` is one of the 255 indexes in a `uint256`. 
 
-      ```javascript
-      require(
-          _permissionIndex <= 255,
-          "JBOperatorStore::hasPermissions: INDEX_OUT_OF_BOUNDS"
-      );
-      ```
+   ```javascript
+   require(
+       _permissionIndex <= 255,
+       "JBOperatorStore::hasPermissions: INDEX_OUT_OF_BOUNDS"
+   );
+   ```
 
-   3. If the bit at the specified permission index of the `permissionsOf` the `_operator` for the specified `_account` and within the specified `_domain` is off, return `false` because all provided permissions are not on.
+4. If the bit at the specified permission index of the `permissionsOf` the `_operator` for the specified `_account` and within the specified `_domain` is off, return `false` because all provided permissions are not on.
 
-      ```javascript
-      if (
-          ((permissionsOf[_operator][_account][_domain] >>
-              _permissionIndex) & 1) == 0
-      ) return false;
-      ```
+   ```javascript
+   if (
+       ((permissionsOf[_operator][_account][_domain] >>
+           _permissionIndex) & 1) == 0
+   ) return false;
+   ```
 
-2. Return `true` since the loop checked all specified permissions without returning `false`.
+5. After the loop, return `true` since the loop checked all specified permissions without returning `false`.
 
    ```javascript
    return true;

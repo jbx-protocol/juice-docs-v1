@@ -30,7 +30,7 @@ function setOperator(
 1. Pack the provided permissions into a `uint256`. Each bit of the resulting value represents whether or not permission has been granted for that index.  
 
 
-   _Internal references:_
+   Internal references:
 
    * [`_packedPermissions`](_packedpermissions.md)
 

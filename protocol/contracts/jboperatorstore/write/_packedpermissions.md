@@ -8,8 +8,8 @@ Interface: `IJBOperatorStore`
 {% tab title="Step by step" %}
 **Converts an array of permission indexes to a packed `uint256`.**
 
-_Only an address can set its own operators._  
-  
+_Only an address can set its own operators._
+
 Definition:
 
 ```javascript
@@ -30,27 +30,27 @@ function _packedPermissions(uint256[] calldata _indexes)
    for (uint256 _i = 0; _i < _indexes.length; _i++) { ... }
    ```
 
-   1. Get a reference to the `_permissionIndex` being iterated on.
+2. Get a reference to the `_permissionIndex` being iterated on.
 
-      ```javascript
-      uint256 _index = _indexes[_i];
-      ```
+   ```javascript
+   uint256 _index = _indexes[_i];
+   ```
 
-   2. Make sure the `_permissionIndex` is one of the 255 indexes in a `uint256`. 
+3. Make sure the `_permissionIndex` is one of the 255 indexes in a `uint256`.
 
-      ```javascript
-      require(
-          _index <= 255,
-          "JBOperatorStore::_packedPermissions: INDEX_OUT_OF_BOUNDS"
-      );
-      ```
+   ```javascript
+   require(
+       _index <= 255,
+       "JBOperatorStore::_packedPermissions: INDEX_OUT_OF_BOUNDS"
+   );
+   ```
 
-   3. Flip the bit at the specified index of the `packed` value being returned to indicate a truthy permission.
+4. Flip the bit at the specified index of the `packed` value being returned to indicate a truthy permission.
 
-      ```javascript
-      // Turn the bit at the index on.
-      packed |= 1 << _index;
-      ```
+   ```javascript
+   // Turn the bit at the index on.
+   packed |= 1 << _index;
+   ```
 {% endtab %}
 
 {% tab title="Only code" %}
