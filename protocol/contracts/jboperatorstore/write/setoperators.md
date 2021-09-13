@@ -42,7 +42,7 @@ function setOperators(
 
 2. Loop through the provided `_operators`.
 
-   ```text
+   ```javascript
    for (uint256 _i = 0; _i < _operators.length; _i++) { ... }
    ```
 
@@ -53,7 +53,7 @@ function setOperators(
 
       * [`_packedPermissons`](_packedpermissions.md)
 
-      ```text
+      ```javascript
       // Pack the indexes into a uint256.
       uint256 _packed = _packedPermissions(_permissionIndexes[_i]);
       ```
@@ -65,7 +65,7 @@ function setOperators(
 
       * [`permissionsOf`](../properties/permissionsof.md)
 
-      ```text
+      ```javascript
       // Store the new value.
       permissionsOf[_operators[_i]][msg.sender][_domains[_i]] = _packed;
       ```
@@ -77,7 +77,7 @@ function setOperators(
 
       * [`SetOperator`](../events/setoperator.md)
 
-      ```text
+      ```javascript
       emit SetOperator(
           _operators[_i],
           msg.sender,
