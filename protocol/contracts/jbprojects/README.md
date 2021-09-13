@@ -51,6 +51,18 @@ Rinkeby testnet: _Not yet deployed_
   </tbody>
 </table>
 
+## Constructor
+
+```javascript
+/** 
+  @param _operatorStore A contract storing operator assignments.
+*/
+constructor(IJBOperatorStore _operatorStore)
+    ERC721("Juicebox project", "JUICEBOX")
+    JBOperatable(_operatorStore)
+{}
+```
+
 ## Events
 
 <table>
