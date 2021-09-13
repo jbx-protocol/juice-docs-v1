@@ -223,7 +223,7 @@ Rinkeby testnet: _Not yet deployed_
         <p><b>Returns</b>
         </p>
         <ul>
-          <li><code>string _uri</code>
+          <li><code>string uri</code>
           </li>
         </ul>
         <p><a href="properties/uriof.md">more</a>
@@ -243,7 +243,7 @@ Rinkeby testnet: _Not yet deployed_
         <p><b>Returns</b>
         </p>
         <ul>
-          <li><code>bytes32 _handle</code>
+          <li><code>bytes32 handle</code>
           </li>
         </ul>
         <p><a href="properties/handleof.md">more</a>
@@ -263,7 +263,7 @@ Rinkeby testnet: _Not yet deployed_
         <p><b>Returns</b>
         </p>
         <ul>
-          <li><code>uint256 _projectId</code>
+          <li><code>uint256 projectId</code>
           </li>
         </ul>
         <p><a href="properties/idfor.md">more</a>
@@ -283,7 +283,7 @@ Rinkeby testnet: _Not yet deployed_
         <p><b>Returns</b>
         </p>
         <ul>
-          <li><code>address _transferAddress</code>
+          <li><code>address transferAddress</code>
           </li>
         </ul>
         <p><a href="properties/transferaddressfor.md">more</a>
@@ -303,7 +303,7 @@ Rinkeby testnet: _Not yet deployed_
         <p><b>Returns</b>
         </p>
         <ul>
-          <li><code>uint256 _challengeExpiryTimestamp</code>
+          <li><code>uint256 challengeExpiryTimestamp</code>
           </li>
         </ul>
         <p><a href="properties/challengeexpiryof.md">more</a>

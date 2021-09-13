@@ -1,7 +1,7 @@
 ---
 description: >-
-  Manages all inflows and outflows of funds into the Juicebox ecosystem. This
-  contract also stores all treasury funds for all projects.
+  Manages all inflows and outflows of ETH into the Juicebox ecosystem. This
+  contract also stores all treasury ETH for all projects.
 ---
 
 # JBPaymentTerminal
