@@ -8,7 +8,7 @@ description: 'Manages ownership over projects, which are represented as ERC-721 
 
 ### Code
 
-{% embed url="https://github.com/jbx-protocol/juice-juicehouse/blob/version/2.1/packages/hardhat/contracts/JBProjects.sol" %}
+{% embed url="https://github.com/jbx-protocol/juice-juicehouse/blob/version/2.2/packages/hardhat/contracts/JBProjects.sol" %}
 
 ### **Addresses**
 
