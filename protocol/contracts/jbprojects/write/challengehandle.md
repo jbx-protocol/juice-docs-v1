@@ -1,8 +1,8 @@
 # challengeHandle
 
-**Contract:**[`JBProjects`](../)
+Contract:[`JBProjects`](../)
 
-**Interface:** `IJBProjects`
+Interface: ****`IJBProjects`
 
 {% tabs %}
 {% tab title="Step by step" %}
@@ -21,7 +21,7 @@ function challengeHandle(bytes32 _handle) external override { ... }
 * The function overrides a function definition from the `IJBProjects` interface.
 * The function doesn't return anything.
 
-1. Check if the handle is being used.  
+1. Get a reference to the project to which the handle being challenged belongs.  
 
 
    _Internal references:_
@@ -29,14 +29,21 @@ function challengeHandle(bytes32 _handle) external override { ... }
    * [`idFor`](../properties/idfor.md)
 
    ```javascript
+   // Get a reference to the ID of the project to which the handle belongs.
+   uint256 _projectId = idFor[_handle];
+   ```
+
+2. Check if the handle is being used.
+
+   ```javascript
    // No need to challenge a handle that's not taken.
    require(
-       idFor[_handle] > 0,
+       _projectId > 0,
        "JBProjects::challengeHandle: HANDLE_NOT_TAKEN"
    );
    ```
 
-2. Check if the handle is already being challenged.  
+3. Check if the handle is already being challenged.  
 
 
    _Internal references:_
@@ -51,7 +58,7 @@ function challengeHandle(bytes32 _handle) external override { ... }
    );
    ```
 
-3. The challenge will expire one year from the current timestamp. If the `_handle` is not renewed before then, anyone will be able to claim the handle by calling [`claimHandle`](claimhandle.md).  
+4. The challenge will expire one year from the current timestamp. If the `_handle` is not renewed before then, anyone will be able to claim the handle by calling [`claimHandle`](claimhandle.md).  
 
 
    _Internal references:_
@@ -63,7 +70,7 @@ function challengeHandle(bytes32 _handle) external override { ... }
    uint256 _challengeExpiry = block.timestamp + _SECONDS_IN_YEAR;
    ```
 
-4. Store the `_challengeExipiry` as the `challengeExpiryOf` the provided `_handle`.  
+5. Store the `_challengeExipiry` as the `challengeExpiryOf` the provided `_handle`.  
 
 
    _Internal references:_
@@ -75,7 +82,7 @@ function challengeHandle(bytes32 _handle) external override { ... }
    challengeExpiryOf[_handle] = _challengeExpiry;
    ```
 
-5. Emit a `ChallengeHandle` event with the all relevant parameters.   
+6. Emit a `ChallengeHandle` event with the all relevant parameters.   
 
 
    _Event references:_
@@ -83,7 +90,7 @@ function challengeHandle(bytes32 _handle) external override { ... }
    * [`ChallengeHandle`](../events/challengehandle.md)
 
    ```javascript
-   emit ChallengeHandle(_handle, _challengeExpiry, msg.sender);
+   emit ChallengeHandle(_handle, _projectId, _challengeExpiry, msg.sender);
    ```
 {% endtab %}
 
@@ -97,9 +104,12 @@ function challengeHandle(bytes32 _handle) external override { ... }
   @param _handle The handle to challenge.
 */
 function challengeHandle(bytes32 _handle) external override {
+    // Get a reference to the ID of the project to which the handle belongs.
+    uint256 _projectId = idFor[_handle];
+    
     // No need to challenge a handle that's not taken.
     require(
-        idFor[_handle] > 0,
+        _projectId > 0,
         "JBProjects::challengeHandle: HANDLE_NOT_TAKEN"
     );
 
@@ -115,7 +125,7 @@ function challengeHandle(bytes32 _handle) external override {
     // Store the challenge expiry for the handle.
     challengeExpiryOf[_handle] = _challengeExpiry;
 
-    emit ChallengeHandle(_handle, _challengeExpiry, msg.sender);
+    emit ChallengeHandle(_handle, _projectId, _challengeExpiry, msg.sender);
 }
 ```
 {% endtab %}

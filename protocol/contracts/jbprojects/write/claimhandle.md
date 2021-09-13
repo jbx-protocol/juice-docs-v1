@@ -1,8 +1,8 @@
 # claimHandle
 
-**Contract:**[`JBProjects`](../)
+Contract:[`JBProjects`](../)
 
-**Interface:** `IJBProjects`
+Interface: ****`IJBProjects`
 
 {% tabs %}
 {% tab title="Step by step" %}
