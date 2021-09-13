@@ -1,16 +1,25 @@
 # uriOf
 
-**The number of projects that have been created using this contract.** 
+Contract: [`JBProjects`](../)
 
-_The count is incremented with each new project created. The resulting ERC-721 token ID for each project is the newly incremented `count`value._  
+Interface: ****`IJBProjects`
+
+**The IPFS CID for each project, which can be used to reference the project's metadata.**
+
+_This is optional for each project._  
 ****  
 Definition:
 
 ```javascript
 /** 
   @notice 
-  Optional mapping for project URIs
+  The IPFS CID for each project, which can be used to reference the project's metadata.
+
+  @dev
+  This is optional for each project.
 */
 mapping(uint256 => string) public override uriOf;
 ```
+
+* `uint256` is the ID of the project to which the URI belongs.
 
