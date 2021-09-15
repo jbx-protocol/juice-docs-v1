@@ -164,7 +164,7 @@ function addFeedFor(uint256 _currency, uint256 _base, AggregatorV3Interface _fee
           </li>
           <li><code>uint256 decimals</code>
           </li>
-          <li><code>AggregatorV3Interface indexed feed</code>
+          <li><code>AggregatorV3Interface feed</code>
           </li>
         </ul>
         <p><a href="../events/addfeed.md">more</a>
