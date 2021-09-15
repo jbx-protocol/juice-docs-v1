@@ -70,7 +70,7 @@ Rinkeby testnet: _Not yet deployed_
         <ul>
           <li><code>uint256 indexed projectId</code> 
           </li>
-          <li><code>uint256 indexed configuration</code> 
+          <li><code>uint256 indexed domain</code> 
           </li>
           <li><code>uint256 indexed group</code> 
           </li>
@@ -86,7 +86,7 @@ Rinkeby testnet: _Not yet deployed_
   </tbody>
 </table>
 
-## Read
+## Properties
 
 <table>
   <thead>
@@ -106,12 +106,25 @@ Rinkeby testnet: _Not yet deployed_
           <li><code>IJBProjects projects</code>
           </li>
         </ul>
-        <p><a href>more</a>
+        <p><a href="properties/projects.md">more</a>
         </p>
       </td>
     </tr>
+  </tbody>
+</table>
+
+## Read
+
+<table>
+  <thead>
     <tr>
-      <td style="text-align:left"><b><code>get</code></b>
+      <th style="text-align:left">Function</th>
+      <th style="text-align:left">Definition</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align:left"><b><code>splitsOf</code></b>
       </td>
       <td style="text-align:left">
         <p><b>Params</b>
@@ -119,7 +132,7 @@ Rinkeby testnet: _Not yet deployed_
         <ul>
           <li><code>uint256 _projectId</code> 
           </li>
-          <li><code>uint256 _configuration</code> 
+          <li><code>uint256 _domain</code> 
           </li>
           <li><code>uint256 _group</code>
           </li>
@@ -130,7 +143,7 @@ Rinkeby testnet: _Not yet deployed_
           <li><code>Split[] splits</code>
           </li>
         </ul>
-        <p><a href>more</a>
+        <p><a href="read/splitsof.md">more</a>
         </p>
       </td>
     </tr>
