@@ -1,5 +1,5 @@
 ---
-description: Manage and normalizes ETH price feeds.
+description: Manages and normalizes price feeds.
 ---
 
 # JBPrices
@@ -44,6 +44,10 @@ Rinkeby testnet: _Not yet deployed_
         <ul>
           <li><code>uint256 indexed currency</code> 
           </li>
+          <li><code>uint256 indexed base</code>
+          </li>
+          <li><code>uint256 decimals</code>
+          </li>
           <li><code>AggregatorV3Interface indexed feed</code>
           </li>
         </ul>
@@ -54,7 +58,7 @@ Rinkeby testnet: _Not yet deployed_
   </tbody>
 </table>
 
-## Read
+## Properties
 
 <table>
   <thead>
@@ -80,7 +84,7 @@ Rinkeby testnet: _Not yet deployed_
           <li><code>uint256 18</code>
           </li>
         </ul>
-        <p><a href="read/targetdecimals.md">more</a>
+        <p><a href="properties/targetdecimals.md">more</a>
         </p>
       </td>
     </tr>
@@ -100,7 +104,7 @@ Rinkeby testnet: _Not yet deployed_
           <li><code>uint256 adjustmentAmount</code>
           </li>
         </ul>
-        <p><a href="read/feeddecimaladjuster.md">more</a>
+        <p><a href="properties/feeddecimaladjuster.md">more</a>
         </p>
       </td>
     </tr>
@@ -113,6 +117,8 @@ Rinkeby testnet: _Not yet deployed_
         <ul>
           <li><code>uint256 _currency</code>
           </li>
+          <li><code>uint256 _base</code>
+          </li>
         </ul>
         <p><b>Returns</b>
         </p>
@@ -120,18 +126,33 @@ Rinkeby testnet: _Not yet deployed_
           <li><code>AggregatorV3Interface feed</code>
           </li>
         </ul>
-        <p><a href="read/feedfor.md">more</a>
+        <p><a href="properties/feedfor.md">more</a>
         </p>
       </td>
     </tr>
+  </tbody>
+</table>
+
+## Read
+
+<table>
+  <thead>
     <tr>
-      <td style="text-align:left"><b><code>getETHPriceFor</code></b>
+      <th style="text-align:left">Function</th>
+      <th style="text-align:left">Definition</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align:left"><b><code>priceFor</code></b>
       </td>
       <td style="text-align:left">
         <p><b>Params</b>
         </p>
         <ul>
           <li><code>uint256 _currency</code>
+          </li>
+          <li><code>uint256 _base</code>
           </li>
         </ul>
         <p><b>Returns</b>
@@ -171,6 +192,8 @@ Rinkeby testnet: _Not yet deployed_
         </p>
         <ul>
           <li><code>uint256 _currency</code>
+          </li>
+          <li><code>uint256 _base</code>
           </li>
           <li><code>AggregatorV3Interface _feed</code> 
           </li>

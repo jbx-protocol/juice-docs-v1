@@ -102,7 +102,7 @@
       <td style="text-align:left"><b><code>JBPrices</code></b>
       </td>
       <td style="text-align:left">
-        <p>Manage and normalizes ETH price feeds.</p>
+        <p>Manages and normalizes price feeds.</p>
         <p></p>
         <p><a href="jbprices/">View API</a>
         </p>
