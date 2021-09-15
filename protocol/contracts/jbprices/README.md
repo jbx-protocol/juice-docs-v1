@@ -89,7 +89,7 @@ Rinkeby testnet: _Not yet deployed_
       </td>
     </tr>
     <tr>
-      <td style="text-align:left"><b><code>feedDecimalAdjuster</code></b>
+      <td style="text-align:left"><b><code>feedDecimalAdjusterFor</code></b>
       </td>
       <td style="text-align:left">
         <p><b>Params</b>

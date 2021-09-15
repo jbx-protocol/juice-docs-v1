@@ -70,11 +70,11 @@ function priceFor(uint256 _currency, uint256 _base)
 
    Internal references:
 
-   * [`targetDecimals`](../properties/targetdecimals.md)
+   * [`feedDecimalAdjusterFor`](../properties/feeddecimaladjuster.md)
 
    ```javascript
    // Multiply the price by the decimal adjuster to get the normalized result.
-   return uint256(_price) * feedDecimalAdjuster[_currency][_base]
+   return uint256(_price) * feedDecimalAdjusterFor[_currency][_base]
    ```
 {% endtab %}
 

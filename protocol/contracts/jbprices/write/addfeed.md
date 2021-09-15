@@ -74,11 +74,12 @@ function addFeedFor(uint256 _currency, uint256 _base, AggregatorV3Interface _fee
 
    Internal references:
 
+   * [`feedDecimalAdjusterFor`](../properties/feeddecimaladjuster.md)
    * [`targetDecimals`](../properties/targetdecimals.md)
 
    ```javascript
    // Set the decimal adjuster for the currency.
-   feedDecimalAdjuster[_currency][_base] = 10**(targetDecimals - _decimals);
+   feedDecimalAdjusterFor[_currency][_base] = 10**(targetDecimals - _decimals);
    ```
 
 6. Emit an `AddFeed` event with the all relevant parameters.   
@@ -129,7 +130,7 @@ function addFeedFor(uint256 _currency, uint256 _base, AggregatorV3Interface _fee
     feedFor[_currency][_base] = _feed;
 
     // Set the decimal adjuster for the currency.
-    feedDecimalAdjuster[_currency][_base] = 10**(targetDecimals - _decimals);
+    feedDecimalAdjusterFor[_currency][_base] = 10**(targetDecimals - _decimals);
 
     emit AddFeed(_currency, _base, _decimals, _feed);
 }
