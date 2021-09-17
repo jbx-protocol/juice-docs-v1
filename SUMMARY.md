@@ -9,6 +9,7 @@
 ## 📚Resources
 
 * [FAQ](resources/faq.md)
+* [Contract Addresses](resources/contract-addresses.md)
 
 ## 👾Protocol
 
