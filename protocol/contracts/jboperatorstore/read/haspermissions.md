@@ -49,7 +49,12 @@ function hasPermissions(
    );
    ```
 
-4. If the bit at the specified permission index of the `permissionsOf` the `_operator` for the specified `_account` and within the specified `_domain` is off, return `false` because all provided permissions are not on.
+4. If the bit at the specified permission index of the `permissionsOf` the `_operator` for the specified `_account` and within the specified `_domain` is off, return `false` because all provided permissions are not on.  
+
+
+   Internal references:
+
+   * [`permissionsOf`](../properties/permissionsof.md)
 
    ```javascript
    if (

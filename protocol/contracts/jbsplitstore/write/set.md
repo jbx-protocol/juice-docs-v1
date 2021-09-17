@@ -89,7 +89,12 @@ function set(
    require(_includesLocked, "JBSplitsStore::set: SOME_LOCKED");
    ```
 
-6. After the loop, delete the current splits from storage so we can repopulate them.
+6. After the loop, delete the current splits from storage so we can repopulate them.  
+
+
+   Internal references:
+
+   * [`_splitsOf`](../properties/_splitsof.md)
 
    ```javascript
    // Delete from storage so splits can be repopulated.
@@ -147,7 +152,12 @@ function set(
     );
     ```
 
-13. Push the split onto the stored `_splits` value. 
+13. Push the split onto the stored `_splits` value.   
+
+
+    Internal references:
+
+    * [`_splitsOf`](../properties/_splitsof.md)
 
     ```javascript
     // Push the new split into the project's list of splits.

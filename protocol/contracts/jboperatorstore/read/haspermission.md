@@ -37,7 +37,12 @@ function hasPermission(
    );
    ```
 
-2. Return whether or not the bit at the specified permission index of the `permissionsOf` the `_operator` for the specified `_account` and within the specified `_domain` is on.
+2. Return whether or not the bit at the specified permission index of the `permissionsOf` the `_operator` for the specified `_account` and within the specified `_domain` is on.  
+
+
+   Internal references:
+
+   * [`permissionsOf`](../properties/permissionsof.md)
 
    ```javascript
    return ((permissionsOf[_operator][_account][_domain] >> _permissionIndex) &
