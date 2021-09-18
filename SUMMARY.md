@@ -206,6 +206,10 @@
     * [Read](protocol/contracts/jboperatable/read/README.md)
       * [operatorStore](protocol/contracts/jboperatable/read/operatorstore.md)
 
+## 🗳Governance
+
+* [Proposal Process](governance/proposal-process.md)
+
 ## Contracts
 
 * [TicketBooth](contracts/ticketbooth/README.md)
