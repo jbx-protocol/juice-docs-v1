@@ -14,14 +14,14 @@ Definition:
 
 ```javascript
 function setHandleOf(uint256 _projectId, bytes32 _handle)
-    external
-    override
-    requirePermission(ownerOf(_projectId), _projectId, JBOperations.SetHandle) { ... }
+  external
+  override
+  requirePermission(ownerOf(_projectId), _projectId, JBOperations.SET_HANDLE) { ... }
 ```
 
 * `_projectId` is the ID of the project who's handle is being changed.
 * `_handle` is the new unique handle for the project.
-* Through the [`requirePermission`](../../jboperatable/modifiers/requirepermission.md) modifier, the function is only accessible by the project's owner, or from an operator that has been given the `JBOperations.SetHandle` permission by the project owner for the provided `_projectId`.
+* Through the [`requirePermission`](../../jboperatable/modifiers/requirepermission.md) modifier, the function is only accessible by the project's owner, or from an operator that has been given the `JBOperations.SET_HANDLE` permission by the project owner for the provided `_projectId`.
 * The function overrides a function definition from the `IJBProjects` interface.
 * The function doesn't return anything.
 
@@ -29,7 +29,7 @@ function setHandleOf(uint256 _projectId, bytes32 _handle)
 
    ```javascript
    // Handle must exist.
-   require(_handle != bytes32(0), "JBProjects::setHandleOf: EMPTY_HANDLE");
+   require(_handle != bytes32(0), "0x08: EMPTY_HANDLE");
    ```
 
 2. Check that the `_handle` is unique. This is done by making sure there isn't yet an `idFor` the handle, and making sure it isn't currently being transferred to an address.  
@@ -41,12 +41,8 @@ function setHandleOf(uint256 _projectId, bytes32 _handle)
    * [`transferAddressFor`](../properties/transferaddressfor.md)
 
    ```javascript
-
    // Handle must be unique.
-   require(
-       idFor[_handle] == 0 && transferAddressFor[_handle] == address(0),
-       "JBProjects::setHandleOf: HANDLE_TAKEN"
-   );
+   require(idFor[_handle] == 0 && transferAddressFor[_handle] == address(0), '0x09: HANDLE_TAKEN');
    ```
 
 3. Free up the mapping from the current`handleOf` the project so that others can use it.  
@@ -109,32 +105,28 @@ function setHandleOf(uint256 _projectId, bytes32 _handle)
 
   @param _projectId The ID of the project who's handle is being changed.
   @param _handle The new unique handle for the project.
-  
 */
 function setHandleOf(uint256 _projectId, bytes32 _handle)
-    external
-    override
-    requirePermission(ownerOf(_projectId), _projectId, JBOperations.SetHandle)
+  external
+  override
+  requirePermission(ownerOf(_projectId), _projectId, JBOperations.SET_HANDLE)
 {
-    // Handle must exist.
-    require(_handle != bytes32(0), "JBProjects::setHandleOf: EMPTY_HANDLE");
+  // Handle must exist.
+  require(_handle != bytes32(0), '0x08: EMPTY_HANDLE');
 
-    // Handle must be unique.
-    require(
-        idFor[_handle] == 0 && transferAddressFor[_handle] == address(0),
-        "JBProjects::setHandleOf: HANDLE_TAKEN"
-    );
+  // Handle must be unique.
+  require(idFor[_handle] == 0 && transferAddressFor[_handle] == address(0), '0x09: HANDLE_TAKEN');
 
-    // Register the change in the resolver.
-    idFor[handleOf[_projectId]] = 0;
+  // Register the change in the resolver.
+  idFor[handleOf[_projectId]] = 0;
 
-    // Store the handle for the project ID.
-    idFor[_handle] = _projectId;
-    
-    // Store the project ID for the handle.
-    handleOf[_projectId] = _handle;
+  // Store the handle for the project ID.
+  handleOf[_projectId] = _handle;
 
-    emit SetHandle(_projectId, _handle, msg.sender);
+  // Store the project ID for the handle.
+  idFor[_handle] = _projectId;
+
+  emit SetHandle(_projectId, _handle, msg.sender);
 }
 ```
 {% endtab %}
@@ -142,8 +134,8 @@ function setHandleOf(uint256 _projectId, bytes32 _handle)
 {% tab title="Errors" %}
 | String | Description |
 | :--- | :--- |
-| **`JBProjects::setHandleOf: EMPTY_HANDLE`** | Thrown if the provided handle is empty |
-| **`JBProjects::setHandleOf: HANDLE_TAKEN`** | Thrown if the provided handle is already in use. |
+| **`0x08: EMPTY_HANDLE`** | Thrown if the provided handle is empty |
+| **`0x09: HANDLE_TAKEN`** | Thrown if the provided handle is already in use. |
 {% endtab %}
 
 {% tab title="Events" %}

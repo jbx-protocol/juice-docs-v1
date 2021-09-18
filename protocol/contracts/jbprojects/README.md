@@ -58,8 +58,8 @@ Rinkeby testnet: _Not yet deployed_
   @param _operatorStore A contract storing operator assignments.
 */
 constructor(IJBOperatorStore _operatorStore)
-    ERC721("Juicebox project", "JUICEBOX")
-    JBOperatable(_operatorStore)
+  ERC721('Juicebox project', 'JUICEBOX')
+  JBOperatable(_operatorStore)
 {}
 ```
 

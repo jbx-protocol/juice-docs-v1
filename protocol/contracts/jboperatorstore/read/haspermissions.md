@@ -12,10 +12,10 @@ Definition:
 
 ```javascript
 function hasPermissions(
-    address _operator,
-    address _account,
-    uint256 _domain,
-    uint256[] calldata _permissionIndexes
+  address _operator,
+  address _account,
+  uint256 _domain,
+  uint256[] calldata _permissionIndexes
 ) external view override returns (bool) { ... }
 ```
 
@@ -45,7 +45,7 @@ function hasPermissions(
    ```javascript
    require(
        _permissionIndex <= 255,
-       "JBOperatorStore::hasPermissions: INDEX_OUT_OF_BOUNDS"
+       "0x02: INDEX_OUT_OF_BOUNDS"
    );
    ```
 
@@ -57,10 +57,8 @@ function hasPermissions(
    * [`permissionsOf`](../properties/permissionsof.md)
 
    ```javascript
-   if (
-       ((permissionsOf[_operator][_account][_domain] >>
-           _permissionIndex) & 1) == 0
-   ) return false;
+   if (((permissionsOf[_operator][_account][_domain] >> _permissionIndex) & 1) == 0)
+     return false;
    ```
 
 5. After the loop, return `true` since the loop checked all specified permissions without returning `false`.
@@ -86,25 +84,20 @@ function hasPermissions(
   @return Whether the operator has all specified permissions.
 */
 function hasPermissions(
-    address _operator,
-    address _account,
-    uint256 _domain,
-    uint256[] calldata _permissionIndexes
+  address _operator,
+  address _account,
+  uint256 _domain,
+  uint256[] calldata _permissionIndexes
 ) external view override returns (bool) {
-    for (uint256 _i = 0; _i < _permissionIndexes.length; _i++) {
-        uint256 _permissionIndex = _permissionIndexes[_i];
+  for (uint256 _i = 0; _i < _permissionIndexes.length; _i++) {
+    uint256 _permissionIndex = _permissionIndexes[_i];
 
-        require(
-            _permissionIndex <= 255,
-            "JBOperatorStore::hasPermissions: INDEX_OUT_OF_BOUNDS"
-        );
+    require(_permissionIndex <= 255, '0x02 INDEX_OUT_OF_BOUNDS');
 
-        if (
-            ((permissionsOf[_operator][_account][_domain] >>
-                _permissionIndex) & 1) == 0
-        ) return false;
-    }
-    return true;
+    if (((permissionsOf[_operator][_account][_domain] >> _permissionIndex) & 1) == 0)
+      return false;
+  }
+  return true;
 }
 ```
 {% endtab %}
@@ -112,7 +105,7 @@ function hasPermissions(
 {% tab title="Errors" %}
 | String | Description |
 | :--- | :--- |
-| **`JBOperatorStore::hasPermission: INDEX_OUT_OF_BOUNDS`** | Thrown if the provided index is more than whats supported in a `uint256`. |
+| **`0x02: INDEX_OUT_OF_BOUNDS`** | Thrown if the provided index is more than whats supported in a `uint256`. |
 {% endtab %}
 
 {% tab title="Bug bounty" %}

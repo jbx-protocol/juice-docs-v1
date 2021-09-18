@@ -16,29 +16,21 @@ Definition:
 
 ```javascript
 function claimHandle(
-    bytes32 _handle,
-    address _transferAddress,
-    uint256 _projectId
+  bytes32 _handle,
+  address _transferAddress,
+  uint256 _projectId
 )
-    external
-    override
-    requirePermissionAllowingWildcardDomain(
-        _transferAddress,
-        _projectId,
-        JBOperations.ClaimHandle
-    )
-    requirePermission(
-        ownerOf(_projectId),
-        _projectId,
-        JBOperations.ClaimHandle
-    ) { ... }
+  external
+  override
+  requirePermissionAllowingWildcardDomain(_transferAddress, _projectId, JBOperations.CLAIM_HANDLE)
+  requirePermission(ownerOf(_projectId), _projectId, JBOperations.CLAIM_HANDLE) { ... }
 ```
 
 * `_handle` is the handle being claimed.
 * `_transferAddress` is the address to which the handle has been transferred, which can now assign the handle to a project.
 * `_projectId` is the ID of the project to assign to the claimed handle.
-* Through the [`requirePermissionAllowingWildcardDomain`](../../jboperatable/modifiers/requirepermissionallowingwildcarddomain.md) modifier, the function is only accessible by the `_transferAddress`, from an operator that has been given the `JBOperations.ClaimHandle` permission by the `_transferAddress` for the provided `_projectId`, or from an operator that has been given the `JBOperations.ClaimHandle` permission by the `_transferAddress`for no specific domain.
-* Through the [`requirePermission`](../../jboperatable/modifiers/requirepermission.md) modifier, the function is only accessible by the project's owner, or from an operator that has been given the `JBOperations.ClaimHandle` permission by the project owner for the provided `_projectId`.
+* Through the [`requirePermissionAllowingWildcardDomain`](../../jboperatable/modifiers/requirepermissionallowingwildcarddomain.md) modifier, the function is only accessible by the `_transferAddress`, from an operator that has been given the `JBOperations.CLAIM_HANDLE` permission by the `_transferAddress` for the provided `_projectId`, or from an operator that has been given the `JBOperations.CLAIM_HANDLE` permission by the `_transferAddress`for no specific domain.
+* Through the [`requirePermission`](../../jboperatable/modifiers/requirepermission.md) modifier, the function is only accessible by the project's owner, or from an operator that has been given the `JBOperations.CLAIM_HANDLE` permission by the project owner for the provided `_projectId`.
 * The function overrides a function definition from the `IJBProjects` interface.
 * The function doesn't return anything.
 
@@ -54,10 +46,9 @@ function claimHandle(
    // The handle must have been transfered to the specified address,
    // or the handle challange must have expired before being renewed.
    require(
-       transferAddressFor[_handle] == _transferAddress ||
-           (challengeExpiryOf[_handle] > 0 &&
-               block.timestamp > challengeExpiryOf[_handle]),
-       "JBProjects::claimHandle: UNAUTHORIZED"
+     transferAddressFor[_handle] == _transferAddress ||
+       (challengeExpiryOf[_handle] > 0 && block.timestamp > challengeExpiryOf[_handle]),
+     '0x0c: UNAUTHORIZED'
    );
    ```
 
@@ -150,48 +141,39 @@ function claimHandle(
   @param _projectId The ID of the project to assign to the claimed handle.
 */
 function claimHandle(
-    bytes32 _handle,
-    address _transferAddress,
-    uint256 _projectId
+  bytes32 _handle,
+  address _transferAddress,
+  uint256 _projectId
 )
-    external
-    override
-    requirePermissionAllowingWildcardDomain(
-        _transferAddress,
-        _projectId,
-        JBOperations.ClaimHandle
-    )
-    requirePermission(
-        ownerOf(_projectId),
-        _projectId,
-        JBOperations.ClaimHandle
-    )
+  external
+  override
+  requirePermissionAllowingWildcardDomain(_transferAddress, _projectId, JBOperations.CLAIM_HANDLE)
+  requirePermission(ownerOf(_projectId), _projectId, JBOperations.CLAIM_HANDLE)
 {
-    // The handle must have been transfered to the specified address,
-    // or the handle challange must have expired before being renewed.
-    require(
-        transferAddressFor[_handle] == _transferAddress ||
-            (challengeExpiryOf[_handle] > 0 &&
-                block.timestamp > challengeExpiryOf[_handle]),
-        "JBProjects::claimHandle: UNAUTHORIZED"
-    );
+  // The handle must have been transfered to the specified address,
+  // or the handle challange must have expired before being renewed.
+  require(
+    transferAddressFor[_handle] == _transferAddress ||
+      (challengeExpiryOf[_handle] > 0 && block.timestamp > challengeExpiryOf[_handle]),
+    '0x0c: UNAUTHORIZED'
+  );
 
-    // Remove the project ID for the current handle of the specified project.
-    idFor[handleOf[_projectId]] = 0;
+  // Remove the project ID for the current handle of the specified project.
+  idFor[handleOf[_projectId]] = 0;
 
-    // Set the project ID for the provided handle to be the specified project.
-    idFor[_handle] = _projectId;
+  // Set the project ID for the provided handle to be the specified project.
+  idFor[_handle] = _projectId;
 
-    // Set the new handle.
-    handleOf[_projectId] = _handle;
+  // Set the new handle.
+  handleOf[_projectId] = _handle;
 
-    // Set the handle as not being transferred.
-    transferAddressFor[_handle] = address(0);
+  // Set the handle as not being transferred.
+  transferAddressFor[_handle] = address(0);
 
-    // Reset the challenge to 0.
-    challengeExpiryOf[_handle] = 0;
+  // Reset the challenge to 0.
+  challengeExpiryOf[_handle] = 0;
 
-    emit ClaimHandle(_projectId, _transferAddress, _handle, msg.sender);
+  emit ClaimHandle(_projectId, _transferAddress, _handle, msg.sender);
 }
 ```
 {% endtab %}
@@ -199,7 +181,7 @@ function claimHandle(
 {% tab title="Errors" %}
 | String | Description |
 | :--- | :--- |
-| **`JBProjects::claimHandle: UNAUTHORIZED`** | Thrown if the message sender does not have access to the function using the specified parameters. |
+| **`0x0c: UNAUTHORIZED`** | Thrown if the message sender does not have access to the function using the specified parameters. |
 {% endtab %}
 
 {% tab title="Events" %}

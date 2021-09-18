@@ -8,11 +8,11 @@ Definition:
 
 ```javascript
 event Create(
-    uint256 indexed projectId,
-    address indexed owner,
-    bytes32 indexed handle,
-    string uri,
-    address caller
+  uint256 indexed projectId,
+  address indexed owner,
+  bytes32 indexed handle,
+  string uri,
+  address caller
 );
 ```
 

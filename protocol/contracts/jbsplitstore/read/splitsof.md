@@ -12,9 +12,9 @@ Definition:
 
 ```javascript
 function splitsOf(
-    uint256 _projectId,
-    uint256 _domain,
-    uint256 _group
+  uint256 _projectId,
+  uint256 _domain,
+  uint256 _group
 ) external view override returns (Split[] memory) { ... }
 ```
 
@@ -49,13 +49,13 @@ function splitsOf(
   @param _group The identifying group of the splits.
 
   @return An array of all splits for the project.
- */
+*/
 function splitsOf(
-    uint256 _projectId,
-    uint256 _domain,
-    uint256 _group
+  uint256 _projectId,
+  uint256 _domain,
+  uint256 _group
 ) external view override returns (Split[] memory) {
-    return _splitsOf[_projectId][_domain][_group];
+  return _splitsOf[_projectId][_domain][_group];
 }
 ```
 {% endtab %}

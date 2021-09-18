@@ -92,32 +92,6 @@ Rinkeby testnet: _Not yet deployed_
       </td>
     </tr>
     <tr>
-      <td style="text-align:left"><b><code>hasPermission</code></b>
-      </td>
-      <td style="text-align:left">
-        <p><b>Params</b>
-        </p>
-        <ul>
-          <li><code>address _operator</code> 
-          </li>
-          <li><code>address _account</code> 
-          </li>
-          <li><code>uint256 _domain</code> 
-          </li>
-          <li><code>uint256 _permissionIndex</code>
-          </li>
-        </ul>
-        <p><b>Returns</b>
-        </p>
-        <ul>
-          <li><code>bool hasPermission</code>
-          </li>
-        </ul>
-        <p><a href="read/haspermission.md">more</a>
-        </p>
-      </td>
-    </tr>
-    <tr>
       <td style="text-align:left"><b><code>hasPermissions</code></b>
       </td>
       <td style="text-align:left">
@@ -157,35 +131,13 @@ Rinkeby testnet: _Not yet deployed_
   </thead>
   <tbody>
     <tr>
-      <td style="text-align:left"><b><code>setOperator</code></b>
-      </td>
-      <td style="text-align:left">
-        <p><b>Params</b>
-        </p>
-        <ul>
-          <li><code>address _operator</code> 
-          </li>
-          <li><code>uint256 _domain</code> 
-          </li>
-          <li><code>uint256[] _permissionIndexes</code>
-          </li>
-        </ul>
-        <p><a href="write/setoperator.md">more</a>
-        </p>
-      </td>
-    </tr>
-    <tr>
       <td style="text-align:left"><b><code>setOperators</code></b>
       </td>
       <td style="text-align:left">
         <p><b>Params</b>
         </p>
         <ul>
-          <li><code>address[] _operators</code> 
-          </li>
-          <li><code>uint256[] _domains</code> 
-          </li>
-          <li><code>uint256[][] _permissionIndexes</code>
+          <li><code>OperatorData[] _operatorData</code> 
           </li>
         </ul>
         <p><a href="write/setoperators.md">more</a>

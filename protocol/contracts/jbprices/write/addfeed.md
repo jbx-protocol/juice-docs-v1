@@ -13,10 +13,11 @@ _Current feeds can't be modified._
 Definition:
 
 ```javascript
-function addFeedFor(uint256 _currency, uint256 _base, AggregatorV3Interface _feed)
-    external
-    override
-    onlyOwner { ... }
+function addFeedFor(
+  uint256 _currency,
+  uint256 _base,
+  AggregatorV3Interface _feed
+) external override onlyOwner { ... }
 ```
 
 * `_currency` is the currency that the price feed is for.
@@ -35,9 +36,7 @@ function addFeedFor(uint256 _currency, uint256 _base, AggregatorV3Interface _fee
 
    ```javascript
    // There can't already be a feed for the specified currency.
-   require(feedFor[_currency][_base] == AggregatorV3Interface(address(0)),
-       "Prices::addFeedFor: ALREADY_EXISTS"
-   );
+   require(feedFor[_currency][_base] == AggregatorV3Interface(address(0)), '0x05: ALREADY_EXISTS');
    ```
 
 2. Get a reference to how many decimal places the provided price feed uses in the quoted rates. 
@@ -52,14 +51,11 @@ function addFeedFor(uint256 _currency, uint256 _base, AggregatorV3Interface _fee
 
    Internal references:
 
-   * [`targetDecimals`](../properties/targetdecimals.md)
+   * [`TARGET_DECIMALS`](../properties/targetdecimals.md)
 
    ```javascript
    // Decimals should be less than or equal to the target number of decimals.
-   require(
-       _decimals <= targetDecimals,
-       "Prices::addFeedFor: BAD_DECIMALS"
-   );
+   require(_decimals <= TARGET_DECIMALS, '0x06: BAD_DECIMALS');
    ```
 
 4. Store the provided feed for the `_currency` `_base` pair.
@@ -69,17 +65,17 @@ function addFeedFor(uint256 _currency, uint256 _base, AggregatorV3Interface _fee
    feedFor[_currency][_base] = _feed;
    ```
 
-5. Store a value that price feed results will be multiplied by in order to always be reported with `targetDecimals` fidelity. The prices from this contract are always reported with `targetDecimals` fidelity – if the provided feed reports with fewer decimals, the contract must know how to adjust the price feed to normalize results.  
+5. Store a value that price feed results will be multiplied by in order to always be reported with `TARGET_DECIMALS` fidelity. The prices from this contract are always reported with `TARGET_DECIMALS` fidelity – if the provided feed reports with fewer decimals, the contract must know how to adjust the price feed to normalize results.  
 
 
    Internal references:
 
    * [`feedDecimalAdjusterFor`](../properties/feeddecimaladjuster.md)
-   * [`targetDecimals`](../properties/targetdecimals.md)
+   * [`TARGET_DECIMALS`](../properties/targetdecimals.md)
 
    ```javascript
    // Set the decimal adjuster for the currency.
-   feedDecimalAdjusterFor[_currency][_base] = 10**(targetDecimals - _decimals);
+   feedDecimalAdjusterFor[_currency][_base] = 10**(TARGET_DECIMALS - _decimals);
    ```
 
 6. Emit an `AddFeed` event with the all relevant parameters.   
@@ -98,7 +94,7 @@ function addFeedFor(uint256 _currency, uint256 _base, AggregatorV3Interface _fee
 ```javascript
 /** 
   @notice 
-   Add a price feed for a currency in terms of the provided base currency.
+  Add a price feed for a currency in terms of the provided base currency.
 
   @dev
   Current feeds can't be modified.
@@ -107,32 +103,27 @@ function addFeedFor(uint256 _currency, uint256 _base, AggregatorV3Interface _fee
   @param _base The currency that the price feed is based on.
   @param _feed The price feed being added.
 */
-function addFeedFor(uint256 _currency, uint256 _base, AggregatorV3Interface _feed)
-    external
-    override
-    onlyOwner
-{
-    // There can't already be a feed for the specified currency.
-    require(feedFor[_currency][_base] == AggregatorV3Interface(address(0)),
-        "Prices::addFeedFor: ALREADY_EXISTS"
-    );
+function addFeedFor(
+  uint256 _currency,
+  uint256 _base,
+  AggregatorV3Interface _feed
+) external override onlyOwner {
+  // There can't already be a feed for the specified currency.
+  require(feedFor[_currency][_base] == AggregatorV3Interface(address(0)), '0x05: ALREADY_EXISTS');
 
-    // Get a reference to the number of decimals the feed uses.
-    uint256 _decimals = _feed.decimals();
+  // Get a reference to the number of decimals the feed uses.
+  uint256 _decimals = _feed.decimals();
 
-    // Decimals should be less than or equal to the target number of decimals.
-    require(
-        _decimals <= targetDecimals,
-        "Prices::addFeedFor: BAD_DECIMALS"
-    );
+  // Decimals should be less than or equal to the target number of decimals.
+  require(_decimals <= targetDecimals, '0x06: BAD_DECIMALS');
 
-    // Set the feed.
-    feedFor[_currency][_base] = _feed;
+  // Set the feed.
+  feedFor[_currency][_base] = _feed;
 
-    // Set the decimal adjuster for the currency.
-    feedDecimalAdjusterFor[_currency][_base] = 10**(targetDecimals - _decimals);
+  // Set the decimal adjuster for the currency.
+  feedDecimalAdjusterFor[_currency][_base] = 10**(targetDecimals - _decimals);
 
-    emit AddFeed(_currency, _base, _decimals, _feed);
+  emit AddFeed(_currency, _base, _decimals, _feed);
 }
 ```
 {% endtab %}
@@ -140,8 +131,8 @@ function addFeedFor(uint256 _currency, uint256 _base, AggregatorV3Interface _fee
 {% tab title="Errors" %}
 | String | Description |
 | :--- | :--- |
-| **`JBPrices::addFeedFor: ALREADY_EXISTS`** | Thrown if the specified currency already has an associated price feed. |
-| **`JBPrices::addFeedFor: BAD_DECIMALS`** | Thrown if the amount of decimals specified in the provided feed contract is greater than the [`targetDecimals`](../properties/targetdecimals.md). |
+| **`0x05: ALREADY_EXISTS`** | Thrown if the specified currency already has an associated price feed. |
+| **`0x06: BAD_DECIMALS`** | Thrown if the amount of decimals specified in the provided feed contract is greater than the [`targetDecimals`](../properties/targetdecimals.md). |
 {% endtab %}
 
 {% tab title="Events" %}

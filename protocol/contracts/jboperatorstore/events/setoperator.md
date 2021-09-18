@@ -2,18 +2,17 @@
 
 Emitted from:
 
-* [`setOperator`](../write/setoperator.md)
 * [`setOperators`](../write/setoperators.md)
 
 Definition:
 
 ```javascript
 event SetOperator(
-    address indexed operator,
-    address indexed account,
-    uint256 indexed domain,
-    uint256[] permissionIndexes,
-    uint256 packed
+  address indexed operator,
+  address indexed account,
+  uint256 indexed domain,
+  uint256[] permissionIndexes,
+  uint256 packed
 );
 ```
 

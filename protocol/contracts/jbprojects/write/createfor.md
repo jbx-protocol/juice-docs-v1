@@ -14,9 +14,9 @@ Definition:
 
 ```javascript
 function createFor(
-    address _owner,
-    bytes32 _handle,
-    string calldata _uri
+  address _owner,
+  bytes32 _handle,
+  string calldata _uri
 ) external override returns (uint256) { ... }
 ```
 
@@ -31,7 +31,7 @@ function createFor(
 
    ```javascript
    // Handle must exist.
-   require(_handle != bytes32(0), "JBProjects::createFor: EMPTY_HANDLE");
+   require(_handle != bytes32(0), '0x06: EMPTY_HANDLE');
    ```
 
 2. Check that the `_handle` is unique. This is done by making sure there isn't yet an `idFor` the handle, and making sure it isn't currently being transferred to an address.  
@@ -44,11 +44,7 @@ function createFor(
 
    ```javascript
    // Handle must be unique.
-   require(
-       idFor[_handle] == 0 &&
-           transferAddressFor[_handle] == address(0),
-       "JBProjects::createFor: HANDLE_TAKEN"
-   );
+   require(idFor[_handle] == 0 && transferAddressFor[_handle] == address(0), '0x07: HANDLE_TAKEN');
    ```
 
 3. Increment the count to include the new project being created.   
@@ -127,51 +123,47 @@ function createFor(
 {% tab title="Only code" %}
 ```javascript
 /**
-    @notice 
-    Create a new project for the specified owner.
+  @notice 
+  Create a new project for the specified owner, which mints an NFT (ERC-721) into their wallet.
 
-    @dev 
-    Anyone can create a project on an owner's behalf.
+  @dev 
+  Anyone can create a project on an owner's behalf.
 
-    @param _owner The address that will be the owner of the project.
-    @param _handle A unique string to associate with the project that will resolve to its token ID.
-    @param _uri An IPFS CID hash where metadata about the project has been uploaded. An empty string is acceptable if no metadata is being provided.
+  @param _owner The address that will be the owner of the project.
+  @param _handle A unique string to associate with the project that will resolve to its token ID.
+  @param _uri An IPFS CID hash where metadata about the project has been uploaded. An empty string is acceptable if no metadata is being provided.
 
-    @return The token ID of the newly created project.
+  @return The token ID of the newly created project
 */
 function createFor(
-    address _owner,
-    bytes32 _handle,
-    string calldata _uri
+  address _owner,
+  bytes32 _handle,
+  string calldata _uri
 ) external override returns (uint256) {
-    // Handle must exist.
-    require(_handle != bytes32(0), "JBProjects::createFor: EMPTY_HANDLE");
+  // Handle must exist.
+  require(_handle != bytes32(0), '0x06: EMPTY_HANDLE');
 
-    // Handle must be unique.
-    require(
-        projectFor[_handle] == 0 &&
-            transferAddressFor[_handle] == address(0),
-        "JBProjects::createFor: HANDLE_TAKEN"
-    );
+  // Handle must be unique.
+  require(idFor[_handle] == 0 && transferAddressFor[_handle] == address(0), '0x07: HANDLE_TAKEN');
 
-    // Increment the count, which will be used as the ID.
-    count++;
+  // Increment the count, which will be used as the ID.
+  count++;
 
-    // Mint the project.
-    _safeMint(_owner, count);
+  // Mint the project.
+  _safeMint(_owner, count);
 
-    // Store the handle for the project ID.
-    handleOf[count] = _handle;
-    
-    // Store the project ID for the handle.
-    idFor[_handle] = count;
+  // Store the handle for the project ID.
+  handleOf[count] = _handle;
 
-    // Set the URI if one was provided.
-    if (bytes(_uri).length > 0) uriOf[count] = _uri;
+  // Store the project ID for the handle.
+  idFor[_handle] = count;
 
-    emit Create(count, _owner, _handle, _uri, msg.sender);
+  // Set the URI if one was provided.
+  if (bytes(_uri).length > 0) uriOf[count] = _uri;
 
-    return count;
+  emit Create(count, _owner, _handle, _uri, msg.sender);
+
+  return count;
 }
 ```
 {% endtab %}
@@ -179,8 +171,8 @@ function createFor(
 {% tab title="Errors" %}
 | String | Description |
 | :--- | :--- |
-| **`JBProjects::createFor: EMPTY_HANDLE`** | Thrown if the provided handle is empty |
-| **`JBProjects::createFor: HANDLE_TAKEN`** | Thrown if the provided handle is already in use. |
+| **`0x06: EMPTY_HANDLE`** | Thrown if the provided handle is empty |
+| **`0x07: HANDLE_TAKEN`** | Thrown if the provided handle is already in use. |
 {% endtab %}
 
 {% tab title="Events" %}

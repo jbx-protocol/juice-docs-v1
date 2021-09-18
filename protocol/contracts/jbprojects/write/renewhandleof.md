@@ -14,17 +14,13 @@ Definition:
 
 ```javascript
 function renewHandleOf(uint256 _projectId)
-    external
-    override
-    requirePermission(
-        ownerOf(_projectId),
-        _projectId,
-        JBOperations.RenewHandle
-    ) { ... }
+  external
+  override
+  requirePermission(ownerOf(_projectId), _projectId, JBOperations.RENEW_HANDLE) { ... }
 ```
 
 * `_projectId` Is the ID of the project to which the handle being renewed belongs.
-* Through the [`requirePermission`](../../jboperatable/modifiers/requirepermission.md) modifier, the function is only accessible by the project's owner, or from an operator that has been given the `JBOperations.RenewHandle` permission by the project owner for the provided `_projectId`.
+* Through the [`requirePermission`](../../jboperatable/modifiers/requirepermission.md) modifier, the function is only accessible by the project's owner, or from an operator that has been given the `JBOperations.RENEW_HANDLE` permission by the project owner for the provided `_projectId`.
 * The function overrides a function definition from the `IJBProjects` interface.
 * The function doesn't return anything.
 
@@ -73,24 +69,20 @@ function renewHandleOf(uint256 _projectId)
   @dev 
   Only a project's owner or operator can renew its handle.
 
-  @param _projectId The ID of the project to which the handle being renewed belongs.
+  @param _projectId The ID of the project to which the handle being renewed belongs. 
 */
 function renewHandleOf(uint256 _projectId)
-    external
-    override
-    requirePermission(
-        ownerOf(_projectId),
-        _projectId,
-        JBOperations.RenewHandle
-    )
+  external
+  override
+  requirePermission(ownerOf(_projectId), _projectId, JBOperations.RENEW_HANDLE)
 {
-    // Get the handle of the project.
-    bytes32 _handle = handleOf[_projectId];
+  // Get the handle of the project.
+  bytes32 _handle = handleOf[_projectId];
 
-    // Reset the challenge to 0.
-    challengeExpiryOf[_handle] = 0;
+  // Reset the challenge to 0.
+  challengeExpiryOf[_handle] = 0;
 
-    emit RenewHandle(_handle, _projectId, msg.sender);
+  emit RenewHandle(_handle, _projectId, msg.sender);
 }
 ```
 {% endtab %}

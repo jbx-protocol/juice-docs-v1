@@ -10,13 +10,10 @@ Definition:
 
 ```javascript
 /** 
-    @notice
-    All splits for each project ID's configurations.
-    
-    [_projectId][_domain][_group]
-*/ 
-mapping(uint256 => mapping(uint256 => mapping(uint256 => Split[])))
-    private _splitsOf;
+  @notice
+  All splits for each project ID's configurations.
+*/
+mapping(uint256 => mapping(uint256 => mapping(uint256 => Split[]))) private _splitsOf;
 ```
 
 * `uint256` is the ID of the project to get splits for.

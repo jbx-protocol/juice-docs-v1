@@ -11,11 +11,7 @@ Interface: `IJBPrices`
 Definition:
 
 ```javascript
-function priceFor(uint256 _currency, uint256 _base)
-    external
-    view
-    override
-    returns (uint256) { ... }
+function priceFor(uint256 _currency, uint256 _base) external view override returns (uint256) { ... }
 ```
 
 * `_currency` is the currency to get a price for.
@@ -29,11 +25,11 @@ function priceFor(uint256 _currency, uint256 _base)
 
    Internal references:
 
-   * [`targetDecimals`](../properties/targetdecimals.md)
+   * [`TARGET_DECIMALS`](../properties/targetdecimals.md)
 
    ```javascript
    // If the currency is the base, return 1 since they are priced the same.
-   if (_currency == _base) return 10**targetDecimals;
+   if (_currency == _base) return 10**TARGET_DECIMALS;
    ```
 
 2. Get a reference to the feed.  
@@ -52,10 +48,7 @@ function priceFor(uint256 _currency, uint256 _base)
 
    ```javascript
    // Feed must exist.
-   require(
-       _feed != AggregatorV3Interface(address(0)),
-       "JBPrices::priceFor: NOT_FOUND"
-   );
+   require(_feed != AggregatorV3Interface(address(0)), '0x04: NOT_FOUND');
    ```
 
 4. Get the latest price being reported by the price feed. The `latestRoundData` function returns several feed parameters, but only the `_price` is needed.
@@ -65,7 +58,7 @@ function priceFor(uint256 _currency, uint256 _base)
    (, int256 _price, , , ) = _feed.latestRoundData();
    ```
 
-5. Return the `_price`, normalizing the value to `targetDecimals` decimal fidelity.  
+5. Return the `_price`, normalizing the value to `TARGET_DECIMALS` decimal fidelity.  
 
 
    Internal references:
@@ -74,7 +67,7 @@ function priceFor(uint256 _currency, uint256 _base)
 
    ```javascript
    // Multiply the price by the decimal adjuster to get the normalized result.
-   return uint256(_price) * feedDecimalAdjusterFor[_currency][_base]
+   return uint256(_price) * feedDecimalAdjusterFor[_currency][_base];
    ```
 {% endtab %}
 
@@ -83,43 +76,35 @@ function priceFor(uint256 _currency, uint256 _base)
 /** 
   @notice 
   Gets the current price of the provided currency in terms of the provided base currency.
-
+      
   @param _currency The currency to get a price for.
   @param _base The currency to base the price on.
-
+      
   @return The price of the currency in terms of the base, with 18 decimals.
 */
-function priceFor(uint256 _currency, uint256 _base)
-    external
-    view
-    override
-    returns (uint256)
-{
-    // If the currency is the base, return 1 since they are priced the same.
-    if (_currency == _base) return 10**targetDecimals;
+function priceFor(uint256 _currency, uint256 _base) external view override returns (uint256) {
+  // If the currency is the base, return 1 since they are priced the same.
+  if (_currency == _base) return 10**TARGET_DECIMALS;
 
-    // Get a reference to the feed.
-    AggregatorV3Interface _feed = feedFor[_currency][_base];
+  // Get a reference to the feed.
+  AggregatorV3Interface _feed = feedFor[_currency][_base];
 
-    // Feed must exist.
-    require(
-        _feed != AggregatorV3Interface(address(0)),
-        "JBPrices::priceFor: NOT_FOUND"
-    );
+  // Feed must exist.
+  require(_feed != AggregatorV3Interface(address(0)), '0x04: NOT_FOUND');
 
-    // Get the latest round information. Only need the price is needed.
-    (, int256 _price, , , ) = _feed.latestRoundData();
+  // Get the latest round information. Only need the price is needed.
+  (, int256 _price, , , ) = _feed.latestRoundData();
 
-    // Multiply the price by the decimal adjuster to get the normalized result.
-    return uint256(_price) * feedDecimalAdjuster[_currency][_base];
-}
+  // Multiply the price by the decimal adjuster to get the normalized result.
+  return uint256(_price) * feedDecimalAdjusterFor[_currency][_base];
+ }
 ```
 {% endtab %}
 
 {% tab title="Errors" %}
 | String | Description |
 | :--- | :--- |
-| **`JBPrices::priceFor: NOT_FOUND`** | Thrown if a feed wasn't found for the specified currency and base. |
+| **`0x04: NOT_FOUND`** | Thrown if a feed wasn't found for the specified currency and base. |
 {% endtab %}
 
 {% tab title="Bug bounty" %}

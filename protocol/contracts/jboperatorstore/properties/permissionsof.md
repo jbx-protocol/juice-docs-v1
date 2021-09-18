@@ -16,7 +16,7 @@ Definition:
 /** 
   @notice
   The permissions that an operator has to operate on a specific domain.
-
+    
   @dev
   An account can give an operator permissions that only pertain to a specific domain.
   There is no domain with a value of 0 -- accounts can use the 0 domain to give an operator
@@ -24,9 +24,7 @@ Definition:
 
   [_operator][_account][_domain]
 */
-mapping(address => mapping(address => mapping(uint256 => uint256)))
-    public
-    override permissionsOf;
+mapping(address => mapping(address => mapping(uint256 => uint256))) public override permissionsOf;
 ```
 
 * `address` is the address of the operator.

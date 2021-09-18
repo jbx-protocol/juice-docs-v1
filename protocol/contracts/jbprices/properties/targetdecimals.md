@@ -1,4 +1,4 @@
-# targetDecimals
+# TARGET\_DECIMALS
 
 Contract: [`JBPrices`](../)
 
@@ -13,7 +13,7 @@ Definition:
   @notice 
   The normalized number of decimals each price feed has.
 */
-uint256 public constant override targetDecimals = 18;
+uint256 public constant override TARGET_DECIMALS = 18;
 ```
 
 * This value cannot change.

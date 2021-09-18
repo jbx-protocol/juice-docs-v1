@@ -37,10 +37,7 @@ function challengeHandle(bytes32 _handle) external override { ... }
 
    ```javascript
    // No need to challenge a handle that's not taken.
-   require(
-       _projectId > 0,
-       "JBProjects::challengeHandle: HANDLE_NOT_TAKEN"
-   );
+   require(_projectId > 0, '0x0d: HANDLE_NOT_TAKEN');
    ```
 
 3. Check if the handle is already being challenged.  
@@ -52,10 +49,7 @@ function challengeHandle(bytes32 _handle) external override { ... }
 
    ```javascript
    // No need to challenge again if a handle is already being challenged.
-   require(
-       challengeExpiryOf[_handle] == 0,
-       "JBProjects::challengeHandle: HANDLE_ALREADY_BEING_CHALLENGED"
-   );
+   require(challengeExpiryOf[_handle] == 0, '0x0e: CHALLENGE_OPEN');
    ```
 
 4. The challenge will expire one year from the current timestamp. If the `_handle` is not renewed before then, anyone will be able to claim the handle by calling [`claimHandle`](claimhandle.md).  
@@ -104,28 +98,22 @@ function challengeHandle(bytes32 _handle) external override { ... }
   @param _handle The handle to challenge.
 */
 function challengeHandle(bytes32 _handle) external override {
-    // Get a reference to the ID of the project to which the handle belongs.
-    uint256 _projectId = idFor[_handle];
-    
-    // No need to challenge a handle that's not taken.
-    require(
-        _projectId > 0,
-        "JBProjects::challengeHandle: HANDLE_NOT_TAKEN"
-    );
+  // Get a reference to the ID of the project to which the handle belongs.
+  uint256 _projectId = idFor[_handle];
 
-    // No need to challenge again if a handle is already being challenged.
-    require(
-        challengeExpiryOf[_handle] == 0,
-        "JBProjects::challengeHandle: HANDLE_ALREADY_BEING_CHALLENGED"
-    );
+  // No need to challenge a handle that's not taken.
+  require(_projectId > 0, '0x0d: HANDLE_NOT_TAKEN');
 
-    // The challenge will expire in a year, at which point the handle can be claimed if it has yet to be renewed.
-    uint256 _challengeExpiry = block.timestamp + _SECONDS_IN_YEAR;
-   
-    // Store the challenge expiry for the handle.
-    challengeExpiryOf[_handle] = _challengeExpiry;
+  // No need to challenge again if a handle is already being challenged.
+  require(challengeExpiryOf[_handle] == 0, '0x0e: CHALLENGE_OPEN');
 
-    emit ChallengeHandle(_handle, _projectId, _challengeExpiry, msg.sender);
+  // The challenge will expire in a year, at which point the handle can be claimed if it has yet to be renewed.
+  uint256 _challengeExpiry = block.timestamp + _SECONDS_IN_YEAR;
+
+  // Store the challenge expiry for the handle.
+  challengeExpiryOf[_handle] = _challengeExpiry;
+
+  emit ChallengeHandle(_handle, _projectId, _challengeExpiry, msg.sender);
 }
 ```
 {% endtab %}
@@ -133,8 +121,8 @@ function challengeHandle(bytes32 _handle) external override {
 {% tab title="Errors" %}
 | String | Description |
 | :--- | :--- |
-| **`JBProjects::challengeHandle: HANDLE_NOT_TAKE`** | Thrown if the handle isn't yet taken. |
-| **`JBProjects::challengeHandle: HANDLE_ALREADY_BEING_CHALLENGED`** | Thrown if the handle is already being challenged. |
+| **`0x0d: HANDLE_NOT_TAKEN`** | Thrown if the handle isn't yet taken. |
+| **`0x0e: CHALLENGE_OPEN`** | Thrown if the handle is already being challenged. |
 {% endtab %}
 
 {% tab title="Events" %}

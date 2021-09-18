@@ -13,15 +13,12 @@ _Only an address can set its own operators._
 Definition:
 
 ```javascript
-function _packedPermissions(uint256[] calldata _indexes)
-    private
-    pure
-    returns (uint256 packed) {...}
+function _packedPermissions(uint256[] calldata _indexes) private pure returns (uint256 packed) {...}
 ```
 
 * `_indexes` are the indexes of the permissions to pack.
 * The function is private to the contract. 
-* The function is pure, meaning it does not modify or reference state variables outside the function.
+* The function does not modify or reference state variables outside the function.
 * The function returns the `packed` value.
 
 1. Loop through the provided `_indexes`.
@@ -39,10 +36,7 @@ function _packedPermissions(uint256[] calldata _indexes)
 3. Make sure the `_permissionIndex` is one of the 255 indexes in a `uint256`.
 
    ```javascript
-   require(
-       _index <= 255,
-       "JBOperatorStore::_packedPermissions: INDEX_OUT_OF_BOUNDS"
-   );
+   require(_index <= 255, '0x03: INDEX_OUT_OF_BOUNDS');
    ```
 
 4. Flip the bit at the specified index of the `packed` value being returned to indicate a truthy permission.
@@ -63,20 +57,13 @@ function _packedPermissions(uint256[] calldata _indexes)
 
   @return packed The packed result.
 */
-function _packedPermissions(uint256[] calldata _indexes)
-    private
-    pure
-    returns (uint256 packed)
-{
-    for (uint256 _i = 0; _i < _indexes.length; _i++) {
-        uint256 _index = _indexes[_i];
-        require(
-            _index <= 255,
-            "JBOperatorStore::_packedPermissions: INDEX_OUT_OF_BOUNDS"
-        );
-        // Turn the bit at the index on.
-        packed |= 1 << _index;
-    }
+function _packedPermissions(uint256[] calldata _indexes) private pure returns (uint256 packed) {
+  for (uint256 _i = 0; _i < _indexes.length; _i++) {
+    uint256 _index = _indexes[_i];
+    require(_index <= 255, '0x03 INDEX_OUT_OF_BOUNDS');
+    // Turn the bit at the index on.
+    packed |= 1 << _index;
+  }
 }
 ```
 {% endtab %}
@@ -84,7 +71,7 @@ function _packedPermissions(uint256[] calldata _indexes)
 {% tab title="Errors" %}
 | String | Description |
 | :--- | :--- |
-| **`JBOperatorStore::_packedPermissions: INDEX_OUT_OF_BOUNDS`** | Thrown if the provided index is more than whats supported in a `uint256`. |
+| **`0x03: INDEX_OUT_OF_BOUNDS`** | Thrown if the provided index is more than whats supported in a `uint256`. |
 {% endtab %}
 
 {% tab title="Bug bounty" %}

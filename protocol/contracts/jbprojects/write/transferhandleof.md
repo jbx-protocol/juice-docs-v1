@@ -14,24 +14,20 @@ Definition:
 
 ```javascript
 function transferHandleOf(
-    uint256 _projectId,
-    address _to,
-    bytes32 _newHandle
+  uint256 _projectId,
+  address _transferAddress,
+  bytes32 _newHandle
 )
-    external
-    override
-    requirePermission(
-        ownerOf(_projectId),
-        _projectId,
-        JBOperations.SetHandle
-    )
-    returns (bytes32 handle) { ... }
+  external
+  override
+  requirePermission(ownerOf(_projectId), _projectId, JBOperations.SET_HANDLE)
+  returns (bytes32 handle) { ... }
 ```
 
 * `_projectId` is the ID of the project to transfer the handle from.
 * `_to` is the address that should be able to reallocate the transferred handle.
 * `_newHandle` is the new unique handle for the project that will replace the transferred one.
-* Through the [`requirePermission`](../../jboperatable/modifiers/requirepermission.md) modifier, the function is only accessible by the project's owner, or from an operator that has been given the `JBOperations.SetHandle` permission by the project owner for the provided `_projectId`.
+* Through the [`requirePermission`](../../jboperatable/modifiers/requirepermission.md) modifier, the function is only accessible by the project's owner, or from an operator that has been given the `JBOperations.SET_HANDLE` permission by the project owner for the provided `_projectId`.
 * The function overrides a function definition from the `IJBProjects` interface.
 * The function returns the `handle` that has been transferred.
 
@@ -39,10 +35,7 @@ function transferHandleOf(
 
    ```javascript
    // A new handle must have been provided.
-   require(
-       _newHandle != bytes32(0),
-       "JBProjects::transferHandleOf: EMPTY_HANDLE"
-   );
+   require(_newHandle != bytes32(0), '0x0a: EMPTY_HANDLE');
    ```
 
 2. Check that the `_newHandle` is unique. This is done by making sure there isn't yet an `idFor` the handle, and making sure it isn't currently being transferred to an address.  
@@ -54,12 +47,8 @@ function transferHandleOf(
    * [`transferAddressFor`](../properties/transferaddressfor.md)
 
    ```javascript
-    
-   // The new handle must be available. 
-   require(
-       idFor[_newHandle] == 0 && transferAddressFor[_newHandle] == address(0),
-       "JBProjects::transferHandleOf: HANDLE_TAKEN"
-   );
+   // The new handle must be available.
+   require(idFor[_newHandle] == 0 && transferAddressFor[_newHandle] == address(0), '0x0b: HANDLE_TAKEN');
    ```
 
 3. Get the current `handleOf` the project. Store this is `handle`, which will be returned by the function.  
@@ -86,7 +75,19 @@ function transferHandleOf(
    idFor[handle] = 0;
    ```
 
-5. Store the provided `_newHandle` as the as the `handleOf` the project.  
+5. Store the project's ID as the `idFor` the provided `_newHandle` to allow for project lookup using the handle.  
+
+
+   _Internal references:_
+
+   * [`idFor`](../properties/idfor.md)
+
+   ```javascript
+   // Store the new handle for the project ID.
+   idFor[_newHandle] = _projectId;
+   ```
+
+6. Store the provided `_newHandle` as the as the `handleOf` the project.  
 
 
    _Internal references:_
@@ -96,18 +97,6 @@ function transferHandleOf(
    ```javascript
    // Store the new handle for the project ID.
    handleOf[_projectId] = _newHandle;
-   ```
-
-6. Store the project's ID as the `idFor` the provided `_newHandle` to allow for project lookup using the handle.  
-
-
-   _Internal references:_
-
-   * [`idFor`](../properties/idfor.md)
-
-   ```javascript
-   // Store the project ID for the new handle.
-   idFor[_newHandle] = _projectId;
    ```
 
 7. Store the `_transferAddress` that will be able to transfer the handle as the `transferAddressFor` the handle.  
@@ -130,13 +119,7 @@ function transferHandleOf(
    * [`TransferHandle`](../events/seturi.md) 
 
    ```text
-   emit TransferHandle(
-       _projectId,
-       _transferAddress,
-       handle,
-       _newHandle,
-       msg.sender
-   );
+   emit TransferHandle(_projectId, _transferAddress, handle, _newHandle, msg.sender);
    ```
 {% endtab %}
 
@@ -152,51 +135,41 @@ function transferHandleOf(
   @param _projectId The ID of the project to transfer the handle from.
   @param _transferAddress The address that should be able to reallocate the transferred handle.
   @param _newHandle The new unique handle for the project that will replace the transferred one.
-  
+
   @return handle The handle that has been transferred.
 */
 function transferHandleOf(
-    uint256 _projectId,
-    address _transferAddress,
-    bytes32 _newHandle
+  uint256 _projectId,
+  address _transferAddress,
+  bytes32 _newHandle
 )
-    external
-    override
-    requirePermission(
-        ownerOf(_projectId),
-        _projectId,
-        JBOperations.SetHandle
-    )
-    returns (bytes32 handle)
+  external
+  override
+  requirePermission(ownerOf(_projectId), _projectId, JBOperations.SET_HANDLE)
+  returns (bytes32 handle)
 {
-    // A new handle must have been provided.
-    require(
-        _newHandle != bytes32(0),
-        "JBProjects::transferHandleOf: EMPTY_HANDLE"
-    );
-    
-    // The new handle must be available. 
-    require(
-        idFor[_newHandle] == 0 && transferAddressFor[_newHandle] == address(0),
-        "JBProjects::transferHandleOf: HANDLE_TAKEN"
-    );
+  // A new handle must have been provided.
+  require(_newHandle != bytes32(0), '0x0a: EMPTY_HANDLE');
 
-    // Get a reference to the project's current handle.
-    handle = handleOf[_projectId];
+  // The new handle must be available.
+  require(idFor[_newHandle] == 0 && transferAddressFor[_newHandle] == address(0), '0x0b: HANDLE_TAKEN');
 
-    // Remove the project ID for the transfered handle.
-    idFor[handle] = 0;
+  // Get a reference to the project's current handle.
+  handle = handleOf[_projectId];
 
-    // Store the new handle for the project ID.
-    handleOf[_projectId] = _newHandle;
-    
-    // Store the project ID for the new handle.
-    idFor[_newHandle] = _projectId;
+  // Remove the project ID for the transfered handle.
+  idFor[handle] = 0;
 
-    // Give the address the power to transfer the current handle.
-    transferAddressFor[handle] = _transferAddress;
+  // Store the new handle for the project ID.
+  idFor[_newHandle] = _projectId;
 
-    emit TransferHandle(_projectId, _transferAddress, handle, _newHandle, msg.sender);
+  // Store the project ID for the new handle.
+  handleOf[_projectId] = _newHandle;
+
+  // Give the address the power to transfer the current handle.
+  transferAddressFor[handle] = _transferAddress;
+
+  emit TransferHandle(_projectId, _transferAddress, handle, _newHandle, msg.sender);
 }
 ```
 {% endtab %}
@@ -204,8 +177,8 @@ function transferHandleOf(
 {% tab title="Errors" %}
 | String | Description |
 | :--- | :--- |
-| **`JBProjects::transferHandleOf: EMPTY_HANDLE`** | Thrown if the provided handle is empty |
-| **`JBProjects::transferHandleOf: HANDLE_TAKEN`** | Thrown if the provided handle is already in use. |
+| **`0x0a: EMPTY_HANDLE`** | Thrown if the provided handle is empty |
+| **`0x0b: HANDLE_TAKEN`** | Thrown if the provided handle is already in use. |
 {% endtab %}
 
 {% tab title="Events" %}

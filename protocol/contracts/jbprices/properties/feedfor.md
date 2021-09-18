@@ -15,9 +15,7 @@ Definition:
 
   [_currency][_base]
 */
-mapping(uint256 => mapping(uint256 => AggregatorV3Interface))
-    public
-    override feedFor;
+mapping(uint256 => mapping(uint256 => AggregatorV3Interface)) public override feedFor;
 ```
 
 * `uint256` is the currency of the feed.

@@ -27,7 +27,7 @@ function set(
         projects.ownerOf(_projectId),
         _projectId,
         JBOperations.SetSplits,
-        address(directory.terminalOf(_projectId))
+        address(directory.terminalOf(_projectId, address(0))
     ) { ... }
 ```
 
@@ -67,26 +67,26 @@ function set(
 4. If the current split is locked, check to make sure the new `_splits` includes it. The only property of a locked split that can have changed is its `lockedUntil` property, which can be extended.
 
    ```javascript
+   // Keep a reference to whether or not the locked split being iterated on is included.
    bool _includesLocked = false;
+
    for (uint256 _j = 0; _j < _splits.length; _j++) {
-       // Check for sameness.
-       if (
-           _splits[_j].percent == _currentSplits[_i].percent &&
-           _splits[_j].beneficiary ==
-           _currentSplits[_i].beneficiary &&
-           _splits[_j].allocator == _currentSplits[_i].allocator &&
-           _splits[_j].projectId == _currentSplits[_i].projectId &&
-           // Allow lock extention.
-           _splits[_j].lockedUntil >=
-           _currentSplits[_i].lockedUntil
-       ) _includesLocked = true;
+     // Check for sameness.
+     if (
+       _splits[_j].percent == _currentSplits[_i].percent &&
+       _splits[_j].beneficiary == _currentSplits[_i].beneficiary &&
+       _splits[_j].allocator == _currentSplits[_i].allocator &&
+       _splits[_j].projectId == _currentSplits[_i].projectId &&
+       // Allow lock extention.
+       _splits[_j].lockedUntil >= _currentSplits[_i].lockedUntil
+     ) _includesLocked = true;
    }
    ```
 
 5. Check to make sure the provided `_splits` includes any locked current splits.
 
    ```javascript
-   require(_includesLocked, "JBSplitsStore::set: SOME_LOCKED");
+   require(_includesLocked, '0x0f: SOME_LOCKED');
    ```
 
 6. After the loop, delete the current splits from storage so we can repopulate them.  
@@ -118,10 +118,7 @@ function set(
 
    ```javascript
    // The percent should be greater than 0.
-   require(
-       _splits[_i].percent > 0,
-       "JBSplitsStore::set: BAD_SPLIT_PERCENT"
-   );
+   require(_splits[_i].percent > 0, '0x10: BAD_SPLIT_PERCENT');
    ```
 
 10. Check that the split specifies a recipient. Either an `allocator` must be specified or a `beneficiary` must be specified.
@@ -129,9 +126,9 @@ function set(
     ```javascript
     // The allocator and the beneficiary shouldn't both be the zero address.
     require(
-        _splits[_i].allocator != IJBSplitAllocator(address(0)) ||
-                _splits[_i].beneficiary != address(0),
-        "JBSplitsStore::set: ZERO_ADDRESS"
+      _splits[_i].allocator != IJBSplitAllocator(address(0)) ||
+        _splits[_i].beneficiary != address(0),
+      '0x11: ZERO_ADDRESS'
     );
     ```
 
@@ -146,10 +143,7 @@ function set(
 
     ```javascript
     // The total percent should be less than 10000.
-    require(
-        _percentTotal <= 10000,
-        "JBSplitsStore::set: BAD_TOTAL_PERCENT"
-    );
+    require(_percentTotal <= 10000, '0x12: BAD_TOTAL_PERCENT');
     ```
 
 13. Push the split onto the stored `_splits` value.   
@@ -205,76 +199,73 @@ function set(
   @param _splits The splits to set.
 */
 function set(
-    uint256 _projectId,
-    uint256 _domain,
-    uint256 _group,
-    Split[] memory _splits
+  uint256 _projectId,
+  uint256 _domain,
+  uint256 _group,
+  Split[] memory _splits
 )
-    external
-    override
-    requirePermissionAcceptingAlternateAddress(
-        projects.ownerOf(_projectId),
-        _projectId,
-        JBOperations.SetSplits,
-        address(directory.terminalOf(_projectId))
-    )
+  external
+  override
+  requirePermissionAcceptingAlternateAddress(
+    projects.ownerOf(_projectId),
+    _projectId,
+    JBOperations.SET_SPLITS,
+    address(directory.terminalOf(_projectId, address(0)))
+  )
 {
-    // Get a reference to the project's current splits.
-    Split[] memory _currentSplits = _splitsOf[_projectId][_domain][_group];
+  // Get a reference to the project's current splits.
+  Split[] memory _currentSplits = _splitsOf[_projectId][_domain][_group];
 
-    // Check to see if all locked splits are included.
-    for (uint256 _i = 0; _i < _currentSplits.length; _i++) {
-        if (block.timestamp >= _currentSplits[_i].lockedUntil) continue;
-        bool _includesLocked = false;
-        for (uint256 _j = 0; _j < _splits.length; _j++) {
-            // Check for sameness.
-            if (
-                _splits[_j].percent == _currentSplits[_i].percent &&
-                _splits[_j].beneficiary ==
-                _currentSplits[_i].beneficiary &&
-                _splits[_j].allocator == _currentSplits[_i].allocator &&
-                _splits[_j].projectId == _currentSplits[_i].projectId &&
-                // Allow lock extention.
-                _splits[_j].lockedUntil >=
-                _currentSplits[_i].lockedUntil
-            ) _includesLocked = true;
-        }
-        require(_includesLocked, "JBSplitsStore::set: SOME_LOCKED");
+  // Check to see if all locked splits are included.
+  for (uint256 _i = 0; _i < _currentSplits.length; _i++) {
+    // If not locked, continue.
+    if (block.timestamp >= _currentSplits[_i].lockedUntil) continue;
+
+    // Keep a reference to whether or not the locked split being iterated on is included.
+    bool _includesLocked = false;
+
+    for (uint256 _j = 0; _j < _splits.length; _j++) {
+      // Check for sameness.
+      if (
+        _splits[_j].percent == _currentSplits[_i].percent &&
+        _splits[_j].beneficiary == _currentSplits[_i].beneficiary &&
+        _splits[_j].allocator == _currentSplits[_i].allocator &&
+        _splits[_j].projectId == _currentSplits[_i].projectId &&
+        // Allow lock extention.
+        _splits[_j].lockedUntil >= _currentSplits[_i].lockedUntil
+      ) _includesLocked = true;
     }
+    require(_includesLocked, '0x0f: SOME_LOCKED');
+  }
 
-    // Delete from storage so splits can be repopulated.
-    delete _splitsOf[_projectId][_domain][_group];
+  // Delete from storage so splits can be repopulated.
+  delete _splitsOf[_projectId][_domain][_group];
 
-    // Add up all the percents to make sure they cumulative are under 100%.
-    uint256 _percentTotal = 0;
+  // Add up all the percents to make sure they cumulative are under 100%.
+  uint256 _percentTotal = 0;
 
-    for (uint256 _i = 0; _i < _splits.length; _i++) {
-        // The percent should be greater than 0.
-        require(
-            _splits[_i].percent > 0,
-            "JBSplitsStore::set: BAD_SPLIT_PERCENT"
-        );
+  for (uint256 _i = 0; _i < _splits.length; _i++) {
+    // The percent should be greater than 0.
+    require(_splits[_i].percent > 0, '0x10: BAD_SPLIT_PERCENT');
 
-        // The allocator and the beneficiary shouldn't both be the zero address.
-        require(
-            _splits[_i].allocator != IJBSplitAllocator(address(0)) ||
-                _splits[_i].beneficiary != address(0),
-            "JBSplitsStore::set: ZERO_ADDRESS"
-        );
+    // The allocator and the beneficiary shouldn't both be the zero address.
+    require(
+      _splits[_i].allocator != IJBSplitAllocator(address(0)) ||
+        _splits[_i].beneficiary != address(0),
+      '0x11: ZERO_ADDRESS'
+    );
 
-        // Add to the total percents.
-        _percentTotal = _percentTotal + _splits[_i].percent;
+    // Add to the total percents.
+    _percentTotal = _percentTotal + _splits[_i].percent;
 
-        // The total percent should be less than 10000.
-        require(
-            _percentTotal <= 10000,
-            "JBSplitsStore::set: BAD_TOTAL_PERCENT"
-        );
-        // Push the new split into the project's list of splits.
-        _splitsOf[_projectId][_domain][_group].push(_splits[_i]);
+    // The total percent should be less than 10000.
+    require(_percentTotal <= 10000, '0x12: BAD_TOTAL_PERCENT');
 
-        emit SetSplit(_projectId, _domain, _group, _splits[_i], msg.sender);
-    }
+    // Push the new split into the project's list of splits.
+    _splitsOf[_projectId][_domain][_group].push(_splits[_i]);
+
+    emit SetSplit(_projectId, _domain, _group, _splits[_i], msg.sender);
+  }
 }
 ```
 {% endtab %}
@@ -282,10 +273,10 @@ function set(
 {% tab title="Errors" %}
 | String | Description |
 | :--- | :--- |
-| **`JBSplitStore::set: SOME_LOCKED`** | Thrown if the splits that are being set override some splits that are locked. |
-| **`JBSplitStore::set: BAD_SPLIT_PERCENT`** | Thrown if the split has specified a percent of 0. |
-| **`JBSplitStore::set: ZERO_ADDRESS`** | Thrown if the split doesn't specify a destination. |
-| **`JBSplitStore::set: BAD_TOTAL_PERCENT`** | Thrown if the split percents add up more than 100%. |
+| **`0x0f: SOME_LOCKED`** | Thrown if the splits that are being set override some splits that are locked. |
+| **`0x10: BAD_SPLIT_PERCENT`** | Thrown if the split has specified a percent of 0. |
+| **`0x11: ZERO_ADDRESS`** | Thrown if the split doesn't specify a destination. |
+| **`0x12: BAD_TOTAL_PERCENT`** | Thrown if the split percents add up more than 100%. |
 {% endtab %}
 
 {% tab title="Events" %}

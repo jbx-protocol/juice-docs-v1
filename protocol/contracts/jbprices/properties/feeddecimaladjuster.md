@@ -15,9 +15,7 @@ Definition:
 
   [_currency][_base]
 */
-mapping(uint256 => mapping(uint256 => uint256))
-    public
-    override feedDecimalAdjusterFor;
+mapping(uint256 => mapping(uint256 => uint256)) public override feedDecimalAdjusterFor;
 ```
 
 * `uint256` is the currency of the feed to get the decimal adjuster for.

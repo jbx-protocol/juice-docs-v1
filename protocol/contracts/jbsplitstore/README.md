@@ -52,6 +52,23 @@ Rinkeby testnet: _Not yet deployed_
   </tbody>
 </table>
 
+## Constructor
+
+```javascript
+/** 
+  @param _operatorStore A contract storing operator assignments.
+  @param _jbDirectory The directory of terminals.
+  @param _projects A Projects contract which mints ERC-721's that represent project ownership and transfers.
+*/
+constructor(
+  IJBOperatorStore _operatorStore,
+  IJBDirectory _jbDirectory,
+  IJBProjects _projects
+) JBOperatable(_operatorStore) JBTerminalUtility(_jbDirectory) {
+  projects = _projects;
+}
+```
+
 ## Events
 
 <table>
