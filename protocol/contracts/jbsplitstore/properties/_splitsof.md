@@ -4,10 +4,8 @@ Contract:[`JBSplitStore`](../)​‌
 
 Interface: `IJBSplitStore`
 
-**The number of projects that have been created using this contract.** 
-
-_The count is incremented with each new project created. The resulting ERC-721 token ID for each project is the newly incremented `count` value._  
-****  
+**All splits for each project ID's configurations.**  
+  
 Definition:
 
 ```javascript
