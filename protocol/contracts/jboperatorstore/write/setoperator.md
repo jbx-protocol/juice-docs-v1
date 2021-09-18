@@ -8,26 +8,23 @@ Interface: `IJBOperatorStore`
 {% tab title="Step by step" %}
 **Sets permissions for an operator.**
 
-_Only an address can set its own operators._  
-  
+_Only an address can set its own operators._
+
 Definition:
 
 ```javascript
-function setOperator(
-    address _operator,
-    uint256 _domain,
-    uint256[] calldata _permissionIndexes
-) external override { ... }
+ function setOperator(OperatorData calldata _operatorData) external override { ... }
 ```
 
-* `_operator` is the operator to whom permissions will be given.
-* `_domain` is the domain that the operator is being given permissions to operate. A value of 0 serves as a wildcard domain. Applications can specify their own domain system.
-* `_permissionIndexes` is an array of permission indexes to set. Indexes must be between 0-255. Applications can specify the significance of each index.
+* `_operatorData` are the data that specifies the params for the operator being set.
+  * `_operatorData.operators` are the operator to whom permissions will be given.
+  * `_operatorData.domains` is lists the domain that each operator is being given permissions to operate. A value of 0 serves as a wildcard domain. Applications can specify their own domain system.
+  * `_operatorData.permissionIndexes` lists the permission indexes to set for each operator. Indexes must be between 0-255. Applications can specify the significance of each index.
 * The function can be accessed externally by anyone. 
 * The function overrides a function definition from the `IJBOperatorStore` interface.
 * The function doesn't return anything.
 
-1. Pack the provided permissions into a `uint256`. Each bit of the resulting value represents whether or not permission has been granted for that index.  
+1. Pack the provided permissions into a `uint256`. Each bit of the resulting value represents whether or not permission has been granted for that index.    
 
 
    Internal references:
@@ -36,67 +33,67 @@ function setOperator(
 
    ```javascript
    // Pack the indexes into a uint256.
-   uint256 _packed = _packedPermissions(_permissionIndexes);
+   uint256 _packed = _packedPermissions(_operatorData.permissionIndexes);
    ```
 
-   2. Store the packed permissions as the `permissionsOf` the provided `_operator`, on behalf of the `msg.sender`, specifically for the provided `_domain`.  
+   1. Store the packed permissions as the `permissionsOf` the provided `_operator`, on behalf of the `msg.sender`, specifically for the provided `_domain`.    
 
 
-   _Internal references:_
+      _Internal references:_
 
-   * [`permissionsOf`](../properties/permissionsof.md)
+      * [`permissionsOf`](../properties/permissionsof.md)
 
-   ```javascript
-   // Store the new value.
-   permissionsOf[_operator][msg.sender][_domain] = _packed;
-   ```
+      ```javascript
+      // Store the new value.
+      permissionsOf[_operatorData.operator][msg.sender][_operatorData.domain] = _packed;
+      ```
 
-   3. Emit a `SetOperator` event with the all relevant parameters.   
+   2. Emit a `SetOperator` event with the all relevant parameters.     
 
 
-   _Event references:_
+      _Event references:_
 
-   * [`SetOperator`](../events/setoperator.md)
+      * [`SetOperator`](../events/setoperator.md)
 
-   ```javascript
-   emit SetOperator(
-       _operator,
-       msg.sender,
-       _domain,
-       _permissionIndexes,
-       _packed
-   );
-   ```
+      ```javascript
+      emit SetOperator(
+        _operatorData.operator,
+        msg.sender,
+        _operatorData.domain,
+        _operatorData.permissionIndexes,
+        _packed
+      );
+      ```
 {% endtab %}
 
 {% tab title="Only code" %}
 ```javascript
-/** 
-  @notice 
-  Sets permissions for an operator.
+/**
+  @notice
+  Sets permissions for an operators.
 
-  @param _operator The operator to whom permissions will be given.
-  @param _domain The domain that the operator is being given permissions to operate. A value of 0 serves as a wildcard domain. Applications can specify their own domain system.
-  @param _permissionIndexes An array of permission indexes to set. Indexes must be between 0-255. Applications can specify the significance of each index.
+  @dev
+  Only an address can set its own operators.
+
+  @param _operatorData The data that specifies the params for the operator being set.
+    @dev _operatorData.operators The operators to whom permissions will be given.
+    @dev _operatorData.domains Lists the domain that each operator is being given permissions to operate. A value of 0 serves as a wildcard domain. Applications can specify their own domain system.
+    @dev _operatorData.permissionIndexes Lists the permission indexes to set for each operator. Indexes must be between 0-255. Applications can specify the significance of each index.
 */
-function setOperator(
-    address _operator,
-    uint256 _domain,
-    uint256[] calldata _permissionIndexes
-) external override {
-    // Pack the indexes into a uint256.
-    uint256 _packed = _packedPermissions(_permissionIndexes);
+function setOperator(OperatorData calldata _operatorData) external override {
+  // Pack the indexes into a uint256.
+  uint256 _packed = _packedPermissions(_operatorData.permissionIndexes);
 
-    // Store the new value.
-    permissionsOf[_operator][msg.sender][_domain] = _packed;
+  // Store the new value.
+  permissionsOf[_operatorData.operator][msg.sender][_operatorData.domain] = _packed;
 
-    emit SetOperator(
-        _operator,
-        msg.sender,
-        _domain,
-        _permissionIndexes,
-        _packed
-    );
+  emit SetOperator(
+    _operatorData.operator,
+    msg.sender,
+    _operatorData.domain,
+    _operatorData.permissionIndexes,
+    _packed
+  );
 }
 ```
 {% endtab %}
@@ -104,39 +101,38 @@ function setOperator(
 {% tab title="Errors" %}
 | String | Description |
 | :--- | :--- |
-| **`JBOperatorStore::_packedPermissions: INDEX_OUT_OF_BOUNDS`** | Thrown if the provided index is more than whats supported in a `uint256`. |
+| **`0x02: INDEX_OUT_OF_BOUNDS`** | Thrown if the provided index is more than whats supported in a `uint256`. |
 {% endtab %}
 
 {% tab title="Events" %}
+| Name | Data |
+| :--- | :--- |
+
+
 <table>
   <thead>
     <tr>
-      <th style="text-align:left">Name</th>
-      <th style="text-align:left">Data</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td style="text-align:left"><b><code>SetOperator</code></b>
-      </td>
-      <td style="text-align:left">
+      <th style="text-align:left"><b><code>SetOperator</code></b>
+      </th>
+      <th style="text-align:left">
         <ul>
-          <li><code>address indexed operator</code> 
+          <li><code>address indexed operator</code>
           </li>
-          <li><code>address indexed account</code> 
+          <li><code>address indexed account</code>
           </li>
-          <li><code>uint256 indexed domain</code> 
+          <li><code>uint256 indexed domain</code>
           </li>
-          <li><code>uint256[] permissionIndexes</code> 
+          <li><code>uint256[] permissionIndexes</code>
           </li>
           <li><code>uint256 packed</code>
           </li>
         </ul>
         <p><a href="../events/setoperator.md">more</a>
         </p>
-      </td>
+      </th>
     </tr>
-  </tbody>
+  </thead>
+  <tbody></tbody>
 </table>
 {% endtab %}
 

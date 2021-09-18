@@ -8,9 +8,7 @@ Interface: `IJBOperatorStore`
 {% tab title="Step by step" %}
 **Sets permissions for many operators.**
 
-\_Only an address can set its own operators.
-
-Each element of each provided array should matches up, so each array must be of the same length.\_
+_Only an address can set its own operators._
 
 Definition:
 
@@ -83,9 +81,6 @@ Definition:
   @dev
   Only an address can set its own operators.
 
-  @dev
-  Each element of each provided array should matches up, so each array must be of the same length.
-
   @param _operatorData The data that specifies the params for each operator being set.
     @dev _operators The operators to whom permissions will be given.
     @dev _domains Lists the domain that each operator is being given permissions to operate. A value of 0 serves as a wildcard domain. Applications can specify their own domain system.
@@ -114,7 +109,7 @@ function setOperators(OperatorData[] calldata _operatorData) external override {
 {% tab title="Errors" %}
 | String | Description |
 | :--- | :--- |
-| **`0x03: INDEX_OUT_OF_BOUNDS`** | Thrown if the provided index is more than whats supported in a `uint256`. |
+| **`0x02: INDEX_OUT_OF_BOUNDS`** | Thrown if the provided index is more than whats supported in a `uint256`. |
 {% endtab %}
 
 {% tab title="Events" %}

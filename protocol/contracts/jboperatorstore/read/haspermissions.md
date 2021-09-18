@@ -43,10 +43,7 @@ function hasPermissions(
 3. Make sure the `_permissionIndex` is one of the 255 indexes in a `uint256`. 
 
    ```javascript
-   require(
-       _permissionIndex <= 255,
-       "0x02: INDEX_OUT_OF_BOUNDS"
-   );
+   require(_permissionIndex <= 255, '0x01: INDEX_OUT_OF_BOUNDS');
    ```
 
 4. If the bit at the specified permission index of the `permissionsOf` the `_operator` for the specified `_account` and within the specified `_domain` is off, return `false` because all provided permissions are not on.  
@@ -92,7 +89,7 @@ function hasPermissions(
   for (uint256 _i = 0; _i < _permissionIndexes.length; _i++) {
     uint256 _permissionIndex = _permissionIndexes[_i];
 
-    require(_permissionIndex <= 255, '0x02 INDEX_OUT_OF_BOUNDS');
+    require(_permissionIndex <= 255, '0x01: INDEX_OUT_OF_BOUNDS');
 
     if (((permissionsOf[_operator][_account][_domain] >> _permissionIndex) & 1) == 0)
       return false;
@@ -105,7 +102,7 @@ function hasPermissions(
 {% tab title="Errors" %}
 | String | Description |
 | :--- | :--- |
-| **`0x02: INDEX_OUT_OF_BOUNDS`** | Thrown if the provided index is more than whats supported in a `uint256`. |
+| **`0x01: INDEX_OUT_OF_BOUNDS`** | Thrown if the provided index is more than whats supported in a `uint256`. |
 {% endtab %}
 
 {% tab title="Bug bounty" %}

@@ -36,7 +36,7 @@ function addFeedFor(
 
    ```javascript
    // There can't already be a feed for the specified currency.
-   require(feedFor[_currency][_base] == AggregatorV3Interface(address(0)), '0x05: ALREADY_EXISTS');
+   require(feedFor[_currency][_base] == AggregatorV3Interface(address(0)), '0x04: ALREADY_EXISTS');
    ```
 
 2. Get a reference to how many decimal places the provided price feed uses in the quoted rates. 
@@ -55,7 +55,7 @@ function addFeedFor(
 
    ```javascript
    // Decimals should be less than or equal to the target number of decimals.
-   require(_decimals <= TARGET_DECIMALS, '0x06: BAD_DECIMALS');
+   require(_decimals <= TARGET_DECIMALS, '0x05: BAD_DECIMALS');
    ```
 
 4. Store the provided feed for the `_currency` `_base` pair.
@@ -109,13 +109,13 @@ function addFeedFor(
   AggregatorV3Interface _feed
 ) external override onlyOwner {
   // There can't already be a feed for the specified currency.
-  require(feedFor[_currency][_base] == AggregatorV3Interface(address(0)), '0x05: ALREADY_EXISTS');
+  require(feedFor[_currency][_base] == AggregatorV3Interface(address(0)), '0x04: ALREADY_EXISTS');
 
   // Get a reference to the number of decimals the feed uses.
   uint256 _decimals = _feed.decimals();
 
   // Decimals should be less than or equal to the target number of decimals.
-  require(_decimals <= targetDecimals, '0x06: BAD_DECIMALS');
+  require(_decimals <= targetDecimals, '0x05: BAD_DECIMALS');
 
   // Set the feed.
   feedFor[_currency][_base] = _feed;
@@ -131,8 +131,8 @@ function addFeedFor(
 {% tab title="Errors" %}
 | String | Description |
 | :--- | :--- |
-| **`0x05: ALREADY_EXISTS`** | Thrown if the specified currency already has an associated price feed. |
-| **`0x06: BAD_DECIMALS`** | Thrown if the amount of decimals specified in the provided feed contract is greater than the [`targetDecimals`](../properties/targetdecimals.md). |
+| **`0x04: ALREADY_EXISTS`** | Thrown if the specified currency already has an associated price feed. |
+| **`0x05: BAD_DECIMALS`** | Thrown if the amount of decimals specified in the provided feed contract is greater than the [`targetDecimals`](../properties/targetdecimals.md). |
 {% endtab %}
 
 {% tab title="Events" %}

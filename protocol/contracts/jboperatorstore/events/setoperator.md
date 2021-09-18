@@ -2,6 +2,7 @@
 
 Emitted from:
 
+* [`setOperator`](../write/setoperator.md)
 * [`setOperators`](../write/setoperators.md)
 
 Definition:

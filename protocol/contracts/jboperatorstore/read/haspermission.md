@@ -11,33 +11,30 @@ Interface: `IJBOperatorStore`
 Definition:
 
 ```javascript
-function hasPermission(
-    address _operator,
-    address _account,
-    uint256 _domain,
-    uint256 _permissionIndex
+function hasPermissions(
+  address _operator,
+  address _account,
+  uint256 _domain,
+  uint256[] calldata _permissionIndexes
 ) external view override returns (bool) { ... }
 ```
 
 * `_operator` is the operator to check
 * `_account` is the account that has given out permission to the operator.
 * `_domain` is the domain that the operator has been given permissions to operate.
-* `_permissionIndex` is the permission to check for.
+* `_permissionIndexes` is a permission indexes to check for.
 * The view function can be accessed externally by anyone. 
 * The function does not alter state on the blockchain.
 * The function overrides a function definition from the `IJBOperatorStore` interface.
-* The function return a flag indicating whether or not the operator has the permission.
+* The function return a flag indicating whether or not the operator has the specified permission.
 
 1. Make sure the `_permissionIndex` is one of the 255 indexes in a `uint256`. 
 
    ```javascript
-   require(
-       _permissionIndex <= 255,
-       "JBOperatorStore::hasPermission: INDEX_OUT_OF_BOUNDS"
-   );
+   require(_permissionIndex <= 255, '0x00: INDEX_OUT_OF_BOUNDS');
    ```
 
-2. Return whether or not the bit at the specified permission index of the `permissionsOf` the `_operator` for the specified `_account` and within the specified `_domain` is on.  
+2. Return true if the bit is flipped on for the specified `_permissionIndex`. Otherwise return false.  
 
 
    Internal references:
@@ -45,11 +42,8 @@ function hasPermission(
    * [`permissionsOf`](../properties/permissionsof.md)
 
    ```javascript
-   return ((permissionsOf[_operator][_account][_domain] >> _permissionIndex) &
-               1) == 1;
+   return (((permissionsOf[_operator][_account][_domain] >> _permissionIndex) & 1) == 1)
    ```
-
- 
 {% endtab %}
 
 {% tab title="Only code" %}
@@ -59,25 +53,20 @@ function hasPermission(
   Whether or not an operator has the permission to take a certain action pertaining to the specified domain.
 
   @param _operator The operator to check.
-  @param _account The account that has given out permission to the operator.
+  @param _account The account that has given out permissions to the operator.
   @param _domain The domain that the operator has been given permissions to operate.
-  @param _permissionIndex The permission to check for.
+  @param _permissionIndex The permission indexes to check for.
 
   @return Whether the operator has the specified permission.
 */
 function hasPermission(
-    address _operator,
-    address _account,
-    uint256 _domain,
-    uint256 _permissionIndex
+  address _operator,
+  address _account,
+  uint256 _domain,
+  uint256 _permissionIndex
 ) external view override returns (bool) {
-    require(
-        _permissionIndex <= 255,
-        "JBOperatorStore::hasPermission: INDEX_OUT_OF_BOUNDS"
-    );
-    return
-        ((permissionsOf[_operator][_account][_domain] >> _permissionIndex) &
-            1) == 1;
+  require(_permissionIndex <= 255, '0x00: INDEX_OUT_OF_BOUNDS');
+  return (((permissionsOf[_operator][_account][_domain] >> _permissionIndex) & 1) == 1);
 }
 ```
 {% endtab %}
@@ -85,10 +74,10 @@ function hasPermission(
 {% tab title="Errors" %}
 | String | Description |
 | :--- | :--- |
-| **`JBOperatorStore::hasPermission: INDEX_OUT_OF_BOUNDS`** | Thrown if the provided index is more than whats supported in a `uint256`. |
+| **`0x00: INDEX_OUT_OF_BOUNDS`** | Thrown if the provided index is more than whats supported in a `uint256`. |
 {% endtab %}
 
-{% tab title="Bug bounty" %}
+{% tab title="" %}
 | Category | Description | Reward |
 | :--- | :--- | :--- |
 | **Optimization** | Help make this operation more efficient. | 0.5ETH |
@@ -96,6 +85,4 @@ function hasPermission(
 | **High severity** | Identify a vulnerability in this operation that could lead to data corruption or loss of funds. | 5+ETH |
 {% endtab %}
 {% endtabs %}
-
-
 
