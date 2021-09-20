@@ -27,7 +27,8 @@ function set(
         projects.ownerOf(_projectId),
         _projectId,
         JBOperations.SetSplits,
-        address(directory.terminalOf(_projectId, address(0))
+        address(
+        directory.terminalOf(_projectId, address(directory.terminalOf(_projectId, _domain))))
     ) { ... }
 ```
 
@@ -35,7 +36,7 @@ function set(
 * `_domain` is an identifier within which the splits should be considered active.
 * `_group` is an identifier between of splits being set. All splits within this `_group` must add up to within 100%.
 * `_splits` are the splits to set.
-* Through the [`requirePermissionAcceptingAlternateAddress`](../../jboperatable/modifiers/requirepermissionacceptingalternateaddress.md) modifier, the function is only accessible by the project's owner, from an operator that has been given the `JBOperations.SetSplits` permission by the project owner for the provided `_projectId` , or from the current terminal of the `_projectId`.
+* Through the [`requirePermissionAcceptingAlternateAddress`](../../jboperatable/modifiers/requirepermissionacceptingalternateaddress.md) modifier, the function is only accessible by the project's owner, from an operator that has been given the `JBOperations.SetSplits` permission by the project owner for the provided `_projectId` , or from the current terminal of the `_projectId`for the specified `_domain`.
 * The function overrides a function definition from the `IJBSplitsStore` interface.
 * The function doesn't return anything.
 
