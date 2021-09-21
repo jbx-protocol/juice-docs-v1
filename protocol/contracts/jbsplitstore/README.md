@@ -43,12 +43,6 @@ Rinkeby testnet: _Not yet deployed_
         </p>
       </td>
     </tr>
-    <tr>
-      <td style="text-align:left"><b><code>JBTerminalUtility</code></b>
-      </td>
-      <td style="text-align:left">Includes convenience functionality for checking if the message sender
-        is the current terminal of the project who data is being manipulated.</td>
-    </tr>
   </tbody>
 </table>
 
@@ -62,10 +56,11 @@ Rinkeby testnet: _Not yet deployed_
 */
 constructor(
   IJBOperatorStore _operatorStore,
-  IJBDirectory _jbDirectory,
+  IJBDirectory _directory,
   IJBProjects _projects
-) JBOperatable(_operatorStore) JBTerminalUtility(_jbDirectory) {
+) JBOperatable(_operatorStore) {
   projects = _projects;
+  directory = _directory;
 }
 ```
 
@@ -124,6 +119,19 @@ constructor(
           </li>
         </ul>
         <p><a href="properties/projects.md">more</a>
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td style="text-align:left"><b><code>directory</code></b>
+      </td>
+      <td style="text-align:left">
+        <p>Returns</p>
+        <ul>
+          <li><code>IJBTerminal terminal</code>
+          </li>
+        </ul>
+        <p><a href="properties/directory.md">more</a>
         </p>
       </td>
     </tr>

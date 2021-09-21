@@ -170,6 +170,7 @@
       * [SetSplit](protocol/contracts/jbsplitstore/events/setsplit.md)
     * [Properties](protocol/contracts/jbsplitstore/properties/README.md)
       * [projects](protocol/contracts/jbsplitstore/properties/projects.md)
+      * [directory](protocol/contracts/jbsplitstore/properties/directory.md)
       * [\_splitsOf](protocol/contracts/jbsplitstore/properties/_splitsof.md)
     * [Read](protocol/contracts/jbsplitstore/read/README.md)
       * [splitsOf](protocol/contracts/jbsplitstore/read/splitsof.md)
