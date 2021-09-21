@@ -8,7 +8,7 @@ Interface: `IJBSplitStore`
 {% tab title="Step by step" %}
 **Sets a project's splits.**
 
-_Only the owner or operator of a project, or the current terminal of the project, can set its splits._
+_Only the owner or operator of a project, or the current controller contract of the project, can set its splits._
 
 _The new splits must include any currently set splits that are locked._  
   
@@ -23,12 +23,11 @@ function set(
 )
     external
     override
-    requirePermissionAcceptingAlternateAddress(
+    requirePermissionAllowingOverride(
         projects.ownerOf(_projectId),
         _projectId,
         JBOperations.SetSplits,
-        address(
-        directory.terminalOf(_projectId, address(directory.terminalOf(_projectId, _domain))))
+        directory.controllerOf(_projectId) == msg.sender
     ) { ... }
 ```
 
@@ -36,7 +35,7 @@ function set(
 * `_domain` is an identifier within which the splits should be considered active.
 * `_group` is an identifier between of splits being set. All splits within this `_group` must add up to within 100%.
 * `_splits` are the splits to set.
-* Through the [`requirePermissionAcceptingAlternateAddress`](../../jboperatable/modifiers/requirepermissionacceptingalternateaddress.md) modifier, the function is only accessible by the project's owner, from an operator that has been given the `JBOperations.SetSplits` permission by the project owner for the provided `_projectId` , or from the current terminal of the `_projectId`for the specified `_domain`.
+* Through the [`requirePermission`](../../jboperatable/modifiers/requirepermissionacceptingalternateaddress.md) modifier, the function is only accessible by the project's owner, from an operator that has been given the `JBOperations.SetSplits` permission by the project owner for the provided `_projectId` , or from the current controller of the `_projectId`for the specified.
 * The function overrides a function definition from the `IJBSplitsStore` interface.
 * The function doesn't return anything.
 
@@ -189,7 +188,7 @@ function set(
   Sets a project's splits.
 
   @dev
-  Only the owner or operator of a project, or the current terminal of the project, can set its splits.
+  Only the owner or operator of a project, or the current controller contract of the project, can set its splits.
 
   @dev
   The new splits must include any currently set splits that are locked.
@@ -207,11 +206,11 @@ function set(
 )
   external
   override
-  requirePermissionAcceptingAlternateAddress(
+  requirePermissionAllowingOverride(
     projects.ownerOf(_projectId),
     _projectId,
     JBOperations.SET_SPLITS,
-    address(directory.terminalOf(_projectId, address(0)))
+    directory.controllerOf(_projectId) == msg.sender
   )
 {
   // Get a reference to the project's current splits.
