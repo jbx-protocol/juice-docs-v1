@@ -25,7 +25,7 @@ Rinkeby testnet: _Not yet deployed_
 
 | Contract | Description |
 | :--- | :--- |
-| **`JBTerminalUtility`** | Includes convenience functionality for checking if the message sender is the current terminal of the project who data is being manipulated. |
+| **`JBUtility`** | Includes convenience functionality for checking if the message sender is the current terminal of the project who data is being manipulated. |
 
 ## Events
 
@@ -104,7 +104,7 @@ Rinkeby testnet: _Not yet deployed_
   </tbody>
 </table>
 
-## Read
+## Properties
 
 <table>
   <thead>
@@ -114,26 +114,6 @@ Rinkeby testnet: _Not yet deployed_
     </tr>
   </thead>
   <tbody>
-    <tr>
-      <td style="text-align:left"><b><code>BASE_WEIGHT</code></b>
-      </td>
-      <td style="text-align:left">
-        <p><b>Traits</b>
-        </p>
-        <ul>
-          <li><code>constant</code>
-          </li>
-        </ul>
-        <p><b>Returns</b>
-        </p>
-        <ul>
-          <li><code>uint256 1E24</code>
-          </li>
-        </ul>
-        <p><a href="read/base_weight.md">more</a>
-        </p>
-      </td>
-    </tr>
     <tr>
       <td style="text-align:left"><b><code>MAX_CYCLE_LIMIT</code></b>
       </td>
@@ -150,7 +130,7 @@ Rinkeby testnet: _Not yet deployed_
           <li><code>uint256 32</code>
           </li>
         </ul>
-        <p><a href="read/max_cycle_limit.md">more</a>
+        <p><a href="properties/max_cycle_limit.md">more</a>
         </p>
       </td>
     </tr>
@@ -170,10 +150,23 @@ Rinkeby testnet: _Not yet deployed_
           <li><code>uint256 latestId</code>
           </li>
         </ul>
-        <p><a href="read/latestidof.md">more</a>
+        <p><a href="properties/latestidof.md">more</a>
         </p>
       </td>
     </tr>
+  </tbody>
+</table>
+
+## Read
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align:left">Function</th>
+      <th style="text-align:left">Definition</th>
+    </tr>
+  </thead>
+  <tbody>
     <tr>
       <td style="text-align:left"><b><code>get</code></b>
       </td>
