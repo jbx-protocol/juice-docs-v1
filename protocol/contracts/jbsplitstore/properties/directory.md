@@ -6,6 +6,8 @@ Interface: `IJBSplitStore`
 
 **The directory of terminals and controllers for projects.**
 
+Definition:
+
 ```javascript
 /** 
   @notice 

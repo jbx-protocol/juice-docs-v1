@@ -2,8 +2,6 @@
 
 Contract:[`JBFundingCycleStore`](../)​‌
 
-Interface: `IJBFundingCycleStore`
-
 **The maximum cycle limit value that can be set.**
 
 _The cycle limit is a property within funding cycle configurations._

@@ -2,8 +2,6 @@
 
 Contract:[`JBFundingCycleStore`](../)​‌
 
-Interface: `IJBFundingCycleStore`
-
 **The ID of the latest stored funding cycle for each project.**
 
 ```javascript
