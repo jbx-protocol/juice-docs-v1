@@ -4,6 +4,8 @@ Contract:[`JBFundingCycleStore`](../)​‌
 
 **The ID of the latest stored funding cycle for each project.**
 
+Definition:
+
 ```javascript
 /** 
   @notice 

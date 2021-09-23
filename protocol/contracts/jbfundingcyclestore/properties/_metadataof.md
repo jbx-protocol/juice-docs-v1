@@ -4,6 +4,8 @@ Contract:[`JBFundingCycleStore`](../)​‌
 
 **Stores the metadata for each funding cycle, packed into one storage slot.**
 
+Definition:
+
 ```javascript
 /** 
   @notice

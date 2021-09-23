@@ -4,6 +4,8 @@ Contract:[`JBFundingCycleStore`](../)​‌
 
 **Stores the reconfiguration properties of each funding cycle, packed into one storage slot.**
 
+Definition:
+
 ```javascript
 /** 
   @notice
