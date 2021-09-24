@@ -15,7 +15,7 @@ function splitsOf(
   uint256 _projectId,
   uint256 _domain,
   uint256 _group
-) external view override returns (Split[] memory) { ... }
+) external view override returns (JBSplit[] memory) { ... }
 ```
 
 * `_projectId` is the ID of the project to get splits for.
@@ -24,7 +24,7 @@ function splitsOf(
 * The view function can be accessed externally by anyone. 
 * The function does not alter state on the blockchain.
 * The function overrides a function definition from the `IJBSplitStore` interface.
-* The function returns an array of Split structs.
+* The function returns an array of [`JBSplit`](../../../data-structures/jbsplit.md)s.
 
 1. This function just reads and returns the stored `_splitsOf` the project, within the specified domain, for the specified group.  
 
@@ -54,7 +54,7 @@ function splitsOf(
   uint256 _projectId,
   uint256 _domain,
   uint256 _group
-) external view override returns (Split[] memory) {
+) external view override returns (JBSplit[] memory) {
   return _splitsOf[_projectId][_domain][_group];
 }
 ```

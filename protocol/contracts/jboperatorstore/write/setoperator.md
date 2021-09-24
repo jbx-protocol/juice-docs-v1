@@ -13,13 +13,10 @@ _Only an address can set its own operators._
 Definition:
 
 ```javascript
- function setOperator(OperatorData calldata _operatorData) external override { ... }
+ function setOperator(JBOperatorData calldata _operatorData) external override { ... }
 ```
 
-* `_operatorData` are the data that specifies the params for the operator being set.
-  * `_operatorData.operators` are the operator to whom permissions will be given.
-  * `_operatorData.domains` is lists the domain that each operator is being given permissions to operate. A value of 0 serves as a wildcard domain. Applications can specify their own domain system.
-  * `_operatorData.permissionIndexes` lists the permission indexes to set for each operator. Indexes must be between 0-255. Applications can specify the significance of each index.
+* `_operatorData` are the [JBOperatorData](../../../data-structures/jboperatordata.md) that specifies the params for the operator being set.
 * The function can be accessed externally by anyone. 
 * The function overrides a function definition from the `IJBOperatorStore` interface.
 * The function doesn't return anything.
@@ -80,7 +77,7 @@ Definition:
     @dev _operatorData.domains Lists the domain that each operator is being given permissions to operate. A value of 0 serves as a wildcard domain. Applications can specify their own domain system.
     @dev _operatorData.permissionIndexes Lists the permission indexes to set for each operator. Indexes must be between 0-255. Applications can specify the significance of each index.
 */
-function setOperator(OperatorData calldata _operatorData) external override {
+function setOperator(JBOperatorData calldata _operatorData) external override {
   // Pack the indexes into a uint256.
   uint256 _packed = _packedPermissions(_operatorData.permissionIndexes);
 

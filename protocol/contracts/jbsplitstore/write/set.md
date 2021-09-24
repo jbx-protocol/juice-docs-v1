@@ -19,7 +19,7 @@ function set(
     uint256 _projectId,
     uint256 _domain,
     uint256 _group,
-    Split[] memory _splits
+    JBSplit[] memory _splits
 )
     external
     override
@@ -34,7 +34,7 @@ function set(
 * `_projectId` is the ID of the project for which splits are being added.
 * `_domain` is an identifier within which the splits should be considered active.
 * `_group` is an identifier between of splits being set. All splits within this `_group` must add up to within 100%.
-* `_splits` are the splits to set.
+* `_splits` are the [`JBSplit`](../../../data-structures/jbsplit.md)s to set.
 * Through the [`requirePermission`](../../jboperatable/modifiers/requirepermissionacceptingalternateaddress.md) modifier, the function is only accessible by the project's owner, from an operator that has been given the `JBOperations.SetSplits` permission by the project owner for the provided `_projectId` , or from the current controller of the `_projectId`for the specified.
 * The function overrides a function definition from the `IJBSplitsStore` interface.
 * The function doesn't return anything.
@@ -48,7 +48,7 @@ function set(
 
    ```javascript
    // Get a reference to the project's current splits.
-   Split[] memory _currentSplits = _splitsOf[_projectId][_domain][_group];
+   JBSplit[] memory _currentSplits = _splitsOf[_projectId][_domain][_group];
    ```
 
 2. Loop through each `_currentSplits` to make sure the new `_splits` being set respect any current split bound by a lock constraint.
@@ -202,7 +202,7 @@ function set(
   uint256 _projectId,
   uint256 _domain,
   uint256 _group,
-  Split[] memory _splits
+  JBSplit[] memory _splits
 )
   external
   override
@@ -214,7 +214,7 @@ function set(
   )
 {
   // Get a reference to the project's current splits.
-  Split[] memory _currentSplits = _splitsOf[_projectId][_domain][_group];
+  JBSplit[] memory _currentSplits = _splitsOf[_projectId][_domain][_group];
 
   // Check to see if all locked splits are included.
   for (uint256 _i = 0; _i < _currentSplits.length; _i++) {

@@ -15,14 +15,14 @@ function get(uint256 _fundingCycleId)
   external
   view
   override
-  returns (FundingCycle memory fundingCycle) { ... }
+  returns (JBFundingCycle memory fundingCycle) { ... }
 ```
 
 * `_fundingCycleId` is the ID of the funding cycle to get.
 * The view function can be accessed externally by anyone. 
 * The function does not alter state on the blockchain.
 * The function overrides a function definition from the `IJBFundingCycleStore` interface.
-* The function returns a funding cycle struct.
+* The function returns a [`JBFundingCycle`](../../../data-structures/jbfundingcycle.md).
 {% endtab %}
 
 {% tab title="Only code" %}
@@ -39,7 +39,7 @@ function get(uint256 _fundingCycleId)
   external
   view
   override
-  returns (FundingCycle memory fundingCycle)
+  returns (JBFundingCycle memory fundingCycle)
 {
   // The funding cycle should exist.
   require(_fundingCycleId > 0, 'NOT_FOUND');
