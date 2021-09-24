@@ -4,7 +4,7 @@ Contract:[`JBFundingCycleStore`](../)​
 
 {% tabs %}
 {% tab title="Step by step" %}
-**The project's funding cycle that hasn't yet started, if one exists.**
+**The project's stored funding cycle that hasn't yet started, if one exists.**
 
 _A value of 0 is returned if no funding cycle was found._
 
@@ -52,7 +52,7 @@ function _standbyOf(uint256 _projectId) private view returns (uint256 fundingCyc
 ```javascript
 /**
   @notice 
-  The project's funding cycle that hasn't yet started, if one exists.
+  The project's stored funding cycle that hasn't yet started, if one exists.
     
   @dev
   A value of 0 is returned if no funding cycle was found.
