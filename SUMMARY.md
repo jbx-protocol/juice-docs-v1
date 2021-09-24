@@ -177,6 +177,7 @@
       * [queuedOf](protocol/contracts/jbfundingcyclestore/read/queuedof.md)
       * [currentOf](protocol/contracts/jbfundingcyclestore/read/currentof.md)
       * [currentBallotStateOf](protocol/contracts/jbfundingcyclestore/read/currentballotstateof.md)
+      * [\_getStruct](protocol/contracts/jbfundingcyclestore/read/_getstruct.md)
     * [Write](protocol/contracts/jbfundingcyclestore/write/README.md)
       * [configureFor](protocol/contracts/jbfundingcyclestore/write/configurefor.md)
       * [tapFrom](protocol/contracts/jbfundingcyclestore/write/tapfrom.md)

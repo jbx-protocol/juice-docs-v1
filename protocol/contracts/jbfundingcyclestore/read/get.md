@@ -23,6 +23,84 @@ function get(uint256 _fundingCycleId)
 * The function does not alter state on the blockchain.
 * The function overrides a function definition from the `IJBFundingCycleStore` interface.
 * The function returns a [`JBFundingCycle`](../../../data-structures/jbfundingcycle.md).
+
+1. Check that the provided funding cycle ID is valid. 
+
+   ```javascript
+   // The funding cycle should exist.
+   require(_fundingCycleId > 0, '0x13 NOT_FOUND');
+   ```
+
+2. Try to get the full funding cycle struct for the provided ID.  
+
+
+   _Internal references:_
+
+   * [`_getStruct`](_getstruct.md)
+
+   ```javascript
+   // See if there's stored info for the provided ID.
+   fundingCycle = _getStruct(_fundingCycleId);
+   ```
+
+3. If the funding cycle exists in storage, return it.
+
+   ```javascript
+   // If so, return it.
+   if (fundingCycle.number > 0) return fundingCycle;
+   ```
+
+4. If the funding cycle was not found in storage, it's possible that it still exists as a consequence of a previous funding cycle rolling over, but hasn't yet been stored. Check to see if there's a current funding cycle.  
+
+
+   _Internal references:_
+
+   * [`currentOf`](currentof.md)
+
+   ```javascript
+   // Get the current funding cycle. It might exist but not yet have been stored.
+   fundingCycle = currentOf(_fundingCycleId);
+   ```
+
+5. If the funding cycle ID being queried matches the current funding cycle of the project, return it.
+
+   ```javascript
+    // If the IDs match, return it.
+    if (fundingCycle.id == _fundingCycleId) return fundingCycle;
+   ```
+
+6. The upcoming funding cycle might also not yet be in storage, but might be reference-able.  
+
+
+   _Internal references:_
+
+   * [`queuedOf`](queuedof.md)
+
+   ```javascript
+   // Get the queued funding cycle. It might exist but not yet have been stored.
+   fundingCycle = queuedOf(_fundingCycleId);
+   ```
+
+7. If the funding cycle ID being queried matches the queued funding cycle of the project, return it.
+
+   ```javascript
+   // If the IDs match, return it.
+   if (fundingCycle.id == _fundingCycleId) return fundingCycle;
+   ```
+
+8. If the ID being queried hasn't been found, return an empty Funding cycle struct.  
+
+
+   _Internal references:_
+
+   * [`_getStruct`](_getstruct.md)
+
+   ```javascript
+   // Return an empty Funding Cycle.
+   return _getStruct(0);
+   ```
+
+  
 {% endtab %}
 
 {% tab title="Only code" %}
@@ -42,7 +120,7 @@ function get(uint256 _fundingCycleId)
   returns (JBFundingCycle memory fundingCycle)
 {
   // The funding cycle should exist.
-  require(_fundingCycleId > 0, 'NOT_FOUND');
+  require(_fundingCycleId > 0, '0x13 NOT_FOUND');
 
   // See if there's stored info for the provided ID.
   fundingCycle = _getStruct(_fundingCycleId);
