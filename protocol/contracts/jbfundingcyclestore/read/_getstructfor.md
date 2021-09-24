@@ -3,31 +3,31 @@
 Contract:[`JBFundingCycleStore`](../)​
 
 {% tabs %}
-{% tab title="First Tab" %}
+{% tab title="Step by step" %}
 **The currency ballot state of the project.**
 
 Definition:
 
 ```javascript
-function _getStructFor(uint256 _id) private view returns (JBFundingCycle memory _fundingCycle) { ... }
+function _getStructFor(uint256 _id) private view returns (JBFundingCycle memory fundingCycle) { ... }
 ```
 
 * `_id` is the funding cycle ID to get the full struct for.
-* The view function can be accessed externally by anyone.
+* The view function is private to this contract.
 * The function does not alter state on the blockchain.
-* The function returns a [`JBFundingCycle`](../../../data-structures/jbfundingcycle.md) stored in the `_fundingCycle` reference.
+* The function returns a [`JBFundingCycle`](../../../data-structures/jbfundingcycle.md) stored in the `fundingCycle` reference.
 
 1. If the `_id` provided is 0, return an empty funding cycle.
 
    ```javascript
    // Return an empty funding cycle if the ID specified is 0.
-   if (_id == 0) return _fundingCycle;
+   if (_id == 0) return fundingCycle;
    ```
 
 2. Set the funding cycle's id to the provided value.
 
    ```javascript
-   _fundingCycle.id = _id;
+   fundingCycle.id = _id;
    ```
 
 3. Get the stored intrinsic properties of the funding cycle. Populate the struct values by de-packing the `uint256`.  
@@ -39,11 +39,11 @@ function _getStructFor(uint256 _id) private view returns (JBFundingCycle memory 
    ```javascript
    uint256 _packedIntrinsicProperties = _packedIntrinsicPropertiesOf[_id];
 
-   _fundingCycle.weight = uint256(uint80(_packedIntrinsicProperties));
-   _fundingCycle.projectId = uint256(uint56(_packedIntrinsicProperties >> 80));
-   _fundingCycle.basedOn = uint256(uint48(_packedIntrinsicProperties >> 136));
-   _fundingCycle.start = uint256(uint48(_packedIntrinsicProperties >> 184));
-   _fundingCycle.number = uint256(uint24(_packedIntrinsicProperties >> 232));
+   fundingCycle.weight = uint256(uint80(_packedIntrinsicProperties));
+   fundingCycle.projectId = uint256(uint56(_packedIntrinsicProperties >> 80));
+   fundingCycle.basedOn = uint256(uint48(_packedIntrinsicProperties >> 136));
+   fundingCycle.start = uint256(uint48(_packedIntrinsicProperties >> 184));
+   fundingCycle.number = uint256(uint24(_packedIntrinsicProperties >> 232));
    ```
 
 4. Get the stored configuration properties of the funding cycle. Populate the struct values by de-packing the `uint256`.  
@@ -55,13 +55,13 @@ function _getStructFor(uint256 _id) private view returns (JBFundingCycle memory 
    ```javascript
    uint256 _packedConfigurationProperties = _packedConfigurationPropertiesOf[_id];
   
-   _fundingCycle.ballot = IJBFundingCycleBallot(address(uint160(_packedConfigurationProperties)));
-   _fundingCycle.configured = uint256(uint48(_packedConfigurationProperties >> 160));
-   _fundingCycle.duration = uint256(uint16(_packedConfigurationProperties >> 208));
-   _fundingCycle.currency = uint256(uint8(_packedConfigurationProperties >> 224));
-   _fundingCycle.fee = uint256(uint8(_packedConfigurationProperties >> 232));
-   _fundingCycle.discountRate = uint256(uint8(_packedConfigurationProperties >> 240));
-   _fundingCycle.cycleLimit = uint256(uint8(_packedConfigurationProperties >> 248));  
+   fundingCycle.ballot = IJBFundingCycleBallot(address(uint160(_packedConfigurationProperties)));
+   fundingCycle.configured = uint256(uint48(_packedConfigurationProperties >> 160));
+   fundingCycle.duration = uint256(uint16(_packedConfigurationProperties >> 208));
+   fundingCycle.currency = uint256(uint8(_packedConfigurationProperties >> 224));
+   fundingCycle.fee = uint256(uint8(_packedConfigurationProperties >> 232));
+   fundingCycle.discountRate = uint256(uint8(_packedConfigurationProperties >> 240));
+   fundingCycle.cycleLimit = uint256(uint8(_packedConfigurationProperties >> 248));  
    ```
 
 5. Populate the `target` property of the struct by reading from what's stored in `_targetOf`.  
@@ -71,7 +71,7 @@ function _getStructFor(uint256 _id) private view returns (JBFundingCycle memory 
       * [`_targetOf`](../properties/_targetof.md)
 
    ```javascript
-   _fundingCycle.target = _targetOf[_id];
+   fundingCycle.target = _targetOf[_id];
    ```
 
 6. Populate the `tapped` property of the struct by reading from what's stored in `_tappedAmountOf`.  
@@ -81,7 +81,7 @@ function _getStructFor(uint256 _id) private view returns (JBFundingCycle memory 
       * [`_tappedAmountOf`](../properties/_targetof.md)
 
    ```javascript
-   _fundingCycle.tapped = _tappedAmountOf[_id];
+   fundingCycle.tapped = _tappedAmountOf[_id];
    ```
 
 7. Populate the `metadata` property of the struct by reading from what's stored in `_metadataOf`.  
@@ -91,7 +91,7 @@ function _getStructFor(uint256 _id) private view returns (JBFundingCycle memory 
       * [`_metadataOf`](../properties/_metadataof.md)
 
    ```javascript
-   _fundingCycle.metadata = _metadataOf[_id];
+   fundingCycle.metadata = _metadataOf[_id];
    ```
 
 .
@@ -107,33 +107,33 @@ function _getStructFor(uint256 _id) private view returns (JBFundingCycle memory 
 
   @return _fundingCycle The funding cycle struct.
 */
-function _getStructFor(uint256 _id) private view returns (JBFundingCycle memory _fundingCycle) {
+function _getStructFor(uint256 _id) private view returns (JBFundingCycle memory fundingCycle) {
   // Return an empty funding cycle if the ID specified is 0.
-  if (_id == 0) return _fundingCycle;
+  if (_id == 0) return fundingCycle;
 
-  _fundingCycle.id = _id;
+  fundingCycle.id = _id;
 
   uint256 _packedIntrinsicProperties = _packedIntrinsicPropertiesOf[_id];
 
-  _fundingCycle.weight = uint256(uint80(_packedIntrinsicProperties));
-  _fundingCycle.projectId = uint256(uint56(_packedIntrinsicProperties >> 80));
-  _fundingCycle.basedOn = uint256(uint48(_packedIntrinsicProperties >> 136));
-  _fundingCycle.start = uint256(uint48(_packedIntrinsicProperties >> 184));
-  _fundingCycle.number = uint256(uint24(_packedIntrinsicProperties >> 232));
+  fundingCycle.weight = uint256(uint80(_packedIntrinsicProperties));
+  fundingCycle.projectId = uint256(uint56(_packedIntrinsicProperties >> 80));
+  fundingCycle.basedOn = uint256(uint48(_packedIntrinsicProperties >> 136));
+  fundingCycle.start = uint256(uint48(_packedIntrinsicProperties >> 184));
+  fundingCycle.number = uint256(uint24(_packedIntrinsicProperties >> 232));
 
   uint256 _packedConfigurationProperties = _packedConfigurationPropertiesOf[_id];
   
-  _fundingCycle.ballot = IJBFundingCycleBallot(address(uint160(_packedConfigurationProperties)));
-  _fundingCycle.configured = uint256(uint48(_packedConfigurationProperties >> 160));
-  _fundingCycle.duration = uint256(uint16(_packedConfigurationProperties >> 208));
-  _fundingCycle.currency = uint256(uint8(_packedConfigurationProperties >> 224));
-  _fundingCycle.fee = uint256(uint8(_packedConfigurationProperties >> 232));
-  _fundingCycle.discountRate = uint256(uint8(_packedConfigurationProperties >> 240));
-  _fundingCycle.cycleLimit = uint256(uint8(_packedConfigurationProperties >> 248));
+  fundingCycle.ballot = IJBFundingCycleBallot(address(uint160(_packedConfigurationProperties)));
+  fundingCycle.configured = uint256(uint48(_packedConfigurationProperties >> 160));
+  fundingCycle.duration = uint256(uint16(_packedConfigurationProperties >> 208));
+  fundingCycle.currency = uint256(uint8(_packedConfigurationProperties >> 224));
+  fundingCycle.fee = uint256(uint8(_packedConfigurationProperties >> 232));
+  fundingCycle.discountRate = uint256(uint8(_packedConfigurationProperties >> 240));
+  fundingCycle.cycleLimit = uint256(uint8(_packedConfigurationProperties >> 248));
   
-  _fundingCycle.target = _targetOf[_id];
-  _fundingCycle.tapped = _tappedAmountOf[_id];
-  _fundingCycle.metadata = _metadataOf[_id];
+  fundingCycle.target = _targetOf[_id];
+  fundingCycle.tapped = _tappedAmountOf[_id];
+  fundingCycle.metadata = _metadataOf[_id];
 }
 ```
 {% endtab %}
