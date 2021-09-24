@@ -29,7 +29,7 @@ function queuedOf(uint256 _projectId) public view override returns (JBFundingCyc
 
    _Internal references:_
 
-   * [`_getStrucFor`](_getstructfor.md)
+   * [`_getStructFor`](_getstructfor.md)
 
    ```javascript
    // The project must have funding cycles.
@@ -149,13 +149,13 @@ function queuedOf(uint256 _projectId) public view override returns (JBFundingCyc
 /**
   @notice 
   The funding cycle that's next up for the specified project.
-
-  @dev 
-  This runs roughly similar logic to `_configurableOf`.
   
   @dev
   Returns an empty funding cycle with an ID of 0 if a queued funding cycle of the project is not found.
 
+  @dev 
+  This runs roughly similar logic to `_configurableOf`.
+  
   @param _projectId The ID of the project to get the queued funding cycle of.
 
   @return _fundingCycle The queued funding cycle.

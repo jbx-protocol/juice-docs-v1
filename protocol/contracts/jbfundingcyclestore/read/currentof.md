@@ -1,10 +1,15 @@
 # currentOf
 
+Contract:[`JBFundingCycleStore`](../)​‌
+
+Interface: `IJBFundingCycleStore`
+
 {% tabs %}
 {% tab title="Step by step" %}
 **The funding cycle that is currently active for the specified project.**
 
 _Returns an empty funding cycle with an ID of 0 if a current funding cycle of the project is not found.  
+  
 This runs roughly similar logic to_ [_`_tappableOf`_](_tappableof.md)_.  
 ****_  
 Definition:
@@ -155,6 +160,9 @@ function currentOf(uint256 _projectId)
   @notice 
   The funding cycle that is currently active for the specified project.
 
+  @dev
+  Returns an empty funding cycle with an ID of 0 if a current funding cycle of the project is not found.
+  
   @dev 
   This runs very similar logic to `_tappableOf`.
 
