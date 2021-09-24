@@ -6,7 +6,7 @@ Interface: `IJBFundingCycleStore`
 
 {% tabs %}
 {% tab title="Step by step" %}
-**Get the funding cycle with the given ID.**
+**The funding cycle that's next up for the specified project.**
 
 _Returns an empty funding cycle with an ID of 0 if a queued funding cycle of the project is not found.  
   
@@ -60,19 +60,7 @@ function queuedOf(uint256 _projectId) public view override returns (JBFundingCyc
    if (_fundingCycleId > 0) return _getStructFor(_fundingCycleId);
    ```
 
-4. Get the funding cycle thats the `_eligibleOf` the project. A queued funding cycle can be constructed based on the properties of this funding cycle.  
-
-
-   _Internal references:_
-
-   * [`_eligibleOf`](_getstructfor.md)
-
-   ```javascript
-   // Get a reference to the eligible funding cycle.
-   _fundingCycleId = _eligibleOf(_projectId);
-   ```
-
-5. If there's no eligible cycle, get a reference to the latest cycle stored for the project.  
+4. Get the last stored funding cycle for the project. A queued funding cycle can be constructed based on the properties of this funding cycle.  
 
 
    _Internal references:_
@@ -80,15 +68,11 @@ function queuedOf(uint256 _projectId) public view override returns (JBFundingCyc
    * [`latestIdOf`](../properties/latestidof.md)
 
    ```javascript
-   // If an eligible funding cycle doesn't exists...
-   if (_fundingCycleId == 0) {
-     // No upcoming funding cycle found that is eligible to become active,
-     // so use the ID of the latest active funding cycle, which carries the last configured cycle.
-     _fundingCycleId = latestIdOf[_projectId];
-   }
+   // Get a reference to the latest stored funding cycle for the project.
+   _fundingCycleId = latestIdOf[_projectId];
    ```
 
-6. Get the funding cycle struct for the latest funding cycle.   
+5. Get the funding cycle struct for the latest funding cycle.   
 
 
    _Internal references:_
@@ -100,7 +84,7 @@ function queuedOf(uint256 _projectId) public view override returns (JBFundingCyc
    JBFundingCycle memory _fundingCycle = _getStructfor(_fundingCycleId);
    ```
 
-7. If it has a duration of 0, there can't be a queued funding cycle since configurations are being made manually instead of on a schedule.   
+6. If it has a duration of 0, there can't be a queued funding cycle since configurations are being made manually instead of on a schedule.   
 
 
    _Internal references:_
@@ -112,7 +96,7 @@ function queuedOf(uint256 _projectId) public view override returns (JBFundingCyc
    if (_fundingCycle.duration == 0) return _getStructFor(0);
    ```
 
-8. Otherwise if it has been approved, return a queued cycle based on it.  
+7. Otherwise if it has been approved, return a queued cycle based on it.  
 
 
    _Internal references:_
@@ -126,26 +110,32 @@ function queuedOf(uint256 _projectId) public view override returns (JBFundingCyc
    if (_isApproved(_fundingCycle)) return _mockFundingCycleBasedOn(_fundingCycle, false);
    ```
 
-9. Get a reference to the funding cycle that the current eligible cycle is based on which must be the latest approved cycle configuration.
+8. Get a reference to the funding cycle that the current eligible cycle is based on which must be the latest approved cycle configuration.
 
    ```javascript
    // If it hasn't been approved, set the ID to be its base funding cycle, which carries the last approved configuration.
    _fundingCycleId = _fundingCycle.basedOn;
    ```
 
-10. If there's not a reference to a possible funding cycle to base a queued cycle on, there must not be a queued cycle.  
+9. If there's not a reference to a possible funding cycle to base a queued cycle on, there must not be a queued cycle.  
+
+
+   _Internal references:_
+
+   * [`_getStructFor`](_getstructfor.md)
+
+   ```javascript
+   // A funding cycle must exist.
+   if (_fundingCycleId == 0) return _getStructFor(0);
+   ```
+
+10. Return a funding cycle based on the one current referenced, which must be the last approved cycle.  
 
 
     _Internal references:_
 
     * [`_getStructFor`](_getstructfor.md)
-
-    ```javascript
-    // A funding cycle must exist.
-    if (_fundingCycleId == 0) return _getStructFor(0);
-    ```
-
-11. Return a funding cycle based on the one current referenced, which must be the last approved cycle.
+    * [`_mockFundingCycleBasedOn`](_mockfundingcyclebasedon.md)
 
     ```javascript
     // Return a mock of what its second next up funding cycle would be.
@@ -158,10 +148,10 @@ function queuedOf(uint256 _projectId) public view override returns (JBFundingCyc
 ```javascript
 /**
   @notice 
-  The funding cycle that's next up for a project, and therefor not currently accepting payments.
+  The funding cycle that's next up for the specified project.
 
   @dev 
-  This runs roughly similar logic to `_configurable`.
+  This runs roughly similar logic to `_configurableOf`.
   
   @dev
   Returns an empty funding cycle with an ID of 0 if a queued funding cycle of the project is not found.
@@ -180,15 +170,8 @@ function queuedOf(uint256 _projectId) public view override returns (JBFundingCyc
   // If it exists, return it.
   if (_fundingCycleId > 0) return _getStructFor(_fundingCycleId);
 
-  // Get a reference to the eligible funding cycle.
-  _fundingCycleId = _eligibleOf(_projectId);
-
-  // If an eligible funding cycle doesn't exists...
-  if (_fundingCycleId == 0) {
-    // No upcoming funding cycle found that is eligible to become active,
-    // so use the ID of the latest active funding cycle, which carries the last configured cycle.
-    _fundingCycleId = latestIdOf[_projectId];
-  }
+  // Get a reference to the latest stored funding cycle for the project.
+  _fundingCycleId = latestIdOf[_projectId];
     
   // Get the necessary properties for the standby funding cycle.
   JBFundingCycle memory _fundingCycle = _getStructFor(_fundingCycleId);
