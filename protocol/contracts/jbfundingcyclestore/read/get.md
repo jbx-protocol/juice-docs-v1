@@ -28,7 +28,7 @@ function get(uint256 _fundingCycleId)
 
    ```javascript
    // The funding cycle should exist.
-   require(_fundingCycleId > 0, '0x13 NOT_FOUND');
+   require(_fundingCycleId > 0, '0x13 BAD_ID');
    ```
 
 2. Try to get the full funding cycle struct for the provided ID.  
@@ -36,11 +36,11 @@ function get(uint256 _fundingCycleId)
 
    _Internal references:_
 
-   * [`_getStruct`](_getstruct.md)
+   * [`_getStructFor`](_getstructfor.md)
 
    ```javascript
    // See if there's stored info for the provided ID.
-   fundingCycle = _getStruct(_fundingCycleId);
+   fundingCycle = _getStructFor(_fundingCycleId);
    ```
 
 3. If the funding cycle exists in storage, return it.
@@ -93,11 +93,11 @@ function get(uint256 _fundingCycleId)
 
    _Internal references:_
 
-   * [`_getStruct`](_getstruct.md)
+   * [`_getStructFor`](_getstructfor.md)
 
    ```javascript
    // Return an empty Funding Cycle.
-   return _getStruct(0);
+   return _getStructFor(0);
    ```
 
   
@@ -120,10 +120,10 @@ function get(uint256 _fundingCycleId)
   returns (JBFundingCycle memory fundingCycle)
 {
   // The funding cycle should exist.
-  require(_fundingCycleId > 0, '0x13 NOT_FOUND');
+  require(_fundingCycleId > 0, '0x13 BAD_ID');
 
   // See if there's stored info for the provided ID.
-  fundingCycle = _getStruct(_fundingCycleId);
+  fundingCycle = _getStructFor(_fundingCycleId);
   
   // If so, return it.
   if (fundingCycle.number > 0) return fundingCycle;
@@ -141,13 +141,23 @@ function get(uint256 _fundingCycleId)
   if (fundingCycle.id == _fundingCycleId) return fundingCycle;
 
   // Return an empty Funding Cycle.
-  return _getStruct(0);
+  return _getStructFor(0);
 }
 ```
 {% endtab %}
 
-{% tab title="Bug bounty" %}
+{% tab title="Errors" %}
+| String | Description |
+| :--- | :--- |
+| **`0x13: BAD_ID`** | Thrown if the ID can't be resolved. |
+{% endtab %}
 
+{% tab title="Bug bounty" %}
+| Category | Description | Reward |
+| :--- | :--- | :--- |
+| **Optimization** | Help make this operation more efficient. | 0.5ETH |
+| **Low severity** | Identify a vulnerability in this operation that could lead to an inconvenience for a user of the protocol or for a protocol developer. | 1ETH |
+| **High severity** | Identify a vulnerability in this operation that could lead to data corruption or loss of funds. | 5+ETH |
 {% endtab %}
 {% endtabs %}
 
