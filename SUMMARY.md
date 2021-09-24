@@ -14,6 +14,7 @@
 ## 👾Protocol
 
 * [Overview](protocol/overview.md)
+* [Data structures](protocol/data-structures.md)
 * [Terminology](protocol/terminology.md)
 * [Contract APIs](protocol/contracts/README.md)
   * [JBProjects](protocol/contracts/jbprojects/README.md)
