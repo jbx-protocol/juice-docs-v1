@@ -173,7 +173,7 @@
       * [\_packedIntrinsicPropertiesOf](protocol/contracts/jbfundingcyclestore/properties/_packedintrinsicpropertiesof.md)
       * [\_metadataOf](protocol/contracts/jbfundingcyclestore/properties/_metadataof.md)
       * [\_targetOf](protocol/contracts/jbfundingcyclestore/properties/_targetof.md)
-      * [\_tappedOf](protocol/contracts/jbfundingcyclestore/properties/_tappedof.md)
+      * [\_tappedAmountOf](protocol/contracts/jbfundingcyclestore/properties/_tappedamountof.md)
     * [Read](protocol/contracts/jbfundingcyclestore/read/README.md)
       * [get](protocol/contracts/jbfundingcyclestore/read/get.md)
       * [queuedOf](protocol/contracts/jbfundingcyclestore/read/queuedof.md)

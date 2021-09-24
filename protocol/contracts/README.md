@@ -111,7 +111,3 @@
   </tbody>
 </table>
 
-A full architecture diagram showing the paths through which each contract's transactions can be called is found [here](https://www.figma.com/file/YIf64bRfSXjCDSPb49uAwv/Juicebox-Technical-Docs-Copy?node-id=262%3A8).
-
-![](../../.gitbook/assets/architecture%20%282%29.png)
-
