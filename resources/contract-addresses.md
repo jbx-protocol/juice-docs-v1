@@ -6,9 +6,9 @@ description: Addresses and Etherscan links for deployed JB Protocol and JBX DAO 
 
 ## Juicebox Protocol
 
-TerminalDirectory Mainnet: [`0x46C9999A2EDCD5aA177ed7E8af90c68b7d75Ba46`](https://etherscan.io/address/0x46c9999a2edcd5aa177ed7e8af90c68b7d75ba46)
+### Mainnet
 
-TerminalDirectory Kovan: [`0x71BA69044CbD951AC87124cBEdbC0334AB21F26D`](https://kovan.etherscan.io/address/0x71BA69044CbD951AC87124cBEdbC0334AB21F26D)
+TerminalDirectory: [`0x46C9999A2EDCD5aA177ed7E8af90c68b7d75Ba46`](https://etherscan.io/address/0x46c9999a2edcd5aa177ed7e8af90c68b7d75ba46)
 
 Active7DaysFundingCycleBallot: [`0xEf7480b6E7CEd228fFB0854fe49A428F562a8982`](https://etherscan.io/address/0xEf7480b6E7CEd228fFB0854fe49A428F562a8982)
 
@@ -33,6 +33,10 @@ TerminalDirectory: [`0x46C9999A2EDCD5aA177ed7E8af90c68b7d75Ba46`](https://ethers
 TerminalV1: [`0xd569D3CCE55b71a8a3f3C418c329A66e5f714431`](https://etherscan.io/address/0xd569D3CCE55b71a8a3f3C418c329A66e5f714431)
 
 TicketBooth: [`0xee2eBCcB7CDb34a8A822b589F9E8427C24351bfc`](https://etherscan.io/address/0xee2eBCcB7CDb34a8A822b589F9E8427C24351bfc)
+
+### Kovan
+
+TerminalDirectory Kovan: [`0x71BA69044CbD951AC87124cBEdbC0334AB21F26D`](https://kovan.etherscan.io/address/0x71BA69044CbD951AC87124cBEdbC0334AB21F26D)
 
 ## Juicebox DAO
 
