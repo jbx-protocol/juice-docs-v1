@@ -26,7 +26,7 @@ OperatorStore: [`0xab47304D987390E27Ce3BC0fA4Fe31E3A98B0db2`](https://etherscan.
 
 Prices: [`0xa9537Cc42555564206D4E57c0eb6943d56E83A30`](https://etherscan.io/address/0xab47304D987390E27Ce3BC0fA4Fe31E3A98B0db2)
 
-Projects: [`0x9b5a4053FfBB11cA9cd858AAEE43cc95ab435418`](https://etherscan.io/address/0x9b5a4053FfBB11cA9cd858AAEE43cc95ab435418)
+Projects: [`0x9b5a4053FfBB11cA9cd858AAEE43cc95ab435418`](https://etherscan.io/address/0x9b5a4053FfBB11cA9cd858AAEE43cc95ab435418)\`\`
 
 TerminalDirectory: [`0x46C9999A2EDCD5aA177ed7E8af90c68b7d75Ba46`](https://etherscan.io/address/0x46C9999A2EDCD5aA177ed7E8af90c68b7d75Ba46)
 
