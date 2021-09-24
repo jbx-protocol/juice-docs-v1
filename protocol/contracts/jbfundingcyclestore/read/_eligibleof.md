@@ -1,5 +1,7 @@
 # \_eligibleOf
 
+Contract:[`JBFundingCycleStore`](../)​
+
 {% tabs %}
 {% tab title="Step by step" %}
 **The project's stored funding cycle that has started and hasn't yet expired.**
