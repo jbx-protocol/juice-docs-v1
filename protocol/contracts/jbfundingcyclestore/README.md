@@ -180,7 +180,7 @@ Rinkeby testnet: _Not yet deployed_
         <p><b>Returns</b>
         </p>
         <ul>
-          <li><code>FundingCycle fundingCycle</code>
+          <li><a href="../../data-structures/jbfundingcycle.md"><code>JBFundingCycle</code></a><code>fundingCycle</code>
           </li>
         </ul>
         <p><a href="read/get.md">more</a>
@@ -200,7 +200,7 @@ Rinkeby testnet: _Not yet deployed_
         <p><b>Returns</b>
         </p>
         <ul>
-          <li><code>FundingCycle fundingCycle</code>
+          <li><a href="../../data-structures/jbfundingcycle.md"><code>JBFundingCycle</code></a><code>fundingCycle</code>
           </li>
         </ul>
         <p><a href="read/queuedof.md">more</a>
@@ -220,7 +220,7 @@ Rinkeby testnet: _Not yet deployed_
         <p><b>Returns</b>
         </p>
         <ul>
-          <li><code>FundingCycle fundingCycle</code>
+          <li><a href="../../data-structures/jbfundingcycle.md"><code>JBFundingCycle</code></a><code>fundingCycle</code>
           </li>
         </ul>
         <p><a href="read/currentof.md">more</a>
@@ -240,7 +240,7 @@ Rinkeby testnet: _Not yet deployed_
         <p><b>Returns</b>
         </p>
         <ul>
-          <li><code>BallotState ballotState</code>
+          <li><a href="../../enums/jbballotstate.md"><code>JBBallotState</code></a><code>ballotState</code>
           </li>
         </ul>
         <p><a href="read/currentballotstateof.md">more</a>
@@ -267,7 +267,7 @@ Rinkeby testnet: _Not yet deployed_
         <p><b>Traits</b>
         </p>
         <ul>
-          <li><code>onlyTerminal</code>
+          <li><a href="../jbutility/modifiers/onlycontroller.md"><code>onlyController</code></a>
           </li>
         </ul>
         <p><b>Params</b>
@@ -275,7 +275,7 @@ Rinkeby testnet: _Not yet deployed_
         <ul>
           <li><code>uint256 _projectId</code> 
           </li>
-          <li><code>FundingCycleProperties _properties</code> 
+          <li><a href="../../data-structures/jbfundingcycledata.md"><code>JBFundingCycleData</code></a><code>_properties</code> 
           </li>
           <li><code>uint256 _metadata</code> 
           </li>
@@ -287,7 +287,7 @@ Rinkeby testnet: _Not yet deployed_
         <p><b>Returns</b>
         </p>
         <ul>
-          <li><code>FundingCycle fundingCycle</code>
+          <li><a href="../../data-structures/jbfundingcycle.md"><code>JBFundingCycle</code></a><code>fundingCycle</code>
           </li>
         </ul>
         <p><a href="write/configurefor.md">more</a>
@@ -301,7 +301,7 @@ Rinkeby testnet: _Not yet deployed_
         <p><b>Traits</b>
         </p>
         <ul>
-          <li><code>onlyTerminal</code>
+          <li><a href="../jbutility/modifiers/onlycontroller.md"><code>onlyController</code></a>
           </li>
         </ul>
         <p><b>Params</b>
@@ -315,7 +315,7 @@ Rinkeby testnet: _Not yet deployed_
         <p><b>Returns</b>
         </p>
         <ul>
-          <li><code>FundingCycle fundingCycle</code>
+          <li><a href="../../data-structures/jbfundingcycle.md"><code>JBFundingCycle</code></a><code>fundingCycle</code>
           </li>
         </ul>
         <p><a href="write/tapfrom.md">more</a>
