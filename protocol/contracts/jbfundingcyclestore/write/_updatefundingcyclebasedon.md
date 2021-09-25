@@ -63,7 +63,7 @@ function _updateFundingCycleBasedOn(
       : _baseFundingCycle;
 
     // Save the configuration efficiently.
-    _packAndStoreConfigurationProperties(
+    _packAndStoreConfigurationPropertiesOf(
       fundingCycleId,
       _fundingCycleToCopy.configured,
       _cycleLimit,

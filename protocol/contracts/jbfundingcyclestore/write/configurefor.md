@@ -19,7 +19,7 @@ function configureFor(
   uint256 _metadata,
   uint256 _fee,
   bool _configureActiveFundingCycle
-) external override onlyController(_projectId) returns (JBFundingCycle memory fundingCycle) { ... }
+) external override onlyController(_projectId) returns (JBFundingCycle memory) { ... }
 ```
 
 * `_projectId` is the ID of the project being configured.
@@ -80,7 +80,12 @@ function configureFor(
    uint256 _configured = block.timestamp;
    ```
 
-8. Find the ID of the funding cycle that should be configured.
+8. Find the ID of the funding cycle that should be configured.  
+
+
+   _Internal references:_
+
+   * [`_configurableOf`](_configurableof.md)
 
    ```javascript
    // Gets the ID of the funding cycle to reconfigure.
@@ -186,7 +191,7 @@ function configureFor(
   @param _fee The fee that this configuration incurs when tapping.
   @param _configureActiveFundingCycle A flag indicating if a funding cycle that has already started should be configurable.
 
-  @return fundingCycle The funding cycle that the configuration will take effect during.
+  @return The funding cycle that the configuration will take effect during.
 */
 function configureFor(
   uint256 _projectId,
@@ -194,7 +199,7 @@ function configureFor(
   uint256 _metadata,
   uint256 _fee,
   bool _configureActiveFundingCycle
-) external override onlyController(_projectId) returns (JBFundingCycle memory fundingCycle) {
+) external override onlyController(_projectId) returns (JBFundingCycle memory) {
   // Duration must fit in a uint16.
   require(_data.duration <= type(uint16).max, '0x15: BAD_DURATION');
 
