@@ -1,4 +1,4 @@
-# configureFor
+# \_configurableOf
 
 {% tabs %}
 {% tab title="Step by step" %}

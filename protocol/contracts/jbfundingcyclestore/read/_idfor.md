@@ -1,4 +1,4 @@
-# \_isApproved
+# \_idFor
 
 {% tabs %}
 {% tab title="Step by step" %}
@@ -9,16 +9,15 @@
 ```javascript
 /** 
   @notice 
-  Checks to see if the provided funding cycle is approved according to the correct ballot.
+  Constructs a unique ID from a project ID and a number.
 
-  @param _fundingCycle The ID of the funding cycle to get an approval flag for.
+  @param _projectId The ID of the project to use in the ID.
+  @param _number The number to use in the ID
 
-  @return The approval flag.
+  @return An ID.
 */
-function _isApproved(JBFundingCycle memory _fundingCycle) private view returns (bool) {
-  return
-    _ballotStateOf(_fundingCycle.id, _fundingCycle.configured, _fundingCycle.basedOn) ==
-    JBBallotState.Approved;
+function _idFor(uint256 _projectId, uint256 _number) private pure returns (uint256) {
+  return uint256(uint56(_projectId) | uint24(_number));
 }
 ```
 {% endtab %}

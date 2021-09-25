@@ -10,7 +10,7 @@ Interface: `IJBFundingCycleStore`
 
 _Returns an empty funding cycle with an ID of 0 if a current funding cycle of the project is not found.  
   
-This runs roughly similar logic to_ [_`_tappableOf`_](_tappableof.md)_.  
+This runs roughly similar logic to_ [_`_tappableOf`_](../write/_tappableof.md)_.  
 ****_  
 Definition:
 

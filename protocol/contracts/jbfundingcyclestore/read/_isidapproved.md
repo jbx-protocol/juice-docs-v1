@@ -1,4 +1,4 @@
-# \_isApproved
+# \_isIdApproved
 
 {% tabs %}
 {% tab title="Step by step" %}
@@ -9,16 +9,15 @@
 ```javascript
 /** 
   @notice 
-  Checks to see if the provided funding cycle is approved according to the correct ballot.
+  Checks to see if the funding cycle of the provided ID is approved according to the correct ballot.
 
-  @param _fundingCycle The ID of the funding cycle to get an approval flag for.
+  @param _fundingCycleId The ID of the funding cycle to get an approval flag for.
 
   @return The approval flag.
 */
-function _isApproved(JBFundingCycle memory _fundingCycle) private view returns (bool) {
-  return
-    _ballotStateOf(_fundingCycle.id, _fundingCycle.configured, _fundingCycle.basedOn) ==
-    JBBallotState.Approved;
+function _isIdApproved(uint256 _fundingCycleId) private view returns (bool) {
+  JBFundingCycle memory _fundingCycle = _getStructFor(_fundingCycleId);
+  return _isApproved(_fundingCycle);
 }
 ```
 {% endtab %}
