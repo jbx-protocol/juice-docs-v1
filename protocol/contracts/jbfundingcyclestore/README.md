@@ -48,7 +48,7 @@ Rinkeby testnet: _Not yet deployed_
           </li>
           <li><code>uint256 reconfigured</code> 
           </li>
-          <li><code>FundingCycleProperties properties</code> 
+          <li><a href="../../data-structures/jbfundingcycledata.md"><code>JBFundingCycleData</code></a><code>properties</code> 
           </li>
           <li><code>uint256 metadata</code> 
           </li>

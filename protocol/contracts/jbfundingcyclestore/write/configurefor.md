@@ -1,97 +1,320 @@
 # configureFor
 
+Contract:[`JBFundingCycleStore`](../)​‌
+
+Interface: `IJBFundingCycleStore`
+
 {% tabs %}
 {% tab title="Step by step" %}
+**Configures the next eligible funding cycle for the specified project.**
 
+_Only a project's current controller can configure its funding cycles._  
+  
+Definition:
+
+```javascript
+function configureFor(
+  uint256 _projectId,
+  JBFundingCycleData calldata _data,
+  uint256 _metadata,
+  uint256 _fee,
+  bool _configureActiveFundingCycle
+) external override onlyController(_projectId) returns (JBFundingCycle memory fundingCycle) { ... }
+```
+
+* `_projectId` is the ID of the project being configured.
+* `_data` is the [`JBFundingCycleData`](../../../data-structures/jbfundingcycledata.md)for the configuration.
+* `_metadata` is data to associate with this funding cycle configuration.
+* `_fee` is the fee that this configuration incurs when tapping.
+* `_configureActiveFundingCycle` is a flag indicating if a funding cycle that has already started should be configurable.
+* Through the [`onlyController`](../../jbutility/modifiers/onlycontroller.md) modifier, the function can only be accessed by the controller of the `_projectId`. 
+* The function overrides a function definition from the `IJBFundingCycleStore` interface.
+* Returns the [`JBFundingCycle`](../../../data-structures/jbfundingcycle.md) that was configured.
+
+1. Make sure the `_data.duration` fits in a `uint16`.
+
+   ```javascript
+   // Duration must fit in a uint16.
+   require(_data.duration <= type(uint16).max, '0x15: BAD_DURATION');
+   ```
+
+2. Make sure `_data.cycleLimit` is within the `MAX_CYCLE_LIMIT`.
+
+   ```javascript
+   // Currency must be less than the limit.
+   require(_data.cycleLimit <= MAX_CYCLE_LIMIT, '0x16: BAD_CYCLE_LIMIT');
+   ```
+
+3. Make sure the `_data.discountRate` is at most 201.
+
+   ```javascript
+   // Discount rate token must be less than or equal to 100%. A value of 201 means non-recurring.
+   require(_data.discountRate <= 201, '0x17: BAD_DISCOUNT_RATE');
+   ```
+
+4. Make sure the `_data.currency` fits in a `uint8`.
+
+   ```javascript
+   // Currency must fit into a uint8.
+   require(_data.currency <= type(uint8).max, '0x18: BAD_CURRENCY');
+   ```
+
+5. Make sure the `_data.weight` fits in a `uint80`.
+
+   ```javascript
+   // Weight must fit into a uint8.
+   require(_data.weight <= type(uint80).max, '0x19: BAD_WEIGHT');
+   ```
+
+6. Make sure the provided `_fee` is at most 200.
+
+   ```javascript
+   // Fee must be less than or equal to 100%.
+   require(_fee <= 200, '0x1a: BAD_FEE');
+   ```
+
+7. Get a reference to the time at which the configuration is occurring.
+
+   ```javascript
+   // Set the configuration timestamp is now.
+   uint256 _configured = block.timestamp;
+   ```
+
+8. Find the ID of the funding cycle that should be configured.
+
+   ```javascript
+   // Gets the ID of the funding cycle to reconfigure.
+   uint256 _fundingCycleId = _configurableOf(
+     _projectId,
+     _configured,
+     _data.weight,
+     _configureActiveFundingCycle
+   );
+   ```
+
+9. Store all of the configuration properties provided onto the `_fundingCycleId`. These properties can all be packed into one `uint256` storage slot.  
+
+
+   _Internal references:_
+
+   * [`_packAndStoreConfigurationPropertiesOf`](_packandstoreconfigurationpropertiesof.md)
+
+   ```javascript
+   // Store the configuration.
+   _packAndStoreConfigurationPropertiesOf(
+     _fundingCycleId,
+     _configured,
+     _data.cycleLimit,
+     _data.ballot,
+     _data.duration,
+     _data.currency,
+     _fee,
+     _data.discountRate
+   );
+   ```
+
+10. Store the provided `_data.target` for the `_fundingCycleId`.  
+
+
+    _Internal references:_
+
+    * [`_targetOf`](../properties/_targetof.md)
+
+    ```javascript
+    // Set the target amount.
+    _targetOf[_fundingCycleId] = _data.target;
+    ```
+
+11. Store the provided `_metadata` for the `_fundingCycleId`.  
+
+
+    _Internal references:_
+
+    * [`_metadataOf`](../properties/_metadataof.md)
+
+    ```javascript
+    // Set the metadata.
+    _metadataOf[_fundingCycleId] = _metadata;
+    ```
+
+12. Emit a `Configure` event with the all relevant parameters.   
+
+
+    _Event references:_
+
+    * [`Configure`](../events/configure.md) 
+
+    ```javascript
+    emit Configure(_fundingCycleId, _projectId, _configured, _data, _metadata, msg.sender);
+    ```
+
+13. Return the [`JBFundingCycle`](../../../data-structures/jbfundingcycle.md) struct that carries the new configuration.  
+
+
+    _Internal references:_
+
+    * [`_getStructFor`](../read/_getstructfor.md)
+
+    ```javascript
+    return _getStructFor(_fundingCycleId);
+    ```
 {% endtab %}
 
 {% tab title="Only code" %}
 ```javascript
 /**
   @notice 
-  Returns the configurable funding cycle for this project if it exists, otherwise creates one.
+  Configures the next eligible funding cycle for the specified project.
 
-  @param _projectId The ID of the project to find a configurable funding cycle for.
-  @param _configured The time at which the configuration is occuring.
-  @param _configureActiveFundingCycle If the active funding cycle should be configurable. Otherwise the next funding cycle will be used.
+  @dev
+  Only a project's current controller can configure its funding cycles.
 
-  @return fundingCycleId The ID of the configurable funding cycle.
+  @param _projectId The ID of the project being configured.
+  @param _data The funding cycle configuration.
+    @dev _data.target The amount that the project wants to receive in each funding cycle. 18 decimals.
+    @dev _data.currency The currency of the `_target`. Send 0 for ETH or 1 for USD.
+    @dev _data.duration The duration of the funding cycle for which the `_target` amount is needed. Measured in days. 
+      Set to 0 for no expiry and to be able to reconfigure anytime.
+    @dev _data.cycleLimit The number of cycles that this configuration should last for before going back to the last permanent. This does nothing for a project's first funding cycle.
+    @dev _data.discountRate A number from 0-200 indicating how valuable a contribution to this funding cycle is compared to previous funding cycles.
+      If it's 0, each funding cycle will have equal weight.
+      If the number is 100, a contribution to the next funding cycle will only give you 90% of tickets given to a contribution of the same amount during the current funding cycle.
+      If the number is 200, a contribution to the next funding cycle will only give you 80% of tickets given to a contribution of the same amoutn during the current funding cycle.
+      If the number is 201, an non-recurring funding cycle will get made.
+    @dev _data.ballot The new ballot that will be used to approve subsequent reconfigurations.
+  @param _metadata Data to associate with this funding cycle configuration.
+  @param _fee The fee that this configuration incurs when tapping.
+  @param _configureActiveFundingCycle A flag indicating if a funding cycle that has already started should be configurable.
+
+  @return fundingCycle The funding cycle that the configuration will take effect during.
 */
-function _configurableOf(
+function configureFor(
   uint256 _projectId,
-  uint256 _configured,
-  uint256 _weight,
+  JBFundingCycleData calldata _data,
+  uint256 _metadata,
+  uint256 _fee,
   bool _configureActiveFundingCycle
-) private returns (uint256 fundingCycleId) {
-  // If there's not yet a funding cycle for the project, return the ID of a newly created one.
-  if (latestIdOf[_projectId] == 0)
-    return _initFor(_projectId, _getStructFor(0), block.timestamp, _weight, false);
+) external override onlyController(_projectId) returns (JBFundingCycle memory fundingCycle) {
+  // Duration must fit in a uint16.
+  require(_data.duration <= type(uint16).max, '0x15: BAD_DURATION');
 
-  // Get the standby funding cycle's ID.
-  fundingCycleId = _standbyOf(_projectId);
+  // Currency must be less than the limit.
+  require(_data.cycleLimit <= MAX_CYCLE_LIMIT, '0x16: BAD_CYCLE_LIMIT');
 
-  // If it exists, make sure its updated, then return it.
-  if (fundingCycleId > 0) {
-    // Get the funding cycle that the specified one is based on.
-    JBFundingCycle memory _baseFundingCycle = _getStructFor(
-      _getStructFor(fundingCycleId).basedOn
-    );
+  // Discount rate token must be less than or equal to 100%. A value of 201 means non-recurring.
+  require(_data.discountRate <= 201, '0x17: BAD_DISCOUNT_RATE');
 
-    // The base's ballot must have ended.
-    _updateFundingCycleBasedOn(
-      _baseFundingCycle,
-      _getTimeAfterBallotOf(_baseFundingCycle, _configured),
-      _weight,
-      false
-    );
-    return fundingCycleId;
-  }
+  // Currency must fit into a uint8.
+  require(_data.currency <= type(uint8).max, '0x18: BAD_CURRENCY');
 
-  // Get the active funding cycle's ID.
-  fundingCycleId = _eligibleOf(_projectId);
+  // Weight must fit into a uint8.
+  require(_data.weight <= type(uint80).max, '0x19: BAD_WEIGHT');
 
-  // If the ID of an eligible funding cycle exists, it's approved, and active funding cycles are configurable, return it.
-  if (fundingCycleId > 0) {
-    if (!_isIdApproved(fundingCycleId)) {
-      // If it hasn't been approved, set the ID to be the based funding cycle,
-      // which carries the last approved configuration.
-      fundingCycleId = _getStructFor(fundingCycleId).basedOn;
-    } else if (_configureActiveFundingCycle) {
-      return fundingCycleId;
-    }
-  } else {
-    // Get the ID of the latest funding cycle which has the latest reconfiguration.
-    fundingCycleId = latestIdOf[_projectId];
-  }
+  // Fee must be less than or equal to 100%.
+  require(_fee <= 200, '0x1a: BAD_FEE');
 
-  // Determine if the configurable funding cycle can only take effect on or after a certain date.
-  uint256 _mustStartOnOrAfter;
+  // Set the configuration timestamp is now.
+  uint256 _configured = block.timestamp;
 
-  // Base off of the active funding cycle if it exists.
-  JBFundingCycle memory _fundingCycle = _getStructFor(fundingCycleId);
+  // Gets the ID of the funding cycle to reconfigure.
+  uint256 _fundingCycleId = _configurableOf(
+    _projectId,
+    _configured,
+    _data.weight,
+    _configureActiveFundingCycle
+  );
 
-  // Make sure the funding cycle is recurring.
-  require(_fundingCycle.discountRate < 201, 'NON_RECURRING');
+  // Store the configuration.
+  _packAndStoreConfigurationPropertiesOf(
+    _fundingCycleId,
+    _configured,
+    _data.cycleLimit,
+    _data.ballot,
+    _data.duration,
+    _data.currency,
+    _fee,
+    _data.discountRate
+  );
 
-  if (_configureActiveFundingCycle) {
-    // If the duration is zero, always go back to the original start.
-    if (_fundingCycle.duration == 0) {
-      _mustStartOnOrAfter = _fundingCycle.start;
-    } else {
-      // Set to the start time of the current active start time.
-      uint256 _timeFromStartMultiple = (block.timestamp - _fundingCycle.start) %
-        (_fundingCycle.duration * SECONDS_IN_DAY);
-      _mustStartOnOrAfter = block.timestamp - _timeFromStartMultiple;
-    }
-  } else {
-    // The ballot must have ended.
-    _mustStartOnOrAfter = _getTimeAfterBallotOf(_fundingCycle, _configured);
-  }
+  // Set the target amount.
+  _targetOf[_fundingCycleId] = _data.target;
 
-  // Return the newly initialized configurable funding cycle.
-  fundingCycleId = _initFor(_projectId, _fundingCycle, _mustStartOnOrAfter, _weight, false);
+  // Set the metadata.
+  _metadataOf[_fundingCycleId] = _metadata;
+
+  emit Configure(_fundingCycleId, _projectId, _configured, _data, _metadata, msg.sender);
+
+  return _getStructFor(_fundingCycleId);
 }
 ```
+{% endtab %}
+
+{% tab title="Errors" %}
+| String | Description |
+| :--- | :--- |
+| **`0x15: BAD_DURATION`** | Thrown if the provided duration is greater than 2^16 - 1 \(65,535\) |
+| **`0x16: BAD_CYCLE_LIMIT`** | Thrown if the provided cycle limit is greater than the [`MAX_CYCLE_LIMIT`](../properties/max_cycle_limit.md). |
+| ~~**`0x17: BAD_DISCOUNT_RATE`**~~ | Thrown if the provided discount rate is greater than 201. |
+| ~~**`0x18: BAD_CURRENCY`**~~ | Thrown if the provided currency is greater than 2^8 - 1 \(255\) |
+| ~~**`0x19: BAD_WEIGHT`**~~ | Thrown if the provided weight is greater than 2^80 - 1 \(1.2E24\) |
+| ~~**`0x1a: BAD_FEE`**~~ | Thrown if the provided fee is greater than 200. |
+{% endtab %}
+
+{% tab title="Events" %}
+<table>
+  <thead>
+    <tr>
+      <th style="text-align:left">Name</th>
+      <th style="text-align:left">Data</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align:left"><b><code>Configure</code></b>
+      </td>
+      <td style="text-align:left">
+        <ul>
+          <li><code>uint256 indexed fundingCycleId</code> 
+          </li>
+          <li><code>uint256 indexed projectId</code> 
+          </li>
+          <li><code>uint256 reconfigured</code> 
+          </li>
+          <li><a href="../../../data-structures/jbfundingcycledata.md"><code>JBFundingCycleData</code></a><code>properties</code> 
+          </li>
+          <li><code>uint256 metadata</code> 
+          </li>
+          <li><code>address caller</code>
+          </li>
+        </ul>
+        <p><a href="../events/configure.md">more</a>
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td style="text-align:left"><b><code>Init</code></b>
+      </td>
+      <td style="text-align:left">
+        <ul>
+          <li><code>uint256 indexed fundingCycleId</code> 
+          </li>
+          <li><code>uint256 indexed projectId</code> 
+          </li>
+          <li><code>uint256 indexed number</code> 
+          </li>
+          <li><code>uint256 basedOn</code> 
+          </li>
+          <li><code>uint256 weight</code> 
+          </li>
+          <li><code>uint256 start</code>
+          </li>
+        </ul>
+        <p><a href="../events/init.md">more</a>
+        </p>
+      </td>
+    </tr>
+  </tbody>
+</table>
 {% endtab %}
 
 {% tab title="Bug bounty" %}

@@ -201,7 +201,7 @@
       * [\_initFor](protocol/contracts/jbfundingcyclestore/write/_initfor.md)
       * [\_updateFundingCycleBasedOn](protocol/contracts/jbfundingcyclestore/write/_updatefundingcyclebasedon.md)
       * [\_packAndStoreIntrinsicPropertiesOf](protocol/contracts/jbfundingcyclestore/write/_packandstoreintrinsicpropertiesof.md)
-      * [\_packAndStoreConfigurationProperties](protocol/contracts/jbfundingcyclestore/write/_packandstoreconfigurationproperties.md)
+      * [\_packAndStoreConfigurationPropertiesOf](protocol/contracts/jbfundingcyclestore/write/_packandstoreconfigurationpropertiesof.md)
   * [JBSplitStore](protocol/contracts/jbsplitstore/README.md)
     * [Events](protocol/contracts/jbsplitstore/events/README.md)
       * [SetSplit](protocol/contracts/jbsplitstore/events/setsplit.md)
@@ -243,6 +243,9 @@
       * [requirePermissionAcceptingAlternateAddress](protocol/contracts/jboperatable/modifiers/requirepermissionacceptingalternateaddress.md)
     * [Read](protocol/contracts/jboperatable/read/README.md)
       * [operatorStore](protocol/contracts/jboperatable/read/operatorstore.md)
+  * [JBUtility](protocol/contracts/jbutility/README.md)
+    * [Modifiers](protocol/contracts/jbutility/modifiers/README.md)
+      * [onlyController](protocol/contracts/jbutility/modifiers/onlycontroller.md)
 
 ## 🗳Governance
 
