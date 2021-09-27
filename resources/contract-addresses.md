@@ -14,7 +14,7 @@ Active7DaysFundingCycleBallot: [`0xEf7480b6E7CEd228fFB0854fe49A428F562a8982`](ht
 
 Active3DaysFundingCycleBallot: [`0x6d6da471703647Fd8b84FFB1A29e037686dBd8b2`](https://etherscan.io/address/0x6d6da471703647Fd8b84FFB1A29e037686dBd8b2)
 
-Active1DayFundingCycleBallot: [`0x6d6da471703647Fd8b84FFB1A29e037686dBd8b2`](https://etherscan.io/address/0x6d6da471703647Fd8b84FFB1A29e037686dBd8b2)
+Active1DayFundingCycleBallot: N/A
 
 FundingCycles: [`0xf507B2A1dD7439201eb07F11E1d62AfB29216e2E`](https://etherscan.io/address/0xf507B2A1dD7439201eb07F11E1d62AfB29216e2E)
 
