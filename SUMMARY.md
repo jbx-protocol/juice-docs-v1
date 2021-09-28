@@ -168,6 +168,7 @@
       * [Init](protocol/contracts/jbfundingcyclestore/events/init.md)
     * [Properties](protocol/contracts/jbfundingcyclestore/properties/README.md)
       * [MAX\_CYCLE\_LIMIT](protocol/contracts/jbfundingcyclestore/properties/max_cycle_limit.md)
+      * [\_SECONDS\_IN\_DAY](protocol/contracts/jbfundingcyclestore/properties/_seconds_in_day.md)
       * [latestIdOf](protocol/contracts/jbfundingcyclestore/properties/latestidof.md)
       * [\_packedConfigurationPropertiesOf](protocol/contracts/jbfundingcyclestore/properties/_packedconfigurationpropertiesof.md)
       * [\_packedIntrinsicPropertiesOf](protocol/contracts/jbfundingcyclestore/properties/_packedintrinsicpropertiesof.md)
