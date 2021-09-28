@@ -33,8 +33,9 @@ function _getStructFor(uint256 _id) private view returns (JBFundingCycle memory 
 3. Get the stored intrinsic properties of the funding cycle. Populate the struct values by de-packing the `uint256`.  
 
 
-   1. _Internal references:_
-      * [`_packedInstrinsicPropertiesOf`](../properties/_packedintrinsicpropertiesof.md)
+   _Internal references:_
+
+   * [`_packedInstrinsicPropertiesOf`](../properties/_packedintrinsicpropertiesof.md)
 
    ```javascript
    uint256 _packedIntrinsicProperties = _packedIntrinsicPropertiesOf[_id];
@@ -49,8 +50,9 @@ function _getStructFor(uint256 _id) private view returns (JBFundingCycle memory 
 4. Get the stored configuration properties of the funding cycle. Populate the struct values by de-packing the `uint256`.  
 
 
-   1. _Internal references:_
-      * [`_packedConfigurationPropertiesOf`](../properties/_packedconfigurationpropertiesof.md)
+   _\Internal references:_
+
+   * [`_packedConfigurationPropertiesOf`](../properties/_packedconfigurationpropertiesof.md)
 
    ```javascript
    uint256 _packedConfigurationProperties = _packedConfigurationPropertiesOf[_id];
@@ -67,8 +69,9 @@ function _getStructFor(uint256 _id) private view returns (JBFundingCycle memory 
 5. Populate the `target` property of the struct by reading from what's stored in `_targetOf`.  
 
 
-   1. _Internal references:_
-      * [`_targetOf`](../properties/_targetof.md)
+   _Internal references:_
+
+   * [`_targetOf`](../properties/_targetof.md)
 
    ```javascript
    fundingCycle.target = _targetOf[_id];
@@ -77,8 +80,9 @@ function _getStructFor(uint256 _id) private view returns (JBFundingCycle memory 
 6. Populate the `tapped` property of the struct by reading from what's stored in `_tappedAmountOf`.  
 
 
-   1. _Internal references:_
-      * [`_tappedAmountOf`](../properties/_targetof.md)
+   _Internal references:_
+
+   * [`_tappedAmountOf`](../properties/_targetof.md)
 
    ```javascript
    fundingCycle.tapped = _tappedAmountOf[_id];
@@ -87,8 +91,9 @@ function _getStructFor(uint256 _id) private view returns (JBFundingCycle memory 
 7. Populate the `metadata` property of the struct by reading from what's stored in `_metadataOf`.  
 
 
-   1. _Internal references:_
-      * [`_metadataOf`](../properties/_metadataof.md)
+   _Internal references:_
+
+   * [`_metadataOf`](../properties/_metadataof.md)
 
    ```javascript
    fundingCycle.metadata = _metadataOf[_id];

@@ -145,7 +145,12 @@ function currentOf(uint256 _projectId)
    _fundingCycle = _getStructFor(_fundingCycleId);
    ```
 
-9. Return a funding cycle based on the one currently referenced. This funding cycle will be stored once it has been tapped.
+9. Return a funding cycle based on the one currently referenced. This funding cycle will be stored once it has been tapped. The mock funding cycle is allowed to have started already, which is why a `true` flag is passed in.  
+
+
+   _Internal references:_
+
+   * [`_mockFundingCycleBasedOn`](_mockfundingcyclebasedon.md)
 
    ```javascript
    // Return a mock of what the next funding cycle would be like,
@@ -220,7 +225,7 @@ function currentOf(uint256 _projectId)
   _fundingCycle = _getStructFor(_fundingCycleId);
 
   // Return a mock of what the next funding cycle would be like,
-  // which would become active one it has been tapped.
+  // which would become active once it has been tapped.
   return _mockFundingCycleBasedOn(_fundingCycle, true);
 }
 ```

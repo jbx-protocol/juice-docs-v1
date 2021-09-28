@@ -1,5 +1,7 @@
 # \_deriveCycleLimitFrom
 
+Contract:[`JBFundingCycleStore`](../)​
+
 {% tabs %}
 {% tab title="Step by step" %}
 

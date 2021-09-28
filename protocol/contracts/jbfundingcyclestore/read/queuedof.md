@@ -96,7 +96,9 @@ function queuedOf(uint256 _projectId) public view override returns (JBFundingCyc
    if (_fundingCycle.duration == 0) return _getStructFor(0);
    ```
 
-7. Otherwise if it has been approved, return a queued cycle based on it.  
+7. Otherwise if it has been approved, return a queued cycle based on it. The mock funding cycle is not allowed to have started already, which is why a `false` flag is passed in.
+
+  
 
 
    _Internal references:_
@@ -129,7 +131,9 @@ function queuedOf(uint256 _projectId) public view override returns (JBFundingCyc
    if (_fundingCycleId == 0) return _getStructFor(0);
    ```
 
-10. Return a funding cycle based on the one current referenced, which must be the last approved cycle.  
+10. Return a funding cycle based on the one current referenced, which must be the last approved cycle. The mock funding cycle is not allowed to have started already, which is why a `false` flag is passed in.
+
+  
 
 
     _Internal references:_
