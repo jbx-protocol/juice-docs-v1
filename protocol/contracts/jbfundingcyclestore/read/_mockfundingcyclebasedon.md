@@ -190,8 +190,7 @@ function _mockFundingCycleBasedOn(JBFundingCycle memory _baseFundingCycle, bool 
   JBFundingCycle memory _latestPermanentFundingCycle = _baseFundingCycle.cycleLimit == 0
     ? _baseFundingCycle
     : _latestPermanentCycleBefore(_baseFundingCycle);
-
-
+    
   // The distance of the current time to the start of the next possible funding cycle.
   uint256 _timeFromImmediateStartMultiple;
 
