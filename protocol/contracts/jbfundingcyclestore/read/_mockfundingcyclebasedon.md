@@ -4,7 +4,9 @@ Contract:[`JBFundingCycleStore`](../)​
 
 {% tabs %}
 {% tab title="Step by step" %}
-**A view of the funding cycle that would be created based on the provided one if the project doesn't approve a reconfiguration ahead of it starting.**
+**A view of the funding cycle that would be created based on the provided one if the project doesn't approve a reconfiguration ahead of it starting.**  
+  
+_Returns an empty funding cycle if there can't be a mock funding cycle based on the provided one._
 
 Definition:
 
@@ -171,7 +173,10 @@ function _mockFundingCycleBasedOn(JBFundingCycle memory _baseFundingCycle, bool 
 /** 
   @notice 
   A view of the funding cycle that would be created based on the provided one if the project doesn't make a reconfiguration.
-
+ 
+  @dev
+  Returns an empty funding cycle if there can't be a mock funding cycle based on the provided one.
+  
   @param _baseFundingCycle The funding cycle that the resulting funding cycle should follow.
   @param _allowMidCycle A flag indicating if the mocked funding cycle is allowed to already be mid cycle.
 
@@ -261,4 +266,6 @@ function _mockFundingCycleBasedOn(JBFundingCycle memory _baseFundingCycle, bool 
 | **High severity** | Identify a vulnerability in this operation that could lead to data corruption or loss of funds. | 5+ETH |
 {% endtab %}
 {% endtabs %}
+
+
 
