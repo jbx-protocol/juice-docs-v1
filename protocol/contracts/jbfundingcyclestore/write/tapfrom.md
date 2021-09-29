@@ -57,7 +57,7 @@ function tapFrom(uint256 _projectId, uint256 _amount)
    uint256 _newTappedAmount = _tappedAmountOf[_fundingCycleId] + _amount;
    ```
 
-4. The amount being tapped plus what's already be tapped must be within the configured target for the funding cycle.
+4. The amount being tapped plus what's already been tapped must be within the configured target for the funding cycle.
 
    ```javascript
    // Amount must be within what is still tappable.
@@ -71,12 +71,12 @@ function tapFrom(uint256 _projectId, uint256 _amount)
    _tappedAmountOf[_fundingCycleId] = _newTappedAmount;
    ```
 
-6. Emit a `Configure` event with the all relevant parameters.   
+6. Emit a `Tap` event with the all relevant parameters.   
 
 
    _Event references:_
 
-   * [`Configure`](../events/configure.md) 
+   * [`Tap`](../events/tap.md) 
 
    ```javascript
    emit Tap(_fundingCycleId, _projectId, _amount, _newTappedAmount, msg.sender);
