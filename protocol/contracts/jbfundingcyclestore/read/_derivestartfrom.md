@@ -106,9 +106,8 @@ function _deriveStartFrom(
     ```javascript
       // Add increments of duration as necessary to satisfy the threshold.
       while (_mustStartOnOrAfter > start) start = start + _cycleDurationInSeconds;
-    ```
 
-  
+    ```
 {% endtab %}
 
 {% tab title="Only code" %}
