@@ -19,7 +19,7 @@ Contract:[`JBFundingCycleStore`](../)​
   @return start The inclusive nunmber of cycles remaining.
 */
 function _deriveCycleLimitFrom(JBFundingCycle memory _fundingCycle, uint256 _start)
-  internal
+  private
   pure
   returns (uint256)
 {

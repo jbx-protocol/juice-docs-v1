@@ -13,7 +13,7 @@ function _deriveNumberFrom(
   JBFundingCycle memory _baseFundingCycle,
   JBFundingCycle memory _latestPermanentFundingCycle,
   uint256 _start
-) internal pure returns (uint256 number) { ... }
+) private pure returns (uint256 number) { ... }
 ```
 
 * `_baseFundingCycle` is The [`JBFundingCycle`](../../../data-structures/jbfundingcycle.md) to make the calculation for.
@@ -117,7 +117,7 @@ function _deriveNumberFrom(
   JBFundingCycle memory _baseFundingCycle,
   JBFundingCycle memory _latestPermanentFundingCycle,
   uint256 _start
-) internal pure returns (uint256 number) {
+) private pure returns (uint256 number) {
   // A subsequent cycle to one with a duration of 0 should be the next number.
   if (_baseFundingCycle.duration == 0) return _baseFundingCycle.number + 1;
 

@@ -12,7 +12,7 @@ Definition:
 
 ```javascript
 function _mockFundingCycleBasedOn(JBFundingCycle memory _baseFundingCycle, bool _allowMidCycle)
-  internal
+  private
   view
   returns (JBFundingCycle memory) { ... }
 ```
@@ -183,7 +183,7 @@ function _mockFundingCycleBasedOn(JBFundingCycle memory _baseFundingCycle, bool 
   @return A mock of what the next funding cycle will be.
 */
 function _mockFundingCycleBasedOn(JBFundingCycle memory _baseFundingCycle, bool _allowMidCycle)
-  internal
+  private
   view
   returns (JBFundingCycle memory)
 {

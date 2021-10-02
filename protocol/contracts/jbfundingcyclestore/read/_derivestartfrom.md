@@ -13,7 +13,7 @@ function _deriveStartFrom(
   JBFundingCycle memory _baseFundingCycle,
   JBFundingCycle memory _latestPermanentFundingCycle,
   uint256 _mustStartOnOrAfter
-) internal pure returns (uint256 start) { ... }
+) private pure returns (uint256 start) { ... }
 ```
 
 * `_baseFundingCycle` is The [`JBFundingCycle`](../../../data-structures/jbfundingcycle.md) to make the calculation for.
@@ -126,7 +126,7 @@ function _deriveStartFrom(
   JBFundingCycle memory _baseFundingCycle,
   JBFundingCycle memory _latestPermanentFundingCycle,
   uint256 _mustStartOnOrAfter
-) internal pure returns (uint256 start) {
+) private pure returns (uint256 start) {
   // A subsequent cycle to one with a duration of 0 should start as soon as possible.
   if (_baseFundingCycle.duration == 0) return _mustStartOnOrAfter;
 

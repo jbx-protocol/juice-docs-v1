@@ -13,7 +13,7 @@ function _deriveWeightFrom(
   JBFundingCycle memory _baseFundingCycle,
   JBFundingCycle memory _latestPermanentFundingCycle,
   uint256 _start
-) internal pure returns (uint256 weight) { ... }
+) private pure returns (uint256 weight) { ... }
 ```
 
 * `_baseFundingCycle` is The [`JBFundingCycle`](../../../data-structures/jbfundingcycle.md) to make the calculation for.
@@ -131,7 +131,7 @@ function _deriveWeightFrom(
   JBFundingCycle memory _baseFundingCycle,
   JBFundingCycle memory _latestPermanentFundingCycle,
   uint256 _start
-) internal pure returns (uint256 weight) {
+) private pure returns (uint256 weight) {
   // A subsequent cycle to one with a duration of 0 should have the next possible weight.
   if (_baseFundingCycle.duration == 0)
     return PRBMath.mulDiv(_baseFundingCycle.weight, 400 - _baseFundingCycle.discountRate, 400);
