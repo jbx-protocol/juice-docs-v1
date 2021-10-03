@@ -76,7 +76,15 @@ function _deriveStartFrom(
      _mustStartOnOrAfter > _baseFundingCycleLimitEnd;
    ```
 
-7. If the `_shouldRevertToLatestPermanentCycle`, use the duration from the `_latestPermanentFundingCycle` rather than the base.
+7. If the latest permanent cycle should be used and it has a no duration, start as soon as possible.
+
+   ```javascript
+   // If the latest permanent cycle should be used and it has a no duration, start as soon as possible.
+   if (_shouldRevertToLatestPermanentCycle && _latestPermanentFundingCycle.duration == 0)
+   return _mustStartOnOrAfter;
+   ```
+
+8. If the `_shouldRevertToLatestPermanentCycle`, use the duration from the `_latestPermanentFundingCycle` rather than the base.
 
    ```javascript
    // Use the duration of the permanent funding cycle as the base if needed.
@@ -85,28 +93,28 @@ function _deriveStartFrom(
      : _cycleDurationInSeconds;
    ```
 
-8. Save a reference to the amount of seconds since the `_mustStartOnOrAfter` time that results in a start time that might satisfy the specified constraints.
+9. Save a reference to the amount of seconds since the `_mustStartOnOrAfter` time that results in a start time that might satisfy the specified constraints. If the modulo would cause a divide-by-0 error, instead return 0 since the next start can be immediately.
 
    ```javascript
    // The amount of seconds since the `_mustStartOnOrAfter` time that results in a start time that might satisfy the specified constraints.
+   // If the modulo would cause a divide-by-0 error, instead return 0 since the next start can be immediately.
    uint256 _timeFromImmediateStartMultiple = (_mustStartOnOrAfter -
-     (_shouldRevertToLatestPermanentCycle ? _baseFundingCycleLimitEnd : _nextImmediateStart)) %
-     _cycleDurationInSeconds;
+       (_shouldRevertToLatestPermanentCycle ? _baseFundingCycleLimitEnd : _nextImmediateStart)) %
+       _cycleDurationInSeconds
    ```
 
-9. Save a reference to the first possible start time.
-
-   ```javascript
-   // A reference to the first possible start timestamp.
-   start = _mustStartOnOrAfter - _timeFromImmediateStartMultiple;
-   ```
-
-10. It's possible that the `start` time doesn't satisfy the specified constraints. If so, add increments of the funding cycle's duration as necessary to satisfy the threshold.
+10. Save a reference to the first possible start time.
 
     ```javascript
-      // Add increments of duration as necessary to satisfy the threshold.
-      while (_mustStartOnOrAfter > start) start = start + _cycleDurationInSeconds;
+    // A reference to the first possible start timestamp.
+    start = _mustStartOnOrAfter - _timeFromImmediateStartMultiple;
+    ```
 
+11. It's possible that the `start` time doesn't satisfy the specified constraints. If so, add increments of the funding cycle's duration as necessary to satisfy the threshold.
+
+    ```javascript
+    // Add increments of duration as necessary to satisfy the threshold.
+    while (_mustStartOnOrAfter > start) start = start + _cycleDurationInSeconds;
     ```
 {% endtab %}
 
@@ -151,15 +159,20 @@ function _deriveStartFrom(
     _latestPermanentFundingCycle.id &&
     _mustStartOnOrAfter > _baseFundingCycleLimitEnd;
 
+  // If the latest permanent cycle should be used and it has a no duration, start as soon as possible.
+  if (_shouldRevertToLatestPermanentCycle && _latestPermanentFundingCycle.duration == 0)
+    return _mustStartOnOrAfter;
+      
   // Use the duration of the permanent funding cycle as the base if needed.
   _cycleDurationInSeconds = _shouldRevertToLatestPermanentCycle
     ? _latestPermanentFundingCycle.duration * _SECONDS_IN_DAY
     : _cycleDurationInSeconds;
 
   // The amount of seconds since the `_mustStartOnOrAfter` time that results in a start time that might satisfy the specified constraints.
+  // If the modulo would cause a divide-by-0 error, instead return 0 since the next start can be immediately.
   uint256 _timeFromImmediateStartMultiple = (_mustStartOnOrAfter -
-    (_shouldRevertToLatestPermanentCycle ? _baseFundingCycleLimitEnd : _nextImmediateStart)) %
-    _cycleDurationInSeconds;
+      (_shouldRevertToLatestPermanentCycle ? _baseFundingCycleLimitEnd : _nextImmediateStart)) %
+      _cycleDurationInSeconds
   
   // A reference to the first possible start timestamp.
   start = _mustStartOnOrAfter - _timeFromImmediateStartMultiple;

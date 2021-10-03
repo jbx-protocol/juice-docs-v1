@@ -99,7 +99,11 @@ function _deriveWeightFrom(
 
    ```javascript
    // Apply the latest permanent funding cycle's discount rate, if necessary.
-   if (_crossesCycleLimit && _latestPermanentFundingCycle.discountRate > 0) {
+   if (
+     _crossesCycleLimit &&
+     _latestPermanentFundingCycle.discountRate > 0 &&
+     _latestPermanentFundingCycle.duration > 0
+   ) {   
      // The number of times to apply the latest permanent discount rate.
      uint256 _permanentDiscountMultiple = (_startDistance - _limitLength) /
        (_latestPermanentFundingCycle.duration * _SECONDS_IN_DAY);
@@ -164,7 +168,11 @@ function _deriveWeightFrom(
   }
 
   // Apply the latest permanent funding cycle's discount rate, if necessary.
-  if (_crossesCycleLimit && _latestPermanentFundingCycle.discountRate > 0) {
+  if (
+    _crossesCycleLimit &&
+    _latestPermanentFundingCycle.discountRate > 0 &&
+    _latestPermanentFundingCycle.duration > 0
+  ) {    
     // The number of times to apply the latest permanent discount rate.
     uint256 _permanentDiscountMultiple = (_startDistance - _limitLength) /
       (_latestPermanentFundingCycle.duration * _SECONDS_IN_DAY);

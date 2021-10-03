@@ -21,7 +21,7 @@ function _deriveNumberFrom(
 * `_start`is a time that the cycle having a weight derived for starts.
 * The view function is private to this contract.
 * The function does not alter state on the blockchain.
-* The function returns a number.
+* The function returns the funding cycle number.
 
 1. If the `_baseFundingCycle` doesn't have a duration, the next number is 1 more than the base's number. 
 
