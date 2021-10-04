@@ -19,7 +19,12 @@ function _standbyOf(uint256 _projectId) private view returns (uint256 fundingCyc
 * The function does not alter state on the blockchain.
 * The function returns an ID of a standby funding cycle if one exists, or 0 if one doesn't exist.
 
-1. Get a reference to the latest funding cycle for the project.
+1. Get a reference to the latest funding cycle for the project.  
+
+
+   _Internal references:_
+
+   * [`latestIdOf`](../properties/latestidof.md)
 
    ```javascript
    // Get a reference to the project's latest funding cycle.
@@ -33,7 +38,12 @@ function _standbyOf(uint256 _projectId) private view returns (uint256 fundingCyc
    if (fundingCycleId == 0) return 0;
    ```
 
-3. Get the struct for the latest funding cycle.
+3. Get the struct for the latest funding cycle.  
+
+
+   _Internal references:_
+
+   * [`_getStructFor`](_getstructfor.md)
 
    ```javascript
    // Get the necessary properties for the latest funding cycle.

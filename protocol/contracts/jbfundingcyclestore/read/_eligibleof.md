@@ -19,7 +19,12 @@ function _eligibleOf(uint256 _projectId) private view returns (uint256 fundingCy
 * The function does not alter state on the blockchain.
 * The function returns an ID of an eligible funding cycle if one exists, or 0 if one doesn't exist.
 
-1. Get a reference to the latest funding cycle for the project.
+1. Get a reference to the latest funding cycle for the project.  
+
+
+   _Internal references:_
+
+   * [`latestIdOf`](../properties/latestidof.md)
 
    ```javascript
    // Get a reference to the project's latest funding cycle.
@@ -33,39 +38,59 @@ function _eligibleOf(uint256 _projectId) private view returns (uint256 fundingCy
    if (fundingCycleId == 0) return 0;
    ```
 
-3. Get the struct for the latest funding cycle.
+3. Get the struct for the latest funding cycle.  
+
+
+   _Internal references:_
+
+   * [`_getStructFor`](_getstructfor.md)
 
    ```javascript
    // Get the necessary properties for the latest funding cycle.
    JBFundingCycle memory _fundingCycle = _getStructFor(fundingCycleId);
    ```
 
-4. If the latest is expired, return an empty funding cycle since there can't be a stored eligible cycle.
+4. If the latest is expired, return an empty funding cycle since there can't be a stored eligible cycle.  
+
+
+   _Internal references:_
+
+   * [`_SECONDS_IN_DAY`](../properties/_seconds_in_day.md)
 
    ```javascript
    // If the latest is expired, return an empty funding cycle.
    // A duration of 0 can not be expired.
    if (
      _fundingCycle.duration > 0 &&
-     block.timestamp >= _fundingCycle.start + (_fundingCycle.duration * SECONDS_IN_DAY)
+     block.timestamp >= _fundingCycle.start + (_fundingCycle.duration * _SECONDS_IN_DAY)
    ) return 0;
    ```
 
-5. Get a reference to the funding cycle that the current cycle is based on.
+5. Get a reference to the funding cycle that the current cycle is based on.  
+
+
+   _Internal references:_
+
+   * [`_getStructFor`](_getstructfor.md)
 
    ```javascript
    // The base cant be expired.
    JBFundingCycle memory _baseFundingCycle = _getStructFor(_fundingCycle.basedOn);
    ```
 
-6. If the base is expired, return an empty funding cycle since there can't be a stored eligible cycle.
+6. If the base is expired, return an empty funding cycle since there can't be a stored eligible cycle.  
+
+
+   _Internal references:_
+
+   * [`_SECONDS_IN_DAY`](../properties/_seconds_in_day.md)
 
    ```javascript
    // If the current time is past the end of the base, return 0.
    // A duration of 0 is always eligible.
    if (
      _baseFundingCycle.duration > 0 &&
-     block.timestamp >= _baseFundingCycle.start + (_baseFundingCycle.duration * SECONDS_IN_DAY)
+     block.timestamp >= _baseFundingCycle.start + (_baseFundingCycle.duration * _SECONDS_IN_DAY)
    ) return 0;
    ```
 
@@ -104,7 +129,7 @@ function _eligibleOf(uint256 _projectId) private view returns (uint256 fundingCy
   // A duration of 0 can not be expired.
   if (
     _fundingCycle.duration > 0 &&
-    block.timestamp >= _fundingCycle.start + (_fundingCycle.duration * SECONDS_IN_DAY)
+    block.timestamp >= _fundingCycle.start + (_fundingCycle.duration * _SECONDS_IN_DAY)
   ) return 0;
 
   // The base cant be expired.
@@ -114,7 +139,7 @@ function _eligibleOf(uint256 _projectId) private view returns (uint256 fundingCy
   // A duration of 0 is always eligible.
   if (
     _baseFundingCycle.duration > 0 &&
-    block.timestamp >= _baseFundingCycle.start + (_baseFundingCycle.duration * SECONDS_IN_DAY)
+    block.timestamp >= _baseFundingCycle.start + (_baseFundingCycle.duration * _SECONDS_IN_DAY)
   ) return 0;
 
   // Return the funding cycle immediately before the latest.
