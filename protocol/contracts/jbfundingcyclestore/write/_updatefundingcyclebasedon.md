@@ -23,6 +23,64 @@ function _updateFundingCycleBasedOn(
 * `_copy` is a flag indicating if non-intrinsic properties should be copied from the base funding cycle.
 * The function is private to this contract.
 * The function returns the ID of the updated funding cycle.
+
+1. Find the time that the updated funding cycle should start at.  
+
+
+   _Internal references:_
+
+   * [`_deriveStartFrom`](../read/_derivestartfrom.md)
+
+   ```javascript
+   // Derive the correct next start time from the base.
+   uint256 _start = _deriveStartFrom(_baseFundingCycle, _mustStartOnOrAfter);
+   ```
+
+2. Find the weight that the updated funding cycle should use. If a weight was provided to the function, use it. Otherwise derive one from the previous weight.  
+  
+   If the provided weight is the number 1, treat is like the number 0. A weight of 0 means that no specific weight was passed in.  
+
+
+   _Internal references:_
+
+   * [`_deriveWeightFrom`](../read/_deriveweightfrom.md)
+
+   ```javascript
+   // A weight of 1 is treated as a weight of 0.
+   _weight = _weight > 0
+     ? (_weight == 1 ? 0 : _weight)
+     : _deriveWeightFrom(_baseFundingCycle, _start);
+   ```
+
+3. Find the number that the updated funding cycle should use.  
+
+
+   _Internal references:_
+
+   * [`_deriveNumberFrom`](../read/_derivenumberfrom.md)
+
+   ```javascript
+   // Derive the correct number.
+   uint256 _number = _deriveNumberFrom(_baseFundingCycle, _start);
+   ```
+
+4. Store the properties for the updated funding cycle.  
+
+
+   _Internal references:_
+
+   * [`_packAndStoreIntrinsicPropertiesOf`](_packandstoreintrinsicpropertiesof.md)
+
+   ```javascript
+   // Update the intrinsic properties.
+   fundingCycleId = _packAndStoreIntrinsicPropertiesOf(
+     _baseFundingCycle.projectId,
+     _number,
+     _weight,
+     _baseFundingCycle.id,
+     _start
+   );
+   ```
 {% endtab %}
 
 {% tab title="Only code" %}
@@ -63,23 +121,6 @@ function _updateFundingCycleBasedOn(
     _baseFundingCycle.id,
     _start
   );
-
-  // Copy if needed.
-  if (_copy) {
-    // Save the configuration efficiently.
-    _packAndStoreConfigurationPropertiesOf(
-      fundingCycleId,
-      _baseFundingCycle.configured,
-      _baseFundingCycle.ballot,
-      _baseFundingCycle.duration,
-      _baseFundingCycle.currency,
-      _baseFundingCycle.fee,
-      _baseFundingCycle.discountRate
-    );
-
-    _metadataOf[fundingCycleId] = _metadataOf[_baseFundingCycle.id];
-    _targetOf[fundingCycleId] = _targetOf[_baseFundingCycle.id];
-  }
 }
 ```
 {% endtab %}

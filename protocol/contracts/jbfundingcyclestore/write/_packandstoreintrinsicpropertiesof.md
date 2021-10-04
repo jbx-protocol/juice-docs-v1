@@ -25,6 +25,65 @@ function _packAndStoreIntrinsicPropertiesOf(
 * `_start` is the start time of this funding cycle.
 * The function is private to this contract.
 * The function returns the ID of the funding cycle whose intrinsic properties have been packed and stored.
+
+1. The `_weight` property should take up the first 80 bits of the packed `uint256`.
+
+   ```javascript
+   // weight in bytes 0-79 bits.
+   uint256 packed = _weight;
+   ```
+
+2. The `_projectId` should take up the next 56 bits.
+
+   ```javascript
+   // projectId in bytes 80-135 bytes.
+   packed |= _projectId << 80;
+   ```
+
+3. The `_basedOn` should take up the next 48 bits.
+
+   ```javascript
+   // basedOn in bytes 136-183 bytes.
+   packed |= _basedOn << 136;
+   ```
+
+4. The `_start` should take up the next 48 bits.
+
+   ```javascript
+   // start in bytes 184-231 bytes.
+   packed |= _start << 184;
+   ```
+
+5. The `_number` should take up the last 24 bits.
+
+   ```javascript
+   // number in bytes 232-255 bytes.
+   packed |= _number << 232;
+   ```
+
+6. Derive the ID from the `_projectId` and the `_number`.  
+
+
+   _Internal references:_
+
+   * [`_idFor`](../read/_idfor.md)
+
+   ```javascript
+   // Construct the ID.
+   fundingCycleId = _idFor(_projectId, _number);
+   ```
+
+7. Store the packed intrinsic properties for the funding cycle.  
+
+
+   _Internal references:_
+
+   * [`_packAndStoreIntrinsicPropertiesOf`](_packandstoreintrinsicpropertiesof.md)
+
+   ```javascript
+   // Set in storage.
+   _packedIntrinsicPropertiesOf[fundingCycleId] = packed;
+   ```
 {% endtab %}
 
 {% tab title="Only code" %}

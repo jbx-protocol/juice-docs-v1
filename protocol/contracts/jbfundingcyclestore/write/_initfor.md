@@ -23,7 +23,14 @@ function _initFor(
 * The function is private to this contract.
 * The function returns the ID of the initialized funding cycle.
 
-1. If no base funding cycle was provided, create a first funding cycle for the project. Otherwise, create a new funding cycle by calling `_updateFundingCycleBasedOn`, which will derive properties for the funding cycle that follows the specified base cycle, and store them to an ID.
+1. If no base funding cycle was provided, create a first funding cycle for the project. Otherwise, create a new funding cycle by calling`_updateFundingCycleBasedOn`, which will derive properties for the funding cycle that follows the specified base cycle, and store them to an ID.  
+
+
+   _Internal references:_
+
+   * [`_idFor`](../read/_idfor.md)
+   * [`_packAndStoreIntrinsicPropertiesOf`](_packandstoreintrinsicpropertiesof.md)
+   * [`_updateFundingCycleBasedOn`](_updatefundingcyclebasedon.md)
 
    ```javascript
    // If there is no base, initialize a first cycle.
@@ -42,21 +49,30 @@ function _initFor(
        _baseFundingCycle.id,
        block.timestamp
      );
-  
    } else {
      // Update the intrinsic properties of the funding cycle being initialized.
      newFundingCycleId = _updateFundingCycleBasedOn(_baseFundingCycle, _mustStartOnOrAfter, _weight);
    }
    ```
 
-2. Store the initialized ID as the `latestIdOf` the project.
+2. Store the initialized ID as the `latestIdOf` the project.  
+
+
+   _Internal references:_
+
+   * [`latestIdOf`](../properties/latestidof.md)
 
    ```javascript
    // Set the project's latest funding cycle ID to the new count.
    latestIdOf[_projectId] = newFundingCycleId;
    ```
 
-3. Get a reference to the [`JBFundingCycle`](../../../data-structures/jbfundingcycle.md) structure for the newly initialized funding cycle.
+3. Get a reference to the [`JBFundingCycle`](../../../data-structures/jbfundingcycle.md) structure for the newly initialized funding cycle.  
+
+
+   _Internal references:_
+
+   * [`_getStructFor`](../read/_getstructfor.md)
 
    ```javascript
    // Get a reference to the funding cycle with updated intrinsic properties.

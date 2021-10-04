@@ -21,14 +21,19 @@ function _tappableOf(uint256 _projectId) private returns (uint256 fundingCycleId
 
    _Internal references:_
 
-   * [`_standbyOf`](../read/_standbyof.md)
+   * [`_eligibleOf`](../read/_eligibleof.md)
 
    ```javascript
    // Check for the ID of an eligible funding cycle.
    fundingCycleId = _eligibleOf(_projectId);
    ```
 
-2. If no eligible funding cycle was found, get a reference to the project's standby cycle.
+2. If no eligible funding cycle was found, get a reference to the project's standby cycle.  
+
+
+   _Internal references:_
+
+   * [`_standbyOf`](../read/_standbyof.md)
 
    ```javascript
    // No eligible funding cycle found, check for the ID of a standby funding cycle.
@@ -45,7 +50,14 @@ function _tappableOf(uint256 _projectId) private returns (uint256 fundingCycleId
 
 4. If a funding cycle exists that is either eligible to be tapped or is in standby, check to see if it has started and it's approved. If so, return it. Otherwise, get a reference to the funding cycle that it's based on which will provide the correct configuration to a new funding cycle that will be initialized.  
   
-   If no eligible or standby funding cycle exists, get a reference to the last approved funding cycle for the project which will provide the correct configuration to a new funding cycle that will be initialized.
+   If no eligible or standby funding cycle exists, get a reference to the last approved funding cycle for the project which will provide the correct configuration to a new funding cycle that will be initialized.  
+
+
+   _Internal references:_
+
+   * [`_getStructFor`](../read/_getstructfor.md)
+   * [`_isApproved`](../read/_isapproved.md)
+   * [`latestIdOf`](../properties/latestidof.md)
 
    ```javascript
    // If the ID of an eligible funding cycle exists,
@@ -81,7 +93,12 @@ function _tappableOf(uint256 _projectId) private returns (uint256 fundingCycleId
    require(fundingCycleId > 0, '0x1e: NOT_FOUND');
    ```
 
-6. Get a reference to the [`JBFundingCycle`](../../../data-structures/jbfundingcycle.md) structure.
+6. Get a reference to the [`JBFundingCycle`](../../../data-structures/jbfundingcycle.md) structure.  
+
+
+   _Internal references:_
+
+   * [`_getStructFor`](../read/_getstructfor.md)
 
    ```javascript
    // Set the eligible funding cycle.
@@ -95,24 +112,39 @@ function _tappableOf(uint256 _projectId) private returns (uint256 fundingCycleId
    require(_fundingCycle.discountRate < 201, '0x1f: NON_RECURRING');
    ```
 
-8. Get a reference to the first start time that is possible after the funding cycle, which is the moment after it ends.
+8. Get a reference to the first start time that is possible after the funding cycle, which is the moment after it ends.  
+
+
+   _Internal references:_
+
+   * [`_SECONDS_IN_DAY`](../properties/_seconds_in_day.md)
 
    ```javascript
    // The time when the funding cycle immediately after the eligible funding cycle starts.
-   uint256 _nextImmediateStart = _fundingCycle.start + (_fundingCycle.duration * SECONDS_IN_DAY);
+   uint256 _nextImmediateStart = _fundingCycle.start + (_fundingCycle.duration * _SECONDS_IN_DAY);
    ```
 
-9. Get a reference to the time distance to the most recent funding cycle iteration's start time.
+9. Get a reference to the time distance to the most recent funding cycle iteration's start time.  
+
+
+   _Internal references:_
+
+   * [`_SECONDS_IN_DAY`](../properties/_seconds_in_day.md)
 
    ```javascript
    // The distance from now until the nearest past multiple of the cycle duration from its start.
    // A duration of zero means the reconfiguration can start right away.
    uint256 _timeFromImmediateStartMultiple = _fundingCycle.duration == 0
      ? 0
-     : (block.timestamp - _nextImmediateStart) % (_fundingCycle.duration * SECONDS_IN_DAY);
+     : (block.timestamp - _nextImmediateStart) % (_fundingCycle.duration * _SECONDS_IN_DAY);
    ```
 
-10. Set the ID that'll be returned to the ID of a newly initialized funding cycle.
+10. Set the ID that'll be returned to the ID of a newly initialized funding cycle.  
+
+
+    _Internal references:_
+
+    * [`_initFor`](_initfor.md)
 
     ```javascript
     // Return the tappable funding cycle.
@@ -124,7 +156,14 @@ function _tappableOf(uint256 _projectId) private returns (uint256 fundingCycleId
     );
     ```
 
-11. Copy the properties of the base funding cycle onto the newly initialized configuration.
+11. Copy the properties of the base funding cycle onto the newly initialized configuration.  
+
+
+    _Internal references:_
+
+    * [`_packAndStoreConfigurationPropertiesOf`](_packandstoreconfigurationpropertiesof.md)
+    * [`_metadataOf`](../properties/_metadataof.md)
+    * [`_targetOf`](../properties/_targetof.md)
 
     ```javascript
      // Copy the properties of the base funding cycle onto the new configuration efficiently.
@@ -199,13 +238,13 @@ function _tappableOf(uint256 _projectId) private returns (uint256 fundingCycleId
   require(_fundingCycle.discountRate < 201, '0x1f: NON_RECURRING');
 
   // The time when the funding cycle immediately after the eligible funding cycle starts.
-  uint256 _nextImmediateStart = _fundingCycle.start + (_fundingCycle.duration * SECONDS_IN_DAY);
+  uint256 _nextImmediateStart = _fundingCycle.start + (_fundingCycle.duration * _SECONDS_IN_DAY);
 
   // The distance from now until the nearest past multiple of the cycle duration from its start.
   // A duration of zero means the reconfiguration can start right away.
   uint256 _timeFromImmediateStartMultiple = _fundingCycle.duration == 0
     ? 0
-    : (block.timestamp - _nextImmediateStart) % (_fundingCycle.duration * SECONDS_IN_DAY);
+    : (block.timestamp - _nextImmediateStart) % (_fundingCycle.duration * _SECONDS_IN_DAY);
 
   // Return the tappable funding cycle.
   fundingCycleId = _initFor(
