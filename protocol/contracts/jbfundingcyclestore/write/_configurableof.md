@@ -1,5 +1,7 @@
 # \_configurableOf
 
+Contract:[`JBFundingCycleStore`](../)​
+
 {% tabs %}
 {% tab title="Step by step" %}
 
@@ -40,7 +42,7 @@ function _configurableOf(
     // The base's ballot must have ended.
     _updateFundingCycleBasedOn(
       _baseFundingCycle,
-      _getTimeAfterBallotOf(_baseFundingCycle, _configured),
+      _getLatestTimeAfterBallotOf(_baseFundingCycle, _configured),
       _weight,
       false
     );
@@ -71,7 +73,7 @@ function _configurableOf(
   JBFundingCycle memory _fundingCycle = _getStructFor(fundingCycleId);
 
   // Make sure the funding cycle is recurring.
-  require(_fundingCycle.discountRate < 201, 'NON_RECURRING');
+  require(_fundingCycle.discountRate < 201, '0x1d: NON_RECURRING');
 
   if (_configureActiveFundingCycle) {
     // If the duration is zero, always go back to the original start.
@@ -80,12 +82,12 @@ function _configurableOf(
     } else {
       // Set to the start time of the current active start time.
       uint256 _timeFromStartMultiple = (block.timestamp - _fundingCycle.start) %
-        (_fundingCycle.duration * SECONDS_IN_DAY);
+        (_fundingCycle.duration * _SECONDS_IN_DAY);
       _mustStartOnOrAfter = block.timestamp - _timeFromStartMultiple;
     }
   } else {
     // The ballot must have ended.
-    _mustStartOnOrAfter = _getTimeAfterBallotOf(_fundingCycle, _configured);
+    _mustStartOnOrAfter = _getLatestTimeAfterBallotOf(_fundingCycle, _configured);
   }
 
   // Return the newly initialized configurable funding cycle.
