@@ -112,7 +112,7 @@ function _tappableOf(uint256 _projectId) private returns (uint256 fundingCycleId
      : (block.timestamp - _nextImmediateStart) % (_fundingCycle.duration * SECONDS_IN_DAY);
    ```
 
-10. Set the ID to that of a newly initialized funding cycle.
+10. Set the ID that'll be returned to the ID of a newly initialized funding cycle.
 
     ```javascript
     // Return the tappable funding cycle.
