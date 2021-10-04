@@ -4,7 +4,25 @@ Contract:[`JBFundingCycleStore`](../)​
 
 {% tabs %}
 {% tab title="Step by step" %}
+**Updates intrinsic properties for a funding cycle given a base cycle.**  
+  
+Definition:
 
+```javascript
+function _updateFundingCycleBasedOn(
+  JBFundingCycle memory _baseFundingCycle,
+  uint256 _mustStartOnOrAfter,
+  uint256 _weight,
+  bool _copy
+) private returns (uint256 fundingCycleId) { ... }
+```
+
+* `_baseFundingCycle` is the cycle that the one being updated is based on.
+* `_mustStartOnOrAfter` is the time before which the initialized funding cycle can't start.
+* `_weight` is the weight to store along with a newly updated configurable funding cycle.
+* `_copy` is a flag indicating if non-intrinsic properties should be copied from the base funding cycle.
+* The function is private to this contract.
+* The function returns the ID of the updated funding cycle.
 {% endtab %}
 
 {% tab title="Only code" %}
@@ -15,7 +33,8 @@ Contract:[`JBFundingCycleStore`](../)​
 
   @param _baseFundingCycle The cycle that the one being updated is based on.
   @param _mustStartOnOrAfter The time before which the initialized funding cycle can't start.
-  @param _copy If non-intrinsic properties should be copied from the base funding cycle.
+  @param _weight The weight to store along with a newly updated configurable funding cycle.
+  @param _copy A flag indicating if non-intrinsic properties should be copied from the base funding cycle.
 
   @return fundingCycleId The ID of the funding cycle that was updated.
 */

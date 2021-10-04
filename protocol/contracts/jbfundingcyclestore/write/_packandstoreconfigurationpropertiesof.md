@@ -4,7 +4,33 @@ Contract:[`JBFundingCycleStore`](../)​
 
 {% tabs %}
 {% tab title="Step by step" %}
+**Efficiently stores a funding cycles provided configuration properties.**
 
+Definition:
+
+```javascript
+function _packAndStoreConfigurationProperties(
+  uint256 _fundingCycleId,
+  uint256 _configured,
+  uint256 _cycleLimit,
+  IJBFundingCycleBallot _ballot,
+  uint256 _duration,
+  uint256 _currency,
+  uint256 _fee,
+  uint256 _discountRate
+) private { ... }
+```
+
+* `_fundingCycleId` is the ID of the funding cycle to pack and store.
+* `_configured` is the timestamp of the configuration.
+* `_cycleLimit` is the number of cycles that this configuration should last for before going back to the last permanent.
+* `_ballot` is the ballot to use for future reconfiguration approvals. 
+* `_duration` is the duration of the funding cycle.
+* `_currency` is the currency of the funding cycle.
+* `_fee` is the fee of the funding cycle.
+* `_discountRate` is the discount rate of the base funding cycle.
+* The function is private to this contract.
+* The function doesn't return anything.
 {% endtab %}
 
 {% tab title="Only code" %}
@@ -20,7 +46,7 @@ Contract:[`JBFundingCycleStore`](../)​
   @param _duration The duration of the funding cycle.
   @param _currency The currency of the funding cycle.
   @param _fee The fee of the funding cycle.
-  @param _discountRate The discount rate of the based funding cycle.
+  @param _discountRate The discount rate of the base funding cycle.
 */
 function _packAndStoreConfigurationProperties(
   uint256 _fundingCycleId,

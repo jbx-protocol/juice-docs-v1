@@ -4,7 +4,17 @@ Contract:[`JBFundingCycleStore`](../)​
 
 {% tabs %}
 {% tab title="Step by step" %}
+**Returns the funding cycle that can be tapped at the time of the call.**  
+  
+Definition:
 
+```javascript
+function _tappableOf(uint256 _projectId) private returns (uint256 fundingCycleId) { ... }
+```
+
+* `_projectId` is the ID of the project to find a tappable funding cycle for.
+* The function is private to this contract.
+* The function returns the ID of a tappable funding cycle.
 {% endtab %}
 
 {% tab title="Only code" %}
@@ -13,7 +23,7 @@ Contract:[`JBFundingCycleStore`](../)​
   @notice 
   Returns the funding cycle that can be tapped at the time of the call.
 
-  @param _projectId The ID of the project to find a configurable funding cycle for.
+  @param _projectId The ID of the project to find a tappable funding cycle for.
 
   @return fundingCycleId The ID of the tappable funding cycle.
 */
@@ -83,6 +93,13 @@ function _tappableOf(uint256 _projectId) private returns (uint256 fundingCycleId
 ```
 {% endtab %}
 
+{% tab title="Errors" %}
+| String | Description |
+| :--- | :--- |
+| **`0x1d: NOT_FOUND`** | Thrown if no tappable funding cycle was found. |
+| **`0x1d: NON_RECURRING`** | Thrown if a tappable funding cycle is being looked for but the base is non-recurring. |
+{% endtab %}
+
 {% tab title="Bug bounty" %}
 | Category | Description | Reward |
 | :--- | :--- | :--- |
@@ -91,4 +108,6 @@ function _tappableOf(uint256 _projectId) private returns (uint256 fundingCycleId
 | **High severity** | Identify a vulnerability in this operation that could lead to data corruption or loss of funds. | 5+ETH |
 {% endtab %}
 {% endtabs %}
+
+
 

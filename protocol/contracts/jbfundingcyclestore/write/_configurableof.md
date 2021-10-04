@@ -4,7 +4,25 @@ Contract:[`JBFundingCycleStore`](../)​
 
 {% tabs %}
 {% tab title="Step by step" %}
+**Returns the configurable funding cycle for this project if it exists, otherwise creates one.**  
+  
+Definition:
 
+```javascript
+function _configurableOf(
+  uint256 _projectId,
+  uint256 _configured,
+  uint256 _weight,
+  bool _configureActiveFundingCycle
+) private returns (uint256 fundingCycleId) { ... }
+```
+
+* `_projectId` is the ID of the project to find a configurable funding cycle for.
+* `_configured` is the time at which the configuration is occurring.
+* `_weight` is the weight to store along with a newly created configurable funding cycle.
+* `_configureActiveFundingCycles` is if the active funding cycle should be configurable. Otherwise the next funding cycle will be used.
+* The function is private to this contract.
+* The function returns the ID of a configurable funding cycle.
 {% endtab %}
 
 {% tab title="Only code" %}
@@ -14,7 +32,8 @@ Contract:[`JBFundingCycleStore`](../)​
   Returns the configurable funding cycle for this project if it exists, otherwise creates one.
 
   @param _projectId The ID of the project to find a configurable funding cycle for.
-  @param _configured The time at which the configuration is occuring.
+  @param _configured The time at which the configuration is occurring.
+  @param _weight The weight to store along with a newly created configurable funding cycle.
   @param _configureActiveFundingCycle If the active funding cycle should be configurable. Otherwise the next funding cycle will be used.
 
   @return fundingCycleId The ID of the configurable funding cycle.
@@ -94,6 +113,12 @@ function _configurableOf(
   fundingCycleId = _initFor(_projectId, _fundingCycle, _mustStartOnOrAfter, _weight, false);
 }
 ```
+{% endtab %}
+
+{% tab title="Errors" %}
+| String | Description |
+| :--- | :--- |
+| **`0x1d: NON_RECURRING`** | Thrown if a configurable funding cycle is being looked for but the base is non-recurring. |
 {% endtab %}
 
 {% tab title="Bug bounty" %}

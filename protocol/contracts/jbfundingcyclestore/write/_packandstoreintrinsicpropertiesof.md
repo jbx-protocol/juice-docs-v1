@@ -4,7 +4,27 @@ Contract:[`JBFundingCycleStore`](../)​
 
 {% tabs %}
 {% tab title="Step by step" %}
+**Efficiently stores a funding cycle's provided intrinsic properties.**
 
+Definition:
+
+```javascript
+function _packAndStoreIntrinsicPropertiesOf(
+  uint256 _projectId,
+  uint256 _number,
+  uint256 _weight,
+  uint256 _basedOn,
+  uint256 _start
+) private returns (uint256 fundingCycleId) { ... }
+```
+
+* `_projectId` is the ID of the project to which the funding cycle belongs.
+* `_number` is the number of the funding cycle.
+* `_weight` is the weight of the funding cycle.
+* `_basedOn` is the ID of the based funding cycle.
+* `_start` is the start time of this funding cycle.
+* The function is private to this contract.
+* The function returns the ID of the funding cycle whose intrinsic properties have been packed and stored.
 {% endtab %}
 
 {% tab title="Only code" %}
