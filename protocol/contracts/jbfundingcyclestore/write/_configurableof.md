@@ -36,7 +36,7 @@ function _configurableOf(
    ```javascript
    // If there's not yet a funding cycle for the project, return the ID of a newly created one.
    if (latestIdOf[_projectId] == 0)
-     return _initFor(_projectId, _getStructFor(0), block.timestamp, _weight, false);
+     return _initFor(_projectId, _getStructFor(0), block.timestamp, _weight);
    ```
 
 2. Get a reference to the project's standby funding cycle.  
@@ -188,8 +188,7 @@ function _configurableOf(
 
     ```javascript
     // Return the newly initialized configurable funding cycle.
-    // No need to copy since a new configuration is going to be applied.
-    fundingCycleId = _initFor(_projectId, _fundingCycle, _mustStartOnOrAfter, _weight, false);
+    fundingCycleId = _initFor(_projectId, _fundingCycle, _mustStartOnOrAfter, _weight);
     ```
 
   
@@ -219,7 +218,7 @@ function _configurableOf(
 ) private returns (uint256 fundingCycleId) {
   // If there's not yet a funding cycle for the project, return the ID of a newly created one.
   if (latestIdOf[_projectId] == 0)
-    return _initFor(_projectId, _getStructFor(0), block.timestamp, _weight, false);
+    return _initFor(_projectId, _getStructFor(0), block.timestamp, _weight);
 
   // Get the standby funding cycle's ID.
   fundingCycleId = _standbyOf(_projectId);
@@ -287,8 +286,7 @@ function _configurableOf(
   }
 
   // Return the newly initialized configurable funding cycle.
-  // No need to copy since a new configuration is going to be applied.
-  fundingCycleId = _initFor(_projectId, _fundingCycle, _mustStartOnOrAfter, _weight, false);
+  fundingCycleId = _initFor(_projectId, _fundingCycle, _mustStartOnOrAfter, _weight);
 }
 ```
 {% endtab %}

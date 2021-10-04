@@ -13,15 +13,13 @@ function _initFor(
   uint256 _projectId,
   JBFundingCycle memory _baseFundingCycle,
   uint256 _mustStartOnOrAfter,
-  uint256 _weight,
-  bool _copy
+  uint256 _weight
 ) private returns (uint256 newFundingCycleId) { ... }
 ```
 
 * `_projectId` is the ID of the project to which the funding cycle being initialized belongs.
 * `_baseFundingCycle` is the funding cycle to base the initialized one on.
 * `_mustStartOnOrAfter` is the time before which the initialized funding cycle can't start.
-* `_copy` is a flag indicating if non-intrinsic properties should be copied from the base funding cycle.
 * The function is private to this contract.
 * The function returns the ID of the initialized funding cycle.
 
@@ -44,9 +42,10 @@ function _initFor(
        _baseFundingCycle.id,
        block.timestamp
      );
+  
    } else {
      // Update the intrinsic properties of the funding cycle being initialized.
-     newFundingCycleId = _updateFundingCycleBasedOn(_baseFundingCycle, _mustStartOnOrAfter, _weight, _copy);
+     newFundingCycleId = _updateFundingCycleBasedOn(_baseFundingCycle, _mustStartOnOrAfter, _weight);
    }
    ```
 
@@ -92,7 +91,6 @@ function _initFor(
   @param _projectId The ID of the project to which the funding cycle being initialized belongs.
   @param _baseFundingCycle The funding cycle to base the initialized one on.
   @param _mustStartOnOrAfter The time before which the initialized funding cycle can't start.
-  @param _copy A flag indicating if non-intrinsic properties should be copied from the base funding cycle.
 
   @return newFundingCycleId The ID of the initialized funding cycle.
 */
@@ -100,8 +98,7 @@ function _initFor(
   uint256 _projectId,
   JBFundingCycle memory _baseFundingCycle,
   uint256 _mustStartOnOrAfter,
-  uint256 _weight,
-  bool _copy
+  uint256 _weight
 ) private returns (uint256 newFundingCycleId) {
   // If there is no base, initialize a first cycle.
   if (_baseFundingCycle.id == 0) {
@@ -119,9 +116,10 @@ function _initFor(
       _baseFundingCycle.id,
       block.timestamp
     );
+    
   } else {
     // Update the intrinsic properties of the funding cycle being initialized.
-    newFundingCycleId = _updateFundingCycleBasedOn(_baseFundingCycle, _mustStartOnOrAfter, _weight, _copy);
+    newFundingCycleId = _updateFundingCycleBasedOn(_baseFundingCycle, _mustStartOnOrAfter, _weight);
   }
 
   // Set the project's latest funding cycle ID to the new count.

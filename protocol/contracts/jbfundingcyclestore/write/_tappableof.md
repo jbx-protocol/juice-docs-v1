@@ -120,9 +120,26 @@ function _tappableOf(uint256 _projectId) private returns (uint256 fundingCycleId
       _projectId,
       _fundingCycle,
       block.timestamp - _timeFromImmediateStartMultiple,
-      0,
-      true
+      0
     );
+    ```
+
+11. Copy the properties of the base funding cycle onto the newly initialized configuration.
+
+    ```javascript
+     // Copy the properties of the base funding cycle onto the new configuration efficiently.
+    _packAndStoreConfigurationPropertiesOf(
+      fundingCycleId,
+      _fundingCycle.configured,
+      _fundingCycle.ballot,
+      _fundingCycle.duration,
+      _fundingCycle.currency,
+      _fundingCycle.fee,
+      _fundingCycle.discountRate
+     );
+
+     _metadataOf[fundingCycleId] = _metadataOf[_fundingCycle.id];
+     _targetOf[fundingCycleId] = _targetOf[_fundingCycle.id];
     ```
 {% endtab %}
 
@@ -195,9 +212,22 @@ function _tappableOf(uint256 _projectId) private returns (uint256 fundingCycleId
     _projectId,
     _fundingCycle,
     block.timestamp - _timeFromImmediateStartMultiple,
-    0,
-    true
+    0
   );
+  
+  // Copy the properties of the base funding cycle onto the new configuration efficiently.
+  _packAndStoreConfigurationPropertiesOf(
+    fundingCycleId,
+    _fundingCycle.configured,
+    _fundingCycle.ballot,
+    _fundingCycle.duration,
+    _fundingCycle.currency,
+    _fundingCycle.fee,
+    _fundingCycle.discountRate
+  );
+
+  _metadataOf[fundingCycleId] = _metadataOf[_fundingCycle.id];
+  _targetOf[fundingCycleId] = _targetOf[_fundingCycle.id];
 }
 ```
 {% endtab %}

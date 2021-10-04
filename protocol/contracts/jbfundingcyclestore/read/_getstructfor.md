@@ -50,7 +50,7 @@ function _getStructFor(uint256 _id) private view returns (JBFundingCycle memory 
 4. Get the stored configuration properties of the funding cycle. Populate the struct values by de-packing the `uint256`.  
 
 
-   _\Internal references:_
+   _Internal references:_
 
    * [`_packedConfigurationPropertiesOf`](../properties/_packedconfigurationpropertiesof.md)
 
@@ -63,7 +63,6 @@ function _getStructFor(uint256 _id) private view returns (JBFundingCycle memory 
    fundingCycle.currency = uint256(uint8(_packedConfigurationProperties >> 224));
    fundingCycle.fee = uint256(uint8(_packedConfigurationProperties >> 232));
    fundingCycle.discountRate = uint256(uint8(_packedConfigurationProperties >> 240));
-   fundingCycle.cycleLimit = uint256(uint8(_packedConfigurationProperties >> 248));  
    ```
 
 5. Populate the `target` property of the struct by reading from what's stored in `_targetOf`.  
@@ -134,7 +133,6 @@ function _getStructFor(uint256 _id) private view returns (JBFundingCycle memory 
   fundingCycle.currency = uint256(uint8(_packedConfigurationProperties >> 224));
   fundingCycle.fee = uint256(uint8(_packedConfigurationProperties >> 232));
   fundingCycle.discountRate = uint256(uint8(_packedConfigurationProperties >> 240));
-  fundingCycle.cycleLimit = uint256(uint8(_packedConfigurationProperties >> 248));
   
   fundingCycle.target = _targetOf[_id];
   fundingCycle.tapped = _tappedAmountOf[_id];

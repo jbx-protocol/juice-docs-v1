@@ -130,7 +130,7 @@ Rinkeby testnet: _Not yet deployed_
           <li><code>uint256 32</code>
           </li>
         </ul>
-        <p><a href="properties/max_cycle_limit.md">more</a>
+        <p><a href>more</a>
         </p>
       </td>
     </tr>

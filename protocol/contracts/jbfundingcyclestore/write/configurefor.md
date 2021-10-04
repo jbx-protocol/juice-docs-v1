@@ -38,49 +38,42 @@ function configureFor(
    require(_data.duration <= type(uint16).max, '0x15: BAD_DURATION');
    ```
 
-2. Make sure `_data.cycleLimit` is within the `MAX_CYCLE_LIMIT`.
-
-   ```javascript
-   // Currency must be less than the limit.
-   require(_data.cycleLimit <= MAX_CYCLE_LIMIT, '0x16: BAD_CYCLE_LIMIT');
-   ```
-
-3. Make sure the `_data.discountRate` is at most 201.
+2. Make sure the `_data.discountRate` is at most 201.
 
    ```javascript
    // Discount rate token must be less than or equal to 100%. A value of 201 means non-recurring.
    require(_data.discountRate <= 201, '0x17: BAD_DISCOUNT_RATE');
    ```
 
-4. Make sure the `_data.currency` fits in a `uint8`.
+3. Make sure the `_data.currency` fits in a `uint8`.
 
    ```javascript
    // Currency must fit into a uint8.
    require(_data.currency <= type(uint8).max, '0x18: BAD_CURRENCY');
    ```
 
-5. Make sure the `_data.weight` fits in a `uint80`.
+4. Make sure the `_data.weight` fits in a `uint80`.
 
    ```javascript
    // Weight must fit into a uint8.
    require(_data.weight <= type(uint80).max, '0x19: BAD_WEIGHT');
    ```
 
-6. Make sure the provided `_fee` is at most 200.
+5. Make sure the provided `_fee` is at most 200.
 
    ```javascript
    // Fee must be less than or equal to 100%.
    require(_fee <= 200, '0x1a: BAD_FEE');
    ```
 
-7. Get a reference to the time at which the configuration is occurring.
+6. Get a reference to the time at which the configuration is occurring.
 
    ```javascript
    // Set the configuration timestamp is now.
    uint256 _configured = block.timestamp;
    ```
 
-8. Find the ID of the funding cycle that should be configured.  
+7. Find the ID of the funding cycle that should be configured.  
 
 
    _Internal references:_
@@ -97,7 +90,7 @@ function configureFor(
    );
    ```
 
-9. Store all of the configuration properties provided onto the `_fundingCycleId`. These properties can all be packed into one `uint256` storage slot.  
+8. Store all of the configuration properties provided onto the `_fundingCycleId`. These properties can all be packed into one `uint256` storage slot.  
 
 
    _Internal references:_
@@ -109,7 +102,6 @@ function configureFor(
    _packAndStoreConfigurationPropertiesOf(
      _fundingCycleId,
      _configured,
-     _data.cycleLimit,
      _data.ballot,
      _data.duration,
      _data.currency,
@@ -118,19 +110,19 @@ function configureFor(
    );
    ```
 
-10. Store the provided `_data.target` for the `_fundingCycleId`.  
+9. Store the provided `_data.target` for the `_fundingCycleId`.  
 
 
-    _Internal references:_
+   _Internal references:_
 
-    * [`_targetOf`](../properties/_targetof.md)
+   * [`_targetOf`](../properties/_targetof.md)
 
-    ```javascript
-    // Set the target amount.
-    _targetOf[_fundingCycleId] = _data.target;
-    ```
+   ```javascript
+   // Set the target amount.
+   _targetOf[_fundingCycleId] = _data.target;
+   ```
 
-11. Store the provided `_metadata` for the `_fundingCycleId`.  
+10. Store the provided `_metadata` for the `_fundingCycleId`.  
 
 
     _Internal references:_
@@ -142,7 +134,7 @@ function configureFor(
     _metadataOf[_fundingCycleId] = _metadata;
     ```
 
-12. Emit a `Configure` event with the all relevant parameters.   
+11. Emit a `Configure` event with the all relevant parameters.   
 
 
     _Event references:_
@@ -153,7 +145,7 @@ function configureFor(
     emit Configure(_fundingCycleId, _projectId, _configured, _data, _metadata, msg.sender);
     ```
 
-13. Return the [`JBFundingCycle`](../../../data-structures/jbfundingcycle.md) struct that carries the new configuration.  
+12. Return the [`JBFundingCycle`](../../../data-structures/jbfundingcycle.md) struct that carries the new configuration.  
 
 
     _Internal references:_
@@ -180,7 +172,6 @@ function configureFor(
     @dev _data.currency The currency of the `_target`. Send 0 for ETH or 1 for USD.
     @dev _data.duration The duration of the funding cycle for which the `_target` amount is needed. Measured in days. 
       Set to 0 for no expiry and to be able to reconfigure anytime.
-    @dev _data.cycleLimit The number of cycles that this configuration should last for before going back to the last permanent. This does nothing for a project's first funding cycle.
     @dev _data.discountRate A number from 0-200 indicating how valuable a contribution to this funding cycle is compared to previous funding cycles.
       If it's 0, each funding cycle will have equal weight.
       If the number is 100, a contribution to the next funding cycle will only give you 90% of tickets given to a contribution of the same amount during the current funding cycle.
@@ -202,9 +193,6 @@ function configureFor(
 ) external override onlyController(_projectId) returns (JBFundingCycle memory) {
   // Duration must fit in a uint16.
   require(_data.duration <= type(uint16).max, '0x15: BAD_DURATION');
-
-  // Currency must be less than the limit.
-  require(_data.cycleLimit <= MAX_CYCLE_LIMIT, '0x16: BAD_CYCLE_LIMIT');
 
   // Discount rate token must be less than or equal to 100%. A value of 201 means non-recurring.
   require(_data.discountRate <= 201, '0x17: BAD_DISCOUNT_RATE');
@@ -233,7 +221,6 @@ function configureFor(
   _packAndStoreConfigurationPropertiesOf(
     _fundingCycleId,
     _configured,
-    _data.cycleLimit,
     _data.ballot,
     _data.duration,
     _data.currency,
@@ -258,7 +245,6 @@ function configureFor(
 | String | Description |
 | :--- | :--- |
 | **`0x15: BAD_DURATION`** | Thrown if the provided duration is greater than 2^16 - 1 \(65,535\) |
-| **`0x16: BAD_CYCLE_LIMIT`** | Thrown if the provided cycle limit is greater than the [`MAX_CYCLE_LIMIT`](../properties/max_cycle_limit.md). |
 | ~~**`0x17: BAD_DISCOUNT_RATE`**~~ | Thrown if the provided discount rate is greater than 201. |
 | ~~**`0x18: BAD_CURRENCY`**~~ | Thrown if the provided currency is greater than 2^8 - 1 \(255\) |
 | ~~**`0x19: BAD_WEIGHT`**~~ | Thrown if the provided weight is greater than 2^80 - 1 \(1.2E24\) |
