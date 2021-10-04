@@ -51,7 +51,11 @@ function _initFor(
      );
    } else {
      // Update the intrinsic properties of the funding cycle being initialized.
-     newFundingCycleId = _updateFundingCycleBasedOn(_baseFundingCycle, _mustStartOnOrAfter, _weight);
+     newFundingCycleId = _updateFundingCycleBasedOn(
+       _baseFundingCycle, 
+       _mustStartOnOrAfter, 
+       _weight
+     );
    }
    ```
 
@@ -67,19 +71,7 @@ function _initFor(
    latestIdOf[_projectId] = newFundingCycleId;
    ```
 
-3. Get a reference to the [`JBFundingCycle`](../../../data-structures/jbfundingcycle.md) structure for the newly initialized funding cycle.  
-
-
-   _Internal references:_
-
-   * [`_getStructFor`](../read/_getstructfor.md)
-
-   ```javascript
-   // Get a reference to the funding cycle with updated intrinsic properties.
-   JBFundingCycle memory _fundingCycle = _getStructFor(newFundingCycleId);
-   ```
-
-4. Emit an `Init` event with the all relevant parameters.   
+3. Emit an `Init` event with the all relevant parameters.   
 
 
    _Event references:_
@@ -89,11 +81,8 @@ function _initFor(
    ```javascript
    emit Init(
      newFundingCycleId,
-     _fundingCycle.projectId,
-     _fundingCycle.number,
-     _fundingCycle.basedOn,
-     _fundingCycle.weight,
-     _fundingCycle.start
+     _projectId,
+     _basedFundingCycle.id
    );
    ```
 {% endtab %}
@@ -174,13 +163,7 @@ function _initFor(
           </li>
           <li><code>uint256 indexed projectId</code> 
           </li>
-          <li><code>uint256 indexed number</code> 
-          </li>
-          <li><code>uint256 basedOn</code> 
-          </li>
-          <li><code>uint256 weight</code> 
-          </li>
-          <li><code>uint256 start</code>
+          <li><code>uint256 indexed basedOn</code>
           </li>
         </ul>
         <p><a href="../events/init.md">more</a>

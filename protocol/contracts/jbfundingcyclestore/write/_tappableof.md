@@ -90,7 +90,7 @@ function _tappableOf(uint256 _projectId) private returns (uint256 fundingCycleId
 
    ```javascript
    // The funding cycle cant be 0.
-   require(fundingCycleId > 0, '0x1e: NOT_FOUND');
+   require(fundingCycleId > 0, '0x1d: NOT_FOUND');
    ```
 
 6. Get a reference to the [`JBFundingCycle`](../../../data-structures/jbfundingcycle.md) structure.  
@@ -109,7 +109,7 @@ function _tappableOf(uint256 _projectId) private returns (uint256 fundingCycleId
 
    ```javascript
    // Funding cycles with a discount rate of 100% are non-recurring.
-   require(_fundingCycle.discountRate < 201, '0x1f: NON_RECURRING');
+   require(_fundingCycle.discountRate < 201, '0x1e: NON_RECURRING');
    ```
 
 8. Get a reference to the first start time that is possible after the funding cycle, which is the moment after it ends.  
@@ -229,13 +229,13 @@ function _tappableOf(uint256 _projectId) private returns (uint256 fundingCycleId
   }
 
   // The funding cycle cant be 0.
-  require(fundingCycleId > 0, '0x1e: NOT_FOUND');
+  require(fundingCycleId > 0, '0x1d: NOT_FOUND');
 
   // Set the eligible funding cycle.
   _fundingCycle = _getStructFor(fundingCycleId);
 
   // Funding cycles with a discount rate of 100% are non-recurring.
-  require(_fundingCycle.discountRate < 201, '0x1f: NON_RECURRING');
+  require(_fundingCycle.discountRate < 201, '0x1e: NON_RECURRING');
 
   // The time when the funding cycle immediately after the eligible funding cycle starts.
   uint256 _nextImmediateStart = _fundingCycle.start + (_fundingCycle.duration * _SECONDS_IN_DAY);
@@ -275,7 +275,7 @@ function _tappableOf(uint256 _projectId) private returns (uint256 fundingCycleId
 | String | Description |
 | :--- | :--- |
 | **`0x1d: NOT_FOUND`** | Thrown if no tappable funding cycle was found. |
-| **`0x1d: NON_RECURRING`** | Thrown if a tappable funding cycle is being looked for but the base is non-recurring. |
+| **`0x1e: NON_RECURRING`** | Thrown if a tappable funding cycle is being looked for but the base is non-recurring. |
 {% endtab %}
 
 {% tab title="Bug bounty" %}

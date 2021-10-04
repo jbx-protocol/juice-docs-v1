@@ -73,9 +73,7 @@ function _configurableOf(
      _updateFundingCycleBasedOn(
        _baseFundingCycle,
        _getLatestTimeAfterBallotOf(_baseFundingCycle, _configured),
-       _weight,
-       // No need to copy since a new configuration is going to be applied.
-       false
+       _weight
      );
      return fundingCycleId;
    }
@@ -142,7 +140,7 @@ function _configurableOf(
 
    ```javascript
    // Make sure the funding cycle is recurring.
-   require(_fundingCycle.discountRate < 201, '0x1d: NON_RECURRING');
+   require(_fundingCycle.discountRate < 201, '0x1c: NON_RECURRING');
    ```
 
 8. The next step is to find its appropriate start time constraints for the funding cycle that will be initialized.Get a reference to the timestamp that the initialized funding cycle must start on or after.
@@ -265,7 +263,7 @@ function _configurableOf(
   JBFundingCycle memory _fundingCycle = _getStructFor(fundingCycleId);
 
   // Make sure the funding cycle is recurring.
-  require(_fundingCycle.discountRate < 201, '0x1d: NON_RECURRING');
+  require(_fundingCycle.discountRate < 201, '0x1c: NON_RECURRING');
 
   // Determine if the configurable funding cycle can only take effect on or after a certain date.
   uint256 _mustStartOnOrAfter;

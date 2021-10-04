@@ -97,7 +97,6 @@ function _mockFundingCycleBasedOn(JBFundingCycle memory _baseFundingCycle, bool 
        _number,
        _baseFundingCycle.id,
        _baseFundingCycle.configured,
-       _cycleLimit,
        _deriveWeightFrom(_baseFundingCycle, _start),
        _baseFundingCycle.ballot,
        _start,

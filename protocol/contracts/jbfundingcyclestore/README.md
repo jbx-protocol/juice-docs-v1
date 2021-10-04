@@ -88,13 +88,7 @@ Rinkeby testnet: _Not yet deployed_
           </li>
           <li><code>uint256 indexed projectId</code> 
           </li>
-          <li><code>uint256 indexed number</code> 
-          </li>
-          <li><code>uint256 basedOn</code> 
-          </li>
-          <li><code>uint256 weight</code> 
-          </li>
-          <li><code>uint256 start</code>
+          <li><code>uint256 indexed basedOn</code> 
           </li>
         </ul>
         <p><a href="events/init.md">more</a>

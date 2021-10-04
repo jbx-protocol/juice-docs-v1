@@ -42,28 +42,28 @@ function configureFor(
 
    ```javascript
    // Discount rate token must be less than or equal to 100%. A value of 201 means non-recurring.
-   require(_data.discountRate <= 201, '0x17: BAD_DISCOUNT_RATE');
+   require(_data.discountRate <= 201, '0x16: BAD_DISCOUNT_RATE');
    ```
 
 3. Make sure the `_data.currency` fits in a `uint8`.
 
    ```javascript
    // Currency must fit into a uint8.
-   require(_data.currency <= type(uint8).max, '0x18: BAD_CURRENCY');
+   require(_data.currency <= type(uint8).max, '0x17: BAD_CURRENCY');
    ```
 
 4. Make sure the `_data.weight` fits in a `uint80`.
 
    ```javascript
    // Weight must fit into a uint8.
-   require(_data.weight <= type(uint80).max, '0x19: BAD_WEIGHT');
+   require(_data.weight <= type(uint80).max, '0x18: BAD_WEIGHT');
    ```
 
 5. Make sure the provided `_fee` is at most 200.
 
    ```javascript
    // Fee must be less than or equal to 100%.
-   require(_fee <= 200, '0x1a: BAD_FEE');
+   require(_fee <= 200, '0x19: BAD_FEE');
    ```
 
 6. Get a reference to the time at which the configuration is occurring.

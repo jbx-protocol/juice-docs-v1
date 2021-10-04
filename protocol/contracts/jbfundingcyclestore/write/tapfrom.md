@@ -30,7 +30,7 @@ function tapFrom(uint256 _projectId, uint256 _amount)
 
    ```javascript
    // Amount must be positive.
-   require(_amount > 0, '0x1b: INSUFFICIENT_FUNDS');
+   require(_amount > 0, '0x1a: INSUFFICIENT_FUNDS');
    ```
 
 2. Find the ID of the funding cycle that should be tapped.  
@@ -61,7 +61,7 @@ function tapFrom(uint256 _projectId, uint256 _amount)
 
    ```javascript
    // Amount must be within what is still tappable.
-   require(_newTappedAmount <= _targetOf[_fundingCycleId], '0x1c: INSUFFICIENT_FUNDS');
+   require(_newTappedAmount <= _targetOf[_fundingCycleId], '0x1b: INSUFFICIENT_FUNDS');
    ```
 
 5. Store the new tapped amount.
@@ -115,7 +115,7 @@ function tapFrom(uint256 _projectId, uint256 _amount)
   returns (JBFundingCycle memory)
 {
   // Amount must be positive.
-  require(_amount > 0, '0x1b: BAD_AMOUNT');
+  require(_amount > 0, '0x1a: BAD_AMOUNT');
   
   // Get a reference to the funding cycle being tapped.
   uint256 _fundingCycleId = _tappableOf(_projectId);
@@ -124,7 +124,7 @@ function tapFrom(uint256 _projectId, uint256 _amount)
   uint256 _newTappedAmount = _tappedAmountOf[_fundingCycleId] + _amount;
 
   // Amount must be within what is still tappable.
-  require(_newTappedAmount <= _targetOf[_fundingCycleId], '0x1c: INSUFFICIENT_FUNDS');
+  require(_newTappedAmount <= _targetOf[_fundingCycleId], '0x1b: INSUFFICIENT_FUNDS');
 
   // Store the new amount.
   _tappedAmountOf[_fundingCycleId] = _newTappedAmount;
