@@ -139,8 +139,8 @@ function tapFrom(uint256 _projectId, uint256 _amount)
 {% tab title="Errors" %}
 | String | Description |
 | :--- | :--- |
-| **`0x1b: BAD_AMOUNT`** | Thrown if the provided `_amount` is 0. |
-| **`0x1c: INSUFFICIENT_FUNDS`** | Thrown if tapping the `_amount` provided would result in tapping an amount greater than the funding cycle's target. |
+| **`0x1a: BAD_AMOUNT`** | Thrown if the provided `_amount` is 0. |
+| **`0x1b: INSUFFICIENT_FUNDS`** | Thrown if tapping the `_amount` provided would result in tapping an amount greater than the funding cycle's target. |
 {% endtab %}
 
 {% tab title="Events" %}

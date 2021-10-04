@@ -294,7 +294,7 @@ function _configurableOf(
 {% tab title="Errors" %}
 | String | Description |
 | :--- | :--- |
-| **`0x1d: NON_RECURRING`** | Thrown if a configurable funding cycle is being looked for but the base is non-recurring. |
+| **`0x1c: NON_RECURRING`** | Thrown if a configurable funding cycle is being looked for but the base is non-recurring. |
 {% endtab %}
 
 {% tab title="Bug bounty" %}

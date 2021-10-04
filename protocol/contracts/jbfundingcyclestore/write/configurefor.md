@@ -245,10 +245,10 @@ function configureFor(
 | String | Description |
 | :--- | :--- |
 | **`0x15: BAD_DURATION`** | Thrown if the provided duration is greater than 2^16 - 1 \(65,535\) |
-| ~~**`0x17: BAD_DISCOUNT_RATE`**~~ | Thrown if the provided discount rate is greater than 201. |
-| ~~**`0x18: BAD_CURRENCY`**~~ | Thrown if the provided currency is greater than 2^8 - 1 \(255\) |
-| ~~**`0x19: BAD_WEIGHT`**~~ | Thrown if the provided weight is greater than 2^80 - 1 \(1.2E24\) |
-| ~~**`0x1a: BAD_FEE`**~~ | Thrown if the provided fee is greater than 200. |
+| ~~**`0x16: BAD_DISCOUNT_RATE`**~~ | Thrown if the provided discount rate is greater than 201. |
+| ~~**`0x17: BAD_CURRENCY`**~~ | Thrown if the provided currency is greater than 2^8 - 1 \(255\) |
+| ~~**`0x18: BAD_WEIGHT`**~~ | Thrown if the provided weight is greater than 2^80 - 1 \(1.2E24\) |
+| ~~**`0x19: BAD_FEE`**~~ | Thrown if the provided fee is greater than 200. |
 {% endtab %}
 
 {% tab title="Events" %}
