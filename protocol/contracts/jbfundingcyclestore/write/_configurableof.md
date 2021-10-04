@@ -140,7 +140,7 @@ function _configurableOf(
 
    ```javascript
    // Make sure the funding cycle is recurring.
-   require(_fundingCycle.discountRate < 201, '0x1c: NON_RECURRING');
+   require(_fundingCycle.discountRate < 10001, '0x1c: NON_RECURRING');
    ```
 
 8. The next step is to find its appropriate start time constraints for the funding cycle that will be initialized.Get a reference to the timestamp that the initialized funding cycle must start on or after.

@@ -41,8 +41,8 @@ function configureFor(
 2. Make sure the `_data.discountRate` is at most 201.
 
    ```javascript
-   // Discount rate token must be less than or equal to 100%. A value of 201 means non-recurring.
-   require(_data.discountRate <= 201, '0x16: BAD_DISCOUNT_RATE');
+   // Discount rate token must be less than or equal to 100%. A value of 10001 means non-recurring.
+   require(_data.discountRate <= 10001, '0x16: BAD_DISCOUNT_RATE');
    ```
 
 3. Make sure the `_data.currency` fits in a `uint8`.
@@ -172,11 +172,10 @@ function configureFor(
     @dev _data.currency The currency of the `_target`. Send 0 for ETH or 1 for USD.
     @dev _data.duration The duration of the funding cycle for which the `_target` amount is needed. Measured in days. 
       Set to 0 for no expiry and to be able to reconfigure anytime.
-    @dev _data.discountRate A number from 0-200 indicating how valuable a contribution to this funding cycle is compared to previous funding cycles.
+    @dev _data.discountRate A number from 0-10000 indicating how valuable a contribution to this funding cycle is compared to previous funding cycles.
       If it's 0, each funding cycle will have equal weight.
-      If the number is 100, a contribution to the next funding cycle will only give you 90% of tickets given to a contribution of the same amount during the current funding cycle.
-      If the number is 200, a contribution to the next funding cycle will only give you 80% of tickets given to a contribution of the same amoutn during the current funding cycle.
-      If the number is 201, an non-recurring funding cycle will get made.
+      If the number is 9000, a contribution to the next funding cycle will only give you 10% of tickets given to a contribution of the same amoutn during the current funding cycle.
+      If the number is 10001, an non-recurring funding cycle will get made.
     @dev _data.ballot The new ballot that will be used to approve subsequent reconfigurations.
   @param _metadata Data to associate with this funding cycle configuration.
   @param _fee The fee that this configuration incurs when tapping.

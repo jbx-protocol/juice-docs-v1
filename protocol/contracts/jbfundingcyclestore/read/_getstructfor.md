@@ -47,7 +47,7 @@ function _getStructFor(uint256 _id) private view returns (JBFundingCycle memory 
    fundingCycle.number = uint256(uint24(_packedIntrinsicProperties >> 232));
    ```
 
-4. Get the stored configuration properties of the funding cycle. Populate the struct values by de-packing the `uint256`.  
+4. Get the stored configuration properties of the funding cycle. Populate the struct values by unpacking the `uint256`.  
 
 
    _Internal references:_
@@ -62,7 +62,7 @@ function _getStructFor(uint256 _id) private view returns (JBFundingCycle memory 
    fundingCycle.duration = uint256(uint16(_packedConfigurationProperties >> 208));
    fundingCycle.currency = uint256(uint8(_packedConfigurationProperties >> 224));
    fundingCycle.fee = uint256(uint8(_packedConfigurationProperties >> 232));
-   fundingCycle.discountRate = uint256(uint8(_packedConfigurationProperties >> 240));
+   fundingCycle.discountRate = uint256(uint16(_packedConfigurationProperties >> 240));
    ```
 
 5. Populate the `target` property of the struct by reading from what's stored in `_targetOf`.  

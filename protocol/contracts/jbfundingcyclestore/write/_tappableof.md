@@ -109,7 +109,7 @@ function _tappableOf(uint256 _projectId) private returns (uint256 fundingCycleId
 
    ```javascript
    // Funding cycles with a discount rate of 100% are non-recurring.
-   require(_fundingCycle.discountRate < 201, '0x1e: NON_RECURRING');
+   require(_fundingCycle.discountRate < 10001, '0x1e: NON_RECURRING');
    ```
 
 8. Get a reference to the first start time that is possible after the funding cycle, which is the moment after it ends.  

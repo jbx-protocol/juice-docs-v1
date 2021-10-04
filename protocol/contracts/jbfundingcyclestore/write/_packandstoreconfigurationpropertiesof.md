@@ -67,10 +67,10 @@ function _packAndStoreConfigurationProperties(
    packed |= _fee << 232;
    ```
 
-6. Store the `_discountRate` in the next 8 bits.
+6. Store the `_discountRate` in the next 16 bits.
 
    ```javascript
-   // discountRate in bytes 240-247 bytes.
+   // discountRate in bytes 240-255 bytes.
    packed |= _discountRate << 240;
    ```
 

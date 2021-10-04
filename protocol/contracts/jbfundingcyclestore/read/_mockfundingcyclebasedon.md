@@ -131,7 +131,7 @@ function _mockFundingCycleBasedOn(JBFundingCycle memory _baseFundingCycle, bool 
   returns (JBFundingCycle memory)
 {
   // Can't mock a non recurring funding cycle.
-  if (_baseFundingCycle.discountRate == 201) return _getStructFor(0);
+  if (_baseFundingCycle.discountRate == 10001) return _getStructFor(0);
     
   // The distance of the current time to the start of the next possible funding cycle.
   // If the returned mock cycle must not yet have started, the start time of the mock must be in the future so no need to adjust backwards.
