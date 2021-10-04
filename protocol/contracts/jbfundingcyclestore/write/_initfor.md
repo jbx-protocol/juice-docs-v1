@@ -24,6 +24,63 @@ function _initFor(
 * `_copy` is a flag indicating if non-intrinsic properties should be copied from the base funding cycle.
 * The function is private to this contract.
 * The function returns the ID of the initialized funding cycle.
+
+1. If no base funding cycle was provided, create a first funding cycle for the project. Otherwise, create a new funding cycle by calling `_updateFundingCycleBasedOn`, which will derive properties for the funding cycle that follows the specified base cycle, and store them to an ID.
+
+   ```javascript
+   // If there is no base, initialize a first cycle.
+   if (_baseFundingCycle.id == 0) {
+     // The first number is 1.
+     uint256 _number = 1;
+
+     // Get the formatted ID.
+     newFundingCycleId = _idFor(_projectId, _number);
+
+     // Set fresh intrinsic properties.
+     _packAndStoreIntrinsicPropertiesOf(
+       _projectId,
+       _number,
+       _weight,
+       _baseFundingCycle.id,
+       block.timestamp
+     );
+   } else {
+     // Update the intrinsic properties of the funding cycle being initialized.
+     newFundingCycleId = _updateFundingCycleBasedOn(_baseFundingCycle, _mustStartOnOrAfter, _weight, _copy);
+   }
+   ```
+
+2. Store the initialized ID as the `latestIdOf` the project.
+
+   ```javascript
+   // Set the project's latest funding cycle ID to the new count.
+   latestIdOf[_projectId] = newFundingCycleId;
+   ```
+
+3. Get a reference to the [`JBFundingCycle`](../../../data-structures/jbfundingcycle.md) structure for the newly initialized funding cycle.
+
+   ```javascript
+   // Get a reference to the funding cycle with updated intrinsic properties.
+   JBFundingCycle memory _fundingCycle = _getStructFor(newFundingCycleId);
+   ```
+
+4. Emit an `Init` event with the all relevant parameters.   
+
+
+   _Event references:_
+
+   * [`Init`](../events/init.md) 
+
+   ```javascript
+   emit Init(
+     newFundingCycleId,
+     _fundingCycle.projectId,
+     _fundingCycle.number,
+     _fundingCycle.basedOn,
+     _fundingCycle.weight,
+     _fundingCycle.start
+   );
+   ```
 {% endtab %}
 
 {% tab title="Only code" %}
