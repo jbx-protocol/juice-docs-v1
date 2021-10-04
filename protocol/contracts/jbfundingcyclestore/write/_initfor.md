@@ -79,11 +79,7 @@ function _initFor(
    * [`Init`](../events/init.md) 
 
    ```javascript
-   emit Init(
-     newFundingCycleId,
-     _projectId,
-     _basedFundingCycle.id
-   );
+   emit Init(newFundingCycleId, _projectId, _basedFundingCycle.id);
    ```
 {% endtab %}
 
