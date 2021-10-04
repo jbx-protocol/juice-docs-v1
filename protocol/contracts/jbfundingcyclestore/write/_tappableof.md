@@ -15,6 +15,115 @@ function _tappableOf(uint256 _projectId) private returns (uint256 fundingCycleId
 * `_projectId` is the ID of the project to find a tappable funding cycle for.
 * The function is private to this contract.
 * The function returns the ID of a tappable funding cycle.
+
+1. Get a reference to the project's eligible funding cycle.  
+
+
+   _Internal references:_
+
+   * [`_standbyOf`](../read/_standbyof.md)
+
+   ```javascript
+   // Check for the ID of an eligible funding cycle.
+   fundingCycleId = _eligibleOf(_projectId);
+   ```
+
+2. If no eligible funding cycle was found, get a reference to the project's standby cycle.
+
+   ```javascript
+   // No eligible funding cycle found, check for the ID of a standby funding cycle.
+   // If this one exists, it will become eligible one it has started.
+   if (fundingCycleId == 0) fundingCycleId = _standbyOf(_projectId);
+   ```
+
+3. Get a reference to the funding cycle that should be tapped.
+
+   ```javascript
+   // Keep a reference to the funding cycle eligible for being tappable.
+   JBFundingCycle memory _fundingCycle;
+   ```
+
+4. If a funding cycle exists that is either eligible to be tapped or is in standby, check to see if it has started and it's approved. If so, return it. Otherwise, get a reference to the funding cycle that it's based on which will provide the correct configuration to a new funding cycle that will be initialized.  
+  
+   If no eligible or standby funding cycle exists, get a reference to the last approved funding cycle for the project which will provide the correct configuration to a new funding cycle that will be initialized.
+
+   ```javascript
+   // If the ID of an eligible funding cycle exists,
+   // check to see if it has been approved by the based funding cycle's ballot.
+   if (fundingCycleId > 0) {
+     // Get the necessary properties for the funding cycle.
+     _fundingCycle = _getStructFor(fundingCycleId);
+
+     // Check to see if the cycle is approved. If so, return it.
+     if (_fundingCycle.start <= block.timestamp && _isApproved(_fundingCycle))
+       return fundingCycleId;
+
+     // If it hasn't been approved, set the ID to be the base funding cycle,
+     // which carries the last approved configuration.
+     fundingCycleId = _fundingCycle.basedOn;
+   } else {
+     // No upcoming funding cycle found that is eligible to become active, clone the latest active funding cycle.
+     // which carries the last configuration.
+     fundingCycleId = latestIdOf[_projectId];
+
+     // Get the funding cycle for the latest ID.
+     _fundingCycle = _getStructFor(fundingCycleId);
+
+     // If it's not approved, get a reference to the funding cycle that the latest is based on, which has the latest approved configuration.
+     if (!_isApproved(_fundingCycle)) fundingCycleId = _fundingCycle.basedOn;
+   }
+   ```
+
+5. Make sure there's a funding cycle to base the newly initialized cycle on.
+
+   ```javascript
+   // The funding cycle cant be 0.
+   require(fundingCycleId > 0, '0x1e: NOT_FOUND');
+   ```
+
+6. Get a reference to the [`JBFundingCycle`](../../../data-structures/jbfundingcycle.md) structure.
+
+   ```javascript
+   // Set the eligible funding cycle.
+   _fundingCycle = _getStructFor(fundingCycleId);
+   ```
+
+7. Make sure the cycle is recurring, otherwise throw an error since a new funding cycle cannot be created based on a non-recurring cycle.
+
+   ```javascript
+   // Funding cycles with a discount rate of 100% are non-recurring.
+   require(_fundingCycle.discountRate < 201, '0x1f: NON_RECURRING');
+   ```
+
+8. Get a reference to the first start time that is possible after the funding cycle, which is the moment after it ends.
+
+   ```javascript
+   // The time when the funding cycle immediately after the eligible funding cycle starts.
+   uint256 _nextImmediateStart = _fundingCycle.start + (_fundingCycle.duration * SECONDS_IN_DAY);
+   ```
+
+9. Get a reference to the time distance to the most recent funding cycle iteration's start time.
+
+   ```javascript
+   // The distance from now until the nearest past multiple of the cycle duration from its start.
+   // A duration of zero means the reconfiguration can start right away.
+   uint256 _timeFromImmediateStartMultiple = _fundingCycle.duration == 0
+     ? 0
+     : (block.timestamp - _nextImmediateStart) % (_fundingCycle.duration * SECONDS_IN_DAY);
+   ```
+
+10. Set the ID to that of a newly initialized funding cycle.
+
+    ```javascript
+    // Return the tappable funding cycle.
+    fundingCycleId = _initFor(
+      _projectId,
+      _fundingCycle,
+      block.timestamp - _timeFromImmediateStartMultiple,
+      0,
+      true
+    );
+    ```
 {% endtab %}
 
 {% tab title="Only code" %}
