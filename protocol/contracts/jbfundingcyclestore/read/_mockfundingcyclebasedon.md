@@ -40,14 +40,14 @@ function _mockFundingCycleBasedOn(JBFundingCycle memory _baseFundingCycle, bool 
 
    _Internal references:_
 
-   * [`_latestPermanentCycleBefore`](_latestpermanentcyclebefore.md)
+   * [`_latestPermanentCycleFrom`](_latestpermanentcyclefrom.md)
 
    ```javascript
    // If the base has a limit, find the last permanent funding cycle, which is needed to make subsequent calculations.
    // Otherwise, the base is already the latest permanent funding cycle.
    JBFundingCycle memory _latestPermanentFundingCycle = _baseFundingCycle.cycleLimit == 0
      ? _baseFundingCycle
-     : _latestPermanentCycleBefore(_baseFundingCycle);
+     : _latestPermanentCycleFrom(_baseFundingCycle);
    ```
 
 3. Save a reference to the amount of seconds since right now that the returned funding cycle could have started at.
@@ -194,7 +194,7 @@ function _mockFundingCycleBasedOn(JBFundingCycle memory _baseFundingCycle, bool 
   // Otherwise, the base is already the latest permanent funding cycle.
   JBFundingCycle memory _latestPermanentFundingCycle = _baseFundingCycle.cycleLimit == 0
     ? _baseFundingCycle
-    : _latestPermanentCycleBefore(_baseFundingCycle);
+    : _latestPermanentCycleFrom(_baseFundingCycle);
     
   // The distance of the current time to the start of the next possible funding cycle.
   uint256 _timeFromImmediateStartMultiple;

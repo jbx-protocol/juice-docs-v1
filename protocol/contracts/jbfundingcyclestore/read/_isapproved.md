@@ -4,7 +4,31 @@ Contract:[`JBFundingCycleStore`](../)​
 
 {% tabs %}
 {% tab title="Step by step" %}
+**Checks to see if the provided funding cycle is approved according to the correct ballot.**
 
+Definition:
+
+```javascript
+function _isApproved(JBFundingCycle memory _fundingCycle) private view returns (bool) { ... }
+```
+
+* `_fundingCycle` is the [`JBFundingCycle`](../../../data-structures/jbfundingcycle.md) to get an approval flag for.
+* The view function is private to this contract.
+* The function does not alter state on the blockchain.
+* The function returns the approval flag.
+
+1. Check to see if the state of the ballot for the provided funding cycle configuration is approved. The ballot that should be used is that of the funding cycle that the provided one is based on. This is because each funding cycle's ballot dictates the approval conditions of future reconfigurations.  
+
+
+   _Internal references:_
+
+   * [`_ballotStateOf`](_ballotstateof.md)
+
+   ```javascript
+   return
+     _ballotStateOf(_fundingCycle.id, _fundingCycle.configured, _fundingCycle.basedOn) ==
+     JBBallotState.Approved;
+   ```
 {% endtab %}
 
 {% tab title="Only code" %}

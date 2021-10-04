@@ -4,17 +4,59 @@ Contract:[`JBFundingCycleStore`](../)​
 
 {% tabs %}
 {% tab title="Step by step" %}
+**A funding cycle configuration's current status.**
 
+Definition:
+
+```javascript
+function _ballotStateOf(
+  uint256 _id,
+  uint256 _configuration,
+  uint256 _ballotFundingCycleId
+) private view returns (JBBallotState) { ... }
+```
+
+* `_id` is the ID of the funding cycle configuration to check the status of.
+* `_configuration` is the timestamp when the configuration took place. This differentiates reconfigurations onto the same upcoming funding cycle, which all would have the same ID but different configuration times.
+* `_ballotFundingCycleId` is the ID of the funding cycle which is configured with the ballot that should be used.
+* The view function is private to this contract.
+* The function does not alter state on the blockchain.
+* The function returns the [`JBBallotState`](../../../enums/jbballotstate.md).
+
+1. If there is no ballot, the ballot state is implicitly approved.
+
+   ```javascript
+   // If there is no ballot funding cycle, implicitly approve.
+   if (_ballotFundingCycleId == 0) return JBBallotState.Approved;
+   ```
+
+2. Get the `JBFundingCycle` struct that has a reference of the ballot that should be used.
+
+   ```javascript
+   // Get the ballot funding cycle.
+   JBFundingCycle memory _ballotFundingCycle = _getStructFor(_ballotFundingCycleId);
+   ```
+
+3. If there's no ballot, implicitly the funding cycle configuration is implicitly approved. Otherwise, return the state that the ballot for the provided `_id` and `_configuration`. 
+
+   ```javascript
+   // If there is no ballot, the ID is auto approved.
+   // Otherwise, return the ballot's state.
+   return
+     _ballotFundingCycle.ballot == IJBFundingCycleBallot(address(0))
+       ? JBBallotState.Approved
+       : _ballotFundingCycle.ballot.state(_id, _configuration);
+   ```
 {% endtab %}
 
 {% tab title="Only code" %}
 ```javascript
 /**
   @notice 
-  A funding cycle configuration's currency status.
+  A funding cycle configuration's current status.
 
   @param _id The ID of the funding cycle configuration to check the status of.
-  @param _configuration The timestamp of when the configuration took place.
+  @param _configuration This differentiates reconfigurations onto the same upcoming funding cycle, which all would have the same ID but different configuration times.
   @param _ballotFundingCycleId The ID of the funding cycle which is configured with the ballot that should be used.
 
   @return The funding cycle's configuration status.
@@ -24,15 +66,11 @@ function _ballotStateOf(
   uint256 _configuration,
   uint256 _ballotFundingCycleId
 ) private view returns (JBBallotState) {
-  // If there is no ballot funding cycle, auto approve.
+  // If there is no ballot funding cycle, implicitly approve.
   if (_ballotFundingCycleId == 0) return JBBallotState.Approved;
 
   // Get the ballot funding cycle.
   JBFundingCycle memory _ballotFundingCycle = _getStructFor(_ballotFundingCycleId);
-
-  // If the configuration is the same as the ballot's funding cycle,
-  // the ballot isn't applicable. Auto approve since the ballot funding cycle is approved.
-  if (_ballotFundingCycle.configured == _configuration) return JBBallotState.Approved;
 
   // If there is no ballot, the ID is auto approved.
   // Otherwise, return the ballot's state.

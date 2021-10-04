@@ -4,7 +4,42 @@ Contract:[`JBFundingCycleStore`](../)​
 
 {% tabs %}
 {% tab title="Step by step" %}
+**Checks to see if the funding cycle of the provided ID is approved according to the correct ballot.**
 
+Definition:
+
+```javascript
+function _isIdApproved(uint256 _fundingCycleId) private view returns (bool) { ... } 
+```
+
+* `_fundingCycleId` is the ID of the funding cycle to get an approval flag for.
+* The view function is private to this contract.
+* The function does not alter state on the blockchain.
+* The function returns the approval flag.
+
+1. Find the [`JBFundingCycle`](../../../data-structures/jbfundingcycle.md) struct for the provided ID.  
+
+
+   _Internal references:_
+
+   * [`_getStructFor`](_getstructfor.md)
+
+   ```javascript
+   JBFundingCycle memory _fundingCycle = _getStructFor(_fundingCycleId);
+   ```
+
+2. Return the approval flag from the [`_isApproved`](_isapproved.md) function.  
+
+
+   _Internal references:_
+
+   * [`_isApproved`](_isapproved.md)
+
+   ```javascript
+   return _isApproved(_fundingCycle);
+   ```
+
+  
 {% endtab %}
 
 {% tab title="Only code" %}

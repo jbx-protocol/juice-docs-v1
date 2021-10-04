@@ -25,7 +25,7 @@ function _updateFundingCycleBasedOn(
 ) private returns (uint256 fundingCycleId) {
   // Get the latest permanent funding cycle.
   JBFundingCycle memory _latestPermanentFundingCycle = _baseFundingCycle.cycleLimit > 0
-    ? _latestPermanentCycleBefore(_baseFundingCycle)
+    ? _latestPermanentCycleFrom(_baseFundingCycle)
     : _baseFundingCycle;
 
   // Derive the correct next start time from the base.

@@ -4,7 +4,25 @@ Contract:[`JBFundingCycleStore`](../)​
 
 {% tabs %}
 {% tab title="Step by step" %}
+**Constructs a unique ID from a project ID and a number.**  
+  
+Definition:
 
+```javascript
+function _idFor(uint256 _projectId, uint256 _number) private pure returns (uint256) { ... }
+```
+
+* `_projectId`is ID of the project to use in the constructed ID.
+* `_number` is the number to use in the constructed ID.
+* The view function is private to this contract.
+* The function does not alter state on the blockchain.
+* The function returns the ID that is unique to the provided inputs.
+
+1. Return a concatenated `uint256` with the first 56 bits being the `_projectId` and the next 24 bits being the `_number`. Both of these values get packed down into these constraints anyways when they get stored, so theres no additional risk of data loss by doing this. 
+
+   ```javascript
+   return uint256(uint56(_projectId) | uint24(_number));
+   ```
 {% endtab %}
 
 {% tab title="Only code" %}
@@ -16,7 +34,7 @@ Contract:[`JBFundingCycleStore`](../)​
   @param _projectId The ID of the project to use in the ID.
   @param _number The number to use in the ID
 
-  @return An ID.
+  @return The ID that is unique to the provided inputs.
 */
 function _idFor(uint256 _projectId, uint256 _number) private pure returns (uint256) {
   return uint256(uint56(_projectId) | uint24(_number));
