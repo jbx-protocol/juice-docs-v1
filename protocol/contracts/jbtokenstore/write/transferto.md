@@ -1,5 +1,9 @@
 # transferTo
 
+Contract:[`JBTokenStore`](../)​‌
+
+Interface: `IJBTokenStore`
+
 {% tabs %}
 {% tab title="Step by step" %}
 
