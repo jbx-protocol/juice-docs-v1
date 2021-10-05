@@ -95,7 +95,7 @@ Rinkeby testnet: _Not yet deployed_
           </li>
           <li><code>uint256 amount</code> 
           </li>
-          <li><code>bool shouldClaimTokens</code> 
+          <li><code>bool tokensWereClaimed</code> 
           </li>
           <li><code>bool preferClaimedTokens</code> 
           </li>
@@ -163,7 +163,7 @@ Rinkeby testnet: _Not yet deployed_
       </td>
     </tr>
     <tr>
-      <td style="text-align:left"><b><code>UseNewToken</code></b>
+      <td style="text-align:left"><b><code>ChangeToken</code></b>
       </td>
       <td style="text-align:left">
         <ul>
@@ -471,7 +471,7 @@ Rinkeby testnet: _Not yet deployed_
       </td>
     </tr>
     <tr>
-      <td style="text-align:left"><b><code>changeTokenFor</code></b>
+      <td style="text-align:left"><b><code>changeTokenOf</code></b>
       </td>
       <td style="text-align:left">
         <p><b>Traits</b>
@@ -490,7 +490,7 @@ Rinkeby testnet: _Not yet deployed_
           <li><code>address _newOwner</code>
           </li>
         </ul>
-        <p><a href="write/changetokenfor.md">more</a>
+        <p><a href="write/changetokenof.md">more</a>
         </p>
       </td>
     </tr>
