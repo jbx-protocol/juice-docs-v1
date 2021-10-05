@@ -46,7 +46,7 @@ Rinkeby testnet: _Not yet deployed_
       </td>
     </tr>
     <tr>
-      <td style="text-align:left"><b><code>TerminalUtility</code></b>
+      <td style="text-align:left"><b><code>JBUtility</code></b>
       </td>
       <td style="text-align:left">Includes convenience functionality for checking if the message sender
         is the current terminal of the project who data is being manipulated.</td>
@@ -95,14 +95,14 @@ Rinkeby testnet: _Not yet deployed_
           </li>
           <li><code>uint256 amount</code> 
           </li>
-          <li><code>bool shouldUnstakeTokens</code> 
+          <li><code>bool shouldClaimTokens</code> 
           </li>
-          <li><code>bool preferUnstakedTokens</code> 
+          <li><code>bool preferClaimedTokens</code> 
           </li>
           <li><code>address caller</code>
           </li>
         </ul>
-        <p><a href="events/print.md">more</a>
+        <p><a href="events/mint.md">more</a>
         </p>
       </td>
     </tr>
@@ -117,19 +117,19 @@ Rinkeby testnet: _Not yet deployed_
           </li>
           <li><code>uint256 amount</code> 
           </li>
-          <li><code>uint256 inlockedStakedBalance</code> 
+          <li><code>uint256 unclaimedTokenBalance</code> 
           </li>
-          <li><code>bool preferUnstakedTokens</code> 
+          <li><code>bool preferClaimedTokens</code> 
           </li>
           <li><code>address caller</code>
           </li>
         </ul>
-        <p><a href="../jbpaymentterminal/events/redeem.md">more</a>
+        <p><a href="events/burn.md">more</a>
         </p>
       </td>
     </tr>
     <tr>
-      <td style="text-align:left"><b><code>Stake</code></b>
+      <td style="text-align:left"><b><code>Claim</code></b>
       </td>
       <td style="text-align:left">
         <ul>
@@ -142,61 +142,41 @@ Rinkeby testnet: _Not yet deployed_
           <li><code>address caller</code>
           </li>
         </ul>
-        <p><a href="events/stake.md">more</a>
+        <p><a href="events/claim.md">more</a>
         </p>
       </td>
     </tr>
     <tr>
-      <td style="text-align:left"><b><code>Unstake</code></b>
+      <td style="text-align:left"><b><code>ShouldRequireClaimFor</code></b>
       </td>
       <td style="text-align:left">
         <ul>
-          <li><code>address indexed holder</code> 
-          </li>
           <li><code>uint256 indexed projectId</code> 
           </li>
-          <li><code>uint256 amount</code> 
+          <li><code>bool indexed flag</code> 
           </li>
           <li><code>address caller</code>
           </li>
         </ul>
-        <p><a href="events/unstake.md">more</a>
+        <p><a href="events/shouldrequireclaimfor.md">more</a>
         </p>
       </td>
     </tr>
     <tr>
-      <td style="text-align:left"><b><code>Lock</code></b>
+      <td style="text-align:left"><b><code>UseNewToken</code></b>
       </td>
       <td style="text-align:left">
         <ul>
-          <li><code>address indexed holder</code> 
+          <li><code>uint256 indexed projectId</code>
           </li>
-          <li><code>uint256 indexed projectId</code> 
+          <li><code>IJBToken indexed token</code> 
           </li>
-          <li><code>uint256 amount</code> 
+          <li><code>address indexed owner</code> 
           </li>
           <li><code>address caller</code>
           </li>
         </ul>
-        <p><a href="events/lock.md">more</a>
-        </p>
-      </td>
-    </tr>
-    <tr>
-      <td style="text-align:left"><b><code>Unlock</code></b>
-      </td>
-      <td style="text-align:left">
-        <ul>
-          <li><code>address indexed holder</code> 
-          </li>
-          <li><code>uint256 indexed projectId</code> 
-          </li>
-          <li><code>uint256 amount</code> 
-          </li>
-          <li><code>address caller</code>
-          </li>
-        </ul>
-        <p><a href="events/unlock.md">more</a>
+        <p><a href="events/usenewtoken.md">more</a>
         </p>
       </td>
     </tr>
