@@ -249,12 +249,12 @@ Rinkeby testnet: _Not yet deployed_
           <li><code>IJBToken token</code>
           </li>
         </ul>
-        <p><a href="read/ticketsof.md">more</a>
+        <p><a href="properties/ticketsof.md">more</a>
         </p>
       </td>
     </tr>
     <tr>
-      <td style="text-align:left"><b><code>stakedBalanceOf</code></b>
+      <td style="text-align:left"><b><code>unclaimedBalanceOf</code></b>
       </td>
       <td style="text-align:left">
         <p><b>Params</b>
@@ -268,15 +268,15 @@ Rinkeby testnet: _Not yet deployed_
         <p><b>Returns</b>
         </p>
         <ul>
-          <li><code>uint256 stakedBalance</code>
+          <li><code>uint256 unclaimedBalance</code>
           </li>
         </ul>
-        <p><a href="read/stakedbalanceof.md">more</a>
+        <p><a href="properties/unclaimedbalanceof.md">more</a>
         </p>
       </td>
     </tr>
     <tr>
-      <td style="text-align:left"><b><code>stakedTotalSupplyOf</code></b>
+      <td style="text-align:left"><b><code>unclaimedTotalSupplyOf</code></b>
       </td>
       <td style="text-align:left">
         <p><b>Params</b>
@@ -288,56 +288,10 @@ Rinkeby testnet: _Not yet deployed_
         <p><b>Returns</b>
         </p>
         <ul>
-          <li><code>uint256 stakedTotalSupply</code>
+          <li><code>uint256 unclaimedTotalSupply</code>
           </li>
         </ul>
-        <p><a href="read/stakedtotalsupplyof.md">more</a>
-        </p>
-      </td>
-    </tr>
-    <tr>
-      <td style="text-align:left"><b><code>lockedBalanceOf</code></b>
-      </td>
-      <td style="text-align:left">
-        <p><b>Params</b>
-        </p>
-        <ul>
-          <li><code>address _holder</code>
-          </li>
-          <li><code>uint256 _projectId</code>
-          </li>
-        </ul>
-        <p><b>Returns</b>
-        </p>
-        <ul>
-          <li><code>uint256 lockedBalance</code>
-          </li>
-        </ul>
-        <p><a href="read/lockedbalanceof.md">more</a>
-        </p>
-      </td>
-    </tr>
-    <tr>
-      <td style="text-align:left"><b><code>lockedBalanceBy</code></b>
-      </td>
-      <td style="text-align:left">
-        <p><b>Params</b>
-        </p>
-        <ul>
-          <li><code>address _locker</code>
-          </li>
-          <li><code>address _holder</code>
-          </li>
-          <li><code>uint256 _projectId</code>
-          </li>
-        </ul>
-        <p><b>Returns</b>
-        </p>
-        <ul>
-          <li><code>uint256 lockedBalance</code>
-          </li>
-        </ul>
-        <p><a href="read/lockedbalanceby.md">more</a>
+        <p><a href="properties/unclaimedtotalsupplyof.md">more</a>
         </p>
       </td>
     </tr>
@@ -380,6 +334,26 @@ Rinkeby testnet: _Not yet deployed_
           </li>
         </ul>
         <p><a href="../jbpaymentterminaldata/read/balanceof.md">more</a>
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td style="text-align:left"><b><code>requireClaimFor</code></b>
+      </td>
+      <td style="text-align:left">
+        <p><b>Params</b>
+        </p>
+        <ul>
+          <li><code>uint256 _projectId</code>
+          </li>
+        </ul>
+        <p><b>Returns</b>
+        </p>
+        <ul>
+          <li><code>bool flag</code>
+          </li>
+        </ul>
+        <p><a href="properties/requireclaimfor.md">more</a>
         </p>
       </td>
     </tr>
@@ -479,7 +453,25 @@ Rinkeby testnet: _Not yet deployed_
       </td>
     </tr>
     <tr>
-      <td style="text-align:left"><b><code>stakeFor</code></b>
+      <td style="text-align:left"><b><code>claimFor</code></b>
+      </td>
+      <td style="text-align:left">
+        <p><b>Params</b>
+        </p>
+        <ul>
+          <li><code>address _holder</code> 
+          </li>
+          <li><code>uint256 _projectId</code> 
+          </li>
+          <li><code>uint256 _amount</code>
+          </li>
+        </ul>
+        <p><a href="write/claimfor.md">more</a>
+        </p>
+      </td>
+    </tr>
+    <tr>
+      <td style="text-align:left"><b><code>changeTokenFor</code></b>
       </td>
       <td style="text-align:left">
         <p><b>Traits</b>
@@ -491,80 +483,30 @@ Rinkeby testnet: _Not yet deployed_
         <p><b>Params</b>
         </p>
         <ul>
-          <li><code>address _holder</code> 
+          <li><code>uint256 _projectId</code>
           </li>
-          <li><code>uint256 _projectId</code> 
+          <li><code>IJBToken _token</code> 
           </li>
-          <li><code>uint256 _amount</code>
+          <li><code>address _newOwner</code>
           </li>
         </ul>
-        <p><a href="write/stakefor.md">more</a>
+        <p><a href="write/changetokenfor.md">more</a>
         </p>
       </td>
     </tr>
     <tr>
-      <td style="text-align:left"><b><code>unstakeFor</code></b>
-      </td>
-      <td style="text-align:left">
-        <p><b>Traits</b>
-        </p>
-        <ul>
-          <li><code>requirePermission</code>
-          </li>
-        </ul>
-        <p><b>Params</b>
-        </p>
-        <ul>
-          <li><code>address _holder</code> 
-          </li>
-          <li><code>uint256 _projectId</code> 
-          </li>
-          <li><code>uint256 _amount</code>
-          </li>
-        </ul>
-        <p><a href="write/unstakefor.md">more</a>
-        </p>
-      </td>
-    </tr>
-    <tr>
-      <td style="text-align:left"><b><code>lockFor</code></b>
-      </td>
-      <td style="text-align:left">
-        <p><b>Traits</b>
-        </p>
-        <ul>
-          <li><code>requirePermission</code>
-          </li>
-        </ul>
-        <p><b>Params</b>
-        </p>
-        <ul>
-          <li><code>address _holder</code> 
-          </li>
-          <li><code>uint256 _projectId</code> 
-          </li>
-          <li><code>uint256 _amount</code>
-          </li>
-        </ul>
-        <p><a href="write/lockfor.md">more</a>
-        </p>
-      </td>
-    </tr>
-    <tr>
-      <td style="text-align:left"><b><code>unlockFor</code></b>
+      <td style="text-align:left"><b><code>shouldRequireClaimingFor</code></b>
       </td>
       <td style="text-align:left">
         <p><b>Params</b>
         </p>
         <ul>
-          <li><code>address _holder</code> 
-          </li>
           <li><code>uint256 _projectId</code> 
           </li>
-          <li><code>uint256 _amount</code>
+          <li><code>bool _flag</code>
           </li>
         </ul>
-        <p><a href="write/unlockfor.md">more</a>
+        <p><a href="write/shouldrequireclaimingfor.md">more</a>
         </p>
       </td>
     </tr>
