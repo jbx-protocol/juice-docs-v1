@@ -229,7 +229,7 @@ Rinkeby testnet: _Not yet deployed_
           <li><code>IJBProjects projects</code>
           </li>
         </ul>
-        <p><a href>more</a>
+        <p><a href="properties/projects.md">more</a>
         </p>
       </td>
     </tr>
