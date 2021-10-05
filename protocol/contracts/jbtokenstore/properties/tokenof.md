@@ -1,24 +1,23 @@
-# unclaimedTotalSupplyOf
+# tokenOf
 
 Contract:[`JBTokenStore`](../)​‌
 
 Interface: `IJBTokenStore`
 
-**Each holder's balance of unclaimed Tokens for each project.**
+**Each project's ERC20 Token tokens.**
 
 Definition:
 
 ```javascript
 /** 
   @notice
-  Each holder's balance of unclaimed Tokens for each project.
+  Each project's ERC20 Token tokens.
 
-  [_holder][_projectId]
+  [_projectId]
 */
-mapping(address => mapping(uint256 => uint256)) public override unclaimedBalanceOf;
+mapping(uint256 => IJBToken) public override tokenOf;
 ```
 
-* `address` is the holder of balance.
 * `uint256` is the ID of the project to which the token belongs.
 * The resulting view function can be accessed externally by anyone. 
 * The resulting function overrides a function definition from the `IJBTokenStore` interface.

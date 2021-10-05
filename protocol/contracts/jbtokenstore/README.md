@@ -249,7 +249,7 @@ Rinkeby testnet: _Not yet deployed_
           <li><code>IJBToken token</code>
           </li>
         </ul>
-        <p><a href="properties/ticketsof.md">more</a>
+        <p><a href="properties/tokenof.md">more</a>
         </p>
       </td>
     </tr>

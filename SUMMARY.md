@@ -143,7 +143,7 @@
       * [Transfer](protocol/contracts/jbtokenstore/events/transfer.md)
     * [Properties](protocol/contracts/jbtokenstore/properties/README.md)
       * [projects](protocol/contracts/jbtokenstore/properties/projects.md)
-      * [ticketsOf](protocol/contracts/jbtokenstore/properties/ticketsof.md)
+      * [tokenOf](protocol/contracts/jbtokenstore/properties/tokenof.md)
       * [unclaimedTotalSupplyOf](protocol/contracts/jbtokenstore/properties/unclaimedtotalsupplyof.md)
       * [unclaimedBalanceOf](protocol/contracts/jbtokenstore/properties/unclaimedbalanceof.md)
       * [requireClaimFor](protocol/contracts/jbtokenstore/properties/requireclaimfor.md)
