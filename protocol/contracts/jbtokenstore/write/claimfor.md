@@ -6,7 +6,26 @@ Interface: `IJBTokenStore`
 
 {% tabs %}
 {% tab title="Step by step" %}
+**Claims internal tokens by minting and distributing ERC20 tokens.**
 
+_Anyone can claim tokens on behalf of a token owner._
+
+Definition:
+
+```javascript
+function claimFor(
+  address _holder,
+  uint256 _projectId,
+  uint256 _amount
+) external override { ... }
+```
+
+* `_holder` is the owner of the tokens to claim.
+* `_projectId` is the ID of the project whose tokens are being claimed.
+* `_amount` is the amount of tokens to claim.
+* The function can be accessed externally by anyone. 
+* The function overrides a function definition from the `IJBTokenStore` interface.
+* The function returns nothing.
 {% endtab %}
 
 {% tab title="Only code" %}
@@ -19,7 +38,7 @@ Interface: `IJBTokenStore`
   Anyone can claim tokens on behalf of a token owner.
 
   @param _holder The owner of the tokens to claim.
-  @param _projectId The ID of the project whos tokens are being claimed.
+  @param _projectId The ID of the project whose tokens are being claimed.
   @param _amount The amount of tokens to claim.
 */
 function claimFor(

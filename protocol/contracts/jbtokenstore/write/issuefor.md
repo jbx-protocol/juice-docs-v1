@@ -6,17 +6,45 @@ Interface: `IJBTokenStore`
 
 {% tabs %}
 {% tab title="Step by step" %}
+**Issues an owner's ERC-20 Tokens that'll be used when claiming tokens.**
 
+_Deploys an owner's Token ERC-20 token contract._
+
+_Only a project owner or operator can issue its token._
+
+Definition:
+
+```javascript
+function issueFor(
+  uint256 _projectId,
+  string calldata _name,
+  string calldata _symbol
+)
+  external
+  override
+  requirePermission(projects.ownerOf(_projectId), _projectId, JBOperations.ISSUE)
+  returns (IJBToken token) { ... }
+```
+
+* `_projectId` is the ID of the project for which the tokens will be issued.
+* `_name` is the name to associate with the token.
+* `_symbol` is the symbol to associate with the token. This is usually short and all caps.
+* Through the [`requirePermission`](../../jboperatable/modifiers/requirepermission.md) modifier, the function is only accessible by the project's owner, or from an operator that has been given the `JBOperations.ISSUE` permission by the project owner for the provided `_projectId`.
+* The function overrides a function definition from the `IJBTokenStore` interface.
+* The function returns the address of the token that was issued.
 {% endtab %}
 
 {% tab title="Only code" %}
 ```javascript
 /**
   @notice 
-  Issues an owner's ERC-20 Tokens that'll be used when unstaking tokens.
+  Issues an owner's ERC-20 Tokens that'll be used when claiming tokens.
 
   @dev 
   Deploys an owner's Token ERC-20 token contract.
+  
+  @dev
+  Only a project owner or operator can issue its token.
 
   @param _projectId The ID of the project being issued tokens.
   @param _name The ERC-20's name.

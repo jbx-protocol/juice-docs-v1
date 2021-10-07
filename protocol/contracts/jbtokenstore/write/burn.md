@@ -6,7 +6,28 @@ Interface: `IJBTokenStore`
 
 {% tabs %}
 {% tab title="Step by step" %}
+**Burns tokens.**
 
+_Only a project's current controller can burn its tokens._
+
+Definition:
+
+```javascript
+function burnFrom(
+  address _holder,
+  uint256 _projectId,
+  uint256 _amount,
+  bool _preferClaimedTokens
+) external override onlyController(_projectId) { ... }
+```
+
+* `_holder` is the address address that owns the tokens being burned.
+* `_projectId` is the ID of the project to which the burned tokens belong.
+* `_amount` is the amount of tokens to burn.
+* `_preferClaimedTokens` is a flag indicating if there's a preference to burn tokens that have been converted to ERC-20s.
+* Through the [`onlyController`](../../jbutility/modifiers/onlycontroller.md) modifier, the function can only be accessed by the controller of the `_projectId`. 
+* The function overrides a function definition from the `IJBTokenStore` interface.
+* The function returns nothing.
 {% endtab %}
 
 {% tab title="Only code" %}
@@ -16,12 +37,12 @@ Interface: `IJBTokenStore`
   Burns tokens.
 
   @dev
-  Only a project's current terminal can burn its tokens.
+  Only a project's current controller can burn its tokens.
 
   @param _holder The address that owns the tokens being burned.
-  @param _projectId The ID of the project of the tokens being burned.
-  @param _amount The amount of tokens being burned.
-  @param _preferClaimedTokens If the preference is to burn tokens that have been converted to ERC-20s.
+  @param _projectId The ID of the project to which the burned tokens belong.
+  @param _amount The amount of tokens to burn.
+  @param _preferClaimedTokens A flag indicating if there's a preference to burn tokens that have been converted to ERC-20s
 */
 function burnFrom(
   address _holder,

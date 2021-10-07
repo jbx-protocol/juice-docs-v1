@@ -6,7 +6,28 @@ Interface: `IJBTokenStore`
 
 {% tabs %}
 {% tab title="Step by step" %}
+**Mint new tokens.**
 
+_Only a project's current controller can mint its tokens._
+
+Definition:
+
+```javascript
+function mintFor(
+  address _holder,
+  uint256 _projectId,
+  uint256 _amount,
+  bool _preferClaimedTokens
+) external override onlyController(_projectId) { ... }
+```
+
+* `_holder` is the address receiving the new tokens.
+* `_projectId` is the ID of the project to which the tokens belong.
+* `_amount` is the amount of tokens to mint.
+* `_preferClaimedTokens` is a flag indicating whether there's a preference for ERC20's to be claimed automatically if they have been issued.
+* Through the [`onlyController`](../../jbutility/modifiers/onlycontroller.md) modifier, the function can only be accessed by the controller of the `_projectId`. 
+* The function overrides a function definition from the `IJBTokenStore` interface.
+* The function returns nothing.
 {% endtab %}
 
 {% tab title="Only code" %}
@@ -16,12 +37,12 @@ Interface: `IJBTokenStore`
   Mint new tokens.
 
   @dev
-  Only a project's current terminal can mint its tokens.
+  Only a project's current controller can mint its tokens.
 
   @param _holder The address receiving the new tokens.
-  @param _projectId The project to which the tokens belong.
-  @param _amount The amount to mint.
-  @param _preferClaimedTokens Whether ERC20's should be converted automatically if they have been issued.
+  @param _projectId The ID of the project to which the tokens belong.
+  @param _amount The amount of tokens to mint.
+  @param _preferClaimedTokens A flag indicating whether there's a preference for ERC20's to be claimed automatically if they have been issued.
 */
 function mintFor(
   address _holder,
