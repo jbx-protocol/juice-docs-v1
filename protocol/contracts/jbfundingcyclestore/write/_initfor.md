@@ -8,7 +8,7 @@ Contract:[`JBFundingCycleStore`](../)​
 ****\
 ****Definition:
 
-```javascript
+```solidity
 function _initFor(
   uint256 _projectId,
   JBFundingCycle memory _baseFundingCycle,
@@ -34,7 +34,7 @@ function _initFor(
     * [`_packAndStoreIntrinsicPropertiesOf`](\_packandstoreintrinsicpropertiesof.md)
     * [`_updateFundingCycleBasedOn`](\_updatefundingcyclebasedon.md)
 
-    ```javascript
+    ```solidity
     // If there is no base, initialize a first cycle.
     if (_baseFundingCycle.id == 0) {
       // The first number is 1.
@@ -69,7 +69,7 @@ function _initFor(
 
     * [`latestIdOf`](../properties/latestidof.md)
 
-    ```javascript
+    ```solidity
     // Set the project's latest funding cycle ID to the new count.
     latestIdOf[_projectId] = newFundingCycleId;
     ```
@@ -82,7 +82,7 @@ function _initFor(
 
     * [`Init`](../events/init.md) 
 
-    ```javascript
+    ```solidity
     emit Init(newFundingCycleId, _projectId, _basedFundingCycle.id);
     ```
 {% endtab %}

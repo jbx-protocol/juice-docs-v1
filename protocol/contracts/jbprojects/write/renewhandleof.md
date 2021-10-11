@@ -34,7 +34,7 @@ function renewHandleOf(uint256 _projectId)
 
     * [`handleOf`](../properties/handleof.md)
 
-    ```javascript
+    ```solidity
     // Get the handle of the project.
     bytes32 _handle = handleOf[_projectId];
     ```
@@ -48,7 +48,7 @@ function renewHandleOf(uint256 _projectId)
 
     * [`challengeExpiryOf`](../properties/challengeexpiryof.md)
 
-    ```javascript
+    ```solidity
     // Reset the challenge to 0.
     challengeExpiryOf[_handle] = 0;
     ```
@@ -62,7 +62,7 @@ function renewHandleOf(uint256 _projectId)
 
     * [`RenewHandle`](../events/renewhandle.md)
 
-    ```javascript
+    ```solidity
     emit RenewHandle(_handle, _projectId, msg.sender);
     ```
 {% endtab %}

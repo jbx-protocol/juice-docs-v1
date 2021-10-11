@@ -27,7 +27,7 @@ function _ballotStateOf(
 
 1.  If there is no ballot, the ballot state is implicitly approved.
 
-    ```javascript
+    ```solidity
     // If there is no ballot funding cycle, implicitly approve.
     if (_ballotFundingCycleId == 0) return JBBallotState.Approved;
     ```
@@ -35,7 +35,7 @@ function _ballotStateOf(
 
 2.  Get the `JBFundingCycle` struct that has a reference of the ballot that should be used.
 
-    ```javascript
+    ```solidity
     // Get the ballot funding cycle.
     JBFundingCycle memory _ballotFundingCycle = _getStructFor(_ballotFundingCycleId);
     ```
@@ -43,7 +43,7 @@ function _ballotStateOf(
 
 3.  If there's no ballot, implicitly the funding cycle configuration is implicitly approved. Otherwise, return the state that the ballot for the provided `_id` and `_configuration`. 
 
-    ```javascript
+    ```solidity
     // If there is no ballot, the ID is auto approved.
     // Otherwise, return the ballot's state.
     return

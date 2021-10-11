@@ -33,7 +33,7 @@ function queuedOf(uint256 _projectId) public view override returns (JBFundingCyc
 
     * [`_getStructFor`](\_getstructfor.md)
 
-    ```javascript
+    ```solidity
     // The project must have funding cycles.
     if (latestIdOf[_projectId] == 0) return _getStructFor(0);
     ```
@@ -46,7 +46,7 @@ function queuedOf(uint256 _projectId) public view override returns (JBFundingCyc
 
     * [`_standbyOf`](\_getstructfor.md)
 
-    ```javascript
+    ```solidity
     // Get a reference to the standby funding cycle.
     uint256 _fundingCycleId = _standbyOf(_projectId);
     ```
@@ -59,7 +59,7 @@ function queuedOf(uint256 _projectId) public view override returns (JBFundingCyc
 
     * [`_getStructFor`](\_getstructfor.md)
 
-    ```javascript
+    ```solidity
     // If it exists, return it.
     if (_fundingCycleId > 0) return _getStructFor(_fundingCycleId);
     ```
@@ -72,7 +72,7 @@ function queuedOf(uint256 _projectId) public view override returns (JBFundingCyc
 
     * [`latestIdOf`](../properties/latestidof.md)
 
-    ```javascript
+    ```solidity
     // Get a reference to the latest stored funding cycle for the project.
     _fundingCycleId = latestIdOf[_projectId];
     ```
@@ -85,7 +85,7 @@ function queuedOf(uint256 _projectId) public view override returns (JBFundingCyc
 
     * [`_getStructFor`](\_getstructfor.md)
 
-    ```javascript
+    ```solidity
     // Get the necessary properties for the standby funding cycle.
     JBFundingCycle memory _fundingCycle = _getStructFor(_fundingCycleId);
     ```
@@ -98,7 +98,7 @@ function queuedOf(uint256 _projectId) public view override returns (JBFundingCyc
 
     * [`_getStructFor`](\_getstructfor.md)
 
-    ```javascript
+    ```solidity
     // There's no queued if the current has a duration of 0.
     if (_fundingCycle.duration == 0) return _getStructFor(0);
     ```
@@ -112,7 +112,7 @@ function queuedOf(uint256 _projectId) public view override returns (JBFundingCyc
     * [`_isApproved`](\_getstructfor.md)
     * [`_mockFundingCycleBasedOn`](\_mockfundingcyclebasedon.md)
 
-    ```javascript
+    ```solidity
     // Check to see if the correct ballot is approved for this funding cycle.
     // If so, return a funding cycle based on it.
     if (_isApproved(_fundingCycle)) return _mockFundingCycleBasedOn(_fundingCycle, false);
@@ -121,7 +121,7 @@ function queuedOf(uint256 _projectId) public view override returns (JBFundingCyc
 
 8.  Get a reference to the funding cycle that the current eligible cycle is based on which must be the latest approved cycle configuration.
 
-    ```javascript
+    ```solidity
     // If it hasn't been approved, set the ID to be its base funding cycle, which carries the last approved configuration.
     _fundingCycleId = _fundingCycle.basedOn;
     ```
@@ -134,7 +134,7 @@ function queuedOf(uint256 _projectId) public view override returns (JBFundingCyc
 
     * [`_getStructFor`](\_getstructfor.md)
 
-    ```javascript
+    ```solidity
     // A funding cycle must exist.
     if (_fundingCycleId == 0) return _getStructFor(0);
     ```
@@ -148,7 +148,7 @@ function queuedOf(uint256 _projectId) public view override returns (JBFundingCyc
     * [`_getStructFor`](\_getstructfor.md)
     * [`_mockFundingCycleBasedOn`](\_mockfundingcyclebasedon.md)
 
-    ```javascript
+    ```solidity
     // Return a mock of what its second next up funding cycle would be.
     // Use second next because the next would be a mock of the current funding cycle.
     return _mockFundingCycleBasedOn(_getStructFor(_fundingCycleId), false);

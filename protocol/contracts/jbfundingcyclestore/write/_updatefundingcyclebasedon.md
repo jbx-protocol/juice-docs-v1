@@ -33,7 +33,7 @@ function _updateFundingCycleBasedOn(
 
     * [`_deriveStartFrom`](../read/\_derivestartfrom.md)
 
-    ```javascript
+    ```solidity
     // Derive the correct next start time from the base.
     uint256 _start = _deriveStartFrom(_baseFundingCycle, _mustStartOnOrAfter);
     ```
@@ -48,7 +48,7 @@ function _updateFundingCycleBasedOn(
 
     * [`_deriveWeightFrom`](../read/\_deriveweightfrom.md)
 
-    ```javascript
+    ```solidity
     // A weight of 1 is treated as a weight of 0.
     _weight = _weight > 0
       ? (_weight == 1 ? 0 : _weight)
@@ -63,7 +63,7 @@ function _updateFundingCycleBasedOn(
 
     * [`_deriveNumberFrom`](../read/\_derivenumberfrom.md)
 
-    ```javascript
+    ```solidity
     // Derive the correct number.
     uint256 _number = _deriveNumberFrom(_baseFundingCycle, _start);
     ```
@@ -76,7 +76,7 @@ function _updateFundingCycleBasedOn(
 
     * [`_packAndStoreIntrinsicPropertiesOf`](\_packandstoreintrinsicpropertiesof.md)
 
-    ```javascript
+    ```solidity
     // Update the intrinsic properties.
     fundingCycleId = _packAndStoreIntrinsicPropertiesOf(
       _baseFundingCycle.projectId,

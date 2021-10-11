@@ -35,7 +35,7 @@ function configureFor(
 
 1.  Make sure the `_data.duration` fits in a `uint16`.
 
-    ```javascript
+    ```solidity
     // Duration must fit in a uint16.
     require(_data.duration <= type(uint16).max, '0x15: BAD_DURATION');
     ```
@@ -43,7 +43,7 @@ function configureFor(
 
 2.  Make sure the `_data.discountRate` is at most 201.
 
-    ```javascript
+    ```solidity
     // Discount rate token must be less than or equal to 100%. A value of 10001 means non-recurring.
     require(_data.discountRate <= 10001, '0x16: BAD_DISCOUNT_RATE');
     ```
@@ -51,7 +51,7 @@ function configureFor(
 
 3.  Make sure the `_data.currency` fits in a `uint8`.
 
-    ```javascript
+    ```solidity
     // Currency must fit into a uint8.
     require(_data.currency <= type(uint8).max, '0x17: BAD_CURRENCY');
     ```
@@ -59,7 +59,7 @@ function configureFor(
 
 4.  Make sure the `_data.weight` fits in a `uint80`.
 
-    ```javascript
+    ```solidity
     // Weight must fit into a uint8.
     require(_data.weight <= type(uint80).max, '0x18: BAD_WEIGHT');
     ```
@@ -67,7 +67,7 @@ function configureFor(
 
 5.  Make sure the provided `_fee` is at most 200.
 
-    ```javascript
+    ```solidity
     // Fee must be less than or equal to 100%.
     require(_fee <= 200, '0x19: BAD_FEE');
     ```
@@ -75,7 +75,7 @@ function configureFor(
 
 6.  Get a reference to the time at which the configuration is occurring.
 
-    ```javascript
+    ```solidity
     // Set the configuration timestamp is now.
     uint256 _configured = block.timestamp;
     ```
@@ -88,7 +88,7 @@ function configureFor(
 
     * [`_configurableOf`](\_configurableof.md)
 
-    ```javascript
+    ```solidity
     // Gets the ID of the funding cycle to reconfigure.
     uint256 _fundingCycleId = _configurableOf(
       _projectId,
@@ -106,7 +106,7 @@ function configureFor(
 
     * [`_packAndStoreConfigurationPropertiesOf`](\_packandstoreconfigurationpropertiesof.md)
 
-    ```javascript
+    ```solidity
     // Store the configuration.
     _packAndStoreConfigurationPropertiesOf(
       _fundingCycleId,
@@ -127,7 +127,7 @@ function configureFor(
 
     * [`_targetOf`](../properties/\_targetof.md)
 
-    ```javascript
+    ```solidity
     // Set the target amount.
     _targetOf[_fundingCycleId] = _data.target;
     ```
@@ -140,7 +140,7 @@ function configureFor(
 
     * [`_metadataOf`](../properties/\_metadataof.md)
 
-    ```javascript
+    ```solidity
     // Set the metadata.
     _metadataOf[_fundingCycleId] = _metadata;
     ```
@@ -153,7 +153,7 @@ function configureFor(
 
     * [`Configure`](../events/configure.md) 
 
-    ```javascript
+    ```solidity
     emit Configure(_fundingCycleId, _projectId, _configured, _data, _metadata, msg.sender);
     ```
 
@@ -165,7 +165,7 @@ function configureFor(
 
     * [`_getStructFor`](../read/\_getstructfor.md)
 
-    ```javascript
+    ```solidity
     return _getStructFor(_fundingCycleId);
     ```
 {% endtab %}

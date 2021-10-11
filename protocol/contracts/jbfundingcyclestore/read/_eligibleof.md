@@ -28,7 +28,7 @@ function _eligibleOf(uint256 _projectId) private view returns (uint256 fundingCy
 
     * [`latestIdOf`](../properties/latestidof.md)
 
-    ```javascript
+    ```solidity
     // Get a reference to the project's latest funding cycle.
     fundingCycleId = latestIdOf[_projectId];
     ```
@@ -36,7 +36,7 @@ function _eligibleOf(uint256 _projectId) private view returns (uint256 fundingCy
 
 2.  If there isn't a funding cycle for the project, there isn't an eligible cycle either.
 
-    ```javascript
+    ```solidity
     // If there isn't one, theres also no eligible funding cycle.
     if (fundingCycleId == 0) return 0;
     ```
@@ -49,7 +49,7 @@ function _eligibleOf(uint256 _projectId) private view returns (uint256 fundingCy
 
     * [`_getStructFor`](\_getstructfor.md)
 
-    ```javascript
+    ```solidity
     // Get the necessary properties for the latest funding cycle.
     JBFundingCycle memory _fundingCycle = _getStructFor(fundingCycleId);
     ```
@@ -62,7 +62,7 @@ function _eligibleOf(uint256 _projectId) private view returns (uint256 fundingCy
 
     * [`_SECONDS_IN_DAY`](../properties/\_seconds_in_day.md)
 
-    ```javascript
+    ```solidity
     // If the latest is expired, return an empty funding cycle.
     // A duration of 0 can not be expired.
     if (
@@ -79,7 +79,7 @@ function _eligibleOf(uint256 _projectId) private view returns (uint256 fundingCy
 
     * [`_getStructFor`](\_getstructfor.md)
 
-    ```javascript
+    ```solidity
     // The base cant be expired.
     JBFundingCycle memory _baseFundingCycle = _getStructFor(_fundingCycle.basedOn);
     ```
@@ -92,7 +92,7 @@ function _eligibleOf(uint256 _projectId) private view returns (uint256 fundingCy
 
     * [`_SECONDS_IN_DAY`](../properties/\_seconds_in_day.md)
 
-    ```javascript
+    ```solidity
     // If the current time is past the end of the base, return 0.
     // A duration of 0 is always eligible.
     if (
@@ -104,7 +104,7 @@ function _eligibleOf(uint256 _projectId) private view returns (uint256 fundingCy
 
 7.  Return the ID that the latest funding cycle is based on.
 
-    ```javascript
+    ```solidity
     // Return the funding cycle immediately before the latest.
     fundingCycleId = _fundingCycle.basedOn;
     ```

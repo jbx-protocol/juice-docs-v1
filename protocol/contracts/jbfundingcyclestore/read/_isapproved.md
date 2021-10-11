@@ -8,7 +8,7 @@ Contract:[`JBFundingCycleStore`](../)​
 
 Definition:
 
-```javascript
+```solidity
 function _isApproved(JBFundingCycle memory _fundingCycle) private view returns (bool) { ... }
 ```
 
@@ -26,7 +26,7 @@ function _isApproved(JBFundingCycle memory _fundingCycle) private view returns (
 
     * [`_ballotStateOf`](\_ballotstateof.md)
 
-    ```javascript
+    ```solidity
     return
       _ballotStateOf(_fundingCycle.id, _fundingCycle.configured, _fundingCycle.basedOn) ==
       JBBallotState.Approved;
@@ -34,7 +34,7 @@ function _isApproved(JBFundingCycle memory _fundingCycle) private view returns (
 {% endtab %}
 
 {% tab title="Only code" %}
-```javascript
+```solidity
 /** 
   @notice 
   Checks to see if the provided funding cycle is approved according to the correct ballot.

@@ -35,7 +35,7 @@ function _configurableOf(
     * [`_initFor`](\_initfor.md)
     * [`_getStructFor`](../read/\_getstructfor.md)
 
-    ```javascript
+    ```solidity
     // If there's not yet a funding cycle for the project, return the ID of a newly created one.
     if (latestIdOf[_projectId] == 0)
       return _initFor(_projectId, _getStructFor(0), block.timestamp, _weight);
@@ -49,7 +49,7 @@ function _configurableOf(
 
     * [`_standbyOf`](../read/\_standbyof.md)
 
-    ```javascript
+    ```solidity
     // Get the standby funding cycle's ID.
     fundingCycleId = _standbyOf(_projectId);
     ```
@@ -65,7 +65,7 @@ function _configurableOf(
     * [`_updateFundingCycleBasedOn`](\_updatefundingcyclebasedon.md)
     * [`_getLatestTimeAfterBallotOf`](../read/\_getlatesttimeafterballotof.md)
 
-    ```javascript
+    ```solidity
     // If it exists, make sure its updated, then return it.
     if (fundingCycleId > 0) {
       // Get the funding cycle that the specified one is based on.
@@ -91,7 +91,7 @@ function _configurableOf(
 
     * [`_eligibleOf`](../read/\_eligibleof.md)
 
-    ```javascript
+    ```solidity
     // Get the active funding cycle's ID.
     fundingCycleId = _eligibleOf(_projectId);
     ```
@@ -110,7 +110,7 @@ function _configurableOf(
     * [`_getStructFor`](../read/\_getstructfor.md)
     * [`latestIdOf`](../properties/latestidof.md)
 
-    ```javascript
+    ```solidity
     // If the ID of an eligible funding cycle exists, it's approved, and active funding cycles are configurable, return it.
     if (fundingCycleId > 0) {
       if (!_isIdApproved(fundingCycleId)) {
@@ -138,7 +138,7 @@ function _configurableOf(
 
     * [`_getStructFor`](../read/\_getstructfor.md)
 
-    ```javascript
+    ```solidity
     // Get a reference to the funding cycle.
     JBFundingCycle memory _fundingCycle = _getStructFor(fundingCycleId);
     ```
@@ -146,7 +146,7 @@ function _configurableOf(
 
 7.  Make sure the cycle is recurring, otherwise throw an error since a new funding cycle cannot be created based on a non-recurring cycle.
 
-    ```javascript
+    ```solidity
     // Make sure the funding cycle is recurring.
     require(_fundingCycle.discountRate < 10001, '0x1c: NON_RECURRING');
     ```
@@ -154,7 +154,7 @@ function _configurableOf(
 
 8.  The next step is to find its appropriate start time constraints for the funding cycle that will be initialized.Get a reference to the timestamp that the initialized funding cycle must start on or after.
 
-    ```javascript
+    ```solidity
     // Determine if the configurable funding cycle can only take effect on or after a certain date.
     uint256 _mustStartOnOrAfter;
     ```
@@ -170,7 +170,7 @@ function _configurableOf(
     * [`_SECONDS_IN_DAY`](../properties/\_seconds_in_day.md)
     * [`_getLatestTimeAfterBallotOf`](../read/\_getlatesttimeafterballotof.md)
 
-    ```javascript
+    ```solidity
     if (_configureActiveFundingCycle) {
       // If the duration is zero, always go back to the original start.
       if (_fundingCycle.duration == 0) {
@@ -195,7 +195,7 @@ function _configurableOf(
 
     * [`_initFor`](../read/\_getstructfor.md)
 
-    ```javascript
+    ```solidity
     // Return the newly initialized configurable funding cycle.
     fundingCycleId = _initFor(_projectId, _fundingCycle, _mustStartOnOrAfter, _weight);
     ```

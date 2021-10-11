@@ -10,7 +10,7 @@ Contract:[`JBFundingCycleStore`](../)​
 
 Definition:
 
-```javascript
+```solidity
 function _getLatestTimeAfterBallotOf(JBFundingCycle memory _fundingCycle, uint256 _from)
   private
   view
@@ -27,7 +27,7 @@ function _getLatestTimeAfterBallotOf(JBFundingCycle memory _fundingCycle, uint25
 
 1.  If the provided `_fundingCycle` has no ballot, return the current timestamp.
 
-    ```javascript
+    ```solidity
     // If the provided funding cycle has no ballot, return the current timestamp.
     if (_fundingCycle.ballot == IJBFundingCycleBallot(address(0))) return block.timestamp;
     ```
@@ -35,7 +35,7 @@ function _getLatestTimeAfterBallotOf(JBFundingCycle memory _fundingCycle, uint25
 
 2.  Get a reference to the ballot's expiration, which is the ballot's duration measured `_from` the provided value.
 
-    ```javascript
+    ```solidity
     // Get a reference to the time the ballot ends.
     uint256 _ballotExpiration = _from + _fundingCycle.ballot.duration();
     ```
@@ -43,7 +43,7 @@ function _getLatestTimeAfterBallotOf(JBFundingCycle memory _fundingCycle, uint25
 
 3.  If the ballot ends in past, return the current timestamp. Otherwise return the ballot's expiration.
 
-    ```javascript
+    ```solidity
     // If the ballot ends in past, return the current timestamp. Otherwise return the ballot's expiration.
     return block.timestamp > _ballotExpiration ? block.timestamp : _ballotExpiration;
     ```

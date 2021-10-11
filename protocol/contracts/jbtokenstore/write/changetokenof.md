@@ -12,7 +12,7 @@ _Only a project owner or operator can change its token._
 
 Definition:
 
-```javascript
+```solidity
 function changeTokenOf(
   uint256 _projectId,
   IJBToken _token,
@@ -32,7 +32,7 @@ function changeTokenOf(
 {% endtab %}
 
 {% tab title="Only code" %}
-```javascript
+```solidity
 /**
   @notice 
   Swap the current project's token that is minted and burned for another, and transfer ownership from the current to another address.

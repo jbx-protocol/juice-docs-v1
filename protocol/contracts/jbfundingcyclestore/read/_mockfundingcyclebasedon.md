@@ -32,7 +32,7 @@ function _mockFundingCycleBasedOn(JBFundingCycle memory _baseFundingCycle, bool 
 
     * [`_getStructFor`](\_getstructfor.md)
 
-    ```javascript
+    ```solidity
     // Can't mock a non recurring funding cycle.
     if (_baseFundingCycle.discountRate == 201) return _getStructFor(0);
     ```
@@ -50,7 +50,7 @@ function _mockFundingCycleBasedOn(JBFundingCycle memory _baseFundingCycle, bool 
 
     * [`_SECONDS_IN_DAY`](../properties/\_seconds_in_day.md)
 
-    ```javascript
+    ```solidity
     // The distance of the current time to the start of the next possible funding cycle.
     // If the returned mock cycle must not yet have started, the start time of the mock must be in the future so no need to adjust backwards.
     // If the base funding cycle doesn't have a duration, no adjustment is necessary because the next cycle can start immediately.
@@ -67,7 +67,7 @@ function _mockFundingCycleBasedOn(JBFundingCycle memory _baseFundingCycle, bool 
 
     * [`_deriveStartFrom`](\_derivestartfrom.md)
 
-    ```javascript
+    ```solidity
     // Derive what the start time should be.
     uint256 _start = _deriveStartFrom(
       _baseFundingCycle,
@@ -83,7 +83,7 @@ function _mockFundingCycleBasedOn(JBFundingCycle memory _baseFundingCycle, bool 
 
     * [`_deriveNumberFrom`](\_derivenumberfrom.md)
 
-    ```javascript
+    ```solidity
     // Derive what the number should be.
     uint256 _number = _deriveNumberFrom(_baseFundingCycle, _start);
     ```
@@ -97,7 +97,7 @@ function _mockFundingCycleBasedOn(JBFundingCycle memory _baseFundingCycle, bool 
     * [`_idFor`](\_idfor.md)
     * [`_deriveWeightFrom`](\_deriveweightfrom.md)
 
-    ```javascript
+    ```solidity
     return
       JBFundingCycle(
         _idFor(_baseFundingCycle.projectId, _number),

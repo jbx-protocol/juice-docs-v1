@@ -14,7 +14,7 @@ _Only a project owner or operator can issue its token._
 
 Definition:
 
-```javascript
+```solidity
 function issueFor(
   uint256 _projectId,
   string calldata _name,
@@ -35,7 +35,7 @@ function issueFor(
 {% endtab %}
 
 {% tab title="Only code" %}
-```javascript
+```solidity
 /**
   @notice 
   Issues an owner's ERC-20 Tokens that'll be used when claiming tokens.

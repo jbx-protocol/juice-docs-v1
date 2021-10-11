@@ -25,7 +25,7 @@ function _tappableOf(uint256 _projectId) private returns (uint256 fundingCycleId
 
     * [`_eligibleOf`](../read/\_eligibleof.md)
 
-    ```javascript
+    ```solidity
     // Check for the ID of an eligible funding cycle.
     fundingCycleId = _eligibleOf(_projectId);
     ```
@@ -38,7 +38,7 @@ function _tappableOf(uint256 _projectId) private returns (uint256 fundingCycleId
 
     * [`_standbyOf`](../read/\_standbyof.md)
 
-    ```javascript
+    ```solidity
     // No eligible funding cycle found, check for the ID of a standby funding cycle.
     // If this one exists, it will become eligible one it has started.
     if (fundingCycleId == 0) fundingCycleId = _standbyOf(_projectId);
@@ -47,7 +47,7 @@ function _tappableOf(uint256 _projectId) private returns (uint256 fundingCycleId
 
 3.  Get a reference to the funding cycle that should be tapped.
 
-    ```javascript
+    ```solidity
     // Keep a reference to the funding cycle eligible for being tappable.
     JBFundingCycle memory _fundingCycle;
     ```
@@ -64,7 +64,7 @@ function _tappableOf(uint256 _projectId) private returns (uint256 fundingCycleId
     * [`_isApproved`](../read/\_isapproved.md)
     * [`latestIdOf`](../properties/latestidof.md)
 
-    ```javascript
+    ```solidity
     // If the ID of an eligible funding cycle exists,
     // check to see if it has been approved by the based funding cycle's ballot.
     if (fundingCycleId > 0) {
@@ -94,7 +94,7 @@ function _tappableOf(uint256 _projectId) private returns (uint256 fundingCycleId
 
 5.  Make sure there's a funding cycle to base the newly initialized cycle on.
 
-    ```javascript
+    ```solidity
     // The funding cycle cant be 0.
     require(fundingCycleId > 0, '0x1d: NOT_FOUND');
     ```
@@ -107,7 +107,7 @@ function _tappableOf(uint256 _projectId) private returns (uint256 fundingCycleId
 
     * [`_getStructFor`](../read/\_getstructfor.md)
 
-    ```javascript
+    ```solidity
     // Set the eligible funding cycle.
     _fundingCycle = _getStructFor(fundingCycleId);
     ```
@@ -115,7 +115,7 @@ function _tappableOf(uint256 _projectId) private returns (uint256 fundingCycleId
 
 7.  Make sure the cycle is recurring, otherwise throw an error since a new funding cycle cannot be created based on a non-recurring cycle.
 
-    ```javascript
+    ```solidity
     // Funding cycles with a discount rate of 100% are non-recurring.
     require(_fundingCycle.discountRate < 10001, '0x1e: NON_RECURRING');
     ```
@@ -128,7 +128,7 @@ function _tappableOf(uint256 _projectId) private returns (uint256 fundingCycleId
 
     * [`_SECONDS_IN_DAY`](../properties/\_seconds_in_day.md)
 
-    ```javascript
+    ```solidity
     // The time when the funding cycle immediately after the eligible funding cycle starts.
     uint256 _nextImmediateStart = _fundingCycle.start + (_fundingCycle.duration * _SECONDS_IN_DAY);
     ```
@@ -141,7 +141,7 @@ function _tappableOf(uint256 _projectId) private returns (uint256 fundingCycleId
 
     * [`_SECONDS_IN_DAY`](../properties/\_seconds_in_day.md)
 
-    ```javascript
+    ```solidity
     // The distance from now until the nearest past multiple of the cycle duration from its start.
     // A duration of zero means the reconfiguration can start right away.
     uint256 _timeFromImmediateStartMultiple = _fundingCycle.duration == 0
@@ -157,7 +157,7 @@ function _tappableOf(uint256 _projectId) private returns (uint256 fundingCycleId
 
     * [`_initFor`](\_initfor.md)
 
-    ```javascript
+    ```solidity
     // Return the tappable funding cycle.
     fundingCycleId = _initFor(
       _projectId,
@@ -177,7 +177,7 @@ function _tappableOf(uint256 _projectId) private returns (uint256 fundingCycleId
     * [`_metadataOf`](../properties/\_metadataof.md)
     * [`_targetOf`](../properties/\_targetof.md)
 
-    ```javascript
+    ```solidity
      // Copy the properties of the base funding cycle onto the new configuration efficiently.
     _packAndStoreConfigurationPropertiesOf(
       fundingCycleId,

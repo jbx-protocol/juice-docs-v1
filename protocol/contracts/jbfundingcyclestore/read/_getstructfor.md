@@ -21,7 +21,7 @@ function _getStructFor(uint256 _id) private view returns (JBFundingCycle memory 
 
 1.  If the `_id` provided is 0, return an empty funding cycle.
 
-    ```javascript
+    ```solidity
     // Return an empty funding cycle if the ID specified is 0.
     if (_id == 0) return fundingCycle;
     ```
@@ -29,7 +29,7 @@ function _getStructFor(uint256 _id) private view returns (JBFundingCycle memory 
 
 2.  Set the funding cycle's id to the provided value.
 
-    ```javascript
+    ```solidity
     fundingCycle.id = _id;
     ```
 
@@ -41,7 +41,7 @@ function _getStructFor(uint256 _id) private view returns (JBFundingCycle memory 
 
     * [`_packedIntrinsicPropertiesOf`](../properties/\_packedintrinsicpropertiesof.md)
 
-    ```javascript
+    ```solidity
     uint256 _packedIntrinsicProperties = _packedIntrinsicPropertiesOf[_id];
 
     fundingCycle.weight = uint256(uint80(_packedIntrinsicProperties));
@@ -59,7 +59,7 @@ function _getStructFor(uint256 _id) private view returns (JBFundingCycle memory 
 
     * [`_packedConfigurationPropertiesOf`](../properties/\_packedconfigurationpropertiesof.md)
 
-    ```javascript
+    ```solidity
     uint256 _packedConfigurationProperties = _packedConfigurationPropertiesOf[_id];
       
     fundingCycle.ballot = IJBFundingCycleBallot(address(uint160(_packedConfigurationProperties)));
@@ -78,7 +78,7 @@ function _getStructFor(uint256 _id) private view returns (JBFundingCycle memory 
 
     * [`_targetOf`](../properties/\_targetof.md)
 
-    ```javascript
+    ```solidity
     fundingCycle.target = _targetOf[_id];
     ```
 
@@ -90,7 +90,7 @@ function _getStructFor(uint256 _id) private view returns (JBFundingCycle memory 
 
     * [`_tappedAmountOf`](../properties/\_targetof.md)
 
-    ```javascript
+    ```solidity
     fundingCycle.tapped = _tappedAmountOf[_id];
     ```
 
@@ -102,7 +102,7 @@ function _getStructFor(uint256 _id) private view returns (JBFundingCycle memory 
 
     * [`_metadataOf`](../properties/\_metadataof.md)
 
-    ```javascript
+    ```solidity
     fundingCycle.metadata = _metadataOf[_id];
     ```
 {% endtab %}

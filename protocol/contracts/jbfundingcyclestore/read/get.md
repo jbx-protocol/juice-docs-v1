@@ -28,7 +28,7 @@ function get(uint256 _fundingCycleId)
 
 1.  Check that the provided funding cycle ID is valid. 
 
-    ```javascript
+    ```solidity
     // The funding cycle should exist.
     require(_fundingCycleId > 0, '0x13 BAD_ID');
     ```
@@ -41,7 +41,7 @@ function get(uint256 _fundingCycleId)
 
     * [`_getStructFor`](\_getstructfor.md)
 
-    ```javascript
+    ```solidity
     // See if there's stored info for the provided ID.
     fundingCycle = _getStructFor(_fundingCycleId);
     ```
@@ -49,7 +49,7 @@ function get(uint256 _fundingCycleId)
 
 3.  If the funding cycle exists in storage, return it.
 
-    ```javascript
+    ```solidity
     // If so, return it.
     if (fundingCycle.number > 0) return fundingCycle;
     ```
@@ -62,7 +62,7 @@ function get(uint256 _fundingCycleId)
 
     * [`currentOf`](currentof.md)
 
-    ```javascript
+    ```solidity
     // Get the current funding cycle. It might exist but not yet have been stored.
     fundingCycle = currentOf(_fundingCycleId);
     ```
@@ -70,7 +70,7 @@ function get(uint256 _fundingCycleId)
 
 5.  If the funding cycle ID being queried matches the current funding cycle of the project, return it.
 
-    ```javascript
+    ```solidity
      // If the IDs match, return it.
      if (fundingCycle.id == _fundingCycleId) return fundingCycle;
     ```
@@ -83,7 +83,7 @@ function get(uint256 _fundingCycleId)
 
     * [`queuedOf`](queuedof.md)
 
-    ```javascript
+    ```solidity
     // Get the queued funding cycle. It might exist but not yet have been stored.
     fundingCycle = queuedOf(_fundingCycleId);
     ```
@@ -91,7 +91,7 @@ function get(uint256 _fundingCycleId)
 
 7.  If the funding cycle ID being queried matches the queued funding cycle of the project, return it.
 
-    ```javascript
+    ```solidity
     // If the IDs match, return it.
     if (fundingCycle.id == _fundingCycleId) return fundingCycle;
     ```
@@ -104,7 +104,7 @@ function get(uint256 _fundingCycleId)
 
     * [`_getStructFor`](\_getstructfor.md)
 
-    ```javascript
+    ```solidity
     // Return an empty Funding Cycle.
     return _getStructFor(0);
     ```

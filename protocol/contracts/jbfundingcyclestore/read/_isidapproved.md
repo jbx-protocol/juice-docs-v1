@@ -8,7 +8,7 @@ Contract:[`JBFundingCycleStore`](../)​
 
 Definition:
 
-```javascript
+```solidity
 function _isIdApproved(uint256 _fundingCycleId) private view returns (bool) { ... } 
 ```
 
@@ -26,7 +26,7 @@ function _isIdApproved(uint256 _fundingCycleId) private view returns (bool) { ..
 
     * [`_getStructFor`](\_getstructfor.md)
 
-    ```javascript
+    ```solidity
     JBFundingCycle memory _fundingCycle = _getStructFor(_fundingCycleId);
     ```
 
@@ -38,7 +38,7 @@ function _isIdApproved(uint256 _fundingCycleId) private view returns (bool) { ..
 
     * [`_isApproved`](\_isapproved.md)
 
-    ```javascript
+    ```solidity
     return _isApproved(_fundingCycle);
     ```
 {% endtab %}

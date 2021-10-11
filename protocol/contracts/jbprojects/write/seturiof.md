@@ -35,7 +35,7 @@ function setUriOf(uint256 _projectId, string calldata _uri)
 
     * [`uriOf`](../properties/uriof.md)
 
-    ```javascript
+    ```solidity
     // Set the new uri.
     uriOf[_projectId] = _uri;
     ```
@@ -49,7 +49,7 @@ function setUriOf(uint256 _projectId, string calldata _uri)
 
     * [`SetUri`](../events/seturi.md)
 
-    ```javascript
+    ```solidity
     emit SetUri(_projectId, _uri, msg.sender);
     ```
 {% endtab %}

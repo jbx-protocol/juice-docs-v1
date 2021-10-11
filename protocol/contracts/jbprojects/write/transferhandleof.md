@@ -35,7 +35,7 @@ function transferHandleOf(
 
 1.  Check that the provided `_newHandle` is not empty.
 
-    ```javascript
+    ```solidity
     // A new handle must have been provided.
     require(_newHandle != bytes32(0), '0x0a: EMPTY_HANDLE');
     ```
@@ -50,7 +50,7 @@ function transferHandleOf(
     * [`idFor`](../properties/idfor.md)
     * [`transferAddressFor`](../properties/transferaddressfor.md)
 
-    ```javascript
+    ```solidity
     // The new handle must be available.
     require(idFor[_newHandle] == 0 && transferAddressFor[_newHandle] == address(0), '0x0b: HANDLE_TAKEN');
     ```
@@ -64,7 +64,7 @@ function transferHandleOf(
 
     * [`handleOf`](../properties/handleof.md)
 
-    ```javascript
+    ```solidity
     // Get a reference to the project's current handle.
     handle = handleOf[_projectId];
     ```
@@ -78,7 +78,7 @@ function transferHandleOf(
 
     * [`idFor`](../properties/idfor.md)
 
-    ```javascript
+    ```solidity
     // Remove the resolver for the transferred handle.
     idFor[handle] = 0;
     ```
@@ -92,7 +92,7 @@ function transferHandleOf(
 
     * [`idFor`](../properties/idfor.md)
 
-    ```javascript
+    ```solidity
     // Store the new handle for the project ID.
     idFor[_newHandle] = _projectId;
     ```
@@ -106,7 +106,7 @@ function transferHandleOf(
 
     * [`handleOf`](../properties/handleof.md)
 
-    ```javascript
+    ```solidity
     // Store the new handle for the project ID.
     handleOf[_projectId] = _newHandle;
     ```
@@ -120,7 +120,7 @@ function transferHandleOf(
 
     * [`transferAddressFor`](../properties/idfor.md)
 
-    ```javascript
+    ```solidity
     // Give the address the power to transfer the current handle.
     transferAddressFor[handle] = _transferAddress;
     ```

@@ -32,7 +32,7 @@ function hasPermissions(
 
 1.  Make sure the `_permissionIndex` is one of the 255 indexes in a `uint256`. 
 
-    ```javascript
+    ```solidity
     require(_permissionIndex <= 255, '0x00: INDEX_OUT_OF_BOUNDS');
     ```
 
@@ -44,7 +44,7 @@ function hasPermissions(
 
     * [`permissionsOf`](../properties/permissionsof.md)
 
-    ```javascript
+    ```solidity
     return (((permissionsOf[_operator][_account][_domain] >> _permissionIndex) & 1) == 1)
     ```
 {% endtab %}

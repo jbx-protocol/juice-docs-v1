@@ -8,7 +8,7 @@ _The cycle limit is a property within funding cycle configurations._
 
 Definition:
 
-```javascript
+```solidity
 /** 
   @notice 
   The maximum cycle limit value that can be set.

@@ -36,7 +36,7 @@ function addFeedFor(
 
     * [`feedFor`](../properties/feedfor.md)
 
-    ```javascript
+    ```solidity
     // There can't already be a feed for the specified currency.
     require(feedFor[_currency][_base] == AggregatorV3Interface(address(0)), '0x04: ALREADY_EXISTS');
     ```
@@ -44,7 +44,7 @@ function addFeedFor(
 
 2.  Get a reference to how many decimal places the provided price feed uses in the quoted rates. 
 
-    ```javascript
+    ```solidity
     // Get a reference to the number of decimals the feed uses.
     uint256 _decimals = _feed.decimals();
     ```
@@ -57,7 +57,7 @@ function addFeedFor(
 
     * [`TARGET_DECIMALS`](../properties/targetdecimals.md)
 
-    ```javascript
+    ```solidity
     // Decimals should be less than or equal to the target number of decimals.
     require(_decimals <= TARGET_DECIMALS, '0x05: BAD_DECIMALS');
     ```
@@ -65,7 +65,7 @@ function addFeedFor(
 
 4.  Store the provided feed for the `_currency` `_base` pair.
 
-    ```javascript
+    ```solidity
     // Set the feed.
     feedFor[_currency][_base] = _feed;
     ```
@@ -79,7 +79,7 @@ function addFeedFor(
     * [`feedDecimalAdjusterFor`](../properties/feeddecimaladjuster.md)
     * [`TARGET_DECIMALS`](../properties/targetdecimals.md)
 
-    ```javascript
+    ```solidity
     // Set the decimal adjuster for the currency.
     feedDecimalAdjusterFor[_currency][_base] = 10**(TARGET_DECIMALS - _decimals);
     ```
@@ -92,7 +92,7 @@ function addFeedFor(
 
     * [`AddFeed`](../events/addfeed.md)
 
-    ```javascript
+    ```solidity
     emit AddFeed(_currency, _base, _decimals, _feed);
     ```
 {% endtab %}

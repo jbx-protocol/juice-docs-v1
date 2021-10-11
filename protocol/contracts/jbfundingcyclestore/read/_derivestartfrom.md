@@ -8,7 +8,7 @@ Contract:[`JBFundingCycleStore`](../)​
 
 Definition:
 
-```javascript
+```solidity
 function _deriveStartFrom(
   JBFundingCycle memory _baseFundingCycle,
   uint256 _mustStartOnOrAfter
@@ -25,7 +25,7 @@ function _deriveStartFrom(
 
 1.  A funding cycle with a duration of 0 can start as soon as possible. 
 
-    ```javascript
+    ```solidity
     // A subsequent cycle to one with a duration of 0 should start as soon as possible.
     if (_baseFundingCycle.duration == 0) return _mustStartOnOrAfter;
     ```
@@ -38,7 +38,7 @@ function _deriveStartFrom(
 
     * [`_SECONDS_IN_DAY`](../properties/\_seconds_in_day.md)
 
-    ```javascript
+    ```solidity
     // Save a reference to the cycle's duration measured in seconds.
     uint256 _cycleDurationInSeconds = _baseFundingCycle.duration * _SECONDS_IN_DAY;
     ```
@@ -46,7 +46,7 @@ function _deriveStartFrom(
 
 3.  Get a reference to the start time of the cycle immediately following the base cycle. This is the base cycles start time plus the base cycle's duration.
 
-    ```javascript
+    ```solidity
     // The time when the funding cycle immediately after the specified funding cycle starts.
     uint256 _nextImmediateStart = _baseFundingCycle.start + _baseCycleDurationInSeconds;
     ```
@@ -54,7 +54,7 @@ function _deriveStartFrom(
 
 4.  If the `_nextImmediateStart` is allowed, it should be used. Otherwise we'll have to calculate a value depending on how much time has passed since the `_nextImmediateStart`.
 
-    ```javascript
+    ```solidity
     // If the next immediate start is now or in the future, return it.
     if (_nextImmediateStart >= _mustStartOnOrAfter) return _nextImmediateStart;
     ```
@@ -62,7 +62,7 @@ function _deriveStartFrom(
 
 5.  Save a reference to the amount of seconds since the `_mustStartOnOrAfter` time that results in a start time that might satisfy the specified constraints.
 
-    ```javascript
+    ```solidity
     // The amount of seconds since the `_mustStartOnOrAfter` time that results in a start time that might satisfy the specified constraints.
     uint256 _timeFromImmediateStartMultiple = (_mustStartOnOrAfter - _nextImmediateStart) %
       _cycleDurationInSeconds;
@@ -71,7 +71,7 @@ function _deriveStartFrom(
 
 6.  Save a reference to the first possible start time.
 
-    ```javascript
+    ```solidity
     // A reference to the first possible start timestamp.
     start = _mustStartOnOrAfter - _timeFromImmediateStartMultiple;
     ```
@@ -79,14 +79,14 @@ function _deriveStartFrom(
 
 7.  It's possible that the `start` time doesn't satisfy the specified constraints. If so, add increments of the funding cycle's duration as necessary to satisfy the threshold.
 
-    ```javascript
+    ```solidity
     // Add increments of duration as necessary to satisfy the threshold.
     while (_mustStartOnOrAfter > start) start = start + _cycleDurationInSeconds;
     ```
 {% endtab %}
 
 {% tab title="Only code" %}
-```javascript
+```solidity
 /** 
   @notice 
   The date that is the nearest multiple of the specified funding cycle's duration from its end.

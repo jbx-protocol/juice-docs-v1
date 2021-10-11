@@ -8,7 +8,7 @@ Interface: `IJBTokenStore`
 
 Definition:
 
-```javascript
+```solidity
 /** 
   @notice
   A flag indicating if tokens are required to be issued as claimed for a particular project.

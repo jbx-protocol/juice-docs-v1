@@ -25,7 +25,7 @@ Definition:
 
 1.  Loop through the provided `_operatorData`.
 
-    ```javascript
+    ```solidity
     for (uint256 _i = 0; _i < _operatorData.length; _i++) { ... }
     ```
 
@@ -37,7 +37,7 @@ Definition:
 
     * [`_packedPermissions`](\_packedpermissions.md)
 
-    ```javascript
+    ```solidity
     // Pack the indexes into a uint256.
     uint256 _packed = _packedPermissions(_operatorData[_i].permissionIndexes);
     ```
@@ -50,7 +50,7 @@ Definition:
 
     * [`permissionsOf`](../properties/permissionsof.md)
 
-    ```javascript
+    ```solidity
     // Store the new value.
     permissionsOf[_operatorData[_i].operator][msg.sender][_operatorData[_i].domain] = _packed;
     ```
@@ -63,7 +63,7 @@ Definition:
 
     * [`SetOperator`](../events/setoperator.md)
 
-    ```javascript
+    ```solidity
     emit SetOperator(
       _operatorData[_i].operator,
       msg.sender,

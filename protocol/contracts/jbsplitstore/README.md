@@ -48,7 +48,7 @@ Rinkeby testnet: _Not yet deployed_
 
 ## Constructor
 
-```javascript
+```solidity
 /** 
   @param _operatorStore A contract storing operator assignments.
   @param _jbDirectory The directory of terminals.

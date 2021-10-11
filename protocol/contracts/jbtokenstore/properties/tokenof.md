@@ -8,7 +8,7 @@ Interface: `IJBTokenStore`
 
 Definition:
 
-```javascript
+```solidity
 /** 
   @notice
   Each project's ERC20 Token tokens.

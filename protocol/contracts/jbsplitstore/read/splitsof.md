@@ -10,7 +10,7 @@ Interface: `IJBSplitStore`
   
 Definition:
 
-```javascript
+```solidity
 function splitsOf(
   uint256 _projectId,
   uint256 _domain,
@@ -33,13 +33,13 @@ function splitsOf(
 
    * [`_splitsOf`](../properties/_splitsof.md)
 
-   ```javascript
+   ```solidity
    return _splitsOf[_projectId][_domain][_group];
    ```
 {% endtab %}
 
 {% tab title="Only code" %}
-```javascript
+```solidity
 /**
   @notice 
   Get all splits for the specified project ID, within the specified domain, for the specified group.

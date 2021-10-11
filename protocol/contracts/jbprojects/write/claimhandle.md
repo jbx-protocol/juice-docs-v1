@@ -45,7 +45,7 @@ function claimHandle(
     * [`transferAddressFor`](../properties/transferaddressfor.md)
     * [`challengeExpiryOf`](../properties/challengeexpiryof.md)
 
-    ```javascript
+    ```solidity
     // The handle must have been transferred to the specified address,
     // or the handle challenge must have expired before being renewed.
     require(
@@ -65,7 +65,7 @@ function claimHandle(
     * [`handleOf`](../properties/handleof.md)
     * [`idFor`](../properties/idfor.md)
 
-    ```javascript
+    ```solidity
     // Remove the project ID for the current handle of the specified project.
     idFor[handleOf[_projectId]] = 0;
     ```
@@ -79,7 +79,7 @@ function claimHandle(
 
     * [`idFor`](../properties/idfor.md)
 
-    ```javascript
+    ```solidity
     // Set the project ID for the provided handle to be the specified project.
     idFor[_handle] = _projectId;
     ```
@@ -93,7 +93,7 @@ function claimHandle(
 
     * [`handleOf`](../properties/handleof.md)
 
-    ```javascript
+    ```solidity
     // Set the new handle.
     handleOf[_projectId] = _handle;
     ```
@@ -107,7 +107,7 @@ function claimHandle(
 
     * [`transferAddressFor`](../properties/transferaddressfor.md)
 
-    ```javascript
+    ```solidity
     // Set the handle as not being transferred.
     transferAddressFor[_handle] = address(0);
     ```
@@ -121,7 +121,7 @@ function claimHandle(
 
     * [`challengeExpiryOf`](../properties/challengeexpiryof.md)
 
-    ```javascript
+    ```solidity
     // Reset the challenge to 0.
     challengeExpiryOf[_handle] = 0;
     ```
@@ -135,7 +135,7 @@ function claimHandle(
 
     * [`ClaimHandle`](../events/claimhandle.md)
 
-    ```javascript
+    ```solidity
     emit ClaimHandle(_projectId, _transferAddress, _handle, msg.sender);
     ```
 {% endtab %}

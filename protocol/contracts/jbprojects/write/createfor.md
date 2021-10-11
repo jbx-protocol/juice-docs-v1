@@ -31,7 +31,7 @@ function createFor(
 
 1.  Check that the provided `_handle` is not empty.
 
-    ```javascript
+    ```solidity
     // Handle must exist.
     require(_handle != bytes32(0), '0x06: EMPTY_HANDLE');
     ```
@@ -46,7 +46,7 @@ function createFor(
     * [`idFor`](../properties/idfor.md)
     * [`transferAddressFor`](../properties/transferaddressfor.md)
 
-    ```javascript
+    ```solidity
     // Handle must be unique.
     require(idFor[_handle] == 0 && transferAddressFor[_handle] == address(0), '0x07: HANDLE_TAKEN');
     ```
@@ -58,7 +58,7 @@ function createFor(
 
     * [`count`](../properties/count.md)
 
-    ```javascript
+    ```solidity
     // Increment the count, which will be used as the ID.
     count++;
     ```
@@ -66,7 +66,7 @@ function createFor(
 
 4.  Mint a new NFT token belonging to the `_owner` using the `count` as the token ID.
 
-    ```javascript
+    ```solidity
     // Mint the project.
     _safeMint(_owner, count);
     ```
@@ -78,7 +78,7 @@ function createFor(
 
     * [`handleOf`](../properties/handleof.md)
 
-    ```javascript
+    ```solidity
     // Store the handle for the project ID.
     handleOf[count] = _handle;
     ```
@@ -92,7 +92,7 @@ function createFor(
 
     * [`idFor`](../properties/idfor.md)
 
-    ```javascript
+    ```solidity
     // Store the project ID for the handle.
     idFor[_handle] = count;
     ```
@@ -106,7 +106,7 @@ function createFor(
 
     * [`uriOf`](../properties/uriof.md)
 
-    ```javascript
+    ```solidity
     // Set the URI if one was provided.
     if (bytes(_uri).length > 0) uriOf[count] = _uri;
     ```
@@ -127,7 +127,7 @@ function createFor(
 
 9.  Return the newly created project's token ID.
 
-    ```javascript
+    ```solidity
     return count;
     ```
 {% endtab %}

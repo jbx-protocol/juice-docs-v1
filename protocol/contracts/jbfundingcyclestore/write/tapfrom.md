@@ -30,7 +30,7 @@ function tapFrom(uint256 _projectId, uint256 _amount)
 
 1.  Check that the amount is positive.
 
-    ```javascript
+    ```solidity
     // Amount must be positive.
     require(_amount > 0, '0x1a: INSUFFICIENT_FUNDS');
     ```
@@ -43,7 +43,7 @@ function tapFrom(uint256 _projectId, uint256 _amount)
 
     * [`_tappableOf`](\_tappableof.md)
 
-    ```javascript
+    ```solidity
     // Get a reference to the funding cycle being tapped.
     uint256 _fundingCycleId = _tappableOf(_projectId);
     ```
@@ -56,7 +56,7 @@ function tapFrom(uint256 _projectId, uint256 _amount)
 
     * [`_tappedAmountOf`](../properties/\_tappedamountof.md)
 
-    ```javascript
+    ```solidity
     // The new amount that has been tapped.
     uint256 _newTappedAmount = _tappedAmountOf[_fundingCycleId] + _amount;
     ```
@@ -64,7 +64,7 @@ function tapFrom(uint256 _projectId, uint256 _amount)
 
 4.  The amount being tapped plus what's already been tapped must be within the configured target for the funding cycle.
 
-    ```javascript
+    ```solidity
     // Amount must be within what is still tappable.
     require(_newTappedAmount <= _targetOf[_fundingCycleId], '0x1b: INSUFFICIENT_FUNDS');
     ```
@@ -72,7 +72,7 @@ function tapFrom(uint256 _projectId, uint256 _amount)
 
 5.  Store the new tapped amount.
 
-    ```javascript
+    ```solidity
     // Store the new amount.
     _tappedAmountOf[_fundingCycleId] = _newTappedAmount;
     ```
@@ -85,7 +85,7 @@ function tapFrom(uint256 _projectId, uint256 _amount)
 
     * [`Tap`](../events/tap.md) 
 
-    ```javascript
+    ```solidity
     emit Tap(_fundingCycleId, _projectId, _amount, _newTappedAmount, msg.sender);
     ```
 
@@ -97,7 +97,7 @@ function tapFrom(uint256 _projectId, uint256 _amount)
 
     * [`_getStructFor`](../read/\_getstructfor.md)
 
-    ```javascript
+    ```solidity
     return _getStructFor(_fundingCycleId);
     ```
 {% endtab %}

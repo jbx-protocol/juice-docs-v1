@@ -53,7 +53,7 @@ Rinkeby testnet: _Not yet deployed_
 
 ## Constructor
 
-```javascript
+```solidity
 /** 
   @param _operatorStore A contract storing operator assignments.
 */

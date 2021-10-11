@@ -25,28 +25,28 @@ function _packedPermissions(uint256[] calldata _indexes) private pure returns (u
 
 1.  Loop through the provided `_indexes`.
 
-    ```javascript
+    ```solidity
     for (uint256 _i = 0; _i < _indexes.length; _i++) { ... }
     ```
 
 
 2.  Get a reference to the `_permissionIndex` being iterated on.
 
-    ```javascript
+    ```solidity
     uint256 _index = _indexes[_i];
     ```
 
 
 3.  Make sure the `_permissionIndex` is one of the 255 indexes in a `uint256`.
 
-    ```javascript
+    ```solidity
     require(_index <= 255, '0x02: INDEX_OUT_OF_BOUNDS');
     ```
 
 
 4.  Flip the bit at the specified index of the `packed` value being returned to indicate a truthy permission.
 
-    ```javascript
+    ```solidity
     // Turn the bit at the index on.
     packed |= 1 << _index;
     ```

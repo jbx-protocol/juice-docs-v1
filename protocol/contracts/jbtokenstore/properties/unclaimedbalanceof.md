@@ -8,7 +8,7 @@ Interface: `IJBTokenStore`
 
 Definition:
 
-```javascript
+```solidity
 /** 
   @notice
   The total supply of unclaimed tokens for each project.

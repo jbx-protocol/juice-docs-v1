@@ -12,7 +12,7 @@ _Only a project's current controller can burn its tokens._
 
 Definition:
 
-```javascript
+```solidity
 function burnFrom(
   address _holder,
   uint256 _projectId,
@@ -31,7 +31,7 @@ function burnFrom(
 {% endtab %}
 
 {% tab title="Only code" %}
-```javascript
+```solidity
 /** 
   @notice 
   Burns tokens.

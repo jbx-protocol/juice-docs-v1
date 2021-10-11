@@ -12,7 +12,7 @@ _Only an address can set its own operators._
 
 Definition:
 
-```javascript
+```solidity
  function setOperator(JBOperatorData calldata _operatorData) external override { ... }
 ```
 
@@ -30,7 +30,7 @@ Definition:
 
     * [`_packedPermissions`](\_packedpermissions.md)
 
-    ```javascript
+    ```solidity
     // Pack the indexes into a uint256.
     uint256 _packed = _packedPermissions(_operatorData.permissionIndexes);
     ```
@@ -44,7 +44,7 @@ Definition:
 
         * [`permissionsOf`](../properties/permissionsof.md)
 
-        ```javascript
+        ```solidity
         // Store the new value.
         permissionsOf[_operatorData.operator][msg.sender][_operatorData.domain] = _packed;
         ```
@@ -57,7 +57,7 @@ Definition:
 
         * [`SetOperator`](../events/setoperator.md)
 
-        ```javascript
+        ```solidity
         emit SetOperator(
           _operatorData.operator,
           msg.sender,

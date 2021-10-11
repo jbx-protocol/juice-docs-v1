@@ -12,7 +12,7 @@ _Permissions are stored in a packed `uint256`. Each 256 bits represents the on/o
 __\
 __Definition:
 
-```javascript
+```solidity
 /** 
   @notice
   The permissions that an operator has to operate on a specific domain.

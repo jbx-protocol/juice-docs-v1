@@ -37,7 +37,7 @@ function currentOf(uint256 _projectId)
 
     * [`_getStructFor`](\_getstructfor.md)
 
-    ```javascript
+    ```solidity
     // The project must have funding cycles.
     if (latestIdOf[_projectId] == 0) return _getStructFor(0);
     ```
@@ -50,7 +50,7 @@ function currentOf(uint256 _projectId)
 
     * [`_eligibleOf`](\_eligibleof.md)
 
-    ```javascript
+    ```solidity
     // Check for an eligible funding cycle.
     uint256 _fundingCycleId = _eligibleOf(_projectId);
     ```
@@ -63,7 +63,7 @@ function currentOf(uint256 _projectId)
 
     * [`_standbyOf`](\_standbyof.md)
 
-    ```javascript
+    ```solidity
     // If no active funding cycle is found, check if there is a standby funding cycle.
     // If one exists, it will become active one it has been tapped.
     if (_fundingCycleId == 0) _fundingCycleId = _standbyOf(_projectId);
@@ -72,7 +72,7 @@ function currentOf(uint256 _projectId)
 
 4.  Create a reference to a funding cycle.
 
-    ```javascript
+    ```solidity
     // Keep a reference to the eligible funding cycle.
     JBFundingCycle memory _fundingCycle;
     ```
@@ -88,7 +88,7 @@ function currentOf(uint256 _projectId)
     * [`_getStructFor`](\_getstructfor.md)
     * [`_isApproved`](\_isapproved.md)
 
-    ```javascript
+    ```solidity
     // If a standby funding cycle exists...
     if (_fundingCycleId > 0) {
       // Get the necessary properties for the standby funding cycle.
@@ -114,7 +114,7 @@ function currentOf(uint256 _projectId)
     * [`_getStructFor`](\_getstructfor.md)
     * [`_isApproved`](\_isapproved.md)
 
-    ```javascript
+    ```solidity
     else {
       // No upcoming funding cycle found that is eligible to become active,
       // so us the ID of the latest active funding cycle, which carries the last configuration.
@@ -136,7 +136,7 @@ function currentOf(uint256 _projectId)
 
     * [`_getStructFor`](\_getstructfor.md)
 
-    ```javascript
+    ```solidity
     // The funding cycle cant be 0.
     if (_fundingCycleId == 0) return _getStructFor(0);
     ```
@@ -149,7 +149,7 @@ function currentOf(uint256 _projectId)
 
     * [`_getStructFor`](\_getstructfor.md)
 
-    ```javascript
+    ```solidity
     // The funding cycle to base a current one on.
     _fundingCycle = _getStructFor(_fundingCycleId);
     ```
@@ -162,7 +162,7 @@ function currentOf(uint256 _projectId)
 
     * [`_mockFundingCycleBasedOn`](\_mockfundingcyclebasedon.md)
 
-    ```javascript
+    ```solidity
     // Return a mock of what the next funding cycle would be like,
     // which would become active one it has been tapped.
     return _mockFundingCycleBasedOn(_fundingCycle, true);

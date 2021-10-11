@@ -30,7 +30,7 @@ function _packAndStoreIntrinsicPropertiesOf(
 
 1.  The `_weight` property should take up the first 80 bits of the packed `uint256`.
 
-    ```javascript
+    ```solidity
     // weight in bytes 0-79 bits.
     uint256 packed = _weight;
     ```
@@ -38,7 +38,7 @@ function _packAndStoreIntrinsicPropertiesOf(
 
 2.  The `_projectId` should take up the next 56 bits.
 
-    ```javascript
+    ```solidity
     // projectId in bytes 80-135 bytes.
     packed |= _projectId << 80;
     ```
@@ -46,7 +46,7 @@ function _packAndStoreIntrinsicPropertiesOf(
 
 3.  The `_basedOn` should take up the next 48 bits.
 
-    ```javascript
+    ```solidity
     // basedOn in bytes 136-183 bytes.
     packed |= _basedOn << 136;
     ```
@@ -54,7 +54,7 @@ function _packAndStoreIntrinsicPropertiesOf(
 
 4.  The `_start` should take up the next 48 bits.
 
-    ```javascript
+    ```solidity
     // start in bytes 184-231 bytes.
     packed |= _start << 184;
     ```
@@ -62,7 +62,7 @@ function _packAndStoreIntrinsicPropertiesOf(
 
 5.  The `_number` should take up the last 24 bits.
 
-    ```javascript
+    ```solidity
     // number in bytes 232-255 bytes.
     packed |= _number << 232;
     ```
@@ -73,7 +73,7 @@ function _packAndStoreIntrinsicPropertiesOf(
 
     * [`_idFor`](../read/\_idfor.md)
 
-    ```javascript
+    ```solidity
     // Construct the ID.
     fundingCycleId = _idFor(_projectId, _number);
     ```
@@ -86,7 +86,7 @@ function _packAndStoreIntrinsicPropertiesOf(
 
     * [`_packAndStoreIntrinsicPropertiesOf`](\_packandstoreintrinsicpropertiesof.md)
 
-    ```javascript
+    ```solidity
     // Set in storage.
     _packedIntrinsicPropertiesOf[fundingCycleId] = packed;
     ```

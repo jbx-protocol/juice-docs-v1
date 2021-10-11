@@ -10,7 +10,7 @@ Interface: `IJBTokenStore`
   
 Definition:
 
-```javascript
+```solidity
 function totalSupplyOf(uint256 _projectId) external view override returns (uint256 supply) { ... }
 ```
 
@@ -22,28 +22,28 @@ function totalSupplyOf(uint256 _projectId) external view override returns (uint2
 
 1. Get a reference to the unclaimed total supply of the project.
 
-   ```javascript
+   ```solidity
    // Get a reference to the unclaimed total supply of the project.
    supply = unclaimedTotalSupplyOf[_projectId];
    ```
 
 2. Get a reference to the project's tokens.
 
-   ```javascript
+   ```solidity
    // Get a reference to the project's token.
    IJBToken _token = tokenOf[_projectId];
    ```
 
 3. If the project has issued a token, add it's total supply to the total.
 
-   ```javascript
+   ```solidity
    // If the project has issued a token, add it's total supply to the total.
    if (_token != IJBToken(address(0))) supply = supply + _token.totalSupply();
    ```
 {% endtab %}
 
 {% tab title="Only code" %}
-```javascript
+```solidity
 /** 
   @notice 
   The total supply of tokens for each project, including claimed and unclaimed tokens.

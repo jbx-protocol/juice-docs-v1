@@ -12,7 +12,7 @@ _Only a project's current controller can mint its tokens._
 
 Definition:
 
-```javascript
+```solidity
 function mintFor(
   address _holder,
   uint256 _projectId,
@@ -31,7 +31,7 @@ function mintFor(
 {% endtab %}
 
 {% tab title="Only code" %}
-```javascript
+```solidity
 /** 
   @notice 
   Mint new tokens.

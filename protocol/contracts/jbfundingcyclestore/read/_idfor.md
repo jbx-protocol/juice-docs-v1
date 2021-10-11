@@ -22,7 +22,7 @@ function _idFor(uint256 _projectId, uint256 _number) private pure returns (uint2
 
 1.  Return a concatenated `uint256` with the first 56 bits being the `_projectId` and the next 24 bits being the `_number`. Both of these values get packed down into these constraints anyways when they get stored, so theres no additional risk of data loss by doing this. 
 
-    ```javascript
+    ```solidity
     return uint256(uint56(_projectId) | uint24(_number));
     ```
 {% endtab %}

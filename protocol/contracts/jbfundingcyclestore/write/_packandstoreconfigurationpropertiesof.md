@@ -36,7 +36,7 @@ function _packAndStoreConfigurationProperties(
 
 1.  Store the ballot in the first 160 bits of the packed `uint256`.
 
-    ```javascript
+    ```solidity
     // ballot in bytes 0-159 bits.
     uint256 packed = uint160(address(_ballot));
     ```
@@ -44,7 +44,7 @@ function _packAndStoreConfigurationProperties(
 
 2.  Store the `_configured` in the next 48 bits.
 
-    ```javascript
+    ```solidity
     // configured in bits 160-207 bytes.
     packed |= _configured << 160;
     ```
@@ -52,7 +52,7 @@ function _packAndStoreConfigurationProperties(
 
 3.  Store the `_duration` in the next 16 bits.
 
-    ```javascript
+    ```solidity
     // duration in bytes 208-223 bytes.
     packed |= _duration << 208;
     ```
@@ -60,7 +60,7 @@ function _packAndStoreConfigurationProperties(
 
 4.  Store the `_currency` in the next 8 bits.
 
-    ```javascript
+    ```solidity
     // basedOn in bytes 224-231 bytes.
     packed |= _currency << 224;
     ```
@@ -68,7 +68,7 @@ function _packAndStoreConfigurationProperties(
 
 5.  Store the `_fee` in the next 8 bits.
 
-    ```javascript
+    ```solidity
     // fee in bytes 232-239 bytes.
     packed |= _fee << 232;
     ```
@@ -76,7 +76,7 @@ function _packAndStoreConfigurationProperties(
 
 6.  Store the `_discountRate` in the next 16 bits.
 
-    ```javascript
+    ```solidity
     // discountRate in bytes 240-255 bytes.
     packed |= _discountRate << 240;
     ```
@@ -89,7 +89,7 @@ function _packAndStoreConfigurationProperties(
 
     * [`_packAndStoreConfigurationPropertiesOf`](../properties/\_packedconfigurationpropertiesof.md)
 
-    ```javascript
+    ```solidity
     // Set in storage.
     _packedConfigurationPropertiesOf[_fundingCycleId] = packed;
     ```

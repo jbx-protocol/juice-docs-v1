@@ -4,7 +4,7 @@
 {% tab title="Step by step" %}
 The function has the following definition:
 
-```javascript
+```solidity
 function pay(
     uint256 _projectId,
     address _beneficiary,
@@ -20,7 +20,7 @@ function pay(
 {% endtab %}
 
 {% tab title="Only code" %}
-```javascript
+```solidity
 
 ```
 {% endtab %}

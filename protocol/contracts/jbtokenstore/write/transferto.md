@@ -12,7 +12,7 @@ _Only a token holder or an operator can transfer its unclaimed tokens_.
 
 Definition:
 
-```javascript
+```solidity
 function transferTo(
   address _recipient,
   address _holder,
@@ -31,7 +31,7 @@ function transferTo(
 {% endtab %}
 
 {% tab title="Only code" %}
-```javascript
+```solidity
 /** 
   @notice 
   Allows an unclaimed token holder to transfer them to another account, without claimed them to ERC-20s.

@@ -8,7 +8,7 @@ Contract:[`JBFundingCycleStore`](../)​
 
 Definition:
 
-```javascript
+```solidity
 function _deriveWeightFrom(JBFundingCycle memory _baseFundingCycle, uint256 _start) 
   private 
   pure 
@@ -27,7 +27,7 @@ function _deriveWeightFrom(JBFundingCycle memory _baseFundingCycle, uint256 _sta
     \
     The `discountRate` property in a [`JBFundingCycle`](../../../data-structures/jbfundingcycle.md)is out of 10000. Discount rates represent a number between 0-100%, with 0.01% fidelity, so the calculation must be made out of 10000.
 
-    ```javascript
+    ```solidity
     // A subsequent cycle to one with a duration of 0 should have the next possible weight.
     if (_baseFundingCycle.duration == 0)
       return PRBMath.mulDiv(_baseFundingCycle.weight, 10000 - _baseFundingCycle.discountRate, 10000);
@@ -36,7 +36,7 @@ function _deriveWeightFrom(JBFundingCycle memory _baseFundingCycle, uint256 _sta
 
 2.  The calculations that follow will progressively apply discount rates to the `_baseFundingCycle`'s weight to arrive at the correct weight to return.
 
-    ```javascript
+    ```solidity
     // The weight should be based off the base funding cycle's weight.
     weight = _baseFundingCycle.weight;
     ```
@@ -44,7 +44,7 @@ function _deriveWeightFrom(JBFundingCycle memory _baseFundingCycle, uint256 _sta
 
 3.  If the base doesn't have a discount rate, the original weight won't change and should be returned.
 
-    ```javascript
+    ```solidity
     // If the discount is 0, the weight doesn't change.
     if (_baseFundingCycle.discountRate == 0) return weight;
     ```
@@ -52,7 +52,7 @@ function _deriveWeightFrom(JBFundingCycle memory _baseFundingCycle, uint256 _sta
 
 4.  Get a reference to how long after the `_baseFundingCycle`'s start the specified `_start` time is. The goal will be to see how many cycles have passed within this time distance. 
 
-    ```javascript
+    ```solidity
     // The difference between the start of the base funding cycle and the proposed start.
     uint256 _startDistance = _start - _baseFundingCycle.start;
     ```
@@ -65,7 +65,7 @@ function _deriveWeightFrom(JBFundingCycle memory _baseFundingCycle, uint256 _sta
 
     * [`_SECONDS_IN_DAY`](../properties/\_seconds_in_day.md)
 
-    ```javascript
+    ```solidity
     // Apply the base funding cycle's discount rate, if necessary.
     uint256 _discountMultiple = _startDistance / (_baseFundingCycle.duration * _SECONDS_IN_DAY);
 

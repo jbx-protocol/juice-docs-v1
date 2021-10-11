@@ -28,7 +28,7 @@ function _standbyOf(uint256 _projectId) private view returns (uint256 fundingCyc
 
     * [`latestIdOf`](../properties/latestidof.md)
 
-    ```javascript
+    ```solidity
     // Get a reference to the project's latest funding cycle.
     fundingCycleId = latestIdOf[_projectId];
     ```
@@ -36,7 +36,7 @@ function _standbyOf(uint256 _projectId) private view returns (uint256 fundingCyc
 
 2.  If there isn't a funding cycle for the project, there isn't a standby cycle either.
 
-    ```javascript
+    ```solidity
     // If there isn't one, theres also no standby funding cycle.
     if (fundingCycleId == 0) return 0;
     ```
@@ -49,7 +49,7 @@ function _standbyOf(uint256 _projectId) private view returns (uint256 fundingCyc
 
     * [`_getStructFor`](\_getstructfor.md)
 
-    ```javascript
+    ```solidity
     // Get the necessary properties for the latest funding cycle.
     JBFundingCycle memory _fundingCycle = _getStructFor(fundingCycleId);
     ```
@@ -57,7 +57,7 @@ function _standbyOf(uint256 _projectId) private view returns (uint256 fundingCyc
 
 4.  If the cycle has started, return 0 since there is not a stored funding cycle in standby.
 
-    ```javascript
+    ```solidity
     // There is no upcoming funding cycle if the latest funding cycle has already started.
     if (block.timestamp >= _fundingCycle.start) return 0;
     ```

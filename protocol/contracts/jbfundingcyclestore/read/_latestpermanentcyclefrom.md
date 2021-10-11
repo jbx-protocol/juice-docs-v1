@@ -12,7 +12,7 @@ _If the provided cycle is permanent, it will be returned._
 
 Definition:
 
-```javascript
+```solidity
 function _latestPermanentCycleFrom(JBFundingCycle memory _fundingCycle)
   private
   view
@@ -26,28 +26,28 @@ function _latestPermanentCycleFrom(JBFundingCycle memory _fundingCycle)
 
 1. If the provided `_fundingCycle` has a `cycleLimit` of 0, or if it isn't `basedOn` another funding cycle, return it.
 
-   ```javascript
+   ```solidity
    // A funding cycle with no cycle limit, or one not based on another funding cycle is, implicitly permanent.
    if (_fundingCycle.basedOn == 0 || _fundingCycle.cycleLimit == 0) return _fundingCycle;
    ```
 
 2. Get a reference to the base funding cycle.
 
-   ```javascript
+   ```solidity
    // Get the funding cycle of the base funding cycle.
    fundingCycle = _getStructFor(_fundingCycle.basedOn);  
    ```
 
 3. Recurse through this function with the base funding cycle until a permanent one is found.
 
-   ```javascript
+   ```solidity
    // Recursively check if the previous cycle is permanent.
    return _latestPermanentCycleFrom(fundingCycle);
    ```
 {% endtab %}
 
 {% tab title="Only code" %}
-```javascript
+```solidity
 /** 
   @notice 
   Finds the last funding cycle that was permanent in relation to the specified funding cycle.

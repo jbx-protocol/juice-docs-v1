@@ -29,7 +29,7 @@ function setHandleOf(uint256 _projectId, bytes32 _handle)
 
 1.  Check that the provided `_handle` is not empty.
 
-    ```javascript
+    ```solidity
     // Handle must exist.
     require(_handle != bytes32(0), "0x08: EMPTY_HANDLE");
 
@@ -43,7 +43,7 @@ function setHandleOf(uint256 _projectId, bytes32 _handle)
     * [`idFor`](../properties/idfor.md)
     * [`transferAddressFor`](../properties/transferaddressfor.md)
 
-    ```javascript
+    ```solidity
     // Handle must be unique.
     require(idFor[_handle] == 0 && transferAddressFor[_handle] == address(0), '0x09: HANDLE_TAKEN');
     ```
@@ -56,7 +56,7 @@ function setHandleOf(uint256 _projectId, bytes32 _handle)
     * [`handleOf`](../properties/handleof.md)
     * [`idFor`](../properties/idfor.md)
 
-    ```javascript
+    ```solidity
     // Register the change in the resolver.
     idFor[handleOf[_projectId]] = 0;
     ```
@@ -68,7 +68,7 @@ function setHandleOf(uint256 _projectId, bytes32 _handle)
 
     * [`handleOf`](../properties/handleof.md)
 
-    ```javascript
+    ```solidity
     // Store the handle for the project ID.
     handleOf[_projectId] = _handle;
     ```
@@ -80,7 +80,7 @@ function setHandleOf(uint256 _projectId, bytes32 _handle)
 
     * [`idFor`](../properties/idfor.md)
 
-    ```javascript
+    ```solidity
     // Store the project ID for the handle.
     idFor[_handle] = _projectId;
     ```
@@ -92,7 +92,7 @@ function setHandleOf(uint256 _projectId, bytes32 _handle)
 
     * [`SetHandle`](../events/sethandle.md)
 
-    ```javascript
+    ```solidity
     emit SetHandle(_projectId, _handle, msg.sender);
     ```
 {% endtab %}

@@ -6,7 +6,7 @@
 {% endtab %}
 
 {% tab title="Only code" %}
-```javascript
+```solidity
 /**
   @notice 
   Efficiently stores a funding cycles provided configuration properties.

@@ -10,7 +10,7 @@ Interface: `IJBOperatorStore`
 
 Definition:
 
-```javascript
+```solidity
 function hasPermissions(
   address _operator,
   address _account,
@@ -30,19 +30,19 @@ function hasPermissions(
 
 1. Loop through the provided `_permissionIndexes`.
 
-   ```javascript
+   ```solidity
    for (uint256 _i = 0; _i < _permissionIndexes.length; _i++) { ... }
    ```
 
 2. Get a reference to the `_permissionIndex` being iterated on.
 
-   ```javascript
+   ```solidity
    uint256 _permissionIndex = _permissionIndexes[_i];
    ```
 
 3. Make sure the `_permissionIndex` is one of the 255 indexes in a `uint256`. 
 
-   ```javascript
+   ```solidity
    require(_permissionIndex <= 255, '0x01: INDEX_OUT_OF_BOUNDS');
    ```
 
@@ -53,14 +53,14 @@ function hasPermissions(
 
    * [`permissionsOf`](../properties/permissionsof.md)
 
-   ```javascript
+   ```solidity
    if (((permissionsOf[_operator][_account][_domain] >> _permissionIndex) & 1) == 0)
      return false;
    ```
 
 5. After the loop, return `true` since the loop checked all specified permissions without returning `false`.
 
-   ```javascript
+   ```solidity
    return true;
    ```
 
@@ -68,7 +68,7 @@ function hasPermissions(
 {% endtab %}
 
 {% tab title="Only code" %}
-```javascript
+```solidity
 /** 
   @notice 
   Whether or not an operator has the permission to take certain actions pertaining to the specified domain.

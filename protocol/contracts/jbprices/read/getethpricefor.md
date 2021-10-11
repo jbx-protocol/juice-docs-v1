@@ -10,7 +10,7 @@ Interface: `IJBPrices`
 ****\
 ****Definition:
 
-```javascript
+```solidity
 function priceFor(uint256 _currency, uint256 _base) external view override returns (uint256) { ... }
 ```
 
@@ -29,7 +29,7 @@ function priceFor(uint256 _currency, uint256 _base) external view override retur
 
     * [`TARGET_DECIMALS`](../properties/targetdecimals.md)
 
-    ```javascript
+    ```solidity
     // If the currency is the base, return 1 since they are priced the same.
     if (_currency == _base) return 10**TARGET_DECIMALS;
     ```
@@ -42,7 +42,7 @@ function priceFor(uint256 _currency, uint256 _base) external view override retur
 
     * [`feedFor`](../properties/targetdecimals.md)
 
-    ```javascript
+    ```solidity
     // Get a reference to the feed.
     AggregatorV3Interface _feed = feedFor[_currency][_base];
     ```
@@ -50,7 +50,7 @@ function priceFor(uint256 _currency, uint256 _base) external view override retur
 
 3.  Make sure there is a feed stored for the `_currency` `_base` pair.
 
-    ```javascript
+    ```solidity
     // Feed must exist.
     require(_feed != AggregatorV3Interface(address(0)), '0x03: NOT_FOUND');
     ```
@@ -58,7 +58,7 @@ function priceFor(uint256 _currency, uint256 _base) external view override retur
 
 4.  Get the latest price being reported by the price feed. The `latestRoundData` function returns several feed parameters, but only the `_price` is needed.
 
-    ```javascript
+    ```solidity
     // Get the latest round information. Only need the price is needed.
     (, int256 _price, , , ) = _feed.latestRoundData();
     ```
@@ -71,14 +71,14 @@ function priceFor(uint256 _currency, uint256 _base) external view override retur
 
     * [`feedDecimalAdjusterFor`](../properties/feeddecimaladjuster.md)
 
-    ```javascript
+    ```solidity
     // Multiply the price by the decimal adjuster to get the normalized result.
     return uint256(_price) * feedDecimalAdjusterFor[_currency][_base];
     ```
 {% endtab %}
 
 {% tab title="Only code" %}
-```javascript
+```solidity
 /** 
   @notice 
   Gets the current price of the provided currency in terms of the provided base currency.

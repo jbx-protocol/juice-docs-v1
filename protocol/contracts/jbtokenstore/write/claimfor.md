@@ -12,7 +12,7 @@ _Anyone can claim tokens on behalf of a token owner._
 
 Definition:
 
-```javascript
+```solidity
 function claimFor(
   address _holder,
   uint256 _projectId,
@@ -29,7 +29,7 @@ function claimFor(
 {% endtab %}
 
 {% tab title="Only code" %}
-```javascript
+```solidity
 /**
   @notice 
   Claims internal tokens by minting and distributing ERC20 tokens.
