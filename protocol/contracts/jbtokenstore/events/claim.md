@@ -6,7 +6,7 @@ Emitted from:
 
 Definition:
 
-```javascript
+```solidity
 event Claim(address indexed holder, uint256 indexed projectId, uint256 amount, address caller)
 ```
 
@@ -14,4 +14,3 @@ event Claim(address indexed holder, uint256 indexed projectId, uint256 amount, a
 * `projectId` is the ID of the project to which the claimed tokens belong.
 * `amount` is the amount of tokens that were claimed.
 * `caller` is the address that issued the transaction within which the event was emitted.
-

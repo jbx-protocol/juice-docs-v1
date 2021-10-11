@@ -1,6 +1,6 @@
 # JBBallotState
 
-```javascript
+```solidity
 enum JBBallotState {
   Approved,
   Active,
@@ -8,4 +8,3 @@ enum JBBallotState {
   Standby
 }
 ```
-

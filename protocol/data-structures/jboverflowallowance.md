@@ -1,9 +1,8 @@
 # JBOverflowAllowance
 
-```text
+```solidity
 struct JBOverflowAllowance {
   IJBTerminal terminal;
   uint256 amount;
 }
 ```
-

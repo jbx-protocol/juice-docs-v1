@@ -8,11 +8,11 @@ Interface: `IJBPrices`
 {% tab title="Step by step" %}
 **Add an ETH price feed for a currency.**
 
-_Current feeds can't be modified._  
-  
+_Current feeds can't be modified._\
+\
 Definition:
 
-```javascript
+```solidity
 function addFeedFor(
   uint256 _currency,
   uint256 _base,
@@ -27,71 +27,78 @@ function addFeedFor(
 * The function overrides a function definition from the `IJBPrices` interface.
 * The function doesn't return anything.
 
-1. Make sure there isn't already a price feed set for the `_currency` `_base` pair.  
 
 
-   Internal references:
-
-   * [`feedFor`](../properties/feedfor.md)
-
-   ```javascript
-   // There can't already be a feed for the specified currency.
-   require(feedFor[_currency][_base] == AggregatorV3Interface(address(0)), '0x04: ALREADY_EXISTS');
-   ```
-
-2. Get a reference to how many decimal places the provided price feed uses in the quoted rates. 
-
-   ```javascript
-   // Get a reference to the number of decimals the feed uses.
-   uint256 _decimals = _feed.decimals();
-   ```
-
-3. Make sure the feed doesn't use more decimals than what the contract expects. This contract isn't design to support feeds that use more than 18 decimals of fidelity.  
+1.  Make sure there isn't already a price feed set for the `_currency` `_base` pair.\
 
 
-   Internal references:
+    Internal references:
 
-   * [`TARGET_DECIMALS`](../properties/targetdecimals.md)
+    * [`feedFor`](../properties/feedfor.md)
 
-   ```javascript
-   // Decimals should be less than or equal to the target number of decimals.
-   require(_decimals <= TARGET_DECIMALS, '0x05: BAD_DECIMALS');
-   ```
-
-4. Store the provided feed for the `_currency` `_base` pair.
-
-   ```javascript
-   // Set the feed.
-   feedFor[_currency][_base] = _feed;
-   ```
-
-5. Store a value that price feed results will be multiplied by in order to always be reported with `TARGET_DECIMALS` fidelity. The prices from this contract are always reported with `TARGET_DECIMALS` fidelity – if the provided feed reports with fewer decimals, the contract must know how to adjust the price feed to normalize results.  
+    ```javascript
+    // There can't already be a feed for the specified currency.
+    require(feedFor[_currency][_base] == AggregatorV3Interface(address(0)), '0x04: ALREADY_EXISTS');
+    ```
 
 
-   Internal references:
+2.  Get a reference to how many decimal places the provided price feed uses in the quoted rates. 
 
-   * [`feedDecimalAdjusterFor`](../properties/feeddecimaladjuster.md)
-   * [`TARGET_DECIMALS`](../properties/targetdecimals.md)
-
-   ```javascript
-   // Set the decimal adjuster for the currency.
-   feedDecimalAdjusterFor[_currency][_base] = 10**(TARGET_DECIMALS - _decimals);
-   ```
-
-6. Emit an `AddFeed` event with the all relevant parameters.   
+    ```javascript
+    // Get a reference to the number of decimals the feed uses.
+    uint256 _decimals = _feed.decimals();
+    ```
 
 
-   _Event references:_
+3.  Make sure the feed doesn't use more decimals than what the contract expects. This contract isn't design to support feeds that use more than 18 decimals of fidelity.\
 
-   * [`AddFeed`](../events/addfeed.md)
 
-   ```javascript
-   emit AddFeed(_currency, _base, _decimals, _feed);
-   ```
+    Internal references:
+
+    * [`TARGET_DECIMALS`](../properties/targetdecimals.md)
+
+    ```javascript
+    // Decimals should be less than or equal to the target number of decimals.
+    require(_decimals <= TARGET_DECIMALS, '0x05: BAD_DECIMALS');
+    ```
+
+
+4.  Store the provided feed for the `_currency` `_base` pair.
+
+    ```javascript
+    // Set the feed.
+    feedFor[_currency][_base] = _feed;
+    ```
+
+
+5.  Store a value that price feed results will be multiplied by in order to always be reported with `TARGET_DECIMALS` fidelity. The prices from this contract are always reported with `TARGET_DECIMALS` fidelity – if the provided feed reports with fewer decimals, the contract must know how to adjust the price feed to normalize results.\
+
+
+    Internal references:
+
+    * [`feedDecimalAdjusterFor`](../properties/feeddecimaladjuster.md)
+    * [`TARGET_DECIMALS`](../properties/targetdecimals.md)
+
+    ```javascript
+    // Set the decimal adjuster for the currency.
+    feedDecimalAdjusterFor[_currency][_base] = 10**(TARGET_DECIMALS - _decimals);
+    ```
+
+
+6.  Emit an `AddFeed` event with the all relevant parameters. \
+
+
+    _Event references:_
+
+    * [`AddFeed`](../events/addfeed.md)
+
+    ```javascript
+    emit AddFeed(_currency, _base, _decimals, _feed);
+    ```
 {% endtab %}
 
 {% tab title="Only code" %}
-```javascript
+```solidity
 /** 
   @notice 
   Add a price feed for a currency in terms of the provided base currency.
@@ -129,51 +136,24 @@ function addFeedFor(
 {% endtab %}
 
 {% tab title="Errors" %}
-| String | Description |
-| :--- | :--- |
-| **`0x04: ALREADY_EXISTS`** | Thrown if the specified currency already has an associated price feed. |
-| **`0x05: BAD_DECIMALS`** | Thrown if the amount of decimals specified in the provided feed contract is greater than the [`targetDecimals`](../properties/targetdecimals.md). |
+| String                     | Description                                                                                                                                       |
+| -------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **`0x04: ALREADY_EXISTS`** | Thrown if the specified currency already has an associated price feed.                                                                            |
+| **`0x05: BAD_DECIMALS`**   | Thrown if the amount of decimals specified in the provided feed contract is greater than the [`targetDecimals`](../properties/targetdecimals.md). |
 {% endtab %}
 
 {% tab title="Events" %}
-<table>
-  <thead>
-    <tr>
-      <th style="text-align:left">Name</th>
-      <th style="text-align:left">Data</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td style="text-align:left"><b><code>AddFeed</code></b>
-      </td>
-      <td style="text-align:left">
-        <ul>
-          <li><code>uint256 indexed currency</code>
-          </li>
-          <li><code>uint256 indexed base</code>
-          </li>
-          <li><code>uint256 decimals</code>
-          </li>
-          <li><code>AggregatorV3Interface feed</code>
-          </li>
-        </ul>
-        <p><a href="../events/addfeed.md">more</a>
-        </p>
-      </td>
-    </tr>
-  </tbody>
-</table>
+| Name          | Data                                                                                                                                                                                                                                  |
+| ------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **`AddFeed`** | <ul><li><code>uint256 indexed currency</code></li><li><code>uint256 indexed base</code></li><li><code>uint256 decimals</code></li><li><code>AggregatorV3Interface feed</code></li></ul><p><a href="../events/addfeed.md">more</a></p> |
 {% endtab %}
 
 {% tab title="Bug bounty" %}
-| Category | Description | Reward |
-| :--- | :--- | :--- |
-| **Optimization** | Help make this operation more efficient. | 0.5ETH |
-| **Low severity** | Identify a vulnerability in this operation that could lead to an inconvenience for a user of the protocol or for a protocol developer. | 1ETH |
-| **High severity** | Identify a vulnerability in this operation that could lead to data corruption or loss of funds. | 5+ETH |
+| Category          | Description                                                                                                                            | Reward |
+| ----------------- | -------------------------------------------------------------------------------------------------------------------------------------- | ------ |
+| **Optimization**  | Help make this operation more efficient.                                                                                               | 0.5ETH |
+| **Low severity**  | Identify a vulnerability in this operation that could lead to an inconvenience for a user of the protocol or for a protocol developer. | 1ETH   |
+| **High severity** | Identify a vulnerability in this operation that could lead to data corruption or loss of funds.                                        | 5+ETH  |
 {% endtab %}
 {% endtabs %}
-
-
 

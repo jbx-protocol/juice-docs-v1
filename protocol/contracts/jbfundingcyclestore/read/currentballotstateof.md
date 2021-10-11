@@ -10,7 +10,7 @@ Interface: `IJBFundingCycleStore`
 
 Definition:
 
-```javascript
+```solidity
 function currentBallotStateOf(uint256 _projectId) external view override returns (JBBallotState) { ... } 
 ```
 
@@ -20,58 +20,64 @@ function currentBallotStateOf(uint256 _projectId) external view override returns
 * The function overrides a function definition from the `IJBFundingCycleStore` interface.
 * The function returns a [`JBBallotState`](../../../enums/jbballotstate.md).
 
-1. Get a reference to the latest funding cycle for the `_projectId`.
-
-   ```javascript
-   // Get a reference to the latest funding cycle ID.
-   uint256 _fundingCycleId = latestIdOf[_projectId];
-   ```
-
-2. Check that there is a funding cycle for the project.  
 
 
-   _Internal references:_
+1.  Get a reference to the latest funding cycle for the `_projectId`.
 
-   * [`latestIdOf`](../properties/latestidof.md)
-
-   ```javascript
-   // The project must have funding cycles.
-   require(_fundingCycleId > 0, '0x14: NOT_FOUND');
-   ```
-
-3. Get a reference to the funding cycle for the latest funding cycle.  
+    ```javascript
+    // Get a reference to the latest funding cycle ID.
+    uint256 _fundingCycleId = latestIdOf[_projectId];
+    ```
 
 
-   _Internal references:_
-
-   * [`_getStructFor`](_getstructfor.md)
-
-   ```javascript
-   // Get the necessary properties for the latest funding cycle.
-   JBFundingCycle memory _fundingCycle = _getStructFor(_fundingCycleId);
-   ```
-
-4. If this is the first funding cycle for the project, it must be approved.
-
-   ```javascript
-   // If the latest funding cycle is the first, or if it has already started, it must be approved.
-   if (_fundingCycle.basedOn == 0) return JBBallotState.Approved;
-   ```
-
-5. Return the `_ballotStateOf` the latest funding cycle ID as is determined by the current configuration and the funding cycle it's based on.  
+2.  Check that there is a funding cycle for the project.\
 
 
-   _Internal references:_
+    _Internal references:_
 
-   * [`_ballotStateOf`](_ballotstateof.md)
+    * [`latestIdOf`](../properties/latestidof.md)
 
-   ```javascript
-   return _ballotStateOf(_fundingCycleId, _fundingCycle.configured, _fundingCycle.basedOn);
-   ```
+    ```javascript
+    // The project must have funding cycles.
+    require(_fundingCycleId > 0, '0x14: NOT_FOUND');
+    ```
+
+
+3.  Get a reference to the funding cycle for the latest funding cycle.\
+
+
+    _Internal references:_
+
+    * [`_getStructFor`](\_getstructfor.md)
+
+    ```javascript
+    // Get the necessary properties for the latest funding cycle.
+    JBFundingCycle memory _fundingCycle = _getStructFor(_fundingCycleId);
+    ```
+
+
+4.  If this is the first funding cycle for the project, it must be approved.
+
+    ```javascript
+    // If the latest funding cycle is the first, or if it has already started, it must be approved.
+    if (_fundingCycle.basedOn == 0) return JBBallotState.Approved;
+    ```
+
+
+5.  Return the `_ballotStateOf` the latest funding cycle ID as is determined by the current configuration and the funding cycle it's based on.\
+
+
+    _Internal references:_
+
+    * [`_ballotStateOf`](\_ballotstateof.md)
+
+    ```javascript
+    return _ballotStateOf(_fundingCycleId, _fundingCycle.configured, _fundingCycle.basedOn);
+    ```
 {% endtab %}
 
 {% tab title="Only code" %}
-```javascript
+```solidity
 /** 
   @notice 
   The currency ballot state of the project.
@@ -99,17 +105,16 @@ function currentBallotStateOf(uint256 _projectId) external view override returns
 {% endtab %}
 
 {% tab title="Errors" %}
-| String | Description |
-| :--- | :--- |
+| String                | Description                                                  |
+| --------------------- | ------------------------------------------------------------ |
 | **`0x14: NOT_FOUND`** | Thrown if the provided project doesn't have a funding cycle. |
 {% endtab %}
 
 {% tab title="Bug bounty" %}
-| Category | Description | Reward |
-| :--- | :--- | :--- |
-| **Optimization** | Help make this operation more efficient. | 0.5ETH |
-| **Low severity** | Identify a vulnerability in this operation that could lead to an inconvenience for a user of the protocol or for a protocol developer. | 1ETH |
-| **High severity** | Identify a vulnerability in this operation that could lead to data corruption or loss of funds. | 5+ETH |
+| Category          | Description                                                                                                                            | Reward |
+| ----------------- | -------------------------------------------------------------------------------------------------------------------------------------- | ------ |
+| **Optimization**  | Help make this operation more efficient.                                                                                               | 0.5ETH |
+| **Low severity**  | Identify a vulnerability in this operation that could lead to an inconvenience for a user of the protocol or for a protocol developer. | 1ETH   |
+| **High severity** | Identify a vulnerability in this operation that could lead to data corruption or loss of funds.                                        | 5+ETH  |
 {% endtab %}
 {% endtabs %}
-

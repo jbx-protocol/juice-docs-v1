@@ -1,6 +1,6 @@
 # JBDidPayData
 
-```javascript
+```solidity
 struct JBDidPayData {
   address payer;
   uint256 projectId;
@@ -12,4 +12,3 @@ struct JBDidPayData {
   bytes delegateMetadata;
 }
 ```
-

@@ -21,50 +21,55 @@ Definition:
 * The function overrides a function definition from the `IJBOperatorStore` interface.
 * The function doesn't return anything.
 
-1. Pack the provided permissions into a `uint256`. Each bit of the resulting value represents whether or not permission has been granted for that index.    
 
 
-   Internal references:
-
-   * [`_packedPermissions`](_packedpermissions.md)
-
-   ```javascript
-   // Pack the indexes into a uint256.
-   uint256 _packed = _packedPermissions(_operatorData.permissionIndexes);
-   ```
-
-   1. Store the packed permissions as the `permissionsOf` the provided `_operator`, on behalf of the `msg.sender`, specifically for the provided `_domain`.    
+1.  Pack the provided permissions into a `uint256`. Each bit of the resulting value represents whether or not permission has been granted for that index.  \
 
 
-      _Internal references:_
+    Internal references:
 
-      * [`permissionsOf`](../properties/permissionsof.md)
+    * [`_packedPermissions`](\_packedpermissions.md)
 
-      ```javascript
-      // Store the new value.
-      permissionsOf[_operatorData.operator][msg.sender][_operatorData.domain] = _packed;
-      ```
-
-   2. Emit a `SetOperator` event with the all relevant parameters.     
+    ```javascript
+    // Pack the indexes into a uint256.
+    uint256 _packed = _packedPermissions(_operatorData.permissionIndexes);
+    ```
 
 
-      _Event references:_
 
-      * [`SetOperator`](../events/setoperator.md)
+    1.  Store the packed permissions as the `permissionsOf` the provided `_operator`, on behalf of the `msg.sender`, specifically for the provided `_domain`.  \
 
-      ```javascript
-      emit SetOperator(
-        _operatorData.operator,
-        msg.sender,
-        _operatorData.domain,
-        _operatorData.permissionIndexes,
-        _packed
-      );
-      ```
+
+        _Internal references:_
+
+        * [`permissionsOf`](../properties/permissionsof.md)
+
+        ```javascript
+        // Store the new value.
+        permissionsOf[_operatorData.operator][msg.sender][_operatorData.domain] = _packed;
+        ```
+
+
+    2.  Emit a `SetOperator` event with the all relevant parameters.   \
+
+
+        _Event references:_
+
+        * [`SetOperator`](../events/setoperator.md)
+
+        ```javascript
+        emit SetOperator(
+          _operatorData.operator,
+          msg.sender,
+          _operatorData.domain,
+          _operatorData.permissionIndexes,
+          _packed
+        );
+        ```
 {% endtab %}
 
 {% tab title="Only code" %}
-```javascript
+```solidity
 /**
   @notice
   Sets permissions for an operators.
@@ -96,49 +101,24 @@ function setOperator(JBOperatorData calldata _operatorData) external override {
 {% endtab %}
 
 {% tab title="Errors" %}
-| String | Description |
-| :--- | :--- |
+| String                          | Description                                                               |
+| ------------------------------- | ------------------------------------------------------------------------- |
 | **`0x02: INDEX_OUT_OF_BOUNDS`** | Thrown if the provided index is more than whats supported in a `uint256`. |
 {% endtab %}
 
 {% tab title="Events" %}
 | Name | Data |
-| :--- | :--- |
+| ---- | ---- |
 
-
-<table>
-  <thead>
-    <tr>
-      <th style="text-align:left"><b><code>SetOperator</code></b>
-      </th>
-      <th style="text-align:left">
-        <ul>
-          <li><code>address indexed operator</code>
-          </li>
-          <li><code>address indexed account</code>
-          </li>
-          <li><code>uint256 indexed domain</code>
-          </li>
-          <li><code>uint256[] permissionIndexes</code>
-          </li>
-          <li><code>uint256 packed</code>
-          </li>
-        </ul>
-        <p><a href="../events/setoperator.md">more</a>
-        </p>
-      </th>
-    </tr>
-  </thead>
-  <tbody></tbody>
-</table>
+| **`SetOperator`** | <ul><li><code>address indexed operator</code></li><li><code>address indexed account</code></li><li><code>uint256 indexed domain</code></li><li><code>uint256[] permissionIndexes</code></li><li><code>uint256 packed</code></li></ul><p><a href="../events/setoperator.md">more</a></p> |
+| ----------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 {% endtab %}
 
 {% tab title="Bug bounty" %}
-| Category | Description | Reward |
-| :--- | :--- | :--- |
-| **Optimization** | Help make this operation more efficient. | 0.5ETH |
-| **Low severity** | Identify a vulnerability in this operation that could lead to an inconvenience for a user of the protocol or for a protocol developer. | 1ETH |
-| **High severity** | Identify a vulnerability in this operation that could lead to data corruption or loss of funds. | 5+ETH |
+| Category          | Description                                                                                                                            | Reward |
+| ----------------- | -------------------------------------------------------------------------------------------------------------------------------------- | ------ |
+| **Optimization**  | Help make this operation more efficient.                                                                                               | 0.5ETH |
+| **Low severity**  | Identify a vulnerability in this operation that could lead to an inconvenience for a user of the protocol or for a protocol developer. | 1ETH   |
+| **High severity** | Identify a vulnerability in this operation that could lead to data corruption or loss of funds.                                        | 5+ETH  |
 {% endtab %}
 {% endtabs %}
-

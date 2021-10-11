@@ -12,7 +12,7 @@ _Only an address can set its own operators._
 
 Definition:
 
-```javascript
+```solidity
 function _packedPermissions(uint256[] calldata _indexes) private pure returns (uint256 packed) {...}
 ```
 
@@ -21,34 +21,39 @@ function _packedPermissions(uint256[] calldata _indexes) private pure returns (u
 * The function does not modify or reference state variables outside the function.
 * The function returns the `packed` value.
 
-1. Loop through the provided `_indexes`.
 
-   ```javascript
-   for (uint256 _i = 0; _i < _indexes.length; _i++) { ... }
-   ```
 
-2. Get a reference to the `_permissionIndex` being iterated on.
+1.  Loop through the provided `_indexes`.
 
-   ```javascript
-   uint256 _index = _indexes[_i];
-   ```
+    ```javascript
+    for (uint256 _i = 0; _i < _indexes.length; _i++) { ... }
+    ```
 
-3. Make sure the `_permissionIndex` is one of the 255 indexes in a `uint256`.
 
-   ```javascript
-   require(_index <= 255, '0x02: INDEX_OUT_OF_BOUNDS');
-   ```
+2.  Get a reference to the `_permissionIndex` being iterated on.
 
-4. Flip the bit at the specified index of the `packed` value being returned to indicate a truthy permission.
+    ```javascript
+    uint256 _index = _indexes[_i];
+    ```
 
-   ```javascript
-   // Turn the bit at the index on.
-   packed |= 1 << _index;
-   ```
+
+3.  Make sure the `_permissionIndex` is one of the 255 indexes in a `uint256`.
+
+    ```javascript
+    require(_index <= 255, '0x02: INDEX_OUT_OF_BOUNDS');
+    ```
+
+
+4.  Flip the bit at the specified index of the `packed` value being returned to indicate a truthy permission.
+
+    ```javascript
+    // Turn the bit at the index on.
+    packed |= 1 << _index;
+    ```
 {% endtab %}
 
 {% tab title="Only code" %}
-```javascript
+```solidity
 /** 
   @notice 
   Converts an array of permission indexes to a packed uint256.
@@ -69,17 +74,17 @@ function _packedPermissions(uint256[] calldata _indexes) private pure returns (u
 {% endtab %}
 
 {% tab title="Errors" %}
-| String | Description |
-| :--- | :--- |
+| String                          | Description                                                               |
+| ------------------------------- | ------------------------------------------------------------------------- |
 | **`0x02: INDEX_OUT_OF_BOUNDS`** | Thrown if the provided index is more than whats supported in a `uint256`. |
 {% endtab %}
 
 {% tab title="Bug bounty" %}
-| Category | Description | Reward |
-| :--- | :--- | :--- |
-| **Optimization** | Help make this operation more efficient. | 0.5ETH |
-| **Low severity** | Identify a vulnerability in this operation that could lead to an inconvenience for a user of the protocol or for a protocol developer. | 1ETH |
-| **High severity** | Identify a vulnerability in this operation that could lead to data corruption or loss of funds. | 5+ETH |
+| Category          | Description                                                                                                                            | Reward |
+| ----------------- | -------------------------------------------------------------------------------------------------------------------------------------- | ------ |
+| **Optimization**  | Help make this operation more efficient.                                                                                               | 0.5ETH |
+| **Low severity**  | Identify a vulnerability in this operation that could lead to an inconvenience for a user of the protocol or for a protocol developer. | 1ETH   |
+| **High severity** | Identify a vulnerability in this operation that could lead to data corruption or loss of funds.                                        | 5+ETH  |
 {% endtab %}
 {% endtabs %}
 

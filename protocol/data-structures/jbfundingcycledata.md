@@ -1,6 +1,6 @@
 # JBFundingCycleData
 
-```javascript
+```solidity
 struct JBFundingCycleData {
   uint256 target;
   uint256 currency;
@@ -11,4 +11,3 @@ struct JBFundingCycleData {
   IJBFundingCycleBallot ballot;
 }
 ```
-

@@ -6,7 +6,7 @@ Emitted from:
 
 Definition:
 
-```javascript
+```solidity
 event Configure(
   uint256 indexed fundingCycleId,
   uint256 indexed projectId,
@@ -23,4 +23,3 @@ event Configure(
 * `properties` are the properties of the configuration.
 * `metadata` is the metadata attached the configuration.
 * `caller` is the address that issued the transaction within which the event was emitted.
-

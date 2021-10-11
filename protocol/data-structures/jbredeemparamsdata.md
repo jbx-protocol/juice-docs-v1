@@ -1,6 +1,6 @@
 # JBRedeemParamsData
 
-```text
+```solidity
 struct JBRedeemParamsData {
   address holder;
   uint256 count;
@@ -11,4 +11,3 @@ struct JBRedeemParamsData {
   bytes delegateMetadata;
 }
 ```
-

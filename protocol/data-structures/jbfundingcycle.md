@@ -1,6 +1,6 @@
 # JBFundingCycle
 
-```javascript
+```solidity
 /// @notice The funding cycle structure represents a project stewarded by an address, and accounts for which addresses have helped sustain the project.
 struct JBFundingCycle {
   // A unique number that's incremented for each new funding cycle, starting with 1.
@@ -35,4 +35,3 @@ struct JBFundingCycle {
   uint256 metadata;
 }
 ```
-

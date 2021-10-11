@@ -17,18 +17,20 @@ function _isApproved(JBFundingCycle memory _fundingCycle) private view returns (
 * The function does not alter state on the blockchain.
 * The function returns the approval flag.
 
-1. Check to see if the state of the ballot for the provided funding cycle configuration is approved. The ballot that should be used is that of the funding cycle that the provided one is based on. This is because each funding cycle's ballot dictates the approval conditions of future reconfigurations.  
 
 
-   _Internal references:_
+1.  Check to see if the state of the ballot for the provided funding cycle configuration is approved. The ballot that should be used is that of the funding cycle that the provided one is based on. This is because each funding cycle's ballot dictates the approval conditions of future reconfigurations.\
 
-   * [`_ballotStateOf`](_ballotstateof.md)
 
-   ```javascript
-   return
-     _ballotStateOf(_fundingCycle.id, _fundingCycle.configured, _fundingCycle.basedOn) ==
-     JBBallotState.Approved;
-   ```
+    _Internal references:_
+
+    * [`_ballotStateOf`](\_ballotstateof.md)
+
+    ```javascript
+    return
+      _ballotStateOf(_fundingCycle.id, _fundingCycle.configured, _fundingCycle.basedOn) ==
+      JBBallotState.Approved;
+    ```
 {% endtab %}
 
 {% tab title="Only code" %}
@@ -50,11 +52,10 @@ function _isApproved(JBFundingCycle memory _fundingCycle) private view returns (
 {% endtab %}
 
 {% tab title="Bug bounty" %}
-| Category | Description | Reward |
-| :--- | :--- | :--- |
-| **Optimization** | Help make this operation more efficient. | 0.5ETH |
-| **Low severity** | Identify a vulnerability in this operation that could lead to an inconvenience for a user of the protocol or for a protocol developer. | 1ETH |
-| **High severity** | Identify a vulnerability in this operation that could lead to data corruption or loss of funds. | 5+ETH |
+| Category          | Description                                                                                                                            | Reward |
+| ----------------- | -------------------------------------------------------------------------------------------------------------------------------------- | ------ |
+| **Optimization**  | Help make this operation more efficient.                                                                                               | 0.5ETH |
+| **Low severity**  | Identify a vulnerability in this operation that could lead to an inconvenience for a user of the protocol or for a protocol developer. | 1ETH   |
+| **High severity** | Identify a vulnerability in this operation that could lead to data corruption or loss of funds.                                        | 5+ETH  |
 {% endtab %}
 {% endtabs %}
-

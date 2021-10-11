@@ -2,17 +2,17 @@
 
 Contract:[`JBProjects`](../)
 
-Interface: ****`IJBProjects`
+Interface:** **`IJBProjects`
 
 {% tabs %}
 {% tab title="Step by step" %}
 **Allows a project owner to set the project's IPFS CID hash where metadata about the project has been uploaded.**
 
-_Only a project's owner or operator can set its URI._  
-  
+_Only a project's owner or operator can set its URI._\
+\
 Definition:
 
-```javascript
+```solidity
 function setUriOf(uint256 _projectId, string calldata _uri)
   external
   override
@@ -25,32 +25,35 @@ function setUriOf(uint256 _projectId, string calldata _uri)
 * The function overrides a function definition from the `IJBProjects` interface.
 * The function doesn't return anything.
 
-1. Store the new `_uri` as the `uriOf` the project.  
 
 
-   _Internal references:_
-
-   * [`uriOf`](../properties/uriof.md)
-
-   ```javascript
-   // Set the new uri.
-   uriOf[_projectId] = _uri;
-   ```
-
-2. Emit a `SetUri` event with the all relevant parameters.   
+1.  Store the new `_uri` as the `uriOf` the project.\
 
 
-   _Event references:_
+    _Internal references:_
 
-   * [`SetUri`](../events/seturi.md) 
+    * [`uriOf`](../properties/uriof.md)
 
-   ```javascript
-   emit SetUri(_projectId, _uri, msg.sender);
-   ```
+    ```javascript
+    // Set the new uri.
+    uriOf[_projectId] = _uri;
+    ```
+
+
+2.  Emit a `SetUri` event with the all relevant parameters. \
+
+
+    _Event references:_
+
+    * [`SetUri`](../events/seturi.md) 
+
+    ```javascript
+    emit SetUri(_projectId, _uri, msg.sender);
+    ```
 {% endtab %}
 
 {% tab title="Only code" %}
-```javascript
+```solidity
 /**
   @notice 
   Allows a project owner to set the project's IPFS CID hash where metadata about the project has been uploaded.
@@ -75,42 +78,17 @@ function setUriOf(uint256 _projectId, string calldata _uri)
 {% endtab %}
 
 {% tab title="Events" %}
-<table>
-  <thead>
-    <tr>
-      <th style="text-align:left">Name</th>
-      <th style="text-align:left">Data</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td style="text-align:left"><b><code>SetUri</code></b>
-      </td>
-      <td style="text-align:left">
-        <ul>
-          <li><code>uint256 indexed projectId</code> 
-          </li>
-          <li><code>string uri</code> 
-          </li>
-          <li><code>address caller</code>
-          </li>
-        </ul>
-        <p><a href="../events/seturi.md">more</a>
-        </p>
-      </td>
-    </tr>
-  </tbody>
-</table>
+| Name         | Data                                                                                                                                                                        |
+| ------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **`SetUri`** | <ul><li><code>uint256 indexed projectId</code> </li><li><code>string uri</code> </li><li><code>address caller</code></li></ul><p><a href="../events/seturi.md">more</a></p> |
 {% endtab %}
 
 {% tab title="Bug bounty" %}
-| Category | Description | Reward |
-| :--- | :--- | :--- |
-| **Optimization** | Help make this operation more efficient. | 0.5ETH |
-| **Low severity** | Identify a vulnerability in this operation that could lead to an inconvenience for a user of the protocol or for a protocol developer. | 1ETH |
-| **High severity** | Identify a vulnerability in this operation that could lead to data corruption or loss of funds. | 5+ETH |
+| Category          | Description                                                                                                                            | Reward |
+| ----------------- | -------------------------------------------------------------------------------------------------------------------------------------- | ------ |
+| **Optimization**  | Help make this operation more efficient.                                                                                               | 0.5ETH |
+| **Low severity**  | Identify a vulnerability in this operation that could lead to an inconvenience for a user of the protocol or for a protocol developer. | 1ETH   |
+| **High severity** | Identify a vulnerability in this operation that could lead to data corruption or loss of funds.                                        | 5+ETH  |
 {% endtab %}
 {% endtabs %}
-
-
 

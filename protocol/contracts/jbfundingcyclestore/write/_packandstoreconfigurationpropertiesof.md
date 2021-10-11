@@ -8,7 +8,7 @@ Contract:[`JBFundingCycleStore`](../)​
 
 Definition:
 
-```javascript
+```solidity
 function _packAndStoreConfigurationProperties(
   uint256 _fundingCycleId,
   uint256 _configured,
@@ -32,63 +32,71 @@ function _packAndStoreConfigurationProperties(
 * The function is private to this contract.
 * The function doesn't return anything.
 
-1. Store the ballot in the first 160 bits of the packed `uint256`.
-
-   ```javascript
-   // ballot in bytes 0-159 bits.
-   uint256 packed = uint160(address(_ballot));
-   ```
-
-2. Store the `_configured` in the next 48 bits.
-
-   ```javascript
-   // configured in bits 160-207 bytes.
-   packed |= _configured << 160;
-   ```
-
-3. Store the `_duration` in the next 16 bits.
-
-   ```javascript
-   // duration in bytes 208-223 bytes.
-   packed |= _duration << 208;
-   ```
-
-4. Store the `_currency` in the next 8 bits.
-
-   ```javascript
-   // basedOn in bytes 224-231 bytes.
-   packed |= _currency << 224;
-   ```
-
-5. Store the `_fee` in the next 8 bits.
-
-   ```javascript
-   // fee in bytes 232-239 bytes.
-   packed |= _fee << 232;
-   ```
-
-6. Store the `_discountRate` in the next 16 bits.
-
-   ```javascript
-   // discountRate in bytes 240-255 bytes.
-   packed |= _discountRate << 240;
-   ```
-
-7. Store the packed configuration properties of the funding cycle.  
 
 
-   _Internal references:_
+1.  Store the ballot in the first 160 bits of the packed `uint256`.
 
-   * [`_packAndStoreConfigurationPropertiesOf`](../properties/_packedconfigurationpropertiesof.md)
+    ```javascript
+    // ballot in bytes 0-159 bits.
+    uint256 packed = uint160(address(_ballot));
+    ```
 
-   ```javascript
-   // Set in storage.
-   _packedConfigurationPropertiesOf[_fundingCycleId] = packed;
-   ```
+
+2.  Store the `_configured` in the next 48 bits.
+
+    ```javascript
+    // configured in bits 160-207 bytes.
+    packed |= _configured << 160;
+    ```
+
+
+3.  Store the `_duration` in the next 16 bits.
+
+    ```javascript
+    // duration in bytes 208-223 bytes.
+    packed |= _duration << 208;
+    ```
+
+
+4.  Store the `_currency` in the next 8 bits.
+
+    ```javascript
+    // basedOn in bytes 224-231 bytes.
+    packed |= _currency << 224;
+    ```
+
+
+5.  Store the `_fee` in the next 8 bits.
+
+    ```javascript
+    // fee in bytes 232-239 bytes.
+    packed |= _fee << 232;
+    ```
+
+
+6.  Store the `_discountRate` in the next 16 bits.
+
+    ```javascript
+    // discountRate in bytes 240-255 bytes.
+    packed |= _discountRate << 240;
+    ```
+
+
+7.  Store the packed configuration properties of the funding cycle.\
+
+
+    _Internal references:_
+
+    * [`_packAndStoreConfigurationPropertiesOf`](../properties/\_packedconfigurationpropertiesof.md)
+
+    ```javascript
+    // Set in storage.
+    _packedConfigurationPropertiesOf[_fundingCycleId] = packed;
+    ```
 {% endtab %}
 
 {% tab title="Only code" %}
-```javascript
+```solidity
 /**
   @notice 
   Efficiently stores a funding cycles provided configuration properties.
@@ -132,11 +140,10 @@ function _packAndStoreConfigurationProperties(
 {% endtab %}
 
 {% tab title="Bug bounty" %}
-| Category | Description | Reward |
-| :--- | :--- | :--- |
-| **Optimization** | Help make this operation more efficient. | 0.5ETH |
-| **Low severity** | Identify a vulnerability in this operation that could lead to an inconvenience for a user of the protocol or for a protocol developer. | 1ETH |
-| **High severity** | Identify a vulnerability in this operation that could lead to data corruption or loss of funds. | 5+ETH |
+| Category          | Description                                                                                                                            | Reward |
+| ----------------- | -------------------------------------------------------------------------------------------------------------------------------------- | ------ |
+| **Optimization**  | Help make this operation more efficient.                                                                                               | 0.5ETH |
+| **Low severity**  | Identify a vulnerability in this operation that could lead to an inconvenience for a user of the protocol or for a protocol developer. | 1ETH   |
+| **High severity** | Identify a vulnerability in this operation that could lead to data corruption or loss of funds.                                        | 5+ETH  |
 {% endtab %}
 {% endtabs %}
-

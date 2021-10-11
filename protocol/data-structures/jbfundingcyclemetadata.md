@@ -1,6 +1,6 @@
 # JBFundingCycleMetadata
 
-```javascript
+```solidity
 struct JBFundingCycleMetadata {
   uint256 reservedRate;
   uint256 redemptionRate;
@@ -15,4 +15,3 @@ struct JBFundingCycleMetadata {
   IJBFundingCycleDataSource dataSource;
 }
 ```
-

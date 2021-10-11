@@ -4,11 +4,11 @@ Contract:[`JBFundingCycleStore`](../)​
 
 {% tabs %}
 {% tab title="Step by step" %}
-**Updates intrinsic properties for a funding cycle given a base cycle.**  
-  
-Definition:
+**Updates intrinsic properties for a funding cycle given a base cycle.**\
+****\
+****Definition:
 
-```javascript
+```solidity
 function _updateFundingCycleBasedOn(
   JBFundingCycle memory _baseFundingCycle,
   uint256 _mustStartOnOrAfter,
@@ -24,67 +24,72 @@ function _updateFundingCycleBasedOn(
 * The function is private to this contract.
 * The function returns the ID of the updated funding cycle.
 
-1. Find the time that the updated funding cycle should start at.  
 
 
-   _Internal references:_
-
-   * [`_deriveStartFrom`](../read/_derivestartfrom.md)
-
-   ```javascript
-   // Derive the correct next start time from the base.
-   uint256 _start = _deriveStartFrom(_baseFundingCycle, _mustStartOnOrAfter);
-   ```
-
-2. Find the weight that the updated funding cycle should use. If a weight was provided to the function, use it. Otherwise derive one from the previous weight.  
-  
-   If the provided weight is the number 1, treat is like the number 0. A weight of 0 means that no specific weight was passed in.  
+1.  Find the time that the updated funding cycle should start at.\
 
 
-   _Internal references:_
+    _Internal references:_
 
-   * [`_deriveWeightFrom`](../read/_deriveweightfrom.md)
+    * [`_deriveStartFrom`](../read/\_derivestartfrom.md)
 
-   ```javascript
-   // A weight of 1 is treated as a weight of 0.
-   _weight = _weight > 0
-     ? (_weight == 1 ? 0 : _weight)
-     : _deriveWeightFrom(_baseFundingCycle, _start);
-   ```
-
-3. Find the number that the updated funding cycle should use.  
+    ```javascript
+    // Derive the correct next start time from the base.
+    uint256 _start = _deriveStartFrom(_baseFundingCycle, _mustStartOnOrAfter);
+    ```
 
 
-   _Internal references:_
-
-   * [`_deriveNumberFrom`](../read/_derivenumberfrom.md)
-
-   ```javascript
-   // Derive the correct number.
-   uint256 _number = _deriveNumberFrom(_baseFundingCycle, _start);
-   ```
-
-4. Store the properties for the updated funding cycle.  
+2.  Find the weight that the updated funding cycle should use. If a weight was provided to the function, use it. Otherwise derive one from the previous weight.\
+    \
+    If the provided weight is the number 1, treat is like the number 0. A weight of 0 means that no specific weight was passed in.\
 
 
-   _Internal references:_
+    _Internal references:_
 
-   * [`_packAndStoreIntrinsicPropertiesOf`](_packandstoreintrinsicpropertiesof.md)
+    * [`_deriveWeightFrom`](../read/\_deriveweightfrom.md)
 
-   ```javascript
-   // Update the intrinsic properties.
-   fundingCycleId = _packAndStoreIntrinsicPropertiesOf(
-     _baseFundingCycle.projectId,
-     _number,
-     _weight,
-     _baseFundingCycle.id,
-     _start
-   );
-   ```
+    ```javascript
+    // A weight of 1 is treated as a weight of 0.
+    _weight = _weight > 0
+      ? (_weight == 1 ? 0 : _weight)
+      : _deriveWeightFrom(_baseFundingCycle, _start);
+    ```
+
+
+3.  Find the number that the updated funding cycle should use.\
+
+
+    _Internal references:_
+
+    * [`_deriveNumberFrom`](../read/\_derivenumberfrom.md)
+
+    ```javascript
+    // Derive the correct number.
+    uint256 _number = _deriveNumberFrom(_baseFundingCycle, _start);
+    ```
+
+
+4.  Store the properties for the updated funding cycle.\
+
+
+    _Internal references:_
+
+    * [`_packAndStoreIntrinsicPropertiesOf`](\_packandstoreintrinsicpropertiesof.md)
+
+    ```javascript
+    // Update the intrinsic properties.
+    fundingCycleId = _packAndStoreIntrinsicPropertiesOf(
+      _baseFundingCycle.projectId,
+      _number,
+      _weight,
+      _baseFundingCycle.id,
+      _start
+    );
+    ```
 {% endtab %}
 
 {% tab title="Only code" %}
-```javascript
+```solidity
 /** 
   @notice
   Updates intrinsic properties for a funding cycle given a base cycle.
@@ -126,11 +131,10 @@ function _updateFundingCycleBasedOn(
 {% endtab %}
 
 {% tab title="Bug bounty" %}
-| Category | Description | Reward |
-| :--- | :--- | :--- |
-| **Optimization** | Help make this operation more efficient. | 0.5ETH |
-| **Low severity** | Identify a vulnerability in this operation that could lead to an inconvenience for a user of the protocol or for a protocol developer. | 1ETH |
-| **High severity** | Identify a vulnerability in this operation that could lead to data corruption or loss of funds. | 5+ETH |
+| Category          | Description                                                                                                                            | Reward |
+| ----------------- | -------------------------------------------------------------------------------------------------------------------------------------- | ------ |
+| **Optimization**  | Help make this operation more efficient.                                                                                               | 0.5ETH |
+| **Low severity**  | Identify a vulnerability in this operation that could lead to an inconvenience for a user of the protocol or for a protocol developer. | 1ETH   |
+| **High severity** | Identify a vulnerability in this operation that could lead to data corruption or loss of funds.                                        | 5+ETH  |
 {% endtab %}
 {% endtabs %}
-

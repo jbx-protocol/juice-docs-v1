@@ -2,17 +2,17 @@
 
 Contract:[`JBProjects`](../)
 
-Interface: ****`IJBProjects`
+Interface:** **`IJBProjects`
 
 {% tabs %}
 {% tab title="Step by step" %}
 **Allows a project owner to transfer its handle to another address.**
 
-_Only a project's owner or operator can transfer its handle._  
-  
+_Only a project's owner or operator can transfer its handle._\
+\
 Definition:
 
-```javascript
+```solidity
 function transferHandleOf(
   uint256 _projectId,
   address _transferAddress,
@@ -31,100 +31,109 @@ function transferHandleOf(
 * The function overrides a function definition from the `IJBProjects` interface.
 * The function returns the `handle` that has been transferred.
 
-1. Check that the provided `_newHandle` is not empty.
-
-   ```javascript
-   // A new handle must have been provided.
-   require(_newHandle != bytes32(0), '0x0a: EMPTY_HANDLE');
-   ```
-
-2. Check that the `_newHandle` is unique. This is done by making sure there isn't yet an `idFor` the handle, and making sure it isn't currently being transferred to an address.  
 
 
-   _Internal references:_
+1.  Check that the provided `_newHandle` is not empty.
 
-   * [`idFor`](../properties/idfor.md)
-   * [`transferAddressFor`](../properties/transferaddressfor.md)
-
-   ```javascript
-   // The new handle must be available.
-   require(idFor[_newHandle] == 0 && transferAddressFor[_newHandle] == address(0), '0x0b: HANDLE_TAKEN');
-   ```
-
-3. Get the current `handleOf` the project. Store this is `handle`, which will be returned by the function.  
+    ```javascript
+    // A new handle must have been provided.
+    require(_newHandle != bytes32(0), '0x0a: EMPTY_HANDLE');
+    ```
 
 
-   _Internal references:_
-
-   * [`handleOf`](../properties/handleof.md)
-
-   ```javascript
-   // Get a reference to the project's current handle.
-   handle = handleOf[_projectId];
-   ```
-
-4. Remove the `idFor` the project's current handle so that the handle no longer resolves to any project ID.  
+2.  Check that the `_newHandle` is unique. This is done by making sure there isn't yet an `idFor` the handle, and making sure it isn't currently being transferred to an address.\
 
 
-   _Internal references:_
+    _Internal references:_
 
-   * [`idFor`](../properties/idfor.md)
+    * [`idFor`](../properties/idfor.md)
+    * [`transferAddressFor`](../properties/transferaddressfor.md)
 
-   ```javascript
-   // Remove the resolver for the transfered handle.
-   idFor[handle] = 0;
-   ```
-
-5. Store the project's ID as the `idFor` the provided `_newHandle` to allow for project lookup using the handle.  
-
-
-   _Internal references:_
-
-   * [`idFor`](../properties/idfor.md)
-
-   ```javascript
-   // Store the new handle for the project ID.
-   idFor[_newHandle] = _projectId;
-   ```
-
-6. Store the provided `_newHandle` as the as the `handleOf` the project.  
+    ```javascript
+    // The new handle must be available.
+    require(idFor[_newHandle] == 0 && transferAddressFor[_newHandle] == address(0), '0x0b: HANDLE_TAKEN');
+    ```
 
 
-   _Internal references:_
-
-   * [`handleOf`](../properties/handleof.md)
-
-   ```javascript
-   // Store the new handle for the project ID.
-   handleOf[_projectId] = _newHandle;
-   ```
-
-7. Store the `_transferAddress` that will be able to transfer the handle as the `transferAddressFor` the handle.  
+3.  Get the current `handleOf` the project. Store this is `handle`, which will be returned by the function.\
 
 
-   _Internal references:_
+    _Internal references:_
 
-   * [`transferAddressFor`](../properties/idfor.md)
+    * [`handleOf`](../properties/handleof.md)
 
-   ```javascript
-   // Give the address the power to transfer the current handle.
-   transferAddressFor[handle] = _transferAddress;
-   ```
-
-8. Emit a `TransferHandle` event with the all relevant parameters.   
+    ```javascript
+    // Get a reference to the project's current handle.
+    handle = handleOf[_projectId];
+    ```
 
 
-   _Event references:_
+4.  Remove the `idFor` the project's current handle so that the handle no longer resolves to any project ID.\
 
-   * [`TransferHandle`](../events/seturi.md) 
 
-   ```text
-   emit TransferHandle(_projectId, _transferAddress, handle, _newHandle, msg.sender);
-   ```
+    _Internal references:_
+
+    * [`idFor`](../properties/idfor.md)
+
+    ```javascript
+    // Remove the resolver for the transferred handle.
+    idFor[handle] = 0;
+    ```
+
+
+5.  Store the project's ID as the `idFor` the provided `_newHandle` to allow for project lookup using the handle.\
+
+
+    _Internal references:_
+
+    * [`idFor`](../properties/idfor.md)
+
+    ```javascript
+    // Store the new handle for the project ID.
+    idFor[_newHandle] = _projectId;
+    ```
+
+
+6.  Store the provided `_newHandle` as the as the `handleOf` the project.\
+
+
+    _Internal references:_
+
+    * [`handleOf`](../properties/handleof.md)
+
+    ```javascript
+    // Store the new handle for the project ID.
+    handleOf[_projectId] = _newHandle;
+    ```
+
+
+7.  Store the `_transferAddress` that will be able to transfer the handle as the `transferAddressFor` the handle.\
+
+
+    _Internal references:_
+
+    * [`transferAddressFor`](../properties/idfor.md)
+
+    ```javascript
+    // Give the address the power to transfer the current handle.
+    transferAddressFor[handle] = _transferAddress;
+    ```
+
+
+8.  Emit a `TransferHandle` event with the all relevant parameters. \
+
+
+    _Event references:_
+
+    * [`TransferHandle`](../events/seturi.md) 
+
+    ```
+    emit TransferHandle(_projectId, _transferAddress, handle, _newHandle, msg.sender);
+    ```
 {% endtab %}
 
 {% tab title="Only code" %}
-```javascript
+```solidity
 /**
   @notice 
   Allows a project owner to transfer its handle to another address.
@@ -157,7 +166,7 @@ function transferHandleOf(
   // Get a reference to the project's current handle.
   handle = handleOf[_projectId];
 
-  // Remove the project ID for the transfered handle.
+  // Remove the project ID for the transferred handle.
   idFor[handle] = 0;
 
   // Store the new handle for the project ID.
@@ -175,51 +184,23 @@ function transferHandleOf(
 {% endtab %}
 
 {% tab title="Errors" %}
-| String | Description |
-| :--- | :--- |
-| **`0x0a: EMPTY_HANDLE`** | Thrown if the provided handle is empty |
+| String                   | Description                                      |
+| ------------------------ | ------------------------------------------------ |
+| **`0x0a: EMPTY_HANDLE`** | Thrown if the provided handle is empty           |
 | **`0x0b: HANDLE_TAKEN`** | Thrown if the provided handle is already in use. |
 {% endtab %}
 
 {% tab title="Events" %}
-<table>
-  <thead>
-    <tr>
-      <th style="text-align:left">Name</th>
-      <th style="text-align:left">Data</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td style="text-align:left"><b><code>SetHandle</code></b>
-      </td>
-      <td style="text-align:left">
-        <ul>
-          <li><code>uint256 indexed projectId</code> 
-          </li>
-          <li><code>address indexed transferAddress</code> 
-          </li>
-          <li><code>bytes32 indexed handle</code> 
-          </li>
-          <li><code>bytes32 newHandle</code> 
-          </li>
-          <li><code>address caller</code>
-          </li>
-        </ul>
-        <p><a href="../events/transferhandle.md">more</a>
-        </p>
-      </td>
-    </tr>
-  </tbody>
-</table>
+| Name            | Data                                                                                                                                                                                                                                                                                          |
+| --------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **`SetHandle`** | <ul><li><code>uint256 indexed projectId</code> </li><li><code>address indexed transferAddress</code> </li><li><code>bytes32 indexed handle</code> </li><li><code>bytes32 newHandle</code> </li><li><code>address caller</code></li></ul><p><a href="../events/transferhandle.md">more</a></p> |
 {% endtab %}
 
 {% tab title="Bug bounty" %}
-| Category | Description | Reward |
-| :--- | :--- | :--- |
-| **Optimization** | Help make this operation more efficient. | 0.5ETH |
-| **Low severity** | Identify a vulnerability in this operation that could lead to an inconvenience for a user of the protocol or for a protocol developer. | 1ETH |
-| **High severity** | Identify a vulnerability in this operation that could lead to data corruption or loss of funds. | 5+ETH |
+| Category          | Description                                                                                                                            | Reward |
+| ----------------- | -------------------------------------------------------------------------------------------------------------------------------------- | ------ |
+| **Optimization**  | Help make this operation more efficient.                                                                                               | 0.5ETH |
+| **Low severity**  | Identify a vulnerability in this operation that could lead to an inconvenience for a user of the protocol or for a protocol developer. | 1ETH   |
+| **High severity** | Identify a vulnerability in this operation that could lead to data corruption or loss of funds.                                        | 5+ETH  |
 {% endtab %}
 {% endtabs %}
-

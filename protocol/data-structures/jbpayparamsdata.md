@@ -1,6 +1,6 @@
 # JBPayParamsData
 
-```text
+```solidity
 struct JBPayParamsData {
   address payer;
   uint256 amount;
@@ -11,4 +11,3 @@ struct JBPayParamsData {
   bytes delegateMetadata;
 }
 ```
-

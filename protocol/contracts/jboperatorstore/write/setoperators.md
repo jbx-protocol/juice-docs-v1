@@ -12,7 +12,7 @@ _Only an address can set its own operators._
 
 Definition:
 
-```javascript
+```solidity
  function setOperators(JBOperatorData[] calldata _operatorData) external override { ... }
 ```
 
@@ -21,56 +21,61 @@ Definition:
 * The function overrides a function definition from the `IJBOperatorStore` interface.
 * The function doesn't return anything.
 
-1. Loop through the provided `_operatorData`.
-
-   ```javascript
-   for (uint256 _i = 0; _i < _operatorData.length; _i++) { ... }
-   ```
-
-2. Pack the provided permissions into a `uint256`. Each bit of the resulting value represents whether or not permission has been granted for that index.    
 
 
-   Internal references:
+1.  Loop through the provided `_operatorData`.
 
-   * [`_packedPermissions`](_packedpermissions.md)
-
-   ```javascript
-   // Pack the indexes into a uint256.
-   uint256 _packed = _packedPermissions(_operatorData[_i].permissionIndexes);
-   ```
-
-3. Store the packed permissions as the `permissionsOf` the provided `_operator`, on behalf of the `msg.sender`, specifically for the provided `_domain`.    
+    ```javascript
+    for (uint256 _i = 0; _i < _operatorData.length; _i++) { ... }
+    ```
 
 
-   _Internal references:_
-
-   * [`permissionsOf`](../properties/permissionsof.md)
-
-   ```javascript
-   // Store the new value.
-   permissionsOf[_operatorData[_i].operator][msg.sender][_operatorData[_i].domain] = _packed;
-   ```
-
-4. Emit a `SetOperator` event with the all relevant parameters.     
+2.  Pack the provided permissions into a `uint256`. Each bit of the resulting value represents whether or not permission has been granted for that index.  \
 
 
-   _Event references:_
+    Internal references:
 
-   * [`SetOperator`](../events/setoperator.md)
+    * [`_packedPermissions`](\_packedpermissions.md)
 
-   ```javascript
-   emit SetOperator(
-     _operatorData[_i].operator,
-     msg.sender,
-     _operatorData[_i].domain,
-     _operatorData[_i].permissionIndexes,
-     _packed
-   );
-   ```
+    ```javascript
+    // Pack the indexes into a uint256.
+    uint256 _packed = _packedPermissions(_operatorData[_i].permissionIndexes);
+    ```
+
+
+3.  Store the packed permissions as the `permissionsOf` the provided `_operator`, on behalf of the `msg.sender`, specifically for the provided `_domain`.  \
+
+
+    _Internal references:_
+
+    * [`permissionsOf`](../properties/permissionsof.md)
+
+    ```javascript
+    // Store the new value.
+    permissionsOf[_operatorData[_i].operator][msg.sender][_operatorData[_i].domain] = _packed;
+    ```
+
+
+4.  Emit a `SetOperator` event with the all relevant parameters.   \
+
+
+    _Event references:_
+
+    * [`SetOperator`](../events/setoperator.md)
+
+    ```javascript
+    emit SetOperator(
+      _operatorData[_i].operator,
+      msg.sender,
+      _operatorData[_i].domain,
+      _operatorData[_i].permissionIndexes,
+      _packed
+    );
+    ```
 {% endtab %}
 
 {% tab title="Only code" %}
-```javascript
+```solidity
 /**
   @notice
   Sets permissions for many operators.
@@ -104,49 +109,24 @@ function setOperators(JBOperatorData[] calldata _operatorData) external override
 {% endtab %}
 
 {% tab title="Errors" %}
-| String | Description |
-| :--- | :--- |
+| String                          | Description                                                               |
+| ------------------------------- | ------------------------------------------------------------------------- |
 | **`0x02: INDEX_OUT_OF_BOUNDS`** | Thrown if the provided index is more than whats supported in a `uint256`. |
 {% endtab %}
 
 {% tab title="Events" %}
 | Name | Data |
-| :--- | :--- |
+| ---- | ---- |
 
-
-<table>
-  <thead>
-    <tr>
-      <th style="text-align:left"><b><code>SetOperator</code></b>
-      </th>
-      <th style="text-align:left">
-        <ul>
-          <li><code>address indexed operator</code>
-          </li>
-          <li><code>address indexed account</code>
-          </li>
-          <li><code>uint256 indexed domain</code>
-          </li>
-          <li><code>uint256[] permissionIndexes</code>
-          </li>
-          <li><code>uint256 packed</code>
-          </li>
-        </ul>
-        <p><a href="../events/setoperator.md">more</a>
-        </p>
-      </th>
-    </tr>
-  </thead>
-  <tbody></tbody>
-</table>
+| **`SetOperator`** | <ul><li><code>address indexed operator</code></li><li><code>address indexed account</code></li><li><code>uint256 indexed domain</code></li><li><code>uint256[] permissionIndexes</code></li><li><code>uint256 packed</code></li></ul><p><a href="../events/setoperator.md">more</a></p> |
+| ----------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 {% endtab %}
 
 {% tab title="Bug bounty" %}
-| Category | Description | Reward |
-| :--- | :--- | :--- |
-| **Optimization** | Help make this operation more efficient. | 0.5ETH |
-| **Low severity** | Identify a vulnerability in this operation that could lead to an inconvenience for a user of the protocol or for a protocol developer. | 1ETH |
-| **High severity** | Identify a vulnerability in this operation that could lead to data corruption or loss of funds. | 5+ETH |
+| Category          | Description                                                                                                                            | Reward |
+| ----------------- | -------------------------------------------------------------------------------------------------------------------------------------- | ------ |
+| **Optimization**  | Help make this operation more efficient.                                                                                               | 0.5ETH |
+| **Low severity**  | Identify a vulnerability in this operation that could lead to an inconvenience for a user of the protocol or for a protocol developer. | 1ETH   |
+| **High severity** | Identify a vulnerability in this operation that could lead to data corruption or loss of funds.                                        | 5+ETH  |
 {% endtab %}
 {% endtabs %}
-

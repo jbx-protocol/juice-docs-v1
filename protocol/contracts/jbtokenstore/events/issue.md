@@ -6,7 +6,7 @@ Emitted from:
 
 Definition:
 
-```javascript
+```solidity
 event Issue(
   uint256 indexed projectId,
   IJBToken indexed token,
@@ -21,4 +21,3 @@ event Issue(
 * `name` is the name of the token.
 * `symbol` is the symbol of the token.
 * `caller` is the address that issued the transaction within which the event was emitted.
-

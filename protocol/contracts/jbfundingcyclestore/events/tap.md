@@ -6,7 +6,7 @@ Emitted from:
 
 Definition:
 
-```javascript
+```solidity
 event Tap(
   uint256 indexed fundingCycleId,
   uint256 indexed projectId,
@@ -21,4 +21,3 @@ event Tap(
 * `amount` is the amount that was tapped.
 * `newTappedAmount` is the total amount that has now been tapped from the funding cycle.
 * `caller` is the address that issued the transaction within which the event was emitted.
-

@@ -10,7 +10,7 @@ _A value of 0 is returned if no funding cycle was found._
 
 Definition:
 
-```javascript
+```solidity
 function _standbyOf(uint256 _projectId) private view returns (uint256 fundingCycleId) { ... }
 ```
 
@@ -19,47 +19,52 @@ function _standbyOf(uint256 _projectId) private view returns (uint256 fundingCyc
 * The function does not alter state on the blockchain.
 * The function returns an ID of a standby funding cycle if one exists, or 0 if one doesn't exist.
 
-1. Get a reference to the latest funding cycle for the project.  
 
 
-   _Internal references:_
-
-   * [`latestIdOf`](../properties/latestidof.md)
-
-   ```javascript
-   // Get a reference to the project's latest funding cycle.
-   fundingCycleId = latestIdOf[_projectId];
-   ```
-
-2. If there isn't a funding cycle for the project, there isn't a standby cycle either.
-
-   ```javascript
-   // If there isn't one, theres also no standy funding cycle.
-   if (fundingCycleId == 0) return 0;
-   ```
-
-3. Get the struct for the latest funding cycle.  
+1.  Get a reference to the latest funding cycle for the project.\
 
 
-   _Internal references:_
+    _Internal references:_
 
-   * [`_getStructFor`](_getstructfor.md)
+    * [`latestIdOf`](../properties/latestidof.md)
 
-   ```javascript
-   // Get the necessary properties for the latest funding cycle.
-   JBFundingCycle memory _fundingCycle = _getStructFor(fundingCycleId);
-   ```
+    ```javascript
+    // Get a reference to the project's latest funding cycle.
+    fundingCycleId = latestIdOf[_projectId];
+    ```
 
-4. If the cycle has started, return 0 since there is not a stored funding cycle in standby.
 
-   ```javascript
-   // There is no upcoming funding cycle if the latest funding cycle has already started.
-   if (block.timestamp >= _fundingCycle.start) return 0;
-   ```
+2.  If there isn't a funding cycle for the project, there isn't a standby cycle either.
+
+    ```javascript
+    // If there isn't one, theres also no standby funding cycle.
+    if (fundingCycleId == 0) return 0;
+    ```
+
+
+3.  Get the struct for the latest funding cycle.\
+
+
+    _Internal references:_
+
+    * [`_getStructFor`](\_getstructfor.md)
+
+    ```javascript
+    // Get the necessary properties for the latest funding cycle.
+    JBFundingCycle memory _fundingCycle = _getStructFor(fundingCycleId);
+    ```
+
+
+4.  If the cycle has started, return 0 since there is not a stored funding cycle in standby.
+
+    ```javascript
+    // There is no upcoming funding cycle if the latest funding cycle has already started.
+    if (block.timestamp >= _fundingCycle.start) return 0;
+    ```
 {% endtab %}
 
 {% tab title="Only code" %}
-```javascript
+```solidity
 /**
   @notice 
   The project's stored funding cycle that hasn't yet started, if one exists.
@@ -88,11 +93,12 @@ function _standbyOf(uint256 _projectId) private view returns (uint256 fundingCyc
 {% endtab %}
 
 {% tab title="Bug bounty" %}
-| Category | Description | Reward |
-| :--- | :--- | :--- |
-| **Optimization** | Help make this operation more efficient. | 0.5ETH |
-| **Low severity** | Identify a vulnerability in this operation that could lead to an inconvenience for a user of the protocol or for a protocol developer. | 1ETH |
-| **High severity** | Identify a vulnerability in this operation that could lead to data corruption or loss of funds. | 5+ETH |
+| Category          | Description                                                                                                                            | Reward |
+| ----------------- | -------------------------------------------------------------------------------------------------------------------------------------- | ------ |
+| **Optimization**  | Help make this operation more efficient.                                                                                               | 0.5ETH |
+| **Low severity**  | Identify a vulnerability in this operation that could lead to an inconvenience for a user of the protocol or for a protocol developer. | 1ETH   |
+| **High severity** | Identify a vulnerability in this operation that could lead to data corruption or loss of funds.                                        | 5+ETH  |
+
+
 {% endtab %}
 {% endtabs %}
-

@@ -6,7 +6,7 @@ Emitted from:
 
 Definition:
 
-```javascript
+```solidity
 event Transfer(
   address indexed holder,
   uint256 indexed projectId,
@@ -21,4 +21,3 @@ event Transfer(
 * `recipient` is the address by which the transferred tokens are now being held.
 * `amount` is the amount of tokens that were transferred.
 * `caller` is the address that issued the transaction within which the event was emitted.
-

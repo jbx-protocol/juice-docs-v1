@@ -8,7 +8,7 @@ Contract:[`JBFundingCycleStore`](../)​
 
 Definition:
 
-```javascript
+```solidity
 function _deriveNumberFrom(JBFundingCycle memory _baseFundingCycle, uint256 _start) 
   private 
   pure 
@@ -21,36 +21,40 @@ function _deriveNumberFrom(JBFundingCycle memory _baseFundingCycle, uint256 _sta
 * The function does not alter state on the blockchain.
 * The function returns the funding cycle number.
 
-1. If the `_baseFundingCycle` doesn't have a duration, the next number is 1 more than the base's number. 
-
-   ```javascript
-   // A subsequent cycle to one with a duration of 0 should be the next number.
-   if (_baseFundingCycle.duration == 0) return _baseFundingCycle.number + 1;
-   ```
-
-2. Get a reference to how long after the `_baseFundingCycle`'s start the specified `_start` time is. The goal will be to see how many cycles have passed within this time distance. 
-
-   ```javascript
-   // The difference between the start of the base funding cycle and the proposed start.
-   uint256 _startDistance = _start - _baseFundingCycle.start;
-   ```
-
-3. Return the number of base cycles that fit in the base distance.  
 
 
-   _Internal references:_
+1.  If the `_baseFundingCycle` doesn't have a duration, the next number is 1 more than the base's number. 
 
-   * [`_SECONDS_IN_DAY`](../properties/_seconds_in_day.md)
+    ```javascript
+    // A subsequent cycle to one with a duration of 0 should be the next number.
+    if (_baseFundingCycle.duration == 0) return _baseFundingCycle.number + 1;
+    ```
 
-   ```javascript
-   // Find the number of base cycles that fit in the base distance.
-   return
-     _baseFundingCycle.number + (_startDistance / (_baseFundingCycle.duration * _SECONDS_IN_DAY));
-   ```
+
+2.  Get a reference to how long after the `_baseFundingCycle`'s start the specified `_start` time is. The goal will be to see how many cycles have passed within this time distance. 
+
+    ```javascript
+    // The difference between the start of the base funding cycle and the proposed start.
+    uint256 _startDistance = _start - _baseFundingCycle.start;
+    ```
+
+
+3.  Return the number of base cycles that fit in the base distance.\
+
+
+    _Internal references:_
+
+    * [`_SECONDS_IN_DAY`](../properties/\_seconds_in_day.md)
+
+    ```javascript
+    // Find the number of base cycles that fit in the base distance.
+    return
+      _baseFundingCycle.number + (_startDistance / (_baseFundingCycle.duration * _SECONDS_IN_DAY));
+    ```
 {% endtab %}
 
 {% tab title="Only code" %}
-```javascript
+```solidity
 /** 
   @notice 
   The number of the next funding cycle given the specified funding cycle.
@@ -80,11 +84,10 @@ function _deriveNumberFrom(JBFundingCycle memory _baseFundingCycle, uint256 _sta
 {% endtab %}
 
 {% tab title="Bug bounty" %}
-| Category | Description | Reward |
-| :--- | :--- | :--- |
-| **Optimization** | Help make this operation more efficient. | 0.5ETH |
-| **Low severity** | Identify a vulnerability in this operation that could lead to an inconvenience for a user of the protocol or for a protocol developer. | 1ETH |
-| **High severity** | Identify a vulnerability in this operation that could lead to data corruption or loss of funds. | 5+ETH |
+| Category          | Description                                                                                                                            | Reward |
+| ----------------- | -------------------------------------------------------------------------------------------------------------------------------------- | ------ |
+| **Optimization**  | Help make this operation more efficient.                                                                                               | 0.5ETH |
+| **Low severity**  | Identify a vulnerability in this operation that could lead to an inconvenience for a user of the protocol or for a protocol developer. | 1ETH   |
+| **High severity** | Identify a vulnerability in this operation that could lead to data corruption or loss of funds.                                        | 5+ETH  |
 {% endtab %}
 {% endtabs %}
-

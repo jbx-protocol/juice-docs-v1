@@ -8,7 +8,7 @@ Contract:[`JBFundingCycleStore`](../)​
 
 Definition:
 
-```javascript
+```solidity
 function _ballotStateOf(
   uint256 _id,
   uint256 _configuration,
@@ -23,34 +23,38 @@ function _ballotStateOf(
 * The function does not alter state on the blockchain.
 * The function returns the [`JBBallotState`](../../../enums/jbballotstate.md).
 
-1. If there is no ballot, the ballot state is implicitly approved.
 
-   ```javascript
-   // If there is no ballot funding cycle, implicitly approve.
-   if (_ballotFundingCycleId == 0) return JBBallotState.Approved;
-   ```
 
-2. Get the `JBFundingCycle` struct that has a reference of the ballot that should be used.
+1.  If there is no ballot, the ballot state is implicitly approved.
 
-   ```javascript
-   // Get the ballot funding cycle.
-   JBFundingCycle memory _ballotFundingCycle = _getStructFor(_ballotFundingCycleId);
-   ```
+    ```javascript
+    // If there is no ballot funding cycle, implicitly approve.
+    if (_ballotFundingCycleId == 0) return JBBallotState.Approved;
+    ```
 
-3. If there's no ballot, implicitly the funding cycle configuration is implicitly approved. Otherwise, return the state that the ballot for the provided `_id` and `_configuration`. 
 
-   ```javascript
-   // If there is no ballot, the ID is auto approved.
-   // Otherwise, return the ballot's state.
-   return
-     _ballotFundingCycle.ballot == IJBFundingCycleBallot(address(0))
-       ? JBBallotState.Approved
-       : _ballotFundingCycle.ballot.state(_id, _configuration);
-   ```
+2.  Get the `JBFundingCycle` struct that has a reference of the ballot that should be used.
+
+    ```javascript
+    // Get the ballot funding cycle.
+    JBFundingCycle memory _ballotFundingCycle = _getStructFor(_ballotFundingCycleId);
+    ```
+
+
+3.  If there's no ballot, implicitly the funding cycle configuration is implicitly approved. Otherwise, return the state that the ballot for the provided `_id` and `_configuration`. 
+
+    ```javascript
+    // If there is no ballot, the ID is auto approved.
+    // Otherwise, return the ballot's state.
+    return
+      _ballotFundingCycle.ballot == IJBFundingCycleBallot(address(0))
+        ? JBBallotState.Approved
+        : _ballotFundingCycle.ballot.state(_id, _configuration);
+    ```
 {% endtab %}
 
 {% tab title="Only code" %}
-```javascript
+```solidity
 /**
   @notice 
   A funding cycle configuration's current status.
@@ -83,11 +87,10 @@ function _ballotStateOf(
 {% endtab %}
 
 {% tab title="Bug bounty" %}
-| Category | Description | Reward |
-| :--- | :--- | :--- |
-| **Optimization** | Help make this operation more efficient. | 0.5ETH |
-| **Low severity** | Identify a vulnerability in this operation that could lead to an inconvenience for a user of the protocol or for a protocol developer. | 1ETH |
-| **High severity** | Identify a vulnerability in this operation that could lead to data corruption or loss of funds. | 5+ETH |
+| Category          | Description                                                                                                                            | Reward |
+| ----------------- | -------------------------------------------------------------------------------------------------------------------------------------- | ------ |
+| **Optimization**  | Help make this operation more efficient.                                                                                               | 0.5ETH |
+| **Low severity**  | Identify a vulnerability in this operation that could lead to an inconvenience for a user of the protocol or for a protocol developer. | 1ETH   |
+| **High severity** | Identify a vulnerability in this operation that could lead to data corruption or loss of funds.                                        | 5+ETH  |
 {% endtab %}
 {% endtabs %}
-

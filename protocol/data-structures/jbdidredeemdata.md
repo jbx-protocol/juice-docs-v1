@@ -1,6 +1,6 @@
 # JBDidRedeemData
 
-```javascript
+```solidity
 struct JBDidRedeemData {
   address holder;
   uint256 projectId;
@@ -11,4 +11,3 @@ struct JBDidRedeemData {
   bytes metadata;
 }
 ```
-

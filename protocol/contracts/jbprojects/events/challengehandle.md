@@ -6,7 +6,7 @@ Emitted from:
 
 Definition:
 
-```javascript
+```solidity
 event ChallengeHandle(
     bytes32 indexed handle,
     uint256 indexed projectId,
@@ -16,7 +16,6 @@ event ChallengeHandle(
 ```
 
 * `handle` is the handle that is being challenged. 
-* `projectId` is the token ID of the NFT \(ERC-721\) that represents the project who's handle has been challenged.
+* `projectId` is the token ID of the NFT (ERC-721) that represents the project who's handle has been challenged.
 * `challengeExpiry` is the time at which the challenged handle can be claimed if it has yet to be renewed.
 * `caller` is the address that issued the transaction within which the event was emitted.
-

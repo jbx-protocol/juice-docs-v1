@@ -6,7 +6,7 @@ Contract:[`JBFundingCycleStore`](../)​‌
 
 Definition:
 
-```javascript
+```solidity
 /** 
   @notice
   Stores the metadata for each funding cycle, packed into one storage slot.
@@ -18,4 +18,3 @@ mapping(uint256 => uint256) private _metadataOf;
 
 * `uint256` is the the ID of the project to get the`_metadataOf`.
 * The resulting view function is private to this contract.
-

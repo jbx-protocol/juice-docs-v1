@@ -6,7 +6,7 @@ Emitted from:
 
 Definition:
 
-```javascript
+```solidity
 event ChangeToken(
   uint256 indexed projectId,
   IJBToken indexed token,
@@ -19,4 +19,3 @@ event ChangeToken(
 * `token` is the new token that is being used by the project.
 * `owner` is the new owner of the token that was previously used by the project.
 * `caller` is the address that issued the transaction within which the event was emitted.
-

@@ -2,11 +2,11 @@
 
 Contract:[`JBSplitStore`](../)​‌
 
-**All splits for each project ID's configurations.**  
-  
-Definition:
+**All splits for each project ID's configurations.**\
+****\
+****Definition:
 
-```javascript
+```solidity
 /** 
   @notice
   All splits for each project ID's configurations.
@@ -19,4 +19,3 @@ mapping(uint256 => mapping(uint256 => mapping(uint256 => JBSplit[]))) private _s
 * `uint256` is the identifying group of the splits.
 * Returns an array of [`JBSplit`](../../../data-structures/jbsplit.md)s.
 * The resulting view function is private to this contract.
-

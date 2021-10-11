@@ -6,7 +6,7 @@ Emitted from:
 
 Definition:
 
-```javascript
+```solidity
 event Mint(
   address indexed holder,
   uint256 indexed projectId,
@@ -23,4 +23,3 @@ event Mint(
 * `tokensWereClaimed` is a flag indicating if the minted tokens were distributed into the holder's wallet.
 * `preferClaimedTokens` is a flag indicating if the minting had a preference to claim the tokens into the holder's wallet.
 * `caller` is the address that issued the transaction within which the event was emitted.
-

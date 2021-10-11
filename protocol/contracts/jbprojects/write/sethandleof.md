@@ -146,17 +146,17 @@ function setHandleOf(uint256 _projectId, bytes32 _handle)
 {% endtab %}
 
 {% tab title="Events" %}
-| Name            | **Data**                                                                                                                                                                                   |
+| Name            | Data                                                                                                                                                                                       |
 | --------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | **`SetHandle`** | <ul><li><code>uint256 indexed projectId</code> </li><li><code>bytes32 indexed handle</code> </li><li><code>address caller</code></li></ul><p><a href="../events/sethandle.md">more</a></p> |
 {% endtab %}
 
 {% tab title="Bug bounty" %}
-| **Category**      | **Description**                                                                                                                        | **Reward** |
-| ----------------- | -------------------------------------------------------------------------------------------------------------------------------------- | ---------- |
-| **Optimization**  | Help make this operation more efficient.                                                                                               | 0.5ETH     |
-| **Low severity**  | Identify a vulnerability in this operation that could lead to an inconvenience for a user of the protocol or for a protocol developer. | 1ETH       |
-| **High severity** | Identify a vulnerability in this operation that could lead to data corruption or loss of funds.                                        | 5+ETH      |
+| Category          | Description                                                                                                                            | Reward |
+| ----------------- | -------------------------------------------------------------------------------------------------------------------------------------- | ------ |
+| **Optimization**  | Help make this operation more efficient.                                                                                               | 0.5ETH |
+| **Low severity**  | Identify a vulnerability in this operation that could lead to an inconvenience for a user of the protocol or for a protocol developer. | 1ETH   |
+| **High severity** | Identify a vulnerability in this operation that could lead to data corruption or loss of funds.                                        | 5+ETH  |
 {% endtab %}
 {% endtabs %}
 

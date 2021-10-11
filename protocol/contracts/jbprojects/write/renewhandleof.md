@@ -2,17 +2,17 @@
 
 Contract:[`JBProjects`](../)
 
-Interface: ****`IJBProjects`
+Interface:** **`IJBProjects`
 
 {% tabs %}
 {% tab title="Step by step" %}
 **Allows a project to renew its handle, which cancels any pending challenges.**
 
-_Only a project's owner or operator can renew its handle._  
-  
+_Only a project's owner or operator can renew its handle._\
+\
 Definition:
 
-```javascript
+```solidity
 function renewHandleOf(uint256 _projectId)
   external
   override
@@ -24,44 +24,48 @@ function renewHandleOf(uint256 _projectId)
 * The function overrides a function definition from the `IJBProjects` interface.
 * The function doesn't return anything.
 
-1. Get a reference to the project's current handle.  
 
 
-   _Internal references:_
-
-   * [`handleOf`](../properties/handleof.md)
-
-   ```javascript
-   // Get the handle of the project.
-   bytes32 _handle = handleOf[_projectId];
-   ```
-
-2. Remove the `challengeExpiryOf` the `_handle`. Anyone will be able to reissue a challenge through the [`challengeHandle`](challengehandle.md) transaction, and await the challenge period from that time.  
+1.  Get a reference to the project's current handle.\
 
 
-   _Internal references:_
+    _Internal references:_
 
-   * [`challengeExpiryOf`](../properties/challengeexpiryof.md)
+    * [`handleOf`](../properties/handleof.md)
 
-   ```javascript
-   // Reset the challenge to 0.
-   challengeExpiryOf[_handle] = 0;
-   ```
-
-3. Emit a `RenewHandle` event with the all relevant parameters.   
+    ```javascript
+    // Get the handle of the project.
+    bytes32 _handle = handleOf[_projectId];
+    ```
 
 
-   _Event references:_
+2.  Remove the `challengeExpiryOf` the `_handle`. Anyone will be able to reissue a challenge through the [`challengeHandle`](challengehandle.md) transaction, and await the challenge period from that time.\
 
-   * [`RenewHandle`](../events/renewhandle.md)
 
-   ```javascript
-   emit RenewHandle(_handle, _projectId, msg.sender);
-   ```
+    _Internal references:_
+
+    * [`challengeExpiryOf`](../properties/challengeexpiryof.md)
+
+    ```javascript
+    // Reset the challenge to 0.
+    challengeExpiryOf[_handle] = 0;
+    ```
+
+
+3.  Emit a `RenewHandle` event with the all relevant parameters. \
+
+
+    _Event references:_
+
+    * [`RenewHandle`](../events/renewhandle.md)
+
+    ```javascript
+    emit RenewHandle(_handle, _projectId, msg.sender);
+    ```
 {% endtab %}
 
 {% tab title="Only code" %}
-```javascript
+```solidity
 /** 
   @notice
   Allows a project to renew its handle, which cancels any pending challenges.
@@ -88,40 +92,16 @@ function renewHandleOf(uint256 _projectId)
 {% endtab %}
 
 {% tab title="Events" %}
-<table>
-  <thead>
-    <tr>
-      <th style="text-align:left">Name</th>
-      <th style="text-align:left">Data</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td style="text-align:left"><b><code>RenewHandle</code></b>
-      </td>
-      <td style="text-align:left">
-        <ul>
-          <li><code>bytes32 indexed handle</code> 
-          </li>
-          <li><code>uint256 indexed projectId</code> 
-          </li>
-          <li><code>address caller</code>
-          </li>
-        </ul>
-        <p><a href="../events/renewhandle.md">more</a>
-        </p>
-      </td>
-    </tr>
-  </tbody>
-</table>
+| Name              | Data                                                                                                                                                                                         |
+| ----------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **`RenewHandle`** | <ul><li><code>bytes32 indexed handle</code> </li><li><code>uint256 indexed projectId</code> </li><li><code>address caller</code></li></ul><p><a href="../events/renewhandle.md">more</a></p> |
 {% endtab %}
 
 {% tab title="Bug bounty" %}
-| Category | Description | Reward |
-| :--- | :--- | :--- |
-| **Optimization** | Help make this operation more efficient. | 0.5ETH |
-| **Low severity** | Identify a vulnerability in this operation that could lead to an inconvenience for a user of the protocol or for a protocol developer. | 1ETH |
-| **High severity** | Identify a vulnerability in this operation that could lead to data corruption or loss of funds. | 5+ETH |
+| Category          | Description                                                                                                                            | Reward |
+| ----------------- | -------------------------------------------------------------------------------------------------------------------------------------- | ------ |
+| **Optimization**  | Help make this operation more efficient.                                                                                               | 0.5ETH |
+| **Low severity**  | Identify a vulnerability in this operation that could lead to an inconvenience for a user of the protocol or for a protocol developer. | 1ETH   |
+| **High severity** | Identify a vulnerability in this operation that could lead to data corruption or loss of funds.                                        | 5+ETH  |
 {% endtab %}
 {% endtabs %}
-

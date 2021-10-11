@@ -10,7 +10,7 @@ Interface: `IJBOperatorStore`
 
 Definition:
 
-```javascript
+```solidity
 function hasPermissions(
   address _operator,
   address _account,
@@ -28,26 +28,29 @@ function hasPermissions(
 * The function overrides a function definition from the `IJBOperatorStore` interface.
 * The function return a flag indicating whether or not the operator has the specified permission.
 
-1. Make sure the `_permissionIndex` is one of the 255 indexes in a `uint256`. 
-
-   ```javascript
-   require(_permissionIndex <= 255, '0x00: INDEX_OUT_OF_BOUNDS');
-   ```
-
-2. Return true if the bit is flipped on for the specified `_permissionIndex`. Otherwise return false.  
 
 
-   Internal references:
+1.  Make sure the `_permissionIndex` is one of the 255 indexes in a `uint256`. 
 
-   * [`permissionsOf`](../properties/permissionsof.md)
+    ```javascript
+    require(_permissionIndex <= 255, '0x00: INDEX_OUT_OF_BOUNDS');
+    ```
 
-   ```javascript
-   return (((permissionsOf[_operator][_account][_domain] >> _permissionIndex) & 1) == 1)
-   ```
+
+2.  Return true if the bit is flipped on for the specified `_permissionIndex`. Otherwise return false.\
+
+
+    Internal references:
+
+    * [`permissionsOf`](../properties/permissionsof.md)
+
+    ```javascript
+    return (((permissionsOf[_operator][_account][_domain] >> _permissionIndex) & 1) == 1)
+    ```
 {% endtab %}
 
 {% tab title="Only code" %}
-```javascript
+```solidity
 /** 
   @notice 
   Whether or not an operator has the permission to take a certain action pertaining to the specified domain.
@@ -72,17 +75,16 @@ function hasPermission(
 {% endtab %}
 
 {% tab title="Errors" %}
-| String | Description |
-| :--- | :--- |
+| String                          | Description                                                               |
+| ------------------------------- | ------------------------------------------------------------------------- |
 | **`0x00: INDEX_OUT_OF_BOUNDS`** | Thrown if the provided index is more than whats supported in a `uint256`. |
 {% endtab %}
 
 {% tab title="" %}
-| Category | Description | Reward |
-| :--- | :--- | :--- |
-| **Optimization** | Help make this operation more efficient. | 0.5ETH |
-| **Low severity** | Identify a vulnerability in this operation that could lead to an inconvenience for a user of the protocol or for a protocol developer. | 1ETH |
-| **High severity** | Identify a vulnerability in this operation that could lead to data corruption or loss of funds. | 5+ETH |
+| Category          | Description                                                                                                                            | Reward |
+| ----------------- | -------------------------------------------------------------------------------------------------------------------------------------- | ------ |
+| **Optimization**  | Help make this operation more efficient.                                                                                               | 0.5ETH |
+| **Low severity**  | Identify a vulnerability in this operation that could lead to an inconvenience for a user of the protocol or for a protocol developer. | 1ETH   |
+| **High severity** | Identify a vulnerability in this operation that could lead to data corruption or loss of funds.                                        | 5+ETH  |
 {% endtab %}
 {% endtabs %}
-

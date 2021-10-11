@@ -6,11 +6,11 @@ Interface: `IJBFundingCycleStore`
 
 {% tabs %}
 {% tab title="Step by step" %}
-**Get the funding cycle with the given ID.**  
-  
-Definition:
+**Get the funding cycle with the given ID.**\
+****\
+****Definition:
 
-```javascript
+```solidity
 function get(uint256 _fundingCycleId)
   external
   view
@@ -24,87 +24,94 @@ function get(uint256 _fundingCycleId)
 * The function overrides a function definition from the `IJBFundingCycleStore` interface.
 * The function returns a [`JBFundingCycle`](../../../data-structures/jbfundingcycle.md).
 
-1. Check that the provided funding cycle ID is valid. 
-
-   ```javascript
-   // The funding cycle should exist.
-   require(_fundingCycleId > 0, '0x13 BAD_ID');
-   ```
-
-2. Try to get the full funding cycle struct for the provided ID.  
 
 
-   _Internal references:_
+1.  Check that the provided funding cycle ID is valid. 
 
-   * [`_getStructFor`](_getstructfor.md)
-
-   ```javascript
-   // See if there's stored info for the provided ID.
-   fundingCycle = _getStructFor(_fundingCycleId);
-   ```
-
-3. If the funding cycle exists in storage, return it.
-
-   ```javascript
-   // If so, return it.
-   if (fundingCycle.number > 0) return fundingCycle;
-   ```
-
-4. If the funding cycle was not found in storage, it's possible that it still exists as a consequence of a previous funding cycle rolling over, but hasn't yet been stored. Check to see if there's a current funding cycle.  
+    ```javascript
+    // The funding cycle should exist.
+    require(_fundingCycleId > 0, '0x13 BAD_ID');
+    ```
 
 
-   _Internal references:_
+2.  Try to get the full funding cycle struct for the provided ID.\
 
-   * [`currentOf`](currentof.md)
 
-   ```javascript
-   // Get the current funding cycle. It might exist but not yet have been stored.
-   fundingCycle = currentOf(_fundingCycleId);
-   ```
+    _Internal references:_
 
-5. If the funding cycle ID being queried matches the current funding cycle of the project, return it.
+    * [`_getStructFor`](\_getstructfor.md)
 
-   ```javascript
+    ```javascript
+    // See if there's stored info for the provided ID.
+    fundingCycle = _getStructFor(_fundingCycleId);
+    ```
+
+
+3.  If the funding cycle exists in storage, return it.
+
+    ```javascript
+    // If so, return it.
+    if (fundingCycle.number > 0) return fundingCycle;
+    ```
+
+
+4.  If the funding cycle was not found in storage, it's possible that it still exists as a consequence of a previous funding cycle rolling over, but hasn't yet been stored. Check to see if there's a current funding cycle.\
+
+
+    _Internal references:_
+
+    * [`currentOf`](currentof.md)
+
+    ```javascript
+    // Get the current funding cycle. It might exist but not yet have been stored.
+    fundingCycle = currentOf(_fundingCycleId);
+    ```
+
+
+5.  If the funding cycle ID being queried matches the current funding cycle of the project, return it.
+
+    ```javascript
+     // If the IDs match, return it.
+     if (fundingCycle.id == _fundingCycleId) return fundingCycle;
+    ```
+
+
+6.  The upcoming funding cycle might also not yet be in storage, but might be reference-able.\
+
+
+    _Internal references:_
+
+    * [`queuedOf`](queuedof.md)
+
+    ```javascript
+    // Get the queued funding cycle. It might exist but not yet have been stored.
+    fundingCycle = queuedOf(_fundingCycleId);
+    ```
+
+
+7.  If the funding cycle ID being queried matches the queued funding cycle of the project, return it.
+
+    ```javascript
     // If the IDs match, return it.
     if (fundingCycle.id == _fundingCycleId) return fundingCycle;
-   ```
-
-6. The upcoming funding cycle might also not yet be in storage, but might be reference-able.  
+    ```
 
 
-   _Internal references:_
-
-   * [`queuedOf`](queuedof.md)
-
-   ```javascript
-   // Get the queued funding cycle. It might exist but not yet have been stored.
-   fundingCycle = queuedOf(_fundingCycleId);
-   ```
-
-7. If the funding cycle ID being queried matches the queued funding cycle of the project, return it.
-
-   ```javascript
-   // If the IDs match, return it.
-   if (fundingCycle.id == _fundingCycleId) return fundingCycle;
-   ```
-
-8. If the ID being queried hasn't been found, return an empty Funding cycle struct.  
+8.  If the ID being queried hasn't been found, return an empty Funding cycle struct.\
 
 
-   _Internal references:_
+    _Internal references:_
 
-   * [`_getStructFor`](_getstructfor.md)
+    * [`_getStructFor`](\_getstructfor.md)
 
-   ```javascript
-   // Return an empty Funding Cycle.
-   return _getStructFor(0);
-   ```
-
-  
+    ```javascript
+    // Return an empty Funding Cycle.
+    return _getStructFor(0);
+    ```
 {% endtab %}
 
 {% tab title="Only code" %}
-```javascript
+```solidity
 /**
   @notice 
   Get the funding cycle with the given ID.
@@ -147,17 +154,19 @@ function get(uint256 _fundingCycleId)
 {% endtab %}
 
 {% tab title="Errors" %}
-| String | Description |
-| :--- | :--- |
+| String             | Description                         |
+| ------------------ | ----------------------------------- |
 | **`0x13: BAD_ID`** | Thrown if the ID can't be resolved. |
+
+
 {% endtab %}
 
 {% tab title="Bug bounty" %}
-| Category | Description | Reward |
-| :--- | :--- | :--- |
-| **Optimization** | Help make this operation more efficient. | 0.5ETH |
-| **Low severity** | Identify a vulnerability in this operation that could lead to an inconvenience for a user of the protocol or for a protocol developer. | 1ETH |
-| **High severity** | Identify a vulnerability in this operation that could lead to data corruption or loss of funds. | 5+ETH |
+| Category          | Description                                                                                                                            | Reward |
+| ----------------- | -------------------------------------------------------------------------------------------------------------------------------------- | ------ |
+| **Optimization**  | Help make this operation more efficient.                                                                                               | 0.5ETH |
+| **Low severity**  | Identify a vulnerability in this operation that could lead to an inconvenience for a user of the protocol or for a protocol developer. | 1ETH   |
+| **High severity** | Identify a vulnerability in this operation that could lead to data corruption or loss of funds.                                        | 5+ETH  |
 {% endtab %}
 {% endtabs %}
 
