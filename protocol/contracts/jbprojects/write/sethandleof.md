@@ -36,65 +36,67 @@ function setHandleOf(uint256 _projectId, bytes32 _handle)
     ```
 2.  Check that the `_handle` is unique. This is done by making sure there isn't yet an `idFor` the handle, and making sure it isn't currently being transferred to an address.
 
-
+    ```solidity
+    // Handle must be unique.
+    require(idFor[_handle] == 0 && transferAddressFor[_handle] == address(0), '0x09: HANDLE_TAKEN');
+    ```
 
     _Internal references:_
 
     * [`idFor`](../properties/idfor.md)
     * [`transferAddressFor`](../properties/transferaddressfor.md)
 
-    ```solidity
-    // Handle must be unique.
-    require(idFor[_handle] == 0 && transferAddressFor[_handle] == address(0), '0x09: HANDLE_TAKEN');
-    ```
+
+
 3.  Free up the mapping from the current`handleOf` the project so that others can use it.
-
-
-
-    _Internal references:_
-
-    * [`handleOf`](../properties/handleof.md)
-    * [`idFor`](../properties/idfor.md)
 
     ```solidity
     // Register the change in the resolver.
     idFor[handleOf[_projectId]] = 0;
     ```
-4.  Store the provided `_handle` as the as the `handleOf` the project.
-
-
 
     _Internal references:_
 
     * [`handleOf`](../properties/handleof.md)
+    * [`idFor`](../properties/idfor.md)
+
+
+
+4.  Store the provided `_handle` as the as the `handleOf` the project.
 
     ```solidity
     // Store the handle for the project ID.
     handleOf[_projectId] = _handle;
     ```
-5.  Store the project's ID as the `idFor` the provided `_handle` to allow for project lookup using the handle.
-
-
 
     _Internal references:_
 
-    * [`idFor`](../properties/idfor.md)
+    * [`handleOf`](../properties/handleof.md)
+
+
+
+5.  Store the project's ID as the `idFor` the provided `_handle` to allow for project lookup using the handle.
 
     ```solidity
     // Store the project ID for the handle.
     idFor[_handle] = _projectId;
     ```
+
+    _Internal references:_
+
+    * [`idFor`](../properties/idfor.md)
+
+
+
 6.  Emit a `SetHandle` event with the all relevant parameters.
-
-
-
-    _Event references:_
-
-    * [`SetHandle`](../events/sethandle.md)
 
     ```solidity
     emit SetHandle(_projectId, _handle, msg.sender);
     ```
+
+    _Event references:_
+
+    * [`SetHandle`](../events/sethandle.md)
 {% endtab %}
 
 {% tab title="Only code" %}

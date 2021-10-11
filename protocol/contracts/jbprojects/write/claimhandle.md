@@ -39,12 +39,6 @@ function claimHandle(
 1.  Check that either the `transferAddressFor` the `_handle` is the provided `_transferAddress`, or that the `_handle` is being challenged and the `challengeExpiryOf` the `_handle` has successfully passed.
 
 
-
-    _Internal references:_
-
-    * [`transferAddressFor`](../properties/transferaddressfor.md)
-    * [`challengeExpiryOf`](../properties/challengeexpiryof.md)
-
     ```solidity
     // The handle must have been transferred to the specified address,
     // or the handle challenge must have expired before being renewed.
@@ -55,92 +49,95 @@ function claimHandle(
     );
     ```
 
+    _Internal references:_
+
+    * [`transferAddressFor`](../properties/transferaddressfor.md)
+    * [`challengeExpiryOf`](../properties/challengeexpiryof.md)
+
+
 
 2.  Remove the `idFor` the `handleOf` the project so that the handle no longer resolves to any project ID.
 
-
-
-    _Internal references:_
-
-    * [`handleOf`](../properties/handleof.md)
-    * [`idFor`](../properties/idfor.md)
 
     ```solidity
     // Remove the project ID for the current handle of the specified project.
     idFor[handleOf[_projectId]] = 0;
     ```
 
+    _Internal references:_
+
+    * [`handleOf`](../properties/handleof.md)
+    * [`idFor`](../properties/idfor.md)
+
+
 
 3.  Store the project's ID as the `idFor` the provided `_handle` to allow for project lookup using the handle.
 
-
-
-    _Internal references:_
-
-    * [`idFor`](../properties/idfor.md)
 
     ```solidity
     // Set the project ID for the provided handle to be the specified project.
     idFor[_handle] = _projectId;
     ```
 
+    _Internal references:_
+
+    * [`idFor`](../properties/idfor.md)
+
+
 
 4.  Store the provided `_handle` as the as the `handleOf` the project.
 
-
-
-    _Internal references:_
-
-    * [`handleOf`](../properties/handleof.md)
 
     ```solidity
     // Set the new handle.
     handleOf[_projectId] = _handle;
     ```
 
+    _Internal references:_
+
+    * [`handleOf`](../properties/handleof.md)
+
 
 5.  Remove the `transferAddressFor` the handle since it has now been claimed and is no longer being transferred.
 
-
-
-    _Internal references:_
-
-    * [`transferAddressFor`](../properties/transferaddressfor.md)
 
     ```solidity
     // Set the handle as not being transferred.
     transferAddressFor[_handle] = address(0);
     ```
 
+    _Internal references:_
+
+    * [`transferAddressFor`](../properties/transferaddressfor.md)
+
 
 6.  Remove the `challengeExpiryOf` the handle since it has now been transferred to a new project and must have a fresh challenge period awaited before being claimed again.
 
-
-
-    _Internal references:_
-
-    * [`challengeExpiryOf`](../properties/challengeexpiryof.md)
 
     ```solidity
     // Reset the challenge to 0.
     challengeExpiryOf[_handle] = 0;
     ```
 
+    _Internal references:_
+
+    * [`challengeExpiryOf`](../properties/challengeexpiryof.md)
+
+
 
 7.  Emit a `TransferHandle` event with the all relevant parameters.
 
 
+    ```solidity
+    emit ClaimHandle(_projectId, _transferAddress, _handle, msg.sender);
+    ```
 
     _Event references:_
 
     * [`ClaimHandle`](../events/claimhandle.md)
-
-    ```solidity
-    emit ClaimHandle(_projectId, _transferAddress, _handle, msg.sender);
-    ```
 {% endtab %}
 
-{% tab title="Only code" %}
+{% tab title="Code" %}
 ```solidity
 /**
   @notice 

@@ -94,7 +94,7 @@ function challengeHandle(bytes32 _handle) external override { ... }
     * [`ChallengeHandle`](../events/challengehandle.md)
 {% endtab %}
 
-{% tab title="Only code" %}
+{% tab title="Code" %}
 ```solidity
 /** 
   @notice

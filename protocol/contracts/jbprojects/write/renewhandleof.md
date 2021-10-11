@@ -28,43 +28,39 @@ function renewHandleOf(uint256 _projectId)
 
 1.  Get a reference to the project's current handle.
 
-
-
-    _Internal references:_
-
-    * [`handleOf`](../properties/handleof.md)
-
     ```solidity
     // Get the handle of the project.
     bytes32 _handle = handleOf[_projectId];
     ```
 
-
-2.  Remove the `challengeExpiryOf` the `_handle`. Anyone will be able to reissue a challenge through the [`challengeHandle`](challengehandle.md) transaction, and await the challenge period from that time.
-
-
-
     _Internal references:_
 
-    * [`challengeExpiryOf`](../properties/challengeexpiryof.md)
+    * [`handleOf`](../properties/handleof.md)
+
+
+
+2.  Remove the `challengeExpiryOf` the `_handle`. Anyone will be able to reissue a challenge through the [`challengeHandle`](challengehandle.md) transaction, and await the challenge period from that time.
 
     ```solidity
     // Reset the challenge to 0.
     challengeExpiryOf[_handle] = 0;
     ```
 
+    _Internal references:_
+
+    * [`challengeExpiryOf`](../properties/challengeexpiryof.md)
+
+
 
 3.  Emit a `RenewHandle` event with the all relevant parameters.
-
-
-
-    _Event references:_
-
-    * [`RenewHandle`](../events/renewhandle.md)
 
     ```solidity
     emit RenewHandle(_handle, _projectId, msg.sender);
     ```
+
+    _Event references:_
+
+    * [`RenewHandle`](../events/renewhandle.md)
 {% endtab %}
 
 {% tab title="Only code" %}

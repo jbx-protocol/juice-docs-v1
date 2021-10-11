@@ -39,29 +39,29 @@ function createFor(
 
 2.  Check that the `_handle` is unique. This is done by making sure there isn't yet an `idFor` the handle, and making sure it isn't currently being transferred to an address.
 
-
+    ```solidity
+    // Handle must be unique.
+    require(idFor[_handle] == 0 && transferAddressFor[_handle] == address(0), '0x07: HANDLE_TAKEN');
+    ```
 
     _Internal references:_
 
     * [`idFor`](../properties/idfor.md)
     * [`transferAddressFor`](../properties/transferaddressfor.md)
 
-    ```solidity
-    // Handle must be unique.
-    require(idFor[_handle] == 0 && transferAddressFor[_handle] == address(0), '0x07: HANDLE_TAKEN');
-    ```
 
 
 3.  Increment the count to include the new project being created.
-
-    _Internal references:_
-
-    * [`count`](../properties/count.md)
 
     ```solidity
     // Increment the count, which will be used as the ID.
     count++;
     ```
+
+    _Internal references:_
+
+    * [`count`](../properties/count.md)
+
 
 
 4.  Mint a new NFT token belonging to the `_owner` using the `count` as the token ID.
@@ -74,55 +74,53 @@ function createFor(
 
 5.  Store the provided `_handle` as the as the `handleOf` the newly created project.
 
-    _Internal references:_
-
-    * [`handleOf`](../properties/handleof.md)
-
     ```solidity
     // Store the handle for the project ID.
     handleOf[count] = _handle;
     ```
 
-
-6.  Store the newly created project's ID as the `idFor` the provided `_handle` to allow for project lookup using the handle.
-
-
-
     _Internal references:_
 
-    * [`idFor`](../properties/idfor.md)
+    * [`handleOf`](../properties/handleof.md)
+
+
+
+6.  Store the newly created project's ID as the `idFor` the provided `_handle` to allow for project lookup using the handle.
 
     ```solidity
     // Store the project ID for the handle.
     idFor[_handle] = count;
     ```
 
-
-7.  If a URI was provided (meaning it's not an empty string), store it as the `uriOf` the newly created project.
-
-
-
     _Internal references:_
 
-    * [`uriOf`](../properties/uriof.md)
+    * [`idFor`](../properties/idfor.md)
+
+
+
+7.  If a URI was provided (meaning it's not an empty string), store it as the `uriOf` the newly created project.
 
     ```solidity
     // Set the URI if one was provided.
     if (bytes(_uri).length > 0) uriOf[count] = _uri;
     ```
 
+    _Internal references:_
+
+    * [`uriOf`](../properties/uriof.md)
+
+
 
 8.  Emit a `Create` event with all relevant parameters.
 
-
+    ```
+    emit Create(count, _owner, _handle, _uri, _terminal, msg.sender);
+    ```
 
     _Event references:_
 
     * [`Create`](../events/create.md)
 
-    ```
-    emit Create(count, _owner, _handle, _uri, _terminal, msg.sender);
-    ```
 
 
 9.  Return the newly created project's token ID.
@@ -132,7 +130,7 @@ function createFor(
     ```
 {% endtab %}
 
-{% tab title="Only code" %}
+{% tab title="Code" %}
 ```solidity
 /**
   @notice 

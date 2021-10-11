@@ -43,103 +43,95 @@ function transferHandleOf(
 
 2.  Check that the `_newHandle` is unique. This is done by making sure there isn't yet an `idFor` the handle, and making sure it isn't currently being transferred to an address.
 
-
+    ```solidity
+    // The new handle must be available.
+    require(idFor[_newHandle] == 0 && transferAddressFor[_newHandle] == address(0), '0x0b: HANDLE_TAKEN');
+    ```
 
     _Internal references:_
 
     * [`idFor`](../properties/idfor.md)
     * [`transferAddressFor`](../properties/transferaddressfor.md)
 
-    ```solidity
-    // The new handle must be available.
-    require(idFor[_newHandle] == 0 && transferAddressFor[_newHandle] == address(0), '0x0b: HANDLE_TAKEN');
-    ```
 
 
 3.  Get the current `handleOf` the project. Store this is `handle`, which will be returned by the function.
-
-
-
-    _Internal references:_
-
-    * [`handleOf`](../properties/handleof.md)
 
     ```solidity
     // Get a reference to the project's current handle.
     handle = handleOf[_projectId];
     ```
 
-
-4.  Remove the `idFor` the project's current handle so that the handle no longer resolves to any project ID.
-
-
-
     _Internal references:_
 
-    * [`idFor`](../properties/idfor.md)
+    * [`handleOf`](../properties/handleof.md)
+
+
+
+4.  Remove the `idFor` the project's current handle so that the handle no longer resolves to any project ID.
 
     ```solidity
     // Remove the resolver for the transferred handle.
     idFor[handle] = 0;
     ```
 
-
-5.  Store the project's ID as the `idFor` the provided `_newHandle` to allow for project lookup using the handle.
-
-
-
     _Internal references:_
 
     * [`idFor`](../properties/idfor.md)
+
+
+
+5.  Store the project's ID as the `idFor` the provided `_newHandle` to allow for project lookup using the handle.
 
     ```solidity
     // Store the new handle for the project ID.
     idFor[_newHandle] = _projectId;
     ```
 
-
-6.  Store the provided `_newHandle` as the as the `handleOf` the project.
-
-
-
     _Internal references:_
 
-    * [`handleOf`](../properties/handleof.md)
+    * [`idFor`](../properties/idfor.md)
+
+
+
+6.  Store the provided `_newHandle` as the as the `handleOf` the project.
 
     ```solidity
     // Store the new handle for the project ID.
     handleOf[_projectId] = _newHandle;
     ```
 
-
-7.  Store the `_transferAddress` that will be able to transfer the handle as the `transferAddressFor` the handle.
-
-
-
     _Internal references:_
 
-    * [`transferAddressFor`](../properties/idfor.md)
+    * [`handleOf`](../properties/handleof.md)
+
+
+
+7.  Store the `_transferAddress` that will be able to transfer the handle as the `transferAddressFor` the handle.
 
     ```solidity
     // Give the address the power to transfer the current handle.
     transferAddressFor[handle] = _transferAddress;
     ```
 
+    _Internal references:_
+
+    * [`transferAddressFor`](../properties/idfor.md)
+
+
 
 8.  Emit a `TransferHandle` event with the all relevant parameters.
-
-
-
-    _Event references:_
-
-    * [`TransferHandle`](../events/seturi.md)
 
     ```
     emit TransferHandle(_projectId, _transferAddress, handle, _newHandle, msg.sender);
     ```
+
+    _Event references:_
+
+    * [`TransferHandle`](../events/seturi.md)
 {% endtab %}
 
-{% tab title="Only code" %}
+{% tab title="Code" %}
 ```solidity
 /**
   @notice 

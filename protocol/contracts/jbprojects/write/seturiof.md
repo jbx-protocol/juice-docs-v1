@@ -29,32 +29,29 @@ function setUriOf(uint256 _projectId, string calldata _uri)
 
 1.  Store the new `_uri` as the `uriOf` the project.
 
-
-
-    _Internal references:_
-
-    * [`uriOf`](../properties/uriof.md)
-
     ```solidity
     // Set the new uri.
     uriOf[_projectId] = _uri;
     ```
 
+    _Internal references:_
+
+    * [`uriOf`](../properties/uriof.md)
+
+
 
 2.  Emit a `SetUri` event with the all relevant parameters.
-
-
-
-    _Event references:_
-
-    * [`SetUri`](../events/seturi.md)
 
     ```solidity
     emit SetUri(_projectId, _uri, msg.sender);
     ```
+
+    _Event references:_
+
+    * [`SetUri`](../events/seturi.md)
 {% endtab %}
 
-{% tab title="Only code" %}
+{% tab title="Code" %}
 ```solidity
 /**
   @notice 
