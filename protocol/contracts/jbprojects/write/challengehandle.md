@@ -8,17 +8,14 @@ Interface:`IJBProjects`
 {% tab title="Step by step" %}
 **Allows anyone to challenge a project's handle.**
 
-\
-**After one year, the handle can be claimed by the public if the challenge isn't answered by the handle's project. **
-
-****
+**After one year, the handle can be claimed by the public if the challenge isn't answered by the handle's project.**
 
 **This can be used to make sure a handle belonging to an unattended to project isn't lost forever.**
 
 \
 Definition:
 
-```javascript
+```solidity
 function challengeHandle(bytes32 _handle) external override { ... }
 ```
 
@@ -31,21 +28,20 @@ function challengeHandle(bytes32 _handle) external override { ... }
 
 1.  Get a reference to the project to which the handle being challenged belongs.
 
-
+    ```solidity
+    // Get a reference to the ID of the project to which the handle belongs.
+    uint256 _projectId = idFor[_handle];
+    ```
 
     _Internal references:_
 
     * [`idFor`](../properties/idfor.md)
 
-    ```javascript
-    // Get a reference to the ID of the project to which the handle belongs.
-    uint256 _projectId = idFor[_handle];
-    ```
 
 
 2.  Check if the handle is being used.
 
-    ```javascript
+    ```solidity
     // No need to challenge a handle that's not taken.
     require(_projectId > 0, '0x0d: HANDLE_NOT_TAKEN');
     ```
@@ -53,57 +49,53 @@ function challengeHandle(bytes32 _handle) external override { ... }
 
 3.  Check if the handle is already being challenged.
 
-
+    ```solidity
+    // No need to challenge again if a handle is already being challenged.
+    require(challengeExpiryOf[_handle] == 0, '0x0e: CHALLENGE_OPEN');
+    ```
 
     _Internal references:_
 
     * [`challengeExpiryOf`](../properties/challengeexpiryof.md)
 
-    ```javascript
-    // No need to challenge again if a handle is already being challenged.
-    require(challengeExpiryOf[_handle] == 0, '0x0e: CHALLENGE_OPEN');
-    ```
 
 
 4.  The challenge will expire one year from the current timestamp. If the `_handle` is not renewed before then, anyone will be able to claim the handle by calling [`claimHandle`](claimhandle.md).
 
-
+    ```solidity
+    // The challenge will expire in a year, at which point the handle can be claimed if it has yet to be renewed.
+    uint256 _challengeExpiry = block.timestamp + _SECONDS_IN_YEAR;
+    ```
 
     _Internal references:_
 
     * [`_SECONDS_IN_YEAR`](../properties/\_seconds_in_year.md)
 
-    ```javascript
-    // The challenge will expire in a year, at which point the handle can be claimed if it has yet to be renewed.
-    uint256 _challengeExpiry = block.timestamp + _SECONDS_IN_YEAR;
-    ```
 
 
 5.  Store the `_challengeExpiry` as the `challengeExpiryOf` the provided `_handle`.
 
-
+    ```solidity
+    // Store the challenge expiry for the handle.
+    challengeExpiryOf[_handle] = _challengeExpiry;
+    ```
 
     _Internal references:_
 
     * [`challengeExpiryOf`](../properties/challengeexpiryof.md)
 
-    ```javascript
-    // Store the challenge expiry for the handle.
-    challengeExpiryOf[_handle] = _challengeExpiry;
-    ```
 
 
 6.  Emit a `ChallengeHandle` event with the all relevant parameters.
 
-
+    ```solidity
+    emit ChallengeHandle(_handle, _projectId, _challengeExpiry, msg.sender);
+    ```
 
     _Event references:_
 
     * [`ChallengeHandle`](../events/challengehandle.md)
 
-    ```javascript
-    emit ChallengeHandle(_handle, _projectId, _challengeExpiry, msg.sender);
-    ```
 {% endtab %}
 
 {% tab title="Only code" %}
