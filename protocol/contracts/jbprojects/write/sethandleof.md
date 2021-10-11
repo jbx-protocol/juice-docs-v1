@@ -12,7 +12,7 @@ _Only a project's owner or operator can set its handle._\
 \
 Definition:
 
-```javascript
+```solidity
 function setHandleOf(uint256 _projectId, bytes32 _handle)
   external
   override
@@ -102,7 +102,7 @@ function setHandleOf(uint256 _projectId, bytes32 _handle)
 {% endtab %}
 
 {% tab title="Only code" %}
-```javascript
+```solidity
 /**
   @notice 
   Allows a project owner to set the project's handle.
