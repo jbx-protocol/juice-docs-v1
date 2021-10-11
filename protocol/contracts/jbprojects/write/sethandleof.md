@@ -2,14 +2,14 @@
 
 Contract:[`JBProjects`](../)
 
-Interface: ****`IJBProjects`
+Interface:** **`IJBProjects`
 
 {% tabs %}
 {% tab title="Step by step" %}
 **Allows a project owner to set the project's handle.**
 
-_Only a project's owner or operator can set its handle._  
-  
+_Only a project's owner or operator can set its handle._\
+\
 Definition:
 
 ```javascript
@@ -25,73 +25,80 @@ function setHandleOf(uint256 _projectId, bytes32 _handle)
 * The function overrides a function definition from the `IJBProjects` interface.
 * The function doesn't return anything.
 
-1. Check that the provided `_handle` is not empty.
+****
 
-   ```javascript
-   // Handle must exist.
-   require(_handle != bytes32(0), "0x08: EMPTY_HANDLE");
-   ```
+1.  Check that the provided `_handle` is not empty.
 
-2. Check that the `_handle` is unique. This is done by making sure there isn't yet an `idFor` the handle, and making sure it isn't currently being transferred to an address.  
-
-
-   _Internal references:_
-
-   * [`idFor`](../properties/idfor.md)
-   * [`transferAddressFor`](../properties/transferaddressfor.md)
-
-   ```javascript
-   // Handle must be unique.
-   require(idFor[_handle] == 0 && transferAddressFor[_handle] == address(0), '0x09: HANDLE_TAKEN');
-   ```
-
-3. Free up the mapping from the current`handleOf` the project so that others can use it.  
+    ```javascript
+    // Handle must exist.
+    require(_handle != bytes32(0), "0x08: EMPTY_HANDLE");
+    ```
 
 
-   _Internal references:_
-
-   * [`handleOf`](../properties/handleof.md)
-   * [`idFor`](../properties/idfor.md)
-
-   ```javascript
-   // Register the change in the resolver.
-   idFor[handleOf[_projectId]] = 0;
-   ```
-
-4. Store the provided `_handle` as the as the `handleOf` the project.  
+2.  Check that the `_handle` is unique. This is done by making sure there isn't yet an `idFor` the handle, and making sure it isn't currently being transferred to an address.\
 
 
-   _Internal references:_
+    _Internal references:_
 
-   * [`handleOf`](../properties/handleof.md)
+    * [`idFor`](../properties/idfor.md)
+    * [`transferAddressFor`](../properties/transferaddressfor.md)
 
-   ```javascript
-   // Store the handle for the project ID.
-   handleOf[_projectId] = _handle;
-   ```
-
-5. Store the project's ID as the `idFor` the provided `_handle` to allow for project lookup using the handle.  
-
-
-   _Internal references:_
-
-   * [`idFor`](../properties/idfor.md)
-
-   ```javascript
-   // Store the project ID for the handle.
-   idFor[_handle] = _projectId;
-   ```
-
-6. Emit a `SetHandle` event with the all relevant parameters.   
+    ```javascript
+    // Handle must be unique.
+    require(idFor[_handle] == 0 && transferAddressFor[_handle] == address(0), '0x09: HANDLE_TAKEN');
+    ```
 
 
-   _Event references:_
+3.  Free up the mapping from the current`handleOf` the project so that others can use it.\
 
-   * [`SetHandle`](../events/sethandle.md) 
 
-   ```javascript
-   emit SetHandle(_projectId, _handle, msg.sender);
-   ```
+    _Internal references:_
+
+    * [`handleOf`](../properties/handleof.md)
+    * [`idFor`](../properties/idfor.md)
+
+    ```javascript
+    // Register the change in the resolver.
+    idFor[handleOf[_projectId]] = 0;
+    ```
+
+
+4.  Store the provided `_handle` as the as the `handleOf` the project.\
+
+
+    _Internal references:_
+
+    * [`handleOf`](../properties/handleof.md)
+
+    ```javascript
+    // Store the handle for the project ID.
+    handleOf[_projectId] = _handle;
+    ```
+
+
+5.  Store the project's ID as the `idFor` the provided `_handle` to allow for project lookup using the handle.\
+
+
+    _Internal references:_
+
+    * [`idFor`](../properties/idfor.md)
+
+    ```javascript
+    // Store the project ID for the handle.
+    idFor[_handle] = _projectId;
+    ```
+
+
+6.  Emit a `SetHandle` event with the all relevant parameters. \
+
+
+    _Event references:_
+
+    * [`SetHandle`](../events/sethandle.md) 
+
+    ```javascript
+    emit SetHandle(_projectId, _handle, msg.sender);
+    ```
 {% endtab %}
 
 {% tab title="Only code" %}
@@ -132,49 +139,28 @@ function setHandleOf(uint256 _projectId, bytes32 _handle)
 {% endtab %}
 
 {% tab title="Errors" %}
-| String | Description |
-| :--- | :--- |
-| **`0x08: EMPTY_HANDLE`** | Thrown if the provided handle is empty |
+| String                   | Description                                      |
+| ------------------------ | ------------------------------------------------ |
+| **`0x08: EMPTY_HANDLE`** | Thrown if the provided handle is empty           |
 | **`0x09: HANDLE_TAKEN`** | Thrown if the provided handle is already in use. |
 {% endtab %}
 
 {% tab title="Events" %}
-<table>
-  <thead>
-    <tr>
-      <th style="text-align:left">Name</th>
-      <th style="text-align:left">Data</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td style="text-align:left"><b><code>SetHandle</code></b>
-      </td>
-      <td style="text-align:left">
-        <ul>
-          <li><code>uint256 indexed projectId</code> 
-          </li>
-          <li><code>bytes32 indexed handle</code> 
-          </li>
-          <li><code>address caller</code>
-          </li>
-        </ul>
-        <p><a href="../events/sethandle.md">more</a>
-        </p>
-      </td>
-    </tr>
-  </tbody>
-</table>
+| Name            | **Data**                                                                                                                                                                                   |
+| --------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **`SetHandle`** | <ul><li><code>uint256 indexed projectId</code> </li><li><code>bytes32 indexed handle</code> </li><li><code>address caller</code></li></ul><p><a href="../events/sethandle.md">more</a></p> |
 {% endtab %}
 
 {% tab title="Bug bounty" %}
-| Category | Description | Reward |
-| :--- | :--- | :--- |
-| **Optimization** | Help make this operation more efficient. | 0.5ETH |
-| **Low severity** | Identify a vulnerability in this operation that could lead to an inconvenience for a user of the protocol or for a protocol developer. | 1ETH |
-| **High severity** | Identify a vulnerability in this operation that could lead to data corruption or loss of funds. | 5+ETH |
+| **Category**      | **Description**                                                                                                                        | **Reward** |
+| ----------------- | -------------------------------------------------------------------------------------------------------------------------------------- | ---------- |
+| **Optimization**  | Help make this operation more efficient.                                                                                               | 0.5ETH     |
+| **Low severity**  | Identify a vulnerability in this operation that could lead to an inconvenience for a user of the protocol or for a protocol developer. | 1ETH       |
+| **High severity** | Identify a vulnerability in this operation that could lead to data corruption or loss of funds.                                        | 5+ETH      |
 {% endtab %}
 {% endtabs %}
+
+
 
 
 
