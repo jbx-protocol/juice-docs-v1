@@ -19,7 +19,8 @@ Definition:
 function challengeHandle(bytes32 _handle) external override { ... }
 ```
 
-* `_handle` is the handle being challenged.
+* Arguments:
+  * `_handle` is the handle being challenged.
 * The function can be accessed externally by anyone.
 * The function overrides a function definition from the `IJBProjects` interface.
 * The function doesn't return anything.
@@ -35,8 +36,7 @@ function challengeHandle(bytes32 _handle) external override { ... }
 
     _Internal references:_
 
-    * [`idFor`](../properties/idfor.md)
-
+    *   [`idFor`](../properties/idfor.md)
 
 
 2.  Check if the handle is being used.
@@ -56,8 +56,7 @@ function challengeHandle(bytes32 _handle) external override { ... }
 
     _Internal references:_
 
-    * [`challengeExpiryOf`](../properties/challengeexpiryof.md)
-
+    *   [`challengeExpiryOf`](../properties/challengeexpiryof.md)
 
 
 4.  The challenge will expire one year from the current timestamp. If the `_handle` is not renewed before then, anyone will be able to claim the handle by calling [`claimHandle`](claimhandle.md).
@@ -69,8 +68,7 @@ function challengeHandle(bytes32 _handle) external override { ... }
 
     _Internal references:_
 
-    * [`_SECONDS_IN_YEAR`](../properties/\_seconds_in_year.md)
-
+    *   [`_SECONDS_IN_YEAR`](../properties/\_seconds_in_year.md)
 
 
 5.  Store the `_challengeExpiry` as the `challengeExpiryOf` the provided `_handle`.
@@ -82,8 +80,7 @@ function challengeHandle(bytes32 _handle) external override { ... }
 
     _Internal references:_
 
-    * [`challengeExpiryOf`](../properties/challengeexpiryof.md)
-
+    *   [`challengeExpiryOf`](../properties/challengeexpiryof.md)
 
 
 6.  Emit a `ChallengeHandle` event with the all relevant parameters.
@@ -95,7 +92,6 @@ function challengeHandle(bytes32 _handle) external override { ... }
     _Event references:_
 
     * [`ChallengeHandle`](../events/challengehandle.md)
-
 {% endtab %}
 
 {% tab title="Only code" %}
@@ -149,4 +145,3 @@ function challengeHandle(bytes32 _handle) external override {
 | **High severity** | Identify a vulnerability in this operation that could lead to data corruption or loss of funds.                                        | 5+ETH  |
 {% endtab %}
 {% endtabs %}
-
