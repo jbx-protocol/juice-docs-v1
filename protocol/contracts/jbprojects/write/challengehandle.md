@@ -8,9 +8,9 @@ Interface:`IJBProjects`
 {% tab title="Step by step" %}
 **Allows anyone to challenge a project's handle.**
 
-**After one year, the handle can be claimed by the public if the challenge isn't answered by the handle's project.**
+**After one year, the handle can be claimed by anyone if the challenge isn't answered by the handle's project.**
 
-**This can be used to make sure a handle belonging to an unattended to project isn't lost forever.**
+**This can be used to make sure a handle belonging to a stale project isn't lost forever.**
 
 \
 Definition:
@@ -98,8 +98,8 @@ function challengeHandle(bytes32 _handle) external override { ... }
 ```solidity
 /** 
   @notice
-  Allows anyone to challenge a project's handle. After one year, the handle can be claimed by the public if the challenge isn't answered by the handle's project.
-  This can be used to make sure a handle belonging to an unattended to project isn't lost forever.
+  Allows anyone to challenge a project's handle. After one year, the handle can be claimed by anyone if the challenge isn't answered by the handle's project.
+  This can be used to make sure a handle belonging to a stale project isn't lost forever.
 
   @param _handle The handle to challenge.
 */
