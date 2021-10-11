@@ -2,7 +2,7 @@
 
 Contract:[`JBProjects`](../)
 
-Interface:** **`IJBProjects`
+Interface:\*\* \*\*`IJBProjects`
 
 {% tabs %}
 {% tab title="Step by step" %}
@@ -25,17 +25,17 @@ function setHandleOf(uint256 _projectId, bytes32 _handle)
 * The function overrides a function definition from the `IJBProjects` interface.
 * The function doesn't return anything.
 
-****
+***
 
 1.  Check that the provided `_handle` is not empty.
 
     ```javascript
     // Handle must exist.
     require(_handle != bytes32(0), "0x08: EMPTY_HANDLE");
+
     ```
+2.  Check that the `_handle` is unique. This is done by making sure there isn't yet an `idFor` the handle, and making sure it isn't currently being transferred to an address.
 
-
-2.  Check that the `_handle` is unique. This is done by making sure there isn't yet an `idFor` the handle, and making sure it isn't currently being transferred to an address.\
 
 
     _Internal references:_
@@ -47,9 +47,8 @@ function setHandleOf(uint256 _projectId, bytes32 _handle)
     // Handle must be unique.
     require(idFor[_handle] == 0 && transferAddressFor[_handle] == address(0), '0x09: HANDLE_TAKEN');
     ```
+3.  Free up the mapping from the current`handleOf` the project so that others can use it.
 
-
-3.  Free up the mapping from the current`handleOf` the project so that others can use it.\
 
 
     _Internal references:_
@@ -61,9 +60,8 @@ function setHandleOf(uint256 _projectId, bytes32 _handle)
     // Register the change in the resolver.
     idFor[handleOf[_projectId]] = 0;
     ```
+4.  Store the provided `_handle` as the as the `handleOf` the project.
 
-
-4.  Store the provided `_handle` as the as the `handleOf` the project.\
 
 
     _Internal references:_
@@ -74,9 +72,8 @@ function setHandleOf(uint256 _projectId, bytes32 _handle)
     // Store the handle for the project ID.
     handleOf[_projectId] = _handle;
     ```
+5.  Store the project's ID as the `idFor` the provided `_handle` to allow for project lookup using the handle.
 
-
-5.  Store the project's ID as the `idFor` the provided `_handle` to allow for project lookup using the handle.\
 
 
     _Internal references:_
@@ -87,14 +84,13 @@ function setHandleOf(uint256 _projectId, bytes32 _handle)
     // Store the project ID for the handle.
     idFor[_handle] = _projectId;
     ```
+6.  Emit a `SetHandle` event with the all relevant parameters.
 
-
-6.  Emit a `SetHandle` event with the all relevant parameters. \
 
 
     _Event references:_
 
-    * [`SetHandle`](../events/sethandle.md) 
+    * [`SetHandle`](../events/sethandle.md)
 
     ```javascript
     emit SetHandle(_projectId, _handle, msg.sender);
@@ -146,9 +142,9 @@ function setHandleOf(uint256 _projectId, bytes32 _handle)
 {% endtab %}
 
 {% tab title="Events" %}
-| Name            | Data                                                                                                                                                                                       |
-| --------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| **`SetHandle`** | <ul><li><code>uint256 indexed projectId</code> </li><li><code>bytes32 indexed handle</code> </li><li><code>address caller</code></li></ul><p><a href="../events/sethandle.md">more</a></p> |
+| Name            | Data                                                                                                                                                                                     |
+| --------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **`SetHandle`** | <ul><li><code>uint256 indexed projectId</code></li><li><code>bytes32 indexed handle</code></li><li><code>address caller</code></li></ul><p><a href="../events/sethandle.md">more</a></p> |
 {% endtab %}
 
 {% tab title="Bug bounty" %}
@@ -159,8 +155,3 @@ function setHandleOf(uint256 _projectId, bytes32 _handle)
 | **High severity** | Identify a vulnerability in this operation that could lead to data corruption or loss of funds.                                        | 5+ETH  |
 {% endtab %}
 {% endtabs %}
-
-
-
-
-

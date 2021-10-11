@@ -2,7 +2,7 @@
 
 Contract:[`JBProjects`](../)
 
-Interface:** **`IJBProjects`
+Interface:`IJBProjects`
 
 {% tabs %}
 {% tab title="Step by step" %}
@@ -41,7 +41,8 @@ function transferHandleOf(
     ```
 
 
-2.  Check that the `_newHandle` is unique. This is done by making sure there isn't yet an `idFor` the handle, and making sure it isn't currently being transferred to an address.\
+2.  Check that the `_newHandle` is unique. This is done by making sure there isn't yet an `idFor` the handle, and making sure it isn't currently being transferred to an address.
+
 
 
     _Internal references:_
@@ -55,7 +56,8 @@ function transferHandleOf(
     ```
 
 
-3.  Get the current `handleOf` the project. Store this is `handle`, which will be returned by the function.\
+3.  Get the current `handleOf` the project. Store this is `handle`, which will be returned by the function.
+
 
 
     _Internal references:_
@@ -68,7 +70,8 @@ function transferHandleOf(
     ```
 
 
-4.  Remove the `idFor` the project's current handle so that the handle no longer resolves to any project ID.\
+4.  Remove the `idFor` the project's current handle so that the handle no longer resolves to any project ID.
+
 
 
     _Internal references:_
@@ -81,7 +84,8 @@ function transferHandleOf(
     ```
 
 
-5.  Store the project's ID as the `idFor` the provided `_newHandle` to allow for project lookup using the handle.\
+5.  Store the project's ID as the `idFor` the provided `_newHandle` to allow for project lookup using the handle.
+
 
 
     _Internal references:_
@@ -94,7 +98,8 @@ function transferHandleOf(
     ```
 
 
-6.  Store the provided `_newHandle` as the as the `handleOf` the project.\
+6.  Store the provided `_newHandle` as the as the `handleOf` the project.
+
 
 
     _Internal references:_
@@ -107,7 +112,8 @@ function transferHandleOf(
     ```
 
 
-7.  Store the `_transferAddress` that will be able to transfer the handle as the `transferAddressFor` the handle.\
+7.  Store the `_transferAddress` that will be able to transfer the handle as the `transferAddressFor` the handle.
+
 
 
     _Internal references:_
@@ -120,12 +126,13 @@ function transferHandleOf(
     ```
 
 
-8.  Emit a `TransferHandle` event with the all relevant parameters. \
+8.  Emit a `TransferHandle` event with the all relevant parameters.
+
 
 
     _Event references:_
 
-    * [`TransferHandle`](../events/seturi.md) 
+    * [`TransferHandle`](../events/seturi.md)
 
     ```
     emit TransferHandle(_projectId, _transferAddress, handle, _newHandle, msg.sender);
@@ -191,9 +198,9 @@ function transferHandleOf(
 {% endtab %}
 
 {% tab title="Events" %}
-| Name            | Data                                                                                                                                                                                                                                                                                          |
-| --------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **`SetHandle`** | <ul><li><code>uint256 indexed projectId</code> </li><li><code>address indexed transferAddress</code> </li><li><code>bytes32 indexed handle</code> </li><li><code>bytes32 newHandle</code> </li><li><code>address caller</code></li></ul><p><a href="../events/transferhandle.md">more</a></p> |
+| Name            | Data                                                                                                                                                                                                                                                                                      |
+| --------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **`SetHandle`** | <ul><li><code>uint256 indexed projectId</code></li><li><code>address indexed transferAddress</code></li><li><code>bytes32 indexed handle</code></li><li><code>bytes32 newHandle</code></li><li><code>address caller</code></li></ul><p><a href="../events/transferhandle.md">more</a></p> |
 {% endtab %}
 
 {% tab title="Bug bounty" %}

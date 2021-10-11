@@ -2,7 +2,7 @@
 
 Contract:[`JBProjects`](../)
 
-Interface:** **`IJBProjects`
+Interface:`IJBProjects`
 
 {% tabs %}
 {% tab title="Step by step" %}
@@ -20,14 +20,15 @@ function setUriOf(uint256 _projectId, string calldata _uri)
 ```
 
 * `_projectId` is the ID of the project who's URI is being changed.
-* `_uri` is the new IPFS CID hash where metadata about the project has been uploaded. 
+* `_uri` is the new IPFS CID hash where metadata about the project has been uploaded.
 * Through the [`requirePermission`](../../jboperatable/modifiers/requirepermission.md) modifier, the function is only accessible by the project's owner, or from an operator that has been given the `JBOperations.SET_URI` permission by the project owner for the provided `_projectId`.
 * The function overrides a function definition from the `IJBProjects` interface.
 * The function doesn't return anything.
 
 
 
-1.  Store the new `_uri` as the `uriOf` the project.\
+1.  Store the new `_uri` as the `uriOf` the project.
+
 
 
     _Internal references:_
@@ -40,12 +41,13 @@ function setUriOf(uint256 _projectId, string calldata _uri)
     ```
 
 
-2.  Emit a `SetUri` event with the all relevant parameters. \
+2.  Emit a `SetUri` event with the all relevant parameters.
+
 
 
     _Event references:_
 
-    * [`SetUri`](../events/seturi.md) 
+    * [`SetUri`](../events/seturi.md)
 
     ```javascript
     emit SetUri(_projectId, _uri, msg.sender);
@@ -78,9 +80,9 @@ function setUriOf(uint256 _projectId, string calldata _uri)
 {% endtab %}
 
 {% tab title="Events" %}
-| Name         | Data                                                                                                                                                                        |
-| ------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **`SetUri`** | <ul><li><code>uint256 indexed projectId</code> </li><li><code>string uri</code> </li><li><code>address caller</code></li></ul><p><a href="../events/seturi.md">more</a></p> |
+| Name         | Data                                                                                                                                                                      |
+| ------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **`SetUri`** | <ul><li><code>uint256 indexed projectId</code></li><li><code>string uri</code></li><li><code>address caller</code></li></ul><p><a href="../events/seturi.md">more</a></p> |
 {% endtab %}
 
 {% tab title="Bug bounty" %}
@@ -91,4 +93,3 @@ function setUriOf(uint256 _projectId, string calldata _uri)
 | **High severity** | Identify a vulnerability in this operation that could lead to data corruption or loss of funds.                                        | 5+ETH  |
 {% endtab %}
 {% endtabs %}
-

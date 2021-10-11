@@ -2,13 +2,13 @@
 
 Contract: [`JBProjects`](../)
 
-Interface:** **`IJBProjects`
+Interface:`IJBProjects`
 
-**The number of projects that have been created using this contract. **
+**The number of projects that have been created using this contract.**
 
-_The count is incremented with each new project created. The resulting ERC-721 token ID for each project is the newly incremented `count` value._\
-****\
-****Definition:
+_The count is incremented with each new project created. The resulting ERC-721 token ID for each project is the newly incremented `count` value._
+
+Definition:
 
 ```solidity
 /** 
@@ -22,6 +22,5 @@ _The count is incremented with each new project created. The resulting ERC-721 t
 uint256 public override count = 0;
 ```
 
-* The resulting view function can be accessed externally by anyone. 
+* The resulting view function can be accessed externally by anyone.
 * The resulting function overrides a function definition from the `IJBProjects` interface.
-

@@ -12,7 +12,7 @@ _Anyone can create a project on an owner's behalf._\
 \
 Definition:
 
-```javascript
+```solidity
 function createFor(
   address _owner,
   bytes32 _handle,
@@ -23,7 +23,7 @@ function createFor(
 * `_owner` is the address that will be the owner of the project.
 * `_handle` is a unique string to associate with the project that will resolve to its token ID.
 * `_uri` is an IPFS CID hash where metadata about the project has been uploaded. An empty string is acceptable if no metadata is being provided.
-* The function can be accessed externally by anyone. 
+* The function can be accessed externally by anyone.
 * The function overrides a function definition from the `IJBProjects` interface.
 * Returns the token ID of the newly created project.
 
@@ -37,7 +37,8 @@ function createFor(
     ```
 
 
-2.  Check that the `_handle` is unique. This is done by making sure there isn't yet an `idFor` the handle, and making sure it isn't currently being transferred to an address.\
+2.  Check that the `_handle` is unique. This is done by making sure there isn't yet an `idFor` the handle, and making sure it isn't currently being transferred to an address.
+
 
 
     _Internal references:_
@@ -51,8 +52,7 @@ function createFor(
     ```
 
 
-3.  Increment the count to include the new project being created. \
-
+3.  Increment the count to include the new project being created.
 
     _Internal references:_
 
@@ -64,7 +64,7 @@ function createFor(
     ```
 
 
-4.  Mint a new NFT token belonging to the `_owner` using the `count` as the token ID. 
+4.  Mint a new NFT token belonging to the `_owner` using the `count` as the token ID.
 
     ```javascript
     // Mint the project.
@@ -72,8 +72,7 @@ function createFor(
     ```
 
 
-5.  Store the provided `_handle` as the as the `handleOf` the newly created project.\
-
+5.  Store the provided `_handle` as the as the `handleOf` the newly created project.
 
     _Internal references:_
 
@@ -85,7 +84,8 @@ function createFor(
     ```
 
 
-6.  Store the newly created project's ID as the `idFor` the provided `_handle` to allow for project lookup using the handle.\
+6.  Store the newly created project's ID as the `idFor` the provided `_handle` to allow for project lookup using the handle.
+
 
 
     _Internal references:_
@@ -98,7 +98,8 @@ function createFor(
     ```
 
 
-7.  If a URI was provided (meaning it's not an empty string),  store it as the `uriOf` the newly created project. \
+7.  If a URI was provided (meaning it's not an empty string), store it as the `uriOf` the newly created project.
+
 
 
     _Internal references:_
@@ -111,12 +112,13 @@ function createFor(
     ```
 
 
-8.  Emit a `Create` event with all relevant parameters. \
+8.  Emit a `Create` event with all relevant parameters.
+
 
 
     _Event references:_
 
-    * [`Create`](../events/create.md) 
+    * [`Create`](../events/create.md)
 
     ```
     emit Create(count, _owner, _handle, _uri, _terminal, msg.sender);
@@ -186,9 +188,9 @@ function createFor(
 {% endtab %}
 
 {% tab title="Events" %}
-| Name         | Data                                                                                                                                                                                                                                                                |
-| ------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **`Create`** | <ul><li><code>uint256 indexed projectId</code> </li><li><code>address indexed owner</code> </li><li><code>bytes32 indexed handle</code></li><li><code>string uri</code> </li><li><code>address caller</code></li></ul><p><a href="../events/create.md">more</a></p> |
+| Name         | Data                                                                                                                                                                                                                                                             |
+| ------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **`Create`** | <ul><li><code>uint256 indexed projectId</code></li><li><code>address indexed owner</code></li><li><code>bytes32 indexed handle</code></li><li><code>string uri</code></li><li><code>address caller</code></li></ul><p><a href="../events/create.md">more</a></p> |
 {% endtab %}
 
 {% tab title="Bug bounty" %}
@@ -199,6 +201,4 @@ function createFor(
 | **High severity** | Identify a vulnerability in this operation that could lead to data corruption or loss of funds.                                        | 5+ETH  |
 {% endtab %}
 {% endtabs %}
-
-
 

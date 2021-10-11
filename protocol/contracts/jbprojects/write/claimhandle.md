@@ -2,11 +2,11 @@
 
 Contract:[`JBProjects`](../)
 
-Interface:** **`IJBProjects`
+Interface:`IJBProjects`
 
 {% tabs %}
 {% tab title="Step by step" %}
-**Allows an address to claim an handle that has been transferred to it, and apply it to a project of theirs. **
+**Allows an address to claim an handle that has been transferred to it, and apply it to a project of theirs.**
 
 **A handle can also be claimed if it has been challenged and the challenge has succeeded.**
 
@@ -36,7 +36,8 @@ function claimHandle(
 
 
 
-1.  Check that either the `transferAddressFor` the `_handle` is the provided `_transferAddress`, or that the `_handle` is being challenged and the `challengeExpiryOf` the `_handle` has successfully passed.\
+1.  Check that either the `transferAddressFor` the `_handle` is the provided `_transferAddress`, or that the `_handle` is being challenged and the `challengeExpiryOf` the `_handle` has successfully passed.
+
 
 
     _Internal references:_
@@ -45,8 +46,8 @@ function claimHandle(
     * [`challengeExpiryOf`](../properties/challengeexpiryof.md)
 
     ```javascript
-    // The handle must have been transfered to the specified address,
-    // or the handle challange must have expired before being renewed.
+    // The handle must have been transferred to the specified address,
+    // or the handle challenge must have expired before being renewed.
     require(
       transferAddressFor[_handle] == _transferAddress ||
         (challengeExpiryOf[_handle] > 0 && block.timestamp > challengeExpiryOf[_handle]),
@@ -55,7 +56,8 @@ function claimHandle(
     ```
 
 
-2.  Remove the `idFor` the `handleOf` the project so that the handle no longer resolves to any project ID.\
+2.  Remove the `idFor` the `handleOf` the project so that the handle no longer resolves to any project ID.
+
 
 
     _Internal references:_
@@ -69,7 +71,8 @@ function claimHandle(
     ```
 
 
-3.  Store the project's ID as the `idFor` the provided `_handle` to allow for project lookup using the handle.\
+3.  Store the project's ID as the `idFor` the provided `_handle` to allow for project lookup using the handle.
+
 
 
     _Internal references:_
@@ -96,7 +99,8 @@ function claimHandle(
     ```
 
 
-5.  Remove the `transferAddressFor` the handle since it has now been claimed and is no longer being transferred.\
+5.  Remove the `transferAddressFor` the handle since it has now been claimed and is no longer being transferred.
+
 
 
     _Internal references:_
@@ -109,7 +113,8 @@ function claimHandle(
     ```
 
 
-6.  Remove the `challengeExpiryOf` the handle since it has now been transferred to a new project and must have a fresh challenge period awaited before being claimed again.\
+6.  Remove the `challengeExpiryOf` the handle since it has now been transferred to a new project and must have a fresh challenge period awaited before being claimed again.
+
 
 
     _Internal references:_
@@ -122,12 +127,13 @@ function claimHandle(
     ```
 
 
-7.  Emit a `TransferHandle` event with the all relevant parameters. \
+7.  Emit a `TransferHandle` event with the all relevant parameters.
+
 
 
     _Event references:_
 
-    * [`ClaimHandle`](../events/claimhandle.md) 
+    * [`ClaimHandle`](../events/claimhandle.md)
 
     ```javascript
     emit ClaimHandle(_projectId, _transferAddress, _handle, msg.sender);
@@ -158,8 +164,8 @@ function claimHandle(
   requirePermissionAllowingWildcardDomain(_transferAddress, _projectId, JBOperations.CLAIM_HANDLE)
   requirePermission(ownerOf(_projectId), _projectId, JBOperations.CLAIM_HANDLE)
 {
-  // The handle must have been transfered to the specified address,
-  // or the handle challange must have expired before being renewed.
+  // The handle must have been transferred to the specified address,
+  // or the handle challenge must have expired before being renewed.
   require(
     transferAddressFor[_handle] == _transferAddress ||
       (challengeExpiryOf[_handle] > 0 && block.timestamp > challengeExpiryOf[_handle]),
@@ -193,9 +199,9 @@ function claimHandle(
 {% endtab %}
 
 {% tab title="Events" %}
-| Name              | Data                                                                                                                                                                                                                                              |
-| ----------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **`ClaimHandle`** | <ul><li><code>uint256 indexed projectId</code></li><li><code>address indexed transferAddress</code> </li><li><code>bytes32 indexed handle</code> </li><li><code>address caller</code></li></ul><p><a href="../events/claimhandle.md">more</a></p> |
+| Name              | Data                                                                                                                                                                                                                                            |
+| ----------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **`ClaimHandle`** | <ul><li><code>uint256 indexed projectId</code></li><li><code>address indexed transferAddress</code></li><li><code>bytes32 indexed handle</code></li><li><code>address caller</code></li></ul><p><a href="../events/claimhandle.md">more</a></p> |
 {% endtab %}
 
 {% tab title="Bug bounty" %}
@@ -206,4 +212,3 @@ function claimHandle(
 | **High severity** | Identify a vulnerability in this operation that could lead to data corruption or loss of funds.                                        | 5+ETH  |
 {% endtab %}
 {% endtabs %}
-

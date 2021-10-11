@@ -2,7 +2,7 @@
 
 Contract:[`JBProjects`](../)
 
-Interface:** **`IJBProjects`
+Interface:`IJBProjects`
 
 {% tabs %}
 {% tab title="Step by step" %}
@@ -26,7 +26,8 @@ function renewHandleOf(uint256 _projectId)
 
 
 
-1.  Get a reference to the project's current handle.\
+1.  Get a reference to the project's current handle.
+
 
 
     _Internal references:_
@@ -39,7 +40,8 @@ function renewHandleOf(uint256 _projectId)
     ```
 
 
-2.  Remove the `challengeExpiryOf` the `_handle`. Anyone will be able to reissue a challenge through the [`challengeHandle`](challengehandle.md) transaction, and await the challenge period from that time.\
+2.  Remove the `challengeExpiryOf` the `_handle`. Anyone will be able to reissue a challenge through the [`challengeHandle`](challengehandle.md) transaction, and await the challenge period from that time.
+
 
 
     _Internal references:_
@@ -52,7 +54,8 @@ function renewHandleOf(uint256 _projectId)
     ```
 
 
-3.  Emit a `RenewHandle` event with the all relevant parameters. \
+3.  Emit a `RenewHandle` event with the all relevant parameters.
+
 
 
     _Event references:_
@@ -92,9 +95,9 @@ function renewHandleOf(uint256 _projectId)
 {% endtab %}
 
 {% tab title="Events" %}
-| Name              | Data                                                                                                                                                                                         |
-| ----------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **`RenewHandle`** | <ul><li><code>bytes32 indexed handle</code> </li><li><code>uint256 indexed projectId</code> </li><li><code>address caller</code></li></ul><p><a href="../events/renewhandle.md">more</a></p> |
+| Name              | Data                                                                                                                                                                                       |
+| ----------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **`RenewHandle`** | <ul><li><code>bytes32 indexed handle</code></li><li><code>uint256 indexed projectId</code></li><li><code>address caller</code></li></ul><p><a href="../events/renewhandle.md">more</a></p> |
 {% endtab %}
 
 {% tab title="Bug bounty" %}

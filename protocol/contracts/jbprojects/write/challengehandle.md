@@ -2,28 +2,35 @@
 
 Contract:[`JBProjects`](../)
 
-Interface:** **`IJBProjects`
+Interface:`IJBProjects`
 
 {% tabs %}
 {% tab title="Step by step" %}
-**Allows anyone to challenge a project's handle. **\
-****\
-**After one year, the handle can be claimed by the public if the challenge isn't answered by the handle's project. This can be used to make sure a handle belonging to an unattended to project isn't lost forever.**\
-****\
-****Definition:
+**Allows anyone to challenge a project's handle.**
+
+\
+**After one year, the handle can be claimed by the public if the challenge isn't answered by the handle's project. **
+
+****
+
+**This can be used to make sure a handle belonging to an unattended to project isn't lost forever.**
+
+\
+Definition:
 
 ```javascript
 function challengeHandle(bytes32 _handle) external override { ... }
 ```
 
 * `_handle` is the handle being challenged.
-* The function can be accessed externally by anyone. 
+* The function can be accessed externally by anyone.
 * The function overrides a function definition from the `IJBProjects` interface.
 * The function doesn't return anything.
 
 
 
-1.  Get a reference to the project to which the handle being challenged belongs.\
+1.  Get a reference to the project to which the handle being challenged belongs.
+
 
 
     _Internal references:_
@@ -44,7 +51,8 @@ function challengeHandle(bytes32 _handle) external override { ... }
     ```
 
 
-3.  Check if the handle is already being challenged.\
+3.  Check if the handle is already being challenged.
+
 
 
     _Internal references:_
@@ -57,7 +65,8 @@ function challengeHandle(bytes32 _handle) external override { ... }
     ```
 
 
-4.  The challenge will expire one year from the current timestamp. If the `_handle` is not renewed before then, anyone will be able to claim the handle by calling [`claimHandle`](claimhandle.md).\
+4.  The challenge will expire one year from the current timestamp. If the `_handle` is not renewed before then, anyone will be able to claim the handle by calling [`claimHandle`](claimhandle.md).
+
 
 
     _Internal references:_
@@ -70,7 +79,8 @@ function challengeHandle(bytes32 _handle) external override { ... }
     ```
 
 
-5.  Store the `_challengeExpiry` as the `challengeExpiryOf` the provided `_handle`.\
+5.  Store the `_challengeExpiry` as the `challengeExpiryOf` the provided `_handle`.
+
 
 
     _Internal references:_
@@ -83,7 +93,8 @@ function challengeHandle(bytes32 _handle) external override { ... }
     ```
 
 
-6.  Emit a `ChallengeHandle` event with the all relevant parameters. \
+6.  Emit a `ChallengeHandle` event with the all relevant parameters.
+
 
 
     _Event references:_
@@ -133,9 +144,9 @@ function challengeHandle(bytes32 _handle) external override {
 {% endtab %}
 
 {% tab title="Events" %}
-| Name                  | Data                                                                                                                                                                                                                                          |
-| --------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **`ChallengeHandle`** | <ul><li><code>bytes32 indexed handle</code> </li><li><code>uint256 indexed projectId</code></li><li><code>uint256 challengeExpiry</code> </li><li><code>address caller</code></li></ul><p><a href="../events/challengehandle.md">more</a></p> |
+| Name                  | Data                                                                                                                                                                                                                                        |
+| --------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **`ChallengeHandle`** | <ul><li><code>bytes32 indexed handle</code></li><li><code>uint256 indexed projectId</code></li><li><code>uint256 challengeExpiry</code></li><li><code>address caller</code></li></ul><p><a href="../events/challengehandle.md">more</a></p> |
 {% endtab %}
 
 {% tab title="Bug bounty" %}
@@ -146,14 +157,4 @@ function challengeHandle(bytes32 _handle) external override {
 | **High severity** | Identify a vulnerability in this operation that could lead to data corruption or loss of funds.                                        | 5+ETH  |
 {% endtab %}
 {% endtabs %}
-
-
-
-
-
-
-
-
-
-
 
