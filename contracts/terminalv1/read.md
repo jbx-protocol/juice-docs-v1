@@ -6,34 +6,31 @@ Whether or not a project can still print premined tickets.
 
 **Params:**
 
-*  **\_projectId**:The ID of the project to get the status of.
+* **\_projectId**:The ID of the project to get the status of.
 
 **Returns:** Boolean flag.
 
 ```lua
-
 function canPrintPreminedTickets(uint256 _projectId)
     external
     view
     returns (bool);
 ```
 
-
-
 ### claimableOverflowOf
 
 The amount of tokens that can be claimed by the given address.
 
-The \_account must have at least \_count tickets for the specified project.   
-If there is a funding cycle reconfiguration ballot open for the project, the project's current bonding curve        is bypassed.
+The \_account must have at least \_count tickets for the specified project.\
+If there is a funding cycle reconfiguration ballot open for the project, the project's current bonding curve is bypassed.
 
 **Params:**
 
-*  **\_account**: The address to get an amount for.  
-* **\_projectId**: The ID of the project to get a claimable amount for.  
-* **\_count**: The number of Tickets that would be redeemed to get the resulting amount.
+* **\_account**: The address to get an amount for.
+* **\_projectId**: The ID of the project to get a claimable amount for.
+*   **\_count**: The number of Tickets that would be redeemed to get the resulting amount.
 
-  **Returns**: The amount of tokens that can be claimed
+    **Returns**: The amount of tokens that can be claimed
 
 ```lua
 function claimableOverflowOf(
@@ -45,16 +42,15 @@ function claimableOverflowOf(
 
 ### currentOverflowOf
 
-Gets the current overflowed amount for a specified project.   
+Gets the current overflowed amount for a specified project.
 
 **Params:**
 
-*  **\_projectId**: The ID of the project to get overflow for.  
+* **\_projectId**: The ID of the project to get overflow for.
 
 **Returns** The current overflow of funds for the project.
 
 ```lua
-
 function currentOverflowOf(uint256 _projectId)
     external
     view
@@ -65,7 +61,7 @@ function currentOverflowOf(uint256 _projectId)
 
 **Returns** The address of the current governance
 
-```text
+```
 function governance() external view returns (address payable);
 ```
 
@@ -73,29 +69,27 @@ function governance() external view returns (address payable);
 
 Gets the amount of reserved tickets that a project has.
 
-  **Params:**
+**Params:**
 
 * **\_projectId**: The ID of the project to get overflow for.
-* **\_reservedRate**: The reserved rate to use to make the calculation.  
+* **\_reservedRate**: The reserved rate to use to make the calculation.
 
 **Returns:** amount overflow The current overflow of funds for the project.
 
 ```lua
-
 function reservedTicketBalanceOf(uint256 _projectId, uint256 _reservedRate)
     external
     view
     returns (uint256);
 ```
 
-### 
+###
 
 ### TO-DO
 
 Read functions yet to be documented
 
-```text
-
+```
 
 function pendingGovernance() external view returns (address payable);
 
@@ -120,4 +114,3 @@ function migrationIsAllowed(ITerminal _terminal)
     view
     returns (bool);
 ```
-
