@@ -16,7 +16,7 @@ function _deriveStartFrom(
 ```
 
 * `_baseFundingCycle` is The [`JBFundingCycle`](../../../data-structures/jbfundingcycle.md) to make the calculation for.
-* `_mustStartOnOrAfter`is a date that the derived start must be on or come after.
+* `_mustStartOnOrAfter` is a date that the derived start must be on or come after.
 * The view function is private to this contract.
 * The function does not alter state on the blockchain.
 * The function returns a timestamp in seconds.
@@ -41,7 +41,6 @@ function _deriveStartFrom(
     _Internal references:_
 
     * [`_SECONDS_IN_DAY`](../properties/\_seconds_in_day.md)
-
 
 
 3.  Get a reference to the start time of the cycle immediately following the base cycle. This is the base cycles start time plus the base cycle's duration.

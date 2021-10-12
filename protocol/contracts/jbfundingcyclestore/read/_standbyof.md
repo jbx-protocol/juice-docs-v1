@@ -8,8 +8,6 @@ Contract:[`JBFundingCycleStore`](../)​
 
 _A value of 0 is returned if no funding cycle was found._
 
-__
-
 Definition:
 
 ```solidity
@@ -32,7 +30,7 @@ function _standbyOf(uint256 _projectId) private view returns (uint256 fundingCyc
 
     _Internal references:_
 
-    *   [`latestIdOf`](../properties/latestidof.md)
+    * [`latestIdOf`](../properties/latestidof.md)
 
 
 2.  If there isn't a funding cycle for the project, there isn't a standby cycle either.
@@ -52,7 +50,7 @@ function _standbyOf(uint256 _projectId) private view returns (uint256 fundingCyc
 
     _Internal references:_
 
-    *   [`_getStructFor`](\_getstructfor.md)
+    * [`_getStructFor`](\_getstructfor.md)
 
 
 4.  If the cycle has started, return 0 since there is not a stored funding cycle in standby.

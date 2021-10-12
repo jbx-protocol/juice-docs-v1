@@ -8,8 +8,8 @@ Interface: `IJBFundingCycleStore`
 {% tab title="Step by step" %}
 **Tap funds from a project's currently tappable funding cycle.**
 
-_Only a project's current controller can tap funds for its funding cycles._\
-\
+_Only a project's current controller can tap funds for its funding cycles._
+
 Definition:
 
 ```solidity
@@ -36,7 +36,7 @@ function tapFrom(uint256 _projectId, uint256 _amount)
     ```
 
 
-2.  Find the ID of the funding cycle that should be tapped.\
+2.  Find the ID of the funding cycle that should be tapped.
 
     ```solidity
     // Get a reference to the funding cycle being tapped.
@@ -48,7 +48,7 @@ function tapFrom(uint256 _projectId, uint256 _amount)
     * [`_tappableOf`](\_tappableof.md)
 
 
-3.  Get a reference to the new amount that will be tapped. This is the sum of the provided `_amount` with what has already been tapped for the funding cycle.\
+3.  Get a reference to the new amount that will be tapped. This is the sum of the provided `_amount` with what has already been tapped for the funding cycle.
 
     ```solidity
     // The new amount that has been tapped.
@@ -76,7 +76,7 @@ function tapFrom(uint256 _projectId, uint256 _amount)
     ```
 
 
-6.  Emit a `Tap` event with the all relevant parameters. \
+6.  Emit a `Tap` event with the all relevant parameters.
 
     ```solidity
     emit Tap(_fundingCycleId, _projectId, _amount, _newTappedAmount, msg.sender);
@@ -87,7 +87,7 @@ function tapFrom(uint256 _projectId, uint256 _amount)
     * [`Tap`](../events/tap.md) 
 
 
-7.  Return the [`JBFundingCycle`](../../../data-structures/jbfundingcycle.md) struct that has been tapped.\
+7.  Return the [`JBFundingCycle`](../../../data-structures/jbfundingcycle.md) struct that has been tapped.
 
     ```solidity
     return _getStructFor(_fundingCycleId);

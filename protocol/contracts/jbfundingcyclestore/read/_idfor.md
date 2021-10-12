@@ -4,7 +4,7 @@ Contract:[`JBFundingCycleStore`](../)​
 
 {% tabs %}
 {% tab title="Step by step" %}
-**Constructs a unique ID from a project ID and a number.**\
+**Constructs a unique ID from a project ID and a number.**
 
 Definition:
 

@@ -4,9 +4,9 @@ Contract:[`JBFundingCycleStore`](../)​
 
 {% tabs %}
 {% tab title="Step by step" %}
-**The time after the ballot of the provided funding cycle has expired.**\
-****\
-****_If the ballot ends in the past, the current block timestamp will be returned._
+**The time after the ballot of the provided funding cycle has expired.**
+
+_If the ballot ends in the past, the current block timestamp will be returned._
 
 Definition:
 

@@ -26,7 +26,7 @@ function _updateFundingCycleBasedOn(
 
 
 
-1.  Find the time that the updated funding cycle should start at.\
+1.  Find the time that the updated funding cycle should start at.
 
     ```solidity
     // Derive the correct next start time from the base.
@@ -40,7 +40,7 @@ function _updateFundingCycleBasedOn(
 
 2.  Find the weight that the updated funding cycle should use. If a weight was provided to the function, use it. Otherwise derive one from the previous weight.\
     \
-    If the provided weight is the number 1, treat is like the number 0. A weight of 0 means that no specific weight was passed in.\
+    If the provided weight is the number 1, treat is like the number 0. A weight of 0 means that no specific weight was passed in.
 
     ```solidity
     // A weight of 1 is treated as a weight of 0.
@@ -54,7 +54,7 @@ function _updateFundingCycleBasedOn(
     * [`_deriveWeightFrom`](../read/\_deriveweightfrom.md)
 
 
-3.  Find the number that the updated funding cycle should use.\
+3.  Find the number that the updated funding cycle should use.
 
     ```solidity
     // Derive the correct number.
@@ -66,7 +66,7 @@ function _updateFundingCycleBasedOn(
     * [`_deriveNumberFrom`](../read/\_derivenumberfrom.md)
 
 
-4.  Store the properties for the updated funding cycle.\
+4.  Store the properties for the updated funding cycle.
 
     ```solidity
     // Update the intrinsic properties.

@@ -26,6 +26,8 @@ function splitsOf(
 * The function overrides a function definition from the `IJBSplitStore` interface.
 * The function returns an array of [`JBSplit`](../../../data-structures/jbsplit.md)s.
 
+
+  
 1. This function just reads and returns the stored `_splitsOf` the project, within the specified domain, for the specified group.  
 
    ```solidity

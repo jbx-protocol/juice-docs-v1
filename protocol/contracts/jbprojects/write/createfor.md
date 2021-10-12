@@ -8,8 +8,8 @@ Interface: `IJBProjects`
 {% tab title="Step by step" %}
 **Creates a new project for the specified owner, which mints an NFT (ERC-721) into their wallet.**
 
-_Anyone can create a project on an owner's behalf._\
-\
+_Anyone can create a project on an owner's behalf._
+
 Definition:
 
 ```solidity
@@ -50,7 +50,6 @@ function createFor(
     * [`transferAddressFor`](../properties/transferaddressfor.md)
 
 
-
 3.  Increment the count to include the new project being created.
 
     ```solidity
@@ -61,7 +60,6 @@ function createFor(
     _Internal references:_
 
     * [`count`](../properties/count.md)
-
 
 
 4.  Mint a new NFT token belonging to the `_owner` using the `count` as the token ID.
@@ -84,7 +82,6 @@ function createFor(
     * [`handleOf`](../properties/handleof.md)
 
 
-
 6.  Store the newly created project's ID as the `idFor` the provided `_handle` to allow for project lookup using the handle.
 
     ```solidity
@@ -95,7 +92,6 @@ function createFor(
     _Internal references:_
 
     * [`idFor`](../properties/idfor.md)
-
 
 
 7.  If a URI was provided (meaning it's not an empty string), store it as the `uriOf` the newly created project.
@@ -110,7 +106,6 @@ function createFor(
     * [`uriOf`](../properties/uriof.md)
 
 
-
 8.  Emit a `Create` event with all relevant parameters.
 
     ```
@@ -120,7 +115,6 @@ function createFor(
     _Event references:_
 
     * [`Create`](../events/create.md)
-
 
 
 9.  Return the newly created project's token ID.

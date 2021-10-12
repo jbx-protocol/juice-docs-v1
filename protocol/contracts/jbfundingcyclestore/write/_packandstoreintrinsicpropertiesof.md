@@ -66,7 +66,9 @@ function _packAndStoreIntrinsicPropertiesOf(
     // number in bytes 232-255 bytes.
     packed |= _number << 232;
     ```
-6.  Derive the ID from the `_projectId` and the `_number`.\
+
+
+6.  Derive the ID from the `_projectId` and the `_number`.
 
     ```solidity
     // Construct the ID.
@@ -78,7 +80,7 @@ function _packAndStoreIntrinsicPropertiesOf(
     * [`_idFor`](../read/\_idfor.md)
 
 
-7.  Store the packed intrinsic properties for the funding cycle.\
+7.  Store the packed intrinsic properties for the funding cycle.
 
     ```solidity
     // Set in storage.

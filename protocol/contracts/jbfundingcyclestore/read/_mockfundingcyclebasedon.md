@@ -8,8 +8,6 @@ Contract:[`JBFundingCycleStore`](../)​
 
 _Returns an empty funding cycle if there can't be a mock funding cycle based on the provided one._
 
-__
-
 Definition:
 
 ```solidity
@@ -36,7 +34,7 @@ function _mockFundingCycleBasedOn(JBFundingCycle memory _baseFundingCycle, bool 
 
     _Internal references:_
 
-    *   [`_getStructFor`](\_getstructfor.md)
+    * [`_getStructFor`](\_getstructfor.md)
 
 
 2.  Save a reference to the amount of seconds since right now that the returned funding cycle could have started at. There are a few possibilities.
@@ -55,7 +53,7 @@ function _mockFundingCycleBasedOn(JBFundingCycle memory _baseFundingCycle, bool 
 
     _Internal references:_
 
-    *   [`_SECONDS_IN_DAY`](../properties/\_seconds_in_day.md)
+    * [`_SECONDS_IN_DAY`](../properties/\_seconds_in_day.md)
 
 
 3.  Find the correct start time for the mock funding cycle.
@@ -70,10 +68,10 @@ function _mockFundingCycleBasedOn(JBFundingCycle memory _baseFundingCycle, bool 
 
     _Internal references:_
 
-    *   [`_deriveStartFrom`](\_derivestartfrom.md)
+    * [`_deriveStartFrom`](\_derivestartfrom.md)
 
 
-4.  Find the correct number for the mock funding cycle.\\
+4.  Find the correct number for the mock funding cycle.
 
     ```solidity
     // Derive what the number should be.
@@ -82,11 +80,11 @@ function _mockFundingCycleBasedOn(JBFundingCycle memory _baseFundingCycle, bool 
 
     _Internal references:_
 
-    *   [`_deriveNumberFrom`](\_derivenumberfrom.md)
+    * [`_deriveNumberFrom`](\_derivenumberfrom.md)
 
 
  
-5.   Return a [`JBFundingCycle`](../../../data-structures/jbfundingcycle.md) with the aggregated configuration.\\
+5.   Return a [`JBFundingCycle`](../../../data-structures/jbfundingcycle.md) with the aggregated configuration.
 
     ```solidity
     return
@@ -111,8 +109,8 @@ function _mockFundingCycleBasedOn(JBFundingCycle memory _baseFundingCycle, bool 
 
     _Internal references:_
 
-    *   [`_idFor`](\_idfor.md)
-    *   [`_deriveWeightFrom`](\_deriveweightfrom.md)
+    * [`_idFor`](\_idfor.md)
+    * [`_deriveWeightFrom`](\_deriveweightfrom.md)
 {% endtab %}
 
 {% tab title="Code" %}

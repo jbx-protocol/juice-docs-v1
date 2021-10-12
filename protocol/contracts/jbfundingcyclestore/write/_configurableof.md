@@ -4,7 +4,7 @@ Contract:[`JBFundingCycleStore`](../)​
 
 {% tabs %}
 {% tab title="Step by step" %}
-**Returns the configurable funding cycle for this project if it exists, otherwise creates one.**\
+**Returns the configurable funding cycle for this project if it exists, otherwise creates one.**
 
 Definition:
 
@@ -26,14 +26,7 @@ function _configurableOf(
 
 
 
-1.  If the project does not yet have a funding cycle, initialize a new one that can be configured.\
-
-
-    _Internal references:_
-
-    * [`latestOf`](../properties/latestidof.md)
-    * [`_initFor`](\_initfor.md)
-    * [`_getStructFor`](../read/\_getstructfor.md)
+1.  If the project does not yet have a funding cycle, initialize a new one that can be configured.
 
     ```solidity
     // If there's not yet a funding cycle for the project, return the ID of a newly created one.
@@ -41,8 +34,14 @@ function _configurableOf(
       return _initFor(_projectId, _getStructFor(0), block.timestamp, _weight);
     ```
 
+    _Internal references:_
 
-2.  Get a reference to the project's standby funding cycle.\
+    * [`latestOf`](../properties/latestidof.md)
+    * [`_initFor`](\_initfor.md)
+    * [`_getStructFor`](../read/\_getstructfor.md)
+
+
+2.  Get a reference to the project's standby funding cycle.
 
     ```solidity
     // Get the standby funding cycle's ID.
@@ -54,8 +53,7 @@ function _configurableOf(
     * [`_standbyOf`](../read/\_standbyof.md)
 
 
-
-3.  If there is a standby funding cycle, return it after updating it. It must be updated because there's a chance the new reconfiguration will have a new start time than the previous reconfiguration that was in standby, depending on the specifications of the `_baseFundingCycle`'s ballot.\
+3.  If there is a standby funding cycle, return it after updating it. It must be updated because there's a chance the new reconfiguration will have a new start time than the previous reconfiguration that was in standby, depending on the specifications of the `_baseFundingCycle`'s ballot.
 
     ```solidity
     // If it exists, make sure its updated, then return it.
@@ -83,8 +81,7 @@ function _configurableOf(
     * [`_getLatestTimeAfterBallotOf`](../read/\_getlatesttimeafterballotof.md)
 
 
-
-4.  If there's no standby funding cycle, get a reference to the project's eligible funding cycle. The configurable funding cycle will have to be initialized based on the eligible cycle.\
+4.  If there's no standby funding cycle, get a reference to the project's eligible funding cycle. The configurable funding cycle will have to be initialized based on the eligible cycle.
 
     ```solidity
     // Get the active funding cycle's ID.
@@ -100,7 +97,7 @@ function _configurableOf(
     \
     If the eligible funding cycle is approved and an active funding cycle can be configured, return its ID.\
     \
-    If an eligible cycle was not found, base the funding cycle that will be initialized on the project's latest funding cycle. If it is not approved, get a reference to the one its based on.\
+    If an eligible cycle was not found, base the funding cycle that will be initialized on the project's latest funding cycle. If it is not approved, get a reference to the one its based on.
 
     ```solidity
     // If the ID of an eligible funding cycle exists, it's approved, and active funding cycles are configurable, return it.

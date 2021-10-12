@@ -8,8 +8,8 @@ Interface:`IJBProjects`
 {% tab title="Step by step" %}
 **Allows a project owner to set the project's IPFS CID hash where metadata about the project has been uploaded.**
 
-_Only a project's owner or operator can set its URI._\
-\
+_Only a project's owner or operator can set its URI._
+
 Definition:
 
 ```solidity
@@ -25,7 +25,7 @@ function setUriOf(uint256 _projectId, string calldata _uri)
 * The function overrides a function definition from the `IJBProjects` interface.
 * The function doesn't return anything.
 
-***
+
 
 1.  Store the new `_uri` as the `uriOf` the project.
 
@@ -37,7 +37,6 @@ function setUriOf(uint256 _projectId, string calldata _uri)
     _Internal references:_
 
     * [`uriOf`](../properties/uriof.md)
-
 
 
 2.  Emit a `SetUri` event with the all relevant parameters.

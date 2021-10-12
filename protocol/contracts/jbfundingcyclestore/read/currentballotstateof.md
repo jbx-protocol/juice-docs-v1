@@ -8,8 +8,6 @@ Interface: `IJBFundingCycleStore`
 {% tab title="Step by step" %}
 **The currency ballot state of the project.**
 
-****
-
 Definition:
 
 ```solidity
@@ -41,7 +39,7 @@ function currentBallotStateOf(uint256 _projectId) external view override returns
 
     _Internal references:_
 
-    *   [`latestIdOf`](../properties/latestidof.md)
+    * [`latestIdOf`](../properties/latestidof.md)
 
 
 3.  Get a reference to the funding cycle for the latest funding cycle.
@@ -53,7 +51,7 @@ function currentBallotStateOf(uint256 _projectId) external view override returns
 
     _Internal references:_
 
-    *   [`_getStructFor`](\_getstructfor.md)
+    * [`_getStructFor`](\_getstructfor.md)
 
 
 4.  If this is the first funding cycle for the project, it must be approved.

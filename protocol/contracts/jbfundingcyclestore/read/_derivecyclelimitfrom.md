@@ -16,7 +16,7 @@ function _deriveCycleLimitFrom(JBFundingCycle memory _fundingCycle, uint256 _sta
 ```
 
 * `_fundingCycle` is The [`JBFundingCycle`](../../../data-structures/jbfundingcycle.md) to make the calculation for.
-* `_start`is a time that the cycle having a cycle limit derived for starts.
+* `_start` is a time that the cycle having a cycle limit derived for starts.
 * The view function is private to this contract.
 * The function does not alter state on the blockchain.
 * The function returns the cycle limit to use.
@@ -27,6 +27,7 @@ function _deriveCycleLimitFrom(JBFundingCycle memory _fundingCycle, uint256 _sta
    // There's no longer a cycle limit if the provided cycle limit is 1, or if it has no duration.
    if (_fundingCycle.cycleLimit <= 1 || _fundingCycle.duration == 0) return 0;
    ```
+
 
 2. Get a reference to the number of cycles that can fit between the funding cycle's start, and the provided start.  
 
@@ -39,12 +40,14 @@ function _deriveCycleLimitFrom(JBFundingCycle memory _fundingCycle, uint256 _sta
 
    * [`_SECONDS_IN_DAY`](../properties/_seconds_in_day.md)
 
+
 3. There's no longer a cycle limit if more cycles have passed than the provided cycle's limit.
 
    ```solidity
    // If all of the cycle limit has passed, return 0.
    if (_cycles >= _fundingCycle.cycleLimit) return 0;
    ```
+
 
 4. Return the subtracted number of cycles that have passed from the provided cycle's limit.
 

@@ -6,7 +6,7 @@ Interface: `IJBPrices`
 
 {% tabs %}
 {% tab title="Step by step" %}
-**Gets the current price of the provided currency in terms of the provided base currency.**\
+**Gets the current price of the provided currency in terms of the provided base currency.**
 
 Definition:
 
@@ -22,7 +22,7 @@ function priceFor(uint256 _currency, uint256 _base) external view override retur
 
 
 
-1.  Return 1 if the `_currency` and the `_base` are the same, since they have the same price. Normalize to `targetDecimals` number of decimals.\
+1.  Return 1 if the `_currency` and the `_base` are the same, since they have the same price. Normalize to `targetDecimals` number of decimals.
 
     ```solidity
     // If the currency is the base, return 1 since they are priced the same.
@@ -34,8 +34,7 @@ function priceFor(uint256 _currency, uint256 _base) external view override retur
     * [`TARGET_DECIMALS`](../properties/targetdecimals.md)
 
 
-
-2.  Get a reference to the feed.\
+2.  Get a reference to the feed.
 
     ```solidity
     // Get a reference to the feed.
@@ -45,7 +44,6 @@ function priceFor(uint256 _currency, uint256 _base) external view override retur
     Internal references:
 
     * [`feedFor`](../properties/targetdecimals.md)
-
 
 
 3.  Make sure there is a feed stored for the `_currency` `_base` pair.
@@ -64,7 +62,7 @@ function priceFor(uint256 _currency, uint256 _base) external view override retur
     ```
 
 
-5.  Return the `_price`, normalizing the value to `TARGET_DECIMALS` decimal fidelity.\
+5.  Return the `_price`, normalizing the value to `TARGET_DECIMALS` decimal fidelity.
 
     ```solidity
     // Multiply the price by the decimal adjuster to get the normalized result.
@@ -74,7 +72,6 @@ function priceFor(uint256 _currency, uint256 _base) external view override retur
     Internal references:
 
     * [`feedDecimalAdjusterFor`](../properties/feeddecimaladjuster.md)
-
 {% endtab %}
 
 {% tab title="Code" %}

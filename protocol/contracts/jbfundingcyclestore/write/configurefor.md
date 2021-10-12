@@ -8,8 +8,8 @@ Interface: `IJBFundingCycleStore`
 {% tab title="Step by step" %}
 **Configures the next eligible funding cycle for the specified project.**
 
-_Only a project's current controller can configure its funding cycles._\
-\
+_Only a project's current controller can configure its funding cycles._
+
 Definition:
 
 ```solidity
@@ -81,7 +81,7 @@ function configureFor(
     ```
 
 
-7.  Find the ID of the funding cycle that should be configured.\
+7.  Find the ID of the funding cycle that should be configured.
 
     ```solidity
     // Gets the ID of the funding cycle to reconfigure.
@@ -98,7 +98,7 @@ function configureFor(
     * [`_configurableOf`](\_configurableof.md)
 
 
-8.  Store all of the configuration properties provided onto the `_fundingCycleId`. These properties can all be packed into one `uint256` storage slot.\
+8.  Store all of the configuration properties provided onto the `_fundingCycleId`. These properties can all be packed into one `uint256` storage slot.
 
     ```solidity
     // Store the configuration.
@@ -118,7 +118,7 @@ function configureFor(
     * [`_packAndStoreConfigurationPropertiesOf`](\_packandstoreconfigurationpropertiesof.md)
 
 
-9.  Store the provided `_data.target` for the `_fundingCycleId`.\
+9.  Store the provided `_data.target` for the `_fundingCycleId`.
 
     ```solidity
     // Set the target amount.
@@ -130,7 +130,7 @@ function configureFor(
     * [`_targetOf`](../properties/\_targetof.md)
 
 
-10. Store the provided `_metadata` for the `_fundingCycleId`.\
+10. Store the provided `_metadata` for the `_fundingCycleId`.
 
     ```solidity
     // Set the metadata.
@@ -142,7 +142,7 @@ function configureFor(
     * [`_metadataOf`](../properties/\_metadataof.md)
 
 
-11. Emit a `Configure` event with the all relevant parameters. \
+11. Emit a `Configure` event with the all relevant parameters.
 
     ```solidity
     emit Configure(_fundingCycleId, _projectId, _configured, _data, _metadata, msg.sender);
@@ -153,7 +153,7 @@ function configureFor(
     * [`Configure`](../events/configure.md) 
 
 
-12. Return the [`JBFundingCycle`](../../../data-structures/jbfundingcycle.md) struct that carries the new configuration.\
+12. Return the [`JBFundingCycle`](../../../data-structures/jbfundingcycle.md) struct that carries the new configuration.
 
     ```solidity
     return _getStructFor(_fundingCycleId);

@@ -37,7 +37,7 @@ function hasPermissions(
     ```
 
 
-2.  Return true if the bit is flipped on for the specified `_permissionIndex`. Otherwise return false.\
+2.  Return true if the bit is flipped on for the specified `_permissionIndex`. Otherwise return false.
 
     ```solidity
     return (((permissionsOf[_operator][_account][_domain] >> _permissionIndex) & 1) == 1)

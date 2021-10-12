@@ -8,8 +8,8 @@ Interface:`IJBProjects`
 {% tab title="Step by step" %}
 **Allows a project owner to set the project's handle.**
 
-_Only a project's owner or operator can set its handle._\
-\
+_Only a project's owner or operator can set its handle._
+
 Definition:
 
 ```solidity
@@ -25,7 +25,7 @@ function setHandleOf(uint256 _projectId, bytes32 _handle)
 * The function overrides a function definition from the `IJBProjects` interface.
 * The function doesn't return anything.
 
-***
+
 
 1.  Check that the provided `_handle` is not empty.
 
@@ -33,7 +33,6 @@ function setHandleOf(uint256 _projectId, bytes32 _handle)
     // Handle must exist.
     require(_handle != bytes32(0), "0x08: EMPTY_HANDLE");
     ```
-
 
     
 2.  Check that the `_handle` is unique. This is done by making sure there isn't yet an `idFor` the handle, and making sure it isn't currently being transferred to an address.
@@ -49,7 +48,6 @@ function setHandleOf(uint256 _projectId, bytes32 _handle)
     * [`transferAddressFor`](../properties/transferaddressfor.md)
 
 
-
 3.  Free up the mapping from the current`handleOf` the project so that others can use it.
 
     ```solidity
@@ -61,7 +59,6 @@ function setHandleOf(uint256 _projectId, bytes32 _handle)
 
     * [`handleOf`](../properties/handleof.md)
     * [`idFor`](../properties/idfor.md)
-
 
 
 4.  Store the provided `_handle` as the as the `handleOf` the project.
@@ -76,7 +73,6 @@ function setHandleOf(uint256 _projectId, bytes32 _handle)
     * [`handleOf`](../properties/handleof.md)
 
 
-
 5.  Store the project's ID as the `idFor` the provided `_handle` to allow for project lookup using the handle.
 
     ```solidity
@@ -87,7 +83,6 @@ function setHandleOf(uint256 _projectId, bytes32 _handle)
     _Internal references:_
 
     * [`idFor`](../properties/idfor.md)
-
 
 
 6.  Emit a `SetHandle` event with the all relevant parameters.

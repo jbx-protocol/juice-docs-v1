@@ -16,7 +16,7 @@ function _deriveNumberFrom(JBFundingCycle memory _baseFundingCycle, uint256 _sta
 ```
 
 * `_baseFundingCycle` is The [`JBFundingCycle`](../../../data-structures/jbfundingcycle.md) to make the calculation for.
-* `_start`is a time that the cycle having a weight derived for starts.
+* `_start` is a time that the cycle having a weight derived for starts.
 * The view function is private to this contract.
 * The function does not alter state on the blockchain.
 * The function returns the funding cycle number.
@@ -39,7 +39,7 @@ function _deriveNumberFrom(JBFundingCycle memory _baseFundingCycle, uint256 _sta
     ```
 
 
-3.  Return the number of base cycles that fit in the base distance.\
+3.  Return the number of base cycles that fit in the base distance.
 
     ```solidity
     // Find the number of base cycles that fit in the base distance.

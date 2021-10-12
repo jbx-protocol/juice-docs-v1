@@ -19,7 +19,7 @@ function _isApproved(JBFundingCycle memory _fundingCycle) private view returns (
 
 
 
-1.  Check to see if the state of the ballot for the provided funding cycle configuration is approved. The ballot that should be used is that of the funding cycle that the provided one is based on. This is because each funding cycle's ballot dictates the approval conditions of future reconfigurations.\
+1.  Check to see if the state of the ballot for the provided funding cycle configuration is approved. The ballot that should be used is that of the funding cycle that the provided one is based on. This is because each funding cycle's ballot dictates the approval conditions of future reconfigurations.
 
     ```solidity
     return

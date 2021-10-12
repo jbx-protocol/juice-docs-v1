@@ -2,7 +2,7 @@
 
 Contract:[`JBSplitStore`](../)​‌
 
-**All splits for each project ID's configurations.**\
+**All splits for each project ID's configurations.**
 
 Definition:
 

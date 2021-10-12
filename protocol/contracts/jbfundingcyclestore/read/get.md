@@ -8,8 +8,6 @@ Interface: `IJBFundingCycleStore`
 {% tab title="Step by step" %}
 **Get the funding cycle with the given ID.**
 
-****
-
 Definition:
 
 ```solidity
@@ -45,7 +43,7 @@ function get(uint256 _fundingCycleId)
 
     _Internal references:_
 
-    *   [`_getStructFor`](\_getstructfor.md)
+    * [`_getStructFor`](\_getstructfor.md)
 
 
 3.  If the funding cycle exists in storage, return it.
@@ -65,7 +63,7 @@ function get(uint256 _fundingCycleId)
 
     _Internal references:_
 
-    *   [`currentOf`](currentof.md)
+    * [`currentOf`](currentof.md)
 
 
 5.  If the funding cycle ID being queried matches the current funding cycle of the project, return it.
@@ -85,7 +83,7 @@ function get(uint256 _fundingCycleId)
 
     _Internal references:_
 
-    *   [`queuedOf`](queuedof.md)
+    * [`queuedOf`](queuedof.md)
 
 
 7.  If the funding cycle ID being queried matches the queued funding cycle of the project, return it.

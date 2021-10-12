@@ -8,8 +8,8 @@ Interface:`IJBProjects`
 {% tab title="Step by step" %}
 **Allows a project owner to transfer its handle to another address.**
 
-_Only a project's owner or operator can transfer its handle._\
-\
+_Only a project's owner or operator can transfer its handle._
+
 Definition:
 
 ```solidity
@@ -54,7 +54,6 @@ function transferHandleOf(
     * [`transferAddressFor`](../properties/transferaddressfor.md)
 
 
-
 3.  Get the current `handleOf` the project. Store this is `handle`, which will be returned by the function.
 
     ```solidity
@@ -65,7 +64,6 @@ function transferHandleOf(
     _Internal references:_
 
     * [`handleOf`](../properties/handleof.md)
-
 
 
 4.  Remove the `idFor` the project's current handle so that the handle no longer resolves to any project ID.
@@ -80,7 +78,6 @@ function transferHandleOf(
     * [`idFor`](../properties/idfor.md)
 
 
-
 5.  Store the project's ID as the `idFor` the provided `_newHandle` to allow for project lookup using the handle.
 
     ```solidity
@@ -91,7 +88,6 @@ function transferHandleOf(
     _Internal references:_
 
     * [`idFor`](../properties/idfor.md)
-
 
 
 6.  Store the provided `_newHandle` as the as the `handleOf` the project.
@@ -106,7 +102,6 @@ function transferHandleOf(
     * [`handleOf`](../properties/handleof.md)
 
 
-
 7.  Store the `_transferAddress` that will be able to transfer the handle as the `transferAddressFor` the handle.
 
     ```solidity
@@ -117,7 +112,6 @@ function transferHandleOf(
     _Internal references:_
 
     * [`transferAddressFor`](../properties/idfor.md)
-
 
 
 8.  Emit a `TransferHandle` event with the all relevant parameters.

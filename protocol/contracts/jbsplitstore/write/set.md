@@ -58,11 +58,13 @@ function set(
    for (uint256 _i = 0; _i < _currentSplits.length; _i++) { ... }
    ```
 
+
 3. If the current split isn't locked, move on to the next one.
 
    ```solidity
    if (block.timestamp >= _currentSplits[_i].lockedUntil) continue;
    ```
+
 
 4. If the current split is locked, check to make sure the new `_splits` includes it. The only property of a locked split that can have changed is its `lockedUntil` property, which can be extended.
 
@@ -83,11 +85,13 @@ function set(
    }
    ```
 
+
 5. Check to make sure the provided `_splits` includes any locked current splits.
 
    ```solidity
    require(_includesLocked, '0x0f: SOME_LOCKED');
    ```
+
 
 6. After the loop, delete the current splits from storage so we can repopulate them.  
 
@@ -108,12 +112,14 @@ function set(
    uint256 _percentTotal = 0;
    ```
 
+ 
 8. Loop through each newly provided `_splits` to validate 
 
    ```solidity
    for (uint256 _i = 0; _i < _splits.length; _i++) { ... }
    ```
 
+ 
 9. Check that the percent for the current split is not zero.
 
    ```solidity
@@ -121,6 +127,7 @@ function set(
    require(_splits[_i].percent > 0, '0x10: BAD_SPLIT_PERCENT');
    ```
 
+ 
 10. Check that the split specifies a recipient. Either an `allocator` must be specified or a `beneficiary` must be specified.
 
     ```solidity
@@ -132,6 +139,7 @@ function set(
     );
     ```
 
+ 
 11. Increment the total percents that have been accumulated so far.
 
     ```solidity
@@ -139,6 +147,7 @@ function set(
     _percentTotal = _percentTotal + _splits[_i].percent;
     ```
 
+ 
 12. Make sure the accumulated percents are under 100%. Split percents are out of 10000.
 
     ```solidity
@@ -146,6 +155,7 @@ function set(
     require(_percentTotal <= 10000, '0x12: BAD_TOTAL_PERCENT');
     ```
 
+ 
 13. Push the split onto the stored `_splits` value.   
 
     ```solidity
@@ -157,6 +167,7 @@ function set(
 
     * [`_splitsOf`](../properties/_splitsof.md)
 
+ 
 
 14. For each added split, emit a `SetSplit` event with all relevant parameters.   
 

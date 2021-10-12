@@ -18,7 +18,7 @@ function _tappableOf(uint256 _projectId) private returns (uint256 fundingCycleId
 
 
 
-1.  Get a reference to the project's eligible funding cycle.\
+1.  Get a reference to the project's eligible funding cycle.
 
     ```solidity
     // Check for the ID of an eligible funding cycle.
@@ -30,7 +30,7 @@ function _tappableOf(uint256 _projectId) private returns (uint256 fundingCycleId
     * [`_eligibleOf`](../read/\_eligibleof.md)
 
 
-2.  If no eligible funding cycle was found, get a reference to the project's standby cycle.\
+2.  If no eligible funding cycle was found, get a reference to the project's standby cycle.
 
     ```solidity
     // No eligible funding cycle found, check for the ID of a standby funding cycle.
@@ -53,7 +53,7 @@ function _tappableOf(uint256 _projectId) private returns (uint256 fundingCycleId
 
 4.  If a funding cycle exists that is either eligible to be tapped or is in standby, check to see if it has started and it's approved. If so, return it. Otherwise, get a reference to the funding cycle that it's based on which will provide the correct configuration to a new funding cycle that will be initialized.\
     \
-    If no eligible or standby funding cycle exists, get a reference to the last approved funding cycle for the project which will provide the correct configuration to a new funding cycle that will be initialized.\
+    If no eligible or standby funding cycle exists, get a reference to the last approved funding cycle for the project which will provide the correct configuration to a new funding cycle that will be initialized.
 
     ```solidity
     // If the ID of an eligible funding cycle exists,
@@ -97,7 +97,7 @@ function _tappableOf(uint256 _projectId) private returns (uint256 fundingCycleId
     ```
 
 
-6.  Get a reference to the [`JBFundingCycle`](../../../data-structures/jbfundingcycle.md) structure.\
+6.  Get a reference to the [`JBFundingCycle`](../../../data-structures/jbfundingcycle.md) structure.
 
     ```solidity
     // Set the eligible funding cycle.
@@ -117,7 +117,7 @@ function _tappableOf(uint256 _projectId) private returns (uint256 fundingCycleId
     ```
 
 
-8.  Get a reference to the first start time that is possible after the funding cycle, which is the moment after it ends.\
+8.  Get a reference to the first start time that is possible after the funding cycle, which is the moment after it ends.
 
     ```solidity
     // The time when the funding cycle immediately after the eligible funding cycle starts.
@@ -129,7 +129,7 @@ function _tappableOf(uint256 _projectId) private returns (uint256 fundingCycleId
     * [`_SECONDS_IN_DAY`](../properties/\_seconds_in_day.md)
 
 
-9.  Get a reference to the time distance to the most recent funding cycle iteration's start time.\
+9.  Get a reference to the time distance to the most recent funding cycle iteration's start time.
 
     ```solidity
     // The distance from now until the nearest past multiple of the cycle duration from its start.
@@ -144,7 +144,7 @@ function _tappableOf(uint256 _projectId) private returns (uint256 fundingCycleId
     * [`_SECONDS_IN_DAY`](../properties/\_seconds_in_day.md)
 
 
-10. Set the ID that'll be returned to the ID of a newly initialized funding cycle.\
+10. Set the ID that'll be returned to the ID of a newly initialized funding cycle.
 
     ```solidity
     // Return the tappable funding cycle.
@@ -161,7 +161,7 @@ function _tappableOf(uint256 _projectId) private returns (uint256 fundingCycleId
     * [`_initFor`](\_initfor.md)
 
 
-11. Copy the properties of the base funding cycle onto the newly initialized configuration.\
+11. Copy the properties of the base funding cycle onto the newly initialized configuration.
 
     ```solidity
      // Copy the properties of the base funding cycle onto the new configuration efficiently.
@@ -184,7 +184,6 @@ function _tappableOf(uint256 _projectId) private returns (uint256 fundingCycleId
     * [`_packAndStoreConfigurationPropertiesOf`](\_packandstoreconfigurationpropertiesof.md)
     * [`_metadataOf`](../properties/\_metadataof.md)
     * [`_targetOf`](../properties/\_targetof.md)
-
 {% endtab %}
 
 {% tab title="Code" %}

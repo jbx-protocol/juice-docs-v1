@@ -12,7 +12,6 @@ Interface:`IJBProjects`
 
 **This can be used to make sure a handle belonging to a stale project isn't lost forever.**
 
-\
 Definition:
 
 ```solidity
@@ -36,7 +35,7 @@ function challengeHandle(bytes32 _handle) external override { ... }
 
     _Internal references:_
 
-    *   [`idFor`](../properties/idfor.md)
+    * [`idFor`](../properties/idfor.md)
 
 
 2.  Check if the handle is being used.
@@ -56,7 +55,7 @@ function challengeHandle(bytes32 _handle) external override { ... }
 
     _Internal references:_
 
-    *   [`challengeExpiryOf`](../properties/challengeexpiryof.md)
+    * [`challengeExpiryOf`](../properties/challengeexpiryof.md)
 
 
 4.  The challenge will expire one year from the current timestamp. If the `_handle` is not renewed before then, anyone will be able to claim the handle by calling [`claimHandle`](claimhandle.md).
@@ -68,7 +67,7 @@ function challengeHandle(bytes32 _handle) external override { ... }
 
     _Internal references:_
 
-    *   [`_SECONDS_IN_YEAR`](../properties/\_seconds_in_year.md)
+    * [`_SECONDS_IN_YEAR`](../properties/\_seconds_in_year.md)
 
 
 5.  Store the `_challengeExpiry` as the `challengeExpiryOf` the provided `_handle`.
@@ -80,7 +79,7 @@ function challengeHandle(bytes32 _handle) external override { ... }
 
     _Internal references:_
 
-    *   [`challengeExpiryOf`](../properties/challengeexpiryof.md)
+    * [`challengeExpiryOf`](../properties/challengeexpiryof.md)
 
 
 6.  Emit a `ChallengeHandle` event with the all relevant parameters.

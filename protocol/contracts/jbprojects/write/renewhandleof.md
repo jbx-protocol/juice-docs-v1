@@ -8,8 +8,8 @@ Interface:`IJBProjects`
 {% tab title="Step by step" %}
 **Allows a project to renew its handle, which cancels any pending challenges.**
 
-_Only a project's owner or operator can renew its handle._\
-\
+_Only a project's owner or operator can renew its handle._
+
 Definition:
 
 ```solidity
@@ -38,7 +38,6 @@ function renewHandleOf(uint256 _projectId)
     * [`handleOf`](../properties/handleof.md)
 
 
-
 2.  Remove the `challengeExpiryOf` the `_handle`. Anyone will be able to reissue a challenge through the [`challengeHandle`](challengehandle.md) transaction, and await the challenge period from that time.
 
     ```solidity
@@ -49,7 +48,6 @@ function renewHandleOf(uint256 _projectId)
     _Internal references:_
 
     * [`challengeExpiryOf`](../properties/challengeexpiryof.md)
-
 
 
 3.  Emit a `RenewHandle` event with the all relevant parameters.

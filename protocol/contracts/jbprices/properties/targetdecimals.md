@@ -4,7 +4,7 @@ Contract: [`JBPrices`](../)
 
 Interface:** **`IJBPrices`
 
-**The normalized number of decimals each price feed has.**\
+**The normalized number of decimals each price feed has.**
 
 Definition:
 

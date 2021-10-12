@@ -4,7 +4,7 @@ Contract: [`JBPrices`](../)
 
 Interface:** **`IJBPrices`
 
-**The number to multiply each price feed by to get to the target decimals.**\
+**The number to multiply each price feed by to get to the target decimals.**
 
 Definition:
 
