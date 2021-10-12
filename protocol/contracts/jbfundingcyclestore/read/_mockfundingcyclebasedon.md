@@ -85,34 +85,34 @@ function _mockFundingCycleBasedOn(JBFundingCycle memory _baseFundingCycle, bool 
     *   [`_deriveNumberFrom`](\_derivenumberfrom.md)
 
 
-5. Return a [`JBFundingCycle`](../../../data-structures/jbfundingcycle.md) with the aggregated configuration.\\
+ 
+5.   Return a [`JBFundingCycle`](../../../data-structures/jbfundingcycle.md) with the aggregated configuration.\\
 
-````solidity
-return
-  JBFundingCycle(
-    _idFor(_baseFundingCycle.projectId, _number),
-    _baseFundingCycle.projectId,
-    _number,
-    _baseFundingCycle.id,
-    _baseFundingCycle.configured,
-    _deriveWeightFrom(_baseFundingCycle, _start),
-    _baseFundingCycle.ballot,
-    _start,
-    _baseFundingCycle.duration,
-    _baseFundingCycle.target,
-    _baseFundingCycle.currency,
-    _baseFundingCycle.fee,
-    _baseFundingCycle.discountRate,
-    0,
-    _baseFundingCycle.metadata
-  );
-```
+    ```solidity
+    return
+      JBFundingCycle(
+        _idFor(_baseFundingCycle.projectId, _number),
+        _baseFundingCycle.projectId,
+        _number,
+        _baseFundingCycle.id,
+        _baseFundingCycle.configured,
+        _deriveWeightFrom(_baseFundingCycle, _start),
+        _baseFundingCycle.ballot,
+        _start,
+        _baseFundingCycle.duration,
+        _baseFundingCycle.target,
+        _baseFundingCycle.currency,
+        _baseFundingCycle.fee,
+        _baseFundingCycle.discountRate,
+        0,
+        _baseFundingCycle.metadata
+      );
+    ```
 
-_Internal references:_
+    _Internal references:_
 
-* [`_idFor`](\_idfor.md)
-* [`_deriveWeightFrom`](\_deriveweightfrom.md)
-````
+    *   [`_idFor`](\_idfor.md)
+    *   [`_deriveWeightFrom`](\_deriveweightfrom.md)
 {% endtab %}
 
 {% tab title="Code" %}
