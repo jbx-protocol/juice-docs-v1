@@ -2,7 +2,7 @@
 
 Contract:[`JBProjects`](../)
 
-Interface:\*\* \*\*`IJBProjects`
+Interface:`IJBProjects`
 
 {% tabs %}
 {% tab title="Step by step" %}
@@ -99,7 +99,7 @@ function setHandleOf(uint256 _projectId, bytes32 _handle)
     * [`SetHandle`](../events/sethandle.md)
 {% endtab %}
 
-{% tab title="Only code" %}
+{% tab title="Code" %}
 ```solidity
 /**
   @notice 
