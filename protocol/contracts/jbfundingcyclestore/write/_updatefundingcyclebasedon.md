@@ -5,8 +5,8 @@ Contract:[`JBFundingCycleStore`](../)​
 {% tabs %}
 {% tab title="Step by step" %}
 **Updates intrinsic properties for a funding cycle given a base cycle.**\
-****\
-****Definition:
+
+Definition:
 
 ```solidity
 function _updateFundingCycleBasedOn(

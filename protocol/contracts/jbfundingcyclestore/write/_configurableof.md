@@ -5,8 +5,8 @@ Contract:[`JBFundingCycleStore`](../)​
 {% tabs %}
 {% tab title="Step by step" %}
 **Returns the configurable funding cycle for this project if it exists, otherwise creates one.**\
-****\
-****Definition:
+
+Definition:
 
 ```solidity
 function _configurableOf(

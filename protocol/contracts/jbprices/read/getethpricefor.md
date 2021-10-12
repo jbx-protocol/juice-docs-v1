@@ -7,8 +7,8 @@ Interface: `IJBPrices`
 {% tabs %}
 {% tab title="Step by step" %}
 **Gets the current price of the provided currency in terms of the provided base currency.**\
-****\
-****Definition:
+
+Definition:
 
 ```solidity
 function priceFor(uint256 _currency, uint256 _base) external view override returns (uint256) { ... }

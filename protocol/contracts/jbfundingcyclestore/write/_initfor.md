@@ -5,8 +5,8 @@ Contract:[`JBFundingCycleStore`](../)​
 {% tabs %}
 {% tab title="Step by step" %}
 **Initializes a funding cycle with the appropriate properties.**\
-****\
-****Definition:
+
+Definition:
 
 ```solidity
 function _initFor(

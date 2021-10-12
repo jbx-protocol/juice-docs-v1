@@ -5,8 +5,8 @@ Contract:[`JBFundingCycleStore`](../)​
 {% tabs %}
 {% tab title="Step by step" %}
 **Returns the funding cycle that can be tapped at the time of the call.**\
-****\
-****Definition:
+
+Definition:
 
 ```solidity
 function _tappableOf(uint256 _projectId) private returns (uint256 fundingCycleId) { ... }

@@ -5,8 +5,8 @@ Contract: [`JBPrices`](../)
 Interface:** **`IJBPrices`
 
 **The available price feeds.**\
-****\
-****Definition:
+
+Definition:
 
 ```solidity
 /** 

@@ -5,8 +5,8 @@ Contract:[`JBFundingCycleStore`](../)​
 {% tabs %}
 {% tab title="Step by step" %}
 **Constructs a unique ID from a project ID and a number.**\
-****\
-****Definition:
+
+Definition:
 
 ```solidity
 function _idFor(uint256 _projectId, uint256 _number) private pure returns (uint256) { ... }

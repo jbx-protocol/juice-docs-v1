@@ -7,8 +7,8 @@ Interface: `IJBFundingCycleStore`
 {% tabs %}
 {% tab title="Step by step" %}
 **Get the funding cycle with the given ID.**\
-****\
-****Definition:
+
+Definition:
 
 ```solidity
 function get(uint256 _fundingCycleId)
@@ -36,15 +36,15 @@ function get(uint256 _fundingCycleId)
 
 2.  Try to get the full funding cycle struct for the provided ID.\
 
+    ```solidity
+    // See if there's stored info for the provided ID.
+    fundingCycle = _getStructFor(_fundingCycleId);
+    ```
 
     _Internal references:_
 
     * [`_getStructFor`](\_getstructfor.md)
 
-    ```solidity
-    // See if there's stored info for the provided ID.
-    fundingCycle = _getStructFor(_fundingCycleId);
-    ```
 
 
 3.  If the funding cycle exists in storage, return it.

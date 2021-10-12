@@ -3,8 +3,8 @@
 Contract:[`JBSplitStore`](../)​‌
 
 **All splits for each project ID's configurations.**\
-****\
-****Definition:
+
+Definition:
 
 ```solidity
 /** 
