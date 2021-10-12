@@ -8,7 +8,7 @@ Interface:`IJBProjects`
 {% tab title="Step by step" %}
 **Allows a project owner to set the project's handle.**
 
-_Only a project's owner or operator can set its handle._\
+_Only a project's owner or operator can set its handle._
 
 
 Definition:
