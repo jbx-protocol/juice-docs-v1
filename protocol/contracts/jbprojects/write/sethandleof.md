@@ -32,8 +32,10 @@ function setHandleOf(uint256 _projectId, bytes32 _handle)
     ```solidity
     // Handle must exist.
     require(_handle != bytes32(0), "0x08: EMPTY_HANDLE");
-
     ```
+
+
+    
 2.  Check that the `_handle` is unique. This is done by making sure there isn't yet an `idFor` the handle, and making sure it isn't currently being transferred to an address.
 
     ```solidity
