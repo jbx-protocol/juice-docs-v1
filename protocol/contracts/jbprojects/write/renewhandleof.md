@@ -10,6 +10,7 @@ Interface:`IJBProjects`
 
 _Only a project's owner or operator can renew its handle._\
 
+
 Definition:
 
 ```solidity
