@@ -10,7 +10,7 @@ Interface:`IJBProjects`
 
 _Only a project's owner or operator can renew its handle._
 
-__
+
 
 Definition:
 
@@ -25,10 +25,7 @@ function renewHandleOf(uint256 _projectId)
 * Through the [`requirePermission`](../../jboperatable/modifiers/requirepermission.md) modifier, the function is only accessible by the project's owner, or from an operator that has been given the `JBOperations.RENEW_HANDLE` permission by the project owner for the provided `_projectId`.
 * The function overrides a function definition from the `IJBProjects` interface.
 * The function doesn't return anything.
-
-
-
-1.  Get a reference to the project's current handle.
+*   Get a reference to the project's current handle.
 
     ```solidity
     // Get the handle of the project.
@@ -38,9 +35,7 @@ function renewHandleOf(uint256 _projectId)
     _Internal references:_
 
     * [`handleOf`](../properties/handleof.md)
-
-
-2.  Remove the `challengeExpiryOf` the `_handle`. Anyone will be able to reissue a challenge through the [`challengeHandle`](challengehandle.md) transaction, and await the challenge period from that time.
+*   Remove the `challengeExpiryOf` the `_handle`. Anyone will be able to reissue a challenge through the [`challengeHandle`](challengehandle.md) transaction, and await the challenge period from that time.
 
     ```solidity
     // Reset the challenge to 0.
@@ -50,9 +45,7 @@ function renewHandleOf(uint256 _projectId)
     _Internal references:_
 
     * [`challengeExpiryOf`](../properties/challengeexpiryof.md)
-
-
-3.  Emit a `RenewHandle` event with the all relevant parameters.
+*   Emit a `RenewHandle` event with the all relevant parameters.
 
     ```solidity
     emit RenewHandle(_handle, _projectId, msg.sender);
