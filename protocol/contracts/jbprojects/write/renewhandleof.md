@@ -8,7 +8,7 @@ Interface:`IJBProjects`
 {% tab title="Step by step" %}
 **Allows a project to renew its handle, which cancels any pending challenges.**
 
-_Only a project's owner or operator can renew its handle._
+_Only a project's owner or operator can renew its handle._\
 
 Definition:
 

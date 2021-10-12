@@ -9,7 +9,7 @@ Interface: `IJBProjects`
 **Creates a new project for the specified owner, which mints an NFT (ERC-721) into their wallet.**
 
 _Anyone can create a project on an owner's behalf._\
-\
+
 
 Definition:
 

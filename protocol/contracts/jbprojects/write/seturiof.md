@@ -8,7 +8,7 @@ Interface:`IJBProjects`
 {% tab title="Step by step" %}
 **Allows a project owner to set the project's IPFS CID hash where metadata about the project has been uploaded.**
 
-_Only a project's owner or operator can set its URI._
+_Only a project's owner or operator can set its URI._\
 
 Definition:
 
