@@ -6,7 +6,9 @@ Interface: `IJBFundingCycleStore`
 
 {% tabs %}
 {% tab title="Step by step" %}
-**Get the funding cycle with the given ID.**\
+**Get the funding cycle with the given ID.**
+
+****
 
 Definition:
 
@@ -19,14 +21,14 @@ function get(uint256 _fundingCycleId)
 ```
 
 * `_fundingCycleId` is the ID of the funding cycle to get.
-* The view function can be accessed externally by anyone. 
+* The view function can be accessed externally by anyone.
 * The function does not alter state on the blockchain.
 * The function overrides a function definition from the `IJBFundingCycleStore` interface.
 * The function returns a [`JBFundingCycle`](../../../data-structures/jbfundingcycle.md).
 
 
 
-1.  Check that the provided funding cycle ID is valid. 
+1.  Check that the provided funding cycle ID is valid.
 
     ```solidity
     // The funding cycle should exist.
@@ -34,7 +36,7 @@ function get(uint256 _fundingCycleId)
     ```
 
 
-2.  Try to get the full funding cycle struct for the provided ID.\
+2.  Try to get the full funding cycle struct for the provided ID.
 
     ```solidity
     // See if there's stored info for the provided ID.
@@ -43,8 +45,7 @@ function get(uint256 _fundingCycleId)
 
     _Internal references:_
 
-    * [`_getStructFor`](\_getstructfor.md)
-
+    *   [`_getStructFor`](\_getstructfor.md)
 
 
 3.  If the funding cycle exists in storage, return it.
@@ -55,7 +56,7 @@ function get(uint256 _fundingCycleId)
     ```
 
 
-4.  If the funding cycle was not found in storage, it's possible that it still exists as a consequence of a previous funding cycle rolling over, but hasn't yet been stored. Check to see if there's a current funding cycle.\
+4.  If the funding cycle was not found in storage, it's possible that it still exists as a consequence of a previous funding cycle rolling over, but hasn't yet been stored. Check to see if there's a current funding cycle.
 
     ```solidity
     // Get the current funding cycle. It might exist but not yet have been stored.
@@ -64,8 +65,7 @@ function get(uint256 _fundingCycleId)
 
     _Internal references:_
 
-    * [`currentOf`](currentof.md)
-
+    *   [`currentOf`](currentof.md)
 
 
 5.  If the funding cycle ID being queried matches the current funding cycle of the project, return it.
@@ -76,7 +76,7 @@ function get(uint256 _fundingCycleId)
     ```
 
 
-6.  The upcoming funding cycle might also not yet be in storage, but might be reference-able.\
+6.  The upcoming funding cycle might also not yet be in storage, but might be reference-able.
 
     ```solidity
     // Get the queued funding cycle. It might exist but not yet have been stored.
@@ -85,8 +85,7 @@ function get(uint256 _fundingCycleId)
 
     _Internal references:_
 
-    * [`queuedOf`](queuedof.md)
-
+    *   [`queuedOf`](queuedof.md)
 
 
 7.  If the funding cycle ID being queried matches the queued funding cycle of the project, return it.
@@ -97,7 +96,7 @@ function get(uint256 _fundingCycleId)
     ```
 
 
-8.  If the ID being queried hasn't been found, return an empty Funding cycle struct.\
+8.  If the ID being queried hasn't been found, return an empty Funding cycle struct.
 
     ```solidity
     // Return an empty Funding Cycle.
@@ -156,8 +155,6 @@ function get(uint256 _fundingCycleId)
 | String             | Description                         |
 | ------------------ | ----------------------------------- |
 | **`0x13: BAD_ID`** | Thrown if the ID can't be resolved. |
-
-
 {% endtab %}
 
 {% tab title="Bug bounty" %}
@@ -168,4 +165,3 @@ function get(uint256 _fundingCycleId)
 | **High severity** | Identify a vulnerability in this operation that could lead to data corruption or loss of funds.                                        | 5+ETH  |
 {% endtab %}
 {% endtabs %}
-

@@ -8,6 +8,8 @@ Contract:[`JBFundingCycleStore`](../)​
 
 _A value of 0 is returned if no funding cycle was found._
 
+__
+
 Definition:
 
 ```solidity
@@ -21,7 +23,7 @@ function _eligibleOf(uint256 _projectId) private view returns (uint256 fundingCy
 
 
 
-1.  Get a reference to the latest funding cycle for the project.\
+1.  Get a reference to the latest funding cycle for the project.
 
     ```solidity
     // Get a reference to the project's latest funding cycle.
@@ -30,8 +32,7 @@ function _eligibleOf(uint256 _projectId) private view returns (uint256 fundingCy
 
     _Internal references:_
 
-    * [`latestIdOf`](../properties/latestidof.md)
-
+    *   [`latestIdOf`](../properties/latestidof.md)
 
 
 2.  If there isn't a funding cycle for the project, there isn't an eligible cycle either.
@@ -40,9 +41,7 @@ function _eligibleOf(uint256 _projectId) private view returns (uint256 fundingCy
     // If there isn't one, theres also no eligible funding cycle.
     if (fundingCycleId == 0) return 0;
     ```
-
-
-3.  Get the struct for the latest funding cycle.\
+3.  Get the struct for the latest funding cycle.
 
     ```solidity
     // Get the necessary properties for the latest funding cycle.
@@ -51,11 +50,10 @@ function _eligibleOf(uint256 _projectId) private view returns (uint256 fundingCy
 
     _Internal references:_
 
-    * [`_getStructFor`](\_getstructfor.md)
+    *   [`_getStructFor`](\_getstructfor.md)
 
 
-
-4.  If the latest is expired, return an empty funding cycle since there can't be a stored eligible cycle.\
+4.  If the latest is expired, return an empty funding cycle since there can't be a stored eligible cycle.
 
     ```solidity
     // If the latest is expired, return an empty funding cycle.
@@ -68,11 +66,10 @@ function _eligibleOf(uint256 _projectId) private view returns (uint256 fundingCy
 
     _Internal references:_
 
-    * [`_SECONDS_IN_DAY`](../properties/\_seconds_in_day.md)
+    *   [`_SECONDS_IN_DAY`](../properties/\_seconds_in_day.md)
 
- 
 
-5.  Get a reference to the funding cycle that the current cycle is based on.\
+5.  Get a reference to the funding cycle that the current cycle is based on.
 
     ```solidity
     // The base cant be expired.
@@ -81,11 +78,10 @@ function _eligibleOf(uint256 _projectId) private view returns (uint256 fundingCy
 
     _Internal references:_
 
-    * [`_getStructFor`](\_getstructfor.md)
+    *   [`_getStructFor`](\_getstructfor.md)
 
 
-
-6.  If the base is expired, return an empty funding cycle since there can't be a stored eligible cycle.\
+6.  If the base is expired, return an empty funding cycle since there can't be a stored eligible cycle.
 
     ```solidity
     // If the current time is past the end of the base, return 0.
@@ -94,12 +90,11 @@ function _eligibleOf(uint256 _projectId) private view returns (uint256 fundingCy
       _baseFundingCycle.duration > 0 &&
       block.timestamp >= _baseFundingCycle.start + (_baseFundingCycle.duration * _SECONDS_IN_DAY)
     ) return 0;
-
     ```
+
     _Internal references:_
 
-    * [`_SECONDS_IN_DAY`](../properties/\_seconds_in_day.md)
-
+    *   [`_SECONDS_IN_DAY`](../properties/\_seconds_in_day.md)
 
 
 7.  Return the ID that the latest funding cycle is based on.
@@ -164,3 +159,4 @@ function _eligibleOf(uint256 _projectId) private view returns (uint256 fundingCy
 | **High severity** | Identify a vulnerability in this operation that could lead to data corruption or loss of funds.                                        | 5+ETH  |
 {% endtab %}
 {% endtabs %}
+

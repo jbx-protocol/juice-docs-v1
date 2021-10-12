@@ -8,6 +8,8 @@ Interface: `IJBFundingCycleStore`
 {% tab title="Step by step" %}
 **The currency ballot state of the project.**
 
+****
+
 Definition:
 
 ```solidity
@@ -30,7 +32,7 @@ function currentBallotStateOf(uint256 _projectId) external view override returns
     ```
 
 
-2.  Check that there is a funding cycle for the project.\
+2.  Check that there is a funding cycle for the project.
 
     ```solidity
     // The project must have funding cycles.
@@ -39,11 +41,10 @@ function currentBallotStateOf(uint256 _projectId) external view override returns
 
     _Internal references:_
 
-    * [`latestIdOf`](../properties/latestidof.md)
+    *   [`latestIdOf`](../properties/latestidof.md)
 
 
-
-3.  Get a reference to the funding cycle for the latest funding cycle.\
+3.  Get a reference to the funding cycle for the latest funding cycle.
 
     ```solidity
     // Get the necessary properties for the latest funding cycle.
@@ -52,8 +53,7 @@ function currentBallotStateOf(uint256 _projectId) external view override returns
 
     _Internal references:_
 
-    * [`_getStructFor`](\_getstructfor.md)
-
+    *   [`_getStructFor`](\_getstructfor.md)
 
 
 4.  If this is the first funding cycle for the project, it must be approved.
@@ -64,7 +64,7 @@ function currentBallotStateOf(uint256 _projectId) external view override returns
     ```
 
 
-5.  Return the `_ballotStateOf` the latest funding cycle ID as is determined by the current configuration and the funding cycle it's based on.\
+5.  Return the `_ballotStateOf` the latest funding cycle ID as is determined by the current configuration and the funding cycle it's based on.
 
     ```solidity
     return _ballotStateOf(_fundingCycleId, _fundingCycle.configured, _fundingCycle.basedOn);
@@ -117,3 +117,4 @@ function currentBallotStateOf(uint256 _projectId) external view override returns
 | **High severity** | Identify a vulnerability in this operation that could lead to data corruption or loss of funds.                                        | 5+ETH  |
 {% endtab %}
 {% endtabs %}
+

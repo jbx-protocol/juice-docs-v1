@@ -8,6 +8,8 @@ Contract:[`JBFundingCycleStore`](../)​
 
 _A value of 0 is returned if no funding cycle was found._
 
+__
+
 Definition:
 
 ```solidity
@@ -21,7 +23,7 @@ function _standbyOf(uint256 _projectId) private view returns (uint256 fundingCyc
 
 
 
-1.  Get a reference to the latest funding cycle for the project.\
+1.  Get a reference to the latest funding cycle for the project.
 
     ```solidity
     // Get a reference to the project's latest funding cycle.
@@ -30,8 +32,7 @@ function _standbyOf(uint256 _projectId) private view returns (uint256 fundingCyc
 
     _Internal references:_
 
-    * [`latestIdOf`](../properties/latestidof.md)
-
+    *   [`latestIdOf`](../properties/latestidof.md)
 
 
 2.  If there isn't a funding cycle for the project, there isn't a standby cycle either.
@@ -42,7 +43,7 @@ function _standbyOf(uint256 _projectId) private view returns (uint256 fundingCyc
     ```
 
 
-3.  Get the struct for the latest funding cycle.\
+3.  Get the struct for the latest funding cycle.
 
     ```solidity
     // Get the necessary properties for the latest funding cycle.
@@ -51,8 +52,7 @@ function _standbyOf(uint256 _projectId) private view returns (uint256 fundingCyc
 
     _Internal references:_
 
-    * [`_getStructFor`](\_getstructfor.md)
-
+    *   [`_getStructFor`](\_getstructfor.md)
 
 
 4.  If the cycle has started, return 0 since there is not a stored funding cycle in standby.
@@ -98,7 +98,6 @@ function _standbyOf(uint256 _projectId) private view returns (uint256 fundingCyc
 | **Optimization**  | Help make this operation more efficient.                                                                                               | 0.5ETH |
 | **Low severity**  | Identify a vulnerability in this operation that could lead to an inconvenience for a user of the protocol or for a protocol developer. | 1ETH   |
 | **High severity** | Identify a vulnerability in this operation that could lead to data corruption or loss of funds.                                        | 5+ETH  |
-
-
 {% endtab %}
 {% endtabs %}
+

@@ -4,9 +4,11 @@ Contract:[`JBFundingCycleStore`](../)​
 
 {% tabs %}
 {% tab title="Step by step" %}
-**A view of the funding cycle that would be created based on the provided one if the project doesn't approve a reconfiguration ahead of it starting.**\
-****\
-****_Returns an empty funding cycle if there can't be a mock funding cycle based on the provided one._
+**A view of the funding cycle that would be created based on the provided one if the project doesn't approve a reconfiguration ahead of it starting.**
+
+_Returns an empty funding cycle if there can't be a mock funding cycle based on the provided one._
+
+__
 
 Definition:
 
@@ -25,7 +27,7 @@ function _mockFundingCycleBasedOn(JBFundingCycle memory _baseFundingCycle, bool 
 
 
 
-1.  A funding cycle with a `discountRate` of 201 is a non-recurring funding cycle. An empty funding cycle should be returned if the base is non-recurring since there can't be subsequent cycles.\
+1.  A funding cycle with a `discountRate` of 201 is a non-recurring funding cycle. An empty funding cycle should be returned if the base is non-recurring since there can't be subsequent cycles.
 
     ```solidity
     // Can't mock a non recurring funding cycle.
@@ -34,16 +36,13 @@ function _mockFundingCycleBasedOn(JBFundingCycle memory _baseFundingCycle, bool 
 
     _Internal references:_
 
-    * [`_getStructFor`](\_getstructfor.md)
+    *   [`_getStructFor`](\_getstructfor.md)
 
 
+2.  Save a reference to the amount of seconds since right now that the returned funding cycle could have started at. There are a few possibilities.
 
-2.  Save a reference to the amount of seconds since right now that the returned funding cycle could have started at. There are a few possibilities.\
-     
-
-    1. If the call to the function does not `_allowMidCycle`, the start date must be now or in the future. This is also the case if the base funding cycle doesn't have a duration because the next funding cycle can start immediately.\
-
-    2. If neither of these cases apply, moving back one full duration period of the `_baseFundingCycle` will find the most recent possible start time for the mock cycle to start. \
+    1. If the call to the function does not `_allowMidCycle`, the start date must be now or in the future. This is also the case if the base funding cycle doesn't have a duration because the next funding cycle can start immediately.
+    2. If neither of these cases apply, moving back one full duration period of the `_baseFundingCycle` will find the most recent possible start time for the mock cycle to start.
 
     ```solidity
     // The distance of the current time to the start of the next possible funding cycle.
@@ -56,11 +55,10 @@ function _mockFundingCycleBasedOn(JBFundingCycle memory _baseFundingCycle, bool 
 
     _Internal references:_
 
-    * [`_SECONDS_IN_DAY`](../properties/\_seconds_in_day.md)
+    *   [`_SECONDS_IN_DAY`](../properties/\_seconds_in_day.md)
 
 
-
-3.  Find the correct start time for the mock funding cycle.\
+3.  Find the correct start time for the mock funding cycle.
 
     ```solidity
     // Derive what the start time should be.
@@ -72,11 +70,10 @@ function _mockFundingCycleBasedOn(JBFundingCycle memory _baseFundingCycle, bool 
 
     _Internal references:_
 
-    * [`_deriveStartFrom`](\_derivestartfrom.md)
+    *   [`_deriveStartFrom`](\_derivestartfrom.md)
 
 
-
-4.  Find the correct number for the mock funding cycle.\
+4.  Find the correct number for the mock funding cycle.\\
 
     ```solidity
     // Derive what the number should be.
@@ -85,37 +82,37 @@ function _mockFundingCycleBasedOn(JBFundingCycle memory _baseFundingCycle, bool 
 
     _Internal references:_
 
-    * [`_deriveNumberFrom`](\_derivenumberfrom.md)
+    *   [`_deriveNumberFrom`](\_derivenumberfrom.md)
 
 
+5. Return a [`JBFundingCycle`](../../../data-structures/jbfundingcycle.md) with the aggregated configuration.\\
 
-5.   Return a [`JBFundingCycle`](../../../data-structures/jbfundingcycle.md) with the aggregated configuration.\
+````solidity
+return
+  JBFundingCycle(
+    _idFor(_baseFundingCycle.projectId, _number),
+    _baseFundingCycle.projectId,
+    _number,
+    _baseFundingCycle.id,
+    _baseFundingCycle.configured,
+    _deriveWeightFrom(_baseFundingCycle, _start),
+    _baseFundingCycle.ballot,
+    _start,
+    _baseFundingCycle.duration,
+    _baseFundingCycle.target,
+    _baseFundingCycle.currency,
+    _baseFundingCycle.fee,
+    _baseFundingCycle.discountRate,
+    0,
+    _baseFundingCycle.metadata
+  );
+```
 
-    ```solidity
-    return
-      JBFundingCycle(
-        _idFor(_baseFundingCycle.projectId, _number),
-        _baseFundingCycle.projectId,
-        _number,
-        _baseFundingCycle.id,
-        _baseFundingCycle.configured,
-        _deriveWeightFrom(_baseFundingCycle, _start),
-        _baseFundingCycle.ballot,
-        _start,
-        _baseFundingCycle.duration,
-        _baseFundingCycle.target,
-        _baseFundingCycle.currency,
-        _baseFundingCycle.fee,
-        _baseFundingCycle.discountRate,
-        0,
-        _baseFundingCycle.metadata
-      );
-    ```
+_Internal references:_
 
-    _Internal references:_
-
-    * [`_idFor`](\_idfor.md)
-    * [`_deriveWeightFrom`](\_deriveweightfrom.md)
+* [`_idFor`](\_idfor.md)
+* [`_deriveWeightFrom`](\_deriveweightfrom.md)
+````
 {% endtab %}
 
 {% tab title="Code" %}
@@ -186,4 +183,3 @@ function _mockFundingCycleBasedOn(JBFundingCycle memory _baseFundingCycle, bool 
 | **High severity** | Identify a vulnerability in this operation that could lead to data corruption or loss of funds.                                        | 5+ETH  |
 {% endtab %}
 {% endtabs %}
-
