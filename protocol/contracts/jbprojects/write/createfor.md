@@ -10,8 +10,6 @@ Interface: `IJBProjects`
 
 _Anyone can create a project on an owner's behalf._
 
-__
-
 Definition:
 
 ```solidity

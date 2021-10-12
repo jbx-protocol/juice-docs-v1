@@ -10,9 +10,8 @@ Interface:`IJBProjects`
 
 **A handle can also be claimed if it has been challenged and the challenge has succeeded.**
 
-_Only a project's owner or operator can claim a handle for it._
-
-__
+_Only a project's owner or operator can claim a handle for it._/
+/
 
 Definition:
 
