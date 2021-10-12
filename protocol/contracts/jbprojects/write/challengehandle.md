@@ -10,8 +10,8 @@ Interface:`IJBProjects`
 
 **After one year, the handle can be claimed by anyone if the challenge isn't answered by the handle's project.**
 
-**This can be used to make sure a handle belonging to a stale project isn't lost forever.**
-
+**This can be used to make sure a handle belonging to a stale project isn't lost forever.**\
+\
 
 Definition:
 
