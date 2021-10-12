@@ -16,9 +16,10 @@ function _ballotStateOf(
 ) private view returns (JBBallotState) { ... }
 ```
 
-* `_id` is the ID of the funding cycle configuration to check the status of.
-* `_configuration` is the timestamp when the configuration took place. This differentiates reconfigurations onto the same upcoming funding cycle, which all would have the same ID but different configuration times.
-* `_ballotFundingCycleId` is the ID of the funding cycle which is configured with the ballot that should be used.
+* Arguments:
+  * `_id` is the ID of the funding cycle configuration to check the status of.
+  * `_configuration` is the timestamp when the configuration took place. This differentiates reconfigurations onto the same upcoming funding cycle, which all would have the same ID but different configuration times.
+  * `_ballotFundingCycleId` is the ID of the funding cycle which is configured with the ballot that should be used.
 * The view function is private to this contract.
 * The function does not alter state on the blockchain.
 * The function returns the [`JBBallotState`](../../../enums/jbballotstate.md).

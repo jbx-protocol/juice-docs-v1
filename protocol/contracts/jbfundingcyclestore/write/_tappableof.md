@@ -12,7 +12,8 @@ Definition:
 function _tappableOf(uint256 _projectId) private returns (uint256 fundingCycleId) { ... }
 ```
 
-* `_projectId` is the ID of the project to find a tappable funding cycle for.
+* Arguments:
+  * `_projectId` is the ID of the project to find a tappable funding cycle for.
 * The function is private to this contract.
 * The function returns the ID of a tappable funding cycle.
 

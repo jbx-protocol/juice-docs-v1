@@ -12,8 +12,6 @@ Interface:`IJBProjects`
 
 **This can be used to make sure a handle belonging to a stale project isn't lost forever.**
 
-
-
 Definition:
 
 ```solidity

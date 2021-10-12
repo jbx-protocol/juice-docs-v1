@@ -31,10 +31,11 @@ function set(
     ) { ... }
 ```
 
-* `_projectId` is the ID of the project for which splits are being added.
-* `_domain` is an identifier within which the splits should be considered active.
-* `_group` is an identifier between of splits being set. All splits within this `_group` must add up to within 100%.
-* `_splits` are the [`JBSplit`](../../../data-structures/jbsplit.md)s to set.
+* Arguments:
+  * `_projectId` is the ID of the project for which splits are being added.
+  * `_domain` is an identifier within which the splits should be considered active.
+  * `_group` is an identifier between of splits being set. All splits within this `_group` must add up to within 100%.
+  * `_splits` are the [`JBSplit`](../../../data-structures/jbsplit.md)s to set.
 * Through the [`requirePermission`](../../jboperatable/modifiers/requirepermissionacceptingalternateaddress.md) modifier, the function is only accessible by the project's owner, from an operator that has been given the `JBOperations.SetSplits` permission by the project owner for the provided `_projectId` , or from the current controller of the `_projectId`for the specified.
 * The function overrides a function definition from the `IJBSplitsStore` interface.
 * The function doesn't return anything.

@@ -12,8 +12,9 @@ Definition:
 function _idFor(uint256 _projectId, uint256 _number) private pure returns (uint256) { ... }
 ```
 
-* `_projectId`is ID of the project to use in the constructed ID.
-* `_number` is the number to use in the constructed ID.
+* Arguments:
+  * `_projectId`is ID of the project to use in the constructed ID.
+  * `_number` is the number to use in the constructed ID.
 * The view function is private to this contract.
 * The function does not alter state on the blockchain.
 * The function returns the ID that is unique to the provided inputs.

@@ -18,7 +18,8 @@ function get(uint256 _fundingCycleId)
   returns (JBFundingCycle memory fundingCycle) { ... }
 ```
 
-* `_fundingCycleId` is the ID of the funding cycle to get.
+* Arguments:
+  * `_fundingCycleId` is the ID of the funding cycle to get.
 * The view function can be accessed externally by anyone.
 * The function does not alter state on the blockchain.
 * The function overrides a function definition from the `IJBFundingCycleStore` interface.

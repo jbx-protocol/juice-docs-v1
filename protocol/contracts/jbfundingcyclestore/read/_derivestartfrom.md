@@ -15,8 +15,9 @@ function _deriveStartFrom(
 ) private pure returns (uint256 start) { ... }
 ```
 
-* `_baseFundingCycle` is The [`JBFundingCycle`](../../../data-structures/jbfundingcycle.md) to make the calculation for.
-* `_mustStartOnOrAfter` is a date that the derived start must be on or come after.
+* Arguments:
+  * `_baseFundingCycle` is The [`JBFundingCycle`](../../../data-structures/jbfundingcycle.md) to make the calculation for.
+  * `_mustStartOnOrAfter` is a date that the derived start must be on or come after.
 * The view function is private to this contract.
 * The function does not alter state on the blockchain.
 * The function returns a timestamp in seconds.

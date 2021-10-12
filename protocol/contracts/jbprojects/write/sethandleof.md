@@ -10,8 +10,6 @@ Interface:`IJBProjects`
 
 _Only a project's owner or operator can set its handle._
 
-
-
 Definition:
 
 ```solidity
@@ -21,7 +19,8 @@ function setHandleOf(uint256 _projectId, bytes32 _handle)
   requirePermission(ownerOf(_projectId), _projectId, JBOperations.SET_HANDLE) { ... }
 ```
 
-* `_projectId` is the ID of the project who's handle is being changed.
+* Arguments:
+  * `_projectId` is the ID of the project who's handle is being changed.
 * `_handle` is the new unique handle for the project.
 * Through the [`requirePermission`](../../jboperatable/modifiers/requirepermission.md) modifier, the function is only accessible by the project's owner, or from an operator that has been given the `JBOperations.SET_HANDLE` permission by the project owner for the provided `_projectId`.
 * The function overrides a function definition from the `IJBProjects` interface.

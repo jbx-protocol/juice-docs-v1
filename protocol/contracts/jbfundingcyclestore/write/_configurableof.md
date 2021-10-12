@@ -17,10 +17,11 @@ function _configurableOf(
 ) private returns (uint256 fundingCycleId) { ... }
 ```
 
-* `_projectId` is the ID of the project to find a configurable funding cycle for.
-* `_configured` is the time at which the configuration is occurring.
-* `_weight` is the weight to store along with a newly created configurable funding cycle.
-* `_configureActiveFundingCycles` is if the active funding cycle should be configurable. Otherwise the next funding cycle will be used.
+* Arguments:
+  * `_projectId` is the ID of the project to find a configurable funding cycle for.
+  * `_configured` is the time at which the configuration is occurring.
+  * `_weight` is the weight to store along with a newly created configurable funding cycle.
+  * `_configureActiveFundingCycles` is if the active funding cycle should be configurable. Otherwise the next funding cycle will be used.
 * The function is private to this contract.
 * The function returns the ID of a configurable funding cycle.
 

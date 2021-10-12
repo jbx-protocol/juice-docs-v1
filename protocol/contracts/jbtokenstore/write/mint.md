@@ -21,10 +21,11 @@ function mintFor(
 ) external override onlyController(_projectId) { ... }
 ```
 
-* `_holder` is the address receiving the new tokens.
-* `_projectId` is the ID of the project to which the tokens belong.
-* `_amount` is the amount of tokens to mint.
-* `_preferClaimedTokens` is a flag indicating whether there's a preference for ERC20's to be claimed automatically if they have been issued.
+* Arguments:
+  * `_holder` is the address receiving the new tokens.
+  * `_projectId` is the ID of the project to which the tokens belong.
+  * `_amount` is the amount of tokens to mint.
+  * `_preferClaimedTokens` is a flag indicating whether there's a preference for ERC20's to be claimed automatically if they have been issued.
 * Through the [`onlyController`](../../jbutility/modifiers/onlycontroller.md) modifier, the function can only be accessed by the controller of the `_projectId`. 
 * The function overrides a function definition from the `IJBTokenStore` interface.
 * The function returns nothing.

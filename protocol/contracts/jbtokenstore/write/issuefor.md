@@ -26,9 +26,10 @@ function issueFor(
   returns (IJBToken token) { ... }
 ```
 
-* `_projectId` is the ID of the project for which the tokens will be issued.
-* `_name` is the name to associate with the token.
-* `_symbol` is the symbol to associate with the token. This is usually short and all caps.
+* Arguments:
+  * `_projectId` is the ID of the project for which the tokens will be issued.
+  * `_name` is the name to associate with the token.
+  * `_symbol` is the symbol to associate with the token. This is usually short and all caps.
 * Through the [`requirePermission`](../../jboperatable/modifiers/requirepermission.md) modifier, the function is only accessible by the project's owner, or from an operator that has been given the `JBOperations.ISSUE` permission by the project owner for the provided `_projectId`.
 * The function overrides a function definition from the `IJBTokenStore` interface.
 * The function returns the address of the token that was issued.

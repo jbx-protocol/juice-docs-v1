@@ -21,10 +21,11 @@ function transferTo(
 ) external override requirePermission(_holder, _projectId, JBOperations.TRANSFER) { ... }
 ```
 
-* `_recipient` is the recipient of the tokens.
-* `_holder` is the address to transfer tokens from.
-* `_projectId` is the ID of the project whose tokens are being transferred.
-* `_amount` is the amount of tokens to transfer.
+* Arguments:
+  * `_recipient` is the recipient of the tokens.
+  * `_holder` is the address to transfer tokens from.
+  * `_projectId` is the ID of the project whose tokens are being transferred.
+  * `_amount` is the amount of tokens to transfer.
 * Through the [`requirePermission`](../../jboperatable/modifiers/requirepermission.md) modifier, the function is only accessible by the project's owner, or from an operator that has been given the `JBOperations.TRANSFER`permission by the project owner for the provided `_projectId`.
 * The function overrides a function definition from the `IJBTokenStore` interface.
 * The function returns nothing.

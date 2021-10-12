@@ -21,14 +21,15 @@ function _packAndStoreConfigurationProperties(
 ) private { ... }
 ```
 
-* `_fundingCycleId` is the ID of the funding cycle to pack and store.
-* `_configured` is the timestamp of the configuration.
-* `_cycleLimit` is the number of cycles that this configuration should last for before going back to the last permanent.
-* `_ballot` is the ballot to use for future reconfiguration approvals. 
-* `_duration` is the duration of the funding cycle.
-* `_currency` is the currency of the funding cycle.
-* `_fee` is the fee of the funding cycle.
-* `_discountRate` is the discount rate of the base funding cycle.
+* Arguments:
+  * `_fundingCycleId` is the ID of the funding cycle to pack and store.
+  * `_configured` is the timestamp of the configuration.
+  * `_cycleLimit` is the number of cycles that this configuration should last for before going back to the last permanent.
+  * `_ballot` is the ballot to use for future reconfiguration approvals. 
+  * `_duration` is the duration of the funding cycle.
+  * `_currency` is the currency of the funding cycle.
+  * `_fee` is the fee of the funding cycle.
+  * `_discountRate` is the discount rate of the base funding cycle.
 * The function is private to this contract.
 * The function doesn't return anything.
 

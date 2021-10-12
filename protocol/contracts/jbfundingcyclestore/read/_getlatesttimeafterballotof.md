@@ -17,8 +17,9 @@ function _getLatestTimeAfterBallotOf(JBFundingCycle memory _fundingCycle, uint25
   returns (uint256) { ... } 
 ```
 
-* `_fundingCycle` is the ID funding cycle to make the calculation from.
-* `_from` is the time from which the ballot duration should be calculated.
+* Arguments:
+  * `_fundingCycle` is the ID funding cycle to make the calculation from.
+  * `_from` is the time from which the ballot duration should be calculated.
 * The view function is private to this contract.
 * The function does not alter state on the blockchain.
 * The function returns the time.

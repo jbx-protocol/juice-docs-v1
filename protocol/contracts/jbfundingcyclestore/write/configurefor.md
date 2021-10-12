@@ -22,11 +22,12 @@ function configureFor(
 ) external override onlyController(_projectId) returns (JBFundingCycle memory) { ... }
 ```
 
-* `_projectId` is the ID of the project being configured.
-* `_data` is the [`JBFundingCycleData`](../../../data-structures/jbfundingcycledata.md)for the configuration.
-* `_metadata` is data to associate with this funding cycle configuration.
-* `_fee` is the fee that this configuration incurs when tapping.
-* `_configureActiveFundingCycle` is a flag indicating if a funding cycle that has already started should be configurable.
+* Arguments:
+  * `_projectId` is the ID of the project being configured.
+  * `_data` is the [`JBFundingCycleData`](../../../data-structures/jbfundingcycledata.md)for the configuration.
+  * `_metadata` is data to associate with this funding cycle configuration.
+  * `_fee` is the fee that this configuration incurs when tapping.
+  * `_configureActiveFundingCycle` is a flag indicating if a funding cycle that has already started should be configurable.
 * Through the [`onlyController`](../../jbutility/modifiers/onlycontroller.md) modifier, the function can only be accessed by the controller of the `_projectId`. 
 * The function overrides a function definition from the `IJBFundingCycleStore` interface.
 * Returns the [`JBFundingCycle`](../../../data-structures/jbfundingcycle.md) that was configured.

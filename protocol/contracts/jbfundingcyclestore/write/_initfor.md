@@ -17,9 +17,10 @@ function _initFor(
 ) private returns (uint256 newFundingCycleId) { ... }
 ```
 
-* `_projectId` is the ID of the project to which the funding cycle being initialized belongs.
-* `_baseFundingCycle` is the funding cycle to base the initialized one on.
-* `_mustStartOnOrAfter` is the time before which the initialized funding cycle can't start.
+* Arguments:
+  * `_projectId` is the ID of the project to which the funding cycle being initialized belongs.
+  * `_baseFundingCycle` is the funding cycle to base the initialized one on.
+  * `_mustStartOnOrAfter` is the time before which the initialized funding cycle can't start.
 * The function is private to this contract.
 * The function returns the ID of the initialized funding cycle.
 

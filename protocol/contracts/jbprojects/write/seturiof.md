@@ -10,8 +10,6 @@ Interface:`IJBProjects`
 
 _Only a project's owner or operator can set its URI._
 
- 
-
 Definition:
 
 ```solidity
@@ -21,8 +19,9 @@ function setUriOf(uint256 _projectId, string calldata _uri)
   requirePermission(ownerOf(_projectId), _projectId, JBOperations.SET_URI) { ... }
 ```
 
-* `_projectId` is the ID of the project who's URI is being changed.
-* `_uri` is the new IPFS CID hash where metadata about the project has been uploaded.
+* Arguments:
+  * `_projectId` is the ID of the project who's URI is being changed.
+  * `_uri` is the new IPFS CID hash where metadata about the project has been uploaded.
 * Through the [`requirePermission`](../../jboperatable/modifiers/requirepermission.md) modifier, the function is only accessible by the project's owner, or from an operator that has been given the `JBOperations.SET_URI` permission by the project owner for the provided `_projectId`.
 * The function overrides a function definition from the `IJBProjects` interface.
 * The function doesn't return anything.

@@ -12,7 +12,8 @@ Definition:
 function _isIdApproved(uint256 _fundingCycleId) private view returns (bool) { ... } 
 ```
 
-* `_fundingCycleId` is the ID of the funding cycle to get an approval flag for.
+* Arguments:
+  * `_fundingCycleId` is the ID of the funding cycle to get an approval flag for.
 * The view function is private to this contract.
 * The function does not alter state on the blockchain.
 * The function returns the approval flag.

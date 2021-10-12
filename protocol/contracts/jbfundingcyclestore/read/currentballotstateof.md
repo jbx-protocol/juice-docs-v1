@@ -14,7 +14,8 @@ Definition:
 function currentBallotStateOf(uint256 _projectId) external view override returns (JBBallotState) { ... } 
 ```
 
-* `_projectId` is the ID of the project to check the ballot state of.
+* Arguments:
+  * `_projectId` is the ID of the project to check the ballot state of.
 * The view function can be accessed externally by anyone.
 * The function does not alter state on the blockchain.
 * The function overrides a function definition from the `IJBFundingCycleStore` interface.

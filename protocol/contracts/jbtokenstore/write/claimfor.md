@@ -20,9 +20,10 @@ function claimFor(
 ) external override { ... }
 ```
 
-* `_holder` is the owner of the tokens to claim.
-* `_projectId` is the ID of the project whose tokens are being claimed.
-* `_amount` is the amount of tokens to claim.
+* Arguments:
+  * `_holder` is the owner of the tokens to claim.
+  * `_projectId` is the ID of the project whose tokens are being claimed.
+  * `_amount` is the amount of tokens to claim.
 * The function can be accessed externally by anyone. 
 * The function overrides a function definition from the `IJBTokenStore` interface.
 * The function returns nothing.

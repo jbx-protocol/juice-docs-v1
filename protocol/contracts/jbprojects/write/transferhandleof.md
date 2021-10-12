@@ -10,8 +10,6 @@ Interface:`IJBProjects`
 
 _Only a project's owner or operator can transfer its handle._
 
-
-
 Definition:
 
 ```solidity
@@ -26,9 +24,10 @@ function transferHandleOf(
   returns (bytes32 handle) { ... }
 ```
 
-* `_projectId` is the ID of the project to transfer the handle from.
-* `_to` is the address that should be able to reallocate the transferred handle.
-* `_newHandle` is the new unique handle for the project that will replace the transferred one.
+* Arguments:
+  * `_projectId` is the ID of the project to transfer the handle from.
+  * `_to` is the address that should be able to reallocate the transferred handle.
+  * `_newHandle` is the new unique handle for the project that will replace the transferred one.
 * Through the [`requirePermission`](../../jboperatable/modifiers/requirepermission.md) modifier, the function is only accessible by the project's owner, or from an operator that has been given the `JBOperations.SET_HANDLE` permission by the project owner for the provided `_projectId`.
 * The function overrides a function definition from the `IJBProjects` interface.
 * The function returns the `handle` that has been transferred.

@@ -17,10 +17,11 @@ function _updateFundingCycleBasedOn(
 ) private returns (uint256 fundingCycleId) { ... }
 ```
 
-* `_baseFundingCycle` is the cycle that the one being updated is based on.
-* `_mustStartOnOrAfter` is the time before which the initialized funding cycle can't start.
-* `_weight` is the weight to store along with a newly updated configurable funding cycle.
-* `_copy` is a flag indicating if non-intrinsic properties should be copied from the base funding cycle.
+* Arguments:
+  * `_baseFundingCycle` is the cycle that the one being updated is based on.
+  * `_mustStartOnOrAfter` is the time before which the initialized funding cycle can't start.
+  * `_weight` is the weight to store along with a newly updated configurable funding cycle.
+  * `_copy` is a flag indicating if non-intrinsic properties should be copied from the base funding cycle.
 * The function is private to this contract.
 * The function returns the ID of the updated funding cycle.
 
