@@ -10,6 +10,8 @@ Interface: `IJBProjects`
 
 _Anyone can create a project on an owner's behalf._
 
+__
+
 Definition:
 
 ```solidity
@@ -20,24 +22,20 @@ function createFor(
 ) external override returns (uint256) { ... }
 ```
 
-* `_owner` is the address that will be the owner of the project.
-* `_handle` is a unique string to associate with the project that will resolve to its token ID.
-* `_uri` is an IPFS CID hash where metadata about the project has been uploaded. An empty string is acceptable if no metadata is being provided.
+* Arguments:
+  * `_owner` is the address that will be the owner of the project.
+  * `_handle` is a unique string to associate with the project that will resolve to its token ID.
+  * `_uri` is an IPFS CID hash where metadata about the project has been uploaded. An empty string is acceptable if no metadata is being provided.
 * The function can be accessed externally by anyone.
 * The function overrides a function definition from the `IJBProjects` interface.
 * Returns the token ID of the newly created project.
-
-
-
-1.  Check that the provided `_handle` is not empty.
+*   Check that the provided `_handle` is not empty.
 
     ```solidity
     // Handle must exist.
     require(_handle != bytes32(0), '0x06: EMPTY_HANDLE');
     ```
-
-
-2.  Check that the `_handle` is unique. This is done by making sure there isn't yet an `idFor` the handle, and making sure it isn't currently being transferred to an address.
+*   Check that the `_handle` is unique. This is done by making sure there isn't yet an `idFor` the handle, and making sure it isn't currently being transferred to an address.
 
     ```solidity
     // Handle must be unique.
@@ -48,9 +46,7 @@ function createFor(
 
     * [`idFor`](../properties/idfor.md)
     * [`transferAddressFor`](../properties/transferaddressfor.md)
-
-
-3.  Increment the count to include the new project being created.
+*   Increment the count to include the new project being created.
 
     ```solidity
     // Increment the count, which will be used as the ID.
@@ -60,17 +56,13 @@ function createFor(
     _Internal references:_
 
     * [`count`](../properties/count.md)
-
-
-4.  Mint a new NFT token belonging to the `_owner` using the `count` as the token ID.
+*   Mint a new NFT token belonging to the `_owner` using the `count` as the token ID.
 
     ```solidity
     // Mint the project.
     _safeMint(_owner, count);
     ```
-
-
-5.  Store the provided `_handle` as the as the `handleOf` the newly created project.
+*   Store the provided `_handle` as the as the `handleOf` the newly created project.
 
     ```solidity
     // Store the handle for the project ID.
@@ -80,9 +72,7 @@ function createFor(
     _Internal references:_
 
     * [`handleOf`](../properties/handleof.md)
-
-
-6.  Store the newly created project's ID as the `idFor` the provided `_handle` to allow for project lookup using the handle.
+*   Store the newly created project's ID as the `idFor` the provided `_handle` to allow for project lookup using the handle.
 
     ```solidity
     // Store the project ID for the handle.
@@ -92,9 +82,7 @@ function createFor(
     _Internal references:_
 
     * [`idFor`](../properties/idfor.md)
-
-
-7.  If a URI was provided (meaning it's not an empty string), store it as the `uriOf` the newly created project.
+*   If a URI was provided (meaning it's not an empty string), store it as the `uriOf` the newly created project.
 
     ```solidity
     // Set the URI if one was provided.
@@ -104,9 +92,7 @@ function createFor(
     _Internal references:_
 
     * [`uriOf`](../properties/uriof.md)
-
-
-8.  Emit a `Create` event with all relevant parameters.
+*   Emit a `Create` event with all relevant parameters.
 
     ```
     emit Create(count, _owner, _handle, _uri, _terminal, msg.sender);
@@ -115,9 +101,7 @@ function createFor(
     _Event references:_
 
     * [`Create`](../events/create.md)
-
-
-9.  Return the newly created project's token ID.
+*   Return the newly created project's token ID.
 
     ```solidity
     return count;
@@ -193,4 +177,3 @@ function createFor(
 | **High severity** | Identify a vulnerability in this operation that could lead to data corruption or loss of funds.                                        | 5+ETH  |
 {% endtab %}
 {% endtabs %}
-
