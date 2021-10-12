@@ -11,6 +11,7 @@ Interface:`IJBProjects`
 _Only a project's owner or operator can transfer its handle._
 
 
+
 Definition:
 
 ```solidity

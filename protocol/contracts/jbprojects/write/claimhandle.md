@@ -12,7 +12,7 @@ Interface:`IJBProjects`
 
 _Only a project's owner or operator can claim a handle for it._
 
-__
+
 
 Definition:
 
