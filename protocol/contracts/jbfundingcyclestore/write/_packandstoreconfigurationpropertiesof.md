@@ -84,18 +84,18 @@ function _packAndStoreConfigurationProperties(
 
 7.  Store the packed configuration properties of the funding cycle.\
 
+    ```solidity
+    // Set in storage.
+    _packedConfigurationPropertiesOf[_fundingCycleId] = packed;
+    ```
 
     _Internal references:_
 
     * [`_packAndStoreConfigurationPropertiesOf`](../properties/\_packedconfigurationpropertiesof.md)
 
-    ```solidity
-    // Set in storage.
-    _packedConfigurationPropertiesOf[_fundingCycleId] = packed;
-    ```
 {% endtab %}
 
-{% tab title="Only code" %}
+{% tab title="Code" %}
 ```solidity
 /**
   @notice 

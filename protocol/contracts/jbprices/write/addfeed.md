@@ -31,15 +31,15 @@ function addFeedFor(
 
 1.  Make sure there isn't already a price feed set for the `_currency` `_base` pair.\
 
+    ```solidity
+    // There can't already be a feed for the specified currency.
+    require(feedFor[_currency][_base] == AggregatorV3Interface(address(0)), '0x04: ALREADY_EXISTS');
+    ```
 
     Internal references:
 
     * [`feedFor`](../properties/feedfor.md)
 
-    ```solidity
-    // There can't already be a feed for the specified currency.
-    require(feedFor[_currency][_base] == AggregatorV3Interface(address(0)), '0x04: ALREADY_EXISTS');
-    ```
 
 
 2.  Get a reference to how many decimal places the provided price feed uses in the quoted rates. 
@@ -52,15 +52,15 @@ function addFeedFor(
 
 3.  Make sure the feed doesn't use more decimals than what the contract expects. This contract isn't design to support feeds that use more than 18 decimals of fidelity.\
 
+    ```solidity
+    // Decimals should be less than or equal to the target number of decimals.
+    require(_decimals <= TARGET_DECIMALS, '0x05: BAD_DECIMALS');
+    ```
 
     Internal references:
 
     * [`TARGET_DECIMALS`](../properties/targetdecimals.md)
 
-    ```solidity
-    // Decimals should be less than or equal to the target number of decimals.
-    require(_decimals <= TARGET_DECIMALS, '0x05: BAD_DECIMALS');
-    ```
 
 
 4.  Store the provided feed for the `_currency` `_base` pair.
@@ -73,31 +73,30 @@ function addFeedFor(
 
 5.  Store a value that price feed results will be multiplied by in order to always be reported with `TARGET_DECIMALS` fidelity. The prices from this contract are always reported with `TARGET_DECIMALS` fidelity – if the provided feed reports with fewer decimals, the contract must know how to adjust the price feed to normalize results.\
 
+    ```solidity
+    // Set the decimal adjuster for the currency.
+    feedDecimalAdjusterFor[_currency][_base] = 10**(TARGET_DECIMALS - _decimals);
+    ```
 
     Internal references:
 
     * [`feedDecimalAdjusterFor`](../properties/feeddecimaladjuster.md)
     * [`TARGET_DECIMALS`](../properties/targetdecimals.md)
 
-    ```solidity
-    // Set the decimal adjuster for the currency.
-    feedDecimalAdjusterFor[_currency][_base] = 10**(TARGET_DECIMALS - _decimals);
-    ```
 
 
 6.  Emit an `AddFeed` event with the all relevant parameters. \
 
+    ```solidity
+    emit AddFeed(_currency, _base, _decimals, _feed);
+    ```
 
     _Event references:_
 
     * [`AddFeed`](../events/addfeed.md)
-
-    ```solidity
-    emit AddFeed(_currency, _base, _decimals, _feed);
-    ```
 {% endtab %}
 
-{% tab title="Only code" %}
+{% tab title="Code" %}
 ```solidity
 /** 
   @notice 

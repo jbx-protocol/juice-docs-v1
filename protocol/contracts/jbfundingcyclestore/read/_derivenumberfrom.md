@@ -41,19 +41,18 @@ function _deriveNumberFrom(JBFundingCycle memory _baseFundingCycle, uint256 _sta
 
 3.  Return the number of base cycles that fit in the base distance.\
 
-
-    _Internal references:_
-
-    * [`_SECONDS_IN_DAY`](../properties/\_seconds_in_day.md)
-
     ```solidity
     // Find the number of base cycles that fit in the base distance.
     return
       _baseFundingCycle.number + (_startDistance / (_baseFundingCycle.duration * _SECONDS_IN_DAY));
     ```
+
+    _Internal references:_
+
+    * [`_SECONDS_IN_DAY`](../properties/\_seconds_in_day.md)
 {% endtab %}
 
-{% tab title="Only code" %}
+{% tab title="Code" %}
 ```solidity
 /** 
   @notice 

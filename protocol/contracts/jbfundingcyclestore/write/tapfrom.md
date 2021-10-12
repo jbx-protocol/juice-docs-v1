@@ -38,28 +38,26 @@ function tapFrom(uint256 _projectId, uint256 _amount)
 
 2.  Find the ID of the funding cycle that should be tapped.\
 
-
-    _Internal references:_
-
-    * [`_tappableOf`](\_tappableof.md)
-
     ```solidity
     // Get a reference to the funding cycle being tapped.
     uint256 _fundingCycleId = _tappableOf(_projectId);
     ```
 
-
-3.  Get a reference to the new amount that will be tapped. This is the sum of the provided `_amount` with what has already been tapped for the funding cycle.\
-
-
     _Internal references:_
 
-    * [`_tappedAmountOf`](../properties/\_tappedamountof.md)
+    * [`_tappableOf`](\_tappableof.md)
+
+
+3.  Get a reference to the new amount that will be tapped. This is the sum of the provided `_amount` with what has already been tapped for the funding cycle.\
 
     ```solidity
     // The new amount that has been tapped.
     uint256 _newTappedAmount = _tappedAmountOf[_fundingCycleId] + _amount;
     ```
+
+    _Internal references:_
+
+    * [`_tappedAmountOf`](../properties/\_tappedamountof.md)
 
 
 4.  The amount being tapped plus what's already been tapped must be within the configured target for the funding cycle.
@@ -80,29 +78,27 @@ function tapFrom(uint256 _projectId, uint256 _amount)
 
 6.  Emit a `Tap` event with the all relevant parameters. \
 
+    ```solidity
+    emit Tap(_fundingCycleId, _projectId, _amount, _newTappedAmount, msg.sender);
+    ```
 
     _Event references:_
 
     * [`Tap`](../events/tap.md) 
 
-    ```solidity
-    emit Tap(_fundingCycleId, _projectId, _amount, _newTappedAmount, msg.sender);
-    ```
-
 
 7.  Return the [`JBFundingCycle`](../../../data-structures/jbfundingcycle.md) struct that has been tapped.\
-
-
-    _Internal references:_
-
-    * [`_getStructFor`](../read/\_getstructfor.md)
 
     ```solidity
     return _getStructFor(_fundingCycleId);
     ```
+
+    _Internal references:_
+
+    * [`_getStructFor`](../read/\_getstructfor.md)
 {% endtab %}
 
-{% tab title="Only code" %}
+{% tab title="Code" %}
 ```solidity
 /** 
   @notice 

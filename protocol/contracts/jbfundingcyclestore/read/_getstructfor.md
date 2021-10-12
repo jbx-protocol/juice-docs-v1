@@ -36,11 +36,6 @@ function _getStructFor(uint256 _id) private view returns (JBFundingCycle memory 
 
 3.  Get the stored intrinsic properties of the funding cycle. Populate the struct values by de-packing the `uint256`.\
 
-
-    _Internal references:_
-
-    * [`_packedIntrinsicPropertiesOf`](../properties/\_packedintrinsicpropertiesof.md)
-
     ```solidity
     uint256 _packedIntrinsicProperties = _packedIntrinsicPropertiesOf[_id];
 
@@ -51,13 +46,13 @@ function _getStructFor(uint256 _id) private view returns (JBFundingCycle memory 
     fundingCycle.number = uint256(uint24(_packedIntrinsicProperties >> 232));
     ```
 
-
-4.  Get the stored configuration properties of the funding cycle. Populate the struct values by unpacking the `uint256`.\
-
-
     _Internal references:_
 
-    * [`_packedConfigurationPropertiesOf`](../properties/\_packedconfigurationpropertiesof.md)
+    * [`_packedIntrinsicPropertiesOf`](../properties/\_packedintrinsicpropertiesof.md)
+
+
+
+4.  Get the stored configuration properties of the funding cycle. Populate the struct values by unpacking the `uint256`.\
 
     ```solidity
     uint256 _packedConfigurationProperties = _packedConfigurationPropertiesOf[_id];
@@ -70,44 +65,48 @@ function _getStructFor(uint256 _id) private view returns (JBFundingCycle memory 
     fundingCycle.discountRate = uint256(uint16(_packedConfigurationProperties >> 240));
     ```
 
-
-5.  Populate the `target` property of the struct by reading from what's stored in `_targetOf`.\
-
-
     _Internal references:_
 
-    * [`_targetOf`](../properties/\_targetof.md)
+    * [`_packedConfigurationPropertiesOf`](../properties/\_packedconfigurationpropertiesof.md)
+
+
+
+5.  Populate the `target` property of the struct by reading from what's stored in `_targetOf`.\
 
     ```solidity
     fundingCycle.target = _targetOf[_id];
     ```
 
-
-6.  Populate the `tapped` property of the struct by reading from what's stored in `_tappedAmountOf`.\
-
-
     _Internal references:_
 
-    * [`_tappedAmountOf`](../properties/\_targetof.md)
+    * [`_targetOf`](../properties/\_targetof.md)
+
+
+
+6.  Populate the `tapped` property of the struct by reading from what's stored in `_tappedAmountOf`.\
 
     ```solidity
     fundingCycle.tapped = _tappedAmountOf[_id];
     ```
 
-
-7.  Populate the `metadata` property of the struct by reading from what's stored in `_metadataOf`.\
-
-
     _Internal references:_
 
-    * [`_metadataOf`](../properties/\_metadataof.md)
+    * [`_tappedAmountOf`](../properties/\_targetof.md)
+
+
+
+7.  Populate the `metadata` property of the struct by reading from what's stored in `_metadataOf`.\
 
     ```solidity
     fundingCycle.metadata = _metadataOf[_id];
     ```
+
+    _Internal references:_
+
+    * [`_metadataOf`](../properties/\_metadataof.md)
 {% endtab %}
 
-{% tab title="Only code" %}
+{% tab title="Code" %}
 ```solidity
 /**
   @notice 

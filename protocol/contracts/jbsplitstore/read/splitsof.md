@@ -28,17 +28,16 @@ function splitsOf(
 
 1. This function just reads and returns the stored `_splitsOf` the project, within the specified domain, for the specified group.  
 
+   ```solidity
+   return _splitsOf[_projectId][_domain][_group];
+   ```
 
    Internal references:
 
    * [`_splitsOf`](../properties/_splitsof.md)
-
-   ```solidity
-   return _splitsOf[_projectId][_domain][_group];
-   ```
 {% endtab %}
 
-{% tab title="Only code" %}
+{% tab title="Code" %}
 ```solidity
 /**
   @notice 

@@ -83,11 +83,6 @@ function configureFor(
 
 7.  Find the ID of the funding cycle that should be configured.\
 
-
-    _Internal references:_
-
-    * [`_configurableOf`](\_configurableof.md)
-
     ```solidity
     // Gets the ID of the funding cycle to reconfigure.
     uint256 _fundingCycleId = _configurableOf(
@@ -98,13 +93,12 @@ function configureFor(
     );
     ```
 
-
-8.  Store all of the configuration properties provided onto the `_fundingCycleId`. These properties can all be packed into one `uint256` storage slot.\
-
-
     _Internal references:_
 
-    * [`_packAndStoreConfigurationPropertiesOf`](\_packandstoreconfigurationpropertiesof.md)
+    * [`_configurableOf`](\_configurableof.md)
+
+
+8.  Store all of the configuration properties provided onto the `_fundingCycleId`. These properties can all be packed into one `uint256` storage slot.\
 
     ```solidity
     // Store the configuration.
@@ -119,58 +113,58 @@ function configureFor(
     );
     ```
 
-
-9.  Store the provided `_data.target` for the `_fundingCycleId`.\
-
-
     _Internal references:_
 
-    * [`_targetOf`](../properties/\_targetof.md)
+    * [`_packAndStoreConfigurationPropertiesOf`](\_packandstoreconfigurationpropertiesof.md)
+
+
+9.  Store the provided `_data.target` for the `_fundingCycleId`.\
 
     ```solidity
     // Set the target amount.
     _targetOf[_fundingCycleId] = _data.target;
     ```
 
-
-10. Store the provided `_metadata` for the `_fundingCycleId`.\
-
-
     _Internal references:_
 
-    * [`_metadataOf`](../properties/\_metadataof.md)
+    * [`_targetOf`](../properties/\_targetof.md)
+
+
+10. Store the provided `_metadata` for the `_fundingCycleId`.\
 
     ```solidity
     // Set the metadata.
     _metadataOf[_fundingCycleId] = _metadata;
     ```
 
+    _Internal references:_
+
+    * [`_metadataOf`](../properties/\_metadataof.md)
+
 
 11. Emit a `Configure` event with the all relevant parameters. \
-
-
-    _Event references:_
-
-    * [`Configure`](../events/configure.md) 
 
     ```solidity
     emit Configure(_fundingCycleId, _projectId, _configured, _data, _metadata, msg.sender);
     ```
 
+    _Event references:_
+
+    * [`Configure`](../events/configure.md) 
+
 
 12. Return the [`JBFundingCycle`](../../../data-structures/jbfundingcycle.md) struct that carries the new configuration.\
-
-
-    _Internal references:_
-
-    * [`_getStructFor`](../read/\_getstructfor.md)
 
     ```solidity
     return _getStructFor(_fundingCycleId);
     ```
+
+    _Internal references:_
+
+    * [`_getStructFor`](../read/\_getstructfor.md)
 {% endtab %}
 
-{% tab title="Only code" %}
+{% tab title="Code" %}
 ```solidity
 /**
   @notice 

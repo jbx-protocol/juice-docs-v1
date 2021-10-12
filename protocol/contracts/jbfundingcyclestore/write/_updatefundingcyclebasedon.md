@@ -28,25 +28,19 @@ function _updateFundingCycleBasedOn(
 
 1.  Find the time that the updated funding cycle should start at.\
 
-
-    _Internal references:_
-
-    * [`_deriveStartFrom`](../read/\_derivestartfrom.md)
-
     ```solidity
     // Derive the correct next start time from the base.
     uint256 _start = _deriveStartFrom(_baseFundingCycle, _mustStartOnOrAfter);
     ```
 
+    _Internal references:_
+
+    * [`_deriveStartFrom`](../read/\_derivestartfrom.md)
+
 
 2.  Find the weight that the updated funding cycle should use. If a weight was provided to the function, use it. Otherwise derive one from the previous weight.\
     \
     If the provided weight is the number 1, treat is like the number 0. A weight of 0 means that no specific weight was passed in.\
-
-
-    _Internal references:_
-
-    * [`_deriveWeightFrom`](../read/\_deriveweightfrom.md)
 
     ```solidity
     // A weight of 1 is treated as a weight of 0.
@@ -55,26 +49,24 @@ function _updateFundingCycleBasedOn(
       : _deriveWeightFrom(_baseFundingCycle, _start);
     ```
 
-
-3.  Find the number that the updated funding cycle should use.\
-
-
     _Internal references:_
 
-    * [`_deriveNumberFrom`](../read/\_derivenumberfrom.md)
+    * [`_deriveWeightFrom`](../read/\_deriveweightfrom.md)
+
+
+3.  Find the number that the updated funding cycle should use.\
 
     ```solidity
     // Derive the correct number.
     uint256 _number = _deriveNumberFrom(_baseFundingCycle, _start);
     ```
 
-
-4.  Store the properties for the updated funding cycle.\
-
-
     _Internal references:_
 
-    * [`_packAndStoreIntrinsicPropertiesOf`](\_packandstoreintrinsicpropertiesof.md)
+    * [`_deriveNumberFrom`](../read/\_derivenumberfrom.md)
+
+
+4.  Store the properties for the updated funding cycle.\
 
     ```solidity
     // Update the intrinsic properties.
@@ -86,9 +78,13 @@ function _updateFundingCycleBasedOn(
       _start
     );
     ```
+
+    _Internal references:_
+
+    * [`_packAndStoreIntrinsicPropertiesOf`](\_packandstoreintrinsicpropertiesof.md)
 {% endtab %}
 
-{% tab title="Only code" %}
+{% tab title="Code" %}
 ```solidity
 /** 
   @notice

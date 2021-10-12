@@ -60,11 +60,6 @@ function _deriveWeightFrom(JBFundingCycle memory _baseFundingCycle, uint256 _sta
 
 5.  Apply the `_baseFundingCycle`'s discount rate. Apply the rate as many times as there have been cycles within the `_startDistance`.\
 
-
-    _Internal references:_
-
-    * [`_SECONDS_IN_DAY`](../properties/\_seconds_in_day.md)
-
     ```solidity
     // Apply the base funding cycle's discount rate, if necessary.
     uint256 _discountMultiple = _startDistance / (_baseFundingCycle.duration * _SECONDS_IN_DAY);
@@ -74,9 +69,13 @@ function _deriveWeightFrom(JBFundingCycle memory _baseFundingCycle, uint256 _sta
       // Base the new weight on the specified funding cycle's weight.
       weight = PRBMath.mulDiv(weight, 10000 - _baseFundingCycle.discountRate, 10000);
     ```
+
+    _Internal references:_
+
+    * [`_SECONDS_IN_DAY`](../properties/\_seconds_in_day.md)
 {% endtab %}
 
-{% tab title="Only code" %}
+{% tab title="Code" %}
 ```solidity
 /** 
   @notice 

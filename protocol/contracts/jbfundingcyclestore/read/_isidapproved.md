@@ -21,29 +21,28 @@ function _isIdApproved(uint256 _fundingCycleId) private view returns (bool) { ..
 
 1.  Find the [`JBFundingCycle`](../../../data-structures/jbfundingcycle.md) struct for the provided ID.\
 
+    ```solidity
+    JBFundingCycle memory _fundingCycle = _getStructFor(_fundingCycleId);
+    ```
 
     _Internal references:_
 
     * [`_getStructFor`](\_getstructfor.md)
 
-    ```solidity
-    JBFundingCycle memory _fundingCycle = _getStructFor(_fundingCycleId);
-    ```
 
 
 2.  Return the approval flag from the [`_isApproved`](\_isapproved.md) function.\
 
+    ```solidity
+    return _isApproved(_fundingCycle);
+    ```
 
     _Internal references:_
 
     * [`_isApproved`](\_isapproved.md)
-
-    ```solidity
-    return _isApproved(_fundingCycle);
-    ```
 {% endtab %}
 
-{% tab title="Only code" %}
+{% tab title="Code" %}
 ```solidity
 /** 
   @notice 

@@ -32,28 +32,28 @@ function currentBallotStateOf(uint256 _projectId) external view override returns
 
 2.  Check that there is a funding cycle for the project.\
 
-
-    _Internal references:_
-
-    * [`latestIdOf`](../properties/latestidof.md)
-
     ```solidity
     // The project must have funding cycles.
     require(_fundingCycleId > 0, '0x14: NOT_FOUND');
     ```
 
-
-3.  Get a reference to the funding cycle for the latest funding cycle.\
-
-
     _Internal references:_
 
-    * [`_getStructFor`](\_getstructfor.md)
+    * [`latestIdOf`](../properties/latestidof.md)
+
+
+
+3.  Get a reference to the funding cycle for the latest funding cycle.\
 
     ```solidity
     // Get the necessary properties for the latest funding cycle.
     JBFundingCycle memory _fundingCycle = _getStructFor(_fundingCycleId);
     ```
+
+    _Internal references:_
+
+    * [`_getStructFor`](\_getstructfor.md)
+
 
 
 4.  If this is the first funding cycle for the project, it must be approved.
@@ -66,17 +66,16 @@ function currentBallotStateOf(uint256 _projectId) external view override returns
 
 5.  Return the `_ballotStateOf` the latest funding cycle ID as is determined by the current configuration and the funding cycle it's based on.\
 
+    ```solidity
+    return _ballotStateOf(_fundingCycleId, _fundingCycle.configured, _fundingCycle.basedOn);
+    ```
 
     _Internal references:_
 
     * [`_ballotStateOf`](\_ballotstateof.md)
-
-    ```solidity
-    return _ballotStateOf(_fundingCycleId, _fundingCycle.configured, _fundingCycle.basedOn);
-    ```
 {% endtab %}
 
-{% tab title="Only code" %}
+{% tab title="Code" %}
 ```solidity
 /** 
   @notice 

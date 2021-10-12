@@ -25,37 +25,31 @@ Definition:
 
 1.  Pack the provided permissions into a `uint256`. Each bit of the resulting value represents whether or not permission has been granted for that index.  \
 
-
-    Internal references:
-
-    * [`_packedPermissions`](\_packedpermissions.md)
-
     ```solidity
     // Pack the indexes into a uint256.
     uint256 _packed = _packedPermissions(_operatorData.permissionIndexes);
     ```
 
+    Internal references:
+
+    * [`_packedPermissions`](\_packedpermissions.md)
+
 
 
     1.  Store the packed permissions as the `permissionsOf` the provided `_operator`, on behalf of the `msg.sender`, specifically for the provided `_domain`.  \
-
-
-        _Internal references:_
-
-        * [`permissionsOf`](../properties/permissionsof.md)
 
         ```solidity
         // Store the new value.
         permissionsOf[_operatorData.operator][msg.sender][_operatorData.domain] = _packed;
         ```
 
+        _Internal references:_
+
+        * [`permissionsOf`](../properties/permissionsof.md)
+
+
 
     2.  Emit a `SetOperator` event with the all relevant parameters.   \
-
-
-        _Event references:_
-
-        * [`SetOperator`](../events/setoperator.md)
 
         ```solidity
         emit SetOperator(
@@ -66,9 +60,13 @@ Definition:
           _packed
         );
         ```
+
+        _Event references:_
+
+        * [`SetOperator`](../events/setoperator.md)
 {% endtab %}
 
-{% tab title="Only code" %}
+{% tab title="Code" %}
 ```solidity
 /**
   @notice

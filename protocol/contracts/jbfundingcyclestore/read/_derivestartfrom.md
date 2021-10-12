@@ -33,15 +33,15 @@ function _deriveStartFrom(
 
 2.  Get a reference to the duration of the base cycle in seconds.\
 
+    ```solidity
+    // Save a reference to the cycle's duration measured in seconds.
+    uint256 _cycleDurationInSeconds = _baseFundingCycle.duration * _SECONDS_IN_DAY;
+    ```
 
     _Internal references:_
 
     * [`_SECONDS_IN_DAY`](../properties/\_seconds_in_day.md)
 
-    ```solidity
-    // Save a reference to the cycle's duration measured in seconds.
-    uint256 _cycleDurationInSeconds = _baseFundingCycle.duration * _SECONDS_IN_DAY;
-    ```
 
 
 3.  Get a reference to the start time of the cycle immediately following the base cycle. This is the base cycles start time plus the base cycle's duration.
@@ -85,7 +85,7 @@ function _deriveStartFrom(
     ```
 {% endtab %}
 
-{% tab title="Only code" %}
+{% tab title="Code" %}
 ```solidity
 /** 
   @notice 

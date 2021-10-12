@@ -46,7 +46,7 @@ function _latestPermanentCycleFrom(JBFundingCycle memory _fundingCycle)
    ```
 {% endtab %}
 
-{% tab title="Only code" %}
+{% tab title="Code" %}
 ```solidity
 /** 
   @notice 

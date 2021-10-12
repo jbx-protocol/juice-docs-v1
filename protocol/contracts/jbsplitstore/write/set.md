@@ -41,15 +41,15 @@ function set(
 
 1. Get a reference to the current splits set for the specified `_projectId` 's `_domain`, within the specified `_group`.   
 
+   ```solidity
+   // Get a reference to the project's current splits.
+   JBSplit[] memory _currentSplits = _splitsOf[_projectId][_domain][_group];
+   ```
 
    _Internal references:_
 
    * [`_splitsOf`](../properties/_splitsof.md)
 
-   ```solidity
-   // Get a reference to the project's current splits.
-   JBSplit[] memory _currentSplits = _splitsOf[_projectId][_domain][_group];
-   ```
 
 2. Loop through each `_currentSplits` to make sure the new `_splits` being set respect any current split bound by a lock constraint.
 
@@ -91,15 +91,15 @@ function set(
 
 6. After the loop, delete the current splits from storage so we can repopulate them.  
 
+   ```solidity
+   // Delete from storage so splits can be repopulated.
+   delete _splitsOf[_projectId][_domain][_group];
+   ```
 
    Internal references:
 
    * [`_splitsOf`](../properties/_splitsof.md)
 
-   ```solidity
-   // Delete from storage so splits can be repopulated.
-   delete _splitsOf[_projectId][_domain][_group];
-   ```
 
 7. Store a local variable to keep track of all the percents from the splits.
 
@@ -148,40 +148,28 @@ function set(
 
 13. Push the split onto the stored `_splits` value.   
 
-
-    Internal references:
-
-    * [`_splitsOf`](../properties/_splitsof.md)
-
     ```solidity
     // Push the new split into the project's list of splits.
     _splitsOf[_projectId][_domain][_group].push(_splits[_i]);
     ```
 
+    Internal references:
+
+    * [`_splitsOf`](../properties/_splitsof.md)
+
+
 14. For each added split, emit a `SetSplit` event with all relevant parameters.   
-
-
-    _Event references:_
-
-    * [`SetSplit`](../events/setsplit.md) 
 
     ```solidity
     emit SetSplit(_projectId, _domain, _group, _splits[_i], msg.sender);
     ```
 
-  
+    _Event references:_
 
-  
-
-
-
-
-
-
-  
+    * [`SetSplit`](../events/setsplit.md) 
 {% endtab %}
 
-{% tab title="Only code" %}
+{% tab title="Code" %}
 ```solidity
 /** 
   @notice 

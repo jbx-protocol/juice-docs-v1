@@ -20,29 +20,27 @@ function _tappableOf(uint256 _projectId) private returns (uint256 fundingCycleId
 
 1.  Get a reference to the project's eligible funding cycle.\
 
-
-    _Internal references:_
-
-    * [`_eligibleOf`](../read/\_eligibleof.md)
-
     ```solidity
     // Check for the ID of an eligible funding cycle.
     fundingCycleId = _eligibleOf(_projectId);
     ```
 
-
-2.  If no eligible funding cycle was found, get a reference to the project's standby cycle.\
-
-
     _Internal references:_
 
-    * [`_standbyOf`](../read/\_standbyof.md)
+    * [`_eligibleOf`](../read/\_eligibleof.md)
+
+
+2.  If no eligible funding cycle was found, get a reference to the project's standby cycle.\
 
     ```solidity
     // No eligible funding cycle found, check for the ID of a standby funding cycle.
     // If this one exists, it will become eligible one it has started.
     if (fundingCycleId == 0) fundingCycleId = _standbyOf(_projectId);
     ```
+
+    _Internal references:_
+
+    * [`_standbyOf`](../read/\_standbyof.md)
 
 
 3.  Get a reference to the funding cycle that should be tapped.
@@ -56,13 +54,6 @@ function _tappableOf(uint256 _projectId) private returns (uint256 fundingCycleId
 4.  If a funding cycle exists that is either eligible to be tapped or is in standby, check to see if it has started and it's approved. If so, return it. Otherwise, get a reference to the funding cycle that it's based on which will provide the correct configuration to a new funding cycle that will be initialized.\
     \
     If no eligible or standby funding cycle exists, get a reference to the last approved funding cycle for the project which will provide the correct configuration to a new funding cycle that will be initialized.\
-
-
-    _Internal references:_
-
-    * [`_getStructFor`](../read/\_getstructfor.md)
-    * [`_isApproved`](../read/\_isapproved.md)
-    * [`latestIdOf`](../properties/latestidof.md)
 
     ```solidity
     // If the ID of an eligible funding cycle exists,
@@ -91,6 +82,12 @@ function _tappableOf(uint256 _projectId) private returns (uint256 fundingCycleId
     }
     ```
 
+    _Internal references:_
+
+    * [`_getStructFor`](../read/\_getstructfor.md)
+    * [`_isApproved`](../read/\_isapproved.md)
+    * [`latestIdOf`](../properties/latestidof.md)
+
 
 5.  Make sure there's a funding cycle to base the newly initialized cycle on.
 
@@ -102,15 +99,14 @@ function _tappableOf(uint256 _projectId) private returns (uint256 fundingCycleId
 
 6.  Get a reference to the [`JBFundingCycle`](../../../data-structures/jbfundingcycle.md) structure.\
 
-
-    _Internal references:_
-
-    * [`_getStructFor`](../read/\_getstructfor.md)
-
     ```solidity
     // Set the eligible funding cycle.
     _fundingCycle = _getStructFor(fundingCycleId);
     ```
+
+    _Internal references:_
+
+    * [`_getStructFor`](../read/\_getstructfor.md)
 
 
 7.  Make sure the cycle is recurring, otherwise throw an error since a new funding cycle cannot be created based on a non-recurring cycle.
@@ -123,23 +119,17 @@ function _tappableOf(uint256 _projectId) private returns (uint256 fundingCycleId
 
 8.  Get a reference to the first start time that is possible after the funding cycle, which is the moment after it ends.\
 
-
-    _Internal references:_
-
-    * [`_SECONDS_IN_DAY`](../properties/\_seconds_in_day.md)
-
     ```solidity
     // The time when the funding cycle immediately after the eligible funding cycle starts.
     uint256 _nextImmediateStart = _fundingCycle.start + (_fundingCycle.duration * _SECONDS_IN_DAY);
     ```
 
-
-9.  Get a reference to the time distance to the most recent funding cycle iteration's start time.\
-
-
     _Internal references:_
 
     * [`_SECONDS_IN_DAY`](../properties/\_seconds_in_day.md)
+
+
+9.  Get a reference to the time distance to the most recent funding cycle iteration's start time.\
 
     ```solidity
     // The distance from now until the nearest past multiple of the cycle duration from its start.
@@ -149,13 +139,12 @@ function _tappableOf(uint256 _projectId) private returns (uint256 fundingCycleId
       : (block.timestamp - _nextImmediateStart) % (_fundingCycle.duration * _SECONDS_IN_DAY);
     ```
 
-
-10. Set the ID that'll be returned to the ID of a newly initialized funding cycle.\
-
-
     _Internal references:_
 
-    * [`_initFor`](\_initfor.md)
+    * [`_SECONDS_IN_DAY`](../properties/\_seconds_in_day.md)
+
+
+10. Set the ID that'll be returned to the ID of a newly initialized funding cycle.\
 
     ```solidity
     // Return the tappable funding cycle.
@@ -167,15 +156,12 @@ function _tappableOf(uint256 _projectId) private returns (uint256 fundingCycleId
     );
     ```
 
-
-11. Copy the properties of the base funding cycle onto the newly initialized configuration.\
-
-
     _Internal references:_
 
-    * [`_packAndStoreConfigurationPropertiesOf`](\_packandstoreconfigurationpropertiesof.md)
-    * [`_metadataOf`](../properties/\_metadataof.md)
-    * [`_targetOf`](../properties/\_targetof.md)
+    * [`_initFor`](\_initfor.md)
+
+
+11. Copy the properties of the base funding cycle onto the newly initialized configuration.\
 
     ```solidity
      // Copy the properties of the base funding cycle onto the new configuration efficiently.
@@ -192,9 +178,16 @@ function _tappableOf(uint256 _projectId) private returns (uint256 fundingCycleId
      _metadataOf[fundingCycleId] = _metadataOf[_fundingCycle.id];
      _targetOf[fundingCycleId] = _targetOf[_fundingCycle.id];
     ```
+
+    _Internal references:_
+
+    * [`_packAndStoreConfigurationPropertiesOf`](\_packandstoreconfigurationpropertiesof.md)
+    * [`_metadataOf`](../properties/\_metadataof.md)
+    * [`_targetOf`](../properties/\_targetof.md)
+
 {% endtab %}
 
-{% tab title="Only code" %}
+{% tab title="Code" %}
 ```solidity
 /**
   @notice 

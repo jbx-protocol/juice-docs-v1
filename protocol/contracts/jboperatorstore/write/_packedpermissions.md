@@ -52,7 +52,7 @@ function _packedPermissions(uint256[] calldata _indexes) private pure returns (u
     ```
 {% endtab %}
 
-{% tab title="Only code" %}
+{% tab title="Code" %}
 ```solidity
 /** 
   @notice 

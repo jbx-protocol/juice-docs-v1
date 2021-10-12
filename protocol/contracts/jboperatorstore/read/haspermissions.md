@@ -48,26 +48,24 @@ function hasPermissions(
 
 4. If the bit at the specified permission index of the `permissionsOf` the `_operator` for the specified `_account` and within the specified `_domain` is off, return `false` because all provided permissions are not on.  
 
+   ```solidity
+   if (((permissionsOf[_operator][_account][_domain] >> _permissionIndex) & 1) == 0)
+     return false;
+   ```
 
    Internal references:
 
    * [`permissionsOf`](../properties/permissionsof.md)
 
-   ```solidity
-   if (((permissionsOf[_operator][_account][_domain] >> _permissionIndex) & 1) == 0)
-     return false;
-   ```
 
 5. After the loop, return `true` since the loop checked all specified permissions without returning `false`.
 
    ```solidity
    return true;
    ```
-
-  
 {% endtab %}
 
-{% tab title="Only code" %}
+{% tab title="Code" %}
 ```solidity
 /** 
   @notice 

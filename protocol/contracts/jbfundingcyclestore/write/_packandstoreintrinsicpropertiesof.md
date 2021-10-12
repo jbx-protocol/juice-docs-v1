@@ -68,31 +68,29 @@ function _packAndStoreIntrinsicPropertiesOf(
     ```
 6.  Derive the ID from the `_projectId` and the `_number`.\
 
-
-    _Internal references:_
-
-    * [`_idFor`](../read/\_idfor.md)
-
     ```solidity
     // Construct the ID.
     fundingCycleId = _idFor(_projectId, _number);
     ```
 
-
-7.  Store the packed intrinsic properties for the funding cycle.\
-
-
     _Internal references:_
 
-    * [`_packAndStoreIntrinsicPropertiesOf`](\_packandstoreintrinsicpropertiesof.md)
+    * [`_idFor`](../read/\_idfor.md)
+
+
+7.  Store the packed intrinsic properties for the funding cycle.\
 
     ```solidity
     // Set in storage.
     _packedIntrinsicPropertiesOf[fundingCycleId] = packed;
     ```
+
+    _Internal references:_
+
+    * [`_packAndStoreIntrinsicPropertiesOf`](\_packandstoreintrinsicpropertiesof.md)
 {% endtab %}
 
-{% tab title="Only code" %}
+{% tab title="Code" %}
 ```solidity
 /**
   @notice 

@@ -30,15 +30,14 @@ function _deriveCycleLimitFrom(JBFundingCycle memory _fundingCycle, uint256 _sta
 
 2. Get a reference to the number of cycles that can fit between the funding cycle's start, and the provided start.  
 
-
-   _Internal references:_
-
-   * [`_SECONDS_IN_DAY`](../properties/_seconds_in_day.md)
-
    ```solidity
    // Get a reference to the number of cycles that can fit between the funding cycle's start, and the provided start.
    uint256 _cycles = (_start - _fundingCycle.start) / (_fundingCycle.duration * _SECONDS_IN_DAY);
    ```
+
+   _Internal references:_
+
+   * [`_SECONDS_IN_DAY`](../properties/_seconds_in_day.md)
 
 3. There's no longer a cycle limit if more cycles have passed than the provided cycle's limit.
 
@@ -53,17 +52,9 @@ function _deriveCycleLimitFrom(JBFundingCycle memory _fundingCycle, uint256 _sta
    // Subtract the number of cycles that have passed from the limit.
    return _fundingCycle.cycleLimit - _cycles;
    ```
-
-  
-
-
-  
-
-
-  
 {% endtab %}
 
-{% tab title="Only code" %}
+{% tab title="Code" %}
 ```solidity
 /** 
   @notice 

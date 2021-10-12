@@ -27,7 +27,7 @@ function _idFor(uint256 _projectId, uint256 _number) private pure returns (uint2
     ```
 {% endtab %}
 
-{% tab title="Only code" %}
+{% tab title="Code" %}
 ```solidity
 /** 
   @notice 

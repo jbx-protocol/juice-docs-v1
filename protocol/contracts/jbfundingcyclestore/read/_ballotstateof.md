@@ -53,7 +53,7 @@ function _ballotStateOf(
     ```
 {% endtab %}
 
-{% tab title="Only code" %}
+{% tab title="Code" %}
 ```solidity
 /**
   @notice 

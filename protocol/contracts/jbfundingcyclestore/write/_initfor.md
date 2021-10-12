@@ -27,13 +27,6 @@ function _initFor(
 
 1.  If no base funding cycle was provided, create a first funding cycle for the project. Otherwise, create a new funding cycle by calling`_updateFundingCycleBasedOn`, which will derive properties for the funding cycle that follows the specified base cycle, and store them to an ID.\
 
-
-    _Internal references:_
-
-    * [`_idFor`](../read/\_idfor.md)
-    * [`_packAndStoreIntrinsicPropertiesOf`](\_packandstoreintrinsicpropertiesof.md)
-    * [`_updateFundingCycleBasedOn`](\_updatefundingcyclebasedon.md)
-
     ```solidity
     // If there is no base, initialize a first cycle.
     if (_baseFundingCycle.id == 0) {
@@ -61,33 +54,39 @@ function _initFor(
     }
     ```
 
-
-2.  Store the initialized ID as the `latestIdOf` the project.\
-
-
     _Internal references:_
 
-    * [`latestIdOf`](../properties/latestidof.md)
+    * [`_idFor`](../read/\_idfor.md)
+    * [`_packAndStoreIntrinsicPropertiesOf`](\_packandstoreintrinsicpropertiesof.md)
+    * [`_updateFundingCycleBasedOn`](\_updatefundingcyclebasedon.md)
+
+
+
+2.  Store the initialized ID as the `latestIdOf` the project.\
 
     ```solidity
     // Set the project's latest funding cycle ID to the new count.
     latestIdOf[_projectId] = newFundingCycleId;
     ```
 
+    _Internal references:_
+
+    * [`latestIdOf`](../properties/latestidof.md)
+
 
 3.  Emit an `Init` event with the all relevant parameters. \
 
+    ```solidity
+    emit Init(newFundingCycleId, _projectId, _basedFundingCycle.id);
+    ```
 
     _Event references:_
 
     * [`Init`](../events/init.md) 
 
-    ```solidity
-    emit Init(newFundingCycleId, _projectId, _basedFundingCycle.id);
-    ```
 {% endtab %}
 
-{% tab title="Only code" %}
+{% tab title="Code" %}
 ```solidity
 /**
   @notice 

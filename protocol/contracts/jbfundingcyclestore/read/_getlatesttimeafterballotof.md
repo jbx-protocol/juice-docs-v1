@@ -49,7 +49,7 @@ function _getLatestTimeAfterBallotOf(JBFundingCycle memory _fundingCycle, uint25
     ```
 {% endtab %}
 
-{% tab title="Only code" %}
+{% tab title="Code" %}
 ```solidity
 /** 
   @notice

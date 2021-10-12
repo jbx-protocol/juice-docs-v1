@@ -24,28 +24,28 @@ function priceFor(uint256 _currency, uint256 _base) external view override retur
 
 1.  Return 1 if the `_currency` and the `_base` are the same, since they have the same price. Normalize to `targetDecimals` number of decimals.\
 
-
-    Internal references:
-
-    * [`TARGET_DECIMALS`](../properties/targetdecimals.md)
-
     ```solidity
     // If the currency is the base, return 1 since they are priced the same.
     if (_currency == _base) return 10**TARGET_DECIMALS;
     ```
 
-
-2.  Get a reference to the feed.\
-
-
     Internal references:
 
-    * [`feedFor`](../properties/targetdecimals.md)
+    * [`TARGET_DECIMALS`](../properties/targetdecimals.md)
+
+
+
+2.  Get a reference to the feed.\
 
     ```solidity
     // Get a reference to the feed.
     AggregatorV3Interface _feed = feedFor[_currency][_base];
     ```
+
+    Internal references:
+
+    * [`feedFor`](../properties/targetdecimals.md)
+
 
 
 3.  Make sure there is a feed stored for the `_currency` `_base` pair.
@@ -66,18 +66,18 @@ function priceFor(uint256 _currency, uint256 _base) external view override retur
 
 5.  Return the `_price`, normalizing the value to `TARGET_DECIMALS` decimal fidelity.\
 
+    ```solidity
+    // Multiply the price by the decimal adjuster to get the normalized result.
+    return uint256(_price) * feedDecimalAdjusterFor[_currency][_base];
+    ```
 
     Internal references:
 
     * [`feedDecimalAdjusterFor`](../properties/feeddecimaladjuster.md)
 
-    ```solidity
-    // Multiply the price by the decimal adjuster to get the normalized result.
-    return uint256(_price) * feedDecimalAdjusterFor[_currency][_base];
-    ```
 {% endtab %}
 
-{% tab title="Only code" %}
+{% tab title="Code" %}
 ```solidity
 /** 
   @notice 
