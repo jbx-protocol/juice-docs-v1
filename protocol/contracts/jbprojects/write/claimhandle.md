@@ -12,6 +12,8 @@ Interface:`IJBProjects`
 
 _Only a project's owner or operator can claim a handle for it._
 
+__
+
 Definition:
 
 ```solidity
@@ -26,9 +28,10 @@ function claimHandle(
   requirePermission(ownerOf(_projectId), _projectId, JBOperations.CLAIM_HANDLE) { ... }
 ```
 
-* `_handle` is the handle being claimed.
-* `_transferAddress` is the address to which the handle has been transferred, which can now assign the handle to a project.
-* `_projectId` is the ID of the project to assign to the claimed handle.
+* Arguments:
+  * `_handle` is the handle being claimed.
+  * `_transferAddress` is the address to which the handle has been transferred, which can now assign the handle to a project.
+  * `_projectId` is the ID of the project to assign to the claimed handle.
 * Through the [`requirePermissionAllowingWildcardDomain`](../../jboperatable/modifiers/requirepermissionallowingwildcarddomain.md) modifier, the function is only accessible by the `_transferAddress`, from an operator that has been given the `JBOperations.CLAIM_HANDLE` permission by the `_transferAddress` for the provided `_projectId`, or from an operator that has been given the `JBOperations.CLAIM_HANDLE` permission by the `_transferAddress`for no specific domain.
 * Through the [`requirePermission`](../../jboperatable/modifiers/requirepermission.md) modifier, the function is only accessible by the project's owner, or from an operator that has been given the `JBOperations.CLAIM_HANDLE` permission by the project owner for the provided `_projectId`.
 * The function overrides a function definition from the `IJBProjects` interface.
