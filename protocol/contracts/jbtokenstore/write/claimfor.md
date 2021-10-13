@@ -103,13 +103,13 @@ function claimFor(
 
 8. Emit a `Claim` event with the all relevant parameters.
 
-    ```solidity
-    emit Claim(_holder, _projectId, _amount, msg.sender);
-    ```
+   ```solidity
+   emit Claim(_holder, _projectId, _amount, msg.sender);
+   ```
 
-    _Event references:_
+   _Event references:_
 
-    * [`Claim`](../events/claim.md)
+   * [`Claim`](../events/claim.md)
 {% endtab %}
 
 {% tab title="Only code" %}
