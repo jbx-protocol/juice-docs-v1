@@ -7,7 +7,7 @@ Emitted from:
 Definition:
 
 ```solidity
-event ShouldRequireClaimFor(uint256 indexed projectId, bool indexed flag, address caller)
+event ShouldRequireClaim(uint256 indexed projectId, bool indexed flag, address caller)
 ```
 
 * `projectId` is the ID of the project which is requiring claimed tokens or not.

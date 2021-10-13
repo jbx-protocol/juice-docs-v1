@@ -111,7 +111,6 @@ function transferTo(
    _Event references:_
 
    * [`Transfer`](../events/transfer.md)
-
 {% endtab %}
 
 {% tab title="Only code" %}
