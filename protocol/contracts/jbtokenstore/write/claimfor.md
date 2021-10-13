@@ -27,6 +27,20 @@ function claimFor(
 * The function can be accessed externally by anyone. 
 * The function overrides a function definition from the `IJBTokenStore` interface.
 * The function returns nothing.
+
+
+
+1. Get a reference to the current splits set for the specified `_projectId` 's `_domain`, within the specified `_group`.   
+
+   ```solidity
+   ```
+
+   _Internal references:_
+
+   * [`_splitsOf`](../properties/_splitsof.md)
+
+
+2. 
 {% endtab %}
 
 {% tab title="Only code" %}

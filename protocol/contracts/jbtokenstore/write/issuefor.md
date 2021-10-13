@@ -33,6 +33,20 @@ function issueFor(
 * Through the [`requirePermission`](../../jboperatable/modifiers/requirepermission.md) modifier, the function is only accessible by the project's owner, or from an operator that has been given the `JBOperations.ISSUE` permission by the project owner for the provided `_projectId`.
 * The function overrides a function definition from the `IJBTokenStore` interface.
 * The function returns the address of the token that was issued.
+
+
+
+1. Get a reference to the current splits set for the specified `_projectId` 's `_domain`, within the specified `_group`.   
+
+   ```solidity
+   ```
+
+   _Internal references:_
+
+   * [`_splitsOf`](../properties/_splitsof.md)
+
+
+2. 
 {% endtab %}
 
 {% tab title="Only code" %}

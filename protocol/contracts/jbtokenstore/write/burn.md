@@ -29,6 +29,20 @@ function burnFrom(
 * Through the [`onlyController`](../../jbutility/modifiers/onlycontroller.md) modifier, the function can only be accessed by the controller of the `_projectId`. 
 * The function overrides a function definition from the `IJBTokenStore` interface.
 * The function returns nothing.
+
+
+
+1. Get a reference to the current splits set for the specified `_projectId` 's `_domain`, within the specified `_group`.   
+
+   ```solidity
+   ```
+
+   _Internal references:_
+
+   * [`_splitsOf`](../properties/_splitsof.md)
+
+
+2. 
 {% endtab %}
 
 {% tab title="Code" %}
