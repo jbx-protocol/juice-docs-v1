@@ -1,7 +1,7 @@
-# IJBUtility
+# IJBControllerUtility
 
 ```solidity
-interface IJBUtility {
+interface IJBControllerUtility {
   function directory() external view returns (IJBDirectory);
 }
 ```
