@@ -36,17 +36,63 @@ function issueFor(
 
 
 
-1. Get a reference to the current splits set for the specified `_projectId` 's `_domain`, within the specified `_group`.   
+1. Make sure a name was provided.
 
    ```solidity
+   // There must be a name.
+   require((bytes(_name).length > 0), '0x1f: EMPTY_NAME');
+   ```
+
+
+2. Make sure a symbol was provided. 
+
+   ```solidity
+   // There must be a symbol.
+   require((bytes(_symbol).length > 0), '0x20: EMPTY_SYMBOL');
+   ```
+
+
+3. Make sure the project hasn't already issued a token.
+
+   ```solidity
+   // Only one ERC20 token can be issued.
+   require(tokenOf[_projectId] == IJBToken(address(0)), '0x21: ALREADY_ISSUED');
    ```
 
    _Internal references:_
 
-   * [`_splitsOf`](../properties/_splitsof.md)
+   * [`tokenOf`](../properties/_tokenof.md)
 
 
-2. 
+4. Deploy a new instance of a [`JBToken`](../../jbtoken.md) contract. Assign it to the return value.
+
+   ```solidity
+   // Deploy the token contract.
+   token = new JBToken(_name, _symbol);
+   ```
+
+
+5. Store the newly created token as the `tokenOf` the project.
+
+   ```solidity
+   // Store the token contract.
+   tokenOf[_projectId] = token;
+   ```
+
+   _Internal references:_
+
+   * [`tokenOf`](../properties/_tokenof.md)
+
+
+6.  Emit an `Issue` event with the all relevant parameters.
+
+    ```solidity
+    emit Issue(_projectId, token, _name, _symbol, msg.sender);
+    ```
+
+    _Event references:_
+
+    * [`Issue`](../events/issue.md)
 {% endtab %}
 
 {% tab title="Only code" %}
