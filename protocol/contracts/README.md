@@ -57,7 +57,7 @@
       </td>
       <td style="text-align:left">
         <p>Manages token minting and burning for all projects, while keeping track
-          of staked/unstaked and locked/unlock token balances for all accounts.</p>
+          of unclaimed token balances for all accounts.</p>
         <p></p>
         <p><a href="jbtokenstore/">View API</a>
         </p>

@@ -1,7 +1,7 @@
 ---
 description: >-
   Manages token minting and burning for all projects, while keeping track of
-  staked/unstaked and locked/unlock token balances for all accounts.
+  unclaimed token balances for all accounts.
 ---
 
 # JBTokenStore
