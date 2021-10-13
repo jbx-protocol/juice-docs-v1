@@ -2,7 +2,7 @@
 
 Emitted from:
 
-* [`burnFrom`](../write/burn.md)
+* [`burnFrom`](../write/burnfrom.md)
 
 Definition:
 

@@ -2,7 +2,7 @@
 
 Emitted from:
 
-* [`issueFor`](../write/issuefor.md)
+* [`issueFor`](../write/mintfor.md)
 
 Definition:
 

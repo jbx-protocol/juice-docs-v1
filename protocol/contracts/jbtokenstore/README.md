@@ -14,528 +14,56 @@ description: >-
 
 ### **Addresses**
 
-Ethereum mainnet: _Not yet deployed_  
+Ethereum mainnet: _Not yet deployed_\
 Rinkeby testnet: _Not yet deployed_
 
 ### **Interfaces**
 
-| **Name** | Description |
-| :--- | :--- |
+|                     |                                                                                                                                          |
+| ------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- |
+| **Name**            | Description                                                                                                                              |
 | **`IJBTokenStore`** | General interface for the methods in this contract that interact with the blockchain's state according to the Juicebox protocol's rules. |
 
 ### **Inheritance**
 
-<table>
-  <thead>
-    <tr>
-      <th style="text-align:left"><b>Name</b>
-      </th>
-      <th style="text-align:left">Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td style="text-align:left"><b><code>JBOperatable</code></b>
-      </td>
-      <td style="text-align:left">
-        <p>Includes convenience functionality for checking a message sender&apos;s
-          permissions before executing certain transactions.</p>
-        <p></p>
-        <p><a href="../jboperatable/">more</a>
-        </p>
-      </td>
-    </tr>
-    <tr>
-      <td style="text-align:left"><b><code>JBUtility</code></b>
-      </td>
-      <td style="text-align:left">Includes convenience functionality for checking if the message sender
-        is the current terminal of the project who data is being manipulated.</td>
-    </tr>
-  </tbody>
-</table>
+|                    |                                                                                                                                                                        |
+| ------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Name**           | Description                                                                                                                                                            |
+| **`JBOperatable`** | <p>Includes convenience functionality for checking a message sender's permissions before executing certain transactions.</p><p><a href="../jboperatable/">more</a></p> |
+| **`JBUtility`**    | Includes convenience functionality for checking if the message sender is the current terminal of the project who data is being manipulated.                            |
 
 ## Events
 
-<table>
-  <thead>
-    <tr>
-      <th style="text-align:left">Name</th>
-      <th style="text-align:left">Data</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td style="text-align:left"><b><code>Issue</code></b>
-      </td>
-      <td style="text-align:left">
-        <ul>
-          <li><code>uint256 indexed projectId</code>
-          </li>
-          <li><code>IJBToken indexed token</code> 
-          </li>
-          <li><code>string name</code> 
-          </li>
-          <li><code>string symbol</code> 
-          </li>
-          <li><code>address caller</code>
-          </li>
-        </ul>
-        <p><a href="events/issue.md">more</a>
-        </p>
-      </td>
-    </tr>
-    <tr>
-      <td style="text-align:left"><b><code>Mint</code></b>
-      </td>
-      <td style="text-align:left">
-        <ul>
-          <li><code>address indexed holder</code> 
-          </li>
-          <li><code>uint256 indexed projectId</code> 
-          </li>
-          <li><code>uint256 amount</code> 
-          </li>
-          <li><code>bool tokensWereClaimed</code> 
-          </li>
-          <li><code>bool preferClaimedTokens</code> 
-          </li>
-          <li><code>address caller</code>
-          </li>
-        </ul>
-        <p><a href="events/mint.md">more</a>
-        </p>
-      </td>
-    </tr>
-    <tr>
-      <td style="text-align:left"><b><code>Burn</code></b>
-      </td>
-      <td style="text-align:left">
-        <ul>
-          <li><code>address indexed holder</code>
-          </li>
-          <li><code>uint256 indexed projectId</code> 
-          </li>
-          <li><code>uint256 amount</code> 
-          </li>
-          <li><code>uint256 unclaimedTokenBalance</code> 
-          </li>
-          <li><code>bool preferClaimedTokens</code> 
-          </li>
-          <li><code>address caller</code>
-          </li>
-        </ul>
-        <p><a href="events/burn.md">more</a>
-        </p>
-      </td>
-    </tr>
-    <tr>
-      <td style="text-align:left"><b><code>Claim</code></b>
-      </td>
-      <td style="text-align:left">
-        <ul>
-          <li><code>address indexed holder</code> 
-          </li>
-          <li><code>uint256 indexed projectId</code> 
-          </li>
-          <li><code>uint256 amount</code> 
-          </li>
-          <li><code>address caller</code>
-          </li>
-        </ul>
-        <p><a href="events/claim.md">more</a>
-        </p>
-      </td>
-    </tr>
-    <tr>
-      <td style="text-align:left"><b><code>ShouldRequireClaimFor</code></b>
-      </td>
-      <td style="text-align:left">
-        <ul>
-          <li><code>uint256 indexed projectId</code> 
-          </li>
-          <li><code>bool indexed flag</code> 
-          </li>
-          <li><code>address caller</code>
-          </li>
-        </ul>
-        <p><a href="events/shouldrequireclaimfor.md">more</a>
-        </p>
-      </td>
-    </tr>
-    <tr>
-      <td style="text-align:left"><b><code>ChangeToken</code></b>
-      </td>
-      <td style="text-align:left">
-        <ul>
-          <li><code>uint256 indexed projectId</code>
-          </li>
-          <li><code>IJBToken indexed token</code> 
-          </li>
-          <li><code>address indexed owner</code> 
-          </li>
-          <li><code>address caller</code>
-          </li>
-        </ul>
-        <p><a href="events/usenewtoken.md">more</a>
-        </p>
-      </td>
-    </tr>
-    <tr>
-      <td style="text-align:left"><b><code>Transfer</code></b>
-      </td>
-      <td style="text-align:left">
-        <ul>
-          <li><code>address indexed holder</code> 
-          </li>
-          <li><code>uint256 indexed projectId</code> 
-          </li>
-          <li><code>address indexed recipient</code> 
-          </li>
-          <li><code>uint256 amount</code> 
-          </li>
-          <li><code>address caller</code>
-          </li>
-        </ul>
-        <p><a href="events/transfer.md">more</a>
-        </p>
-      </td>
-    </tr>
-  </tbody>
-</table>
+| Name                        | Data                                                                                                                                                                                                                                                                                                                  |
+| --------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **`Issue`**                 | <ul><li><code>uint256 indexed projectId</code></li><li><code>IJBToken indexed token</code></li><li><code>string name</code></li><li><code>string symbol</code></li><li><code>address caller</code></li></ul><p><a href="events/issue.md">more</a></p>                                                                 |
+| **`Mint`**                  | <ul><li><code>address indexed holder</code></li><li><code>uint256 indexed projectId</code></li><li><code>uint256 amount</code></li><li><code>bool tokensWereClaimed</code></li><li><code>bool preferClaimedTokens</code></li><li><code>address caller</code></li></ul><p><a href="events/mint.md">more</a></p>        |
+| **`Burn`**                  | <ul><li><code>address indexed holder</code></li><li><code>uint256 indexed projectId</code></li><li><code>uint256 amount</code></li><li><code>uint256 unclaimedTokenBalance</code></li><li><code>bool preferClaimedTokens</code></li><li><code>address caller</code></li></ul><p><a href="events/burn.md">more</a></p> |
+| **`Claim`**                 | <ul><li><code>address indexed holder</code></li><li><code>uint256 indexed projectId</code></li><li><code>uint256 amount</code></li><li><code>address caller</code></li></ul><p><a href="events/claim.md">more</a></p>                                                                                                 |
+| **`ShouldRequireClaimFor`** | <ul><li><code>uint256 indexed projectId</code></li><li><code>bool indexed flag</code></li><li><code>address caller</code></li></ul><p><a href="events/shouldrequireclaimfor.md">more</a></p>                                                                                                                          |
+| **`ChangeToken`**           | <ul><li><code>uint256 indexed projectId</code></li><li><code>IJBToken indexed token</code></li><li><code>address indexed owner</code></li><li><code>address caller</code></li></ul><p><a href="events/usenewtoken.md">more</a></p>                                                                                    |
+| **`Transfer`**              | <ul><li><code>address indexed holder</code></li><li><code>uint256 indexed projectId</code></li><li><code>address indexed recipient</code></li><li><code>uint256 amount</code></li><li><code>address caller</code></li></ul><p><a href="events/transfer.md">more</a></p>                                               |
 
 ## Read
 
-<table>
-  <thead>
-    <tr>
-      <th style="text-align:left">Function</th>
-      <th style="text-align:left">Definition</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td style="text-align:left"><b><code>projects</code></b>
-      </td>
-      <td style="text-align:left">
-        <p><b>Traits</b>
-        </p>
-        <ul>
-          <li><code>immutable</code>
-          </li>
-        </ul>
-        <p><b>Returns</b>
-        </p>
-        <ul>
-          <li><code>IJBProjects projects</code>
-          </li>
-        </ul>
-        <p><a href="properties/projects.md">more</a>
-        </p>
-      </td>
-    </tr>
-    <tr>
-      <td style="text-align:left"><b><code>tokenOf</code></b>
-      </td>
-      <td style="text-align:left">
-        <p><b>Params</b>
-        </p>
-        <ul>
-          <li><code>uint256 _projectId</code>
-          </li>
-        </ul>
-        <p><b>Returns</b>
-        </p>
-        <ul>
-          <li><code>IJBToken token</code>
-          </li>
-        </ul>
-        <p><a href="properties/tokenof.md">more</a>
-        </p>
-      </td>
-    </tr>
-    <tr>
-      <td style="text-align:left"><b><code>unclaimedBalanceOf</code></b>
-      </td>
-      <td style="text-align:left">
-        <p><b>Params</b>
-        </p>
-        <ul>
-          <li><code>address _holder</code>
-          </li>
-          <li><code>uint256 _projectId</code>
-          </li>
-        </ul>
-        <p><b>Returns</b>
-        </p>
-        <ul>
-          <li><code>uint256 unclaimedBalance</code>
-          </li>
-        </ul>
-        <p><a href="properties/unclaimedbalanceof.md">more</a>
-        </p>
-      </td>
-    </tr>
-    <tr>
-      <td style="text-align:left"><b><code>unclaimedTotalSupplyOf</code></b>
-      </td>
-      <td style="text-align:left">
-        <p><b>Params</b>
-        </p>
-        <ul>
-          <li><code>uint256 _projectId</code>
-          </li>
-        </ul>
-        <p><b>Returns</b>
-        </p>
-        <ul>
-          <li><code>uint256 unclaimedTotalSupply</code>
-          </li>
-        </ul>
-        <p><a href="properties/unclaimedtotalsupplyof.md">more</a>
-        </p>
-      </td>
-    </tr>
-    <tr>
-      <td style="text-align:left"><b><code>totalSupplyOf</code></b>
-      </td>
-      <td style="text-align:left">
-        <p><b>Params</b>
-        </p>
-        <ul>
-          <li><code>uint256 _projectId</code>
-          </li>
-        </ul>
-        <p><b>Returns</b>
-        </p>
-        <ul>
-          <li><code>uint256 totalSupply</code>
-          </li>
-        </ul>
-        <p><a href="read/totalsupplyof.md">more</a>
-        </p>
-      </td>
-    </tr>
-    <tr>
-      <td style="text-align:left"><b><code>balanceOf</code></b>
-      </td>
-      <td style="text-align:left">
-        <p><b>Params</b>
-        </p>
-        <ul>
-          <li><code>uint256 _holder</code>
-          </li>
-          <li><code>uint256 _projectId</code>
-          </li>
-        </ul>
-        <p><b>Returns</b>
-        </p>
-        <ul>
-          <li><code>uint256 balance</code>
-          </li>
-        </ul>
-        <p><a href="../jbpaymentterminaldata/read/balanceof.md">more</a>
-        </p>
-      </td>
-    </tr>
-    <tr>
-      <td style="text-align:left"><b><code>requireClaimFor</code></b>
-      </td>
-      <td style="text-align:left">
-        <p><b>Params</b>
-        </p>
-        <ul>
-          <li><code>uint256 _projectId</code>
-          </li>
-        </ul>
-        <p><b>Returns</b>
-        </p>
-        <ul>
-          <li><code>bool flag</code>
-          </li>
-        </ul>
-        <p><a href="properties/requireclaimfor.md">more</a>
-        </p>
-      </td>
-    </tr>
-  </tbody>
-</table>
+| Function                     | Definition                                                                                                                                                                                                                                                            |
+| ---------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **`projects`**               | <p><strong>Traits</strong></p><ul><li><code>immutable</code></li></ul><p><strong>Returns</strong></p><ul><li><code>IJBProjects projects</code></li></ul><p><a href="properties/projects.md">more</a></p>                                                              |
+| **`tokenOf`**                | <p><strong>Params</strong></p><ul><li><code>uint256 _projectId</code></li></ul><p><strong>Returns</strong></p><ul><li><code>IJBToken token</code></li></ul><p><a href="properties/tokenof.md">more</a></p>                                                            |
+| **`unclaimedBalanceOf`**     | <p><strong>Params</strong></p><ul><li><code>address _holder</code></li><li><code>uint256 _projectId</code></li></ul><p><strong>Returns</strong></p><ul><li><code>uint256 unclaimedBalance</code></li></ul><p><a href="properties/unclaimedbalanceof.md">more</a></p>  |
+| **`unclaimedTotalSupplyOf`** | <p><strong>Params</strong></p><ul><li><code>uint256 _projectId</code></li></ul><p><strong>Returns</strong></p><ul><li><code>uint256 unclaimedTotalSupply</code></li></ul><p><a href="properties/unclaimedtotalsupplyof.md">more</a></p>                               |
+| **`totalSupplyOf`**          | <p><strong>Params</strong></p><ul><li><code>uint256 _projectId</code></li></ul><p><strong>Returns</strong></p><ul><li><code>uint256 totalSupply</code></li></ul><p><a href="read/totalsupplyof.md">more</a></p>                                                       |
+| **`balanceOf`**              | <p><strong>Params</strong></p><ul><li><code>uint256 _holder</code></li><li><code>uint256 _projectId</code></li></ul><p><strong>Returns</strong></p><ul><li><code>uint256 balance</code></li></ul><p><a href="../jbpaymentterminaldata/read/balanceof.md">more</a></p> |
+| **`requireClaimFor`**        | <p><strong>Params</strong></p><ul><li><code>uint256 _projectId</code></li></ul><p><strong>Returns</strong></p><ul><li><code>bool flag</code></li></ul><p><a href="properties/requireclaimfor.md">more</a></p>                                                         |
 
 ## Write
 
-<table>
-  <thead>
-    <tr>
-      <th style="text-align:left">Function</th>
-      <th style="text-align:left">Definition</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td style="text-align:left"><b><code>issueFor</code></b>
-      </td>
-      <td style="text-align:left">
-        <p><b>Traits</b>
-        </p>
-        <ul>
-          <li><code>requirePermission</code>
-          </li>
-        </ul>
-        <p><b>Params</b>
-        </p>
-        <ul>
-          <li><code>uint256 _projectId</code> 
-          </li>
-          <li><code>string _name</code> 
-          </li>
-          <li><code>string _symbol</code>
-          </li>
-        </ul>
-        <p><b>Returns</b>
-        </p>
-        <ul>
-          <li><code>IJBToken token</code>
-          </li>
-        </ul>
-        <p><a href="write/issuefor.md">more</a>
-        </p>
-      </td>
-    </tr>
-    <tr>
-      <td style="text-align:left"><b><code>mintFor</code></b>
-      </td>
-      <td style="text-align:left">
-        <p><b>Traits</b>
-        </p>
-        <ul>
-          <li><code>onlyTerminal</code>
-          </li>
-        </ul>
-        <p><b>Params</b>
-        </p>
-        <ul>
-          <li><code>address _holder</code> 
-          </li>
-          <li><code>uint256 _projectId</code> 
-          </li>
-          <li><code>uint256 _amount</code> 
-          </li>
-          <li><code>bool _preferUnstakedTokens</code>
-          </li>
-        </ul>
-        <p><a href="write/mint.md">more</a>
-        </p>
-      </td>
-    </tr>
-    <tr>
-      <td style="text-align:left"><b><code>burnFrom</code></b>
-      </td>
-      <td style="text-align:left">
-        <p><b>Traits</b>
-        </p>
-        <ul>
-          <li><code>onlyTerminal</code>
-          </li>
-        </ul>
-        <p><b>Params</b>
-        </p>
-        <ul>
-          <li><code>address _holder</code>
-          </li>
-          <li><code>uint256 _projectId</code> 
-          </li>
-          <li><code>uint256 _amount</code> 
-          </li>
-          <li><code>bool _preferUnstakedTokens</code>
-          </li>
-        </ul>
-        <p><a href="write/burn.md">more</a>
-        </p>
-      </td>
-    </tr>
-    <tr>
-      <td style="text-align:left"><b><code>claimFor</code></b>
-      </td>
-      <td style="text-align:left">
-        <p><b>Params</b>
-        </p>
-        <ul>
-          <li><code>address _holder</code> 
-          </li>
-          <li><code>uint256 _projectId</code> 
-          </li>
-          <li><code>uint256 _amount</code>
-          </li>
-        </ul>
-        <p><a href="write/claimfor.md">more</a>
-        </p>
-      </td>
-    </tr>
-    <tr>
-      <td style="text-align:left"><b><code>changeTokenOf</code></b>
-      </td>
-      <td style="text-align:left">
-        <p><b>Traits</b>
-        </p>
-        <ul>
-          <li><code>requirePermission</code>
-          </li>
-        </ul>
-        <p><b>Params</b>
-        </p>
-        <ul>
-          <li><code>uint256 _projectId</code>
-          </li>
-          <li><code>IJBToken _token</code> 
-          </li>
-          <li><code>address _newOwner</code>
-          </li>
-        </ul>
-        <p><a href="write/changetokenof.md">more</a>
-        </p>
-      </td>
-    </tr>
-    <tr>
-      <td style="text-align:left"><b><code>shouldRequireClaimingFor</code></b>
-      </td>
-      <td style="text-align:left">
-        <p><b>Params</b>
-        </p>
-        <ul>
-          <li><code>uint256 _projectId</code> 
-          </li>
-          <li><code>bool _flag</code>
-          </li>
-        </ul>
-        <p><a href="write/shouldrequireclaimingfor.md">more</a>
-        </p>
-      </td>
-    </tr>
-    <tr>
-      <td style="text-align:left"><b><code>transferTo</code></b>
-      </td>
-      <td style="text-align:left">
-        <p><b>Traits</b>
-        </p>
-        <ul>
-          <li><code>requirePermission</code>
-          </li>
-        </ul>
-        <p><b>Params</b>
-        </p>
-        <ul>
-          <li><code>address _recipient</code>
-          </li>
-          <li><code>address _holder</code> 
-          </li>
-          <li><code>uint256 _projectId</code> 
-          </li>
-          <li><code>uint256 _amount</code> 
-          </li>
-        </ul>
-        <p><a href="write/transferto.md">more</a>
-        </p>
-      </td>
-    </tr>
-  </tbody>
-</table>
-
+| Function                       | Definition                                                                                                                                                                                                                                                                                                                                                |
+| ------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **`issueFor`**                 | <p><strong>Traits</strong></p><ul><li><code>requirePermission</code></li></ul><p><strong>Params</strong></p><ul><li><code>uint256 _projectId</code></li><li><code>string _name</code></li><li><code>string _symbol</code></li></ul><p><strong>Returns</strong></p><ul><li><code>IJBToken token</code></li></ul><p><a href="write/mintfor.md">more</a></p> |
+| **`mintFor`**                  | <p><strong>Traits</strong></p><ul><li><code>onlyTerminal</code></li></ul><p><strong>Params</strong></p><ul><li><code>address _holder</code></li><li><code>uint256 _projectId</code></li><li><code>uint256 _amount</code></li><li><code>bool _preferUnstakedTokens</code></li></ul><p><a href="write/mintfor-1.md">more</a></p>                            |
+| **`burnFrom`**                 | <p><strong>Traits</strong></p><ul><li><code>onlyTerminal</code></li></ul><p><strong>Params</strong></p><ul><li><code>address _holder</code></li><li><code>uint256 _projectId</code></li><li><code>uint256 _amount</code></li><li><code>bool _preferUnstakedTokens</code></li></ul><p><a href="write/burnfrom.md">more</a></p>                             |
+| **`claimFor`**                 | <p><strong>Params</strong></p><ul><li><code>address _holder</code></li><li><code>uint256 _projectId</code></li><li><code>uint256 _amount</code></li></ul><p><a href="write/claimfor.md">more</a></p>                                                                                                                                                      |
+| **`changeTokenOf`**            | <p><strong>Traits</strong></p><ul><li><code>requirePermission</code></li></ul><p><strong>Params</strong></p><ul><li><code>uint256 _projectId</code></li><li><code>IJBToken _token</code></li><li><code>address _newOwner</code></li></ul><p><a href="write/changetokenof.md">more</a></p>                                                                 |
+| **`shouldRequireClaimingFor`** | <p><strong>Params</strong></p><ul><li><code>uint256 _projectId</code></li><li><code>bool _flag</code></li></ul><p><a href="write/shouldrequireclaimingfor.md">more</a></p>                                                                                                                                                                                |
+| **`transferTo`**               | <p><strong>Traits</strong></p><ul><li><code>requirePermission</code></li></ul><p><strong>Params</strong></p><ul><li><code>address _recipient</code></li><li><code>address _holder</code></li><li><code>uint256 _projectId</code></li><li><code>uint256 _amount</code></li></ul><p><a href="write/transferto.md">more</a></p>                              |

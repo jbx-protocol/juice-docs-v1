@@ -2,7 +2,7 @@
 
 Emitted from:
 
-* [`claimFor`](../write/burn.md)
+* [`claimFor`](../write/burnfrom.md)
 
 Definition:
 
