@@ -104,7 +104,7 @@
       * [\_distributeToPayoutSplitsOf](protocol/contracts/jbpaymentterminal/write/\_distributetopayoutsplitsof.md)
       * [\_takeFeeFrom](protocol/contracts/jbpaymentterminal/write/\_takefee.md)
       * [\_pay](protocol/contracts/jbpaymentterminal/write/\_pay.md)
-  * [JBPaymentTerminalData](protocol/contracts/jbpaymentterminaldata/README.md)
+  * [JBControllerV1](protocol/contracts/jbpaymentterminaldata/README.md)
     * [Events](protocol/contracts/jbpaymentterminaldata/events/README.md)
       * [SetOverflowAllowance](protocol/contracts/jbpaymentterminaldata/events/setoverflowallowance.md)
       * [DistributeReservedTokens](protocol/contracts/jbpaymentterminaldata/events/distributereservedtokens.md)
