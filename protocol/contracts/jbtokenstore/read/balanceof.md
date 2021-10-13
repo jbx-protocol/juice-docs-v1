@@ -47,7 +47,7 @@ function balanceOf(address _holder, uint256 _projectId)
    ```
 {% endtab %}
 
-{% tab title="Only code" %}
+{% tab title="Code" %}
 ```solidity
 /** 
   @notice 

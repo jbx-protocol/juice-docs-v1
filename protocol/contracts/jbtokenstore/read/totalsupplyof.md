@@ -42,7 +42,7 @@ function totalSupplyOf(uint256 _projectId) external view override returns (uint2
    ```
 {% endtab %}
 
-{% tab title="Only code" %}
+{% tab title="Code" %}
 ```solidity
 /** 
   @notice 

@@ -95,7 +95,7 @@ function mintFor(
 
 {% endtab %}
 
-{% tab title="Only code" %}
+{% tab title="Code" %}
 ```solidity
 /** 
   @notice 

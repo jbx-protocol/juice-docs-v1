@@ -19,7 +19,7 @@ function pay(
 * `_beneficiary` is the address to mint tokens for and pass along to the funding cycle's data source and delegate.
 {% endtab %}
 
-{% tab title="Only code" %}
+{% tab title="Code" %}
 ```solidity
 
 ```

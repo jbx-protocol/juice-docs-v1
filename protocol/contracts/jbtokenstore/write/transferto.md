@@ -113,7 +113,7 @@ function transferTo(
    * [`Transfer`](../events/transfer.md)
 {% endtab %}
 
-{% tab title="Only code" %}
+{% tab title="Code" %}
 ```solidity
 /** 
   @notice 

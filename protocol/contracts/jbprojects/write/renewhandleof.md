@@ -55,7 +55,7 @@ function renewHandleOf(uint256 _projectId)
     * [`RenewHandle`](../events/renewhandle.md)
 {% endtab %}
 
-{% tab title="Only code" %}
+{% tab title="Code" %}
 ```solidity
 /** 
   @notice

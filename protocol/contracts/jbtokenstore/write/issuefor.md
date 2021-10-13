@@ -95,7 +95,7 @@ function issueFor(
     * [`Issue`](../events/issue.md)
 {% endtab %}
 
-{% tab title="Only code" %}
+{% tab title="Code" %}
 ```solidity
 /**
   @notice 

@@ -112,7 +112,7 @@ function claimFor(
    * [`Claim`](../events/claim.md)
 {% endtab %}
 
-{% tab title="Only code" %}
+{% tab title="Code" %}
 ```solidity
 /**
   @notice 
