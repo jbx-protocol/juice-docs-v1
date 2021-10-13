@@ -2,7 +2,7 @@
 
 Contract:[`JBProjects`](../)
 
-Interface:`IJBProjects`
+Interface: [`IJBProjects`](../../../interfaces/ijbprojects.md)
 
 {% tabs %}
 {% tab title="Step by step" %}
@@ -34,10 +34,7 @@ function claimHandle(
 * Through the [`requirePermission`](../../jboperatable/modifiers/requirepermission.md) modifier, the function is only accessible by the project's owner, or from an operator that has been given the `JBOperations.CLAIM_HANDLE` permission by the project owner for the provided `_projectId`.
 * The function overrides a function definition from the `IJBProjects` interface.
 * The function doesn't return anything.
-
-
-
-1.  Check that either the `transferAddressFor` the `_handle` is the provided `_transferAddress`, or that the `_handle` is being challenged and the `challengeExpiryOf` the `_handle` has successfully passed.
+*   Check that either the `transferAddressFor` the `_handle` is the provided `_transferAddress`, or that the `_handle` is being challenged and the `challengeExpiryOf` the `_handle` has successfully passed.
 
     ```solidity
     // The handle must have been transferred to the specified address,
@@ -53,9 +50,7 @@ function claimHandle(
 
     * [`transferAddressFor`](../properties/transferaddressfor.md)
     * [`challengeExpiryOf`](../properties/challengeexpiryof.md)
-
-
-2.  Remove the `idFor` the `handleOf` the project so that the handle no longer resolves to any project ID.
+*   Remove the `idFor` the `handleOf` the project so that the handle no longer resolves to any project ID.
 
     ```solidity
     // Remove the project ID for the current handle of the specified project.
@@ -66,9 +61,7 @@ function claimHandle(
 
     * [`handleOf`](../properties/handleof.md)
     * [`idFor`](../properties/idfor.md)
-
-
-3.  Store the project's ID as the `idFor` the provided `_handle` to allow for project lookup using the handle.
+*   Store the project's ID as the `idFor` the provided `_handle` to allow for project lookup using the handle.
 
     ```solidity
     // Set the project ID for the provided handle to be the specified project.
@@ -78,9 +71,7 @@ function claimHandle(
     _Internal references:_
 
     * [`idFor`](../properties/idfor.md)
-
-
-4.  Store the provided `_handle` as the as the `handleOf` the project.
+*   Store the provided `_handle` as the as the `handleOf` the project.
 
     ```solidity
     // Set the new handle.
@@ -90,9 +81,7 @@ function claimHandle(
     _Internal references:_
 
     * [`handleOf`](../properties/handleof.md)
-
-
-5.  Remove the `transferAddressFor` the handle since it has now been claimed and is no longer being transferred.
+*   Remove the `transferAddressFor` the handle since it has now been claimed and is no longer being transferred.
 
     ```solidity
     // Set the handle as not being transferred.
@@ -102,9 +91,7 @@ function claimHandle(
     _Internal references:_
 
     * [`transferAddressFor`](../properties/transferaddressfor.md)
-
-
-6.  Remove the `challengeExpiryOf` the handle since it has now been transferred to a new project and must have a fresh challenge period awaited before being claimed again.
+*   Remove the `challengeExpiryOf` the handle since it has now been transferred to a new project and must have a fresh challenge period awaited before being claimed again.
 
     ```solidity
     // Reset the challenge to 0.
@@ -114,9 +101,7 @@ function claimHandle(
     _Internal references:_
 
     * [`challengeExpiryOf`](../properties/challengeexpiryof.md)
-
-
-7.  Emit a `TransferHandle` event with the all relevant parameters.
+*   Emit a `TransferHandle` event with the all relevant parameters.
 
     ```solidity
     emit ClaimHandle(_projectId, _transferAddress, _handle, msg.sender);

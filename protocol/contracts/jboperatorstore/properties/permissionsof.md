@@ -2,7 +2,7 @@
 
 Contract:[`JBOperatorStore`](../)​‌
 
-Interface: `IJBOperatorStore`
+Interface: [`IJBOperatorStore`](../../../interfaces/ijboperatorstore.md)
 
 **The permissions that an operator has to operate on a specific domain.**
 
@@ -30,5 +30,5 @@ mapping(address => mapping(address => mapping(uint256 => uint256))) public overr
 * `address` is the address of the operator.
 * `address` is the address of the account being operated.
 * `uint256` is the domain within which the permissions apply.
-* The resulting view function can be accessed externally by anyone. 
+* The resulting view function can be accessed externally by anyone.
 * The resulting function overrides a function definition from the `IJBOperatorStore` interface.

@@ -2,7 +2,7 @@
 
 Contract:[`JBProjects`](../)
 
-Interface:`IJBProjects`
+Interface: [`IJBProjects`](../../../interfaces/ijbprojects.md)
 
 {% tabs %}
 {% tab title="Step by step" %}
@@ -25,10 +25,7 @@ function setUriOf(uint256 _projectId, string calldata _uri)
 * Through the [`requirePermission`](../../jboperatable/modifiers/requirepermission.md) modifier, the function is only accessible by the project's owner, or from an operator that has been given the `JBOperations.SET_URI` permission by the project owner for the provided `_projectId`.
 * The function overrides a function definition from the `IJBProjects` interface.
 * The function doesn't return anything.
-
-
-
-1.  Store the new `_uri` as the `uriOf` the project.
+*   Store the new `_uri` as the `uriOf` the project.
 
     ```solidity
     // Set the new uri.
@@ -38,9 +35,7 @@ function setUriOf(uint256 _projectId, string calldata _uri)
     _Internal references:_
 
     * [`uriOf`](../properties/uriof.md)
-
-
-2.  Emit a `SetUri` event with the all relevant parameters.
+*   Emit a `SetUri` event with the all relevant parameters.
 
     ```solidity
     emit SetUri(_projectId, _uri, msg.sender);

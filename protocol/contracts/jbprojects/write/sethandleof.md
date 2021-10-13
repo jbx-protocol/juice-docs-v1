@@ -2,7 +2,7 @@
 
 Contract:[`JBProjects`](../)
 
-Interface:`IJBProjects`
+Interface: [`IJBProjects`](../../../interfaces/ijbprojects.md)
 
 {% tabs %}
 {% tab title="Step by step" %}
@@ -25,18 +25,13 @@ function setHandleOf(uint256 _projectId, bytes32 _handle)
 * Through the [`requirePermission`](../../jboperatable/modifiers/requirepermission.md) modifier, the function is only accessible by the project's owner, or from an operator that has been given the `JBOperations.SET_HANDLE` permission by the project owner for the provided `_projectId`.
 * The function overrides a function definition from the `IJBProjects` interface.
 * The function doesn't return anything.
-
-
-
-1.  Check that the provided `_handle` is not empty.
+*   Check that the provided `_handle` is not empty.
 
     ```solidity
     // Handle must exist.
     require(_handle != bytes32(0), "0x08: EMPTY_HANDLE");
     ```
-
-    
-2.  Check that the `_handle` is unique. This is done by making sure there isn't yet an `idFor` the handle, and making sure it isn't currently being transferred to an address.
+*   Check that the `_handle` is unique. This is done by making sure there isn't yet an `idFor` the handle, and making sure it isn't currently being transferred to an address.
 
     ```solidity
     // Handle must be unique.
@@ -47,9 +42,7 @@ function setHandleOf(uint256 _projectId, bytes32 _handle)
 
     * [`idFor`](../properties/idfor.md)
     * [`transferAddressFor`](../properties/transferaddressfor.md)
-
-
-3.  Free up the mapping from the current`handleOf` the project so that others can use it.
+*   Free up the mapping from the current`handleOf` the project so that others can use it.
 
     ```solidity
     // Register the change in the resolver.
@@ -60,9 +53,7 @@ function setHandleOf(uint256 _projectId, bytes32 _handle)
 
     * [`handleOf`](../properties/handleof.md)
     * [`idFor`](../properties/idfor.md)
-
-
-4.  Store the provided `_handle` as the as the `handleOf` the project.
+*   Store the provided `_handle` as the as the `handleOf` the project.
 
     ```solidity
     // Store the handle for the project ID.
@@ -72,9 +63,7 @@ function setHandleOf(uint256 _projectId, bytes32 _handle)
     _Internal references:_
 
     * [`handleOf`](../properties/handleof.md)
-
-
-5.  Store the project's ID as the `idFor` the provided `_handle` to allow for project lookup using the handle.
+*   Store the project's ID as the `idFor` the provided `_handle` to allow for project lookup using the handle.
 
     ```solidity
     // Store the project ID for the handle.
@@ -84,9 +73,7 @@ function setHandleOf(uint256 _projectId, bytes32 _handle)
     _Internal references:_
 
     * [`idFor`](../properties/idfor.md)
-
-
-6.  Emit a `SetHandle` event with the all relevant parameters.
+*   Emit a `SetHandle` event with the all relevant parameters.
 
     ```solidity
     emit SetHandle(_projectId, _handle, msg.sender);

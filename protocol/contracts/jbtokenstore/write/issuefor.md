@@ -2,7 +2,7 @@
 
 Contract:[`JBTokenStore`](../)​‌
 
-Interface: `IJBTokenStore`
+Interface: [`IJBTokenStore`](../../../interfaces/ijbtokenstore.md)
 
 {% tabs %}
 {% tab title="Step by step" %}
@@ -33,58 +33,45 @@ function issueFor(
 * Through the [`requirePermission`](../../jboperatable/modifiers/requirepermission.md) modifier, the function is only accessible by the project's owner, or from an operator that has been given the `JBOperations.ISSUE` permission by the project owner for the provided `_projectId`.
 * The function overrides a function definition from the `IJBTokenStore` interface.
 * The function returns the address of the token that was issued.
+*   Make sure a name was provided.
 
+    ```solidity
+    // There must be a name.
+    require((bytes(_name).length > 0), '0x1f: EMPTY_NAME');
+    ```
+*   Make sure a symbol was provided.
 
+    ```solidity
+    // There must be a symbol.
+    require((bytes(_symbol).length > 0), '0x20: EMPTY_SYMBOL');
+    ```
+*   Make sure the project hasn't already issued a token.
 
-1. Make sure a name was provided.
+    ```solidity
+    // Only one ERC20 token can be issued.
+    require(tokenOf[_projectId] == IJBToken(address(0)), '0x21: ALREADY_ISSUED');
+    ```
 
-   ```solidity
-   // There must be a name.
-   require((bytes(_name).length > 0), '0x1f: EMPTY_NAME');
-   ```
+    _Internal references:_
 
+    * [`tokenOf`](../properties/tokenof.md)
+*   Deploy a new instance of a [`JBToken`](../../jbtoken.md) contract. Assign it to the return value.
 
-2. Make sure a symbol was provided. 
+    ```solidity
+    // Deploy the token contract.
+    token = new JBToken(_name, _symbol);
+    ```
+*   Store the newly created token as the `tokenOf` the project.
 
-   ```solidity
-   // There must be a symbol.
-   require((bytes(_symbol).length > 0), '0x20: EMPTY_SYMBOL');
-   ```
+    ```solidity
+    // Store the token contract.
+    tokenOf[_projectId] = token;
+    ```
 
+    _Internal references:_
 
-3. Make sure the project hasn't already issued a token.
-
-   ```solidity
-   // Only one ERC20 token can be issued.
-   require(tokenOf[_projectId] == IJBToken(address(0)), '0x21: ALREADY_ISSUED');
-   ```
-
-   _Internal references:_
-
-   * [`tokenOf`](../properties/tokenof.md)
-
-
-4. Deploy a new instance of a [`JBToken`](../../jbtoken.md) contract. Assign it to the return value.
-
-   ```solidity
-   // Deploy the token contract.
-   token = new JBToken(_name, _symbol);
-   ```
-
-
-5. Store the newly created token as the `tokenOf` the project.
-
-   ```solidity
-   // Store the token contract.
-   tokenOf[_projectId] = token;
-   ```
-
-   _Internal references:_
-
-   * [`tokenOf`](../properties/tokenof.md)
-
-
-6. Emit an `Issue` event with the all relevant parameters.
+    * [`tokenOf`](../properties/tokenof.md)
+*   Emit an `Issue` event with the all relevant parameters.
 
     ```solidity
     emit Issue(_projectId, token, _name, _symbol, msg.sender);
@@ -142,39 +129,24 @@ function issueFor(
 {% endtab %}
 
 {% tab title="Errors" %}
-| String | Description |
-| :--- | :--- |
-| **`0x1f: EMPTY_NAME`** | Thrown if a name wasn't specified for the token. |
-| **`0x20: EMPTY_SYMBOL`** | Thrown if a symbol wasn't specified for the token. |
-| **`0x21: ALREADY_ISSUED`** | Thrown if the project has already issued a token. |
+| String                     | Description                                        |
+| -------------------------- | -------------------------------------------------- |
+| **`0x1f: EMPTY_NAME`**     | Thrown if a name wasn't specified for the token.   |
+| **`0x20: EMPTY_SYMBOL`**   | Thrown if a symbol wasn't specified for the token. |
+| **`0x21: ALREADY_ISSUED`** | Thrown if the project has already issued a token.  |
 {% endtab %}
 
 {% tab title="Events" %}
-<table>
-  <thead>
-    <tr>
-      <th style="text-align:left">Name</th>
-      <th style="text-align:left">Data</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td style="text-align:left"><b><code>Issue</code></b>
-      </td>
-      <td style="text-align:left">
-        <ul><li><code>uint256 indexed projectId</code></li><li><code>IJBToken indexed token</code></li><li><code>string name</code></li><li><code>string symbol</code></li><li><code>address caller</code></li></ul><p><a href="../events/issue.md">more</a></p>
-      </td>
-    </tr>
-  </tbody>
-</table>
+| Name        | Data                                                                                                                                                                                                                                                     |
+| ----------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **`Issue`** | <ul><li><code>uint256 indexed projectId</code></li><li><code>IJBToken indexed token</code></li><li><code>string name</code></li><li><code>string symbol</code></li><li><code>address caller</code></li></ul><p><a href="../events/issue.md">more</a></p> |
 {% endtab %}
 
 {% tab title="Bug bounty" %}
-| Category | Description | Reward |
-| :--- | :--- | :--- |
-| **Optimization** | Help make this operation more efficient. | 0.5ETH |
-| **Low severity** | Identify a vulnerability in this operation that could lead to an inconvenience for a user of the protocol or for a protocol developer. | 1ETH |
-| **High severity** | Identify a vulnerability in this operation that could lead to data corruption or loss of funds. | 5+ETH |
+| Category          | Description                                                                                                                            | Reward |
+| ----------------- | -------------------------------------------------------------------------------------------------------------------------------------- | ------ |
+| **Optimization**  | Help make this operation more efficient.                                                                                               | 0.5ETH |
+| **Low severity**  | Identify a vulnerability in this operation that could lead to an inconvenience for a user of the protocol or for a protocol developer. | 1ETH   |
+| **High severity** | Identify a vulnerability in this operation that could lead to data corruption or loss of funds.                                        | 5+ETH  |
 {% endtab %}
 {% endtabs %}
-

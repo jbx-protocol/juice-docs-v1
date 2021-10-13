@@ -2,7 +2,7 @@
 
 Contract:[`JBTokenStore`](../)​‌
 
-Interface: `IJBTokenStore`
+Interface: [`IJBTokenStore`](../../../interfaces/ijbtokenstore.md)
 
 **The total supply of unclaimed tokens for each project.**
 
@@ -19,6 +19,5 @@ mapping(uint256 => uint256) public override unclaimedTotalSupplyOf;
 ```
 
 * `uint256` is the ID of the project to which the token belongs.
-* The resulting view function can be accessed externally by anyone. 
+* The resulting view function can be accessed externally by anyone.
 * The resulting function overrides a function definition from the `IJBTokenStore` interface.
-

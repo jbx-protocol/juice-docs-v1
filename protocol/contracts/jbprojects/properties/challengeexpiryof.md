@@ -2,7 +2,7 @@
 
 Contract: [`JBProjects`](../)
 
-Interface:`IJBProjects`
+Interface: [`IJBProjects`](../../../interfaces/ijbprojects.md)
 
 **The timestamps after which each handle can be openly claimed.**
 

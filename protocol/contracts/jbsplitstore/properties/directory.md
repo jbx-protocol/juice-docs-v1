@@ -2,7 +2,7 @@
 
 Contract:[`JBSplitStore`](../)​‌
 
-Interface: `IJBSplitStore`
+Interface: [`IJBSplitStore`](../../../interfaces/ijbsplitsstore.md)
 
 **The directory of terminals and controllers for projects.**
 
@@ -16,5 +16,5 @@ Definition:
 IJBDirectory public immutable override directory;
 ```
 
-* The resulting view function can be accessed externally by anyone. 
+* The resulting view function can be accessed externally by anyone.
 * The resulting function overrides a function definition from the `IJBSplitStore` interface.

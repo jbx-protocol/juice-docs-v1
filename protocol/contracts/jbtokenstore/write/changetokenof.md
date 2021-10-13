@@ -2,7 +2,7 @@
 
 Contract:[`JBTokenStore`](../)​‌
 
-Interface: `IJBTokenStore`
+Interface: [`IJBTokenStore`](../../../interfaces/ijbtokenstore.md)
 
 {% tabs %}
 {% tab title="Step by step" %}
@@ -30,41 +30,34 @@ function changeTokenOf(
 * Through the [`requirePermission`](../../jboperatable/modifiers/requirepermission.md) modifier, the function is only accessible by the project's owner, or from an operator that has been given the `JBOperations.CHANGE_TOKEN`permission by the project owner for the provided `_projectId`.
 * The function overrides a function definition from the `IJBTokenStore` interface.
 * The function returns nothing.
+*   Get a reference to the project's current token.
 
+    ```solidity
+    // Get a reference to the current owner of the token.
+    IJBToken _currentToken = tokenOf[_projectId];
+    ```
 
+    _Internal references:_
 
-1. Get a reference to the project's current token.  
+    * [`tokenOf`](../properties/tokenof.md)
+*   Store the provided token as the `tokenOf` the project.
 
-   ```solidity
-   // Get a reference to the current owner of the token.
-   IJBToken _currentToken = tokenOf[_projectId];
-   ```
+    ```solidity
+    // Store the new token.
+    tokenOf[_projectId] = _token;
+    ```
 
-   _Internal references:_
+    _Internal references:_
 
-   * [`tokenOf`](../properties/tokenof.md)
+    * [`tokenOf`](../properties/tokenof.md)
+*   If there's a current token and a new owner address was provided, transfer the ownership of the current token from this contract to the new owner. This will let the new owner mint and burn tokens from the current token contract.
 
-
-2. Store the provided token as the `tokenOf` the project.
-
-   ```solidity
-   // Store the new token.
-   tokenOf[_projectId] = _token;
-   ```
-
-   _Internal references:_
-
-   * [`tokenOf`](../properties/tokenof.md)
-
-3. If there's a current token and a new owner address was provided, transfer the ownership of the current token from this contract to the new owner. This will let the new owner mint and burn tokens from the current token contract. 
-
-   ```solidity
-   // If there's a current token and a new owner was provided, transfer ownership of the old token to the new owner.
-   if (_currentToken != IJBToken(address(0)) && _newOwner != address(0))
-     _currentToken.transferOwnership(_newOwner);
-   ```
-
-4. Emit a `ChangeToken` event with the all relevant parameters.
+    ```solidity
+    // If there's a current token and a new owner was provided, transfer ownership of the old token to the new owner.
+    if (_currentToken != IJBToken(address(0)) && _newOwner != address(0))
+      _currentToken.transferOwnership(_newOwner);
+    ```
+*   Emit a `ChangeToken` event with the all relevant parameters.
 
     ```solidity
     emit ChangeToken(_projectId, _token, _newOwner, msg.sender);
@@ -113,31 +106,16 @@ function changeTokenOf(
 {% endtab %}
 
 {% tab title="Events" %}
-<table>
-  <thead>
-    <tr>
-      <th style="text-align:left">Name</th>
-      <th style="text-align:left">Data</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td style="text-align:left"><b><code>ChangeToken</code></b>
-      </td>
-      <td style="text-align:left">
-        <ul><li><code>uint256 indexed projectId</code></li><li><code>IJBToken indexed token</code></li><li><code>address indexed owner</code></li><li><code>address caller</code></li></ul><p><a href="../events/usenewtoken.md">more</a></p>
-      </td>
-    </tr>
-  </tbody>
-</table>
+| Name              | Data                                                                                                                                                                                                                                  |
+| ----------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **`ChangeToken`** | <ul><li><code>uint256 indexed projectId</code></li><li><code>IJBToken indexed token</code></li><li><code>address indexed owner</code></li><li><code>address caller</code></li></ul><p><a href="../events/usenewtoken.md">more</a></p> |
 {% endtab %}
 
 {% tab title="Bug bounty" %}
-| Category | Description | Reward |
-| :--- | :--- | :--- |
-| **Optimization** | Help make this operation more efficient. | 0.5ETH |
-| **Low severity** | Identify a vulnerability in this operation that could lead to an inconvenience for a user of the protocol or for a protocol developer. | 1ETH |
-| **High severity** | Identify a vulnerability in this operation that could lead to data corruption or loss of funds. | 5+ETH |
+| Category          | Description                                                                                                                            | Reward |
+| ----------------- | -------------------------------------------------------------------------------------------------------------------------------------- | ------ |
+| **Optimization**  | Help make this operation more efficient.                                                                                               | 0.5ETH |
+| **Low severity**  | Identify a vulnerability in this operation that could lead to an inconvenience for a user of the protocol or for a protocol developer. | 1ETH   |
+| **High severity** | Identify a vulnerability in this operation that could lead to data corruption or loss of funds.                                        | 5+ETH  |
 {% endtab %}
 {% endtabs %}
-

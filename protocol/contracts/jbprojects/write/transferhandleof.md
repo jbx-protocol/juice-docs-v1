@@ -2,7 +2,7 @@
 
 Contract:[`JBProjects`](../)
 
-Interface:`IJBProjects`
+Interface: [`IJBProjects`](../../../interfaces/ijbprojects.md)
 
 {% tabs %}
 {% tab title="Step by step" %}
@@ -31,18 +31,13 @@ function transferHandleOf(
 * Through the [`requirePermission`](../../jboperatable/modifiers/requirepermission.md) modifier, the function is only accessible by the project's owner, or from an operator that has been given the `JBOperations.SET_HANDLE` permission by the project owner for the provided `_projectId`.
 * The function overrides a function definition from the `IJBProjects` interface.
 * The function returns the `handle` that has been transferred.
-
-
-
-1.  Check that the provided `_newHandle` is not empty.
+*   Check that the provided `_newHandle` is not empty.
 
     ```solidity
     // A new handle must have been provided.
     require(_newHandle != bytes32(0), '0x0a: EMPTY_HANDLE');
     ```
-
-
-2.  Check that the `_newHandle` is unique. This is done by making sure there isn't yet an `idFor` the handle, and making sure it isn't currently being transferred to an address.
+*   Check that the `_newHandle` is unique. This is done by making sure there isn't yet an `idFor` the handle, and making sure it isn't currently being transferred to an address.
 
     ```solidity
     // The new handle must be available.
@@ -53,9 +48,7 @@ function transferHandleOf(
 
     * [`idFor`](../properties/idfor.md)
     * [`transferAddressFor`](../properties/transferaddressfor.md)
-
-
-3.  Get the current `handleOf` the project. Store this is `handle`, which will be returned by the function.
+*   Get the current `handleOf` the project. Store this is `handle`, which will be returned by the function.
 
     ```solidity
     // Get a reference to the project's current handle.
@@ -65,9 +58,7 @@ function transferHandleOf(
     _Internal references:_
 
     * [`handleOf`](../properties/handleof.md)
-
-
-4.  Remove the `idFor` the project's current handle so that the handle no longer resolves to any project ID.
+*   Remove the `idFor` the project's current handle so that the handle no longer resolves to any project ID.
 
     ```solidity
     // Remove the resolver for the transferred handle.
@@ -77,9 +68,7 @@ function transferHandleOf(
     _Internal references:_
 
     * [`idFor`](../properties/idfor.md)
-
-
-5.  Store the project's ID as the `idFor` the provided `_newHandle` to allow for project lookup using the handle.
+*   Store the project's ID as the `idFor` the provided `_newHandle` to allow for project lookup using the handle.
 
     ```solidity
     // Store the new handle for the project ID.
@@ -89,9 +78,7 @@ function transferHandleOf(
     _Internal references:_
 
     * [`idFor`](../properties/idfor.md)
-
-
-6.  Store the provided `_newHandle` as the as the `handleOf` the project.
+*   Store the provided `_newHandle` as the as the `handleOf` the project.
 
     ```solidity
     // Store the new handle for the project ID.
@@ -101,9 +88,7 @@ function transferHandleOf(
     _Internal references:_
 
     * [`handleOf`](../properties/handleof.md)
-
-
-7.  Store the `_transferAddress` that will be able to transfer the handle as the `transferAddressFor` the handle.
+*   Store the `_transferAddress` that will be able to transfer the handle as the `transferAddressFor` the handle.
 
     ```solidity
     // Give the address the power to transfer the current handle.
@@ -113,9 +98,7 @@ function transferHandleOf(
     _Internal references:_
 
     * [`transferAddressFor`](../properties/idfor.md)
-
-
-8.  Emit a `TransferHandle` event with the all relevant parameters.
+*   Emit a `TransferHandle` event with the all relevant parameters.
 
     ```
     emit TransferHandle(_projectId, _transferAddress, handle, _newHandle, msg.sender);

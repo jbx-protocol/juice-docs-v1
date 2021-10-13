@@ -2,7 +2,7 @@
 
 Contract:[`JBProjects`](../)
 
-Interface:`IJBProjects`
+Interface: [`IJBProjects`](../../../interfaces/ijbprojects.md)
 
 {% tabs %}
 {% tab title="Step by step" %}
@@ -23,10 +23,7 @@ function challengeHandle(bytes32 _handle) external override { ... }
 * The function can be accessed externally by anyone.
 * The function overrides a function definition from the `IJBProjects` interface.
 * The function doesn't return anything.
-
-
-
-1.  Get a reference to the project to which the handle being challenged belongs.
+*   Get a reference to the project to which the handle being challenged belongs.
 
     ```solidity
     // Get a reference to the ID of the project to which the handle belongs.
@@ -36,17 +33,13 @@ function challengeHandle(bytes32 _handle) external override { ... }
     _Internal references:_
 
     * [`idFor`](../properties/idfor.md)
-
-
-2.  Check if the handle is being used.
+*   Check if the handle is being used.
 
     ```solidity
     // No need to challenge a handle that's not taken.
     require(_projectId > 0, '0x0d: HANDLE_NOT_TAKEN');
     ```
-
-
-3.  Check if the handle is already being challenged.
+*   Check if the handle is already being challenged.
 
     ```solidity
     // No need to challenge again if a handle is already being challenged.
@@ -56,9 +49,7 @@ function challengeHandle(bytes32 _handle) external override { ... }
     _Internal references:_
 
     * [`challengeExpiryOf`](../properties/challengeexpiryof.md)
-
-
-4.  The challenge will expire one year from the current timestamp. If the `_handle` is not renewed before then, anyone will be able to claim the handle by calling [`claimHandle`](claimhandle.md).
+*   The challenge will expire one year from the current timestamp. If the `_handle` is not renewed before then, anyone will be able to claim the handle by calling [`claimHandle`](claimhandle.md).
 
     ```solidity
     // The challenge will expire in a year, at which point the handle can be claimed if it has yet to be renewed.
@@ -68,9 +59,7 @@ function challengeHandle(bytes32 _handle) external override { ... }
     _Internal references:_
 
     * [`_SECONDS_IN_YEAR`](../properties/\_seconds_in_year.md)
-
-
-5.  Store the `_challengeExpiry` as the `challengeExpiryOf` the provided `_handle`.
+*   Store the `_challengeExpiry` as the `challengeExpiryOf` the provided `_handle`.
 
     ```solidity
     // Store the challenge expiry for the handle.
@@ -80,9 +69,7 @@ function challengeHandle(bytes32 _handle) external override { ... }
     _Internal references:_
 
     * [`challengeExpiryOf`](../properties/challengeexpiryof.md)
-
-
-6.  Emit a `ChallengeHandle` event with the all relevant parameters.
+*   Emit a `ChallengeHandle` event with the all relevant parameters.
 
     ```solidity
     emit ChallengeHandle(_handle, _projectId, _challengeExpiry, msg.sender);

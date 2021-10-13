@@ -2,7 +2,7 @@
 
 Contract:[`JBOperatorStore`](../)​‌
 
-Interface: `IJBOperatorStore`
+Interface: [`IJBOperatorStore`](../../../interfaces/ijboperatorstore.md)
 
 {% tabs %}
 {% tab title="Step by step" %}
@@ -23,21 +23,16 @@ function hasPermissions(
 * `_account` is the account that has given out permission to the operator.
 * `_domain` is the domain that the operator has been given permissions to operate.
 * `_permissionIndexes` is a permission indexes to check for.
-* The view function can be accessed externally by anyone. 
+* The view function can be accessed externally by anyone.
 * The function does not alter state on the blockchain.
 * The function overrides a function definition from the `IJBOperatorStore` interface.
 * The function return a flag indicating whether or not the operator has the specified permission.
-
-
-
-1.  Make sure the `_permissionIndex` is one of the 255 indexes in a `uint256`. 
+*   Make sure the `_permissionIndex` is one of the 255 indexes in a `uint256`.
 
     ```solidity
     require(_permissionIndex <= 255, '0x00: INDEX_OUT_OF_BOUNDS');
     ```
-
-
-2.  Return true if the bit is flipped on for the specified `_permissionIndex`. Otherwise return false.
+*   Return true if the bit is flipped on for the specified `_permissionIndex`. Otherwise return false.
 
     ```solidity
     return (((permissionsOf[_operator][_account][_domain] >> _permissionIndex) & 1) == 1)
