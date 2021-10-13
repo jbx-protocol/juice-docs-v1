@@ -32,17 +32,86 @@ function transferTo(
 
 
 
-1. Get a reference to the current splits set for the specified `_projectId` 's `_domain`, within the specified `_group`.   
+1. Make sure a recipient was specified. 
 
    ```solidity
+   // Can't transfer to the zero address.
+   require(_recipient != address(0), '0x26: ZERO_ADDRESS');
+   ```
+
+
+2. Make sure the holder of the tokens isn't also the recipient.
+
+   ```solidity
+   // An address can't transfer to itself.
+   require(_holder != _recipient, '0x27: IDENTITY');
+   ```
+
+
+3. Make sure there is amount to transfer.
+   
+   ```solidity
+   // There must be an amount to transfer.
+   require(_amount > 0, '0x28: NO_OP');
+   ```
+
+
+4. Get a reference to the amount of unclaimed tokens the holder has for the project.
+
+   ```solidity
+   // Get a reference to the amount of unclaimed tokens.
+   uint256 _unclaimedBalance = unclaimedBalanceOf[_holder][_projectId];
    ```
 
    _Internal references:_
 
-   * [`_splitsOf`](../properties/_splitsof.md)
+   * [`unclaimedBalanceOf`](../properties/unclaimedbalanceof.md)
 
 
-2. 
+5. Make sure the holder has enough unclaimed tokens to transfer. 
+
+   ```solidity
+   // There must be enough unclaimed tokens to transfer.
+   require(_amount <= _unclaimedBalance, '0x29: INSUFFICIENT_FUNDS');
+   ```
+
+
+6. Subtract the amount from the `unclaimedBalanceOf` the holder for the project. 
+
+   ```solidity
+   // Subtract from the holder.
+   unclaimedBalanceOf[_holder][_projectId] = unclaimedBalanceOf[_holder][_projectId] - _amount;
+   ```
+
+   _Internal references:_
+
+   * [`unclaimedBalanceOf`](../properties/unclaimedbalanceof.md)
+  
+
+6. Add the amount to the `unclaimedBalanceOf` the recipient for the project. 
+
+   ```solidity
+   // Add the tokens to the recipient.
+   unclaimedBalanceOf[_recipient][_projectId] =
+     unclaimedBalanceOf[_recipient][_projectId] +
+     _amount;
+   ```
+
+   _Internal references:_
+
+   * [`unclaimedBalanceOf`](../properties/unclaimedbalanceof.md)
+   
+
+7. Emit a `Transfer` event with the all relevant parameters.
+
+   ```solidity
+   emit Transfer(_holder, _projectId, _recipient, _amount, msg.sender);
+   ```
+
+   _Event references:_
+
+   * [`Transfer`](../events/transfer.md)
+
 {% endtab %}
 
 {% tab title="Only code" %}
