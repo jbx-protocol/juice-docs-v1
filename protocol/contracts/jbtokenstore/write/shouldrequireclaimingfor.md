@@ -44,7 +44,7 @@ function shouldRequireClaimingFor(uint256 _projectId, bool _flag)
 
    ```solidity
    // Tokens must have been issued.
-   require(_token != IJBToken(address(0)), '0x24: NOT_FOUND');
+   require(_token != IJBToken(address(0)), '0x2a: NOT_FOUND');
    ```
 
 
@@ -93,7 +93,7 @@ function shouldRequireClaimingFor(uint256 _projectId, bool _flag)
   IJBToken _token = tokenOf[_projectId];
 
   // Tokens must have been issued.
-  require(_token != IJBToken(address(0)), '0x24: NOT_FOUND');
+  require(_token != IJBToken(address(0)), '0x2a: NOT_FOUND');
 
   // Store the flag.
   requireClaimFor[_projectId] = _flag;
