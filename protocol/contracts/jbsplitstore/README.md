@@ -8,7 +8,7 @@ description: Stores splits information for all groups of each project.
 
 ### Code
 
-{% embed url="https://github.com/jbx-protocol/juice-juicehouse/blob/version/2.1/packages/hardhat/contracts/JBSplitStore.sol" %}
+{% embed url="https://github.com/jbx-protocol/juice-contracts/tree/main/contracts/v2/JBSplitStore.sol" %}
 
 ### **Addresses**
 

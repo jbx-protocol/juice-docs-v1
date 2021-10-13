@@ -8,7 +8,7 @@ description: 'Manage funding cycle configurations, ballots, accounting, and sche
 
 ### Code
 
-{% embed url="https://github.com/jbx-protocol/juice-juicehouse/blob/version/2.1/packages/hardhat/contracts/JBFundingCycleStore.sol" %}
+{% embed url="https://github.com/jbx-protocol/juice-contracts/tree/main/contracts/v2/JBFundingCycleStore.sol" %}
 
 ### **Addresses**
 

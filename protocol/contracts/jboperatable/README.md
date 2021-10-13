@@ -14,7 +14,7 @@ description: >-
 
 ### Code
 
-{% embed url="https://github.com/jbx-protocol/juice-juicehouse/blob/version/2.1/packages/hardhat/contracts/abstract/JBOperatable.sol" %}
+{% embed url="https://github.com/jbx-protocol/juice-contracts/tree/main/contracts/v2abstract/JBOperatable.sol" %}
 
 ## Modifiers
 
