@@ -260,10 +260,10 @@
     * [Read](protocol/contracts/jboperatable/read/README.md)
       * [operatorStore](protocol/contracts/jboperatable/read/operatorstore.md)
   * [JBTerminalUtility](protocol/contracts/jbterminalutility/README.md)
-    * [Modifiers](protocol/contracts/jbutility/modifiers/README.md)
+    * [Modifiers](protocol/contracts/jbterminalutility/modifiers/README.md)
       * [onlyTerminal](protocol/contracts/jbterminalutility/modifiers/onlyterminal.md)
   * [JBControllerUtility](protocol/contracts/jbcontrollerutility/README.md)
-    * [Modifiers](protocol/contracts/jbutility/modifiers/README.md)
+    * [Modifiers](protocol/contracts/jbcontrollerutility/modifiers/README.md)
       * [onlyController](protocol/contracts/jbutility/modifiers/onlycontroller.md)
 
 ## 🗳Governance
