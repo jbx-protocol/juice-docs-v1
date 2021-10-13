@@ -47,10 +47,10 @@ function changeTokenOf(
 
 2. Store the provided token as the `tokenOf` the project.
 
-  ```solidity
-  // Store the new token.
-  tokenOf[_projectId] = _token;
-  ```
+   ```solidity
+   // Store the new token.
+   tokenOf[_projectId] = _token;
+   ```
 
    _Internal references:_
 
@@ -58,11 +58,11 @@ function changeTokenOf(
 
 3. If there's a current token and a new owner address was provided, transfer the ownership of the current token from this contract to the new owner. This will let the new owner mint and burn tokens from the current token contract. 
 
-  ```solidity
-  // If there's a current token and a new owner was provided, transfer ownership of the old token to the new owner.
-  if (_currentToken != IJBToken(address(0)) && _newOwner != address(0))
-    _currentToken.transferOwnership(_newOwner);
-  ```
+   ```solidity
+   // If there's a current token and a new owner was provided, transfer ownership of the old token to the new owner.
+   if (_currentToken != IJBToken(address(0)) && _newOwner != address(0))
+     _currentToken.transferOwnership(_newOwner);
+   ```
 
 4. Emit a `ChangeToken` event with the all relevant parameters.
 
