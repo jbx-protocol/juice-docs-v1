@@ -2,7 +2,7 @@
 
 Contract: [`JBProjects`](../)
 
-Interface: [`IJBProjects`](../../../interfaces/ijbprojects.md)
+Interface:`IJBProjects`
 
 **The unique handle for each project.**
 

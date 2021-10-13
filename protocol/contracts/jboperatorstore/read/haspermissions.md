@@ -2,7 +2,7 @@
 
 Contract:[`JBOperatorStore`](../)​‌
 
-Interface: [`IJBOperatorStore`](../../../interfaces/ijboperatorstore.md)
+Interface: `IJBOperatorStore`
 
 {% tabs %}
 {% tab title="Step by step" %}
@@ -23,40 +23,46 @@ function hasPermissions(
 * `_account` is the account that has given out permission to the operator.
 * `_domain` is the domain that the operator has been given permissions to operate.
 * `_permissionIndexes` is an array of permission indexes to check for.
-* The view function can be accessed externally by anyone.
+* The view function can be accessed externally by anyone. 
 * The function does not alter state on the blockchain.
 * The function overrides a function definition from the `IJBOperatorStore` interface.
 * The function return a flag indicating whether or not the operator has the permissions.
-*   Loop through the provided `_permissionIndexes`.
 
-    ```solidity
-    for (uint256 _i = 0; _i < _permissionIndexes.length; _i++) { ... }
-    ```
-*   Get a reference to the `_permissionIndex` being iterated on.
+1. Loop through the provided `_permissionIndexes`.
 
-    ```solidity
-    uint256 _permissionIndex = _permissionIndexes[_i];
-    ```
-*   Make sure the `_permissionIndex` is one of the 255 indexes in a `uint256`.
+   ```solidity
+   for (uint256 _i = 0; _i < _permissionIndexes.length; _i++) { ... }
+   ```
 
-    ```solidity
-    require(_permissionIndex <= 255, '0x01: INDEX_OUT_OF_BOUNDS');
-    ```
-*   If the bit at the specified permission index of the `permissionsOf` the `_operator` for the specified `_account` and within the specified `_domain` is off, return `false` because all provided permissions are not on.
+2. Get a reference to the `_permissionIndex` being iterated on.
 
-    ```solidity
-    if (((permissionsOf[_operator][_account][_domain] >> _permissionIndex) & 1) == 0)
-      return false;
-    ```
+   ```solidity
+   uint256 _permissionIndex = _permissionIndexes[_i];
+   ```
 
-    Internal references:
+3. Make sure the `_permissionIndex` is one of the 255 indexes in a `uint256`. 
 
-    * [`permissionsOf`](../properties/permissionsof.md)
-*   After the loop, return `true` since the loop checked all specified permissions without returning `false`.
+   ```solidity
+   require(_permissionIndex <= 255, '0x01: INDEX_OUT_OF_BOUNDS');
+   ```
 
-    ```solidity
-    return true;
-    ```
+4. If the bit at the specified permission index of the `permissionsOf` the `_operator` for the specified `_account` and within the specified `_domain` is off, return `false` because all provided permissions are not on.  
+
+   ```solidity
+   if (((permissionsOf[_operator][_account][_domain] >> _permissionIndex) & 1) == 0)
+     return false;
+   ```
+
+   Internal references:
+
+   * [`permissionsOf`](../properties/permissionsof.md)
+
+
+5. After the loop, return `true` since the loop checked all specified permissions without returning `false`.
+
+   ```solidity
+   return true;
+   ```
 {% endtab %}
 
 {% tab title="Code" %}
@@ -92,16 +98,17 @@ function hasPermissions(
 {% endtab %}
 
 {% tab title="Errors" %}
-| String                          | Description                                                               |
-| ------------------------------- | ------------------------------------------------------------------------- |
+| String | Description |
+| :--- | :--- |
 | **`0x01: INDEX_OUT_OF_BOUNDS`** | Thrown if the provided index is more than whats supported in a `uint256`. |
 {% endtab %}
 
 {% tab title="Bug bounty" %}
-| Category          | Description                                                                                                                            | Reward |
-| ----------------- | -------------------------------------------------------------------------------------------------------------------------------------- | ------ |
-| **Optimization**  | Help make this operation more efficient.                                                                                               | 0.5ETH |
-| **Low severity**  | Identify a vulnerability in this operation that could lead to an inconvenience for a user of the protocol or for a protocol developer. | 1ETH   |
-| **High severity** | Identify a vulnerability in this operation that could lead to data corruption or loss of funds.                                        | 5+ETH  |
+| Category | Description | Reward |
+| :--- | :--- | :--- |
+| **Optimization** | Help make this operation more efficient. | 0.5ETH |
+| **Low severity** | Identify a vulnerability in this operation that could lead to an inconvenience for a user of the protocol or for a protocol developer. | 1ETH |
+| **High severity** | Identify a vulnerability in this operation that could lead to data corruption or loss of funds. | 5+ETH |
 {% endtab %}
 {% endtabs %}
+

@@ -2,7 +2,7 @@
 
 Contract: [`JBProjects`](../)
 
-Interface: [`IJBProjects`](../../../interfaces/ijbprojects.md)
+Interface:`IJBProjects`
 
 **The IPFS CID for each project, which can be used to reference the project's metadata.**
 

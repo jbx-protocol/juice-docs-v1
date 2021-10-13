@@ -1,6 +1,6 @@
 # createFor
 
-Contract:[`JBProjects`](../)
+Contract: [`JBProjects`](../)
 
 Interface: [`IJBProjects`](../../../interfaces/ijbprojects.md)
 

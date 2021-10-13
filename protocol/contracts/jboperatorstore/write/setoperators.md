@@ -2,7 +2,7 @@
 
 Contract:[`JBOperatorStore`](../)​‌
 
-Interface: [`IJBOperatorStore`](../../../interfaces/ijboperatorstore.md)
+Interface: `IJBOperatorStore`
 
 {% tabs %}
 {% tab title="Step by step" %}
@@ -17,16 +17,20 @@ Definition:
 ```
 
 * `_operatorData` are the [JBOperatorData](../../../data-structures/jboperatordata.md) that specifies the params for each operator being set.
-* The function can be accessed externally by anyone.
+* The function can be accessed externally by anyone. 
 * The function overrides a function definition from the `IJBOperatorStore` interface.
 * The function doesn't return anything.
-*   Loop through the provided `_operatorData`.
+
+
+
+1.  Loop through the provided `_operatorData`.
 
     ```solidity
     for (uint256 _i = 0; _i < _operatorData.length; _i++) { ... }
     ```
 
-    1.  Pack the provided permissions into a `uint256`. Each bit of the resulting value represents whether or not permission has been granted for that index.
+
+    2.  Pack the provided permissions into a `uint256`. Each bit of the resulting value represents whether or not permission has been granted for that index.
 
         ```solidity
         // Pack the indexes into a uint256.
@@ -36,7 +40,9 @@ Definition:
         Internal references:
 
         * [`_packedPermissions`](\_packedpermissions.md)
-    2.  Store the packed permissions as the `permissionsOf` the provided `_operator`, on behalf of the `msg.sender`, specifically for the provided `_domain`.
+
+
+    3.  Store the packed permissions as the `permissionsOf` the provided `_operator`, on behalf of the `msg.sender`, specifically for the provided `_domain`.
 
         ```solidity
         // Store the new value.
@@ -46,7 +52,9 @@ Definition:
         _Internal references:_
 
         * [`permissionsOf`](../properties/permissionsof.md)
-    3.  Emit a `SetOperator` event with the all relevant parameters.
+
+
+    4.  Emit a `SetOperator` event with the all relevant parameters.
 
         ```solidity
         emit SetOperator(
@@ -104,9 +112,11 @@ function setOperators(JBOperatorData[] calldata _operatorData) external override
 {% endtab %}
 
 {% tab title="Events" %}
-|                   |                                                                                                                                                                                                                                                                                         |
-| ----------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Name | Data |
+| ---- | ---- |
+
 | **`SetOperator`** | <ul><li><code>address indexed operator</code></li><li><code>address indexed account</code></li><li><code>uint256 indexed domain</code></li><li><code>uint256[] permissionIndexes</code></li><li><code>uint256 packed</code></li></ul><p><a href="../events/setoperator.md">more</a></p> |
+| ----------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 {% endtab %}
 
 {% tab title="Bug bounty" %}

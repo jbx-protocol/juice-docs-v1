@@ -2,7 +2,7 @@
 
 Contract: [`JBProjects`](../)
 
-Interface: [`IJBProjects`](../../../interfaces/ijbprojects.md)
+Interface:`IJBProjects`
 
 **The address that can reallocate a handle that have been transferred to it.**
 

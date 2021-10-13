@@ -2,7 +2,7 @@
 
 Contract:[`JBTokenStore`](../)​‌
 
-Interface: [`IJBTokenStore`](../../../interfaces/ijbtokenstore.md)
+Interface: `IJBTokenStore`
 
 {% tabs %}
 {% tab title="Step by step" %}
@@ -25,41 +25,51 @@ function shouldRequireClaimingFor(uint256 _projectId, bool _flag)
 * Through the [`requirePermission`](../../jboperatable/modifiers/requirepermission.md) modifier, the function is only accessible by the project's owner, or from an operator that has been given the `JBOperations.REQUIRE_CLAIM`permission by the project owner for the provided `_projectId`.
 * The function overrides a function definition from the `IJBTokenStore` interface.
 * The function returns nothing.
-*   Get a reference to the project's token.
 
-    ```solidity
-    // Get a reference to the project's ERC20 tokens.
-    IJBToken _token = tokenOf[_projectId];
-    ```
 
-    _Internal references:_
 
-    * [`tokenOf`](../properties/tokenof.md)
-*   Make sure the project has a token. If it doesn't, there's nowhere to claim tokens onto.
+1. Get a reference to the project's token.  
 
-    ```solidity
-    // Tokens must have been issued.
-    require(_token != IJBToken(address(0)), '0x2a: NOT_FOUND');
-    ```
-*   Store the flag for the project.
+   ```solidity
+   // Get a reference to the project's ERC20 tokens.
+   IJBToken _token = tokenOf[_projectId];
+   ```
 
-    ```solidity
-    // Store the flag.
-    requireClaimFor[_projectId] = _flag;
-    ```
+   _Internal references:_
 
-    _Internal references:_
+   * [`tokenOf`](../properties/tokenof.md)
 
-    * [`requireClaimFor`](../properties/requireclaimfor.md)
-*   Emit a `ShouldRequireClaim` event with the all relevant parameters.
 
-    ```solidity
-    emit ShouldRequireClaim(_projectId, _flag, msg.sender);
-    ```
+2. Make sure the project has a token. If it doesn't, there's nowhere to claim tokens onto.
 
-    _Event references:_
+   ```solidity
+   // Tokens must have been issued.
+   require(_token != IJBToken(address(0)), '0x2a: NOT_FOUND');
+   ```
 
-    * [`ShouldRequireClaim`](../events/shouldrequireclaim.md)
+
+3. Store the flag for the project.
+
+   ```solidity
+   // Store the flag.
+   requireClaimFor[_projectId] = _flag;
+   ```
+
+   _Internal references:_
+
+   * [`requireClaimFor`](../properties/requireclaimfor.md)
+  
+
+4. Emit a `ShouldRequireClaim` event with the all relevant parameters.
+
+   ```solidity
+   emit ShouldRequireClaim(_projectId, _flag, msg.sender);
+   ```
+
+   _Event references:_
+
+   * [`ShouldRequireClaim`](../events/shouldrequireclaim.md)
+
 {% endtab %}
 
 {% tab title="Code" %}
@@ -94,22 +104,39 @@ function shouldRequireClaimingFor(uint256 _projectId, bool _flag)
 {% endtab %}
 
 {% tab title="Errors" %}
-| String                | Description                                      |
-| --------------------- | ------------------------------------------------ |
+| String | Description |
+| :--- | :--- |
 | **`0x2a: NOT_FOUND`** | Thrown if the project hasn't yet issued a token. |
 {% endtab %}
 
 {% tab title="Events" %}
-| Name                     | Data                                                                                                                                                                                         |
-| ------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **`ShouldRequireClaim`** | <ul><li><code>uint256 indexed projectId</code></li><li><code>bool indexed flag</code></li><li><code>address caller</code></li></ul><p><a href="../events/shouldrequireclaim.md">more</a></p> |
+<table>
+  <thead>
+    <tr>
+      <th style="text-align:left">Name</th>
+      <th style="text-align:left">Data</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align:left"><b><code>ShouldRequireClaim</code></b>
+      </td>
+      <td style="text-align:left">
+        <ul><li><code>uint256 indexed projectId</code></li><li><code>bool indexed flag</code></li><li><code>address caller</code></li></ul><p><a href="../events/shouldrequireclaim.md">more</a></p>
+      </td>
+    </tr>
+  </tbody>
+</table>
 {% endtab %}
 
 {% tab title="Bug bounty" %}
-| Category          | Description                                                                                                                            | Reward |
-| ----------------- | -------------------------------------------------------------------------------------------------------------------------------------- | ------ |
-| **Optimization**  | Help make this operation more efficient.                                                                                               | 0.5ETH |
-| **Low severity**  | Identify a vulnerability in this operation that could lead to an inconvenience for a user of the protocol or for a protocol developer. | 1ETH   |
-| **High severity** | Identify a vulnerability in this operation that could lead to data corruption or loss of funds.                                        | 5+ETH  |
+| Category | Description | Reward |
+| :--- | :--- | :--- |
+| **Optimization** | Help make this operation more efficient. | 0.5ETH |
+| **Low severity** | Identify a vulnerability in this operation that could lead to an inconvenience for a user of the protocol or for a protocol developer. | 1ETH |
+| **High severity** | Identify a vulnerability in this operation that could lead to data corruption or loss of funds. | 5+ETH |
 {% endtab %}
 {% endtabs %}
+
+
+

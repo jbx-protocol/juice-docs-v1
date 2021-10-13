@@ -2,7 +2,7 @@
 
 Contract:[`JBFundingCycleStore`](../)​‌
 
-Interface: [`IJBFundingCycleStore`](../../../interfaces/ijbfundingcyclestore.md)
+Interface: `IJBFundingCycleStore`
 
 {% tabs %}
 {% tab title="Step by step" %}
@@ -22,16 +22,21 @@ function tapFrom(uint256 _projectId, uint256 _amount)
 
 * `_projectId` is the ID of the project being tapped.
 * `_amount` is the amount being tapped.
-* Through the [`onlyController`](../../jbutility/modifiers/onlycontroller.md) modifier, the function can only be accessed by the controller of the `_projectId`.
+* Through the [`onlyController`](../../jbutility/modifiers/onlycontroller.md) modifier, the function can only be accessed by the controller of the `_projectId`. 
 * The function overrides a function definition from the `IJBFundingCycleStore` interface.
 * Returns the [`JBFundingCycle`](../../../data-structures/jbfundingcycle.md) that was tapped.
-*   Check that the amount is positive.
+
+
+
+1.  Check that the amount is positive.
 
     ```solidity
     // Amount must be positive.
     require(_amount > 0, '0x1a: INSUFFICIENT_FUNDS');
     ```
-*   Find the ID of the funding cycle that should be tapped.
+
+
+2.  Find the ID of the funding cycle that should be tapped.
 
     ```solidity
     // Get a reference to the funding cycle being tapped.
@@ -41,7 +46,9 @@ function tapFrom(uint256 _projectId, uint256 _amount)
     _Internal references:_
 
     * [`_tappableOf`](\_tappableof.md)
-*   Get a reference to the new amount that will be tapped. This is the sum of the provided `_amount` with what has already been tapped for the funding cycle.
+
+
+3.  Get a reference to the new amount that will be tapped. This is the sum of the provided `_amount` with what has already been tapped for the funding cycle.
 
     ```solidity
     // The new amount that has been tapped.
@@ -51,19 +58,25 @@ function tapFrom(uint256 _projectId, uint256 _amount)
     _Internal references:_
 
     * [`_tappedAmountOf`](../properties/\_tappedamountof.md)
-*   The amount being tapped plus what's already been tapped must be within the configured target for the funding cycle.
+
+
+4.  The amount being tapped plus what's already been tapped must be within the configured target for the funding cycle.
 
     ```solidity
     // Amount must be within what is still tappable.
     require(_newTappedAmount <= _targetOf[_fundingCycleId], '0x1b: INSUFFICIENT_FUNDS');
     ```
-*   Store the new tapped amount.
+
+
+5.  Store the new tapped amount.
 
     ```solidity
     // Store the new amount.
     _tappedAmountOf[_fundingCycleId] = _newTappedAmount;
     ```
-*   Emit a `Tap` event with the all relevant parameters.
+
+
+6.  Emit a `Tap` event with the all relevant parameters.
 
     ```solidity
     emit Tap(_fundingCycleId, _projectId, _amount, _newTappedAmount, msg.sender);
@@ -71,8 +84,10 @@ function tapFrom(uint256 _projectId, uint256 _amount)
 
     _Event references:_
 
-    * [`Tap`](../events/tap.md)
-*   Return the [`JBFundingCycle`](../../../data-structures/jbfundingcycle.md) struct that has been tapped.
+    * [`Tap`](../events/tap.md) 
+
+
+7.  Return the [`JBFundingCycle`](../../../data-structures/jbfundingcycle.md) struct that has been tapped.
 
     ```solidity
     return _getStructFor(_fundingCycleId);
@@ -133,10 +148,10 @@ function tapFrom(uint256 _projectId, uint256 _amount)
 {% endtab %}
 
 {% tab title="Events" %}
-| Name       | Data                                                                                                                                                                                                                                                                        |
-| ---------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **`Tap`**  | <ul><li><code>uint256 indexed fundingCycleId</code></li><li><code>uint256 indexed projectId</code></li><li><code>uint256 amount</code></li><li><code>uint256 newTappedAmount</code></li><li><code>address caller</code></li></ul><p><a href="../events/tap.md">more</a></p> |
-| **`Init`** | <ul><li><code>uint256 indexed fundingCycleId</code></li><li><code>uint256 indexed projectId</code></li><li><code>uint256 indexed basedOn</code></li></ul><p><a href="../events/init.md">more</a></p>                                                                        |
+| Name       | Data                                                                                                                                                                                                                                                                                         |
+| ---------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **`Tap`**  | <ul><li><code>uint256 indexed fundingCycleId</code> </li><li><code>uint256 indexed projectId</code> </li><li><code>uint256 amount</code> </li><li><code>uint256 newTappedAmount</code> </li><li><code>address caller</code></li></ul><p><code></code><a href="../events/tap.md">more</a></p> |
+| **`Init`** | <ul><li><code>uint256 indexed fundingCycleId</code> </li><li><code>uint256 indexed projectId</code> </li><li><code>uint256 indexed basedOn</code></li></ul><p><a href="../events/init.md">more</a></p>                                                                                       |
 {% endtab %}
 
 {% tab title="Bug bounty" %}

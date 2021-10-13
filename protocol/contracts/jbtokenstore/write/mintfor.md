@@ -2,7 +2,7 @@
 
 Contract:[`JBTokenStore`](../)​‌
 
-Interface: [`IJBTokenStore`](../../../interfaces/ijbtokenstore.md)
+Interface: `IJBTokenStore`
 
 {% tabs %}
 {% tab title="Step by step" %}
@@ -29,59 +29,70 @@ function mintFor(
 * Through the [`onlyController`](../../jbutility/modifiers/onlycontroller.md) modifier, the function can only be accessed by the controller of the `_projectId`.
 * The function overrides a function definition from the `IJBTokenStore` interface.
 * The function returns nothing.
-*   Make sure a positive amount was specified.
 
-    ```solidity
-    // An amount must be specified.
-    require(_amount > 0, '0x22: NO_OP');
-    ```
-*   Get a reference to the project's token.
 
-    ```solidity
-    // Get a reference to the project's ERC20 tokens.
-    IJBToken _token = tokenOf[_projectId];
-    ```
 
-    _Internal references:_
+1. Make sure a positive amount was specified.     
 
-    * [`tokenOf`](../properties/tokenof.md)
-*   Check if tokens should be minted using the internal accounting mechanism, or if they should be claimed into the holder's wallet. Tokens should be claimed if the project has issued tokens, and either the project forces tokens to be claimed or if `_preferClaimedTokens` flag is true. The internal accounting mechanism uses less gas, and can later be claimed into the holders wallet by anyone who submits a [`claimFor`](../claimfor/) transaction.
+   ```solidity
+   // An amount must be specified.
+   require(_amount > 0, '0x22: NO_OP');
+   ```
 
-    ```solidity
-    // If there exists ERC-20 tokens and the caller prefers these claimed tokens or the project requires it.
-    bool _shouldClaimTokens = (requireClaimFor[_projectId] || _preferClaimedTokens) &&
-      _token != IJBToken(address(0));
-    ```
+2. Get a reference to the project's token.
 
-    _Internal references:_
+   ```solidity
+   // Get a reference to the project's ERC20 tokens.
+   IJBToken _token = tokenOf[_projectId];
+   ```
 
-    * [`requireClaimFor`](../properties/requireclaimfor.md)
-*   If claimed tokens should be minted, mint the project's token into the holders wallet. Otherwise increment the holder's balance or the unclaimed tokens for the project, and the total supply of unclaimed tokens for the project.
+   _Internal references:_
 
-    ```solidity
-    if (_shouldClaimTokens) {
-      // Mint the equivalent amount of ERC20s.
-      _token.mint(_holder, _amount);
-    } else {
-      // Add to the unclaimed balance and total supply.
-      unclaimedBalanceOf[_holder][_projectId] = unclaimedBalanceOf[_holder][_projectId] + _amount;
-      unclaimedTotalSupplyOf[_projectId] = unclaimedTotalSupplyOf[_projectId] + _amount;
-    }
-    ```
+   * [`tokenOf`](../properties/tokenof.md)
 
-    _Internal references:_
+  
+3. Check if tokens should be minted using the internal accounting mechanism, or if they should be claimed into the holder's wallet. Tokens should be claimed if the project has issued tokens, and either the project forces tokens to be claimed or if `_preferClaimedTokens` flag is true. The internal accounting mechanism uses less gas, and can later be claimed into the holders wallet by anyone who submits a [`claimFor`](../claimfor) transaction.
 
-    * [`unclaimedBalanceOf`](../properties/unclaimedbalanceof.md)
-    * [`unclaimedTotalSupplyOf`](../properties/unclaimedtotalsupplyof.md)
-*   Emit a `Mint` event with the all relevant parameters.
+   ```solidity
+   // If there exists ERC-20 tokens and the caller prefers these claimed tokens or the project requires it.
+   bool _shouldClaimTokens = (requireClaimFor[_projectId] || _preferClaimedTokens) &&
+     _token != IJBToken(address(0));
+   ```
 
-    ```solidity
-    emit Mint(_holder, _projectId, _amount, _shouldClaimTokens, _preferClaimedTokens, msg.sender);
-    ```
+   _Internal references:_
 
-    _Event references:_
+   * [`requireClaimFor`](../properties/requireclaimfor.md)
 
-    * [`Mint`](../events/mint.md)
+
+4. If claimed tokens should be minted, mint the project's token into the holders wallet. Otherwise increment the holder's balance or the unclaimed tokens for the project, and the total supply of unclaimed tokens for the project.
+
+   ```solidity
+   if (_shouldClaimTokens) {
+     // Mint the equivalent amount of ERC20s.
+     _token.mint(_holder, _amount);
+   } else {
+     // Add to the unclaimed balance and total supply.
+     unclaimedBalanceOf[_holder][_projectId] = unclaimedBalanceOf[_holder][_projectId] + _amount;
+     unclaimedTotalSupplyOf[_projectId] = unclaimedTotalSupplyOf[_projectId] + _amount;
+   }
+   ```
+
+   _Internal references:_
+
+   * [`unclaimedBalanceOf`](../properties/unclaimedbalanceof.md)
+   * [`unclaimedTotalSupplyOf`](../properties/unclaimedtotalsupplyof.md)
+
+
+5. Emit a `Mint` event with the all relevant parameters.
+
+   ```solidity
+   emit Mint(_holder, _projectId, _amount, _shouldClaimTokens, _preferClaimedTokens, msg.sender);
+   ```
+
+   _Event references:_
+
+   * [`Mint`](../events/mint.md)
+
 {% endtab %}
 
 {% tab title="Code" %}
@@ -129,15 +140,29 @@ function mintFor(
 {% endtab %}
 
 {% tab title="Errors" %}
-| String            | Description                             |
-| ----------------- | --------------------------------------- |
+| String | Description |
+| :--- | :--- |
 | **`0x22: NO_OP`** | Thrown if an amount of 0 was passed in. |
 {% endtab %}
 
 {% tab title="Events" %}
-| Name       | Data                                                                                                                                                                                                                                                                                                              |
-| ---------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **`Mint`** | <ul><li><code>address indexed holder</code></li><li><code>uint256 indexed projectId</code></li><li><code>uint256 amount</code></li><li><code>bool tokensWereClaimed</code></li><li><code>bool preferClaimedTokens</code></li><li><code>address caller</code></li></ul><p><a href="../events/mint.md">more</a></p> |
+<table>
+  <thead>
+    <tr>
+      <th style="text-align:left">Name</th>
+      <th style="text-align:left">Data</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align:left"><b><code>Mint</code></b>
+      </td>
+      <td style="text-align:left">
+        <ul><li><code>address indexed holder</code></li><li><code>uint256 indexed projectId</code></li><li><code>uint256 amount</code></li><li><code>bool tokensWereClaimed</code></li><li><code>bool preferClaimedTokens</code></li><li><code>address caller</code></li></ul><p><a href="../events/mint.md">more</a></p> 
+      </td>
+    </tr>
+  </tbody>
+</table>
 {% endtab %}
 
 {% tab title="Bug bounty" %}

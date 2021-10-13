@@ -2,7 +2,7 @@
 
 Contract:[`JBSplitStore`](../)​‌
 
-Interface: [`IJBSplitStore`](../../../interfaces/ijbsplitsstore.md)
+Interface: `IJBSplitStore`
 
 **The Projects contract which mints ERC-721's that represent project ownership and transfers.**
 
@@ -16,5 +16,6 @@ Definition:
 IJBProjects public immutable override projects;
 ```
 
-* The resulting view function can be accessed externally by anyone.
+* The resulting view function can be accessed externally by anyone. 
 * The resulting function overrides a function definition from the `IJBSplitStore` interface.
+

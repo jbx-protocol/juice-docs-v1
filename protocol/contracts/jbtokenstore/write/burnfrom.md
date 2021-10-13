@@ -2,7 +2,7 @@
 
 Contract:[`JBTokenStore`](../)​‌
 
-Interface: [`IJBTokenStore`](../../../interfaces/ijbtokenstore.md)
+Interface: `IJBTokenStore`
 
 {% tabs %}
 {% tab title="Step by step" %}
@@ -26,103 +26,124 @@ function burnFrom(
   * `_projectId` is the ID of the project to which the burned tokens belong.
   * `_amount` is the amount of tokens to burn.
   * `_preferClaimedTokens` is a flag indicating if there's a preference to burn tokens that have been converted to ERC-20s.
-* Through the [`onlyController`](../../jbutility/modifiers/onlycontroller.md) modifier, the function can only be accessed by the controller of the `_projectId`.
+* Through the [`onlyController`](../../jbutility/modifiers/onlycontroller.md) modifier, the function can only be accessed by the controller of the `_projectId`. 
 * The function overrides a function definition from the `IJBTokenStore` interface.
 * The function returns nothing.
-*   Get a reference to the project's token.
 
-    ```solidity
-    // Get a reference to the project's ERC20 tokens.
-    IJBToken _token = tokenOf[_projectId];
-    ```
 
-    _Internal references:_
 
-    * [`tokenOf`](../properties/tokenof.md)
-*   Get a reference to the amount of unclaimed tokens the holder has for the project.
+2. Get a reference to the project's token.
 
-    ```solidity
-    // Get a reference to the amount of unclaimed tokens.
-    uint256 _unclaimedBalance = unclaimedBalanceOf[_holder][_projectId];
-    ```
+   ```solidity
+   // Get a reference to the project's ERC20 tokens.
+   IJBToken _token = tokenOf[_projectId];
+   ```
 
-    _Internal references:_
+   _Internal references:_
 
-    * [`unclaimedBalanceOf`](../properties/unclaimedbalanceof.md)
-*   Get a reference to the amount of the project's tokens the holder has in their wallet. If the project does not yet have tokens issued, the holder must not have a claimed balance.
+   * [`tokenOf`](../properties/tokenof.md)
+   
 
-    ```solidity
-    // Get a reference to the number of tokens there are.
-    uint256 _claimedBalance = _token == IJBToken(address(0)) ? 0 : _token.balanceOf(_holder);
-    ```
-*   Make sure the holder has enough tokens to burn. This is true if either the amount to burn is less than both the holder's claimed balance and unclaimed balance, if the amount is greater than the claimed balance and there are enough unclaimed tokens to cover the difference, or if the amount is greater than the unclaimed balance and there are enough claimed tokens to cover the difference.
+3. Get a reference to the amount of unclaimed tokens the holder has for the project.
 
-    ```solidity
-    // There must be enough tokens.
-    // Prevent potential overflow by not relying on addition.
-    require(
-      (_amount < _claimedBalance && _amount < _unclaimedBalance) ||
-        (_amount >= _claimedBalance && _unclaimedBalance >= _amount - _claimedBalance) ||
-        (_amount >= _unclaimedBalance && _claimedBalance >= _amount - _unclaimedBalance),
-      '0x23: INSUFFICIENT_FUNDS'
-    );
-    ```
-*   Find the amount of claimed tokens that should be burned. This will be 0 if the holder has no claimed balance, an amount up to the holder's claimed balance if there is a preference for burning claimed tokens, or the difference between the amount being burned and the holder's unclaimed balance otherwise.
+   ```solidity
+   // Get a reference to the amount of unclaimed tokens.
+   uint256 _unclaimedBalance = unclaimedBalanceOf[_holder][_projectId];
+   ```
 
-    ```solidity
-    // The amount of tokens to burn.
-    uint256 _claimedTokensToBurn;
+   _Internal references:_
 
-    // If there's no balance, redeem no tokens.
-    if (_claimedBalance == 0) {
-      _claimedTokensToBurn = 0;
-      // If prefer converted, redeem tokens before redeeming unclaimed tokens.
-    } else if (_preferClaimedTokens) {
-      _claimedTokensToBurn = _claimedBalance >= _amount ? _amount : _claimedBalance;
-      // Otherwise, redeem unclaimed tokens before claimed tokens.
-    } else {
-      _claimedTokensToBurn = _unclaimedBalance >= _amount ? 0 : _amount - _unclaimedBalance;
-    }
-    ```
-*   The amount of unclaimed tokens to burn is necessarily the amount of tokens to burn minus the amount of claimed tokens to burn.
+   * [`unclaimedBalanceOf`](../properties/unclaimedbalanceof.md)
 
-    ```solidity
-    // The amount of unclaimed tokens to redeem.
-    uint256 _unclaimedTokensToBurn = _amount - _claimedTokensToBurn;
-    ```
-*   If there are claimed tokens to burn, burn them from the holder's wallet.
 
-    ```solidity
-    // burn the tokens.
-    if (_claimedTokensToBurn > 0) _token.burn(_holder, _claimedTokensToBurn);
-    ```
-*   If there are unclaimed tokens to burn, subtract the amount from the `unclaimedBalanceOf` the holder for the project, and from the `unclaimedTotalSupplyOf` the project.
+4. Get a reference to the amount of the project's tokens the holder has in their wallet. If the project does not yet have tokens issued, the holder must not have a claimed balance.
 
-    ```solidity
-    if (_unclaimedTokensToBurn > 0) {
-      // Reduce the holders balance and the total supply.
-      unclaimedBalanceOf[_holder][_projectId] =
-        unclaimedBalanceOf[_holder][_projectId] -
-        _unclaimedTokensToBurn;
-      unclaimedTotalSupplyOf[_projectId] =
-        unclaimedTotalSupplyOf[_projectId] -
-        _unclaimedTokensToBurn;
-    }
-    ```
+   ```solidity
+   // Get a reference to the number of tokens there are.
+   uint256 _claimedBalance = _token == IJBToken(address(0)) ? 0 : _token.balanceOf(_holder);
+   ```
 
-    _Internal references:_
 
-    * [`unclaimedBalanceOf`](../properties/unclaimedbalanceof.md)
-    * [`unclaimedTotalSupplyOf`](../properties/unclaimedtotalsupplyof.md)
-* Emit a `Burn` event with the all relevant parameters.
+5. Make sure the holder has enough tokens to burn. This is true if either the amount to burn is less than both the holder's claimed balance and unclaimed balance, if the amount is greater than the claimed balance and there are enough unclaimed tokens to cover the difference, or if the amount is greater than the unclaimed balance and there are enough claimed tokens to cover the difference.
 
-```solidity
-emit Burn(_holder, _projectId, _amount, _unclaimedBalance, _preferClaimedTokens, msg.sender);
-```
+   ```solidity
+   // There must be enough tokens.
+   // Prevent potential overflow by not relying on addition.
+   require(
+     (_amount < _claimedBalance && _amount < _unclaimedBalance) ||
+       (_amount >= _claimedBalance && _unclaimedBalance >= _amount - _claimedBalance) ||
+       (_amount >= _unclaimedBalance && _claimedBalance >= _amount - _unclaimedBalance),
+     '0x23: INSUFFICIENT_FUNDS'
+   );
+   ```
 
-_Event references:_
 
-* [`Burn`](../events/burn.md)
+6. Find the amount of claimed tokens that should be burned. This will be 0 if the holder has no claimed balance, an amount up to the holder's claimed balance if there is a preference for burning claimed tokens, or the difference between the amount being burned and the holder's unclaimed balance otherwise.
+
+   ```solidity
+   // The amount of tokens to burn.
+   uint256 _claimedTokensToBurn;
+
+   // If there's no balance, redeem no tokens.
+   if (_claimedBalance == 0) {
+     _claimedTokensToBurn = 0;
+     // If prefer converted, redeem tokens before redeeming unclaimed tokens.
+   } else if (_preferClaimedTokens) {
+     _claimedTokensToBurn = _claimedBalance >= _amount ? _amount : _claimedBalance;
+     // Otherwise, redeem unclaimed tokens before claimed tokens.
+   } else {
+     _claimedTokensToBurn = _unclaimedBalance >= _amount ? 0 : _amount - _unclaimedBalance;
+   }
+   ```
+
+
+7. The amount of unclaimed tokens to burn is necessarily the amount of tokens to burn minus the amount of claimed tokens to burn.
+
+   ```solidity
+   // The amount of unclaimed tokens to redeem.
+   uint256 _unclaimedTokensToBurn = _amount - _claimedTokensToBurn;
+   ```
+
+
+8. If there are claimed tokens to burn, burn them from the holder's wallet.
+
+   ```solidity
+   // burn the tokens.
+   if (_claimedTokensToBurn > 0) _token.burn(_holder, _claimedTokensToBurn);
+   ```
+
+
+9. If there are unclaimed tokens to burn, subtract the amount from the `unclaimedBalanceOf` the holder for the project, and from the `unclaimedTotalSupplyOf` the project.
+
+   ```solidity
+   if (_unclaimedTokensToBurn > 0) {
+     // Reduce the holders balance and the total supply.
+     unclaimedBalanceOf[_holder][_projectId] =
+       unclaimedBalanceOf[_holder][_projectId] -
+       _unclaimedTokensToBurn;
+     unclaimedTotalSupplyOf[_projectId] =
+       unclaimedTotalSupplyOf[_projectId] -
+       _unclaimedTokensToBurn;
+   }
+   ```
+
+   _Internal references:_
+
+   * [`unclaimedBalanceOf`](../properties/unclaimedbalanceof.md)
+   * [`unclaimedTotalSupplyOf`](../properties/unclaimedtotalsupplyof.md)
+
+
+10. Emit a `Burn` event with the all relevant parameters.
+
+   ```solidity
+   emit Burn(_holder, _projectId, _amount, _unclaimedBalance, _preferClaimedTokens, msg.sender);
+   ```
+
+   _Event references:_
+
+   * [`Burn`](../events/burn.md)
+
+
 {% endtab %}
 
 {% tab title="Code" %}
@@ -198,22 +219,37 @@ function burnFrom(
 {% endtab %}
 
 {% tab title="Errors" %}
-| String                         | Description                                              |
-| ------------------------------ | -------------------------------------------------------- |
+| String | Description |
+| :--- | :--- |
 | **`0x23: INSUFFICIENT_FUNDS`** | Thrown if the holder doesn't have enough tokens to burn. |
 {% endtab %}
 
 {% tab title="Events" %}
-| Name       | Data                                                                                                                                                                                                                                                                                                                     |
-| ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| **`Burn`** | <ul><li><code>address indexed holder</code></li><li><code>uint256 indexed projectId</code></li><li><code>uint256 amount</code></li><li><code>uint256 unclaimedTokenBalance</code></li><li><code>bool preferClaimedTokens</code></li><li><code>address caller</code></li></ul><p><a href="../events/burn.md">more</a></p> |
+<table>
+  <thead>
+    <tr>
+      <th style="text-align:left">Name</th>
+      <th style="text-align:left">Data</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align:left"><b><code>Burn</code></b>
+      </td>
+      <td style="text-align:left">
+        <ul><li><code>address indexed holder</code></li><li><code>uint256 indexed projectId</code></li><li><code>uint256 amount</code></li><li><code>uint256 unclaimedTokenBalance</code></li><li><code>bool preferClaimedTokens</code></li><li><code>address caller</code></li></ul><p><a href="../events/burn.md">more</a></p>
+      </td>
+    </tr>
+  </tbody>
+</table>
 {% endtab %}
 
 {% tab title="Bug bounty" %}
-| Category          | Description                                                                                                                            | Reward |
-| ----------------- | -------------------------------------------------------------------------------------------------------------------------------------- | ------ |
-| **Optimization**  | Help make this operation more efficient.                                                                                               | 0.5ETH |
-| **Low severity**  | Identify a vulnerability in this operation that could lead to an inconvenience for a user of the protocol or for a protocol developer. | 1ETH   |
-| **High severity** | Identify a vulnerability in this operation that could lead to data corruption or loss of funds.                                        | 5+ETH  |
+| Category | Description | Reward |
+| :--- | :--- | :--- |
+| **Optimization** | Help make this operation more efficient. | 0.5ETH |
+| **Low severity** | Identify a vulnerability in this operation that could lead to an inconvenience for a user of the protocol or for a protocol developer. | 1ETH |
+| **High severity** | Identify a vulnerability in this operation that could lead to data corruption or loss of funds. | 5+ETH |
 {% endtab %}
 {% endtabs %}
+

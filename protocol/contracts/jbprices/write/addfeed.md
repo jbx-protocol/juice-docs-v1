@@ -2,7 +2,7 @@
 
 Contract:[`JBPrices`](../)​‌
 
-Interface: [`IJBPrices`](../../../interfaces/ijbprices.md)
+Interface: `IJBPrices`
 
 {% tabs %}
 {% tab title="Step by step" %}
@@ -26,7 +26,10 @@ function addFeedFor(
 * The function can only be accessed by the address that owns this contract.
 * The function overrides a function definition from the `IJBPrices` interface.
 * The function doesn't return anything.
-*   Make sure there isn't already a price feed set for the `_currency` `_base` pair.
+
+
+
+1.  Make sure there isn't already a price feed set for the `_currency` `_base` pair.
 
     ```solidity
     // There can't already be a feed for the specified currency.
@@ -36,13 +39,17 @@ function addFeedFor(
     Internal references:
 
     * [`feedFor`](../properties/feedfor.md)
-*   Get a reference to how many decimal places the provided price feed uses in the quoted rates.
+
+
+2.  Get a reference to how many decimal places the provided price feed uses in the quoted rates. 
 
     ```solidity
     // Get a reference to the number of decimals the feed uses.
     uint256 _decimals = _feed.decimals();
     ```
-*   Make sure the feed doesn't use more decimals than what the contract expects. This contract isn't design to support feeds that use more than 18 decimals of fidelity.
+
+
+3.  Make sure the feed doesn't use more decimals than what the contract expects. This contract isn't design to support feeds that use more than 18 decimals of fidelity.
 
     ```solidity
     // Decimals should be less than or equal to the target number of decimals.
@@ -52,13 +59,17 @@ function addFeedFor(
     Internal references:
 
     * [`TARGET_DECIMALS`](../properties/targetdecimals.md)
-*   Store the provided feed for the `_currency` `_base` pair.
+
+
+4.  Store the provided feed for the `_currency` `_base` pair.
 
     ```solidity
     // Set the feed.
     feedFor[_currency][_base] = _feed;
     ```
-*   Store a value that price feed results will be multiplied by in order to always be reported with `TARGET_DECIMALS` fidelity. The prices from this contract are always reported with `TARGET_DECIMALS` fidelity – if the provided feed reports with fewer decimals, the contract must know how to adjust the price feed to normalize results.
+
+
+5.  Store a value that price feed results will be multiplied by in order to always be reported with `TARGET_DECIMALS` fidelity. The prices from this contract are always reported with `TARGET_DECIMALS` fidelity – if the provided feed reports with fewer decimals, the contract must know how to adjust the price feed to normalize results.
 
     ```solidity
     // Set the decimal adjuster for the currency.
@@ -69,7 +80,9 @@ function addFeedFor(
 
     * [`feedDecimalAdjusterFor`](../properties/feeddecimaladjuster.md)
     * [`TARGET_DECIMALS`](../properties/targetdecimals.md)
-*   Emit an `AddFeed` event with the all relevant parameters.
+
+
+6.  Emit an `AddFeed` event with the all relevant parameters.
 
     ```solidity
     emit AddFeed(_currency, _base, _decimals, _feed);
@@ -139,3 +152,4 @@ function addFeedFor(
 | **High severity** | Identify a vulnerability in this operation that could lead to data corruption or loss of funds.                                        | 5+ETH  |
 {% endtab %}
 {% endtabs %}
+
