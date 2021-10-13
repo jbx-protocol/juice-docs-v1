@@ -138,7 +138,7 @@
       * [Mint](protocol/contracts/jbtokenstore/events/mint.md)
       * [Burn](protocol/contracts/jbtokenstore/events/burn.md)
       * [Claim](protocol/contracts/jbtokenstore/events/claim.md)
-      * [ShouldRequireClaimFor](protocol/contracts/jbtokenstore/events/shouldrequireclaimfor.md)
+      * [ShouldRequireClaim](protocol/contracts/jbtokenstore/events/shouldrequireclaim.md)
       * [ChangeToken](protocol/contracts/jbtokenstore/events/usenewtoken.md)
       * [Transfer](protocol/contracts/jbtokenstore/events/transfer.md)
     * [Properties](protocol/contracts/jbtokenstore/properties/README.md)
