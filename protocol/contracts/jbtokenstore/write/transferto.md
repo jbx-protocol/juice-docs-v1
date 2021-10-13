@@ -166,8 +166,8 @@ function transferTo(
 | :--- | :--- |
 | **`0x26: ZERO_ADDRESS`** | Thrown if no recipient was speicified. |
 | **`0x27: IDENTITY`** | Thrown if the holder is the same address as the recipient. |
-| **`0x27: NO_OP`** | Thrown if no amount was specified to transfer. |
-| **`0x27: INSUFFICIENT_FUNDS`** | Thrown if the holder doesn't have enough tokens to transfer. |
+| **`0x28: NO_OP`** | Thrown if no amount was specified to transfer. |
+| **`0x29: INSUFFICIENT_FUNDS`** | Thrown if the holder doesn't have enough tokens to transfer. |
 {% endtab %}
 
 {% tab title="Events" %}
