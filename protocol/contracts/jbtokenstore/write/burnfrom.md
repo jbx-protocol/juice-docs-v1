@@ -218,6 +218,12 @@ function burnFrom(
 ```
 {% endtab %}
 
+{% tab title="Errors" %}
+| String | Description |
+| :--- | :--- |
+| **`0x23: INSUFFICIENT_FUNDS`** | Thrown if the holder doesn't have enough tokens to burn. |
+{% endtab %}
+
 {% tab title="Bug bounty" %}
 | Category | Description | Reward |
 | :--- | :--- | :--- |
