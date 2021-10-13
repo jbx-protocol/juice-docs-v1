@@ -61,7 +61,7 @@ function issueFor(
 
    _Internal references:_
 
-   * [`tokenOf`](../properties/_tokenof.md)
+   * [`tokenOf`](../properties/tokenof.md)
 
 
 4. Deploy a new instance of a [`JBToken`](../../jbtoken.md) contract. Assign it to the return value.
@@ -81,10 +81,10 @@ function issueFor(
 
    _Internal references:_
 
-   * [`tokenOf`](../properties/_tokenof.md)
+   * [`tokenOf`](../properties/tokenof.md)
 
 
-6.  Emit an `Issue` event with the all relevant parameters.
+6. Emit an `Issue` event with the all relevant parameters.
 
     ```solidity
     emit Issue(_projectId, token, _name, _symbol, msg.sender);

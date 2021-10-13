@@ -30,17 +30,86 @@ function claimFor(
 
 
 
-1. Get a reference to the current splits set for the specified `_projectId` 's `_domain`, within the specified `_group`.   
+1. Get a reference to the project's token.  
 
    ```solidity
+   // Get a reference to the project's ERC20 tokens.
+   IJBToken _token = tokenOf[_projectId];
    ```
 
    _Internal references:_
 
-   * [`_splitsOf`](../properties/_splitsof.md)
+   * [`tokenOf`](../properties/tokenof.md)
 
 
-2. 
+2. Make sure the project has a token. If it doesn't, there's nowhere to claim tokens onto.
+
+   ```solidity
+   // Tokens must have been issued.
+   require(_token != IJBToken(address(0)), '0x24: NOT_FOUND');
+   ```
+
+3. Get a reference to the amount of unclaimed tokens the holder has for the project.
+
+   ```solidity
+   // Get a reference to the amount of unclaimed tokens.
+   uint256 _unclaimedBalance = unclaimedBalanceOf[_holder][_projectId];
+   ```
+
+   _Internal references:_
+
+   * [`unclaimedBalanceOf`](../properties/unclaimedbalanceof.md)
+
+
+4. Make sure the holder has enough tokens to claim.
+
+   ```solidity
+   // There must be enough unlocked unclaimed tokens to claim.
+   require(_unclaimedBalance >= _amount, '0x25: INSUFFICIENT_FUNDS');
+   ```
+
+
+5. Subtract from the `unclaimedBalanceOf` the holder for the project. 
+
+   ```solidity
+   // Subtract the claim amount from the holder's balance.
+   unclaimedBalanceOf[_holder][_projectId] = unclaimedBalanceOf[_holder][_projectId] - _amount;
+   ```
+
+   _Internal references:_
+
+   * [`unclaimedBalanceOf`](../properties/unclaimedbalanceof.md)
+
+
+6. Subtract from the `unclaimedTotalSupplyOf` the project. 
+
+   ```solidity
+   // Subtract the claim amount from the project's total supply.
+   unclaimedTotalSupplyOf[_projectId] = unclaimedTotalSupplyOf[_projectId] - _amount;
+   ```
+
+   _Internal references:_
+
+   * [`unclaimedTotalSupplyOf`](../properties/unclaimedtotalsupplyof.md)
+
+
+7. Mint the tokens to the holders wallet.
+
+   ```solidity
+   // Mint the equivalent amount of ERC20s.
+   _token.mint(_holder, _amount);
+   ```
+
+
+8. Emit a `Claim` event with the all relevant parameters.
+
+    ```solidity
+    emit Claim(_holder, _projectId, _amount, msg.sender);
+    ```
+
+    _Event references:_
+
+    * [`Claim`](../events/claim.md)
 {% endtab %}
 
 {% tab title="Only code" %}
