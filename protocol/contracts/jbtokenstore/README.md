@@ -30,7 +30,7 @@ Rinkeby testnet: _Not yet deployed_
 | ------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **Name**           | Description                                                                                                                                                            |
 | **`JBOperatable`** | <p>Includes convenience functionality for checking a message sender's permissions before executing certain transactions.</p><p><a href="../jboperatable/">more</a></p> |
-| **`JBUtility`**    | Includes convenience functionality for checking if the message sender is the current terminal of the project who data is being manipulated.                            |
+| **`JBControllerUtility`**    | Includes convenience functionality for checking if the message sender is the current controller of the project who data is being manipulated.                            |
 
 ## Events
 

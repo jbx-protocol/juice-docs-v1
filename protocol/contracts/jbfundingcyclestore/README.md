@@ -25,7 +25,7 @@ Rinkeby testnet: _Not yet deployed_
 
 | Contract | Description |
 | :--- | :--- |
-| **`JBUtility`** | Includes convenience functionality for checking if the message sender is the current terminal of the project who data is being manipulated. |
+| **`JBControllerUtility`** | Includes convenience functionality for checking if the message sender is the current controller of the project who data is being manipulated. |
 
 ## Events
 
@@ -261,7 +261,7 @@ Rinkeby testnet: _Not yet deployed_
         <p><b>Traits</b>
         </p>
         <ul>
-          <li><a href="../jbutility/modifiers/onlycontroller.md"><code>onlyController</code></a>
+          <li><a href="../jbcontrollerutility/modifiers/onlycontroller.md"><code>onlyController</code></a>
           </li>
         </ul>
         <p><b>Params</b>
@@ -295,7 +295,7 @@ Rinkeby testnet: _Not yet deployed_
         <p><b>Traits</b>
         </p>
         <ul>
-          <li><a href="../jbutility/modifiers/onlycontroller.md"><code>onlyController</code></a>
+          <li><a href="../jbcontrollerutility/modifiers/onlycontroller.md"><code>onlyController</code></a>
           </li>
         </ul>
         <p><b>Params</b>

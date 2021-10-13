@@ -22,7 +22,7 @@ function tapFrom(uint256 _projectId, uint256 _amount)
 
 * `_projectId` is the ID of the project being tapped.
 * `_amount` is the amount being tapped.
-* Through the [`onlyController`](../../jbutility/modifiers/onlycontroller.md) modifier, the function can only be accessed by the controller of the `_projectId`. 
+* Through the [`onlyController`](../../jbcontrollerutility/modifiers/onlycontroller.md) modifier, the function can only be accessed by the controller of the `_projectId`. 
 * The function overrides a function definition from the `IJBFundingCycleStore` interface.
 * Returns the [`JBFundingCycle`](../../../data-structures/jbfundingcycle.md) that was tapped.
 
