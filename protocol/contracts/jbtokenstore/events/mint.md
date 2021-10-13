@@ -2,7 +2,7 @@
 
 Emitted from:
 
-* [`mintFor`](../write/mintfor-1.md)
+* [`mintFor`](../write/mintfor.md)
 
 Definition:
 
