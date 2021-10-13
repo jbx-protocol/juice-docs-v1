@@ -40,7 +40,7 @@ function set(
 * The function overrides a function definition from the `IJBSplitsStore` interface.
 * The function doesn't return anything.
 
-1. Get a reference to the current splits set for the specified `_projectId` 's `_domain`, within the specified `_group`.   
+1. Get a reference to the current splits set for the specified `_projectId`'s `_domain`, within the specified `_group`.   
 
    ```solidity
    // Get a reference to the project's current splits.
