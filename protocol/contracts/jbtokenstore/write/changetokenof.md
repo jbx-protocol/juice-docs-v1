@@ -112,6 +112,26 @@ function changeTokenOf(
 ```
 {% endtab %}
 
+{% tab title="Events" %}
+<table>
+  <thead>
+    <tr>
+      <th style="text-align:left">Name</th>
+      <th style="text-align:left">Data</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align:left"><b><code>ChangeToken</code></b>
+      </td>
+      <td style="text-align:left">
+        <ul><li><code>uint256 indexed projectId</code></li><li><code>IJBToken indexed token</code></li><li><code>address indexed owner</code></li><li><code>address caller</code></li></ul><p><a href="../events/usenewtoken.md">more</a></p>
+      </td>
+    </tr>
+  </tbody>
+</table>
+{% endtab %}
+
 {% tab title="Bug bounty" %}
 | Category | Description | Reward |
 | :--- | :--- | :--- |

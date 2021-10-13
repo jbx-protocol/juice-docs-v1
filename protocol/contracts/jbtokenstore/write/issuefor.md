@@ -141,6 +141,34 @@ function issueFor(
 ```
 {% endtab %}
 
+{% tab title="Errors" %}
+| String | Description |
+| :--- | :--- |
+| **`0x1f: EMPTY_NAME`** | Thrown if a name wasn't specified for the token. |
+| **`0x20: EMPTY_SYMBOL`** | Thrown if a symbol wasn't specified for the token. |
+| **`0x21: ALREADY_ISSUED`** | Thrown if the project has already issued a token. |
+{% endtab %}
+
+{% tab title="Events" %}
+<table>
+  <thead>
+    <tr>
+      <th style="text-align:left">Name</th>
+      <th style="text-align:left">Data</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align:left"><b><code>Issue</code></b>
+      </td>
+      <td style="text-align:left">
+        <ul><li><code>uint256 indexed projectId</code></li><li><code>IJBToken indexed token</code></li><li><code>string name</code></li><li><code>string symbol</code></li><li><code>address caller</code></li></ul><p><a href="../events/issue.md">more</a></p>
+      </td>
+    </tr>
+  </tbody>
+</table>
+{% endtab %}
+
 {% tab title="Bug bounty" %}
 | Category | Description | Reward |
 | :--- | :--- | :--- |

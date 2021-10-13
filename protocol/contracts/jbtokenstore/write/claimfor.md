@@ -156,6 +156,33 @@ function claimFor(
 ```
 {% endtab %}
 
+{% tab title="Errors" %}
+| String | Description |
+| :--- | :--- |
+| **`0x24: NOT_FOUND`** | Thrown if the project hasn't yet issued its token. |
+| **`0x25: INSUFFICIENT_FUNDS`** | Thrown if the holder doens't have enough tokens to claim. |
+{% endtab %}
+
+{% tab title="Events" %}
+<table>
+  <thead>
+    <tr>
+      <th style="text-align:left">Name</th>
+      <th style="text-align:left">Data</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align:left"><b><code>Claim</code></b>
+      </td>
+      <td style="text-align:left">
+        ul><li><code>address indexed holder</code></li><li><code>uint256 indexed projectId</code></li><li><code>uint256 amount</code></li><li><code>address caller</code></li></ul><p><a href="../events/claim.md">more</a></p>
+      </td>
+    </tr>
+  </tbody>
+</table>
+{% endtab %}
+
 {% tab title="Bug bounty" %}
 | Category | Description | Reward |
 | :--- | :--- | :--- |

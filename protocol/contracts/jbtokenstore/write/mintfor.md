@@ -139,6 +139,32 @@ function mintFor(
 ```
 {% endtab %}
 
+{% tab title="Errors" %}
+| String | Description |
+| :--- | :--- |
+| **`0x22: NO_OP`** | Thrown if an amount of 0 was passed in. |
+{% endtab %}
+
+{% tab title="Events" %}
+<table>
+  <thead>
+    <tr>
+      <th style="text-align:left">Name</th>
+      <th style="text-align:left">Data</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align:left"><b><code>Mint</code></b>
+      </td>
+      <td style="text-align:left">
+        <ul><li><code>address indexed holder</code></li><li><code>uint256 indexed projectId</code></li><li><code>uint256 amount</code></li><li><code>bool tokensWereClaimed</code></li><li><code>bool preferClaimedTokens</code></li><li><code>address caller</code></li></ul><p><a href="../events/mint.md">more</a></p> 
+      </td>
+    </tr>
+  </tbody>
+</table>
+{% endtab %}
+
 {% tab title="Bug bounty" %}
 | Category          | Description                                                                                                                            | Reward |
 | ----------------- | -------------------------------------------------------------------------------------------------------------------------------------- | ------ |

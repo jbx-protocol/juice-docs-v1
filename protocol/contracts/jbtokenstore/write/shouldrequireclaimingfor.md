@@ -103,6 +103,32 @@ function shouldRequireClaimingFor(uint256 _projectId, bool _flag)
 ```
 {% endtab %}
 
+{% tab title="Errors" %}
+| String | Description |
+| :--- | :--- |
+| **`0x2a: NOT_FOUND`** | Thrown if the project hasn't yet issued a token. |
+{% endtab %}
+
+{% tab title="Events" %}
+<table>
+  <thead>
+    <tr>
+      <th style="text-align:left">Name</th>
+      <th style="text-align:left">Data</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align:left"><b><code>ShouldRequireClaim</code></b>
+      </td>
+      <td style="text-align:left">
+        <ul><li><code>uint256 indexed projectId</code></li><li><code>bool indexed flag</code></li><li><code>address caller</code></li></ul><p><a href="../events/shouldrequireclaim.md">more</a></p>
+      </td>
+    </tr>
+  </tbody>
+</table>
+{% endtab %}
+
 {% tab title="Bug bounty" %}
 | Category | Description | Reward |
 | :--- | :--- | :--- |

@@ -161,6 +161,35 @@ function transferTo(
 ```
 {% endtab %}
 
+{% tab title="Errors" %}
+| String | Description |
+| :--- | :--- |
+| **`0x26: ZERO_ADDRESS`** | Thrown if no recipient was speicified. |
+| **`0x27: IDENTITY`** | Thrown if the holder is the same address as the recipient. |
+| **`0x27: NO_OP`** | Thrown if no amount was specified to transfer. |
+| **`0x27: INSUFFICIENT_FUNDS`** | Thrown if the holder doesn't have enough tokens to transfer. |
+{% endtab %}
+
+{% tab title="Events" %}
+<table>
+  <thead>
+    <tr>
+      <th style="text-align:left">Name</th>
+      <th style="text-align:left">Data</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align:left"><b><code>Transfer</code></b>
+      </td>
+      <td style="text-align:left">
+        <ul><li><code>address indexed holder</code></li><li><code>uint256 indexed projectId</code></li><li><code>address indexed recipient</code></li><li><code>uint256 amount</code></li><li><code>address caller</code></li></ul><p><a href="../events/transfer.md">more</a></p>
+      </td>
+    </tr>
+  </tbody>
+</table>
+{% endtab %}
+
 {% tab title="Bug bounty" %}
 | Category | Description | Reward |
 | :--- | :--- | :--- |
