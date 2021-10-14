@@ -72,9 +72,9 @@ function setUriOf(uint256 _projectId, string calldata _uri)
 {% endtab %}
 
 {% tab title="Events" %}
-| Name         | Data                                                                                                                                                                      |
-| ------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **`SetUri`** | <ul><li><code>uint256 indexed projectId</code></li><li><code>string uri</code></li><li><code>address caller</code></li></ul><p><a href="../events/seturi.md">more</a></p> |
+| Name                                | Data                                                                                                                         |
+| ----------------------------------- | ---------------------------------------------------------------------------------------------------------------------------- |
+| [**`SetUri`**](../events/seturi.md) | <ul><li><code>uint256 indexed projectId</code></li><li><code>string uri</code></li><li><code>address caller</code></li></ul> |
 {% endtab %}
 
 {% tab title="Bug bounty" %}

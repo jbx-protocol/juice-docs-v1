@@ -171,9 +171,9 @@ function claimHandle(
 {% endtab %}
 
 {% tab title="Events" %}
-| Name              | Data                                                                                                                                                                                                                                            |
-| ----------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **`ClaimHandle`** | <ul><li><code>uint256 indexed projectId</code></li><li><code>address indexed transferAddress</code></li><li><code>bytes32 indexed handle</code></li><li><code>address caller</code></li></ul><p><a href="../events/claimhandle.md">more</a></p> |
+| Name                                          | Data                                                                                                                                                                                          |
+| --------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [**`ClaimHandle`**](../events/claimhandle.md) | <ul><li><code>uint256 indexed projectId</code></li><li><code>address indexed transferAddress</code></li><li><code>bytes32 indexed handle</code></li><li><code>address caller</code></li></ul> |
 {% endtab %}
 
 {% tab title="Bug bounty" %}

@@ -168,9 +168,9 @@ function transferHandleOf(
 {% endtab %}
 
 {% tab title="Events" %}
-| Name            | Data                                                                                                                                                                                                                                                                                      |
-| --------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **`SetHandle`** | <ul><li><code>uint256 indexed projectId</code></li><li><code>address indexed transferAddress</code></li><li><code>bytes32 indexed handle</code></li><li><code>bytes32 newHandle</code></li><li><code>address caller</code></li></ul><p><a href="../events/transferhandle.md">more</a></p> |
+| Name                                      | Data                                                                                                                                                                                                                                 |
+| ----------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| [**`SetHandle`**](../events/sethandle.md) | <ul><li><code>uint256 indexed projectId</code></li><li><code>address indexed transferAddress</code></li><li><code>bytes32 indexed handle</code></li><li><code>bytes32 newHandle</code></li><li><code>address caller</code></li></ul> |
 {% endtab %}
 
 {% tab title="Bug bounty" %}

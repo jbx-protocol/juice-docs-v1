@@ -129,9 +129,9 @@ function setHandleOf(uint256 _projectId, bytes32 _handle)
 {% endtab %}
 
 {% tab title="Events" %}
-| Name            | Data                                                                                                                                                                                     |
-| --------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **`SetHandle`** | <ul><li><code>uint256 indexed projectId</code></li><li><code>bytes32 indexed handle</code></li><li><code>address caller</code></li></ul><p><a href="../events/sethandle.md">more</a></p> |
+| Name                                      | Data                                                                                                                                     |
+| ----------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- |
+| [**`SetHandle`**](../events/sethandle.md) | <ul><li><code>uint256 indexed projectId</code></li><li><code>bytes32 indexed handle</code></li><li><code>address caller</code></li></ul> |
 {% endtab %}
 
 {% tab title="Bug bounty" %}

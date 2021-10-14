@@ -83,9 +83,9 @@ function renewHandleOf(uint256 _projectId)
 {% endtab %}
 
 {% tab title="Events" %}
-| Name              | Data                                                                                                                                                                                       |
-| ----------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| **`RenewHandle`** | <ul><li><code>bytes32 indexed handle</code></li><li><code>uint256 indexed projectId</code></li><li><code>address caller</code></li></ul><p><a href="../events/renewhandle.md">more</a></p> |
+| Name                                          | Data                                                                                                                                     |
+| --------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- |
+| [**`RenewHandle`**](../events/renewhandle.md) | <ul><li><code>bytes32 indexed handle</code></li><li><code>uint256 indexed projectId</code></li><li><code>address caller</code></li></ul> |
 {% endtab %}
 
 {% tab title="Bug bounty" %}

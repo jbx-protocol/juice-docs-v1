@@ -118,9 +118,9 @@ function challengeHandle(bytes32 _handle) external override {
 {% endtab %}
 
 {% tab title="Events" %}
-| Name                  | Data                                                                                                                                                                                                                                        |
-| --------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **`ChallengeHandle`** | <ul><li><code>bytes32 indexed handle</code></li><li><code>uint256 indexed projectId</code></li><li><code>uint256 challengeExpiry</code></li><li><code>address caller</code></li></ul><p><a href="../events/challengehandle.md">more</a></p> |
+| Name                                                  | Data                                                                                                                                                                                  |
+| ----------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [**`ChallengeHandle`**](../events/challengehandle.md) | <ul><li><code>bytes32 indexed handle</code></li><li><code>uint256 indexed projectId</code></li><li><code>uint256 challengeExpiry</code></li><li><code>address caller</code></li></ul> |
 {% endtab %}
 
 {% tab title="Bug bounty" %}

@@ -162,9 +162,9 @@ function createFor(
 {% endtab %}
 
 {% tab title="Events" %}
-| Name         | Data                                                                                                                                                                                                                                                             |
-| ------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **`Create`** | <ul><li><code>uint256 indexed projectId</code></li><li><code>address indexed owner</code></li><li><code>bytes32 indexed handle</code></li><li><code>string uri</code></li><li><code>address caller</code></li></ul><p><a href="../events/create.md">more</a></p> |
+| Name                                | Data                                                                                                                                                                                                                |
+| ----------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [**`Create`**](../events/create.md) | <ul><li><code>uint256 indexed projectId</code></li><li><code>address indexed owner</code></li><li><code>bytes32 indexed handle</code></li><li><code>string uri</code></li><li><code>address caller</code></li></ul> |
 {% endtab %}
 
 {% tab title="Bug bounty" %}

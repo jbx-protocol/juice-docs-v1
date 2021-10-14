@@ -106,9 +106,9 @@ function changeTokenOf(
 {% endtab %}
 
 {% tab title="Events" %}
-| Name              | Data                                                                                                                                                                                                                                  |
-| ----------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **`ChangeToken`** | <ul><li><code>uint256 indexed projectId</code></li><li><code>IJBToken indexed token</code></li><li><code>address indexed owner</code></li><li><code>address caller</code></li></ul><p><a href="../events/usenewtoken.md">more</a></p> |
+| Name                                          | Data                                                                                                                                                                                |
+| --------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [**`ChangeToken`**](../events/usenewtoken.md) | <ul><li><code>uint256 indexed projectId</code></li><li><code>IJBToken indexed token</code></li><li><code>address indexed owner</code></li><li><code>address caller</code></li></ul> |
 {% endtab %}
 
 {% tab title="Bug bounty" %}
