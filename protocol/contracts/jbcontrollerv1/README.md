@@ -33,6 +33,35 @@ Rinkeby testnet: _Not yet deployed_
 | [**`Ownable`**](https://docs.openzeppelin.com/contracts/2.x/api/ownership)        | Includes convenience functionality for specifying an address that owns the contract, with modifiers that only allow access by the owner.  |
 | [**`ReentrancyGuard`**](https://docs.openzeppelin.com/contracts/4.x/api/security) | Includes convenience functionality for preventing access to certain functions while certain other functions are being executed.           |
 
+
+
+## Constructor
+
+```solidity
+constructor(
+  IJBOperatorStore _operatorStore,
+  IJBProjects _projects,
+  IJBDirectory _directory,
+  IJBFundingCycleStore _fundingCycleStore,
+  IJBTokenStore _tokenStore,
+  IJBSplitsStore _splitsStore
+) JBTerminalUtility(_directory) JBOperatable(_operatorStore) {
+  projects = _projects;
+  fundingCycleStore = _fundingCycleStore;
+  tokenStore = _tokenStore;
+  splitsStore = _splitsStore;
+}
+```
+
+* Arguments:
+  * `_operatorStore` A [`IJBOperatorStore`](../../interfaces/ijboperatorstore.md) contract storing operator assignments.
+  * `_operatorStore` is an [`IJBOperatorStore`](../../interfaces/ijboperatorstore.md) contract storing operator assignments.
+  * `_projects` is an [`IJBProjects`](../../interfaces/ijbprojects.md) contract which mints ERC-721's that represent project ownership and transfers.
+  * `_directory` is an [`IJBDirectory`](../../interfaces/ijbdirectory.md) contract storing directories of terminals and controllers for each project.
+  * `_fundingCycleStore` is an [`IJBFundingCycleStore`](../../interfaces/ijbfundingcyclestore.md) contract storing all funding cycle configurations.
+  * `_tokenStore` is an [`IJBTokenStore`](../../interfaces/ijbtokenstore.md) contract that manages token minting and burning.
+  * `_splitStore` is an [`IJBSplitStore`](../jbsplitstore/) contract that stores splits for each project.
+
 ## Events
 
 | Name                                                                             | Data                                                                                                                                                                                                                                                                                                                      |

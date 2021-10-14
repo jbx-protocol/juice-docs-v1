@@ -27,6 +27,17 @@ Rinkeby testnet: _Not yet deployed_
 | ---------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
 | [**`JBControllerUtility`**](../jbcontrollerutility/) | Includes convenience functionality for checking if the message sender is the current controller of the project who data is being manipulated. |
 
+
+
+## Constructor
+
+```solidity
+constructor(IJBDirectory _directory) JBControllerUtility(_directory) {}
+```
+
+* Arguments:
+  * `_directory` is an [`IJBDirectory`](../../interfaces/ijbdirectory.md) contract storing directories of terminals and controllers for each project.
+
 ## Events
 
 | Name                                   | Data                                                                                                                                                                                                                                                                                                                                                      |

@@ -264,6 +264,7 @@
   * [JBControllerUtility](protocol/contracts/jbcontrollerutility/README.md)
     * [Modifiers](protocol/contracts/jbcontrollerutility/modifiers/README.md)
       * [onlyController](protocol/contracts/jbcontrollerutility/modifiers/onlycontroller.md)
+  * [IJBVault](protocol/contracts/ijbvault.md)
 
 ## 🗳Governance
 
