@@ -45,10 +45,10 @@ constructor(
 
 ## Properties
 
-| Function                                                     | Definition                                                                         |
-| ------------------------------------------------------------ | ---------------------------------------------------------------------------------- |
-| [**`projects`**](properties/projects.md)                     | <p><strong>Returns</strong></p><ul><li><code>IJBProjects projects</code></li></ul> |
-| [**`directory`**](../jbethpaymentterminal/read/directory.md) | <p><strong>Returns</strong></p><ul><li><code>IJBTerminal terminal</code></li></ul> |
+| Function                                   | Definition                                                                         |
+| ------------------------------------------ | ---------------------------------------------------------------------------------- |
+| [**`projects`**](properties/projects.md)   | <p><strong>Returns</strong></p><ul><li><code>IJBProjects projects</code></li></ul> |
+| [**`directory`**](properties/directory.md) | <p><strong>Returns</strong></p><ul><li><code>IJBTerminal terminal</code></li></ul> |
 
 ## Read
 
