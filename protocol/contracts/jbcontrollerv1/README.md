@@ -21,8 +21,8 @@ Rinkeby testnet: _Not yet deployed_
 
 | Name | Description |
 | :--- | :--- |
-| **`IJBPaymentTerminalData`** | General interface for the methods in this contract that interact with the blockchain's state according to the Juicebox protocol's rules. |
-| **`ITerminalDataLayer`** | Conforms to ITerminal, which allows projects to migrate to this contract from other ITerminals \(like TerminalV1\), and to facilitate a project's future migration decisions. |
+| **`IJBControllerV1`** | General interface for the V1 specific methods in this contract that interacts with funding cycles and tokens according to the Juicebox protocol's rules. |
+| **`IJBController`** | General interface for the generic controller methods in this contract that interacts with funding cycles and tokens according to the Juicebox protocol's rules. |
 
 ### **Inheritance**
 
@@ -35,6 +35,16 @@ Rinkeby testnet: _Not yet deployed_
     </tr>
   </thead>
   <tbody>
+    <tr>
+      <td style="text-align:left"><b><code>JBTerminalUtility</code></b>
+      </td>
+      <td style="text-align:left">
+        <p>Includes convenience functionality for checking if the message sender is a current terminal of the project who data is being manipulated.</p>
+        <p></p>
+        <p><a href="../jbterminalutility/">more</a>
+        </p>
+      </td>
+    </tr>
     <tr>
       <td style="text-align:left"><b><code>JBOperatable</code></b>
       </td>
@@ -80,7 +90,7 @@ Rinkeby testnet: _Not yet deployed_
           </li>
           <li><code>uint256 indexed configuration</code> 
           </li>
-          <li><code>uint256 amount</code> 
+          <li><code>JBOverflowAllowance allowance</code> 
           </li>
           <li><code>address caller</code>
           </li>
@@ -122,7 +132,7 @@ Rinkeby testnet: _Not yet deployed_
           </li>
           <li><code>uint256 indexed projectId</code> 
           </li>
-          <li><code>Split split</code>
+          <li><code>JBSplit split</code>
           </li>
           <li><code>uint256 tokenCount</code> 
           </li>
@@ -142,15 +152,11 @@ Rinkeby testnet: _Not yet deployed_
           </li>
           <li><code>uint256 indexed projectId</code> 
           </li>
-          <li><code>uint256 amount</code>
-          </li>
-          <li><code>uint256 currency</code>
-          </li>
-          <li><code>uint256 weight</code>
-          </li>
           <li><code>uint256 count</code>
           </li>
           <li><code>string memo</code> 
+          </li>
+          <li><code>bool shouldReserveTokens</code> 
           </li>
           <li><code>address caller</code>
           </li>
@@ -180,44 +186,18 @@ Rinkeby testnet: _Not yet deployed_
       </td>
     </tr>
     <tr>
-      <td style="text-align:left"><b><code>SetPaymentLayer</code></b>
+      <td style="text-align:left"><b><code>Migrate</code></b>
       </td>
       <td style="text-align:left">
         <ul>
-          <li><code>IJBTerminal terminal</code>
+          <li><code>uint256 projectId</code>
+          </li>
+          <li><code>IJBController to</code>
           </li>
           <li><code>address caller</code>
           </li>
         </ul>
-        <p><a href="events/setpaymentlayer.md">more</a>
-        </p>
-      </td>
-    </tr>
-    <tr>
-      <td style="text-align:left"><b><code>DelegateDidPay</code></b>
-      </td>
-      <td style="text-align:left">
-        <ul>
-          <li><code>IJBPayDelegate indexed delegate</code> 
-          </li>
-          <li><code>DidPayParam param</code>
-          </li>
-        </ul>
-        <p><a href="events/delegatedidpay.md">more</a>
-        </p>
-      </td>
-    </tr>
-    <tr>
-      <td style="text-align:left"><b><code>DelegateDidRedeem</code></b>
-      </td>
-      <td style="text-align:left">
-        <ul>
-          <li><code>IJBRedemptionDelegate indexed delegate</code>
-          </li>
-          <li><code>DidRedeemParam param</code>
-          </li>
-        </ul>
-        <p><a href="events/delegatedidredeem.md">more</a>
+        <p><a href="events/migrate.md">more</a>
         </p>
       </td>
     </tr>
