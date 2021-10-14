@@ -19,19 +19,19 @@ Rinkeby testnet: _Not yet deployed_
 
 ### **Interfaces**
 
-| Name                  | Description                                                                                                                                                                                                                       |
-| --------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **`IJBControllerV1`** | <p>General interface for the V1 specific methods in this contract that interacts with funding cycles and tokens according to the Juicebox protocol's rules.</p><p><a href="../../interfaces/ijbcontrollerv1.md">more</a></p>      |
-| **`IJBController`**   | <p>General interface for the generic controller methods in this contract that interacts with funding cycles and tokens according to the Juicebox protocol's rules.</p><p><a href="../../interfaces/ijbcontroller.md">more</a></p> |
+| Name                                                         | Description                                                                                                                                                     |
+| ------------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [**`IJBControllerV1`**](../../interfaces/ijbcontrollerv1.md) | General interface for the V1 specific methods in this contract that interacts with funding cycles and tokens according to the Juicebox protocol's rules.        |
+| [**`IJBController`**](../../interfaces/ijbcontroller.md)     | General interface for the generic controller methods in this contract that interacts with funding cycles and tokens according to the Juicebox protocol's rules. |
 
 ### **Inheritance**
 
-| Contract                | Description                                                                                                                                                                                     |
-| ----------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **`JBTerminalUtility`** | <p>Includes convenience functionality for checking if the message sender is a current terminal of the project who data is being manipulated.</p><p><a href="../jbterminalutility/">more</a></p> |
-| **`JBOperatable`**      | <p>Includes convenience functionality for checking a message sender's permissions before executing certain transactions.</p><p><a href="../jboperatable/">more</a></p>                          |
-| **`Ownable`**           | Includes convenience functionality for specifying an address that owns the contract, with modifiers that only allow access by the owner.                                                        |
-| **`ReentrancyGuard`**   | Includes convenience functionality for preventing access to certain functions while certain other functions are being executed.                                                                 |
+| Contract                                                                          | Description                                                                                                                               |
+| --------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
+| [**`JBTerminalUtility`**](../jbterminalutility/)                                  | Includes convenience functionality for checking if the message sender is a current terminal of the project who data is being manipulated. |
+| [**`JBOperatable`**](../jboperatable/)                                            | Includes convenience functionality for checking a message sender's permissions before executing certain transactions.                     |
+| [**`Ownable`**](https://docs.openzeppelin.com/contracts/2.x/api/ownership)        | Includes convenience functionality for specifying an address that owns the contract, with modifiers that only allow access by the owner.  |
+| [**`ReentrancyGuard`**](https://docs.openzeppelin.com/contracts/4.x/api/security) | Includes convenience functionality for preventing access to certain functions while certain other functions are being executed.           |
 
 ## Events
 

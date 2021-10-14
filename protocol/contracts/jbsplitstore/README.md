@@ -23,9 +23,9 @@ Rinkeby testnet: _Not yet deployed_
 
 ### **Inheritance**
 
-| Contract                               | Description                                                                                                                                                            |
-| -------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [**`JBOperatable`**](../jboperatable/) | <p>Includes convenience functionality for checking a message sender's permissions before executing certain transactions.</p><p><a href="../jboperatable/">more</a></p> |
+| Contract                               | Description                                                                                                           |
+| -------------------------------------- | --------------------------------------------------------------------------------------------------------------------- |
+| [**`JBOperatable`**](../jboperatable/) | Includes convenience functionality for checking a message sender's permissions before executing certain transactions. |
 
 ## Constructor
 

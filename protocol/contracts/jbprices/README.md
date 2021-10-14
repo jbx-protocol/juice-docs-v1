@@ -23,9 +23,9 @@ Rinkeby testnet: _Not yet deployed_
 
 ### **Inheritance**
 
-| Contract      | Description                                                                                                                              |
-| ------------- | ---------------------------------------------------------------------------------------------------------------------------------------- |
-| **`Ownable`** | Includes convenience functionality for specifying an address that owns the contract, with modifiers that only allow access by the owner. |
+| Contract                                                                  | Description                                                                                                                              |
+| ------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- |
+| [**`Ownable`**](https://docs.openzeppelin.com/contracts/4.x/api/security) | Includes convenience functionality for specifying an address that owns the contract, with modifiers that only allow access by the owner. |
 
 ## Events
 
