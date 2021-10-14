@@ -38,10 +38,10 @@ Rinkeby testnet: _Not yet deployed_
 
 ## Read
 
-| Function         | Definition                                                                                                                                                                                                      |
-| ---------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **`projects`**   | <p><strong>Traits</strong></p><ul><li><code>immutable</code></li></ul><p><strong>Returns</strong></p><ul><li><code>IJBProjects projects</code></li></ul><p><a href="./">more</a></p>                            |
-| **`terminalOf`** | <p><strong>Params</strong></p><ul><li><code>uint256 _projectId</code></li></ul><p><strong>Returns</strong></p><ul><li><code>IJBTerminal terminalOf</code></li></ul><p><a href="read/terminalof.md">more</a></p> |
+| Function                               | Definition                                                                                                                                                          |
+| -------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [**`projects`**](./)                   | <p><strong>Traits</strong></p><ul><li><code>immutable</code></li></ul><p><strong>Returns</strong></p><ul><li><code>IJBProjects projects</code></li></ul>            |
+| [**`terminalOf`**](read/terminalof.md) | <p><strong>Params</strong></p><ul><li><code>uint256 _projectId</code></li></ul><p><strong>Returns</strong></p><ul><li><code>IJBTerminal terminalOf</code></li></ul> |
 
 ## Write
 

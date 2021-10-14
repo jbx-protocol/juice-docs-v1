@@ -32,20 +32,20 @@ Rinkeby testnet: _Not yet deployed_
 
 ## Properties
 
-| Function            | Definition                                                                                                                                                                                                                                                                                      |
-| ------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **`permissionsOf`** | <p><strong>Params</strong></p><ul><li><code>address _operator</code></li><li><code>address _account</code></li><li><code>uint256 _domain</code></li></ul><p><strong>Returns</strong></p><ul><li><code>uint256 permissions</code></li></ul><p><a href="properties/permissionsof.md">more</a></p> |
+| Function                                           | Definition                                                                                                                                                                                                                                 |
+| -------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| [**`permissionsOf`**](properties/permissionsof.md) | <p><strong>Params</strong></p><ul><li><code>address _operator</code></li><li><code>address _account</code></li><li><code>uint256 _domain</code></li></ul><p><strong>Returns</strong></p><ul><li><code>uint256 permissions</code></li></ul> |
 
 ## Read
 
-| Function             | Definition                                                                                                                                                                                                                                                                                                                                   |
-| -------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **`hasPermission`**  | <p><strong>Params</strong></p><ul><li><code>address _operator</code></li><li><code>address _account</code></li><li><code>uint256 _domain</code></li><li><code>uint256 _permissionIndex</code></li></ul><p><strong>Returns</strong></p><ul><li><code>bool hasPermission</code></li></ul><p><a href="read/haspermission.md">more</a></p>       |
-| **`hasPermissions`** | <p><strong>Params</strong></p><ul><li><code>address _operator</code></li><li><code>address _account</code></li><li><code>uint256 _domain</code></li><li><code>uint256[] _permissionIndexes</code></li></ul><p><strong>Returns</strong></p><ul><li><code>bool hasPermissions</code></li></ul><p><a href="read/haspermissions.md">more</a></p> |
+| Function                                       | Definition                                                                                                                                                                                                                                                                                   |
+| ---------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [**`hasPermission`**](read/haspermission.md)   | <p><strong>Params</strong></p><ul><li><code>address _operator</code></li><li><code>address _account</code></li><li><code>uint256 _domain</code></li><li><code>uint256 _permissionIndex</code></li></ul><p><strong>Returns</strong></p><ul><li><code>bool hasPermission</code></li></ul>      |
+| [**`hasPermissions`**](read/haspermissions.md) | <p><strong>Params</strong></p><ul><li><code>address _operator</code></li><li><code>address _account</code></li><li><code>uint256 _domain</code></li><li><code>uint256[] _permissionIndexes</code></li></ul><p><strong>Returns</strong></p><ul><li><code>bool hasPermissions</code></li></ul> |
 
 ## Write
 
-| Function           | Definition                                                                                                                               |
-| ------------------ | ---------------------------------------------------------------------------------------------------------------------------------------- |
-| **`setOperator`**  | <p><strong>Params</strong></p><ul><li><code>OperatorData _operatorData</code></li></ul><p><a href="write/setoperator.md">more</a></p>    |
-| **`setOperators`** | <p><strong>Params</strong></p><ul><li><code>OperatorData[] _operatorData</code></li></ul><p><a href="write/setoperators.md">more</a></p> |
+| Function                                    | Definition                                                                                |
+| ------------------------------------------- | ----------------------------------------------------------------------------------------- |
+| [**`setOperator`**](events/setoperator.md)  | <p><strong>Params</strong></p><ul><li><code>OperatorData _operatorData</code></li></ul>   |
+| [**`setOperators`**](write/setoperators.md) | <p><strong>Params</strong></p><ul><li><code>OperatorData[] _operatorData</code></li></ul> |

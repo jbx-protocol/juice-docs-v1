@@ -17,56 +17,52 @@ Rinkeby testnet: _Not yet deployed_
 
 ### **Interfaces**
 
-| Name                                                      | Description                                                                                                                              |
-| --------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- |
-| [**`IJBSplitStore`**](../../interfaces/ijbsplitsstore.md) | General interface for the methods in this contract that interact with the blockchain's state according to the Juicebox protocol's rules. |
-
 ### **Inheritance**
-
-| Contract                               | Description                                                                                                           |
-| -------------------------------------- | --------------------------------------------------------------------------------------------------------------------- |
-| [**`JBOperatable`**](../jboperatable/) | Includes convenience functionality for checking a message sender's permissions before executing certain transactions. |
 
 ## Constructor
 
 ```solidity
 /** 
   @param _operatorStore A contract storing operator assignments.
-  @param _jbDirectory The directory of terminals.
-  @param _projects A Projects contract which mints ERC-721's that represent project ownership and transfers.
+  @param _projects A contract which mints ERC-721's that represent project ownership and transfers.
+  @param _directory A contract storing directories of terminals and controllers for each project.
 */
 constructor(
   IJBOperatorStore _operatorStore,
-  IJBDirectory _directory,
-  IJBProjects _projects
+  IJBProjects _projects,
+  IJBDirectory _directory
 ) JBOperatable(_operatorStore) {
   projects = _projects;
   directory = _directory;
 }
 ```
 
+* Arguments:
+  * `_operatorStore` is a [`IJBOperatorStore`](../../interfaces/ijboperatorstore.md) contract storing operator assignments.
+  * `_projects` is a contract which mints ERC-721's that represent project ownership and transfers.
+  * `_directory` is a [`IJBDirectory`](../../interfaces/ijbdirectory.md) contract storing terminals and controllers for each project.
+
 ## Events
 
-|                |                                                                                                                                                                                                                                                                  |
-| -------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Name**       | Data                                                                                                                                                                                                                                                             |
-| **`SetSplit`** | <ul><li><code>uint256 indexed projectId</code></li><li><code>uint256 indexed domain</code></li><li><code>uint256 indexed group</code></li><li><code>Split split</code></li><li><code>address caller</code></li></ul><p><a href="events/setsplit.md">more</a></p> |
+| Name                                 | Data                                                                                                                                                                                                                 |
+| ------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [**`SetSplit`**](events/setsplit.md) | <ul><li><code>uint256 indexed projectId</code></li><li><code>uint256 indexed domain</code></li><li><code>uint256 indexed group</code></li><li><code>Split split</code></li><li><code>address caller</code></li></ul> |
 
 ## Properties
 
-| Function        | Definition                                                                                                                         |
-| --------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
-| **`projects`**  | <p><strong>Returns</strong></p><ul><li><code>IJBProjects projects</code></li></ul><p><a href="properties/projects.md">more</a></p> |
-| **`directory`** | <p>Returns</p><ul><li><code>IJBTerminal terminal</code></li></ul><p><a href="properties/directory.md">more</a></p>                 |
+| Function                                                     | Definition                                                                         |
+| ------------------------------------------------------------ | ---------------------------------------------------------------------------------- |
+| [**`projects`**](properties/projects.md)                     | <p><strong>Returns</strong></p><ul><li><code>IJBProjects projects</code></li></ul> |
+| [**`directory`**](../jbethpaymentterminal/read/directory.md) | <p><strong>Returns</strong></p><ul><li><code>IJBTerminal terminal</code></li></ul> |
 
 ## Read
 
-| Function       | Definition                                                                                                                                                                                                                                                                     |
-| -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| **`splitsOf`** | <p><strong>Params</strong></p><ul><li><code>uint256 _projectId</code></li><li><code>uint256 _domain</code></li><li><code>uint256 _group</code></li></ul><p><strong>Returns</strong></p><ul><li><code>Split[] splits</code></li></ul><p><a href="read/splitsof.md">more</a></p> |
+| Function                           | Definition                                                                                                                                                                                                                                                                                         |
+| ---------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [**`splitsOf`**](read/splitsof.md) | <p><strong>Params</strong></p><ul><li><code>uint256 _projectId</code></li><li><code>uint256 _domain</code></li><li><code>uint256 _group</code></li></ul><p><strong>Returns</strong></p><ul><li><a href="../../data-structures/jbsplit.md"><code>JBSplit</code></a><code>[] splits</code></li></ul> |
 
 ## Write
 
-| Function  | Definition                                                                                                                                                                                                                                                                                                               |
-| --------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| **`set`** | <p><strong>Traits</strong></p><ul><li><code>requirePermission</code></li></ul><p><strong>Params</strong></p><ul><li><code>uint256 _projectId</code></li><li><code>uint256 _configuration</code></li><li><code>uint256 _group</code></li><li><code>Split[] _splits</code></li></ul><p><a href="write/set.md">more</a></p> |
+| Function                  | Definition                                                                                                                                                                                                                                                                                                                                                       |
+| ------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [**`set`**](write/set.md) | <p><strong>Traits</strong></p><ul><li><code>requirePermissionAllowingOverride</code></li></ul><p><strong>Params</strong></p><ul><li><code>uint256 _projectId</code></li><li><code>uint256 _configuration</code></li><li><code>uint256 _group</code></li><li><a href="../../data-structures/jbsplit.md"><code>JBSplit</code></a><code>[] _splits</code></li></ul> |
