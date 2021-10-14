@@ -1,8 +1,8 @@
 ---
 description: >-
-  Keeps a reference of which payment terminal contract each project is currently
-  accepting funds through. When a project migrates from one terminal to another,
-  the change is reflected in this contract.
+  Keeps a reference of which terminal contracts each project is currently
+  accepting funds through, and which controller contract is managing each
+  project's tokens and funding cycles.
 ---
 
 # JBDirectory
