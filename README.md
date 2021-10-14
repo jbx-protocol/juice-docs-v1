@@ -2,7 +2,7 @@
 
 ## Welcome to Juicebox docs!
 
-These docs are under active development. Documentation of the v1 protocol can be found in the [Contracts](protocol/contracts/jbcontrollerv1/read/ticketbooth.md) section. Documentation for the forthcoming Juicebox v2 protocol is being written in the [Protocol](protocol/overview.md) section.
+These docs are under active development. Documentation of the v1 protocol can be found in the [Contracts](protocol/contracts/jbcontroller/read/ticketbooth.md) section. Documentation for the forthcoming Juicebox v2 protocol is being written in the [Protocol](protocol/overview.md) section.
 
 ### Visual walkthrough
 

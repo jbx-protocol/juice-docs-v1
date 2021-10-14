@@ -4,7 +4,7 @@ description: >-
   is accounted for and correct.
 ---
 
-# JBControllerV1
+# JBController
 
 ## Overview
 
@@ -19,10 +19,9 @@ Rinkeby testnet: _Not yet deployed_
 
 ### **Interfaces**
 
-| Name                                                         | Description                                                                                                                                                     |
-| ------------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [**`IJBControllerV1`**](../../interfaces/ijbcontrollerv1.md) | General interface for the V1 specific methods in this contract that interacts with funding cycles and tokens according to the Juicebox protocol's rules.        |
-| [**`IJBController`**](../../interfaces/ijbcontroller.md)     | General interface for the generic controller methods in this contract that interacts with funding cycles and tokens according to the Juicebox protocol's rules. |
+| Name                                                     | Description                                                                                                                                                     |
+| -------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [**`IJBController`**](../../interfaces/ijbcontroller.md) | General interface for the generic controller methods in this contract that interacts with funding cycles and tokens according to the Juicebox protocol's rules. |
 
 ### **Inheritance**
 
