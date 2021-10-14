@@ -15,148 +15,36 @@ description: >-
 
 ### **Addresses**
 
-Ethereum mainnet: _Not yet deployed_  
+Ethereum mainnet: _Not yet deployed_\
 Rinkeby testnet: _Not yet deployed_
 
 ### **Interfaces**
 
-| **Name** | Description |
-| :--- | :--- |
-| **`IJBDirectory`** | General interface for the methods in this contract that interact with the blockchain's state according to the Juicebox protocol's rules. |
+| Name                                                   | Description                                                                                                                              |
+| ------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------- |
+| [**`IJBDirectory`**](../../interfaces/ijbdirectory.md) | General interface for the methods in this contract that interact with the blockchain's state according to the Juicebox protocol's rules. |
 
 ### **Inheritance**
 
-<table>
-  <thead>
-    <tr>
-      <th style="text-align:left"><b>Name</b>
-      </th>
-      <th style="text-align:left">Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td style="text-align:left"><b><code>JBOperatable</code></b>
-      </td>
-      <td style="text-align:left">
-        <p>Includes convenience functionality for checking a message sender&apos;s
-          permissions before executing certain transactions.</p>
-        <p></p>
-        <p><a href="../jboperatable/">more</a>
-        </p>
-      </td>
-    </tr>
-  </tbody>
-</table>
+| Contract                               | Description                                                                                                                                                            |
+| -------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [**`JBOperatable`**](../jboperatable/) | <p>Includes convenience functionality for checking a message sender's permissions before executing certain transactions.</p><p><a href="../jboperatable/">more</a></p> |
 
 ## Events
 
-<table>
-  <thead>
-    <tr>
-      <th style="text-align:left">Name</th>
-      <th style="text-align:left">Data</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td style="text-align:left"><b><code>SetTerminal</code></b>
-      </td>
-      <td style="text-align:left">
-        <ul>
-          <li><code>uint256 indexed projectId</code> 
-          </li>
-          <li><code>IJBTerminal indexed terminal</code> 
-          </li>
-          <li><code>address caller</code>
-          </li>
-        </ul>
-        <p><a href="events/setterminal.md">more</a>
-        </p>
-      </td>
-    </tr>
-  </tbody>
-</table>
+| Name                                       | Data                                                                                                                                                                                          |
+| ------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [**`SetTerminal`**](events/setterminal.md) | <ul><li><code>uint256 indexed projectId</code></li><li><code>IJBTerminal indexed terminal</code></li><li><code>address caller</code></li></ul><p><a href="events/setterminal.md">more</a></p> |
 
 ## Read
 
-<table>
-  <thead>
-    <tr>
-      <th style="text-align:left">Function</th>
-      <th style="text-align:left">Definition</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td style="text-align:left"><b><code>projects</code></b>
-      </td>
-      <td style="text-align:left">
-        <p><b>Traits</b>
-        </p>
-        <ul>
-          <li><code>immutable</code>
-          </li>
-        </ul>
-        <p><b>Returns</b>
-        </p>
-        <ul>
-          <li><code>IJBProjects projects</code>
-          </li>
-        </ul>
-        <p><a href>more</a>
-        </p>
-      </td>
-    </tr>
-    <tr>
-      <td style="text-align:left"><b><code>terminalOf</code></b>
-      </td>
-      <td style="text-align:left">
-        <p><b>Params</b>
-        </p>
-        <ul>
-          <li><code>uint256 _projectId</code>
-          </li>
-        </ul>
-        <p><b>Returns</b>
-        </p>
-        <ul>
-          <li><code>IJBTerminal terminalOf</code>
-          </li>
-        </ul>
-        <p><a href="read/terminalof.md">more</a>
-        </p>
-      </td>
-    </tr>
-  </tbody>
-</table>
+| Function         | Definition                                                                                                                                                                                                      |
+| ---------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **`projects`**   | <p><strong>Traits</strong></p><ul><li><code>immutable</code></li></ul><p><strong>Returns</strong></p><ul><li><code>IJBProjects projects</code></li></ul><p><a href="./">more</a></p>                            |
+| **`terminalOf`** | <p><strong>Params</strong></p><ul><li><code>uint256 _projectId</code></li></ul><p><strong>Returns</strong></p><ul><li><code>IJBTerminal terminalOf</code></li></ul><p><a href="read/terminalof.md">more</a></p> |
 
 ## Write
 
-<table>
-  <thead>
-    <tr>
-      <th style="text-align:left">Function</th>
-      <th style="text-align:left">Definition</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td style="text-align:left"><b><code>setTerminalOf</code></b>
-      </td>
-      <td style="text-align:left">
-        <p><b>Params</b>
-        </p>
-        <ul>
-          <li><code>uint256 _projectId</code> 
-          </li>
-          <li><code>IJBTerminal _terminal</code>
-          </li>
-        </ul>
-        <p><a href="write/setterminalof.md">more</a>
-        </p>
-      </td>
-    </tr>
-  </tbody>
-</table>
-
+| Function            | Definition                                                                                                                                                                 |
+| ------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **`setTerminalOf`** | <p><strong>Params</strong></p><ul><li><code>uint256 _projectId</code></li><li><code>IJBTerminal _terminal</code></li></ul><p><a href="write/setterminalof.md">more</a></p> |

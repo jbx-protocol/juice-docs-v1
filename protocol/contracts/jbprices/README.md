@@ -12,196 +12,43 @@ description: Manages and normalizes price feeds.
 
 ### **Addresses**
 
-Ethereum mainnet: _Not yet deployed_  
+Ethereum mainnet: _Not yet deployed_\
 Rinkeby testnet: _Not yet deployed_
 
 ### **Interfaces**
 
-| Name | Description |
-| :--- | :--- |
-| **`IJBPrices`** | General interface for the methods in this contract that interact with the blockchain's state according to the Juicebox protocol's rules. |
+| Name                                             | Description                                                                                                                              |
+| ------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------- |
+| [**`IJBPrices`**](../../interfaces/ijbprices.md) | General interface for the methods in this contract that interact with the blockchain's state according to the Juicebox protocol's rules. |
 
 ### **Inheritance**
 
-| **Contract** | Description |
-| :--- | :--- |
+| Contract      | Description                                                                                                                              |
+| ------------- | ---------------------------------------------------------------------------------------------------------------------------------------- |
 | **`Ownable`** | Includes convenience functionality for specifying an address that owns the contract, with modifiers that only allow access by the owner. |
 
 ## Events
 
-<table>
-  <thead>
-    <tr>
-      <th style="text-align:left">Name</th>
-      <th style="text-align:left">Data</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td style="text-align:left"><b><code>AddFeed</code></b>
-      </td>
-      <td style="text-align:left">
-        <ul>
-          <li><code>uint256 indexed currency</code> 
-          </li>
-          <li><code>uint256 indexed base</code>
-          </li>
-          <li><code>uint256 decimals</code>
-          </li>
-          <li><code>AggregatorV3Interface feed</code>
-          </li>
-        </ul>
-        <p><a href="events/addfeed.md">more</a>
-        </p>
-      </td>
-    </tr>
-  </tbody>
-</table>
+| Name          | Data                                                                                                                                                                                                                               |
+| ------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **`AddFeed`** | <ul><li><code>uint256 indexed currency</code></li><li><code>uint256 indexed base</code></li><li><code>uint256 decimals</code></li><li><code>AggregatorV3Interface feed</code></li></ul><p><a href="events/addfeed.md">more</a></p> |
 
 ## Properties
 
-<table>
-  <thead>
-    <tr>
-      <th style="text-align:left">Function</th>
-      <th style="text-align:left">Definition</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td style="text-align:left"><b><code>targetDecimals</code></b>
-      </td>
-      <td style="text-align:left">
-        <p><b>Traits</b>
-        </p>
-        <ul>
-          <li><code>constant</code>
-          </li>
-        </ul>
-        <p><b>Returns</b>
-        </p>
-        <ul>
-          <li><code>uint256 18</code>
-          </li>
-        </ul>
-        <p><a href="properties/targetdecimals.md">more</a>
-        </p>
-      </td>
-    </tr>
-    <tr>
-      <td style="text-align:left"><b><code>feedDecimalAdjusterFor</code></b>
-      </td>
-      <td style="text-align:left">
-        <p><b>Params</b>
-        </p>
-        <ul>
-          <li><code>uint256 _currency</code>
-          </li>
-        </ul>
-        <p><b>Returns</b>
-        </p>
-        <ul>
-          <li><code>uint256 adjustmentAmount</code>
-          </li>
-        </ul>
-        <p><a href="properties/feeddecimaladjuster.md">more</a>
-        </p>
-      </td>
-    </tr>
-    <tr>
-      <td style="text-align:left"><b><code>feedFor</code></b>
-      </td>
-      <td style="text-align:left">
-        <p><b>Params</b>
-        </p>
-        <ul>
-          <li><code>uint256 _currency</code>
-          </li>
-          <li><code>uint256 _base</code>
-          </li>
-        </ul>
-        <p><b>Returns</b>
-        </p>
-        <ul>
-          <li><code>AggregatorV3Interface feed</code>
-          </li>
-        </ul>
-        <p><a href="properties/feedfor.md">more</a>
-        </p>
-      </td>
-    </tr>
-  </tbody>
-</table>
+| Function                     | Definition                                                                                                                                                                                                                                               |
+| ---------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **`targetDecimals`**         | <p><strong>Traits</strong></p><ul><li><code>constant</code></li></ul><p><strong>Returns</strong></p><ul><li><code>uint256 18</code></li></ul><p><a href="properties/targetdecimals.md">more</a></p>                                                      |
+| **`feedDecimalAdjusterFor`** | <p><strong>Params</strong></p><ul><li><code>uint256 _currency</code></li></ul><p><strong>Returns</strong></p><ul><li><code>uint256 adjustmentAmount</code></li></ul><p><a href="properties/feeddecimaladjuster.md">more</a></p>                          |
+| **`feedFor`**                | <p><strong>Params</strong></p><ul><li><code>uint256 _currency</code></li><li><code>uint256 _base</code></li></ul><p><strong>Returns</strong></p><ul><li><code>AggregatorV3Interface feed</code></li></ul><p><a href="properties/feedfor.md">more</a></p> |
 
 ## Read
 
-<table>
-  <thead>
-    <tr>
-      <th style="text-align:left">Function</th>
-      <th style="text-align:left">Definition</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td style="text-align:left"><b><code>priceFor</code></b>
-      </td>
-      <td style="text-align:left">
-        <p><b>Params</b>
-        </p>
-        <ul>
-          <li><code>uint256 _currency</code>
-          </li>
-          <li><code>uint256 _base</code>
-          </li>
-        </ul>
-        <p><b>Returns</b>
-        </p>
-        <ul>
-          <li><code>uint256 _price</code>
-          </li>
-        </ul>
-        <p><a href="read/getethpricefor.md">more</a>
-        </p>
-      </td>
-    </tr>
-  </tbody>
-</table>
+| Function       | Definition                                                                                                                                                                                                                                    |
+| -------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **`priceFor`** | <p><strong>Params</strong></p><ul><li><code>uint256 _currency</code></li><li><code>uint256 _base</code></li></ul><p><strong>Returns</strong></p><ul><li><code>uint256 _price</code></li></ul><p><a href="read/getethpricefor.md">more</a></p> |
 
 ## Write
 
-<table>
-  <thead>
-    <tr>
-      <th style="text-align:left">Function</th>
-      <th style="text-align:left">Definition</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td style="text-align:left"><b><code>addFeedFor</code></b>
-      </td>
-      <td style="text-align:left">
-        <p><b>Traits</b>
-        </p>
-        <ul>
-          <li><code>onlyOwner</code>
-          </li>
-        </ul>
-        <p><b>Params</b>
-        </p>
-        <ul>
-          <li><code>uint256 _currency</code>
-          </li>
-          <li><code>uint256 _base</code>
-          </li>
-          <li><code>AggregatorV3Interface _feed</code> 
-          </li>
-        </ul>
-        <p><a href="write/addfeed.md">more</a>
-        </p>
-      </td>
-    </tr>
-  </tbody>
-</table>
-
+| Function         | Definition                                                                                                                                                                                                                                                                         |
+| ---------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **`addFeedFor`** | <p><strong>Traits</strong></p><ul><li><code>onlyOwner</code></li></ul><p><strong>Params</strong></p><ul><li><code>uint256 _currency</code></li><li><code>uint256 _base</code></li><li><code>AggregatorV3Interface _feed</code></li></ul><p><a href="write/addfeed.md">more</a></p> |
