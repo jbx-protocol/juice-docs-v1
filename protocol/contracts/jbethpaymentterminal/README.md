@@ -64,7 +64,7 @@ constructor(
   * `_fundingCycleStore` is an [`IJBFundingCycleStore`](../../interfaces/ijbfundingcyclestore.md) contract storing all funding cycle configurations.
   * `_tokenStore` is an [`IJBTokenStore`](../../interfaces/ijbtokenstore.md) contract that manages token minting and burning.
   * `_splitStore` is an [`IJBSplitStore`](../jbsplitstore/) contract that stores splits for each project.
-  * `_vault` is an [`IJBVault`](../jbvault.md) contract to store funds in.
+  * `_vault` is an [`IJBVault`](../jbethvault.md) contract to store funds in.
 
 ## Events
 
