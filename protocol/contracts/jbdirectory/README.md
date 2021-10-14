@@ -61,12 +61,17 @@ constructor(IJBOperatorStore _operatorStore, IJBProjects _projects) JBOperatable
 
 ## Read
 
-| Function          | Definition                                                                                                                                                                                                                                   |
-| ----------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **`terminalsOf`** | <p><strong>Params</strong></p><ul><li><code>uint256 _projectId</code></li></ul><p><strong>Returns</strong></p><ul><li><code></code><a href="../../interfaces/ijbterminal.md"><code>IJBTerminal</code></a><code>[] terminals</code></li></ul> |
+| Function           | Definition                                                                                                                                                                                                                                                      |
+| ------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **`terminalsOf`**  | <p><strong>Params</strong></p><ul><li><code>uint256 _projectId</code></li></ul><p><strong>Returns</strong></p><ul><li><a href="../../interfaces/ijbterminal.md"><code>IJBTerminal</code></a><code>[] terminals</code></li></ul>                                 |
+| **`isTerminalOf`** | <p><strong>Params</strong></p><ul><li><code>uint256 _projectId</code></li></ul><p><strong>Returns</strong></p><ul><li><code>bool isTerminalOf</code></li></ul>                                                                                                  |
+| **`terminalOf`**   | <p><strong>Params</strong></p><ul><li><code>uint256 _projectId</code></li><li><code>address _token</code></li></ul><p><strong>Returns</strong></p><ul><li><a href="../../interfaces/ijbterminal.md"><code>IJBTerminal</code></a><code>terminal</code></li></ul> |
 
 ## Write
 
-| Function            | Definition                                                                                                                                                                 |
-| ------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **`setTerminalOf`** | <p><strong>Params</strong></p><ul><li><code>uint256 _projectId</code></li><li><code>IJBTerminal _terminal</code></li></ul><p><a href="write/setterminalof.md">more</a></p> |
+| Function               | Definition                                                                                                                                                                                 |
+| ---------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **`setControllerOf`**  | <p><strong>Params</strong></p><ul><li><code>uint256 _projectId</code></li><li><a href="../../interfaces/ijbcontroller.md"><code>IJBController</code></a><code>_controller</code></li></ul> |
+| **`addTerminalOf`**    | <p><strong>Params</strong></p><ul><li><code>uint256 _projectId</code></li><li><a href="../../interfaces/ijbterminal.md"><code>IJBTerminal</code></a><code>_terminal</code></li></ul>       |
+| **`removeTerminalOf`** | <p><strong>Params</strong></p><ul><li><code>uint256 _projectId</code></li><li><a href="../../interfaces/ijbterminal.md"><code>IJBTerminal</code></a><code>_terminal</code></li></ul>       |
+
