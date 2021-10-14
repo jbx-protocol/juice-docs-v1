@@ -46,32 +46,32 @@ constructor(IJBOperatorStore _operatorStore, IJBProjects _projects) JBOperatable
 
 ## Events
 
-| Name                                       | Data                                                                                                                                                                                                          |
-| ------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [**`AddTerminal`**](events/setterminal.md) | <ul><li><code>uint256 indexed projectId</code></li><li><a href="../../interfaces/ijbterminal.md"><code>IJBTerminal</code></a><code>indexed terminal</code></li><li><code>address caller</code></li></ul>      |
-| **`RemoveTerminal`**                       | <ul><li><code>uint256 indexed projectId</code></li><li><a href="../../interfaces/ijbterminal.md"><code>IJBTerminal</code></a><code>indexed terminal</code></li><li><code>address caller</code></li></ul>      |
-| **`SetController`**                        | <ul><li><code>int256 indexed projectId</code></li><li><a href="../../interfaces/ijbcontroller.md"><code>IJBController</code></a><code>indexed controller</code></li><li><code>address caller</code></li></ul> |
+| Name                                             | Data                                                                                                                                                                                                          |
+| ------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [**`AddTerminal`**](events/addterminal.md)       | <ul><li><code>uint256 indexed projectId</code></li><li><a href="../../interfaces/ijbterminal.md"><code>IJBTerminal</code></a><code>indexed terminal</code></li><li><code>address caller</code></li></ul>      |
+| [**`RemoveTerminal`**](events/removeterminal.md) | <ul><li><code>uint256 indexed projectId</code></li><li><a href="../../interfaces/ijbterminal.md"><code>IJBTerminal</code></a><code>indexed terminal</code></li><li><code>address caller</code></li></ul>      |
+| [**`SetController`**](events/setcontroller.md)   | <ul><li><code>int256 indexed projectId</code></li><li><a href="../../interfaces/ijbcontroller.md"><code>IJBController</code></a><code>indexed controller</code></li><li><code>address caller</code></li></ul> |
 
 ## Properties
 
-| Function             | Definition                                                                                                                                                                                                         |
-| -------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| [**`projects`**](./) | <p><strong>Traits</strong></p><ul><li><code>immutable</code></li></ul><p><strong>Returns</strong></p><ul><li><a href="../../interfaces/ijbprojects.md"><code>IJBProjects</code></a><code>projects</code></li></ul> |
-| **`controllerOf`**   | <p><strong>Params</strong></p><ul><li><code>uint256 _projectId</code></li></ul><p><strong>Returns</strong></p><ul><li><a href="../jbcontroller/"><code>IJBController</code></a><code>controllerOf</code></li></ul> |
+| Function                                         | Definition                                                                                                                                                                                                         |
+| ------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| [**`projects`**](properties/projects.md)         | <p><strong>Traits</strong></p><ul><li><code>immutable</code></li></ul><p><strong>Returns</strong></p><ul><li><a href="../../interfaces/ijbprojects.md"><code>IJBProjects</code></a><code>projects</code></li></ul> |
+| [**`controllerOf`**](properties/controllerof.md) | <p><strong>Params</strong></p><ul><li><code>uint256 _projectId</code></li></ul><p><strong>Returns</strong></p><ul><li><a href="../jbcontroller/"><code>IJBController</code></a><code>controllerOf</code></li></ul> |
 
 ## Read
 
-| Function           | Definition                                                                                                                                                                                                                                                      |
-| ------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **`terminalsOf`**  | <p><strong>Params</strong></p><ul><li><code>uint256 _projectId</code></li></ul><p><strong>Returns</strong></p><ul><li><a href="../../interfaces/ijbterminal.md"><code>IJBTerminal</code></a><code>[] terminals</code></li></ul>                                 |
-| **`isTerminalOf`** | <p><strong>Params</strong></p><ul><li><code>uint256 _projectId</code></li></ul><p><strong>Returns</strong></p><ul><li><code>bool isTerminalOf</code></li></ul>                                                                                                  |
-| **`terminalOf`**   | <p><strong>Params</strong></p><ul><li><code>uint256 _projectId</code></li><li><code>address _token</code></li></ul><p><strong>Returns</strong></p><ul><li><a href="../../interfaces/ijbterminal.md"><code>IJBTerminal</code></a><code>terminal</code></li></ul> |
+| Function                                   | Definition                                                                                                                                                                                                                                                      |
+| ------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [**`terminalsOf`**](read/terminalsof.md)   | <p><strong>Params</strong></p><ul><li><code>uint256 _projectId</code></li></ul><p><strong>Returns</strong></p><ul><li><a href="../../interfaces/ijbterminal.md"><code>IJBTerminal</code></a><code>[] terminals</code></li></ul>                                 |
+| [**`isTerminalOf`**](read/isterminalof.md) | <p><strong>Params</strong></p><ul><li><code>uint256 _projectId</code></li></ul><p><strong>Returns</strong></p><ul><li><code>bool isTerminalOf</code></li></ul>                                                                                                  |
+| [**`terminalOf`**](read/terminalof.md)     | <p><strong>Params</strong></p><ul><li><code>uint256 _projectId</code></li><li><code>address _token</code></li></ul><p><strong>Returns</strong></p><ul><li><a href="../../interfaces/ijbterminal.md"><code>IJBTerminal</code></a><code>terminal</code></li></ul> |
 
 ## Write
 
-| Function               | Definition                                                                                                                                                                                 |
-| ---------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| **`setControllerOf`**  | <p><strong>Params</strong></p><ul><li><code>uint256 _projectId</code></li><li><a href="../../interfaces/ijbcontroller.md"><code>IJBController</code></a><code>_controller</code></li></ul> |
-| **`addTerminalOf`**    | <p><strong>Params</strong></p><ul><li><code>uint256 _projectId</code></li><li><a href="../../interfaces/ijbterminal.md"><code>IJBTerminal</code></a><code>_terminal</code></li></ul>       |
-| **`removeTerminalOf`** | <p><strong>Params</strong></p><ul><li><code>uint256 _projectId</code></li><li><a href="../../interfaces/ijbterminal.md"><code>IJBTerminal</code></a><code>_terminal</code></li></ul>       |
+| Function                                            | Definition                                                                                                                                                                                 |
+| --------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| [**`setControllerOf`**](write/setcontrollerof.md)   | <p><strong>Params</strong></p><ul><li><code>uint256 _projectId</code></li><li><a href="../../interfaces/ijbcontroller.md"><code>IJBController</code></a><code>_controller</code></li></ul> |
+| [**`addTerminalOf`**](write/addterminalof.md)       | <p><strong>Params</strong></p><ul><li><code>uint256 _projectId</code></li><li><a href="../../interfaces/ijbterminal.md"><code>IJBTerminal</code></a><code>_terminal</code></li></ul>       |
+| [**`removeTerminalOf`**](write/removeterminalof.md) | <p><strong>Params</strong></p><ul><li><code>uint256 _projectId</code></li><li><a href="../../interfaces/ijbterminal.md"><code>IJBTerminal</code></a><code>_terminal</code></li></ul>       |
 
