@@ -1,4 +1,8 @@
-# IJBVault
+---
+description: Stores ETH for terminals.
+---
+
+# JBETHVault
 
 ## Constructor
 
