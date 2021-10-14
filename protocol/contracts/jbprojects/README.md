@@ -31,9 +31,6 @@ Rinkeby testnet: _Not yet deployed_
 ## Constructor
 
 ```solidity
-/** 
-  @param _operatorStore A contract storing operator assignments.
-*/
 constructor(IJBOperatorStore _operatorStore)
   ERC721('Juicebox project', 'JUICEBOX')
   JBOperatable(_operatorStore)
@@ -41,7 +38,7 @@ constructor(IJBOperatorStore _operatorStore)
 ```
 
 * Arguments:
-  * `_operatorStore` A [`IJBOperatorStore`](../../interfaces/ijboperatorstore.md) contract storing operator assignments.
+  * `_operatorStore` is an [`IJBOperatorStore`](../../interfaces/ijboperatorstore.md) contract storing operator assignments.
 
 ## Events
 

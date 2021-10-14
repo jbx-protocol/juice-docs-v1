@@ -23,6 +23,19 @@ description: >-
 | [**`requirePermission`**](modifiers/requirepermission.md)                                 | <ul><li><code>address _account</code></li><li><code>uint256 _domain</code></li><li><code>uint256 _index</code></li></ul>                                                                                         |
 | [**`requirePermissionAllowingOverride`**](modifiers/requirepermissionallowingoverride.md) | <ul><li><code>address _account</code></li><li><code>uint256 _domain</code></li><li><code>uint256 _permissionIndex</code></li><li><code>bool _override</code></li></ul><p><a href="broken-reference">more</a></p> |
 
+
+
+## Constructor
+
+```solidity
+constructor(IJBOperatorStore _operatorStore) {
+  operatorStore = _operatorStore;
+}
+```
+
+* Arguments:
+  * `_operatorStore` is an [`IJBOperatorStore`](../../interfaces/ijboperatorstore.md) contract storing operator assignments.
+
 ## Read
 
 | Function                                     | Definition                                                                                                                                                          |
