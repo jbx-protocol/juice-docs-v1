@@ -57,7 +57,7 @@ constructor(
   * `_directory` is an [`IJBDirectory`](../../../interfaces/ijbdirectory.md) contract storing directories of terminals and controllers for each project.
   * `_fundingCycleStore` is an [`IJBFundingCycleStore`](../../../interfaces/ijbfundingcyclestore.md) contract storing all funding cycle configurations.
   * `_tokenStore` is an [`IJBTokenStore`](../../../interfaces/ijbtokenstore.md) contract that manages token minting and burning.
-  * `_splitStore` is an [`IJBSplitStore`](../../jbsplitstore/) contract that stores splits for each project.
+  * `_splitStore` is an [`IJBSplitStore`](../../../interfaces/ijbsplitstore/) contract that stores splits for each project.
 
 ## Events
 
@@ -74,10 +74,10 @@ constructor(
 
 | Function                                                                                     | Definition                                                                                                                                                                                                                                                      |
 | -------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [**`projects`**](../../or-payment-terminals/jbethpaymentterminal/properties/projects.md)     | <p><strong>Traits</strong></p><ul><li><code>immutable</code></li></ul><p><strong>Returns</strong></p><ul><li><a href="../../../interfaces/ijbprojects.md"><code>IJBProjects</code></a><code>projects</code></li></ul>                                           |
+| [**`projects`**](properties/projects.md)     | <p><strong>Traits</strong></p><ul><li><code>immutable</code></li></ul><p><strong>Returns</strong></p><ul><li><a href="../../../interfaces/ijbprojects.md"><code>IJBProjects</code></a><code>projects</code></li></ul>                                           |
 | [**`fundingCycleStore`**](properties/fundingcyclestore.md)                                   | <p><strong>Traits</strong></p><ul><li><code>immutable</code></li></ul><p><strong>Returns</strong></p><ul><li><a href="../../../interfaces/ijbfundingcyclestore.md"><code>IJBFundingCycleStore</code></a><code>fundingCycleStore</code></li></ul>                |
-| [**`tokenStore`**](../../or-payment-terminals/jbethpaymentterminal/properties/tokenstore.md) | <p><strong>Traits</strong></p><ul><li><code>immutable</code></li></ul><p><strong>Returns</strong></p><ul><li><a href="../../../interfaces/ijbtokenstore.md"><code>IJBTokenStore</code></a><code>tokenStore</code></li></ul>                                     |
-| [**`splitsStore`**](broken-reference/)                                                       | <p><strong>Traits</strong></p><ul><li><code>immutable</code></li></ul><p><strong>Returns</strong></p><ul><li><a href="../../../interfaces/ijbsplitsstore.md"><code>IJBSplitStore</code></a><code>splitStore</code></li></ul>                                    |
+| [**`tokenStore`**](properties/tokenstore.md) | <p><strong>Traits</strong></p><ul><li><code>immutable</code></li></ul><p><strong>Returns</strong></p><ul><li><a href="../../../interfaces/ijbtokenstore.md"><code>IJBTokenStore</code></a><code>tokenStore</code></li></ul>                                     |
+| [**`splitsStore`**](properties/splitstore.md)                                                       | <p><strong>Traits</strong></p><ul><li><code>immutable</code></li></ul><p><strong>Returns</strong></p><ul><li><a href="../../../interfaces/ijbsplitsstore.md"><code>IJBSplitStore</code></a><code>splitStore</code></li></ul>                                    |
 | [**`overflowAllowanceOf`**](properties/overflowallowanceof.md)                               | <p><strong>Params</strong></p><ul><li><code>uint256 _projectId</code></li><li><code>uint256 _configuration</code></li><li><code>IJBTerminal _terminal</code></li></ul><p><strong>Returns</strong></p><ul><li><code>uint256 overflowAllowanceOf</code></li></ul> |
 | [**`fee`**](properties/fee.md)                                                               | <p><strong>Returns</strong></p><ul><li><code>uint256 fee</code></li></ul>                                                                                                                                                                                       |
 

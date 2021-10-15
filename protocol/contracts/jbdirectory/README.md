@@ -57,7 +57,7 @@ constructor(IJBOperatorStore _operatorStore, IJBProjects _projects) JBOperatable
 
 | Function                                                                                   | Definition                                                                                                                                                                                                                        |
 | ------------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [**`projects`**](../or-payment-terminals/jbethpaymentterminalstore/properties/projects.md) | <p><strong>Traits</strong></p><ul><li><code>immutable</code></li></ul><p><strong>Returns</strong></p><ul><li><a href="../../interfaces/ijbprojects.md"><code>IJBProjects</code></a><code>projects</code></li></ul>                |
+| [**`projects`**](properties/projects.md) | <p><strong>Traits</strong></p><ul><li><code>immutable</code></li></ul><p><strong>Returns</strong></p><ul><li><a href="../../interfaces/ijbprojects.md"><code>IJBProjects</code></a><code>projects</code></li></ul>                |
 | [**`controllerOf`**](properties/controllerof.md)                                           | <p><strong>Params</strong></p><ul><li><code>uint256 _projectId</code></li></ul><p><strong>Returns</strong></p><ul><li><a href="../or-controllers/jbcontroller/"><code>IJBController</code></a><code>controllerOf</code></li></ul> |
 
 ## Read
