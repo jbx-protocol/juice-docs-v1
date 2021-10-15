@@ -8,7 +8,7 @@ description: Stores ETH.
 
 ### Code
 
-{% embed url="https://github.com/jbx-protocol/juice-contracts/tree/main/contracts/v2/JBPaymentTerminal.sol" %}
+{% embed url="https://github.com/jbx-protocol/juice-contracts/tree/main/contracts/v2/JBETHVault.sol" %}
 
 ### **Addresses**
 

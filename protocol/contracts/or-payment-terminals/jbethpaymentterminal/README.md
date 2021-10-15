@@ -8,7 +8,7 @@ description: Manages all inflows and outflows of ETH into the Juicebox ecosystem
 
 ### Code
 
-{% embed url="https://github.com/jbx-protocol/juice-contracts/tree/main/contracts/v2/JBPaymentTerminal.sol" %}
+{% embed url="https://github.com/jbx-protocol/juice-contracts/tree/main/contracts/v2/JBETHPaymentTerminal.sol" %}
 
 ### **Addresses**
 
