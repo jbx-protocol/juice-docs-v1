@@ -95,11 +95,11 @@ constructor(
 
 ## Read
 
-| Function                                             | Definition                                                                                                                                                                                                      |
-| ---------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [**`currentOverflowOf`**](read/currentoverflowof.md) | <p><strong>Params</strong></p><ul><li><code>uint256 _projectId</code></li></ul><p><strong>Returns</strong></p><ul><li><code>uint256 currentOverflow</code></li></ul>                                            |
-| [`claimableOverflowOf`](read/claimableoverflowof.md) | <p><strong>Params</strong></p><ul><li><code>uint256 _projectId</code></li><li><code>uint256 _tokenCount</code></li></ul><p><strong>Returns</strong></p><ul><li><code>uint256 claimableOverflow</code></li></ul> |
-| [`currentETHBalanceOf`](read/currentethbalanceof.md) | <p><strong>Params</strong></p><ul><li><code>uint256 _projectId</code></li></ul><p><strong>Returns</strong></p><ul><li><code>uint256 currentETHBalance</code></li></ul>                                          |
+| Function                                                         | Definition                                                                                                                                                                                                      |
+| ---------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [**`currentOverflowOf`**](read/currentoverflowof.md)             | <p><strong>Params</strong></p><ul><li><code>uint256 _projectId</code></li></ul><p><strong>Returns</strong></p><ul><li><code>uint256 currentOverflow</code></li></ul>                                            |
+| ****[**`claimableOverflowOf`**](read/claimableoverflowof.md)**** | <p><strong>Params</strong></p><ul><li><code>uint256 _projectId</code></li><li><code>uint256 _tokenCount</code></li></ul><p><strong>Returns</strong></p><ul><li><code>uint256 claimableOverflow</code></li></ul> |
+| [**`currentETHBalanceOf`**](read/currentethbalanceof.md)****     | <p><strong>Params</strong></p><ul><li><code>uint256 _projectId</code></li></ul><p><strong>Returns</strong></p><ul><li><code>uint256 currentETHBalance</code></li></ul>                                          |
 
 ## Write
 
