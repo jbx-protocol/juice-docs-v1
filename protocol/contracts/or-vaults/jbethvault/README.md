@@ -36,6 +36,15 @@ constructor(IJBDirectory _directory) JBTerminalUtility(_directory) {}
 * **Arguments:**
   * `_directory` is an [`IJBDirectory`](../../../interfaces/ijbdirectory.md) contract storing directories of terminals and controllers for each project.
 
+## Events
+
+## Read
+
+| Name                                 | Data                                                                                                                                                             |
+| ------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [**`Withdraw`**](events/withdraw.md) | <ul><li><code>uint256 indexed projectId</code></li><li><code>uint256 amount</code></li><li><code>address to</code></li><li><code>address caller</code></li></ul> |
+| [**`Deposit`**](events/deposit.md)   | <ul><li><code>uint256 indexed projectId</code></li><li><code>uint256 amount</code></li><li><code>address caller</code></li></ul>                                 |
+
 ## Read
 
 | Function                     | Definition                                                                  |
@@ -48,4 +57,3 @@ constructor(IJBDirectory _directory) JBTerminalUtility(_directory) {}
 | ----------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | [**`deposit`**](write/deposit.md)   | <p><strong>Traits</strong></p><ul><li><code>onlyTerminal</code></li></ul><p><strong>Params</strong></p><ul><li><code>uint256 _projectId</code></li><li><code>uint256 _amount</code></li></ul>                                  |
 | [**`withdraw`**](write/withdraw.md) | <p><strong>Traits</strong></p><ul><li><code>onlyTerminal</code></li></ul><p><strong>Params</strong></p><ul><li><code>uint256 _projectId</code></li><li><code>uint256 _amount</code></li><li><code>address _to</code></li></ul> |
-
