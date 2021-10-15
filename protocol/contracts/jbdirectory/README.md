@@ -54,10 +54,10 @@ constructor(IJBOperatorStore _operatorStore, IJBProjects _projects) JBOperatable
 
 ## Properties
 
-| Function                                         | Definition                                                                                                                                                                                                                        |
-| ------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [**`projects`**](properties/projects.md)         | <p><strong>Traits</strong></p><ul><li><code>immutable</code></li></ul><p><strong>Returns</strong></p><ul><li><a href="../../interfaces/ijbprojects.md"><code>IJBProjects</code></a><code>projects</code></li></ul>                |
-| [**`controllerOf`**](properties/controllerof.md) | <p><strong>Params</strong></p><ul><li><code>uint256 _projectId</code></li></ul><p><strong>Returns</strong></p><ul><li><a href="../or-controllers/jbcontroller/"><code>IJBController</code></a><code>controllerOf</code></li></ul> |
+| Function                                                                | Definition                                                                                                                                                                                                                        |
+| ----------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [**`projects`**](../or-controllers/jbcontroller/properties/projects.md) | <p><strong>Traits</strong></p><ul><li><code>immutable</code></li></ul><p><strong>Returns</strong></p><ul><li><a href="../../interfaces/ijbprojects.md"><code>IJBProjects</code></a><code>projects</code></li></ul>                |
+| [**`controllerOf`**](properties/controllerof.md)                        | <p><strong>Params</strong></p><ul><li><code>uint256 _projectId</code></li></ul><p><strong>Returns</strong></p><ul><li><a href="../or-controllers/jbcontroller/"><code>IJBController</code></a><code>controllerOf</code></li></ul> |
 
 ## Read
 
@@ -69,9 +69,9 @@ constructor(IJBOperatorStore _operatorStore, IJBProjects _projects) JBOperatable
 
 ## Write
 
-| Function                                            | Definition                                                                                                                                                                                 |
-| --------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| [**`setControllerOf`**](write/setcontrollerof.md)   | <p><strong>Params</strong></p><ul><li><code>uint256 _projectId</code></li><li><a href="../../interfaces/ijbcontroller.md"><code>IJBController</code></a><code>_controller</code></li></ul> |
-| [**`addTerminalOf`**](write/addterminalof.md)       | <p><strong>Params</strong></p><ul><li><code>uint256 _projectId</code></li><li><a href="../../interfaces/ijbterminal.md"><code>IJBTerminal</code></a><code>_terminal</code></li></ul>       |
-| [**`removeTerminalOf`**](write/removeterminalof.md) | <p><strong>Params</strong></p><ul><li><code>uint256 _projectId</code></li><li><a href="../../interfaces/ijbterminal.md"><code>IJBTerminal</code></a><code>_terminal</code></li></ul>       |
+| Function                                            | Definition                                                                                                                                                                                                                                                                                                                                                                        |
+| --------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [**`setControllerOf`**](write/setcontrollerof.md)   | <p><strong>Traits</strong></p><ul><li><a href="../or-abstract/jboperatable/modifiers/requirepermissionallowingoverride.md"><code>requirePermissionAllowingOverride</code></a></li></ul><p><strong>Params</strong></p><ul><li><code>uint256 _projectId</code></li><li><a href="../../interfaces/ijbcontroller.md"><code>IJBController</code></a><code>_controller</code></li></ul> |
+| [**`addTerminalOf`**](write/addterminalof.md)       | <p><strong>Traits</strong></p><ul><li><a href="../or-abstract/jboperatable/modifiers/requirepermissionallowingoverride.md"><code>requirePermissionAllowingOverride</code></a></li></ul><p><strong>Params</strong></p><ul><li><code>uint256 _projectId</code></li><li><a href="../../interfaces/ijbterminal.md"><code>IJBTerminal</code></a><code>_terminal</code></li></ul>       |
+| [**`removeTerminalOf`**](write/removeterminalof.md) | <p><strong>Traits</strong></p><ul><li><a href="../or-abstract/jboperatable/modifiers/requirepermissionallowingoverride.md"><code>requirePermissionAllowingOverride</code></a></li></ul><p><strong>Params</strong></p><ul><li><code>uint256 _projectId</code></li><li><a href="../../interfaces/ijbterminal.md"><code>IJBTerminal</code></a><code>_terminal</code></li></ul>       |
 
