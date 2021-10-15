@@ -6,11 +6,6 @@ interface IJBTerminal {
 
   function currentETHBalanceOf(uint256 _projectId) external view returns (uint256);
 
-  function usedOverflowAllowanceOf(uint256 _projectId, uint256 _configuration)
-    external
-    view
-    returns (uint256);
-
   function pay(
     uint256 _projectId,
     address _beneficiary,
