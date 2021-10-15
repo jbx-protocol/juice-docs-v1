@@ -23,9 +23,9 @@ Rinkeby testnet: _Not yet deployed_
 
 ### **Inheritance**
 
-| Contract                                             | Description                                                                                                                                   |
-| ---------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
-| [**`JBControllerUtility`**](../jbcontrollerutility/) | Includes convenience functionality for checking if the message sender is the current controller of the project who data is being manipulated. |
+| Contract                                                         | Description                                                                                                                                   |
+| ---------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
+| [**`JBControllerUtility`**](../or-abstract/jbcontrollerutility/) | Includes convenience functionality for checking if the message sender is the current controller of the project who data is being manipulated. |
 
 
 

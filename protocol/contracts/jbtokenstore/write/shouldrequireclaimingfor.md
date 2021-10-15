@@ -22,7 +22,7 @@ function shouldRequireClaimingFor(uint256 _projectId, bool _flag)
 * Arguments:
   * `_projectId` is the ID of the project being affected.
   * `_flag` is a flag indicating whether or not claiming should be required.
-* Through the [`requirePermission`](../../jboperatable/modifiers/requirepermission.md) modifier, the function is only accessible by the project's owner, or from an operator that has been given the `JBOperations.REQUIRE_CLAIM`permission by the project owner for the provided `_projectId`.
+* Through the [`requirePermission`](../../or-abstract/jboperatable/modifiers/requirepermission.md) modifier, the function is only accessible by the project's owner, or from an operator that has been given the `JBOperations.REQUIRE_CLAIM`permission by the project owner for the provided `_projectId`.
 * The function overrides a function definition from the `IJBTokenStore` interface.
 * The function returns nothing.
 *   Get a reference to the project's token.

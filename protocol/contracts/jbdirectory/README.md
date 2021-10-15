@@ -26,9 +26,9 @@ Rinkeby testnet: _Not yet deployed_
 
 ### **Inheritance**
 
-| Contract                               | Description                                                                                                                                                            |
-| -------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [**`JBOperatable`**](../jboperatable/) | <p>Includes convenience functionality for checking a message sender's permissions before executing certain transactions.</p><p><a href="../jboperatable/">more</a></p> |
+| Contract                                           | Description                                                                                                                                                                        |
+| -------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [**`JBOperatable`**](../or-abstract/jboperatable/) | <p>Includes convenience functionality for checking a message sender's permissions before executing certain transactions.</p><p><a href="../or-abstract/jboperatable/">more</a></p> |
 
 
 
@@ -54,10 +54,10 @@ constructor(IJBOperatorStore _operatorStore, IJBProjects _projects) JBOperatable
 
 ## Properties
 
-| Function                                         | Definition                                                                                                                                                                                                         |
-| ------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| [**`projects`**](properties/projects.md)         | <p><strong>Traits</strong></p><ul><li><code>immutable</code></li></ul><p><strong>Returns</strong></p><ul><li><a href="../../interfaces/ijbprojects.md"><code>IJBProjects</code></a><code>projects</code></li></ul> |
-| [**`controllerOf`**](properties/controllerof.md) | <p><strong>Params</strong></p><ul><li><code>uint256 _projectId</code></li></ul><p><strong>Returns</strong></p><ul><li><a href="../jbcontroller/"><code>IJBController</code></a><code>controllerOf</code></li></ul> |
+| Function                                         | Definition                                                                                                                                                                                                                        |
+| ------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [**`projects`**](properties/projects.md)         | <p><strong>Traits</strong></p><ul><li><code>immutable</code></li></ul><p><strong>Returns</strong></p><ul><li><a href="../../interfaces/ijbprojects.md"><code>IJBProjects</code></a><code>projects</code></li></ul>                |
+| [**`controllerOf`**](properties/controllerof.md) | <p><strong>Params</strong></p><ul><li><code>uint256 _projectId</code></li></ul><p><strong>Returns</strong></p><ul><li><a href="../or-controllers/jbcontroller/"><code>IJBController</code></a><code>controllerOf</code></li></ul> |
 
 ## Read
 

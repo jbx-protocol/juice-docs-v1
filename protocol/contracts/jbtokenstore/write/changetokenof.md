@@ -27,7 +27,7 @@ function changeTokenOf(
   * `_projectId` is the ID of the project to which the changed token belongs.
   * `_token` is the new token, which must adhere to the [`IJBToken`](../../../interfaces/ijbtoken.md) specification.
   * `_newOwner` is an address to transfer the current token's ownership to. This is optional, but it cannot be done later.
-* Through the [`requirePermission`](../../jboperatable/modifiers/requirepermission.md) modifier, the function is only accessible by the project's owner, or from an operator that has been given the `JBOperations.CHANGE_TOKEN`permission by the project owner for the provided `_projectId`.
+* Through the [`requirePermission`](../../or-abstract/jboperatable/modifiers/requirepermission.md) modifier, the function is only accessible by the project's owner, or from an operator that has been given the `JBOperations.CHANGE_TOKEN`permission by the project owner for the provided `_projectId`.
 * The function overrides a function definition from the `IJBTokenStore` interface.
 * The function returns nothing.
 *   Get a reference to the project's current token.

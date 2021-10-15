@@ -34,7 +34,7 @@ constructor(IJBOperatorStore _operatorStore) {
 ```
 
 * Arguments:
-  * `_operatorStore` is an [`IJBOperatorStore`](../../interfaces/ijboperatorstore.md) contract storing operator assignments.
+  * `_operatorStore` is an [`IJBOperatorStore`](../../../interfaces/ijboperatorstore.md) contract storing operator assignments.
 
 ## Read
 

@@ -21,7 +21,7 @@ function renewHandleOf(uint256 _projectId)
 
 * Arguments:
   * `_projectId` Is the ID of the project to which the handle being renewed belongs.
-* Through the [`requirePermission`](../../jboperatable/modifiers/requirepermission.md) modifier, the function is only accessible by the project's owner, or from an operator that has been given the `JBOperations.RENEW_HANDLE` permission by the project owner for the provided `_projectId`.
+* Through the [`requirePermission`](../../or-abstract/jboperatable/modifiers/requirepermission.md) modifier, the function is only accessible by the project's owner, or from an operator that has been given the `JBOperations.RENEW_HANDLE` permission by the project owner for the provided `_projectId`.
 * The function overrides a function definition from the `IJBProjects` interface.
 * The function doesn't return anything.
 *   Get a reference to the project's current handle.

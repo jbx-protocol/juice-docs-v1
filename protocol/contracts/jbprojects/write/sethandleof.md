@@ -22,7 +22,7 @@ function setHandleOf(uint256 _projectId, bytes32 _handle)
 * Arguments:
   * `_projectId` is the ID of the project who's handle is being changed.
 * `_handle` is the new unique handle for the project.
-* Through the [`requirePermission`](../../jboperatable/modifiers/requirepermission.md) modifier, the function is only accessible by the project's owner, or from an operator that has been given the `JBOperations.SET_HANDLE` permission by the project owner for the provided `_projectId`.
+* Through the [`requirePermission`](../../or-abstract/jboperatable/modifiers/requirepermission.md) modifier, the function is only accessible by the project's owner, or from an operator that has been given the `JBOperations.SET_HANDLE` permission by the project owner for the provided `_projectId`.
 * The function overrides a function definition from the `IJBProjects` interface.
 * The function doesn't return anything.
 *   Check that the provided `_handle` is not empty.

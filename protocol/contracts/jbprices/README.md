@@ -43,9 +43,9 @@ Rinkeby testnet: _Not yet deployed_
 
 ## Read
 
-| Function                                 | Definition                                                                                                                                                                                    |
-| ---------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [**`priceFor`**](read/getethpricefor.md) | <p><strong>Params</strong></p><ul><li><code>uint256 _currency</code></li><li><code>uint256 _base</code></li></ul><p><strong>Returns</strong></p><ul><li><code>uint256 _price</code></li></ul> |
+| Function                                 | Definition                                                                                                                                                                                   |
+| ---------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [**`priceFor`**](read/getethpricefor.md) | <p><strong>Params</strong></p><ul><li><code>uint256 _currency</code></li><li><code>uint256 _base</code></li></ul><p><strong>Returns</strong></p><ul><li><code>uint256 price</code></li></ul> |
 
 ## Write
 
