@@ -87,9 +87,9 @@ constructor(
 
 ## Read
 
-| Function                                                       | Definition                                                                                                                                                                                                                                                                     |
-| -------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| [**`reservedTokenBalanceOf`**](read/reservedtokenbalanceof.md) | <p><strong>Params</strong></p><ul><li><code>uint256 _projectId</code></li><li><code>uint256 _reservedRate</code></li></ul><p><strong>Returns</strong></p><ul><li><code>uint256 reservedTokenBalanceOf</code></li></ul><p><a href="read/reservedtokenbalanceof.md">more</a></p> |
+| Function                                                       | Definition                                                                                                                                                                                                             |
+| -------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [**`reservedTokenBalanceOf`**](read/reservedtokenbalanceof.md) | <p><strong>Params</strong></p><ul><li><code>uint256 _projectId</code></li><li><code>uint256 _reservedRate</code></li></ul><p><strong>Returns</strong></p><ul><li><code>uint256 reservedTokenBalanceOf</code></li></ul> |
 
 ## Write
 
