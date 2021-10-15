@@ -32,8 +32,6 @@ Rinkeby testnet: _Not yet deployed_
 | [**`Ownable`**](https://docs.openzeppelin.com/contracts/2.x/api/ownership)        | Includes convenience functionality for specifying an address that owns the contract, with modifiers that only allow access by the owner.  |
 | [**`ReentrancyGuard`**](https://docs.openzeppelin.com/contracts/4.x/api/security) | Includes convenience functionality for preventing access to certain functions while certain other functions are being executed.           |
 
-
-
 ## Constructor
 
 ```solidity
@@ -53,7 +51,7 @@ constructor(
 ```
 
 * **Arguments:**
-  * `_operatorStore` A [`IJBOperatorStore`](../../../interfaces/ijboperatorstore.md) contract storing operator assignments.
+  * `_operatorStore` is a [`IJBOperatorStore`](../../../interfaces/ijboperatorstore.md) contract storing operator assignments.
   * `_operatorStore` is an [`IJBOperatorStore`](../../../interfaces/ijboperatorstore.md) contract storing operator assignments.
   * `_projects` is an [`IJBProjects`](../../../interfaces/ijbprojects.md) contract which mints ERC-721's that represent project ownership and transfers.
   * `_directory` is an [`IJBDirectory`](../../../interfaces/ijbdirectory.md) contract storing directories of terminals and controllers for each project.
@@ -74,14 +72,12 @@ constructor(
 
 ## Properties
 
-
-
 | Function                                                                                                   | Definition                                                                                                                                                                                                                                                      |
 | ---------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | [**`projects`**](../../or-payment-terminals/jbethpaymentterminal/properties/projects.md)                   | <p><strong>Traits</strong></p><ul><li><code>immutable</code></li></ul><p><strong>Returns</strong></p><ul><li><a href="../../../interfaces/ijbprojects.md"><code>IJBProjects</code></a><code>projects</code></li></ul>                                           |
 | [**`fundingCycleStore`**](../../or-payment-terminals/jbethpaymentterminal/properties/fundingcyclestore.md) | <p><strong>Traits</strong></p><ul><li><code>immutable</code></li></ul><p><strong>Returns</strong></p><ul><li><a href="../../../interfaces/ijbfundingcyclestore.md"><code>IJBFundingCycleStore</code></a><code>fundingCycleStore</code></li></ul>                |
 | [**`tokenStore`**](../../or-payment-terminals/jbethpaymentterminal/properties/tokenstore.md)               | <p><strong>Traits</strong></p><ul><li><code>immutable</code></li></ul><p><strong>Returns</strong></p><ul><li><a href="../../../interfaces/ijbtokenstore.md"><code>IJBTokenStore</code></a><code>tokenStore</code></li></ul>                                     |
-| [**`splitsStore`**](broken-reference)                                                                      | <p><strong>Traits</strong></p><ul><li><code>immutable</code></li></ul><p><strong>Returns</strong></p><ul><li><a href="../../../interfaces/ijbsplitsstore.md"><code>IJBSplitStore</code></a><code>splitStore</code></li></ul>                                    |
+| [**`splitsStore`**](broken-reference/)                                                                     | <p><strong>Traits</strong></p><ul><li><code>immutable</code></li></ul><p><strong>Returns</strong></p><ul><li><a href="../../../interfaces/ijbsplitsstore.md"><code>IJBSplitStore</code></a><code>splitStore</code></li></ul>                                    |
 | [**`overflowAllowanceOf`**](properties/overflowallowanceof.md)                                             | <p><strong>Params</strong></p><ul><li><code>uint256 _projectId</code></li><li><code>uint256 _configuration</code></li><li><code>IJBTerminal _terminal</code></li></ul><p><strong>Returns</strong></p><ul><li><code>uint256 overflowAllowanceOf</code></li></ul> |
 | [**`fee`**](properties/fee.md)                                                                             | <p><strong>Returns</strong></p><ul><li><code>uint256 fee</code></li></ul>                                                                                                                                                                                       |
 
