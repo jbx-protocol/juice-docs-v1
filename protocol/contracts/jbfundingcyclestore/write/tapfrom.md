@@ -25,13 +25,16 @@ function tapFrom(uint256 _projectId, uint256 _amount)
 * Through the [`onlyController`](../../jbcontrollerutility/modifiers/onlycontroller.md) modifier, the function can only be accessed by the controller of the `_projectId`.
 * The function overrides a function definition from the `IJBFundingCycleStore` interface.
 * Returns the [`JBFundingCycle`](../../../data-structures/jbfundingcycle.md) that was tapped.
-*   Check that the amount is positive.
+
+
+
+1.   Check that the amount is positive.
 
     ```solidity
     // Amount must be positive.
     require(_amount > 0, '0x1a: INSUFFICIENT_FUNDS');
     ```
-*   Find the ID of the funding cycle that should be tapped.
+2.   Find the ID of the funding cycle that should be tapped.
 
     ```solidity
     // Get a reference to the funding cycle being tapped.
@@ -41,7 +44,7 @@ function tapFrom(uint256 _projectId, uint256 _amount)
     _Internal references:_
 
     * [`_tappableOf`](\_tappableof.md)
-*   Get a reference to the new amount that will be tapped. This is the sum of the provided `_amount` with what has already been tapped for the funding cycle.
+3.   Get a reference to the new amount that will be tapped. This is the sum of the provided `_amount` with what has already been tapped for the funding cycle.
 
     ```solidity
     // The new amount that has been tapped.
@@ -51,7 +54,7 @@ function tapFrom(uint256 _projectId, uint256 _amount)
     _Internal references:_
 
     * [`_tappedAmountOf`](../properties/\_tappedamountof.md)
-*   The amount being tapped plus what's already been tapped must be within the configured target for the funding cycle.
+4.   The amount being tapped plus what's already been tapped must be within the configured target for the funding cycle.
 
     ```solidity
     // Amount must be within what is still tappable.
