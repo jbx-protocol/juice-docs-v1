@@ -9,7 +9,7 @@ Interface: [`IJBTokenStore`](../../../interfaces/ijbtokenstore.md)
 **Burns tokens.**
 
 _Only a project's current controller can burn its tokens._
-## Definition 
+# Definition 
 
 ```solidity
 function burnFrom(
@@ -30,7 +30,7 @@ function burnFrom(
 * The function returns nothing.
 
 
-## Body 
+# Body 
 
 1. Get a reference to the project's token.
 
