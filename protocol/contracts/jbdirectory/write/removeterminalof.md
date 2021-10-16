@@ -40,7 +40,7 @@ function removeTerminalOf(uint256 _projectId, IJBTerminal _terminal)
 
    * [`_terminalsOf`](../properties/_terminalsof.md)
 
-2. Delete all terminals from storage. All terminals except the one being deleted will be repupulated. 
+2. Delete all terminals from storage. All terminals except the one being removed will later be repupulated. 
 
    ```solidity
    // Delete the stored terminals for the project.
@@ -51,7 +51,7 @@ function removeTerminalOf(uint256 _projectId, IJBTerminal _terminal)
 
    * [`_terminalsOf`](../properties/_terminalsof.md)
 
-3. Loop through the terminals, adding all terminals that aren't the one being deleted back into storage.
+3. Loop through the terminals, adding all terminals that aren't the one being removed back into storage.
 
    ```solidity
    // Repopulate the stored terminals for the project, omitting the one being deleted.
