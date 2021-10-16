@@ -1,5 +1,9 @@
 # setControllerOf
 
+Contract:[`JBDirectory`](../)​‌
+
+Interface: `IJBDirectory`
+
 {% tabs %}
 {% tab title="Step by step" %}
 
