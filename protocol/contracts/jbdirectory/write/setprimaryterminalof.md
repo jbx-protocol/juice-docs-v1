@@ -22,12 +22,9 @@ function setPrimaryTerminalOf(uint256 _projectId, IJBTerminal _terminal)
 ```
 
 * Arguments:
-  * `_holder` is the address address that owns the tokens being burned.
-  * `_projectId` is the ID of the project to which the burned tokens belong.
-  * `_amount` is the amount of tokens to burn.
-  * `_preferClaimedTokens` is a flag indicating if there's a preference to burn tokens that have been converted to ERC-20s.
-* Through the [`onlyController`](../../jbcontrollerutility/modifiers/onlycontroller.md) modifier, the function can only be accessed by the controller of the `_projectId`.
-* The function overrides a function definition from the `IJBTokenStore` interface.
+  * `_projectId` is the ID of the project for which a primary token is being set.
+  * `_terminal` is the terminal to make primary.
+* The function overrides a function definition from the `IJBDirectory` interface.
 * The function returns nothing.
 {% endtab %}
 
