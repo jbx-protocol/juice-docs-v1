@@ -1,2 +1,65 @@
-# setTerminalOf
+# setControllerOf
 
+{% tabs %}
+{% tab title="Step by step" %}
+
+{% endtab %}
+
+{% tab title="Code" %}
+```solidity
+/**
+  @notice
+  Update the controller that manages how terminals interact with tokens and funding cycles.
+
+  @dev 
+  A controller cant be set if:
+    - case 1: the project owner or an operator is changing the controller.
+    - case 2: the controller hasn't been set yet and the message sender is the controller being set.
+    - case 3: the current controller is setting a new controller.
+
+  @param _projectId The ID of the project to set a new controller for.
+  @param _controller The new controller to set.
+*/
+function setControllerOf(uint256 _projectId, IJBController _controller)
+  external
+  override
+  requirePermissionAllowingOverride(
+    projects.ownerOf(_projectId),
+    _projectId,
+    JBOperations.SET_CONTROLLER,
+    (address(controllerOf[_projectId]) == address(0) && msg.sender == address(_controller)) ||
+      address(controllerOf[_projectId]) == msg.sender
+  )
+{
+  // Get a reference to the current controller being used.
+  IJBController _currentController = controllerOf[_projectId];
+
+  // If the controller is already set, nothing to do.
+  if (_currentController == _controller) return;
+
+  // The project must exist.
+  require(projects.count() >= _projectId, 'NOT_FOUND');
+
+  // Can't set the zero address.
+  require(_controller != IJBController(address(0)), 'ZERO_ADDRESS');
+
+  // Set the new controller.
+  controllerOf[_projectId] = _controller;
+
+  emit SetController(_projectId, _controller, msg.sender);
+}
+```
+{% endtab %}
+
+{% tab title="Errors" %}
+
+{% endtab %}
+
+{% tab title="Events" %}
+
+{% endtab %}
+
+{% tab title="Bug bounty" %}
+
+{% endtab %}
+{% endtabs %}

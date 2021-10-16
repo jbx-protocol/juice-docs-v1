@@ -1,2 +1,52 @@
 # removeTerminalOf
 
+{% tabs %}
+{% tab title="Step by step" %}
+
+{% endtab %}
+
+{% tab title="Code" %}
+```solidity
+/** 
+  @notice 
+  Removed a terminal from a project's list of terminals.
+
+  @dev
+  Only a project owner or an operator can remove one of its terminals. 
+
+  @param _projectId The ID of the project having a terminal removed.
+  @param _terminal The terminal to remove.
+*/
+function removeTerminalOf(uint256 _projectId, IJBTerminal _terminal)
+  external
+  override
+  requirePermission(projects.ownerOf(_projectId), _projectId, JBOperations.REMOVE_TERMINAL)
+{
+  // Get a reference to the terminals of the project.
+  IJBTerminal[] memory _terminals = _terminalsOf[_projectId];
+
+  // Delete the stored terminals for the project.
+  delete _terminalsOf[_projectId];
+
+  // Repopulate the stored terminals for the project, omitting the one being deleted.
+  for (uint256 _i; _i < _terminals.length; _i++)
+    // Don't include the terminal being deleted.
+    if (_terminals[_i] != _terminal) _terminalsOf[_projectId].push(_terminals[_i]);
+
+  // If the terminal that is being removed is the primary terminal for the token, delete it from being primary terminal.
+  if (_primaryTerminalOf[_projectId][_terminal.vault().token()] == _terminal)
+    delete _primaryTerminalOf[_projectId][_terminal.vault().token()];
+
+  emit RemoveTerminal(_projectId, _terminal, msg.sender);
+}
+```
+{% endtab %}
+
+{% tab title="Events" %}
+
+{% endtab %}
+
+{% tab title="Bug bounty" %}
+
+{% endtab %}
+{% endtabs %}
