@@ -59,7 +59,9 @@ function setControllerOf(uint256 _projectId, IJBController _controller)
 {% endtab %}
 
 {% tab title="Events" %}
-
+| Name                            | Data                                                                                                                                                                                                                                                                          |
+| ------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [**`Burn`**](../events/burn.md) | <ul><li><code>address indexed holder</code></li><li><code>uint256 indexed projectId</code></li><li><code>uint256 amount</code></li><li><code>uint256 unclaimedTokenBalance</code></li><li><code>bool preferClaimedTokens</code></li><li><code>address caller</code></li></ul> |
 {% endtab %}
 
 {% tab title="Bug bounty" %}
