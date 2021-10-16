@@ -25,6 +25,65 @@ function removeTerminalOf(uint256 _projectId, IJBTerminal _terminal)
 * Through the [`requirePermission`](../../or-abstract/jboperatable/modifiers/requirepermission.md) modifier, the function is only accessible by the project's owner, or from an operator that has been given the `JBOperations.REMOVE_TERMINAL`permission by the project owner for the provided `_projectId`.
 * The function overrides a function definition from the `IJBDirectory` interface.
 * The function returns nothing.
+
+
+
+1. Get a reference to the project's terminals. 
+
+   ```solidity
+   // Get a reference to the terminals of the project.
+   IJBTerminal[] memory _terminals = _terminalsOf[_projectId];
+   ```
+
+   Internal references:
+
+   * [`_terminalsOf`](../read/_terminalsof.md)
+
+2. Delete all terminals from storage. All terminals except the one being deleted will be repupulated. 
+
+   ```solidity
+   // Delete the stored terminals for the project.
+   delete _terminalsOf[_projectId];
+   ```
+
+   Internal references:
+
+   * [`_terminalsOf`](../read/_terminalsof.md)
+
+3. Loop through the terminals, adding all terminals that aren't the one being deleted back into storage.
+
+   ```solidity
+   // Repopulate the stored terminals for the project, omitting the one being deleted.
+   for (uint256 _i; _i < _terminals.length; _i++)
+     // Don't include the terminal being deleted.
+     if (_terminals[_i] != _terminal) _terminalsOf[_projectId].push(_terminals[_i]);
+   ```
+
+   Internal references:
+
+   * [`_terminalsOf`](../read/_terminalsof.md)
+
+4. If the terminal being removed is set to be the primary terminal for its vault's token, delete it from being the primary terminal. 
+
+   ```solidity
+   // If the terminal that is being removed is the primary terminal for the token, delete it from being primary terminal.
+   if (_primaryTerminalOf[_projectId][_terminal.vault().token()] == _terminal)
+     delete _primaryTerminalOf[_projectId][_terminal.vault().token()];
+   ```
+
+   Internal references:
+
+   * [`_primaryTerminalOf`](../read/_primaryterminalof.md)
+
+4. Emit a `RemoveTerminal` event with the all relevant parameters.
+
+```solidity
+emit RemoveTerminal(_projectId, _terminal, msg.sender);
+```
+
+_Event references:_
+
+* [`RemoveTerminal`](../events/removeterminal.md)
 {% endtab %}
 
 {% tab title="Code" %}

@@ -41,7 +41,7 @@ function primaryTerminalOf(uint256 _projectId, address _token)
 2. Loop through each of the project's terminals looking for one that has a vault that uses the same token as the one specified. If one is found, return it. 
 
    ```solidity
-   // return the first terminal which accepts the specified token.
+   // Return the first terminal which accepts the specified token.
    for (uint256 _i; _i < _terminalsOf[_projectId].length; _i++) {
      IJBTerminal _terminal = _terminalsOf[_projectId][_i];
      if (_terminal.vault().token() == _token) return _terminal;
@@ -84,7 +84,7 @@ function primaryTerminalOf(uint256 _projectId, address _token)
   if (_primaryTerminalOf[_projectId][_token] != IJBTerminal(address(0)))
     return _primaryTerminalOf[_projectId][_token];
 
-  // return the first terminal which accepts the specified token.
+  // Return the first terminal which accepts the specified token.
   for (uint256 _i; _i < _terminalsOf[_projectId].length; _i++) {
     IJBTerminal _terminal = _terminalsOf[_projectId][_i];
     if (_terminal.vault().token() == _token) return _terminal;

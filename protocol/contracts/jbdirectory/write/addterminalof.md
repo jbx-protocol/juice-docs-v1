@@ -30,6 +30,47 @@ function addTerminalOf(uint256 _projectId, IJBTerminal _terminal)
 * Through the [`requirePermission`](../../or-abstract/jboperatable/modifiers/requirepermission.md) modifier, the function is only accessible by the project's owner, or from an operator that has been given the `JBOperations.ADD_TERMINAL`permission by the project owner for the provided `_projectId`.
 * The function overrides a function definition from the `IJBDirectory` interface.
 * The function returns nothing.
+
+
+  
+1. Make sure the provided terminal isn't the zero address. 
+
+   ```solidity
+   // Can't set the zero address.
+   require(_terminal != IJBTerminal(address(0)), '0x2d: ZERO_ADDRESS');
+   ```
+
+2. If the terminal is already in the project's list of terminals, there's nothing left to do. 
+
+   ```solidity
+   // If the terminal is already in the project's list of terminals, return.
+   if (isTerminalOf(_projectId, _terminal)) return;
+   ```
+
+   Internal references:
+
+   * [`isTerminalOf`](../read/isterminalof.md)
+
+3. Add the terminal to the project's list of terminals. 
+
+   ```solidity
+   // Set the new terminal.
+   _terminalsOf[_projectId].push(_terminal);
+   ```
+
+   Internal references:
+
+   * [`_terminalsOf`](../read/_terminalsof.md)
+
+4. Emit a `AddTerminal` event with the all relevant parameters.
+
+```solidity
+emit AddTerminal(_projectId, _terminal, msg.sender);
+```
+
+_Event references:_
+
+* [`AddTerminal`](../events/addterminal.md)
 {% endtab %}
 
 {% tab title="Code" %}
@@ -55,9 +96,9 @@ function addTerminalOf(uint256 _projectId, IJBTerminal _terminal)
   )
 {
   // Can't set the zero address.
-  require(_terminal != IJBTerminal(address(0)), 'ZERO_ADDRESS');
+  require(_terminal != IJBTerminal(address(0)), '0x2d: ZERO_ADDRESS');
 
-  // If the terminal is already set, nothing to do.
+  // If the terminal is already in the project's list of terminals, return.
   if (isTerminalOf(_projectId, _terminal)) return;
 
   // Set the new terminal.
