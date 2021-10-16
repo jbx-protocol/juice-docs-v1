@@ -38,7 +38,7 @@ function removeTerminalOf(uint256 _projectId, IJBTerminal _terminal)
 
    Internal references:
 
-   * [`_terminalsOf`](../read/_terminalsof.md)
+   * [`_terminalsOf`](../properties/_terminalsof.md)
 
 2. Delete all terminals from storage. All terminals except the one being deleted will be repupulated. 
 
@@ -49,7 +49,7 @@ function removeTerminalOf(uint256 _projectId, IJBTerminal _terminal)
 
    Internal references:
 
-   * [`_terminalsOf`](../read/_terminalsof.md)
+   * [`_terminalsOf`](../properties/_terminalsof.md)
 
 3. Loop through the terminals, adding all terminals that aren't the one being deleted back into storage.
 
@@ -62,7 +62,7 @@ function removeTerminalOf(uint256 _projectId, IJBTerminal _terminal)
 
    Internal references:
 
-   * [`_terminalsOf`](../read/_terminalsof.md)
+   * [`_terminalsOf`](../properties/_terminalsof.md)
 
 4. If the terminal being removed is set to be the primary terminal for its vault's token, delete it from being the primary terminal. 
 
