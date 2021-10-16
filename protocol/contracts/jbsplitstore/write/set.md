@@ -16,19 +16,19 @@ Definition:
 
 ```solidity
 function set(
-    uint256 _projectId,
-    uint256 _domain,
-    uint256 _group,
-    JBSplit[] memory _splits
+  uint256 _projectId,
+  uint256 _domain,
+  uint256 _group,
+  JBSplit[] memory _splits
 )
-    external
-    override
-    requirePermissionAllowingOverride(
-        projects.ownerOf(_projectId),
-        _projectId,
-        JBOperations.SetSplits,
-        address(directory.controllerOf(_projectId)) == msg.sender
-    ) { ... }
+  external
+  override
+  requirePermissionAllowingOverride(
+      projects.ownerOf(_projectId),
+      _projectId,
+      JBOperations.SetSplits,
+      address(directory.controllerOf(_projectId)) == msg.sender
+  ) { ... }
 ```
 
 * Arguments:
@@ -36,7 +36,7 @@ function set(
   * `_domain` is an identifier within which the splits should be considered active.
   * `_group` is an identifier between of splits being set. All splits within this `_group` must add up to within 100%.
   * `_splits` are the [`JBSplit`](../../../data-structures/jbsplit.md)s to set.
-* Through the [`requirePermissionAllowingOverride`](../../or-abstract/jboperatable/modifiers/requirepermissionallowingoverride.md) modifier, the function is only accessible by the project's owner, from an operator that has been given the `JBOperations.SetSplits` permission by the project owner for the provided `_projectId` , or from the current controller of the `_projectId`for the specified.
+* Through the [`requirePermissionAllowingOverride`](../../or-abstract/jboperatable/modifiers/requirepermissionallowingoverride.md) modifier, the function is only accessible by the project's owner, from an operator that has been given the `JBOperations.SetSplits` permission by the project owner for the provided `_projectId` , or from the current controller of the `_projectId` of the specified.
 * The function overrides a function definition from the `IJBSplitsStore` interface.
 * The function doesn't return anything.
 *   Get a reference to the current splits set for the specified `_projectId`'s `_domain`, within the specified `_group`.
