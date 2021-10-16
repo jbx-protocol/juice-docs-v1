@@ -2,13 +2,9 @@
 
 Contract:[`JBDirectory`](../)​‌
 
-Interface: `IJBDirectory`
+Interface: [`IJBDirectory`](../../../interfaces/ijbdirectory.md)
 
 {% tabs %}
-{% tab title="Step by step" %}
-
-{% endtab %}
-
 {% tab title="Code" %}
 ```solidity
 /** 
@@ -46,22 +42,22 @@ function addTerminalOf(uint256 _projectId, IJBTerminal _terminal)
 {% endtab %}
 
 {% tab title="Errors" %}
-| String                         | Description                                              |
-| ------------------------------ | -------------------------------------------------------- |
+| String                   | Description                                                 |
+| ------------------------ | ----------------------------------------------------------- |
 | **`0x2d: ZERO_ADDRESS`** | Thrown if the provided terminal to add is the zero address. |
 {% endtab %}
 
 {% tab title="Events" %}
-| Name                            | Data                                                                                                                                                                                                                                                                          |
-| ------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Name                                          | Data                                                                                                                                                                                                     |
+| --------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | [**`AddTerminal`**](../events/addterminal.md) | <ul><li><code>uint256 indexed projectId</code></li><li><a href="../../interfaces/ijbterminal.md"><code>IJBTerminal</code></a><code>indexed terminal</code></li><li><code>address caller</code></li></ul> |
 {% endtab %}
 
 {% tab title="Bug bounty" %}
-| Category | Description | Reward |
-| :--- | :--- | :--- |
-| **Optimization** | Help make this operation more efficient. | 0.5ETH |
-| **Low severity** | Identify a vulnerability in this operation that could lead to an inconvenience for a user of the protocol or for a protocol developer. | 1ETH |
-| **High severity** | Identify a vulnerability in this operation that could lead to data corruption or loss of funds. | 5+ETH |
+| Category          | Description                                                                                                                            | Reward |
+| ----------------- | -------------------------------------------------------------------------------------------------------------------------------------- | ------ |
+| **Optimization**  | Help make this operation more efficient.                                                                                               | 0.5ETH |
+| **Low severity**  | Identify a vulnerability in this operation that could lead to an inconvenience for a user of the protocol or for a protocol developer. | 1ETH   |
+| **High severity** | Identify a vulnerability in this operation that could lead to data corruption or loss of funds.                                        | 5+ETH  |
 {% endtab %}
 {% endtabs %}

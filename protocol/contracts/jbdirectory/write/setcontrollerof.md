@@ -2,13 +2,9 @@
 
 Contract:[`JBDirectory`](../)​‌
 
-Interface: `IJBDirectory`
+Interface: [`IJBDirectory`](../../../interfaces/ijbdirectory.md)
 
 {% tabs %}
-{% tab title="Step by step" %}
-
-{% endtab %}
-
 {% tab title="Code" %}
 ```solidity
 /**
@@ -56,23 +52,23 @@ function setControllerOf(uint256 _projectId, IJBController _controller)
 {% endtab %}
 
 {% tab title="Errors" %}
-| String                         | Description                                              |
-| ------------------------------ | -------------------------------------------------------- |
-| **`0x2b: NOT_FOUND`** | Thrown if the provided project doesn't yet exist. |
+| String                   | Description                                            |
+| ------------------------ | ------------------------------------------------------ |
+| **`0x2b: NOT_FOUND`**    | Thrown if the provided project doesn't yet exist.      |
 | **`0x2c: ZERO_ADDRESS`** | Thrown if the provided controller is the zero address. |
 {% endtab %}
 
 {% tab title="Events" %}
-| Name                            | Data                                                                                                                                                                                                                                                                          |
-| ------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Name                                     | Data                                                                                                                                                                                                          |
+| ---------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | [**`SetController`**](../events/burn.md) | <ul><li><code>int256 indexed projectId</code></li><li><a href="../../interfaces/ijbcontroller.md"><code>IJBController</code></a><code>indexed controller</code></li><li><code>address caller</code></li></ul> |
 {% endtab %}
 
 {% tab title="Bug bounty" %}
-| Category | Description | Reward |
-| :--- | :--- | :--- |
-| **Optimization** | Help make this operation more efficient. | 0.5ETH |
-| **Low severity** | Identify a vulnerability in this operation that could lead to an inconvenience for a user of the protocol or for a protocol developer. | 1ETH |
-| **High severity** | Identify a vulnerability in this operation that could lead to data corruption or loss of funds. | 5+ETH |
+| Category          | Description                                                                                                                            | Reward |
+| ----------------- | -------------------------------------------------------------------------------------------------------------------------------------- | ------ |
+| **Optimization**  | Help make this operation more efficient.                                                                                               | 0.5ETH |
+| **Low severity**  | Identify a vulnerability in this operation that could lead to an inconvenience for a user of the protocol or for a protocol developer. | 1ETH   |
+| **High severity** | Identify a vulnerability in this operation that could lead to data corruption or loss of funds.                                        | 5+ETH  |
 {% endtab %}
 {% endtabs %}

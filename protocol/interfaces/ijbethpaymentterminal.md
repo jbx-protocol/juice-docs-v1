@@ -3,12 +3,7 @@
 ```solidity
 interface IJBETHPaymentTerminal {
   event AddToBalance(uint256 indexed projectId, uint256 value, string memo, address caller);
-  event TransferBalance(
-    uint256 indexed projectId,
-    IJBTerminal indexed to,
-    uint256 amount,
-    address caller
-  );
+  event Migrate(uint256 indexed projectId, IJBTerminal indexed to, uint256 amount, address caller);
   event DistributePayouts(
     uint256 indexed fundingCycleId,
     uint256 indexed projectId,
@@ -31,7 +26,7 @@ interface IJBETHPaymentTerminal {
     uint256 transferAmount,
     address caller
   );
-
+  event ProcessFees(uint256 indexed projectId, JBFee[] fees);
   event Pay(
     uint256 indexed fundingCycleId,
     uint256 indexed projectId,
@@ -62,37 +57,13 @@ interface IJBETHPaymentTerminal {
     address caller
   );
 
-  event DelegateDidPay(IJBPayDelegate indexed delegate, JBDidPayData data);
-
-  event DelegateDidRedeem(IJBRedemptionDelegate indexed delegate, JBDidRedeemData data);
-
   function projects() external view returns (IJBProjects);
-
-  function fundingCycleStore() external view returns (IJBFundingCycleStore);
-
-  function tokenStore() external view returns (IJBTokenStore);
 
   function splitsStore() external view returns (IJBSplitsStore);
 
-  function prices() external view returns (IJBPrices);
-
   function directory() external view returns (IJBDirectory);
 
-  function balanceOf(uint256 _projectId) external view returns (uint256);
-  
-  function usedOverflowAllowanceOf(uint256 _projectId, uint256 _configuration)
-    external
-    view
-    returns (uint256);
-    
   function heldFeesOf(uint256 _projectId) external view returns (JBFee[] memory);
-
-  function currentOverflowOf(uint256 _projectId) external view returns (uint256);
-
-  function claimableOverflowOf(uint256 _projectId, uint256 _tokenCount)
-    external
-    view
-    returns (uint256);
 
   function distributePayoutsOf(
     uint256 _projectId,
