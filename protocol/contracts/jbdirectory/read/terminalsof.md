@@ -16,6 +16,18 @@ function terminalsOf(uint256 _projectId) external view override returns (IJBTerm
 * The function does not alter state on the blockchain.
 * The function overrides a function definition from the `IJBDirectory` interface.
 * The function returns an array of terminal addresses..
+
+
+
+1. This function just reads and returns the stored `_terminalsOf` the project.
+
+   ```solidity
+   return _terminalsOf[_projectId];
+   ```
+
+   Internal references:
+
+   * [`_terminalsOf`](../properties/_terminalsof.md)
 {% endtab %}
 
 {% tab title="Code" %}

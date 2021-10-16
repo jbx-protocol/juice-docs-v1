@@ -20,7 +20,24 @@ function isTerminalOf(uint256 _projectId, IJBTerminal _terminal)
 * The view function can be accessed externally by anyone. 
 * The function does not alter state on the blockchain.
 * The function overrides a function definition from the `IJBDirectory` interface.
-* The function returns a flag indicating whether or not the specified terminal is a terminal of the specified project..
+* The function returns a flag indicating whether or not the specified terminal is a terminal of the specified project.
+
+1. Loop through each of the project's terminals looking for the one specified. If it's found, return true.
+
+   ```solidity
+   for (uint256 _i; _i < _terminalsOf[_projectId].length; _i++)
+     if (_terminalsOf[_projectId][_i] == _terminal) return true;
+   ```
+
+   Internal references:
+
+   * [`_terminalsOf`](../properties/_terminalsof.md)
+
+2. If a terminal is not found, return false.
+
+   ```solidity
+   return false;
+   ```
 {% endtab %}
 
 {% tab title="Code" %}

@@ -21,6 +21,23 @@ function isTerminalDelegateOf(uint256 _projectId, address _contract)
 * The function does not alter state on the blockchain.
 * The function overrides a function definition from the `IJBDirectory` interface.
 * The function returns a flag indicating whether or not the specified terminal is a terminal of the specified project.
+
+1. Loop through each of the project's terminals looking for one with the provided contract as its delegate. If it's found, return true.
+
+   ```solidity
+   for (uint256 _i; _i < _terminalsOf[_projectId].length; _i++)
+     if (address(_terminalsOf[_projectId][_i].delegate()) == _contract) return true;
+   ```
+
+   Internal references:
+
+   * [`_terminalsOf`](../properties/_terminalsof.md)
+
+2. If a terminal with a matching delegate is not found, return false.
+
+   ```solidity
+   return false;
+   ```
 {% endtab %}
 
 {% tab title="Code" %}
