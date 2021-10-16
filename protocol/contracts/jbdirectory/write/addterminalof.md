@@ -64,13 +64,13 @@ function addTerminalOf(uint256 _projectId, IJBTerminal _terminal)
 
 4. Emit a `AddTerminal` event with the all relevant parameters.
 
-```solidity
-emit AddTerminal(_projectId, _terminal, msg.sender);
-```
+   ```solidity
+   emit AddTerminal(_projectId, _terminal, msg.sender);
+   ```
 
-_Event references:_
+   _Event references:_
 
-* [`AddTerminal`](../events/addterminal.md)
+   [`AddTerminal`](../events/addterminal.md)
 {% endtab %}
 
 {% tab title="Code" %}

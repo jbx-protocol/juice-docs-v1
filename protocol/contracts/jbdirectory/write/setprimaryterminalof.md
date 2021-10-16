@@ -27,6 +27,36 @@ function setPrimaryTerminalOf(uint256 _projectId, IJBTerminal _terminal)
 * Through the [`requirePermission`](../../or-abstract/jboperatable/modifiers/requirepermission.md) modifier, the function is only accessible by the project's owner, or from an operator that has been given the `JBOperations.SET_PRIMARY_TERMINAL`permission by the project owner for the provided `_projectId`.
 * The function overrides a function definition from the `IJBDirectory` interface.
 * The function returns nothing.
+
+
+  
+1. Get a reference to the token that the provided terminal's vault accepts. 
+
+   ```solidity
+   // Get a reference to the token that the terminal's vault accepts.
+   address _token = _terminal.vault().token();
+   ```
+
+2. Store the provided terminal as the `_primaryTerminalOf` the project for the token.
+
+   ```solidity
+   // Store the terminal as the primary for the particular token.
+   _primaryTerminalOf[_projectId][_token] = _terminal;
+   ```
+
+   Internal references:
+
+   * [`_primaryTerminalOf`](../read/primaryTerminalOf.md)
+
+3. Emit a `SetPrimaryTerminal` event with the all relevant parameters.
+
+   ```solidity
+   emit SetPrimaryTerminal(_projectId, _token, _terminal, msg.sender);
+   ```
+
+   _Event references:_
+
+   [`SetPrimaryTerminal`](../events/setprimaryterminalmd)
 {% endtab %}
 
 {% tab title="Code" %}

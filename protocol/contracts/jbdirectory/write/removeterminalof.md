@@ -75,15 +75,15 @@ function removeTerminalOf(uint256 _projectId, IJBTerminal _terminal)
 
    * [`_primaryTerminalOf`](../read/_primaryterminalof.md)
 
-4. Emit a `RemoveTerminal` event with the all relevant parameters.
+5. Emit a `RemoveTerminal` event with the all relevant parameters.
 
-```solidity
-emit RemoveTerminal(_projectId, _terminal, msg.sender);
-```
+   ```solidity
+   emit RemoveTerminal(_projectId, _terminal, msg.sender);
+   ```
 
-_Event references:_
+   _Event references:_
 
-* [`RemoveTerminal`](../events/removeterminal.md)
+   [`RemoveTerminal`](../events/removeterminal.md)
 {% endtab %}
 
 {% tab title="Code" %}

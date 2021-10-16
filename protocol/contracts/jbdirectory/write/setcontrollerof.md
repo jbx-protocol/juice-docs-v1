@@ -35,6 +35,64 @@ function setControllerOf(uint256 _projectId, IJBController _controller)
 * Through the [`requirePermissionAllowingOverride`](../../or-abstract/jboperatable/modifiers/requirepermissionallowingoverride.md) modifier, the function is only accessible by the project's owner, from an operator that has been given the `JBOperations.SET_CONTROLLER` permission by the project owner for the provided `_projectId` , from any address if the project doesn't yet have a controller set, or from the project's current controller. 
 * The function overrides a function definition from the `IJBDirectory` interface.
 * The function returns nothing.
+
+
+
+1. Get a reference to the current controller the project is using. 
+
+   ```solidity
+   // Get a reference to the current controller being used.
+   IJBController _currentController = controllerOf[_projectId];
+   ```
+
+   Internal references:
+
+   * [`controllerOf`](../read/controllerof.md)
+
+2. If the provided controller is already set, there's nothing to do.
+
+   ```solidity
+   // If the controller is already set, nothing to do.
+   if (_currentController == _controller) return;
+   ```
+
+3. Project IDs are assigned incrementally. If the provided `_projectId` is greater than the number of projects, it must not be a valid project ID. 
+
+   ```solidity
+   // The project must exist.
+   require(projects.count() >= _projectId, '0x2b: NOT_FOUND');
+   ```
+
+   Internal references:
+
+   * [`projects`](../read/projects.md)
+
+4. Make sure the provided controller isn't the zero address. 
+
+   ```solidity
+   // Can't set the zero address.
+   require(_controller != IJBController(address(0)), '0x2c: ZERO_ADDRESS');
+   ```
+
+5. Store the provided controller as the `controllerOf` the project.
+   ```solidity
+   // Set the new controller.
+   controllerOf[_projectId] = _controller;
+   ```
+
+   Internal references:
+
+   * [`controllerOf`](../read/controllerof.md)
+
+5. Emit a `SetController` event with the all relevant parameters.
+
+   ```solidity
+   emit SetController(_projectId, _controller, msg.sender);
+   ```
+
+   _Event references:_
+
+   [`SetController`](../events/setcontroller.md)
 {% endtab %}
 
 {% tab title="Code" %}
@@ -70,10 +128,10 @@ function setControllerOf(uint256 _projectId, IJBController _controller)
   if (_currentController == _controller) return;
 
   // The project must exist.
-  require(projects.count() >= _projectId, 'NOT_FOUND');
+  require(projects.count() >= _projectId, '0x2b: NOT_FOUND');
 
   // Can't set the zero address.
-  require(_controller != IJBController(address(0)), 'ZERO_ADDRESS');
+  require(_controller != IJBController(address(0)), '0x2c: ZERO_ADDRESS');
 
   // Set the new controller.
   controllerOf[_projectId] = _controller;
