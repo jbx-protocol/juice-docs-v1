@@ -4,7 +4,7 @@ Contract:[`JBFundingCycleStore`](../)​
 
 **Stores the amount that has been tapped within each funding cycle.**
 
-Definition:
+# Definition
 
 ```solidity
 /** 

@@ -10,7 +10,7 @@ _A permanent funding cycle is one with a \`cycleLimit\` of 0 is, or one that isn
 
 _If the provided cycle is permanent, it will be returned._
 
-Definition:
+# Definition
 
 ```solidity
 function _latestPermanentCycleFrom(JBFundingCycle memory _fundingCycle)
@@ -24,6 +24,8 @@ function _latestPermanentCycleFrom(JBFundingCycle memory _fundingCycle)
 * The view function is private to this contract.
 * The function does not alter state on the blockchain.
 * The function returns the latest permanent funding cycle. If the provided cycle is permanent, it will be returned.
+
+# Body 
 
 1. If the provided `_fundingCycle` has a `cycleLimit` of 0, or if it isn't `basedOn` another funding cycle, return it.
 

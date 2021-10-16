@@ -12,7 +12,7 @@ Interface: [`IJBProjects`](../../../interfaces/ijbprojects.md)
 
 **This can be used to make sure a handle belonging to a stale project isn't lost forever.**
 
-Definition:
+# Definition
 
 ```solidity
 function challengeHandle(bytes32 _handle) external override { ... }
@@ -24,7 +24,7 @@ function challengeHandle(bytes32 _handle) external override { ... }
 * The function overrides a function definition from the `IJBProjects` interface.
 * The function doesn't return anything.
 
-
+# Body 
 
 1. Get a reference to the project to which the handle being challenged belongs.
 

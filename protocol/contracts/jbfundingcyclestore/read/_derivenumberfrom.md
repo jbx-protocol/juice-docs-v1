@@ -6,7 +6,7 @@ Contract:[`JBFundingCycleStore`](../)​
 {% tab title="Step by step" %}
 **The number of the next funding cycle given the specified funding cycle.**
 
-Definition:
+# Definition
 
 ```solidity
 function _deriveNumberFrom(JBFundingCycle memory _baseFundingCycle, uint256 _start) 
@@ -23,6 +23,7 @@ function _deriveNumberFrom(JBFundingCycle memory _baseFundingCycle, uint256 _sta
 * The function returns the funding cycle number.
 
 
+# Body 
 
 1.  If the `_baseFundingCycle` doesn't have a duration, the next number is 1 more than the base's number. 
 

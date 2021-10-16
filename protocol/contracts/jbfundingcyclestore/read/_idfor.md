@@ -6,7 +6,7 @@ Contract:[`JBFundingCycleStore`](../)​
 {% tab title="Step by step" %}
 **Constructs a unique ID from a project ID and a number.**
 
-Definition:
+# Definition
 
 ```solidity
 function _idFor(uint256 _projectId, uint256 _number) private pure returns (uint256) { ... }
@@ -20,6 +20,7 @@ function _idFor(uint256 _projectId, uint256 _number) private pure returns (uint2
 * The function returns the ID that is unique to the provided inputs.
 
 
+# Body 
 
 1.  Return a concatenated `uint256` with the first 56 bits being the `_projectId` and the next 24 bits being the `_number`. Both of these values get packed down into these constraints anyways when they get stored, so theres no additional risk of data loss by doing this. 
 

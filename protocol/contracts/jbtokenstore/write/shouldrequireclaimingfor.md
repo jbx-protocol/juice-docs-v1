@@ -10,7 +10,7 @@ Interface: [`IJBTokenStore`](../../../interfaces/ijbtokenstore.md)
 
 _Only a token holder or an operator can transfer its unclaimed tokens_.
 
-Definition:
+# Definition
 
 ```solidity
 function shouldRequireClaimingFor(uint256 _projectId, bool _flag)
@@ -25,8 +25,7 @@ function shouldRequireClaimingFor(uint256 _projectId, bool _flag)
 * Through the [`requirePermission`](../../or-abstract/jboperatable/modifiers/requirepermission.md) modifier, the function is only accessible by the project's owner, or from an operator that has been given the `JBOperations.REQUIRE_CLAIM`permission by the project owner for the provided `_projectId`.
 * The function overrides a function definition from the `IJBTokenStore` interface.
 * The function returns nothing.
-
-
+# Body 
 
 1. Get a reference to the project's token.
 

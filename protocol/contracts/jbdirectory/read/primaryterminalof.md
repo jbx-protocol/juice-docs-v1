@@ -6,7 +6,7 @@
 
 _The zero address is returned if a terminal isn't found for the specified token._
 
-Definition:
+# Definition
 
 ```solidity
 function primaryTerminalOf(uint256 _projectId, address _token)
@@ -25,6 +25,7 @@ function primaryTerminalOf(uint256 _projectId, address _token)
 * The function returns the primary terminal for the project for the specified token..
 
 
+# Body 
 
 1. Check to see if the project has explicitly set a primary terminal for this token. If so, return it. 
 

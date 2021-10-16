@@ -8,7 +8,7 @@ Interface: `IJBFundingCycleStore`
 {% tab title="Step by step" %}
 **Get the funding cycle with the given ID.**
 
-Definition:
+# Definition
 
 ```solidity
 function get(uint256 _fundingCycleId)
@@ -26,6 +26,7 @@ function get(uint256 _fundingCycleId)
 * The function returns a [`JBFundingCycle`](../../../data-structures/jbfundingcycle.md).
 
 
+# Body 
 
 1.  Check that the provided funding cycle ID is valid.
 

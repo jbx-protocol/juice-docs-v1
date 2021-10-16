@@ -4,7 +4,7 @@
 {% tab title="Step by step" %}
 **For each project ID, the terminals that are currently managing its funds.**
 
-Definition:
+# Definition
 
 ```solidity
 function terminalsOf(uint256 _projectId) external view override returns (IJBTerminal[] memory) { ... }
@@ -18,6 +18,7 @@ function terminalsOf(uint256 _projectId) external view override returns (IJBTerm
 * The function returns an array of terminal addresses..
 
 
+# Body 
 
 1. This function just reads and returns the stored `_terminalsOf` the project.
 

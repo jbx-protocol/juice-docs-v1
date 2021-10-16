@@ -2,7 +2,7 @@
 
 {% tabs %}
 {% tab title="Step by step" %}
-The function has the following definition:
+The function has the following # Definition
 
 ```solidity
 function pay(

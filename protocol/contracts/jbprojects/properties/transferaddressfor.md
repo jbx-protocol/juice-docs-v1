@@ -6,7 +6,7 @@ Interface:`IJBProjects`
 
 **The address that can reallocate a handle that have been transferred to it.**
 
-Definition:
+# Definition
 
 ```solidity
 /** 

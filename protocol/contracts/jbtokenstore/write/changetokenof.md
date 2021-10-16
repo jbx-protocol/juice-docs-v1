@@ -10,7 +10,7 @@ Interface: [`IJBTokenStore`](../../../interfaces/ijbtokenstore.md)
 
 _Only a project owner or operator can change its token._
 
-Definition:
+# Definition
 
 ```solidity
 function changeTokenOf(
@@ -31,7 +31,7 @@ function changeTokenOf(
 * The function overrides a function definition from the `IJBTokenStore` interface.
 * The function returns nothing.
 
-
+# Body 
 
 1. Get a reference to the project's current token.
 

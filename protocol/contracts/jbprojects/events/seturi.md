@@ -4,7 +4,7 @@ Emitted from:
 
 * [`setUriOf`](../write/seturiof.md)
 
-Definition:
+# Definition
 
 ```solidity
 event SetUri(uint256 indexed projectId, string uri, address caller);

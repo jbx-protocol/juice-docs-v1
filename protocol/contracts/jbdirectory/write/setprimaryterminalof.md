@@ -12,7 +12,7 @@ Interface: [`IJBDirectory`](../../../interfaces/ijbdirectory.md)
 
 _The terminal will be set as the primary for the token that its vault accepts._
 
-Definition:
+# Definition
 
 ```solidity
 function setPrimaryTerminalOf(uint256 _projectId, IJBTerminal _terminal)
@@ -29,6 +29,7 @@ function setPrimaryTerminalOf(uint256 _projectId, IJBTerminal _terminal)
 * The function returns nothing.
 
 
+# Body 
   
 1. Get a reference to the token that the provided terminal's vault accepts. 
 

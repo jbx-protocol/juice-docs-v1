@@ -4,7 +4,7 @@ Emitted from:
 
 * [`issueFor`](../write/issuefor.md)
 
-Definition:
+# Definition
 
 ```solidity
 event Issue(

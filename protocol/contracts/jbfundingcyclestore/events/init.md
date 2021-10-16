@@ -5,7 +5,7 @@ Emitted from:
 * [`configureFor`](../../jbsplitstore/write/set.md)
 * [`tapFrom`](../write/tapfrom.md)
 
-Definition:
+# Definition
 
 ```solidity
 event Init(

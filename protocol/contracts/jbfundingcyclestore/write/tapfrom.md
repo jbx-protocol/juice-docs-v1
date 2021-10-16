@@ -10,7 +10,7 @@ Interface: `IJBFundingCycleStore`
 
 _Only a project's current controller can tap funds for its funding cycles._
 
-Definition:
+# Definition
 
 ```solidity
 function tapFrom(uint256 _projectId, uint256 _amount)
@@ -27,6 +27,7 @@ function tapFrom(uint256 _projectId, uint256 _amount)
 * Returns the [`JBFundingCycle`](../../../data-structures/jbfundingcycle.md) that was tapped.
 
 
+# Body 
 
 1. Check that the amount is positive.
 

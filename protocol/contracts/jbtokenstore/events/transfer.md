@@ -4,7 +4,7 @@ Emitted from:
 
 * [`transferTo`](../write/transferto.md)
 
-Definition:
+# Definition
 
 ```solidity
 event Transfer(

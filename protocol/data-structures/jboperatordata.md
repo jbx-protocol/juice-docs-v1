@@ -6,7 +6,7 @@ Used in:
   * [`setOperator`](../contracts/jboperatorstore/write/setoperator.md)
   * [`setOperators`](../contracts/jboperatorstore/write/setoperators.md)
 
-Definition:
+# Definition
 
 ```solidity
 struct JBOperatorData {

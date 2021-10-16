@@ -8,7 +8,7 @@ Interface:`IJBProjects`
 
 _This is optional for each project._
 
-Definition:
+# Definition
 
 ```solidity
 /** 

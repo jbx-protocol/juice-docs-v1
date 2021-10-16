@@ -6,7 +6,7 @@ Contract:[`JBFundingCycleStore`](../)​
 {% tab title="Step by step" %}
 **The currency ballot state of the project.**
 
-Definition:
+# Definition
 
 ```solidity
 function _getStructFor(uint256 _id) private view returns (JBFundingCycle memory fundingCycle) { ... }
@@ -19,6 +19,7 @@ function _getStructFor(uint256 _id) private view returns (JBFundingCycle memory 
 * The function returns a [`JBFundingCycle`](../../../data-structures/jbfundingcycle.md) stored in the `fundingCycle` reference.
 
 
+# Body 
 
 1.  If the `_id` provided is 0, return an empty funding cycle.
 

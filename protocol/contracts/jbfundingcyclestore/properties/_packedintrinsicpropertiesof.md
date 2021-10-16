@@ -4,7 +4,7 @@ Contract:[`JBFundingCycleStore`](../)​‌
 
 **Stores the properties added by the mechanism to manage and schedule each funding cycle, packed into one storage slot.**
 
-Definition:
+# Definition
 
 ```solidity
 /** 

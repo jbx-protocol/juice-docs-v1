@@ -6,7 +6,7 @@ Contract:[`JBFundingCycleStore`](../)​
 {% tab title="Step by step" %}
 **The date that is the nearest multiple of the specified funding cycle's duration from its end.**
 
-Definition:
+# Definition
 
 ```solidity
 function _deriveStartFrom(
@@ -23,6 +23,7 @@ function _deriveStartFrom(
 * The function returns a timestamp in seconds.
 
 
+# Body 
 
 1.  A funding cycle with a duration of 0 can start as soon as possible. 
 

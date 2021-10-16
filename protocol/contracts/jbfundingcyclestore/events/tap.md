@@ -4,7 +4,7 @@ Emitted from:
 
 * [`tapFrom`](../write/tapfrom.md)
 
-Definition:
+# Definition
 
 ```solidity
 event Tap(

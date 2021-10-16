@@ -10,7 +10,7 @@ Interface: [`IJBTokenStore`](../../../interfaces/ijbtokenstore.md)
 
 _Only a project's current controller can mint its tokens._
 
-Definition:
+# Definition
 
 ```solidity
 function mintFor(
@@ -30,7 +30,7 @@ function mintFor(
 * The function overrides a function definition from the `IJBTokenStore` interface.
 * The function returns nothing.
 
-
+# Body 
 
 1. Make sure a positive amount was specified.
 
@@ -76,7 +76,7 @@ function mintFor(
 
    * [`unclaimedBalanceOf`](../properties/unclaimedbalanceof.md)
    * [`unclaimedTotalSupplyOf`](../properties/unclaimedtotalsupplyof.md)
-*  Emit a `Mint` event with the all relevant parameters.
+5. Emit a `Mint` event with the all relevant parameters.
 
    ```solidity
    emit Mint(_holder, _projectId, _amount, _shouldClaimTokens, _preferClaimedTokens, msg.sender);

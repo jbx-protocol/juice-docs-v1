@@ -6,7 +6,7 @@ Interface:** **`IJBPrices`
 
 **The number to multiply each price feed by to get to the target decimals.**
 
-Definition:
+# Definition
 
 ```solidity
 /** 

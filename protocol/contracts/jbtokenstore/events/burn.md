@@ -4,7 +4,7 @@ Emitted from:
 
 * [`burnFrom`](../write/burnfrom.md)
 
-Definition:
+# Definition
 
 ```solidity
 event Burn(

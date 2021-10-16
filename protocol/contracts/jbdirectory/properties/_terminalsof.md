@@ -4,7 +4,7 @@ Contract:[`JBDirectory`](../)‌
 
 **The Projects contract which mints ERC-721's that represent project ownership and transfers.**
 
-Definition:
+# Definition
 
 ```solidity
 /** 

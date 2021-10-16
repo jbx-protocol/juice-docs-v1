@@ -10,7 +10,7 @@ Interface: [`IJBDirectory`](../../../interfaces/ijbdirectory.md)
 
 _Only a project owner or an operator can remove one of its terminals._
 
-Definition:
+# Definition
 
 ```solidity
 function removeTerminalOf(uint256 _projectId, IJBTerminal _terminal)
@@ -27,6 +27,7 @@ function removeTerminalOf(uint256 _projectId, IJBTerminal _terminal)
 * The function returns nothing.
 
 
+# Body 
 
 1. Get a reference to the project's terminals. 
 

@@ -6,7 +6,7 @@ Contract:[`JBFundingCycleStore`](../)​
 {% tab title="Step by step" %}
 **The number of the next funding cycle given the specified funding cycle.**
 
-Definition:
+# Definition
 
 ```solidity
 function _deriveCycleLimitFrom(JBFundingCycle memory _fundingCycle, uint256 _start)
@@ -21,6 +21,8 @@ function _deriveCycleLimitFrom(JBFundingCycle memory _fundingCycle, uint256 _sta
 * The view function is private to this contract.
 * The function does not alter state on the blockchain.
 * The function returns the cycle limit to use.
+
+# Body 
 
 1. There's no longer a cycle limit if the provided cycle has a limit of 1, or if it has no duration.
 

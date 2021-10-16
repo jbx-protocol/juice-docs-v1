@@ -6,7 +6,7 @@ Contract:[`JBFundingCycleStore`](../)​‌
 
 _The cycle limit is a property within funding cycle configurations._
 
-Definition:
+# Definition
 
 ```solidity
 /** 

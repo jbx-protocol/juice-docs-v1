@@ -10,7 +10,7 @@ Interface: [`IJBTokenStore`](../../../interfaces/ijbtokenstore.md)
 
 _Anyone can claim tokens on behalf of a token owner._
 
-Definition:
+# Definition
 
 ```solidity
 function claimFor(
@@ -28,7 +28,7 @@ function claimFor(
 * The function overrides a function definition from the `IJBTokenStore` interface.
 * The function returns nothing.
 
-
+# Body 
 
 1. Get a reference to the project's token.
 
