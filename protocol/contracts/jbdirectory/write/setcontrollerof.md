@@ -92,7 +92,7 @@ function setControllerOf(uint256 _projectId, IJBController _controller)
 
    _Event references:_
 
-   [`SetController`](../events/setcontroller.md)
+   *  [`SetController`](../events/setcontroller.md)
 {% endtab %}
 
 {% tab title="Code" %}

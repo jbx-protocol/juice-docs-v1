@@ -83,7 +83,7 @@ function removeTerminalOf(uint256 _projectId, IJBTerminal _terminal)
 
    _Event references:_
 
-   [`RemoveTerminal`](../events/removeterminal.md)
+   *  [`RemoveTerminal`](../events/removeterminal.md)
 {% endtab %}
 
 {% tab title="Code" %}

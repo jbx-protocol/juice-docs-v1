@@ -70,7 +70,7 @@ function addTerminalOf(uint256 _projectId, IJBTerminal _terminal)
 
    _Event references:_
 
-   [`AddTerminal`](../events/addterminal.md)
+   *  [`AddTerminal`](../events/addterminal.md)
 {% endtab %}
 
 {% tab title="Code" %}

@@ -31,43 +31,44 @@ function configureFor(
 * Through the [`onlyController`](../../jbcontrollerutility/modifiers/onlycontroller.md) modifier, the function can only be accessed by the controller of the `_projectId`.
 * The function overrides a function definition from the `IJBFundingCycleStore` interface.
 * Returns the [`JBFundingCycle`](../../../data-structures/jbfundingcycle.md) that was configured.
-*   Make sure the `_data.duration` fits in a `uint16`.
+
+1.   Make sure the `_data.duration` fits in a `uint16`.
 
     ```solidity
     // Duration must fit in a uint16.
     require(_data.duration <= type(uint16).max, '0x15: BAD_DURATION');
     ```
-*   Make sure the `_data.discountRate` is at most 201.
+2.   Make sure the `_data.discountRate` is at most 201.
 
     ```solidity
     // Discount rate token must be less than or equal to 100%. A value of 10001 means non-recurring.
     require(_data.discountRate <= 10001, '0x16: BAD_DISCOUNT_RATE');
     ```
-*   Make sure the `_data.currency` fits in a `uint8`.
+3.   Make sure the `_data.currency` fits in a `uint8`.
 
     ```solidity
     // Currency must fit into a uint8.
     require(_data.currency <= type(uint8).max, '0x17: BAD_CURRENCY');
     ```
-*   Make sure the `_data.weight` fits in a `uint80`.
+4.   Make sure the `_data.weight` fits in a `uint80`.
 
     ```solidity
     // Weight must fit into a uint8.
     require(_data.weight <= type(uint80).max, '0x18: BAD_WEIGHT');
     ```
-*   Make sure the provided `_fee` is at most 200.
+5.   Make sure the provided `_fee` is at most 200.
 
     ```solidity
     // Fee must be less than or equal to 100%.
     require(_fee <= 200, '0x19: BAD_FEE');
     ```
-*   Get a reference to the time at which the configuration is occurring.
+6.   Get a reference to the time at which the configuration is occurring.
 
     ```solidity
     // Set the configuration timestamp is now.
     uint256 _configured = block.timestamp;
     ```
-*   Find the ID of the funding cycle that should be configured.
+7.   Find the ID of the funding cycle that should be configured.
 
     ```solidity
     // Gets the ID of the funding cycle to reconfigure.
@@ -82,7 +83,7 @@ function configureFor(
     _Internal references:_
 
     * [`_configurableOf`](\_configurableof.md)
-*   Store all of the configuration properties provided onto the `_fundingCycleId`. These properties can all be packed into one `uint256` storage slot.
+8.   Store all of the configuration properties provided onto the `_fundingCycleId`. These properties can all be packed into one `uint256` storage slot.
 
     ```solidity
     // Store the configuration.
@@ -100,7 +101,7 @@ function configureFor(
     _Internal references:_
 
     * [`_packAndStoreConfigurationPropertiesOf`](\_packandstoreconfigurationpropertiesof.md)
-*   Store the provided `_data.target` for the `_fundingCycleId`.
+9.   Store the provided `_data.target` for the `_fundingCycleId`.
 
     ```solidity
     // Set the target amount.
@@ -110,7 +111,7 @@ function configureFor(
     _Internal references:_
 
     * [`_targetOf`](../properties/\_targetof.md)
-*   Store the provided `_metadata` for the `_fundingCycleId`.
+10.   Store the provided `_metadata` for the `_fundingCycleId`.
 
     ```solidity
     // Set the metadata.
@@ -120,7 +121,7 @@ function configureFor(
     _Internal references:_
 
     * [`_metadataOf`](../properties/\_metadataof.md)
-*   Emit a `Configure` event with the all relevant parameters.
+11.   Emit a `Configure` event with the all relevant parameters.
 
     ```solidity
     emit Configure(_fundingCycleId, _projectId, _configured, _data, _metadata, msg.sender);
@@ -129,7 +130,7 @@ function configureFor(
     _Event references:_
 
     * [`Configure`](../events/configure.md)
-*   Return the [`JBFundingCycle`](../../../data-structures/jbfundingcycle.md) struct that carries the new configuration.
+12.   Return the [`JBFundingCycle`](../../../data-structures/jbfundingcycle.md) struct that carries the new configuration.
 
     ```solidity
     return _getStructFor(_fundingCycleId);

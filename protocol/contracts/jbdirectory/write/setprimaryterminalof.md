@@ -56,7 +56,7 @@ function setPrimaryTerminalOf(uint256 _projectId, IJBTerminal _terminal)
 
    _Event references:_
 
-   [`SetPrimaryTerminal`](../events/setprimaryterminalmd)
+   *  [`SetPrimaryTerminal`](../events/setprimaryterminalmd)
 {% endtab %}
 
 {% tab title="Code" %}
