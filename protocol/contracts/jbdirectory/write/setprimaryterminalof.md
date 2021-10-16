@@ -34,10 +34,20 @@ function setPrimaryTerminalOf(uint256 _projectId, IJBTerminal _terminal)
 ```
 {% endtab %}
 
+{% tab title="Errors" %}
+| String                         | Description                                              |
+| ------------------------------ | -------------------------------------------------------- |
+| **`0x2d: ZERO_ADDRESS`** | Thrown if the provided terminal to add is the zero address. |
+{% endtab %}
 {% tab title="Events" %}
 
 {% endtab %}
 
+{% tab title="Events" %}
+| Name                            | Data                                                                                                                                                                                                                                                                          |
+| ------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [**`Burn`**](../events/burn.md) | <ul><li><code>address indexed holder</code></li><li><code>uint256 indexed projectId</code></li><li><code>uint256 amount</code></li><li><code>uint256 unclaimedTokenBalance</code></li><li><code>bool preferClaimedTokens</code></li><li><code>address caller</code></li></ul> |
+{% endtab %}
 {% tab title="Bug bounty" %}
 | Category | Description | Reward |
 | :--- | :--- | :--- |
