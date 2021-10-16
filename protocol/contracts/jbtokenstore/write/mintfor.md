@@ -29,59 +29,62 @@ function mintFor(
 * Through the [`onlyController`](../../jbcontrollerutility/modifiers/onlycontroller.md) modifier, the function can only be accessed by the controller of the `_projectId`.
 * The function overrides a function definition from the `IJBTokenStore` interface.
 * The function returns nothing.
-*   Make sure a positive amount was specified.
 
-    ```solidity
-    // An amount must be specified.
-    require(_amount > 0, '0x22: NO_OP');
-    ```
-*   Get a reference to the project's token.
 
-    ```solidity
-    // Get a reference to the project's ERC20 tokens.
-    IJBToken _token = tokenOf[_projectId];
-    ```
 
-    _Internal references:_
+1. Make sure a positive amount was specified.
 
-    * [`tokenOf`](../properties/tokenof.md)
-*   Check if tokens should be minted using the internal accounting mechanism, or if they should be claimed into the holder's wallet. Tokens should be claimed if the project has issued tokens, and either the project forces tokens to be claimed or if `_preferClaimedTokens` flag is true. The internal accounting mechanism uses less gas, and can later be claimed into the holders wallet by anyone who submits a [`claimFor`](../claimfor/) transaction.
+   ```solidity
+   // An amount must be specified.
+   require(_amount > 0, '0x22: NO_OP');
+   ```
+2. Get a reference to the project's token.
 
-    ```solidity
-    // If there exists ERC-20 tokens and the caller prefers these claimed tokens or the project requires it.
-    bool _shouldClaimTokens = (requireClaimFor[_projectId] || _preferClaimedTokens) &&
-      _token != IJBToken(address(0));
-    ```
+   ```solidity
+   // Get a reference to the project's ERC20 tokens.
+   IJBToken _token = tokenOf[_projectId];
+   ```
 
-    _Internal references:_
+   _Internal references:_
 
-    * [`requireClaimFor`](../properties/requireclaimfor.md)
-*   If claimed tokens should be minted, mint the project's token into the holders wallet. Otherwise increment the holder's balance or the unclaimed tokens for the project, and the total supply of unclaimed tokens for the project.
+   * [`tokenOf`](../properties/tokenof.md)
+3. Check if tokens should be minted using the internal accounting mechanism, or if they should be claimed into the holder's wallet. Tokens should be claimed if the project has issued tokens, and either the project forces tokens to be claimed or if `_preferClaimedTokens` flag is true. The internal accounting mechanism uses less gas, and can later be claimed into the holders wallet by anyone who submits a [`claimFor`](../claimfor/) transaction.
 
-    ```solidity
-    if (_shouldClaimTokens) {
-      // Mint the equivalent amount of ERC20s.
-      _token.mint(_holder, _amount);
-    } else {
-      // Add to the unclaimed balance and total supply.
-      unclaimedBalanceOf[_holder][_projectId] = unclaimedBalanceOf[_holder][_projectId] + _amount;
-      unclaimedTotalSupplyOf[_projectId] = unclaimedTotalSupplyOf[_projectId] + _amount;
-    }
-    ```
+   ```solidity
+   // If there exists ERC-20 tokens and the caller prefers these claimed tokens or the project requires it.
+   bool _shouldClaimTokens = (requireClaimFor[_projectId] || _preferClaimedTokens) &&
+     _token != IJBToken(address(0));
+   ```
 
-    _Internal references:_
+   _Internal references:_
 
-    * [`unclaimedBalanceOf`](../properties/unclaimedbalanceof.md)
-    * [`unclaimedTotalSupplyOf`](../properties/unclaimedtotalsupplyof.md)
-*   Emit a `Mint` event with the all relevant parameters.
+   * [`requireClaimFor`](../properties/requireclaimfor.md)
+4. If claimed tokens should be minted, mint the project's token into the holders wallet. Otherwise increment the holder's balance or the unclaimed tokens for the project, and the total supply of unclaimed tokens for the project.
 
-    ```solidity
-    emit Mint(_holder, _projectId, _amount, _shouldClaimTokens, _preferClaimedTokens, msg.sender);
-    ```
+   ```solidity
+   if (_shouldClaimTokens) {
+     // Mint the equivalent amount of ERC20s.
+     _token.mint(_holder, _amount);
+   } else {
+     // Add to the unclaimed balance and total supply.
+     unclaimedBalanceOf[_holder][_projectId] = unclaimedBalanceOf[_holder][_projectId] + _amount;
+     unclaimedTotalSupplyOf[_projectId] = unclaimedTotalSupplyOf[_projectId] + _amount;
+   }
+   ```
 
-    _Event references:_
+   _Internal references:_
 
-    * [`Mint`](../events/mint.md)
+   * [`unclaimedBalanceOf`](../properties/unclaimedbalanceof.md)
+   * [`unclaimedTotalSupplyOf`](../properties/unclaimedtotalsupplyof.md)
+*  Emit a `Mint` event with the all relevant parameters.
+
+   ```solidity
+   emit Mint(_holder, _projectId, _amount, _shouldClaimTokens, _preferClaimedTokens, msg.sender);
+   ```
+
+   _Event references:_
+
+   * [`Mint`](../events/mint.md)
 {% endtab %}
 
 {% tab title="Code" %}

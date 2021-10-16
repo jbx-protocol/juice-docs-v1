@@ -33,53 +33,56 @@ function issueFor(
 * Through the [`requirePermission`](../../or-abstract/jboperatable/modifiers/requirepermission.md) modifier, the function is only accessible by the project's owner, or from an operator that has been given the `JBOperations.ISSUE` permission by the project owner for the provided `_projectId`.
 * The function overrides a function definition from the `IJBTokenStore` interface.
 * The function returns the address of the token that was issued.
-*   Make sure a name was provided.
 
-    ```solidity
-    // There must be a name.
-    require((bytes(_name).length > 0), '0x1f: EMPTY_NAME');
-    ```
-*   Make sure a symbol was provided.
 
-    ```solidity
-    // There must be a symbol.
-    require((bytes(_symbol).length > 0), '0x20: EMPTY_SYMBOL');
-    ```
-*   Make sure the project hasn't already issued a token.
 
-    ```solidity
-    // Only one ERC20 token can be issued.
-    require(tokenOf[_projectId] == IJBToken(address(0)), '0x21: ALREADY_ISSUED');
-    ```
+1. Make sure a name was provided.
 
-    _Internal references:_
+   ```solidity
+   // There must be a name.
+   require((bytes(_name).length > 0), '0x1f: EMPTY_NAME');
+   ```
+2. Make sure a symbol was provided.
 
-    * [`tokenOf`](../properties/tokenof.md)
-*   Deploy a new instance of a [`JBToken`](../../jbtoken.md) contract. Assign it to the return value.
+   ```solidity
+   // There must be a symbol.
+   require((bytes(_symbol).length > 0), '0x20: EMPTY_SYMBOL');
+   ```
+3. Make sure the project hasn't already issued a token.
 
-    ```solidity
-    // Deploy the token contract.
-    token = new JBToken(_name, _symbol);
-    ```
-*   Store the newly created token as the `tokenOf` the project.
+   ```solidity
+   // Only one ERC20 token can be issued.
+   require(tokenOf[_projectId] == IJBToken(address(0)), '0x21: ALREADY_ISSUED');
+   ```
 
-    ```solidity
-    // Store the token contract.
-    tokenOf[_projectId] = token;
-    ```
+   _Internal references:_
 
-    _Internal references:_
+   * [`tokenOf`](../properties/tokenof.md)
+4. Deploy a new instance of a [`JBToken`](../../jbtoken.md) contract. Assign it to the return value.
 
-    * [`tokenOf`](../properties/tokenof.md)
-*   Emit an `Issue` event with the all relevant parameters.
+   ```solidity
+   // Deploy the token contract.
+   token = new JBToken(_name, _symbol);
+   ```
+5. Store the newly created token as the `tokenOf` the project.
 
-    ```solidity
-    emit Issue(_projectId, token, _name, _symbol, msg.sender);
-    ```
+   ```solidity
+   // Store the token contract.
+   tokenOf[_projectId] = token;
+   ```
 
-    _Event references:_
+   _Internal references:_
 
-    * [`Issue`](../events/issue.md)
+   * [`tokenOf`](../properties/tokenof.md)
+6. Emit an `Issue` event with the all relevant parameters.
+
+   ```solidity
+   emit Issue(_projectId, token, _name, _symbol, msg.sender);
+   ```
+
+   _Event references:_
+
+   * [`Issue`](../events/issue.md)
 {% endtab %}
 
 {% tab title="Code" %}
