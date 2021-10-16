@@ -182,6 +182,8 @@
     * [Properties](protocol/contracts/jbdirectory/properties/README.md)
       * [projects](protocol/contracts/jbdirectory/properties/projects.md)
       * [controllerOf](protocol/contracts/jbdirectory/properties/controllerof.md)
+      * [\_terminalsOf](protocol/contracts/jbdirectory/properties/\_terminalsof.md)
+      * [\_primaryTerminalOf](protocol/contracts/jbdirectory/properties/\_primaryterminalof.md)
     * [Read](protocol/contracts/jbdirectory/read/README.md)
       * [terminalsOf](protocol/contracts/jbdirectory/read/terminalsof.md)
       * [isTerminalOf](protocol/contracts/jbdirectory/read/isterminalof.md)
