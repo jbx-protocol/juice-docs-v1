@@ -8,7 +8,7 @@ Interface: [`IJBDirectory`](../../../interfaces/ijbdirectory.md)
 {% tab title="Step by step" %}
 **Update the controller that manages how terminals interact with the ecosystem.**
 
-_A controller cant be set if:_
+_A controller can be set if:_
 
 * the project owner or an operator is changing the controller.
 * or, the controller hasn't been set yet and the message sender is the controller being set.
@@ -103,7 +103,7 @@ function setControllerOf(uint256 _projectId, IJBController _controller)
   Update the controller that manages how terminals interact with the ecosystem.
 
   @dev 
-  A controller cant be set if:
+  A controller can be set if:
     - the project owner or an operator is changing the controller.
     - or, the controller hasn't been set yet and the message sender is the controller being set.
     - or, the current controller is setting a new controller.
