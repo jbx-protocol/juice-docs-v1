@@ -32,11 +32,10 @@ function setPrimaryTerminalOf(uint256 _projectId, IJBTerminal _terminal)
 
 1.  Get a reference to the token that the provided terminal's vault accepts.
 
-    ```solidity
-    // Get a reference to the token that the terminal's vault accepts.
-    address _token = _terminal.vault().token();
-    ```
-2.  Store the provided terminal as the `_primaryTerminalOf` the project for the token.
+   ```solidity
+   // Get a reference to the token that the terminal's vault accepts.
+   address _token = _terminal.token();
+   ```
 
     ```solidity
     // Store the terminal as the primary for the particular token.
@@ -76,7 +75,7 @@ function setPrimaryTerminalOf(uint256 _projectId, IJBTerminal _terminal)
   requirePermission(projects.ownerOf(_projectId), _projectId, JBOperations.SET_PRIMARY_TERMINAL)
 {
   // Get a reference to the token that the terminal's vault accepts.
-  address _token = _terminal.vault().token();
+  address _token = _terminal.token();
 
   // Store the terminal as the primary for the particular token.
   _primaryTerminalOf[_projectId][_token] = _terminal;

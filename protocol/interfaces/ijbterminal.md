@@ -2,9 +2,9 @@
 
 ```solidity
 interface IJBTerminal {
-  function domain() external view returns (uint256);
+  function token() external view returns (address);
 
-  function currentETHBalanceOf(uint256 _projectId) external view returns (uint256);
+  function ethBalanceOf(uint256 _projectId) external view returns (uint256);
 
   function pay(
     uint256 _projectId,

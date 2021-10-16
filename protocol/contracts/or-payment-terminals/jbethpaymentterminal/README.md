@@ -82,10 +82,11 @@ constructor(
 
 ## Read
 
-| Function                               | Definition                                                                                                                                                                                                             |
-| -------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [**`heldFeesOf`**](read/heldfeesof.md) | <p><strong>Params</strong></p><ul><li><code>uint256 _projectId</code></li></ul><p><strong>Returns</strong></p><ul><li><a href="../../../data-structures/jbfee.md"><code>JBFee</code></a><code>[] fees</code></li></ul> |
-| [**`delegate`**](read/delegate.md)     | <p><strong>Returns</strong></p><ul><li><code>address claimableOverflow</code></li></ul>                                                                                                                                |
+| Function                                      | Definition                                                                                                                                                                                                             |
+| --------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [**`ethBalanceOf`**](read/ethbalanceof.md)        | <p><strong>Params</strong></p><ul><li><code>uint256 _projectId</code></li></ul><p><strong>Returns</strong></p><ul><li><code>uint256</code><code>ethBalance</code></li></ul> |
+| [**`heldFeesOf`**](read/heldfeesof.md)        | <p><strong>Params</strong></p><ul><li><code>uint256 _projectId</code></li></ul><p><strong>Returns</strong></p><ul><li><a href="../../../data-structures/jbfee.md"><code>JBFee</code></a><code>[] fees</code></li></ul> |
+| [**`delegate`**](read/delegate.md) | <p><strong>Returns</strong></p><ul><li><code>address claimableOverflow</code></li></ul>                                                                                                                                |
 
 ## Write
 

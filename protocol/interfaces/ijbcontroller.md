@@ -9,8 +9,6 @@ interface IJBController {
 
   function prepForMigration(uint256 _projectId) external;
 
-  function swapTerminal(uint256 _projectId, IJBTerminal _terminal) external;
-
   function mintTokensOf(
     uint256 _projectId,
     uint256 _tokenCount,
