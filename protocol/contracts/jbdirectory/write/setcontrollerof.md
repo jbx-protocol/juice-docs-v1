@@ -52,7 +52,10 @@ function setControllerOf(uint256 _projectId, IJBController _controller)
 {% endtab %}
 
 {% tab title="Errors" %}
-
+| String                         | Description                                              |
+| ------------------------------ | -------------------------------------------------------- |
+| **`0x2b: NOT_FOUND`** | Thrown if the provided project doesn't yet exist. |
+| **`0x2c: ZERO_ADDRESS`** | Thrown if the provided controller is the zero address. |
 {% endtab %}
 
 {% tab title="Events" %}

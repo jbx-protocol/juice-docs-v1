@@ -42,7 +42,9 @@ function addTerminalOf(uint256 _projectId, IJBTerminal _terminal)
 {% endtab %}
 
 {% tab title="Errors" %}
-
+| String                         | Description                                              |
+| ------------------------------ | -------------------------------------------------------- |
+| **`0x2d: ZERO_ADDRESS`** | Thrown if the provided terminal to add is the zero address. |
 {% endtab %}
 
 {% tab title="Events" %}
