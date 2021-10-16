@@ -8,17 +8,20 @@ Interface: [`IJBDirectory`](../../../interfaces/ijbdirectory.md)
 {% tab title="Step by step" %}
 **Whether or not a specified terminal is a terminal of the specified project.**
 
-_Only a project's current controller can burn its tokens._
+_Only a project owner, an operator, or its controller can add a terminal. _
 
 Definition:
 
 ```solidity
-function burnFrom(
-  address _holder,
-  uint256 _projectId,
-  uint256 _amount,
-  bool _preferClaimedTokens
-) external override onlyController(_projectId) { ... }
+function addTerminalOf(uint256 _projectId, IJBTerminal _terminal)
+  external
+  override
+  requirePermissionAllowingOverride(
+    projects.ownerOf(_projectId),
+    _projectId,
+    JBOperations.ADD_TERMINAL,
+    msg.sender == address(controllerOf[_projectId])
+  ) { ... }
 ```
 
 * Arguments:
@@ -38,7 +41,7 @@ function burnFrom(
   Add a terminal to project's list of terminals.
 
   @dev
-  Only a project owner, an operator, or its controller can add a terminal 
+  Only a project owner, an operator, or its controller can add a terminal. 
 
   @param _projectId The ID of the project having a terminal added.
   @param _terminal The terminal to add.

@@ -8,17 +8,15 @@ Interface: [`IJBDirectory`](../../../interfaces/ijbdirectory.md)
 {% tab title="Step by step" %}
 **Remove a terminal from a project's list of terminals.**
 
-_Only a project's current controller can burn its tokens._
+_Only a project owner or an operator can remove one of its terminals._
 
 Definition:
 
 ```solidity
-function burnFrom(
-  address _holder,
-  uint256 _projectId,
-  uint256 _amount,
-  bool _preferClaimedTokens
-) external override onlyController(_projectId) { ... }
+function removeTerminalOf(uint256 _projectId, IJBTerminal _terminal)
+  external
+  override
+  requirePermission(projects.ownerOf(_projectId), _projectId, JBOperations.REMOVE_TERMINAL) { ... }
 ```
 
 * Arguments:
@@ -29,7 +27,6 @@ function burnFrom(
 * Through the [`onlyController`](../../jbcontrollerutility/modifiers/onlycontroller.md) modifier, the function can only be accessed by the controller of the `_projectId`.
 * The function overrides a function definition from the `IJBTokenStore` interface.
 * The function returns nothing.
-
 {% endtab %}
 
 {% tab title="Code" %}

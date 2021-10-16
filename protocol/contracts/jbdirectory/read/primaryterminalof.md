@@ -4,17 +4,14 @@
 {% tab title="Step by step" %}
 **The primary terminal that is managing funds for a project for a specified token.**
 
-_Only a project's current controller can burn its tokens._
-
 Definition:
 
 ```solidity
-function burnFrom(
-  address _holder,
-  uint256 _projectId,
-  uint256 _amount,
-  bool _preferClaimedTokens
-) external override onlyController(_projectId) { ... }
+function primaryTerminalOf(uint256 _projectId, address _token)
+  public
+  view
+  override
+  returns (IJBTerminal) { ... }
 ```
 
 * Arguments:
@@ -61,10 +58,10 @@ function primaryTerminalOf(uint256 _projectId, address _token)
 {% endtab %}
 
 {% tab title="Bug bounty" %}
-| Category | Description | Reward |
-| :--- | :--- | :--- |
-| **Optimization** | Help make this operation more efficient. | 0.5ETH |
-| **Low severity** | Identify a vulnerability in this operation that could lead to an inconvenience for a user of the protocol or for a protocol developer. | 1ETH |
-| **High severity** | Identify a vulnerability in this operation that could lead to data corruption or loss of funds. | 5+ETH |
+| Category          | Description                                                                                                                            | Reward |
+| ----------------- | -------------------------------------------------------------------------------------------------------------------------------------- | ------ |
+| **Optimization**  | Help make this operation more efficient.                                                                                               | 0.5ETH |
+| **Low severity**  | Identify a vulnerability in this operation that could lead to an inconvenience for a user of the protocol or for a protocol developer. | 1ETH   |
+| **High severity** | Identify a vulnerability in this operation that could lead to data corruption or loss of funds.                                        | 5+ETH  |
 {% endtab %}
 {% endtabs %}

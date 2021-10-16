@@ -4,17 +4,14 @@
 {% tab title="Step by step" %}
 **Whether or not a specified terminal is a terminal of the specified project.**
 
-_Only a project's current controller can burn its tokens._
-
 Definition:
 
 ```solidity
-function burnFrom(
-  address _holder,
-  uint256 _projectId,
-  uint256 _amount,
-  bool _preferClaimedTokens
-) external override onlyController(_projectId) { ... }
+function isTerminalOf(uint256 _projectId, IJBTerminal _terminal)
+  public
+  view
+  override
+  returns (bool) { ... }
 ```
 
 * Arguments:
@@ -25,7 +22,6 @@ function burnFrom(
 * Through the [`onlyController`](../../jbcontrollerutility/modifiers/onlycontroller.md) modifier, the function can only be accessed by the controller of the `_projectId`.
 * The function overrides a function definition from the `IJBTokenStore` interface.
 * The function returns nothing.
-
 {% endtab %}
 
 {% tab title="Code" %}
@@ -53,10 +49,10 @@ function isTerminalOf(uint256 _projectId, IJBTerminal _terminal)
 {% endtab %}
 
 {% tab title="Bug bounty" %}
-| Category | Description | Reward |
-| :--- | :--- | :--- |
-| **Optimization** | Help make this operation more efficient. | 0.5ETH |
-| **Low severity** | Identify a vulnerability in this operation that could lead to an inconvenience for a user of the protocol or for a protocol developer. | 1ETH |
-| **High severity** | Identify a vulnerability in this operation that could lead to data corruption or loss of funds. | 5+ETH |
+| Category          | Description                                                                                                                            | Reward |
+| ----------------- | -------------------------------------------------------------------------------------------------------------------------------------- | ------ |
+| **Optimization**  | Help make this operation more efficient.                                                                                               | 0.5ETH |
+| **Low severity**  | Identify a vulnerability in this operation that could lead to an inconvenience for a user of the protocol or for a protocol developer. | 1ETH   |
+| **High severity** | Identify a vulnerability in this operation that could lead to data corruption or loss of funds.                                        | 5+ETH  |
 {% endtab %}
 {% endtabs %}

@@ -8,17 +8,25 @@ Interface: [`IJBDirectory`](../../../interfaces/ijbdirectory.md)
 {% tab title="Step by step" %}
 **Update the controller that manages how terminals interact with the ecosystem.**
 
-_Only a project's current controller can burn its tokens._
+_A controller cant be set if:_
+
+* the project owner or an operator is changing the controller.
+* or, the controller hasn't been set yet and the message sender is the controller being set.
+* or, the current controller is setting a new controller.
 
 Definition:
 
 ```solidity
-function burnFrom(
-  address _holder,
-  uint256 _projectId,
-  uint256 _amount,
-  bool _preferClaimedTokens
-) external override onlyController(_projectId) { ... }
+function setControllerOf(uint256 _projectId, IJBController _controller)
+  external
+  override
+  requirePermissionAllowingOverride(
+    projects.ownerOf(_projectId),
+    _projectId,
+    JBOperations.SET_CONTROLLER,
+    (address(controllerOf[_projectId]) == address(0) && msg.sender == address(_controller)) ||
+      address(controllerOf[_projectId]) == msg.sender
+  ) { ... }
 ```
 
 * Arguments:
@@ -39,9 +47,9 @@ function burnFrom(
 
   @dev 
   A controller cant be set if:
-    - case 1: the project owner or an operator is changing the controller.
-    - case 2: the controller hasn't been set yet and the message sender is the controller being set.
-    - case 3: the current controller is setting a new controller.
+    - the project owner or an operator is changing the controller.
+    - or, the controller hasn't been set yet and the message sender is the controller being set.
+    - or, the current controller is setting a new controller.
 
   @param _projectId The ID of the project to set a new controller for.
   @param _controller The new controller to set.

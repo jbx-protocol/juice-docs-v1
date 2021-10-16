@@ -8,19 +8,17 @@ Interface: [`IJBDirectory`](../../../interfaces/ijbdirectory.md)
 {% tab title="Step by step" %}
 **Project's can set which terminal should be their primary for a particular token.**
 
-**This is useful in case a project has several terminals connected for a particular token..**
+**This is useful in case a project has several terminals connected for a particular token.**
 
-_Only a project's current controller can burn its tokens._
+_The terminal will be set as the primary for the token that its vault accepts._
 
 Definition:
 
 ```solidity
-function burnFrom(
-  address _holder,
-  uint256 _projectId,
-  uint256 _amount,
-  bool _preferClaimedTokens
-) external override onlyController(_projectId) { ... }
+function setPrimaryTerminalOf(uint256 _projectId, IJBTerminal _terminal)
+  external
+  override
+  requirePermission(projects.ownerOf(_projectId), _projectId, JBOperations.SET_PRIMARY_TERMINAL) { ... }
 ```
 
 * Arguments:
@@ -31,7 +29,6 @@ function burnFrom(
 * Through the [`onlyController`](../../jbcontrollerutility/modifiers/onlycontroller.md) modifier, the function can only be accessed by the controller of the `_projectId`.
 * The function overrides a function definition from the `IJBTokenStore` interface.
 * The function returns nothing.
-
 {% endtab %}
 
 {% tab title="Code" %}
@@ -42,7 +39,7 @@ function burnFrom(
   This is useful in case a project has several terminals connected for a particular token.
 
   @dev
-  The terminal will be set as the primary for the token that it's vault accepts. 
+  The terminal will be set as the primary for the token that its vault accepts. 
 
   @param _projectId The ID of the project for which a primary token is being set.
   @param _terminal The terminal to make primary.
