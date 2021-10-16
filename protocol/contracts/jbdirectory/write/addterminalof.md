@@ -6,7 +6,7 @@ Interface: [`IJBDirectory`](../../../interfaces/ijbdirectory.md)
 
 {% tabs %}
 {% tab title="Step by step" %}
-**Whether or not a specified terminal is a terminal of the specified project.**
+**Add a terminal to project's list of terminals.**
 
 Only a project owner, an operator, or its controller can add a terminal.
 
