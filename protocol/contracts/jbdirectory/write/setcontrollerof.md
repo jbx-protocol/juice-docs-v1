@@ -10,7 +10,7 @@ Interface: [`IJBDirectory`](../../../interfaces/ijbdirectory.md)
 
 _A controller can be set if:_
 
-* the project owner or an operator is changing the controller.
+* the message sender is the project owner or an operator is changing the controller.
 * or, the controller hasn't been set yet and the message sender is the controller being set.
 * or, the current controller is setting a new controller.
 
@@ -104,7 +104,7 @@ function setControllerOf(uint256 _projectId, IJBController _controller)
 
   @dev 
   A controller can be set if:
-    - the project owner or an operator is changing the controller.
+    - the message sender is the project owner or an operator is changing the controller.
     - or, the controller hasn't been set yet and the message sender is the controller being set.
     - or, the current controller is setting a new controller.
 
