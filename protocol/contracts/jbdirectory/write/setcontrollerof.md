@@ -32,6 +32,7 @@ function setControllerOf(uint256 _projectId, IJBController _controller)
 * Arguments:
   * `_projectId` is the ID of the project to set a new controller for.
   * `_controller` is the new controller to set.
+* Through the [`requirePermissionAllowingOverride`](../../or-abstract/jboperatable/modifiers/requirepermissionallowingoverride.md) modifier, the function is only accessible by the project's owner, from an operator that has been given the `JBOperations.SET_CONTROLLER` permission by the project owner for the provided `_projectId` , from any address if the project doesn't yet have a controller set, or from the project's current controller. 
 * The function overrides a function definition from the `IJBDirectory` interface.
 * The function returns nothing.
 {% endtab %}
