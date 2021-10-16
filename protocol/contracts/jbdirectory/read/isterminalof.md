@@ -17,6 +17,8 @@ function isTerminalOf(uint256 _projectId, IJBTerminal _terminal)
 * Arguments:
   * `_projectId` is the ID of the project to check within.
   * `_terminal` is the address of the terminal to check for.
+* The view function can be accessed externally by anyone. 
+* The function does not alter state on the blockchain.
 * The function overrides a function definition from the `IJBDirectory` interface.
 * The function returns a flag indicating whether or not the specified terminal is a terminal of the specified project..
 {% endtab %}

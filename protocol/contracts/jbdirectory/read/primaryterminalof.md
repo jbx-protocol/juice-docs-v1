@@ -17,6 +17,8 @@ function primaryTerminalOf(uint256 _projectId, address _token)
 * Arguments:
   * `_projectId` is the ID of the project to get a terminal for.
   * `_token` is the token the terminal accepts.
+* The view function can be accessed externally by anyone. 
+* The function does not alter state on the blockchain.
 * The function overrides a function definition from the `IJBDirectory` interface.
 * The function returns the primary terminal for the project for the specified token..
 {% endtab %}
