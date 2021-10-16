@@ -14,8 +14,9 @@ Interface: `IJBPrices`
 function priceFor(uint256 _currency, uint256 _base) external view override returns (uint256) { ... }
 ```
 
-* `_currency` is the currency to get a price for.
-* `_base` is the currency to base the price on.
+* Arguments: 
+  * `_currency` is the currency to get a price for.
+  * `_base` is the currency to base the price on.
 * The function can be accessed externally by anyone. 
 * The function overrides a function definition from the `IJBPrices` interface.
 * The function returns the price of the currency in terms of the base, with 18 decimals.
