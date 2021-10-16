@@ -8,7 +8,7 @@ Interface: [`IJBDirectory`](../../../interfaces/ijbdirectory.md)
 {% tab title="Step by step" %}
 **Whether or not a specified terminal is a terminal of the specified project.**
 
-_Only a project owner, an operator, or its controller can add a terminal. _
+Only a project owner, an operator, or its controller can add a terminal.
 
 Definition:
 
