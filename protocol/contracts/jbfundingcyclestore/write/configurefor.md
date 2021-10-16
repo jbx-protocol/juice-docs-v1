@@ -83,6 +83,7 @@ function configureFor(
    _Internal references:_
 
    * [`_configurableOf`](\_configurableof.md)
+
 8. Store all of the configuration properties provided onto the `_fundingCycleId`. These properties can all be packed into one `uint256` storage slot.
 
    ```solidity
@@ -101,6 +102,7 @@ function configureFor(
    _Internal references:_
 
    * [`_packAndStoreConfigurationPropertiesOf`](\_packandstoreconfigurationpropertiesof.md)
+
 9. Store the provided `_data.target` for the `_fundingCycleId`.
 
    ```solidity
@@ -111,6 +113,7 @@ function configureFor(
    _Internal references:_
 
    * [`_targetOf`](../properties/\_targetof.md)
+
 10. Store the provided `_metadata` for the `_fundingCycleId`.
 
    ```solidity
@@ -121,6 +124,7 @@ function configureFor(
    _Internal references:_
 
    * [`_metadataOf`](../properties/\_metadataof.md)
+
 11. Emit a `Configure` event with the all relevant parameters.
 
    ```solidity
@@ -130,6 +134,7 @@ function configureFor(
    _Event references:_
 
    * [`Configure`](../events/configure.md)
+
 12. Return the [`JBFundingCycle`](../../../data-structures/jbfundingcycle.md) struct that carries the new configuration.
 
    ```solidity
