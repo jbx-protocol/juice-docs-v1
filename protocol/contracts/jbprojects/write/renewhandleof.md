@@ -24,35 +24,38 @@ function renewHandleOf(uint256 _projectId)
 * Through the [`requirePermission`](../../or-abstract/jboperatable/modifiers/requirepermission.md) modifier, the function is only accessible by the project's owner, or from an operator that has been given the `JBOperations.RENEW_HANDLE` permission by the project owner for the provided `_projectId`.
 * The function overrides a function definition from the `IJBProjects` interface.
 * The function doesn't return anything.
-*   Get a reference to the project's current handle.
 
-    ```solidity
-    // Get the handle of the project.
-    bytes32 _handle = handleOf[_projectId];
-    ```
 
-    _Internal references:_
 
-    * [`handleOf`](../properties/handleof.md)
-*   Remove the `challengeExpiryOf` the `_handle`. Anyone will be able to reissue a challenge through the [`challengeHandle`](challengehandle.md) transaction, and await the challenge period from that time.
+1. Get a reference to the project's current handle.
 
-    ```solidity
-    // Reset the challenge to 0.
-    challengeExpiryOf[_handle] = 0;
-    ```
+   ```solidity
+   // Get the handle of the project.
+   bytes32 _handle = handleOf[_projectId];
+   ```
 
-    _Internal references:_
+   _Internal references:_
 
-    * [`challengeExpiryOf`](../properties/challengeexpiryof.md)
-*   Emit a `RenewHandle` event with the all relevant parameters.
+   * [`handleOf`](../properties/handleof.md)
+2. Remove the `challengeExpiryOf` the `_handle`. Anyone will be able to reissue a challenge through the [`challengeHandle`](challengehandle.md) transaction, and await the challenge period from that time.
 
-    ```solidity
-    emit RenewHandle(_handle, _projectId, msg.sender);
-    ```
+   ```solidity
+   // Reset the challenge to 0.
+   challengeExpiryOf[_handle] = 0;
+   ```
 
-    _Event references:_
+   _Internal references:_
 
-    * [`RenewHandle`](../events/renewhandle.md)
+   * [`challengeExpiryOf`](../properties/challengeexpiryof.md)
+3. Emit a `RenewHandle` event with the all relevant parameters.
+
+   ```solidity
+   emit RenewHandle(_handle, _projectId, msg.sender);
+   ```
+
+   _Event references:_
+
+   * [`RenewHandle`](../events/renewhandle.md)
 {% endtab %}
 
 {% tab title="Code" %}

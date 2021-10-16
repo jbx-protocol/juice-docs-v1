@@ -34,82 +34,85 @@ function claimHandle(
 * Through the [`requirePermission`](../../or-abstract/jboperatable/modifiers/requirepermission.md) modifier, the function is only accessible by the project's owner, or from an operator that has been given the `JBOperations.CLAIM_HANDLE` permission by the project owner for the provided `_projectId`.
 * The function overrides a function definition from the `IJBProjects` interface.
 * The function doesn't return anything.
-*   Check that either the `transferAddressFor` the `_handle` is the provided `_transferAddress`, or that the `_handle` is being challenged and the `challengeExpiryOf` the `_handle` has successfully passed.
 
-    ```solidity
-    // The handle must have been transferred to the specified address,
-    // or the handle challenge must have expired before being renewed.
-    require(
-      transferAddressFor[_handle] == _transferAddress ||
-        (challengeExpiryOf[_handle] > 0 && block.timestamp > challengeExpiryOf[_handle]),
-      '0x0c: UNAUTHORIZED'
-    );
-    ```
 
-    _Internal references:_
 
-    * [`transferAddressFor`](../properties/transferaddressfor.md)
-    * [`challengeExpiryOf`](../properties/challengeexpiryof.md)
-*   Remove the `idFor` the `handleOf` the project so that the handle no longer resolves to any project ID.
+1. Check that either the `transferAddressFor` the `_handle` is the provided `_transferAddress`, or that the `_handle` is being challenged and the `challengeExpiryOf` the `_handle` has successfully passed.
 
-    ```solidity
-    // Remove the project ID for the current handle of the specified project.
-    idFor[handleOf[_projectId]] = 0;
-    ```
+   ```solidity
+   // The handle must have been transferred to the specified address,
+   // or the handle challenge must have expired before being renewed.
+   require(
+     transferAddressFor[_handle] == _transferAddress ||
+       (challengeExpiryOf[_handle] > 0 && block.timestamp > challengeExpiryOf[_handle]),
+     '0x0c: UNAUTHORIZED'
+   );
+   ```
 
-    _Internal references:_
+   _Internal references:_
 
-    * [`handleOf`](../properties/handleof.md)
-    * [`idFor`](../properties/idfor.md)
-*   Store the project's ID as the `idFor` the provided `_handle` to allow for project lookup using the handle.
+   * [`transferAddressFor`](../properties/transferaddressfor.md)
+   * [`challengeExpiryOf`](../properties/challengeexpiryof.md)
+2. Remove the `idFor` the `handleOf` the project so that the handle no longer resolves to any project ID.
 
-    ```solidity
-    // Set the project ID for the provided handle to be the specified project.
-    idFor[_handle] = _projectId;
-    ```
+   ```solidity
+   // Remove the project ID for the current handle of the specified project.
+   idFor[handleOf[_projectId]] = 0;
+   ```
 
-    _Internal references:_
+   _Internal references:_
 
-    * [`idFor`](../properties/idfor.md)
-*   Store the provided `_handle` as the as the `handleOf` the project.
+   * [`handleOf`](../properties/handleof.md)
+   * [`idFor`](../properties/idfor.md)
+3. Store the project's ID as the `idFor` the provided `_handle` to allow for project lookup using the handle.
 
-    ```solidity
-    // Set the new handle.
-    handleOf[_projectId] = _handle;
-    ```
+   ```solidity
+   // Set the project ID for the provided handle to be the specified project.
+   idFor[_handle] = _projectId;
+   ```
 
-    _Internal references:_
+   _Internal references:_
 
-    * [`handleOf`](../properties/handleof.md)
-*   Remove the `transferAddressFor` the handle since it has now been claimed and is no longer being transferred.
+   * [`idFor`](../properties/idfor.md)
+4. Store the provided `_handle` as the as the `handleOf` the project.
 
-    ```solidity
-    // Set the handle as not being transferred.
-    transferAddressFor[_handle] = address(0);
-    ```
+   ```solidity
+   // Set the new handle.
+   handleOf[_projectId] = _handle;
+   ```
 
-    _Internal references:_
+   _Internal references:_
 
-    * [`transferAddressFor`](../properties/transferaddressfor.md)
-*   Remove the `challengeExpiryOf` the handle since it has now been transferred to a new project and must have a fresh challenge period awaited before being claimed again.
+   * [`handleOf`](../properties/handleof.md)
+5. Remove the `transferAddressFor` the handle since it has now been claimed and is no longer being transferred.
 
-    ```solidity
-    // Reset the challenge to 0.
-    challengeExpiryOf[_handle] = 0;
-    ```
+   ```solidity
+   // Set the handle as not being transferred.
+   transferAddressFor[_handle] = address(0);
+   ```
 
-    _Internal references:_
+   _Internal references:_
 
-    * [`challengeExpiryOf`](../properties/challengeexpiryof.md)
-*   Emit a `TransferHandle` event with the all relevant parameters.
+   * [`transferAddressFor`](../properties/transferaddressfor.md)
+6. Remove the `challengeExpiryOf` the handle since it has now been transferred to a new project and must have a fresh challenge period awaited before being claimed again.
 
-    ```solidity
-    emit ClaimHandle(_projectId, _transferAddress, _handle, msg.sender);
-    ```
+   ```solidity
+   // Reset the challenge to 0.
+   challengeExpiryOf[_handle] = 0;
+   ```
 
-    _Event references:_
+   _Internal references:_
 
-    * [`ClaimHandle`](../events/claimhandle.md)
+   * [`challengeExpiryOf`](../properties/challengeexpiryof.md)
+7. Emit a `TransferHandle` event with the all relevant parameters.
+
+   ```solidity
+   emit ClaimHandle(_projectId, _transferAddress, _handle, msg.sender);
+   ```
+
+   _Event references:_
+
+   * [`ClaimHandle`](../events/claimhandle.md)
 {% endtab %}
 
 {% tab title="Code" %}

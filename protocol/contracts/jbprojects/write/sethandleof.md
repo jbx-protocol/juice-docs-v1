@@ -25,63 +25,66 @@ function setHandleOf(uint256 _projectId, bytes32 _handle)
 * Through the [`requirePermission`](../../or-abstract/jboperatable/modifiers/requirepermission.md) modifier, the function is only accessible by the project's owner, or from an operator that has been given the `JBOperations.SET_HANDLE` permission by the project owner for the provided `_projectId`.
 * The function overrides a function definition from the `IJBProjects` interface.
 * The function doesn't return anything.
-*   Check that the provided `_handle` is not empty.
 
-    ```solidity
-    // Handle must exist.
-    require(_handle != bytes32(0), "0x08: EMPTY_HANDLE");
-    ```
-*   Check that the `_handle` is unique. This is done by making sure there isn't yet an `idFor` the handle, and making sure it isn't currently being transferred to an address.
 
-    ```solidity
-    // Handle must be unique.
-    require(idFor[_handle] == 0 && transferAddressFor[_handle] == address(0), '0x09: HANDLE_TAKEN');
-    ```
 
-    _Internal references:_
+1. Check that the provided `_handle` is not empty.
 
-    * [`idFor`](../properties/idfor.md)
-    * [`transferAddressFor`](../properties/transferaddressfor.md)
-*   Free up the mapping from the current`handleOf` the project so that others can use it.
+   ```solidity
+   // Handle must exist.
+   require(_handle != bytes32(0), "0x08: EMPTY_HANDLE");
+   ```
+2. Check that the `_handle` is unique. This is done by making sure there isn't yet an `idFor` the handle, and making sure it isn't currently being transferred to an address.
 
-    ```solidity
-    // Register the change in the resolver.
-    idFor[handleOf[_projectId]] = 0;
-    ```
+   ```solidity
+   // Handle must be unique.
+   require(idFor[_handle] == 0 && transferAddressFor[_handle] == address(0), '0x09: HANDLE_TAKEN');
+   ```
 
-    _Internal references:_
+   _Internal references:_
 
-    * [`handleOf`](../properties/handleof.md)
-    * [`idFor`](../properties/idfor.md)
-*   Store the provided `_handle` as the as the `handleOf` the project.
+   * [`idFor`](../properties/idfor.md)
+   * [`transferAddressFor`](../properties/transferaddressfor.md)
+3. Free up the mapping from the current`handleOf` the project so that others can use it.
 
-    ```solidity
-    // Store the handle for the project ID.
-    handleOf[_projectId] = _handle;
-    ```
+   ```solidity
+   // Register the change in the resolver.
+   idFor[handleOf[_projectId]] = 0;
+   ```
 
-    _Internal references:_
+   _Internal references:_
 
-    * [`handleOf`](../properties/handleof.md)
-*   Store the project's ID as the `idFor` the provided `_handle` to allow for project lookup using the handle.
+   * [`handleOf`](../properties/handleof.md)
+   * [`idFor`](../properties/idfor.md)
+4. Store the provided `_handle` as the as the `handleOf` the project.
 
-    ```solidity
-    // Store the project ID for the handle.
-    idFor[_handle] = _projectId;
-    ```
+   ```solidity
+   // Store the handle for the project ID.
+   handleOf[_projectId] = _handle;
+   ```
 
-    _Internal references:_
+   _Internal references:_
 
-    * [`idFor`](../properties/idfor.md)
-*   Emit a `SetHandle` event with the all relevant parameters.
+   * [`handleOf`](../properties/handleof.md)
+5. Store the project's ID as the `idFor` the provided `_handle` to allow for project lookup using the handle.
 
-    ```solidity
-    emit SetHandle(_projectId, _handle, msg.sender);
-    ```
+   ```solidity
+   // Store the project ID for the handle.
+   idFor[_handle] = _projectId;
+   ```
 
-    _Event references:_
+   _Internal references:_
 
-    * [`SetHandle`](../events/sethandle.md)
+   * [`idFor`](../properties/idfor.md)
+6. Emit a `SetHandle` event with the all relevant parameters.
+
+   ```solidity
+   emit SetHandle(_projectId, _handle, msg.sender);
+   ```
+
+   _Event references:_
+
+   * [`SetHandle`](../events/sethandle.md)
 {% endtab %}
 
 {% tab title="Code" %}

@@ -20,41 +20,44 @@ Definition:
 * The function can be accessed externally by anyone.
 * The function overrides a function definition from the `IJBOperatorStore` interface.
 * The function doesn't return anything.
-*   Pack the provided permissions into a `uint256`. Each bit of the resulting value represents whether or not permission has been granted for that index.
 
-    ```solidity
-    // Pack the indexes into a uint256.
-    uint256 _packed = _packedPermissions(_operatorData.permissionIndexes);
-    ```
 
-    Internal references:
 
-    * [`_packedPermissions`](\_packedpermissions.md)
-*   Store the packed permissions as the `permissionsOf` the provided `_operator`, on behalf of the `msg.sender`, specifically for the provided `_domain`.
+1. Pack the provided permissions into a `uint256`. Each bit of the resulting value represents whether or not permission has been granted for that index.
 
-    ```solidity
-    // Store the new value.
-    permissionsOf[_operatorData.operator][msg.sender][_operatorData.domain] = _packed;
-    ```
+   ```solidity
+   // Pack the indexes into a uint256.
+   uint256 _packed = _packedPermissions(_operatorData.permissionIndexes);
+   ```
 
-    _Internal references:_
+   Internal references:
 
-    * [`permissionsOf`](../properties/permissionsof.md)
-*   Emit a `SetOperator` event with the all relevant parameters.
+   * [`_packedPermissions`](\_packedpermissions.md)
+2.  Store the packed permissions as the `permissionsOf` the provided `_operator`, on behalf of the `msg.sender`, specifically for the provided `_domain`.
 
-    ```solidity
-    emit SetOperator(
-      _operatorData.operator,
-      msg.sender,
-      _operatorData.domain,
-      _operatorData.permissionIndexes,
-      _packed
-    );
-    ```
+   ```solidity
+   // Store the new value.
+   permissionsOf[_operatorData.operator][msg.sender][_operatorData.domain] = _packed;
+   ```
 
-    _Event references:_
+   _Internal references:_
 
-    * [`SetOperator`](../events/setoperator.md)
+   * [`permissionsOf`](../properties/permissionsof.md)
+3. Emit a `SetOperator` event with the all relevant parameters.
+
+   ```solidity
+   emit SetOperator(
+     _operatorData.operator,
+     msg.sender,
+     _operatorData.domain,
+     _operatorData.permissionIndexes,
+     _packed
+   );
+   ```
+
+   _Event references:_
+
+   * [`SetOperator`](../events/setoperator.md)
 {% endtab %}
 
 {% tab title="Code" %}

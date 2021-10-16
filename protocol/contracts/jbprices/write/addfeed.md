@@ -26,58 +26,62 @@ function addFeedFor(
 * The function can only be accessed by the address that owns this contract.
 * The function overrides a function definition from the `IJBPrices` interface.
 * The function doesn't return anything.
-*   Make sure there isn't already a price feed set for the `_currency` `_base` pair.
 
-    ```solidity
-    // There can't already be a feed for the specified currency.
-    require(feedFor[_currency][_base] == AggregatorV3Interface(address(0)), '0x04: ALREADY_EXISTS');
-    ```
 
-    Internal references:
 
-    * [`feedFor`](../properties/feedfor.md)
-*   Get a reference to how many decimal places the provided price feed uses in the quoted rates.
 
-    ```solidity
-    // Get a reference to the number of decimals the feed uses.
-    uint256 _decimals = _feed.decimals();
-    ```
-*   Make sure the feed doesn't use more decimals than what the contract expects. This contract isn't design to support feeds that use more than 18 decimals of fidelity.
+1. Make sure there isn't already a price feed set for the `_currency` `_base` pair.
 
-    ```solidity
-    // Decimals should be less than or equal to the target number of decimals.
-    require(_decimals <= TARGET_DECIMALS, '0x05: BAD_DECIMALS');
-    ```
+   ```solidity
+   // There can't already be a feed for the specified currency.
+   require(feedFor[_currency][_base] == AggregatorV3Interface(address(0)), '0x04: ALREADY_EXISTS');
+   ```
 
-    Internal references:
+   Internal references:
 
-    * [`TARGET_DECIMALS`](../properties/targetdecimals.md)
-*   Store the provided feed for the `_currency` `_base` pair.
+   * [`feedFor`](../properties/feedfor.md)
+2. Get a reference to how many decimal places the provided price feed uses in the quoted rates.
 
-    ```solidity
-    // Set the feed.
-    feedFor[_currency][_base] = _feed;
-    ```
-*   Store a value that price feed results will be multiplied by in order to always be reported with `TARGET_DECIMALS` fidelity. The prices from this contract are always reported with `TARGET_DECIMALS` fidelity – if the provided feed reports with fewer decimals, the contract must know how to adjust the price feed to normalize results.
+   ```solidity
+   // Get a reference to the number of decimals the feed uses.
+   uint256 _decimals = _feed.decimals();
+   ```
+3. Make sure the feed doesn't use more decimals than what the contract expects. This contract isn't design to support feeds that use more than 18 decimals of fidelity.
 
-    ```solidity
-    // Set the decimal adjuster for the currency.
-    feedDecimalAdjusterFor[_currency][_base] = 10**(TARGET_DECIMALS - _decimals);
-    ```
+   ```solidity
+   // Decimals should be less than or equal to the target number of decimals.
+   require(_decimals <= TARGET_DECIMALS, '0x05: BAD_DECIMALS');
+   ```
 
-    Internal references:
+   Internal references:
 
-    * [`feedDecimalAdjusterFor`](../properties/feeddecimaladjuster.md)
-    * [`TARGET_DECIMALS`](../properties/targetdecimals.md)
-*   Emit an `AddFeed` event with the all relevant parameters.
+   * [`TARGET_DECIMALS`](../properties/targetdecimals.md)
+4. Store the provided feed for the `_currency` `_base` pair.
 
-    ```solidity
-    emit AddFeed(_currency, _base, _decimals, _feed);
-    ```
+   ```solidity
+   // Set the feed.
+   feedFor[_currency][_base] = _feed;
+   ```
+5. Store a value that price feed results will be multiplied by in order to always be reported with `TARGET_DECIMALS` fidelity. The prices from this contract are always reported with `TARGET_DECIMALS` fidelity – if the provided feed reports with fewer decimals, the contract must know how to adjust the price feed to normalize results.
 
-    _Event references:_
+   ```solidity
+   // Set the decimal adjuster for the currency.
+   feedDecimalAdjusterFor[_currency][_base] = 10**(TARGET_DECIMALS - _decimals);
+   ```
 
-    * [`AddFeed`](../events/addfeed.md)
+   Internal references:
+
+   * [`feedDecimalAdjusterFor`](../properties/feeddecimaladjuster.md)
+   * [`TARGET_DECIMALS`](../properties/targetdecimals.md)
+6. Emit an `AddFeed` event with the all relevant parameters.
+
+   ```solidity
+   emit AddFeed(_currency, _base, _decimals, _feed);
+   ```
+
+   _Event references:_
+
+   * [`AddFeed`](../events/addfeed.md)
 {% endtab %}
 
 {% tab title="Code" %}
