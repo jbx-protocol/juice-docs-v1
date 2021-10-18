@@ -23,10 +23,10 @@ The first transaction to call when getting started is [`JBController.launchProje
 This function is for convenience. It wraps the following 5 transactions into one, preventing you from having to call them sequentially:
 
 * [`JBProjects.createFor(...)`](../contracts/jbprojects/write/createfor.md)
-* `JBDirectory.setControllerOf(...)`
-* `JBDirectory.addTerminalOf(...)`
-* `JBFundingCycleStore.configureFor(...)`
-* `JBSplitStore.set(...)`
+* [`JBDirectory.setControllerOf(...)`](../contracts/jbdirectory/write/setcontrollerof.md)
+* [`JBDirectory.addTerminalOf(...)`](../contracts/jbdirectory/write/addterminalof.md)
+* [`JBFundingCycleStore.configureFor(...)`](../contracts/jbfundingcyclestore/write/configurefor.md)
+* [`JBSplitStore.set(...)`](../contracts/jbsplitstore/write/set.md)
 
 Once a project has been created, it can begin accepting funds. ETH can be sent to the project by calling [`JBETHPaymentTerminal.pay(...)`](../contracts/or-payment-terminals/jbethpaymentterminal/write/pay-1.md).
 
