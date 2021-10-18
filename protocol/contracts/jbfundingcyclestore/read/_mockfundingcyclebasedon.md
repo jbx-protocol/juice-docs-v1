@@ -8,7 +8,7 @@ Contract:[`JBFundingCycleStore`](../)​
 
 _Returns an empty funding cycle if there can't be a mock funding cycle based on the provided one._
 
-# Definition
+## Definition
 
 ```solidity
 function _mockFundingCycleBasedOn(JBFundingCycle memory _baseFundingCycle, bool _allowMidCycle)
@@ -24,8 +24,7 @@ function _mockFundingCycleBasedOn(JBFundingCycle memory _baseFundingCycle, bool 
 * The function does not alter state on the blockchain.
 * The function returns a mock [`JBFundingCycle`](../../../data-structures/jbfundingcycle.md) of what the next funding cycle will be.
 
-# Body 
-
+## Body
 
 1.  A funding cycle with a `discountRate` of 201 is a non-recurring funding cycle. An empty funding cycle should be returned if the base is non-recurring since there can't be subsequent cycles.
 
@@ -37,8 +36,6 @@ function _mockFundingCycleBasedOn(JBFundingCycle memory _baseFundingCycle, bool 
     _Internal references:_
 
     * [`_getStructFor`](\_getstructfor.md)
-
-
 2.  Save a reference to the amount of seconds since right now that the returned funding cycle could have started at. There are a few possibilities.
 
     1. If the call to the function does not `_allowMidCycle`, the start date must be now or in the future. This is also the case if the base funding cycle doesn't have a duration because the next funding cycle can start immediately.
@@ -55,9 +52,7 @@ function _mockFundingCycleBasedOn(JBFundingCycle memory _baseFundingCycle, bool 
 
     _Internal references:_
 
-    * [`_SECONDS_IN_DAY`](../properties/\_seconds_in_day.md)
-
-
+    * [`_SECONDS_IN_DAY`](../properties/\_seconds\_in\_day.md)
 3.  Find the correct start time for the mock funding cycle.
 
     ```solidity
@@ -71,8 +66,6 @@ function _mockFundingCycleBasedOn(JBFundingCycle memory _baseFundingCycle, bool 
     _Internal references:_
 
     * [`_deriveStartFrom`](\_derivestartfrom.md)
-
-
 4.  Find the correct number for the mock funding cycle.
 
     ```solidity
@@ -83,36 +76,38 @@ function _mockFundingCycleBasedOn(JBFundingCycle memory _baseFundingCycle, bool 
     _Internal references:_
 
     * [`_deriveNumberFrom`](\_derivenumberfrom.md)
+5. Return a [`JBFundingCycle`](../../../data-structures/jbfundingcycle.md) with the aggregated configuration.
 
+````
+```solidity
+````
 
- 
-5.   Return a [`JBFundingCycle`](../../../data-structures/jbfundingcycle.md) with the aggregated configuration.
+````
+return
+  JBFundingCycle(
+    _idFor(_baseFundingCycle.projectId, _number),
+    _baseFundingCycle.projectId,
+    _number,
+    _baseFundingCycle.id,
+    _baseFundingCycle.configured,
+    _deriveWeightFrom(_baseFundingCycle, _start),
+    _baseFundingCycle.ballot,
+    _start,
+    _baseFundingCycle.duration,
+    _baseFundingCycle.target,
+    _baseFundingCycle.currency,
+    _baseFundingCycle.fee,
+    _baseFundingCycle.discountRate,
+    0,
+    _baseFundingCycle.metadata
+  );
+```
 
-    ```solidity
-    return
-      JBFundingCycle(
-        _idFor(_baseFundingCycle.projectId, _number),
-        _baseFundingCycle.projectId,
-        _number,
-        _baseFundingCycle.id,
-        _baseFundingCycle.configured,
-        _deriveWeightFrom(_baseFundingCycle, _start),
-        _baseFundingCycle.ballot,
-        _start,
-        _baseFundingCycle.duration,
-        _baseFundingCycle.target,
-        _baseFundingCycle.currency,
-        _baseFundingCycle.fee,
-        _baseFundingCycle.discountRate,
-        0,
-        _baseFundingCycle.metadata
-      );
-    ```
+_Internal references:_
 
-    _Internal references:_
-
-    * [`_idFor`](\_idfor.md)
-    * [`_deriveWeightFrom`](\_deriveweightfrom.md)
+* [`_idFor`](\_idfor.md)
+* [`_deriveWeightFrom`](\_deriveweightfrom.md)
+````
 {% endtab %}
 
 {% tab title="Code" %}

@@ -12,7 +12,7 @@ _Only the owner or operator of a project, or the current controller contract of 
 
 _The new splits must include any currently set splits that are locked._
 
-# Definition
+## Definition
 
 ```solidity
 function set(
@@ -40,102 +40,106 @@ function set(
 * The function overrides a function definition from the `IJBSplitsStore` interface.
 * The function doesn't return anything.
 
-# Body 
+## Body
 
-1. Get a reference to the current splits set for the specified `_projectId`'s `_domain`, within the specified `_group`.
-
-   ```solidity
-   // Get a reference to the project's current splits.
-   JBSplit[] memory _currentSplits = _splitsOf[_projectId][_domain][_group];
-   ```
-
-   _Internal references:_
-
-   * [`_splitsOf`](../properties/\_splitsof.md)
-2. Loop through each `_currentSplits` to make sure the new `_splits` being set respect any current split bound by a lock constraint.
-
-   ```solidity
-   // Check to see if all locked splits are included.
-   for (uint256 _i = 0; _i < _currentSplits.length; _i++) { ... }
-   ```
-3. If the current split isn't locked, move on to the next one.
-
-   ```solidity
-   if (block.timestamp >= _currentSplits[_i].lockedUntil) continue;
-   ```
-4.  If the current split is locked, check to make sure the new `_splits` includes it. The only property of a locked split that can have changed is its `lockedUntil` property, which can be extended.
-
-   ```solidity
-   // Keep a reference to whether or not the locked split being iterated on is included.
-   bool _includesLocked = false;
-
-   for (uint256 _j = 0; _j < _splits.length; _j++) {
-     // Check for sameness.
-     if (
-       _splits[_j].percent == _currentSplits[_i].percent &&
-       _splits[_j].beneficiary == _currentSplits[_i].beneficiary &&
-       _splits[_j].allocator == _currentSplits[_i].allocator &&
-       _splits[_j].projectId == _currentSplits[_i].projectId &&
-       // Allow lock extention.
-       _splits[_j].lockedUntil >= _currentSplits[_i].lockedUntil
-     ) _includesLocked = true;
-   }
-   ```
-   Check to make sure the provided `_splits` includes any locked current splits.
+1.  Get a reference to the current splits set for the specified `_projectId`'s `_domain`, within the specified `_group`.
 
     ```solidity
-    require(_includesLocked, '0x0f: SOME_LOCKED');
+    // Get a reference to the project's current splits.
+    JBSplit[] memory _currentSplits = _splitsOf[_projectId][_domain][_group];
     ```
-5. After the loop, delete the current splits from storage so we can repopulate them.
 
-   ```solidity
-   // Delete from storage so splits can be repopulated.
-   delete _splitsOf[_projectId][_domain][_group];
-   ```
+    _Internal references:_
 
-   Internal references:
+    * [`_splitsOf`](../properties/\_splitsof.md)
+2.  Loop through each `_currentSplits` to make sure the new `_splits` being set respect any current split bound by a lock constraint.
 
-   * [`_splitsOf`](../properties/\_splitsof.md)
-6. Store a local variable to keep track of all the percents from the splits.
+    ```solidity
+    // Check to see if all locked splits are included.
+    for (uint256 _i = 0; _i < _currentSplits.length; _i++) { ... }
+    ```
+3.  If the current split isn't locked, move on to the next one.
 
-   ```solidity
-   // Add up all the percents to make sure they cumulative are under 100%.
-   uint256 _percentTotal = 0;
-   ```
-7. Loop through each newly provided `_splits` to validate
+    ```solidity
+    if (block.timestamp >= _currentSplits[_i].lockedUntil) continue;
+    ```
+4. If the current split is locked, check to make sure the new `_splits` includes it. The only property of a locked split that can have changed is its `lockedUntil` property, which can be extended.
 
-   ```solidity
-   for (uint256 _i = 0; _i < _splits.length; _i++) { ... }
-   ```
-8. Check that the percent for the current split is not zero.
+```solidity
+// Keep a reference to whether or not the locked split being iterated on is included.
+bool _includesLocked = false;
 
-   ```solidity
-   // The percent should be greater than 0.
-   require(_splits[_i].percent > 0, '0x10: BAD_SPLIT_PERCENT');
-   ```
-9. Check that the split specifies a recipient. Either an `allocator` must be specified or a `beneficiary` must be specified.
+for (uint256 _j = 0; _j < _splits.length; _j++) {
+  // Check for sameness.
+  if (
+    _splits[_j].percent == _currentSplits[_i].percent &&
+    _splits[_j].beneficiary == _currentSplits[_i].beneficiary &&
+    _splits[_j].allocator == _currentSplits[_i].allocator &&
+    _splits[_j].projectId == _currentSplits[_i].projectId &&
+    // Allow lock extention.
+    _splits[_j].lockedUntil >= _currentSplits[_i].lockedUntil
+  ) _includesLocked = true;
+}
+```
 
-   ```solidity
-   // The allocator and the beneficiary shouldn't both be the zero address.
-   require(
-     _splits[_i].allocator != IJBSplitAllocator(address(0)) ||
-       _splits[_i].beneficiary != address(0),
-     '0x11: ZERO_ADDRESS'
-   );
-   ```
-10. Increment the total percents that have been accumulated so far.
+Check to make sure the provided `_splits` includes any locked current splits.
+
+````
+```solidity
+require(_includesLocked, '0x0f: SOME_LOCKED');
+```
+````
+
+5\. After the loop, delete the current splits from storage so we can repopulate them.
+
+```solidity
+// Delete from storage so splits can be repopulated.
+delete _splitsOf[_projectId][_domain][_group];
+```
+
+Internal references:
+
+* [`_splitsOf`](../properties/\_splitsof.md)
+*   Store a local variable to keep track of all the percents from the splits.
+
+    ```solidity
+    // Add up all the percents to make sure they cumulative are under 100%.
+    uint256 _percentTotal = 0;
+    ```
+*   Loop through each newly provided `_splits` to validate
+
+    ```solidity
+    for (uint256 _i = 0; _i < _splits.length; _i++) { ... }
+    ```
+*   Check that the percent for the current split is not zero.
+
+    ```solidity
+    // The percent should be greater than 0.
+    require(_splits[_i].percent > 0, '0x10: BAD_SPLIT_PERCENT');
+    ```
+*   Check that the split specifies a recipient. Either an `allocator` must be specified or a `beneficiary` must be specified.
+
+    ```solidity
+    // The allocator and the beneficiary shouldn't both be the zero address.
+    require(
+      _splits[_i].allocator != IJBSplitAllocator(address(0)) ||
+        _splits[_i].beneficiary != address(0),
+      '0x11: ZERO_ADDRESS'
+    );
+    ```
+*   Increment the total percents that have been accumulated so far.
 
     ```solidity
     // Add to the total percents.
     _percentTotal = _percentTotal + _splits[_i].percent;
     ```
-11. Make sure the accumulated percents are under 100%. Split percents are out of 10000.
+*   Make sure the accumulated percents are under 100%. Split percents are out of 10000.
 
     ```solidity
     // The total percent should be less than 10000.
     require(_percentTotal <= 10000, '0x12: BAD_TOTAL_PERCENT');
     ```
-12. Push the split onto the stored `_splits` value.
+*   Push the split onto the stored `_splits` value.
 
     ```solidity
     // Push the new split into the project's list of splits.
@@ -145,7 +149,7 @@ function set(
     Internal references:
 
     * [`_splitsOf`](../properties/\_splitsof.md)
-13. For each added split, emit a `SetSplit` event with all relevant parameters.
+*   For each added split, emit a `SetSplit` event with all relevant parameters.
 
     ```solidity
     emit SetSplit(_projectId, _domain, _group, _splits[_i], msg.sender);

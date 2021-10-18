@@ -30,8 +30,6 @@ Rinkeby testnet: _Not yet deployed_
 | -------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | [**`JBOperatable`**](../or-abstract/jboperatable/) | <p>Includes convenience functionality for checking a message sender's permissions before executing certain transactions.</p><p><a href="../or-abstract/jboperatable/">more</a></p> |
 
-
-
 ## Constructor
 
 ```solidity
@@ -57,7 +55,7 @@ constructor(IJBOperatorStore _operatorStore, IJBProjects _projects) JBOperatable
 
 | Function                                                                                   | Definition                                                                                                                                                                                                                        |
 | ------------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [**`projects`**](properties/projects.md) | <p><strong>Traits</strong></p><ul><li><code>immutable</code></li></ul><p><strong>Returns</strong></p><ul><li><a href="../../interfaces/ijbprojects.md"><code>IJBProjects</code></a><code>projects</code></li></ul>                |
+| [**`projects`**](../or-payment-terminals/jbethpaymentterminalstore/properties/projects.md) | <p><strong>Traits</strong></p><ul><li><code>immutable</code></li></ul><p><strong>Returns</strong></p><ul><li><a href="../../interfaces/ijbprojects.md"><code>IJBProjects</code></a><code>projects</code></li></ul>                |
 | [**`controllerOf`**](properties/controllerof.md)                                           | <p><strong>Params</strong></p><ul><li><code>uint256 _projectId</code></li></ul><p><strong>Returns</strong></p><ul><li><a href="../or-controllers/jbcontroller/"><code>IJBController</code></a><code>controllerOf</code></li></ul> |
 
 ## Read
@@ -77,4 +75,3 @@ constructor(IJBOperatorStore _operatorStore, IJBProjects _projects) JBOperatable
 | [**`addTerminalOf`**](write/addterminalof.md)               | <p><strong>Traits</strong></p><ul><li><a href="../or-abstract/jboperatable/modifiers/requirepermissionallowingoverride.md"><code>requirePermissionAllowingOverride</code></a></li></ul><p><strong>Params</strong></p><ul><li><code>uint256 _projectId</code></li><li><a href="../../interfaces/ijbterminal.md"><code>IJBTerminal</code></a><code>_terminal</code></li></ul>       |
 | [**`removeTerminalOf`**](write/removeterminalof.md)         | <p><strong>Traits</strong></p><ul><li><a href="../or-abstract/jboperatable/modifiers/requirepermission.md"><code>requirePermission</code></a></li></ul><p><strong>Params</strong></p><ul><li><code>uint256 _projectId</code></li><li><a href="../../interfaces/ijbterminal.md"><code>IJBTerminal</code></a><code>_terminal</code></li></ul>                                       |
 | [**`setPrimaryTerminalOf`**](write/setprimaryterminalof.md) | <p><strong>Traits</strong></p><ul><li><a href="../or-abstract/jboperatable/modifiers/requirepermission.md"><code>requirePermission</code></a></li></ul><p><strong>Params</strong></p><ul><li><code>uint256 _projectId</code></li><li><a href="../../interfaces/ijbterminal.md"><code>IJBTerminal</code></a><code>_terminal</code></li></ul>                                       |
-

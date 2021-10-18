@@ -6,7 +6,7 @@ Contract:[`JBFundingCycleStore`](../)​
 {% tab title="Step by step" %}
 **The currency ballot state of the project.**
 
-# Definition
+## Definition
 
 ```solidity
 function _getStructFor(uint256 _id) private view returns (JBFundingCycle memory fundingCycle) { ... }
@@ -18,8 +18,7 @@ function _getStructFor(uint256 _id) private view returns (JBFundingCycle memory 
 * The function does not alter state on the blockchain.
 * The function returns a [`JBFundingCycle`](../../../data-structures/jbfundingcycle.md) stored in the `fundingCycle` reference.
 
-
-# Body 
+## Body
 
 1.  If the `_id` provided is 0, return an empty funding cycle.
 
@@ -27,15 +26,11 @@ function _getStructFor(uint256 _id) private view returns (JBFundingCycle memory 
     // Return an empty funding cycle if the ID specified is 0.
     if (_id == 0) return fundingCycle;
     ```
-
-
 2.  Set the funding cycle's id to the provided value.
 
     ```solidity
     fundingCycle.id = _id;
     ```
-
-
 3.  Get the stored intrinsic properties of the funding cycle. Populate the struct values by de-packing the `uint256`.
 
     ```solidity
@@ -51,8 +46,6 @@ function _getStructFor(uint256 _id) private view returns (JBFundingCycle memory 
     _Internal references:_
 
     * [`_packedIntrinsicPropertiesOf`](../properties/\_packedintrinsicpropertiesof.md)
-
-
 4.  Get the stored configuration properties of the funding cycle. Populate the struct values by unpacking the `uint256`.
 
     ```solidity
@@ -69,8 +62,6 @@ function _getStructFor(uint256 _id) private view returns (JBFundingCycle memory 
     _Internal references:_
 
     * [`_packedConfigurationPropertiesOf`](../properties/\_packedconfigurationpropertiesof.md)
-
-
 5.  Populate the `target` property of the struct by reading from what's stored in `_targetOf`.
 
     ```solidity
@@ -80,8 +71,6 @@ function _getStructFor(uint256 _id) private view returns (JBFundingCycle memory 
     _Internal references:_
 
     * [`_targetOf`](../properties/\_targetof.md)
-
-
 6.  Populate the `tapped` property of the struct by reading from what's stored in `_tappedAmountOf`.
 
     ```solidity
@@ -91,8 +80,6 @@ function _getStructFor(uint256 _id) private view returns (JBFundingCycle memory 
     _Internal references:_
 
     * [`_tappedAmountOf`](../properties/\_targetof.md)
-
-
 7.  Populate the `metadata` property of the struct by reading from what's stored in `_metadataOf`.
 
     ```solidity
@@ -152,4 +139,3 @@ function _getStructFor(uint256 _id) private view returns (JBFundingCycle memory 
 | **High severity** | Identify a vulnerability in this operation that could lead to data corruption or loss of funds.                                        | 5+ETH  |
 {% endtab %}
 {% endtabs %}
-

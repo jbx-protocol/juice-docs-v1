@@ -8,7 +8,7 @@ Interface: `IJBFundingCycleStore`
 {% tab title="Step by step" %}
 **The currency ballot state of the project.**
 
-# Definition
+## Definition
 
 ```solidity
 function currentBallotStateOf(uint256 _projectId) external view override returns (JBBallotState) { ... } 
@@ -21,8 +21,7 @@ function currentBallotStateOf(uint256 _projectId) external view override returns
 * The function overrides a function definition from the `IJBFundingCycleStore` interface.
 * The function returns a [`JBBallotState`](../../../enums/jbballotstate.md).
 
-
-# Body 
+## Body
 
 1.  Get a reference to the latest funding cycle for the `_projectId`.
 
@@ -30,8 +29,6 @@ function currentBallotStateOf(uint256 _projectId) external view override returns
     // Get a reference to the latest funding cycle ID.
     uint256 _fundingCycleId = latestIdOf[_projectId];
     ```
-
-
 2.  Check that there is a funding cycle for the project.
 
     ```solidity
@@ -42,8 +39,6 @@ function currentBallotStateOf(uint256 _projectId) external view override returns
     _Internal references:_
 
     * [`latestIdOf`](../properties/latestidof.md)
-
-
 3.  Get a reference to the funding cycle for the latest funding cycle.
 
     ```solidity
@@ -54,16 +49,12 @@ function currentBallotStateOf(uint256 _projectId) external view override returns
     _Internal references:_
 
     * [`_getStructFor`](\_getstructfor.md)
-
-
 4.  If this is the first funding cycle for the project, it must be approved.
 
     ```solidity
     // If the latest funding cycle is the first, or if it has already started, it must be approved.
     if (_fundingCycle.basedOn == 0) return JBBallotState.Approved;
     ```
-
-
 5.  Return the `_ballotStateOf` the latest funding cycle ID as is determined by the current configuration and the funding cycle it's based on.
 
     ```solidity
@@ -117,4 +108,3 @@ function currentBallotStateOf(uint256 _projectId) external view override returns
 | **High severity** | Identify a vulnerability in this operation that could lead to data corruption or loss of funds.                                        | 5+ETH  |
 {% endtab %}
 {% endtabs %}
-

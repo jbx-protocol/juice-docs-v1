@@ -1,5 +1,8 @@
 ---
-description: Stores splits information for all groups of each project.
+description: >-
+  Stores information about how arbitrary distributions should be split. The
+  information is represented as a JBSplit data structure. The protocol uses
+  these to split up payout distributions and reserved
 ---
 
 # JBSplitStore

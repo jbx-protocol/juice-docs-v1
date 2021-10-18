@@ -10,7 +10,7 @@ Interface: [`IJBDirectory`](../../../interfaces/ijbdirectory.md)
 
 Only a project owner, an operator, or its controller can add a terminal.
 
-# Definition
+## Definition
 
 ```solidity
 function addTerminalOf(uint256 _projectId, IJBTerminal _terminal)
@@ -31,47 +31,43 @@ function addTerminalOf(uint256 _projectId, IJBTerminal _terminal)
 * The function overrides a function definition from the `IJBDirectory` interface.
 * The function returns nothing.
 
+## Body
 
-# Body 
-  
-1. Make sure the provided terminal isn't the zero address. 
+1.  Make sure the provided terminal isn't the zero address.
 
-   ```solidity
-   // Can't set the zero address.
-   require(_terminal != IJBTerminal(address(0)), '0x2d: ZERO_ADDRESS');
-   ```
+    ```solidity
+    // Can't set the zero address.
+    require(_terminal != IJBTerminal(address(0)), '0x2d: ZERO_ADDRESS');
+    ```
+2.  If the terminal is already in the project's list of terminals, there's nothing left to do.
 
-2. If the terminal is already in the project's list of terminals, there's nothing left to do. 
+    ```solidity
+    // If the terminal is already in the project's list of terminals, return.
+    if (isTerminalOf(_projectId, _terminal)) return;
+    ```
 
-   ```solidity
-   // If the terminal is already in the project's list of terminals, return.
-   if (isTerminalOf(_projectId, _terminal)) return;
-   ```
+    Internal references:
 
-   Internal references:
+    * [`isTerminalOf`](../read/isterminalof.md)
+3.  Add the terminal to the project's list of terminals.
 
-   * [`isTerminalOf`](../read/isterminalof.md)
+    ```solidity
+    // Set the new terminal.
+    _terminalsOf[_projectId].push(_terminal);
+    ```
 
-3. Add the terminal to the project's list of terminals. 
+    Internal references:
 
-   ```solidity
-   // Set the new terminal.
-   _terminalsOf[_projectId].push(_terminal);
-   ```
+    * [`_terminalsOf`](../properties/\_terminalsof.md)
+4.  Emit a `AddTerminal` event with the all relevant parameters.
 
-   Internal references:
+    ```solidity
+    emit AddTerminal(_projectId, _terminal, msg.sender);
+    ```
 
-   * [`_terminalsOf`](../properties/_terminalsof.md)
+    _Event references:_
 
-4. Emit a `AddTerminal` event with the all relevant parameters.
-
-   ```solidity
-   emit AddTerminal(_projectId, _terminal, msg.sender);
-   ```
-
-   _Event references:_
-
-   *  [`AddTerminal`](../events/addterminal.md)
+    * [`AddTerminal`](../events/addterminal.md)
 {% endtab %}
 
 {% tab title="Code" %}

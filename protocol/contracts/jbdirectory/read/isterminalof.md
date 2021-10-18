@@ -4,7 +4,7 @@
 {% tab title="Step by step" %}
 **Whether or not a specified terminal is a terminal of the specified project.**
 
-# Definition
+## Definition
 
 ```solidity
 function isTerminalOf(uint256 _projectId, IJBTerminal _terminal)
@@ -17,29 +17,28 @@ function isTerminalOf(uint256 _projectId, IJBTerminal _terminal)
 * Arguments:
   * `_projectId` is the ID of the project to check within.
   * `_terminal` is the address of the terminal to check for.
-* The view function can be accessed externally by anyone. 
+* The view function can be accessed externally by anyone.
 * The function does not alter state on the blockchain.
 * The function overrides a function definition from the `IJBDirectory` interface.
 * The function returns a flag indicating whether or not the specified terminal is a terminal of the specified project.
 
-# Body 
+## Body
 
-1. Loop through each of the project's terminals looking for the one specified. If it's found, return true.
+1.  Loop through each of the project's terminals looking for the one specified. If it's found, return true.
 
-   ```solidity
-   for (uint256 _i; _i < _terminalsOf[_projectId].length; _i++)
-     if (_terminalsOf[_projectId][_i] == _terminal) return true;
-   ```
+    ```solidity
+    for (uint256 _i; _i < _terminalsOf[_projectId].length; _i++)
+      if (_terminalsOf[_projectId][_i] == _terminal) return true;
+    ```
 
-   Internal references:
+    Internal references:
 
-   * [`_terminalsOf`](../properties/_terminalsof.md)
+    * [`_terminalsOf`](../properties/\_terminalsof.md)
+2.  If a terminal is not found, return false.
 
-2. If a terminal is not found, return false.
-
-   ```solidity
-   return false;
-   ```
+    ```solidity
+    return false;
+    ```
 {% endtab %}
 
 {% tab title="Code" %}

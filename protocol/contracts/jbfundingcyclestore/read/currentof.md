@@ -10,9 +10,9 @@ Interface: `IJBFundingCycleStore`
 
 _Returns an empty funding cycle with an ID of 0 if a current funding cycle of the project is not found._
 
-_This runs roughly similar logic to [`_tappableOf`](../write/\_tappableof.md)._
+_This runs roughly similar logic to _[_`_tappableOf`_](../write/\_tappableof.md)_._
 
-# Definition
+## Definition
 
 ```solidity
 function currentOf(uint256 _projectId)
@@ -29,9 +29,7 @@ function currentOf(uint256 _projectId)
 * The function overrides a function definition from the `IJBFundingCycleStore` interface.
 * The function returns a [`JBFundingCycle`](../../../data-structures/jbfundingcycle.md).
 
-
-# Body 
-
+## Body
 
 1.  If there are no stored funding cycles for the provided project, there can't be an active funding cycle so an empty funding cycle should be returned.
 
@@ -43,8 +41,6 @@ function currentOf(uint256 _projectId)
     _Internal references:_
 
     * [`_getStructFor`](\_getstructfor.md)
-
-
 2.  Get a reference to an eligible funding cycle if there is one. This eligible cycle might not yet be approved.
 
     ```solidity
@@ -55,8 +51,6 @@ function currentOf(uint256 _projectId)
     _Internal references:_
 
     * [`_eligibleOf`](\_eligibleof.md)
-
-
 3.  If an eligible funding cycle isn't found, check for funding cycle on standby. It's possible that a standby funding cycle will become active once it has been tapped.
 
     ```solidity
@@ -68,16 +62,12 @@ function currentOf(uint256 _projectId)
     _Internal references:_
 
     * [`_standbyOf`](\_standbyof.md)
-
-
 4.  Create a reference to a funding cycle.
 
     ```solidity
     // Keep a reference to the eligible funding cycle.
     JBFundingCycle memory _fundingCycle;
     ```
-
-
 5.  If there's a candidate funding cycle ID, check to see if it has started, and if it is approved. If so, return the funding cycle as the `currentOf` the project. Otherwise, get a reference to the funding cycle that the candidate is based on. A current funding cycle will be one derived from this reference.
 
     ```solidity
@@ -100,8 +90,6 @@ function currentOf(uint256 _projectId)
 
     * [`_getStructFor`](\_getstructfor.md)
     * [`_isApproved`](\_isapproved.md)
-
-
 6.  If there's not a candidate funding cycle ID, get a reference the latest stored funding cycle for the project. If it's not approved, get a reference to the cycle it's based on. A current funding cycle will be one derived from this reference.
 
     ```solidity
@@ -123,8 +111,6 @@ function currentOf(uint256 _projectId)
     * [`latestIdOf`](../properties/latestidof.md)
     * [`_getStructFor`](\_getstructfor.md)
     * [`_isApproved`](\_isapproved.md)
-
-
 7.  If the current reference ID is 0, there must not be a current cycle so return an empty one with an ID of 0.
 
     ```solidity
@@ -135,8 +121,6 @@ function currentOf(uint256 _projectId)
     _Internal references:_
 
     * [`_getStructFor`](\_getstructfor.md)
-
-
 8.  Create the funding cycle structure using the current reference. The current funding cycle will be one based on this reference.
 
     ```solidity
@@ -147,8 +131,6 @@ function currentOf(uint256 _projectId)
     _Internal references:_
 
     * [`_getStructFor`](\_getstructfor.md)
-
-
 9.  Return a funding cycle based on the one currently referenced. This funding cycle will be stored once it has been tapped. The mock funding cycle is allowed to have started already, which is why a `true` flag is passed in.
 
     ```solidity
@@ -242,6 +224,3 @@ function currentOf(uint256 _projectId)
 | **High severity** | Identify a vulnerability in this operation that could lead to data corruption or loss of funds.                                        | 5+ETH  |
 {% endtab %}
 {% endtabs %}
-
-
-

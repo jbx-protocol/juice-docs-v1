@@ -6,9 +6,9 @@ Interface: `IJBSplitStore`
 
 {% tabs %}
 {% tab title="Step by step" %}
-**Get all splits for the specified project ID, within the specified domain, for the specified group.**  
-  
-# Definition
+**Get all splits for the specified project ID, within the specified domain, for the specified group.**
+
+## Definition
 
 ```solidity
 function splitsOf(
@@ -22,22 +22,22 @@ function splitsOf(
   * `_projectId` is the ID of the project to get splits for.
   * `_domain` is an identifier within which the returned splits should be considered active.
   * `_group` is the identifying group of the splits.
-* The view function can be accessed externally by anyone. 
+* The view function can be accessed externally by anyone.
 * The function does not alter state on the blockchain.
 * The function overrides a function definition from the `IJBSplitStore` interface.
 * The function returns an array of [`JBSplit`](../../../data-structures/jbsplit.md)s.
 
-# Body 
-  
-1. This function just reads and returns the stored `_splitsOf` the project, within the specified domain, for the specified group.  
+## Body
 
-   ```solidity
-   return _splitsOf[_projectId][_domain][_group];
-   ```
+1.  This function just reads and returns the stored `_splitsOf` the project, within the specified domain, for the specified group.
 
-   Internal references:
+    ```solidity
+    return _splitsOf[_projectId][_domain][_group];
+    ```
 
-   * [`_splitsOf`](../properties/_splitsof.md)
+    Internal references:
+
+    * [`_splitsOf`](../properties/\_splitsof.md)
 {% endtab %}
 
 {% tab title="Code" %}
@@ -63,11 +63,10 @@ function splitsOf(
 {% endtab %}
 
 {% tab title="Bug bounty" %}
-| Category | Description | Reward |
-| :--- | :--- | :--- |
-| **Optimization** | Help make this operation more efficient. | 0.5ETH |
-| **Low severity** | Identify a vulnerability in this operation that could lead to an inconvenience for a user of the protocol or for a protocol developer. | 1ETH |
-| **High severity** | Identify a vulnerability in this operation that could lead to data corruption or loss of funds. | 5+ETH |
+| Category          | Description                                                                                                                            | Reward |
+| ----------------- | -------------------------------------------------------------------------------------------------------------------------------------- | ------ |
+| **Optimization**  | Help make this operation more efficient.                                                                                               | 0.5ETH |
+| **Low severity**  | Identify a vulnerability in this operation that could lead to an inconvenience for a user of the protocol or for a protocol developer. | 1ETH   |
+| **High severity** | Identify a vulnerability in this operation that could lead to data corruption or loss of funds.                                        | 5+ETH  |
 {% endtab %}
 {% endtabs %}
-

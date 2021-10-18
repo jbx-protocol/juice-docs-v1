@@ -4,9 +4,9 @@ Contract:[`JBFundingCycleStore`](../)​
 
 {% tabs %}
 {% tab title="Step by step" %}
-**Initializes a funding cycle with the appropriate properties.**\
+**Initializes a funding cycle with the appropriate properties.**\\
 
-# Definition
+## Definition
 
 ```solidity
 function _initFor(
@@ -24,7 +24,7 @@ function _initFor(
 * The function is private to this contract.
 * The function returns the ID of the initialized funding cycle.
 
-# Body 
+## Body
 
 1.  If no base funding cycle was provided, create a first funding cycle for the project. Otherwise, create a new funding cycle by calling`_updateFundingCycleBasedOn`, which will derive properties for the funding cycle that follows the specified base cycle, and store them to an ID.
 
@@ -60,8 +60,6 @@ function _initFor(
     * [`_idFor`](../read/\_idfor.md)
     * [`_packAndStoreIntrinsicPropertiesOf`](\_packandstoreintrinsicpropertiesof.md)
     * [`_updateFundingCycleBasedOn`](\_updatefundingcyclebasedon.md)
-
-
 2.  Store the initialized ID as the `latestIdOf` the project.
 
     ```solidity
@@ -72,8 +70,6 @@ function _initFor(
     _Internal references:_
 
     * [`latestIdOf`](../properties/latestidof.md)
-
-
 3.  Emit an `Init` event with the all relevant parameters.
 
     ```solidity
@@ -82,7 +78,7 @@ function _initFor(
 
     _Event references:_
 
-    * [`Init`](../events/init.md) 
+    * [`Init`](../events/init.md)
 {% endtab %}
 
 {% tab title="Code" %}
@@ -144,9 +140,9 @@ function _initFor(
 {% endtab %}
 
 {% tab title="Events" %}
-| Name       | Data                                                                                                                                                                                                   |
-| ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| **`Init`** | <ul><li><code>uint256 indexed fundingCycleId</code> </li><li><code>uint256 indexed projectId</code> </li><li><code>uint256 indexed basedOn</code></li></ul><p><a href="../events/init.md">more</a></p> |
+| Name       | Data                                                                                                                                                                                                 |
+| ---------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **`Init`** | <ul><li><code>uint256 indexed fundingCycleId</code></li><li><code>uint256 indexed projectId</code></li><li><code>uint256 indexed basedOn</code></li></ul><p><a href="../events/init.md">more</a></p> |
 {% endtab %}
 
 {% tab title="Bug bounty" %}
@@ -157,4 +153,3 @@ function _initFor(
 | **High severity** | Identify a vulnerability in this operation that could lead to data corruption or loss of funds.                                        | 5+ETH  |
 {% endtab %}
 {% endtabs %}
-

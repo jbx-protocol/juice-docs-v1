@@ -12,7 +12,7 @@ Interface: [`IJBDirectory`](../../../interfaces/ijbdirectory.md)
 
 _The terminal will be set as the primary for the token that its vault accepts._
 
-# Definition
+## Definition
 
 ```solidity
 function setPrimaryTerminalOf(uint256 _projectId, IJBTerminal _terminal)
@@ -28,36 +28,33 @@ function setPrimaryTerminalOf(uint256 _projectId, IJBTerminal _terminal)
 * The function overrides a function definition from the `IJBDirectory` interface.
 * The function returns nothing.
 
+## Body
 
-# Body 
-  
-1. Get a reference to the token that the provided terminal's vault accepts. 
+1.  Get a reference to the token that the provided terminal's vault accepts.
 
-   ```solidity
-   // Get a reference to the token that the terminal's vault accepts.
-   address _token = _terminal.vault().token();
-   ```
+    ```solidity
+    // Get a reference to the token that the terminal's vault accepts.
+    address _token = _terminal.vault().token();
+    ```
+2.  Store the provided terminal as the `_primaryTerminalOf` the project for the token.
 
-2. Store the provided terminal as the `_primaryTerminalOf` the project for the token.
+    ```solidity
+    // Store the terminal as the primary for the particular token.
+    _primaryTerminalOf[_projectId][_token] = _terminal;
+    ```
 
-   ```solidity
-   // Store the terminal as the primary for the particular token.
-   _primaryTerminalOf[_projectId][_token] = _terminal;
-   ```
+    Internal references:
 
-   Internal references:
+    * [`_primaryTerminalOf`](../read/primaryTerminalOf.md)
+3.  Emit a `SetPrimaryTerminal` event with the all relevant parameters.
 
-   * [`_primaryTerminalOf`](../read/primaryTerminalOf.md)
+    ```solidity
+    emit SetPrimaryTerminal(_projectId, _token, _terminal, msg.sender);
+    ```
 
-3. Emit a `SetPrimaryTerminal` event with the all relevant parameters.
+    _Event references:_
 
-   ```solidity
-   emit SetPrimaryTerminal(_projectId, _token, _terminal, msg.sender);
-   ```
-
-   _Event references:_
-
-   *  [`SetPrimaryTerminal`](../events/setprimaryterminalmd)
+    * [`SetPrimaryTerminal`](../events/setprimaryterminalmd/)
 {% endtab %}
 
 {% tab title="Code" %}

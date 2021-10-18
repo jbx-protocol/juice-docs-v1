@@ -6,7 +6,7 @@ Contract:[`JBFundingCycleStore`](../)​
 {% tab title="Step by step" %}
 **The accumulated weight change since the specified funding cycle.**
 
-# Definition
+## Definition
 
 ```solidity
 function _deriveWeightFrom(JBFundingCycle memory _baseFundingCycle, uint256 _start) 
@@ -22,8 +22,7 @@ function _deriveWeightFrom(JBFundingCycle memory _baseFundingCycle, uint256 _sta
 * The function does not alter state on the blockchain.
 * The function returns a weight with 18 decimal places.
 
-# Body 
-
+## Body
 
 1.  If the base funding cycle has no duration, the derived weight should be calculated from it no matter how much time has passed since it was active. The `discountRate` property in a [`JBFundingCycle`](../../../data-structures/jbfundingcycle.md)is out of 10000. Discount rates represent a number between 0-100%, with 0.01% fidelity, so the calculation must be made out of 10000.
 
@@ -32,32 +31,24 @@ function _deriveWeightFrom(JBFundingCycle memory _baseFundingCycle, uint256 _sta
     if (_baseFundingCycle.duration == 0)
       return PRBMath.mulDiv(_baseFundingCycle.weight, 10000 - _baseFundingCycle.discountRate, 10000);
     ```
-
-
 2.  The calculations that follow will progressively apply discount rates to the `_baseFundingCycle`'s weight to arrive at the correct weight to return.
 
     ```solidity
     // The weight should be based off the base funding cycle's weight.
     weight = _baseFundingCycle.weight;
     ```
-
-
 3.  If the base doesn't have a discount rate, the original weight won't change and should be returned.
 
     ```solidity
     // If the discount is 0, the weight doesn't change.
     if (_baseFundingCycle.discountRate == 0) return weight;
     ```
-
-
-4.  Get a reference to how long after the `_baseFundingCycle`'s start the specified `_start` time is. The goal will be to see how many cycles have passed within this time distance. 
+4.  Get a reference to how long after the `_baseFundingCycle`'s start the specified `_start` time is. The goal will be to see how many cycles have passed within this time distance.
 
     ```solidity
     // The difference between the start of the base funding cycle and the proposed start.
     uint256 _startDistance = _start - _baseFundingCycle.start;
     ```
-
-
 5.  Apply the `_baseFundingCycle`'s discount rate. Apply the rate as many times as there have been cycles within the `_startDistance`.
 
     ```solidity
@@ -72,7 +63,7 @@ function _deriveWeightFrom(JBFundingCycle memory _baseFundingCycle, uint256 _sta
 
     _Internal references:_
 
-    * [`_SECONDS_IN_DAY`](../properties/\_seconds_in_day.md)
+    * [`_SECONDS_IN_DAY`](../properties/\_seconds\_in\_day.md)
 {% endtab %}
 
 {% tab title="Code" %}
@@ -122,4 +113,3 @@ function _deriveWeightFrom(
 | **High severity** | Identify a vulnerability in this operation that could lead to data corruption or loss of funds.                                        | 5+ETH  |
 {% endtab %}
 {% endtabs %}
-

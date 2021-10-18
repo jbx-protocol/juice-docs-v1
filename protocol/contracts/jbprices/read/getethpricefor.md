@@ -8,20 +8,20 @@ Interface: `IJBPrices`
 {% tab title="Step by step" %}
 **Gets the current price of the provided currency in terms of the provided base currency.**
 
-# Definition
+## Definition
 
 ```solidity
 function priceFor(uint256 _currency, uint256 _base) external view override returns (uint256) { ... }
 ```
 
-* Arguments: 
+* Arguments:
   * `_currency` is the currency to get a price for.
   * `_base` is the currency to base the price on.
-* The function can be accessed externally by anyone. 
+* The function can be accessed externally by anyone.
 * The function overrides a function definition from the `IJBPrices` interface.
 * The function returns the price of the currency in terms of the base, with 18 decimals.
 
-# Body 
+## Body
 
 1.  Return 1 if the `_currency` and the `_base` are the same, since they have the same price. Normalize to `targetDecimals` number of decimals.
 
@@ -33,8 +33,6 @@ function priceFor(uint256 _currency, uint256 _base) external view override retur
     Internal references:
 
     * [`TARGET_DECIMALS`](../properties/targetdecimals.md)
-
-
 2.  Get a reference to the feed.
 
     ```solidity
@@ -45,24 +43,18 @@ function priceFor(uint256 _currency, uint256 _base) external view override retur
     Internal references:
 
     * [`feedFor`](../properties/targetdecimals.md)
-
-
 3.  Make sure there is a feed stored for the `_currency` `_base` pair.
 
     ```solidity
     // Feed must exist.
     require(_feed != AggregatorV3Interface(address(0)), '0x03: NOT_FOUND');
     ```
-
-
 4.  Get the latest price being reported by the price feed. The `latestRoundData` function returns several feed parameters, but only the `_price` is needed.
 
     ```solidity
     // Get the latest round information. Only need the price is needed.
     (, int256 _price, , , ) = _feed.latestRoundData();
     ```
-
-
 5.  Return the `_price`, normalizing the value to `TARGET_DECIMALS` decimal fidelity.
 
     ```solidity
@@ -109,8 +101,6 @@ function priceFor(uint256 _currency, uint256 _base) external view override retur
 | String                | Description                                                        |
 | --------------------- | ------------------------------------------------------------------ |
 | **`0x03: NOT_FOUND`** | Thrown if a feed wasn't found for the specified currency and base. |
-
-
 {% endtab %}
 
 {% tab title="Bug bounty" %}
@@ -121,4 +111,3 @@ function priceFor(uint256 _currency, uint256 _base) external view override retur
 | **High severity** | Identify a vulnerability in this operation that could lead to data corruption or loss of funds.                                        | 5+ETH  |
 {% endtab %}
 {% endtabs %}
-

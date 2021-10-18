@@ -12,7 +12,7 @@ Interface: [`IJBProjects`](../../../interfaces/ijbprojects.md)
 
 **This can be used to make sure a handle belonging to a stale project isn't lost forever.**
 
-# Definition
+## Definition
 
 ```solidity
 function challengeHandle(bytes32 _handle) external override { ... }
@@ -24,63 +24,63 @@ function challengeHandle(bytes32 _handle) external override { ... }
 * The function overrides a function definition from the `IJBProjects` interface.
 * The function doesn't return anything.
 
-# Body 
+## Body
 
-1. Get a reference to the project to which the handle being challenged belongs.
+1.  Get a reference to the project to which the handle being challenged belongs.
 
-   ```solidity
-   // Get a reference to the ID of the project to which the handle belongs.
-   uint256 _projectId = idFor[_handle];
-   ```
+    ```solidity
+    // Get a reference to the ID of the project to which the handle belongs.
+    uint256 _projectId = idFor[_handle];
+    ```
 
-   _Internal references:_
+    _Internal references:_
 
-   * [`idFor`](../properties/idfor.md)
-2. Check if the handle is being used.
+    * [`idFor`](../properties/idfor.md)
+2.  Check if the handle is being used.
 
-   ```solidity
-   // No need to challenge a handle that's not taken.
-   require(_projectId > 0, '0x0d: HANDLE_NOT_TAKEN');
-   ```
-4. Check if the handle is already being challenged.
+    ```solidity
+    // No need to challenge a handle that's not taken.
+    require(_projectId > 0, '0x0d: HANDLE_NOT_TAKEN');
+    ```
+3.  Check if the handle is already being challenged.
 
-   ```solidity
-   // No need to challenge again if a handle is already being challenged.
-   require(challengeExpiryOf[_handle] == 0, '0x0e: CHALLENGE_OPEN');
-   ```
+    ```solidity
+    // No need to challenge again if a handle is already being challenged.
+    require(challengeExpiryOf[_handle] == 0, '0x0e: CHALLENGE_OPEN');
+    ```
 
-   _Internal references:_
+    _Internal references:_
 
-   * [`challengeExpiryOf`](../properties/challengeexpiryof.md)
-5. The challenge will expire one year from the current timestamp. If the `_handle` is not renewed before then, anyone will be able to claim the handle by calling [`claimHandle`](claimhandle.md).
+    * [`challengeExpiryOf`](../properties/challengeexpiryof.md)
+4.  The challenge will expire one year from the current timestamp. If the `_handle` is not renewed before then, anyone will be able to claim the handle by calling [`claimHandle`](claimhandle.md).
 
-   ```solidity
-   // The challenge will expire in a year, at which point the handle can be claimed if it has yet to be renewed.
-   uint256 _challengeExpiry = block.timestamp + _SECONDS_IN_YEAR;
-   ```
+    ```solidity
+    // The challenge will expire in a year, at which point the handle can be claimed if it has yet to be renewed.
+    uint256 _challengeExpiry = block.timestamp + _SECONDS_IN_YEAR;
+    ```
 
-   _Internal references:_
+    _Internal references:_
 
-   * [`_SECONDS_IN_YEAR`](../properties/\_seconds_in_year.md)
-6. Store the `_challengeExpiry` as the `challengeExpiryOf` the provided `_handle`.
+    * [`_SECONDS_IN_YEAR`](../properties/\_seconds\_in\_year.md)
+5.  Store the `_challengeExpiry` as the `challengeExpiryOf` the provided `_handle`.
 
-   ```solidity
-   // Store the challenge expiry for the handle.
-   challengeExpiryOf[_handle] = _challengeExpiry;
-   ```
+    ```solidity
+    // Store the challenge expiry for the handle.
+    challengeExpiryOf[_handle] = _challengeExpiry;
+    ```
 
-   _Internal references:_
+    _Internal references:_
 
-   * [`challengeExpiryOf`](../properties/challengeexpiryof.md)
-7. Emit a `ChallengeHandle` event with the all relevant parameters.
+    * [`challengeExpiryOf`](../properties/challengeexpiryof.md)
+6.  Emit a `ChallengeHandle` event with the all relevant parameters.
 
-   ```solidity
-   emit ChallengeHandle(_handle, _projectId, _challengeExpiry, msg.sender);
-   ```
+    ```solidity
+    emit ChallengeHandle(_handle, _projectId, _challengeExpiry, msg.sender);
+    ```
 
-   _Event references:_
+    _Event references:_
 
-   * [`ChallengeHandle`](../events/challengehandle.md)
+    * [`ChallengeHandle`](../events/challengehandle.md)
 {% endtab %}
 
 {% tab title="Code" %}

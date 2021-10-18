@@ -10,7 +10,7 @@ Interface: [`IJBTokenStore`](../../../interfaces/ijbtokenstore.md)
 
 _Only a token holder or an operator can transfer its unclaimed tokens_.
 
-# Definition
+## Definition
 
 ```solidity
 function transferTo(
@@ -30,73 +30,73 @@ function transferTo(
 * The function overrides a function definition from the `IJBTokenStore` interface.
 * The function returns nothing.
 
-# Body 
+## Body
 
-1. Make sure a recipient was specified.
+1.  Make sure a recipient was specified.
 
-   ```solidity
-   // Can't transfer to the zero address.
-   require(_recipient != address(0), '0x26: ZERO_ADDRESS');
-   ```
-2. Make sure the holder of the tokens isn't also the recipient.
+    ```solidity
+    // Can't transfer to the zero address.
+    require(_recipient != address(0), '0x26: ZERO_ADDRESS');
+    ```
+2.  Make sure the holder of the tokens isn't also the recipient.
 
-   ```solidity
-   // An address can't transfer to itself.
-   require(_holder != _recipient, '0x27: IDENTITY');
-   ```
-3. Make sure there is amount to transfer.
+    ```solidity
+    // An address can't transfer to itself.
+    require(_holder != _recipient, '0x27: IDENTITY');
+    ```
+3.  Make sure there is amount to transfer.
 
-   ```solidity
-   // There must be an amount to transfer.
-   require(_amount > 0, '0x28: NO_OP');
-   ```
-4. Get a reference to the amount of unclaimed tokens the holder has for the project.
+    ```solidity
+    // There must be an amount to transfer.
+    require(_amount > 0, '0x28: NO_OP');
+    ```
+4.  Get a reference to the amount of unclaimed tokens the holder has for the project.
 
-   ```solidity
-   // Get a reference to the amount of unclaimed tokens.
-   uint256 _unclaimedBalance = unclaimedBalanceOf[_holder][_projectId];
-   ```
+    ```solidity
+    // Get a reference to the amount of unclaimed tokens.
+    uint256 _unclaimedBalance = unclaimedBalanceOf[_holder][_projectId];
+    ```
 
-   _Internal references:_
+    _Internal references:_
 
-   * [`unclaimedBalanceOf`](../properties/unclaimedbalanceof.md)
-5. Make sure the holder has enough unclaimed tokens to transfer.
+    * [`unclaimedBalanceOf`](../properties/unclaimedbalanceof.md)
+5.  Make sure the holder has enough unclaimed tokens to transfer.
 
-   ```solidity
-   // There must be enough unclaimed tokens to transfer.
-   require(_amount <= _unclaimedBalance, '0x29: INSUFFICIENT_FUNDS');
-   ```
-6. Subtract the amount from the `unclaimedBalanceOf` the holder for the project.
+    ```solidity
+    // There must be enough unclaimed tokens to transfer.
+    require(_amount <= _unclaimedBalance, '0x29: INSUFFICIENT_FUNDS');
+    ```
+6.  Subtract the amount from the `unclaimedBalanceOf` the holder for the project.
 
-   ```solidity
-   // Subtract from the holder.
-   unclaimedBalanceOf[_holder][_projectId] = unclaimedBalanceOf[_holder][_projectId] - _amount;
-   ```
+    ```solidity
+    // Subtract from the holder.
+    unclaimedBalanceOf[_holder][_projectId] = unclaimedBalanceOf[_holder][_projectId] - _amount;
+    ```
 
-   _Internal references:_
+    _Internal references:_
 
-   * [`unclaimedBalanceOf`](../properties/unclaimedbalanceof.md)
-7. Add the amount to the `unclaimedBalanceOf` the recipient for the project.
+    * [`unclaimedBalanceOf`](../properties/unclaimedbalanceof.md)
+7.  Add the amount to the `unclaimedBalanceOf` the recipient for the project.
 
-   ```solidity
-   // Add the tokens to the recipient.
-   unclaimedBalanceOf[_recipient][_projectId] =
-     unclaimedBalanceOf[_recipient][_projectId] +
-     _amount;
-   ```
+    ```solidity
+    // Add the tokens to the recipient.
+    unclaimedBalanceOf[_recipient][_projectId] =
+      unclaimedBalanceOf[_recipient][_projectId] +
+      _amount;
+    ```
 
-   _Internal references:_
+    _Internal references:_
 
-   * [`unclaimedBalanceOf`](../properties/unclaimedbalanceof.md)
-8. Emit a `Transfer` event with the all relevant parameters.
+    * [`unclaimedBalanceOf`](../properties/unclaimedbalanceof.md)
+8.  Emit a `Transfer` event with the all relevant parameters.
 
-   ```solidity
-   emit Transfer(_holder, _projectId, _recipient, _amount, msg.sender);
-   ```
+    ```solidity
+    emit Transfer(_holder, _projectId, _recipient, _amount, msg.sender);
+    ```
 
-   _Event references:_
+    _Event references:_
 
-   * [`Transfer`](../events/transfer.md)
+    * [`Transfer`](../events/transfer.md)
 {% endtab %}
 
 {% tab title="Code" %}

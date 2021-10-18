@@ -10,7 +10,7 @@ Interface: [`IJBProjects`](../../../interfaces/ijbprojects.md)
 
 _Anyone can create a project on an owner's behalf._
 
-# Definition
+## Definition
 
 ```solidity
 function createFor(
@@ -28,85 +28,85 @@ function createFor(
 * The function overrides a function definition from the `IJBProjects` interface.
 * Returns the token ID of the newly created project.
 
-# Body 
+## Body
 
-1. Check that the provided `_handle` is not empty.
+1.  Check that the provided `_handle` is not empty.
 
-   ```solidity
-   // Handle must exist.
-   require(_handle != bytes32(0), '0x06: EMPTY_HANDLE');
-   ```
-2. Check that the `_handle` is unique. This is done by making sure there isn't yet an `idFor` the handle, and making sure it isn't currently being transferred to an address.
+    ```solidity
+    // Handle must exist.
+    require(_handle != bytes32(0), '0x06: EMPTY_HANDLE');
+    ```
+2.  Check that the `_handle` is unique. This is done by making sure there isn't yet an `idFor` the handle, and making sure it isn't currently being transferred to an address.
 
-   ```solidity
-   // Handle must be unique.
-   require(idFor[_handle] == 0 && transferAddressFor[_handle] == address(0), '0x07: HANDLE_TAKEN');
-   ```
+    ```solidity
+    // Handle must be unique.
+    require(idFor[_handle] == 0 && transferAddressFor[_handle] == address(0), '0x07: HANDLE_TAKEN');
+    ```
 
-   _Internal references:_
+    _Internal references:_
 
-   * [`idFor`](../properties/idfor.md)
-   * [`transferAddressFor`](../properties/transferaddressfor.md)
-2. Increment the count to include the new project being created.
+    * [`idFor`](../properties/idfor.md)
+    * [`transferAddressFor`](../properties/transferaddressfor.md)
+3.  Increment the count to include the new project being created.
 
-   ```solidity
-   // Increment the count, which will be used as the ID.
-   count++;
-   ```
+    ```solidity
+    // Increment the count, which will be used as the ID.
+    count++;
+    ```
 
-   _Internal references:_
+    _Internal references:_
 
-   * [`count`](../properties/count.md)
-3. Mint a new NFT token belonging to the `_owner` using the `count` as the token ID.
+    * [`count`](../properties/count.md)
+4.  Mint a new NFT token belonging to the `_owner` using the `count` as the token ID.
 
-   ```solidity
-   // Mint the project.
-   _safeMint(_owner, count);
-   ```
-4. Store the provided `_handle` as the as the `handleOf` the newly created project.
+    ```solidity
+    // Mint the project.
+    _safeMint(_owner, count);
+    ```
+5.  Store the provided `_handle` as the as the `handleOf` the newly created project.
 
-   ```solidity
-   // Store the handle for the project ID.
-   handleOf[count] = _handle;
-   ```
+    ```solidity
+    // Store the handle for the project ID.
+    handleOf[count] = _handle;
+    ```
 
-   _Internal references:_
+    _Internal references:_
 
-   * [`handleOf`](../properties/handleof.md)
-5. Store the newly created project's ID as the `idFor` the provided `_handle` to allow for project lookup using the handle.
+    * [`handleOf`](../properties/handleof.md)
+6.  Store the newly created project's ID as the `idFor` the provided `_handle` to allow for project lookup using the handle.
 
-   ```solidity
-   // Store the project ID for the handle.
-   idFor[_handle] = count;
-   ```
+    ```solidity
+    // Store the project ID for the handle.
+    idFor[_handle] = count;
+    ```
 
-   _Internal references:_
+    _Internal references:_
 
-   * [`idFor`](../properties/idfor.md)
-6. If a URI was provided (meaning it's not an empty string), store it as the `uriOf` the newly created project.
+    * [`idFor`](../properties/idfor.md)
+7.  If a URI was provided (meaning it's not an empty string), store it as the `uriOf` the newly created project.
 
-   ```solidity
-   // Set the URI if one was provided.
-   if (bytes(_uri).length > 0) uriOf[count] = _uri;
-   ```
+    ```solidity
+    // Set the URI if one was provided.
+    if (bytes(_uri).length > 0) uriOf[count] = _uri;
+    ```
 
-   _Internal references:_
+    _Internal references:_
 
-   * [`uriOf`](../properties/uriof.md)
-7. Emit a `Create` event with all relevant parameters.
+    * [`uriOf`](../properties/uriof.md)
+8.  Emit a `Create` event with all relevant parameters.
 
-   ```
-   emit Create(count, _owner, _handle, _uri, _terminal, msg.sender);
-   ```
+    ```
+    emit Create(count, _owner, _handle, _uri, _terminal, msg.sender);
+    ```
 
-   _Event references:_
+    _Event references:_
 
-   * [`Create`](../events/create.md)
-8. Return the newly created project's token ID.
+    * [`Create`](../events/create.md)
+9.  Return the newly created project's token ID.
 
-   ```solidity
-   return count;
-   ```
+    ```solidity
+    return count;
+    ```
 {% endtab %}
 
 {% tab title="Code" %}

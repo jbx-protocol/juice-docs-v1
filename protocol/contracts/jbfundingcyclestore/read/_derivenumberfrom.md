@@ -6,7 +6,7 @@ Contract:[`JBFundingCycleStore`](../)​
 {% tab title="Step by step" %}
 **The number of the next funding cycle given the specified funding cycle.**
 
-# Definition
+## Definition
 
 ```solidity
 function _deriveNumberFrom(JBFundingCycle memory _baseFundingCycle, uint256 _start) 
@@ -22,25 +22,20 @@ function _deriveNumberFrom(JBFundingCycle memory _baseFundingCycle, uint256 _sta
 * The function does not alter state on the blockchain.
 * The function returns the funding cycle number.
 
+## Body
 
-# Body 
-
-1.  If the `_baseFundingCycle` doesn't have a duration, the next number is 1 more than the base's number. 
+1.  If the `_baseFundingCycle` doesn't have a duration, the next number is 1 more than the base's number.
 
     ```solidity
     // A subsequent cycle to one with a duration of 0 should be the next number.
     if (_baseFundingCycle.duration == 0) return _baseFundingCycle.number + 1;
     ```
-
-
-2.  Get a reference to how long after the `_baseFundingCycle`'s start the specified `_start` time is. The goal will be to see how many cycles have passed within this time distance. 
+2.  Get a reference to how long after the `_baseFundingCycle`'s start the specified `_start` time is. The goal will be to see how many cycles have passed within this time distance.
 
     ```solidity
     // The difference between the start of the base funding cycle and the proposed start.
     uint256 _startDistance = _start - _baseFundingCycle.start;
     ```
-
-
 3.  Return the number of base cycles that fit in the base distance.
 
     ```solidity
@@ -51,7 +46,7 @@ function _deriveNumberFrom(JBFundingCycle memory _baseFundingCycle, uint256 _sta
 
     _Internal references:_
 
-    * [`_SECONDS_IN_DAY`](../properties/\_seconds_in_day.md)
+    * [`_SECONDS_IN_DAY`](../properties/\_seconds\_in\_day.md)
 {% endtab %}
 
 {% tab title="Code" %}

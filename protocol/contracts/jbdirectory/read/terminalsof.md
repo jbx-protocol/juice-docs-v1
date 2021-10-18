@@ -4,7 +4,7 @@
 {% tab title="Step by step" %}
 **For each project ID, the terminals that are currently managing its funds.**
 
-# Definition
+## Definition
 
 ```solidity
 function terminalsOf(uint256 _projectId) external view override returns (IJBTerminal[] memory) { ... }
@@ -12,23 +12,22 @@ function terminalsOf(uint256 _projectId) external view override returns (IJBTerm
 
 * Arguments:
   * `_projectId` is the ID of the project to get terminals of.
-* The view function can be accessed externally by anyone. 
+* The view function can be accessed externally by anyone.
 * The function does not alter state on the blockchain.
 * The function overrides a function definition from the `IJBDirectory` interface.
 * The function returns an array of terminal addresses..
 
+## Body
 
-# Body 
+1.  This function just reads and returns the stored `_terminalsOf` the project.
 
-1. This function just reads and returns the stored `_terminalsOf` the project.
+    ```solidity
+    return _terminalsOf[_projectId];
+    ```
 
-   ```solidity
-   return _terminalsOf[_projectId];
-   ```
+    Internal references:
 
-   Internal references:
-
-   * [`_terminalsOf`](../properties/_terminalsof.md)
+    * [`_terminalsOf`](../properties/\_terminalsof.md)
 {% endtab %}
 
 {% tab title="Code" %}

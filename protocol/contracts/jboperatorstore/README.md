@@ -1,8 +1,7 @@
 ---
 description: >-
   Stores operator permissions for all addresses. Addresses can give permissions
-  to any other address to take specific actions throughout the Juicebox
-  ecosystem on their behalf.
+  to any other address to take specific indexed actions on their behalf.
 ---
 
 # JBOperatorStore

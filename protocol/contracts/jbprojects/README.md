@@ -1,5 +1,8 @@
 ---
-description: Manages ownership over projects, which are represented as ERC-721 tokens.
+description: >-
+  Manages ownership over projects, which are represented as ERC-721 tokens.
+  Project's can record a URI where some front-end metadata is stored, and
+  reserve a handle for reverse ID lookup.
 ---
 
 # JBProjects

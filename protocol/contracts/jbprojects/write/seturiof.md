@@ -10,7 +10,7 @@ Interface: [`IJBProjects`](../../../interfaces/ijbprojects.md)
 
 _Only a project's owner or operator can set its URI._
 
-# Definition
+## Definition
 
 ```solidity
 function setUriOf(uint256 _projectId, string calldata _uri)
@@ -26,27 +26,27 @@ function setUriOf(uint256 _projectId, string calldata _uri)
 * The function overrides a function definition from the `IJBProjects` interface.
 * The function doesn't return anything.
 
-# Body 
+## Body
 
-1. Store the new `_uri` as the `uriOf` the project.
+1.  Store the new `_uri` as the `uriOf` the project.
 
-   ```solidity
-   // Set the new uri.
-   uriOf[_projectId] = _uri;
-   ```
+    ```solidity
+    // Set the new uri.
+    uriOf[_projectId] = _uri;
+    ```
 
-   _Internal references:_
+    _Internal references:_
 
-   * [`uriOf`](../properties/uriof.md)
-2. Emit a `SetUri` event with the all relevant parameters.
+    * [`uriOf`](../properties/uriof.md)
+2.  Emit a `SetUri` event with the all relevant parameters.
 
-   ```solidity
-   emit SetUri(_projectId, _uri, msg.sender);
-   ```
+    ```solidity
+    emit SetUri(_projectId, _uri, msg.sender);
+    ```
 
-   _Event references:_
+    _Event references:_
 
-   * [`SetUri`](../events/seturi.md)
+    * [`SetUri`](../events/seturi.md)
 {% endtab %}
 
 {% tab title="Code" %}

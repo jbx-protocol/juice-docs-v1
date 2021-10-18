@@ -1,5 +1,5 @@
 ---
-description: Manage funding cycle configurations, ballots, accounting, and scheduling.
+description: Manages funding cycle configurations, ballots, accounting, and scheduling.
 ---
 
 # JBFundingCycleStore

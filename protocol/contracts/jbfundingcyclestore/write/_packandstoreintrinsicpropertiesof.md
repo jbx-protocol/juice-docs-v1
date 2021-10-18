@@ -6,7 +6,7 @@ Contract:[`JBFundingCycleStore`](../)​
 {% tab title="Step by step" %}
 **Efficiently stores a funding cycle's provided intrinsic properties.**
 
-# Definition
+## Definition
 
 ```solidity
 function _packAndStoreIntrinsicPropertiesOf(
@@ -27,7 +27,7 @@ function _packAndStoreIntrinsicPropertiesOf(
 * The function is private to this contract.
 * The function returns the ID of the funding cycle whose intrinsic properties have been packed and stored.
 
-# Body 
+## Body
 
 1.  The `_weight` property should take up the first 80 bits of the packed `uint256`.
 
@@ -35,40 +35,30 @@ function _packAndStoreIntrinsicPropertiesOf(
     // weight in bytes 0-79 bits.
     uint256 packed = _weight;
     ```
-
-
 2.  The `_projectId` should take up the next 56 bits.
 
     ```solidity
     // projectId in bytes 80-135 bytes.
     packed |= _projectId << 80;
     ```
-
-
 3.  The `_basedOn` should take up the next 48 bits.
 
     ```solidity
     // basedOn in bytes 136-183 bytes.
     packed |= _basedOn << 136;
     ```
-
-
 4.  The `_start` should take up the next 48 bits.
 
     ```solidity
     // start in bytes 184-231 bytes.
     packed |= _start << 184;
     ```
-
-
 5.  The `_number` should take up the last 24 bits.
 
     ```solidity
     // number in bytes 232-255 bytes.
     packed |= _number << 232;
     ```
-
-
 6.  Derive the ID from the `_projectId` and the `_number`.
 
     ```solidity
@@ -79,8 +69,6 @@ function _packAndStoreIntrinsicPropertiesOf(
     _Internal references:_
 
     * [`_idFor`](../read/\_idfor.md)
-
-
 7.  Store the packed intrinsic properties for the funding cycle.
 
     ```solidity
@@ -142,4 +130,3 @@ function _packAndStoreIntrinsicPropertiesOf(
 | **High severity** | Identify a vulnerability in this operation that could lead to data corruption or loss of funds.                                        | 5+ETH  |
 {% endtab %}
 {% endtabs %}
-

@@ -8,7 +8,7 @@ Interface: `IJBFundingCycleStore`
 {% tab title="Step by step" %}
 **Get the funding cycle with the given ID.**
 
-# Definition
+## Definition
 
 ```solidity
 function get(uint256 _fundingCycleId)
@@ -25,8 +25,7 @@ function get(uint256 _fundingCycleId)
 * The function overrides a function definition from the `IJBFundingCycleStore` interface.
 * The function returns a [`JBFundingCycle`](../../../data-structures/jbfundingcycle.md).
 
-
-# Body 
+## Body
 
 1.  Check that the provided funding cycle ID is valid.
 
@@ -34,8 +33,6 @@ function get(uint256 _fundingCycleId)
     // The funding cycle should exist.
     require(_fundingCycleId > 0, '0x13 BAD_ID');
     ```
-
-
 2.  Try to get the full funding cycle struct for the provided ID.
 
     ```solidity
@@ -46,16 +43,12 @@ function get(uint256 _fundingCycleId)
     _Internal references:_
 
     * [`_getStructFor`](\_getstructfor.md)
-
-
 3.  If the funding cycle exists in storage, return it.
 
     ```solidity
     // If so, return it.
     if (fundingCycle.number > 0) return fundingCycle;
     ```
-
-
 4.  If the funding cycle was not found in storage, it's possible that it still exists as a consequence of a previous funding cycle rolling over, but hasn't yet been stored. Check to see if there's a current funding cycle.
 
     ```solidity
@@ -66,16 +59,12 @@ function get(uint256 _fundingCycleId)
     _Internal references:_
 
     * [`currentOf`](currentof.md)
-
-
 5.  If the funding cycle ID being queried matches the current funding cycle of the project, return it.
 
     ```solidity
      // If the IDs match, return it.
      if (fundingCycle.id == _fundingCycleId) return fundingCycle;
     ```
-
-
 6.  The upcoming funding cycle might also not yet be in storage, but might be reference-able.
 
     ```solidity
@@ -86,16 +75,12 @@ function get(uint256 _fundingCycleId)
     _Internal references:_
 
     * [`queuedOf`](queuedof.md)
-
-
 7.  If the funding cycle ID being queried matches the queued funding cycle of the project, return it.
 
     ```solidity
     // If the IDs match, return it.
     if (fundingCycle.id == _fundingCycleId) return fundingCycle;
     ```
-
-
 8.  If the ID being queried hasn't been found, return an empty Funding cycle struct.
 
     ```solidity

@@ -10,7 +10,7 @@ Interface: [`IJBTokenStore`](../../../interfaces/ijbtokenstore.md)
 
 _Only a project owner or operator can change its token._
 
-# Definition
+## Definition
 
 ```solidity
 function changeTokenOf(
@@ -31,44 +31,44 @@ function changeTokenOf(
 * The function overrides a function definition from the `IJBTokenStore` interface.
 * The function returns nothing.
 
-# Body 
+## Body
 
-1. Get a reference to the project's current token.
+1.  Get a reference to the project's current token.
 
-   ```solidity
-   // Get a reference to the current owner of the token.
-   IJBToken _currentToken = tokenOf[_projectId];
-   ```
+    ```solidity
+    // Get a reference to the current owner of the token.
+    IJBToken _currentToken = tokenOf[_projectId];
+    ```
 
-   _Internal references:_
+    _Internal references:_
 
-   * [`tokenOf`](../properties/tokenof.md)
-2. Store the provided token as the `tokenOf` the project.
+    * [`tokenOf`](../properties/tokenof.md)
+2.  Store the provided token as the `tokenOf` the project.
 
-   ```solidity
-   // Store the new token.
-   tokenOf[_projectId] = _token;
-   ```
+    ```solidity
+    // Store the new token.
+    tokenOf[_projectId] = _token;
+    ```
 
-   _Internal references:_
+    _Internal references:_
 
-   * [`tokenOf`](../properties/tokenof.md)
-3. If there's a current token and a new owner address was provided, transfer the ownership of the current token from this contract to the new owner. This will let the new owner mint and burn tokens from the current token contract.
+    * [`tokenOf`](../properties/tokenof.md)
+3.  If there's a current token and a new owner address was provided, transfer the ownership of the current token from this contract to the new owner. This will let the new owner mint and burn tokens from the current token contract.
 
-   ```solidity
-   // If there's a current token and a new owner was provided, transfer ownership of the old token to the new owner.
-   if (_currentToken != IJBToken(address(0)) && _newOwner != address(0))
-     _currentToken.transferOwnership(_newOwner);
-   ```
-4. Emit a `ChangeToken` event with the all relevant parameters.
+    ```solidity
+    // If there's a current token and a new owner was provided, transfer ownership of the old token to the new owner.
+    if (_currentToken != IJBToken(address(0)) && _newOwner != address(0))
+      _currentToken.transferOwnership(_newOwner);
+    ```
+4.  Emit a `ChangeToken` event with the all relevant parameters.
 
-   ```solidity
-   emit ChangeToken(_projectId, _token, _newOwner, msg.sender);
-   ```
+    ```solidity
+    emit ChangeToken(_projectId, _token, _newOwner, msg.sender);
+    ```
 
-   _Event references:_
+    _Event references:_
 
-   * [`ChangeToken`](../events/changetoken.md)
+    * [`ChangeToken`](../events/changetoken.md)
 {% endtab %}
 
 {% tab title="Code" %}

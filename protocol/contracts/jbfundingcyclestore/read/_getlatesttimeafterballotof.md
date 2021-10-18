@@ -8,7 +8,7 @@ Contract:[`JBFundingCycleStore`](../)​
 
 _If the ballot ends in the past, the current block timestamp will be returned._
 
-# Definition
+## Definition
 
 ```solidity
 function _getLatestTimeAfterBallotOf(JBFundingCycle memory _fundingCycle, uint256 _from)
@@ -24,8 +24,7 @@ function _getLatestTimeAfterBallotOf(JBFundingCycle memory _fundingCycle, uint25
 * The function does not alter state on the blockchain.
 * The function returns the time.
 
-
-# Body 
+## Body
 
 1.  If the provided `_fundingCycle` has no ballot, return the current timestamp.
 
@@ -33,16 +32,12 @@ function _getLatestTimeAfterBallotOf(JBFundingCycle memory _fundingCycle, uint25
     // If the provided funding cycle has no ballot, return the current timestamp.
     if (_fundingCycle.ballot == IJBFundingCycleBallot(address(0))) return block.timestamp;
     ```
-
-
 2.  Get a reference to the ballot's expiration, which is the ballot's duration measured `_from` the provided value.
 
     ```solidity
     // Get a reference to the time the ballot ends.
     uint256 _ballotExpiration = _from + _fundingCycle.ballot.duration();
     ```
-
-
 3.  If the ballot ends in past, return the current timestamp. Otherwise return the ballot's expiration.
 
     ```solidity

@@ -10,7 +10,7 @@ Interface: [`IJBTokenStore`](../../../interfaces/ijbtokenstore.md)
 
 _Only a token holder or an operator can transfer its unclaimed tokens_.
 
-# Definition
+## Definition
 
 ```solidity
 function shouldRequireClaimingFor(uint256 _projectId, bool _flag)
@@ -25,43 +25,44 @@ function shouldRequireClaimingFor(uint256 _projectId, bool _flag)
 * Through the [`requirePermission`](../../or-abstract/jboperatable/modifiers/requirepermission.md) modifier, the function is only accessible by the project's owner, or from an operator that has been given the `JBOperations.REQUIRE_CLAIM`permission by the project owner for the provided `_projectId`.
 * The function overrides a function definition from the `IJBTokenStore` interface.
 * The function returns nothing.
-# Body 
 
-1. Get a reference to the project's token.
+## Body
 
-   ```solidity
-   // Get a reference to the project's ERC20 tokens.
-   IJBToken _token = tokenOf[_projectId];
-   ```
+1.  Get a reference to the project's token.
 
-   _Internal references:_
+    ```solidity
+    // Get a reference to the project's ERC20 tokens.
+    IJBToken _token = tokenOf[_projectId];
+    ```
 
-   * [`tokenOf`](../properties/tokenof.md)
-2. Make sure the project has a token. If it doesn't, there's nowhere to claim tokens onto.
+    _Internal references:_
 
-   ```solidity
-   // Tokens must have been issued.
-   require(_token != IJBToken(address(0)), '0x2a: NOT_FOUND');
-   ```
-3. Store the flag for the project.
+    * [`tokenOf`](../properties/tokenof.md)
+2.  Make sure the project has a token. If it doesn't, there's nowhere to claim tokens onto.
 
-   ```solidity
-   // Store the flag.
-   requireClaimFor[_projectId] = _flag;
-   ```
+    ```solidity
+    // Tokens must have been issued.
+    require(_token != IJBToken(address(0)), '0x2a: NOT_FOUND');
+    ```
+3.  Store the flag for the project.
 
-   _Internal references:_
+    ```solidity
+    // Store the flag.
+    requireClaimFor[_projectId] = _flag;
+    ```
 
-   * [`requireClaimFor`](../properties/requireclaimfor.md)
-4. Emit a `ShouldRequireClaim` event with the all relevant parameters.
+    _Internal references:_
 
-   ```solidity
-   emit ShouldRequireClaim(_projectId, _flag, msg.sender);
-   ```
+    * [`requireClaimFor`](../properties/requireclaimfor.md)
+4.  Emit a `ShouldRequireClaim` event with the all relevant parameters.
 
-   _Event references:_
+    ```solidity
+    emit ShouldRequireClaim(_projectId, _flag, msg.sender);
+    ```
 
-   * [`ShouldRequireClaim`](../events/shouldrequireclaim.md)
+    _Event references:_
+
+    * [`ShouldRequireClaim`](../events/shouldrequireclaim.md)
 {% endtab %}
 
 {% tab title="Code" %}

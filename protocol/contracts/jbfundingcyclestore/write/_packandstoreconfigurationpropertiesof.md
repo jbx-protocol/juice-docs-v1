@@ -6,7 +6,7 @@ Contract:[`JBFundingCycleStore`](../)​
 {% tab title="Step by step" %}
 **Efficiently stores a funding cycles provided configuration properties.**
 
-# Definition
+## Definition
 
 ```solidity
 function _packAndStoreConfigurationProperties(
@@ -25,7 +25,7 @@ function _packAndStoreConfigurationProperties(
   * `_fundingCycleId` is the ID of the funding cycle to pack and store.
   * `_configured` is the timestamp of the configuration.
   * `_cycleLimit` is the number of cycles that this configuration should last for before going back to the last permanent.
-  * `_ballot` is the ballot to use for future reconfiguration approvals. 
+  * `_ballot` is the ballot to use for future reconfiguration approvals.
   * `_duration` is the duration of the funding cycle.
   * `_currency` is the currency of the funding cycle.
   * `_fee` is the fee of the funding cycle.
@@ -33,7 +33,7 @@ function _packAndStoreConfigurationProperties(
 * The function is private to this contract.
 * The function doesn't return anything.
 
-# Body 
+## Body
 
 1.  Store the ballot in the first 160 bits of the packed `uint256`.
 
@@ -41,48 +41,36 @@ function _packAndStoreConfigurationProperties(
     // ballot in bytes 0-159 bits.
     uint256 packed = uint160(address(_ballot));
     ```
-
-
 2.  Store the `_configured` in the next 48 bits.
 
     ```solidity
     // configured in bits 160-207 bytes.
     packed |= _configured << 160;
     ```
-
-
 3.  Store the `_duration` in the next 16 bits.
 
     ```solidity
     // duration in bytes 208-223 bytes.
     packed |= _duration << 208;
     ```
-
-
 4.  Store the `_currency` in the next 8 bits.
 
     ```solidity
     // basedOn in bytes 224-231 bytes.
     packed |= _currency << 224;
     ```
-
-
 5.  Store the `_fee` in the next 8 bits.
 
     ```solidity
     // fee in bytes 232-239 bytes.
     packed |= _fee << 232;
     ```
-
-
 6.  Store the `_discountRate` in the next 16 bits.
 
     ```solidity
     // discountRate in bytes 240-255 bytes.
     packed |= _discountRate << 240;
     ```
-
-
 7.  Store the packed configuration properties of the funding cycle.
 
     ```solidity

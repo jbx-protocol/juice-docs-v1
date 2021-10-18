@@ -6,7 +6,7 @@ Contract:[`JBFundingCycleStore`](../)​
 {% tab title="Step by step" %}
 **A funding cycle configuration's current status.**
 
-# Definition
+## Definition
 
 ```solidity
 function _ballotStateOf(
@@ -24,7 +24,7 @@ function _ballotStateOf(
 * The function does not alter state on the blockchain.
 * The function returns the [`JBBallotState`](../../../enums/jbballotstate.md).
 
-# Body 
+## Body
 
 1.  If there is no ballot, the ballot state is implicitly approved.
 
@@ -32,17 +32,13 @@ function _ballotStateOf(
     // If there is no ballot funding cycle, implicitly approve.
     if (_ballotFundingCycleId == 0) return JBBallotState.Approved;
     ```
-
-
 2.  Get the `JBFundingCycle` struct that has a reference of the ballot that should be used.
 
     ```solidity
     // Get the ballot funding cycle.
     JBFundingCycle memory _ballotFundingCycle = _getStructFor(_ballotFundingCycleId);
     ```
-
-
-3.  If there's no ballot, implicitly the funding cycle configuration is implicitly approved. Otherwise, return the state that the ballot for the provided `_id` and `_configuration`. 
+3.  If there's no ballot, implicitly the funding cycle configuration is implicitly approved. Otherwise, return the state that the ballot for the provided `_id` and `_configuration`.
 
     ```solidity
     // If there is no ballot, the ID is auto approved.

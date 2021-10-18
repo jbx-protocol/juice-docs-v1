@@ -10,7 +10,7 @@ Interface: [`IJBProjects`](../../../interfaces/ijbprojects.md)
 
 _Only a project's owner or operator can renew its handle._
 
-# Definition
+## Definition
 
 ```solidity
 function renewHandleOf(uint256 _projectId)
@@ -25,37 +25,37 @@ function renewHandleOf(uint256 _projectId)
 * The function overrides a function definition from the `IJBProjects` interface.
 * The function doesn't return anything.
 
-# Body 
+## Body
 
-1. Get a reference to the project's current handle.
+1.  Get a reference to the project's current handle.
 
-   ```solidity
-   // Get the handle of the project.
-   bytes32 _handle = handleOf[_projectId];
-   ```
+    ```solidity
+    // Get the handle of the project.
+    bytes32 _handle = handleOf[_projectId];
+    ```
 
-   _Internal references:_
+    _Internal references:_
 
-   * [`handleOf`](../properties/handleof.md)
-2. Remove the `challengeExpiryOf` the `_handle`. Anyone will be able to reissue a challenge through the [`challengeHandle`](challengehandle.md) transaction, and await the challenge period from that time.
+    * [`handleOf`](../properties/handleof.md)
+2.  Remove the `challengeExpiryOf` the `_handle`. Anyone will be able to reissue a challenge through the [`challengeHandle`](challengehandle.md) transaction, and await the challenge period from that time.
 
-   ```solidity
-   // Reset the challenge to 0.
-   challengeExpiryOf[_handle] = 0;
-   ```
+    ```solidity
+    // Reset the challenge to 0.
+    challengeExpiryOf[_handle] = 0;
+    ```
 
-   _Internal references:_
+    _Internal references:_
 
-   * [`challengeExpiryOf`](../properties/challengeexpiryof.md)
-3. Emit a `RenewHandle` event with the all relevant parameters.
+    * [`challengeExpiryOf`](../properties/challengeexpiryof.md)
+3.  Emit a `RenewHandle` event with the all relevant parameters.
 
-   ```solidity
-   emit RenewHandle(_handle, _projectId, msg.sender);
-   ```
+    ```solidity
+    emit RenewHandle(_handle, _projectId, msg.sender);
+    ```
 
-   _Event references:_
+    _Event references:_
 
-   * [`RenewHandle`](../events/renewhandle.md)
+    * [`RenewHandle`](../events/renewhandle.md)
 {% endtab %}
 
 {% tab title="Code" %}

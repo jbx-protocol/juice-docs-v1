@@ -10,40 +10,34 @@ Interface: `IJBOperatorStore`
 
 _Only an address can set its own operators._
 
-# Definition
+## Definition
 
 ```solidity
 function _packedPermissions(uint256[] calldata _indexes) private pure returns (uint256 packed) {...}
 ```
 
 * `_indexes` are the indexes of the permissions to pack.
-* The function is private to the contract. 
+* The function is private to the contract.
 * The function does not modify or reference state variables outside the function.
 * The function returns the `packed` value.
 
-# Body 
+## Body
 
 1.  Loop through the provided `_indexes`.
 
     ```solidity
     for (uint256 _i = 0; _i < _indexes.length; _i++) { ... }
     ```
-
-
 2.  Get a reference to the `_permissionIndex` being iterated on.
 
     ```solidity
     uint256 _index = _indexes[_i];
     ```
-
-
 3.  Make sure the `_permissionIndex` is one of the 255 indexes in a `uint256`.
 
     ```solidity
     require(_index <= 255, '0x02: INDEX_OUT_OF_BOUNDS');
     ```
-
-
 4.  Flip the bit at the specified index of the `packed` value being returned to indicate a truthy permission.
 
     ```solidity
@@ -87,4 +81,3 @@ function _packedPermissions(uint256[] calldata _indexes) private pure returns (u
 | **High severity** | Identify a vulnerability in this operation that could lead to data corruption or loss of funds.                                        | 5+ETH  |
 {% endtab %}
 {% endtabs %}
-

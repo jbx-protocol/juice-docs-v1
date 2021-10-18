@@ -8,7 +8,7 @@ Contract:[`JBFundingCycleStore`](../)​
 
 _A value of 0 is returned if no funding cycle was found._
 
-# Definition
+## Definition
 
 ```solidity
 function _standbyOf(uint256 _projectId) private view returns (uint256 fundingCycleId) { ... }
@@ -20,8 +20,7 @@ function _standbyOf(uint256 _projectId) private view returns (uint256 fundingCyc
 * The function does not alter state on the blockchain.
 * The function returns an ID of a standby funding cycle if one exists, or 0 if one doesn't exist.
 
-
-# Body 
+## Body
 
 1.  Get a reference to the latest funding cycle for the project.
 
@@ -33,16 +32,12 @@ function _standbyOf(uint256 _projectId) private view returns (uint256 fundingCyc
     _Internal references:_
 
     * [`latestIdOf`](../properties/latestidof.md)
-
-
 2.  If there isn't a funding cycle for the project, there isn't a standby cycle either.
 
     ```solidity
     // If there isn't one, theres also no standby funding cycle.
     if (fundingCycleId == 0) return 0;
     ```
-
-
 3.  Get the struct for the latest funding cycle.
 
     ```solidity
@@ -53,8 +48,6 @@ function _standbyOf(uint256 _projectId) private view returns (uint256 fundingCyc
     _Internal references:_
 
     * [`_getStructFor`](\_getstructfor.md)
-
-
 4.  If the cycle has started, return 0 since there is not a stored funding cycle in standby.
 
     ```solidity
@@ -100,4 +93,3 @@ function _standbyOf(uint256 _projectId) private view returns (uint256 fundingCyc
 | **High severity** | Identify a vulnerability in this operation that could lead to data corruption or loss of funds.                                        | 5+ETH  |
 {% endtab %}
 {% endtabs %}
-

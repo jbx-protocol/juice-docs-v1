@@ -10,7 +10,7 @@ Interface: [`IJBDirectory`](../../../interfaces/ijbdirectory.md)
 
 _Only a project owner or an operator can remove one of its terminals._
 
-# Definition
+## Definition
 
 ```solidity
 function removeTerminalOf(uint256 _projectId, IJBTerminal _terminal)
@@ -26,65 +26,60 @@ function removeTerminalOf(uint256 _projectId, IJBTerminal _terminal)
 * The function overrides a function definition from the `IJBDirectory` interface.
 * The function returns nothing.
 
+## Body
 
-# Body 
+1.  Get a reference to the project's terminals.
 
-1. Get a reference to the project's terminals. 
+    ```solidity
+    // Get a reference to the terminals of the project.
+    IJBTerminal[] memory _terminals = _terminalsOf[_projectId];
+    ```
 
-   ```solidity
-   // Get a reference to the terminals of the project.
-   IJBTerminal[] memory _terminals = _terminalsOf[_projectId];
-   ```
+    Internal references:
 
-   Internal references:
+    * [`_terminalsOf`](../properties/\_terminalsof.md)
+2.  Delete all terminals from storage. All terminals except the one being removed will later be repupulated.
 
-   * [`_terminalsOf`](../properties/_terminalsof.md)
+    ```solidity
+    // Delete the stored terminals for the project.
+    delete _terminalsOf[_projectId];
+    ```
 
-2. Delete all terminals from storage. All terminals except the one being removed will later be repupulated. 
+    Internal references:
 
-   ```solidity
-   // Delete the stored terminals for the project.
-   delete _terminalsOf[_projectId];
-   ```
+    * [`_terminalsOf`](../properties/\_terminalsof.md)
+3.  Loop through the terminals, adding all terminals that aren't the one being removed back into storage.
 
-   Internal references:
+    ```solidity
+    // Repopulate the stored terminals for the project, omitting the one being deleted.
+    for (uint256 _i; _i < _terminals.length; _i++)
+      // Don't include the terminal being deleted.
+      if (_terminals[_i] != _terminal) _terminalsOf[_projectId].push(_terminals[_i]);
+    ```
 
-   * [`_terminalsOf`](../properties/_terminalsof.md)
+    Internal references:
 
-3. Loop through the terminals, adding all terminals that aren't the one being removed back into storage.
+    * [`_terminalsOf`](../properties/\_terminalsof.md)
+4.  If the terminal being removed is set to be the primary terminal for its vault's token, delete it from being the primary terminal.
 
-   ```solidity
-   // Repopulate the stored terminals for the project, omitting the one being deleted.
-   for (uint256 _i; _i < _terminals.length; _i++)
-     // Don't include the terminal being deleted.
-     if (_terminals[_i] != _terminal) _terminalsOf[_projectId].push(_terminals[_i]);
-   ```
+    ```solidity
+    // If the terminal that is being removed is the primary terminal for the token, delete it from being primary terminal.
+    if (_primaryTerminalOf[_projectId][_terminal.vault().token()] == _terminal)
+      delete _primaryTerminalOf[_projectId][_terminal.vault().token()];
+    ```
 
-   Internal references:
+    Internal references:
 
-   * [`_terminalsOf`](../properties/_terminalsof.md)
+    * [`_primaryTerminalOf`](../read/\_primaryterminalof.md)
+5.  Emit a `RemoveTerminal` event with the all relevant parameters.
 
-4. If the terminal being removed is set to be the primary terminal for its vault's token, delete it from being the primary terminal. 
+    ```solidity
+    emit RemoveTerminal(_projectId, _terminal, msg.sender);
+    ```
 
-   ```solidity
-   // If the terminal that is being removed is the primary terminal for the token, delete it from being primary terminal.
-   if (_primaryTerminalOf[_projectId][_terminal.vault().token()] == _terminal)
-     delete _primaryTerminalOf[_projectId][_terminal.vault().token()];
-   ```
+    _Event references:_
 
-   Internal references:
-
-   * [`_primaryTerminalOf`](../read/_primaryterminalof.md)
-
-5. Emit a `RemoveTerminal` event with the all relevant parameters.
-
-   ```solidity
-   emit RemoveTerminal(_projectId, _terminal, msg.sender);
-   ```
-
-   _Event references:_
-
-   *  [`RemoveTerminal`](../events/removeterminal.md)
+    * [`RemoveTerminal`](../events/removeterminal.md)
 {% endtab %}
 
 {% tab title="Code" %}
