@@ -37,7 +37,7 @@ There are currently 3 surface contracts that manage how projects receive funds a
 
 (The docs for these are WIP)
 
-* ``[`JBController`](../contracts/or-controllers/jbcontroller/) stitches together funding cycles and treasury tokens, making sure all activity is accounted for and correct.
+* [`JBController`](../contracts/or-controllers/jbcontroller/) stitches together funding cycles and treasury tokens, making sure all activity is accounted for and correct.
 * [`JBETHPaymentTerminal`](../contracts/or-payment-terminals/jbethpaymentterminal/) manages all inflows and outflows of ETH into the Juicebox ecosystem.&#x20;
 * [`JBETHPaymentTerminalStore`](../contracts/or-payment-terminals/jbethpaymentterminalstore/) manages balance accounting data on the `JBETHPaymentTerminal`'s behalf.
 
