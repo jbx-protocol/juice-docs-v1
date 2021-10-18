@@ -41,6 +41,6 @@ There are currently 3 surface contracts that manage how projects receive funds a
 * [`JBETHPaymentTerminal`](../contracts/or-payment-terminals/jbethpaymentterminal/) manages all inflows and outflows of ETH into the Juicebox ecosystem.&#x20;
 * [`JBETHPaymentTerminalStore`](../contracts/or-payment-terminals/jbethpaymentterminalstore/) manages balance accounting data on the `JBETHPaymentTerminal`'s behalf.
 
-The `JBETHPaymentTerminal` inherits from the `IJBTerminal` interface. Projects are welcome to roll their own `IJBTerminal` to accept funds through. This can be useful to accept other tokens as payment, bypass protocol fees, or attempt some other funky design. A project can add/remove terminals using the [`JBDirectory.addTerminalOf`](../contracts/jbdirectory/write/addterminalof.md) and [`JBDirectory.removeTerminalOf`](../contracts/jbdirectory/write/removeterminalof.md).&#x20;
+The `JBETHPaymentTerminal` inherits from the `IJBTerminal` interface. Projects are welcome to roll their own `IJBTerminal` to accept funds through. This can be useful to accept other tokens as payment, bypass protocol fees, or attempt some other funky design. A project can add/remove terminals using the [`JBDirectory.addTerminalOf(...)`](../contracts/jbdirectory/write/addterminalof.md) and [`JBDirectory.removeTerminalOf(...)`](../contracts/jbdirectory/write/removeterminalof.md).&#x20;
 
 Likewise, a project can bring their own contract to serve as its controller. A project's controller is the only contract that has direct access to manipulate its tokens and funding cycles.
