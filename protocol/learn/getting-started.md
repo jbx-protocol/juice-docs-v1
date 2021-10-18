@@ -172,7 +172,7 @@ function reconfigureFundingCyclesOf(
   returns (uint256) { ... }
 ```
 
-At any point, anyone can inject funds into a project's treasury by calling `JBETHPaymentTerminal.addToBalanceOf(...)`.
+At any point, anyone can inject funds into a project's treasury by calling [`JBETHPaymentTerminal.addToBalanceOf(...)`](../contracts/or-payment-terminals/jbethpaymentterminal/write/addtobalanceof.md).
 
 ```solidity
  function addToBalanceOf(uint256 _projectId, string memory _memo) external payable override { ... }
