@@ -28,6 +28,20 @@ This function is for convenience. It wraps the following 5 transactions into one
 * [`JBFundingCycleStore.configureFor(...)`](../contracts/jbfundingcyclestore/write/configurefor.md)
 * [`JBSplitStore.set(...)`](../contracts/jbsplitstore/write/set.md)
 
+At any time after the project has been created, it's owner can issue ERC-20 tokens for the protocol to use as its treasury token by calling [`JBTokenStore.issueFor(...)`](../contracts/jbtokenstore/write/issuefor.md). By default the protocol uses an internal accounting mechanism to account for projects' tokens. Once ERC-20's are issued by a project, anyone can claim these internal tokens into the token holders wallet as ERC-20's on their behalf by calling [`JBTokenStore.claimFor(...)`](../contracts/jbtokenstore/write/claimfor.md).
+
+```solidity
+  function issueFor(
+    uint256 _projectId,
+    string calldata _name,
+    string calldata _symbol
+  )
+    external
+    override
+    requirePermission(projects.ownerOf(_projectId), _projectId, JBOperations.ISSUE)
+    returns (IJBToken token) { ... }
+```
+
 Once a project has been created, it can begin accepting funds from anyone. ETH can be sent to the project by calling [`JBETHPaymentTerminal.pay(...)`](../contracts/or-payment-terminals/jbethpaymentterminal/write/pay-1.md).
 
 ```solidity
@@ -120,7 +134,26 @@ function distributeReservedTokensOf(uint256 _projectId, string memory _memo)
   returns (uint256) { ... }
 ```
 
-Anyone who holds your project's tokens can redeem them for a proportional share of the project's overflow, which is the treasury's balance minus the current funding cycle's target. Redeeming tokens burns them, &#x20;
+Anyone who holds your project's tokens can redeem them for a proportional share of the project's overflow by calling [`JBETHPaymentTerminal.redeemTokensOf(...)`](../contracts/or-payment-terminals/jbethpaymentterminal/write/redeemtokensof.md). The overflow amount is the treasury's balance minus the current funding cycle's target.&#x20;
+
+Redeeming tokens burns them, and allows them your token holders to exit the community at any time with their share of the funds.
+
+```solidity
+function redeemTokensOf(
+  address _holder,
+  uint256 _projectId,
+  uint256 _tokenCount,
+  uint256 _minReturnedWei,
+  address payable _beneficiary,
+  string memory _memo,
+  bytes memory _delegateMetadata
+)
+  external
+  override
+  nonReentrant
+  requirePermission(_holder, _projectId, JBOperations.REDEEM)
+  returns (uint256 claimAmount) { ... }
+```
 
 A project's owner can reconfigure its project's funding cycle at any time by calling [`JBController.reconfigureFundingCyclesOf(...)`](../contracts/or-controllers/jbcontroller/write/reconfigurefundingcyclesof.md). If the project is in the middle of a funding cycle, the update will be queued to take effect next cycle. If the current funding cycle has an attached ballot contract, the reconfiguration must be approved by it before taking effect.
 
@@ -137,4 +170,10 @@ function reconfigureFundingCyclesOf(
   nonReentrant
   requirePermission(projects.ownerOf(_projectId), _projectId, JBOperations.RECONFIGURE)
   returns (uint256) { ... }
+```
+
+At any point, anyone can inject funds into a project's treasury by calling `JBETHPaymentTerminal.addToBalanceOf(...)`.
+
+```solidity
+ function addToBalanceOf(uint256 _projectId, string memory _memo) external payable override { ... }
 ```
