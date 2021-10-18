@@ -31,15 +31,15 @@ This function is for convenience. It wraps the following 5 transactions into one
 At any time after the project has been created, it's owner can issue ERC-20 tokens for the protocol to use as its treasury token by calling [`JBTokenStore.issueFor(...)`](../contracts/jbtokenstore/write/issuefor.md). By default the protocol uses an internal accounting mechanism to account for projects' tokens. Once ERC-20's are issued by a project, anyone can claim these internal tokens into the token holders wallet as ERC-20's on their behalf by calling [`JBTokenStore.claimFor(...)`](../contracts/jbtokenstore/write/claimfor.md).
 
 ```solidity
-  function issueFor(
-    uint256 _projectId,
-    string calldata _name,
-    string calldata _symbol
-  )
-    external
-    override
-    requirePermission(projects.ownerOf(_projectId), _projectId, JBOperations.ISSUE)
-    returns (IJBToken token) { ... }
+function issueFor(
+  uint256 _projectId,
+  string calldata _name,
+  string calldata _symbol
+)
+  external
+  override
+  requirePermission(projects.ownerOf(_projectId), _projectId, JBOperations.ISSUE)
+  returns (IJBToken token) { ... }
 ```
 
 Once a project has been created, it can begin accepting funds from anyone. ETH can be sent to the project by calling [`JBETHPaymentTerminal.pay(...)`](../contracts/or-payment-terminals/jbethpaymentterminal/write/pay-1.md).
