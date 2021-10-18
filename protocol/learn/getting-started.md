@@ -1,5 +1,5 @@
 ---
-description: How to begin interacting with the protocol
+description: How to begin interacting with the protocol.
 ---
 
 # Getting started
