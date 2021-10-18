@@ -2,7 +2,7 @@
 
 ## Welcome to Juicebox docs!
 
-These docs are under active development. Documentation of the v1 protocol can be found in the [Contracts](broken-reference) section. Documentation for the forthcoming Juicebox v2 protocol is being written in the [Protocol](protocol/learn.md) section.
+These docs are under active development. Documentation of the v1 protocol can be found in the [Contracts](broken-reference) section. Documentation for the forthcoming Juicebox v2 protocol is being written in the [Protocol](protocol/learn/overview.md) section.
 
 ### Visual walkthrough
 

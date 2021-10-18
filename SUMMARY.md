@@ -13,7 +13,9 @@
 
 ## 👾Protocol
 
-* [Learn](protocol/learn.md)
+* [Learn](protocol/learn/README.md)
+  * [Overview](protocol/learn/overview.md)
+  * [Getting started](protocol/learn/getting-started.md)
 * [Terminology](protocol/terminology.md)
 * [Data structures](protocol/data-structures/README.md)
   * [JBDidPayData](protocol/data-structures/jbdidpaydata.md)
