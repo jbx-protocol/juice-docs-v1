@@ -4,20 +4,20 @@ description: How to begin interacting with the protocol.
 
 # Getting started
 
-The first transaction to call when getting started is [`JBController.launchProjectFor(...)`](../contracts/or-controllers/jbcontroller/write/launchprojectfor.md).&#x20;
+The first transaction to call when getting started is [`JBController.launchProjectFor(...)`](../contracts/or-controllers/jbcontroller/write/launchprojectfor.md).
 
 ```solidity
- function launchProjectFor(
-    address _owner,
-    bytes32 _handle,
-    string calldata _uri,
-    JBFundingCycleData calldata _data,
-    JBFundingCycleMetadata calldata _metadata,
-    JBOverflowAllowance[] memory _overflowAllowances,
-    JBSplit[] memory _payoutSplits,
-    JBSplit[] memory _reservedTokenSplits,
-    IJBTerminal _terminal
-  ) external { ... }
+function launchProjectFor(
+  address _owner,
+  bytes32 _handle,
+  string calldata _uri,
+  JBFundingCycleData calldata _data,
+  JBFundingCycleMetadata calldata _metadata,
+  JBOverflowAllowance[] memory _overflowAllowances,
+  JBSplit[] memory _payoutSplits,
+  JBSplit[] memory _reservedTokenSplits,
+  IJBTerminal _terminal
+) external { ... }
 ```
 
 This function is for convenience. It wraps the following 5 transactions into one, preventing you from having to call them sequentially:
@@ -28,16 +28,113 @@ This function is for convenience. It wraps the following 5 transactions into one
 * [`JBFundingCycleStore.configureFor(...)`](../contracts/jbfundingcyclestore/write/configurefor.md)
 * [`JBSplitStore.set(...)`](../contracts/jbsplitstore/write/set.md)
 
-Once a project has been created, it can begin accepting funds. ETH can be sent to the project by calling [`JBETHPaymentTerminal.pay(...)`](../contracts/or-payment-terminals/jbethpaymentterminal/write/pay-1.md).
+Once a project has been created, it can begin accepting funds from anyone. ETH can be sent to the project by calling [`JBETHPaymentTerminal.pay(...)`](../contracts/or-payment-terminals/jbethpaymentterminal/write/pay-1.md).
 
 ```solidity
-  function pay(
-    uint256 _projectId,
-    address _beneficiary,
-    uint256 _minReturnedTokens,
-    bool _preferClaimedTokens,
-    string calldata _memo,
-    bytes calldata _delegateMetadata
-  ) external payable override returns (uint256 fundingCycleId) { ... }
+function pay(
+ uint256 _projectId,
+  address _beneficiary,
+  uint256 _minReturnedTokens,
+  bool _preferClaimedTokens,
+  string calldata _memo,
+  bytes calldata _delegateMetadata
+ ) external payable override returns (uint256 fundingCycleId) { ... }
 ```
 
+At any point, anyone can distribute a project's funds up to its current funding cycle's target to its preprogrammed splits by calling [`JBETHPaymentTerminal.distributePayoutsOf(...)`](../contracts/or-payment-terminals/jbethpaymentterminal/write/distributepayoutsof.md).
+
+```solidity
+function distributePayoutsOf(
+  uint256 _projectId,
+  uint256 _amount,
+  uint256 _currency,
+  uint256 _minReturnedWei,
+  string memory _memo
+) external override nonReentrant returns (uint256) { ... }
+```
+
+A project's owner can also distribute additional funds from its treasury's overflow up until its preconfigured allowance.
+
+```solidity
+function useAllowanceOf(
+  uint256 _projectId,
+  uint256 _amount,
+  uint256 _currency,
+  uint256 _minReturnedWei,
+  address payable _beneficiary
+)
+  external
+  override
+  nonReentrant
+  requirePermission(projects.ownerOf(_projectId), _projectId, JBOperations.USE_ALLOWANCE)
+  returns (uint256) { ... }
+```
+
+A project's owner can mint or burn its token by calling [`JBController.mintTokensOf(...)`](../contracts/jbtokenstore/write/mintfor.md) and [`JBController.burnFrom(...)`](../contracts/jbtokenstore/write/burnfrom.md).
+
+```solidity
+function mintTokensOf(
+  uint256 _projectId,
+  uint256 _tokenCount,
+  address _beneficiary,
+  string calldata _memo,
+  bool _preferClaimedTokens,
+  bool _shouldReserveTokens
+)
+  external
+  override
+  nonReentrant
+  requirePermissionAllowingOverride(
+    projects.ownerOf(_projectId),
+    _projectId,
+    JBOperations.MINT,
+    directory.isTerminalDelegateOf(_projectId, msg.sender)
+  ) { ... }
+```
+
+```solidity
+function burnTokensOf(
+  address _holder,
+  uint256 _projectId,
+  uint256 _tokenCount,
+  string calldata _memo,
+  bool _preferClaimedTokens
+)
+  external
+  override
+  nonReentrant
+  requirePermissionAllowingOverride(
+    _holder,
+    _projectId,
+    JBOperations.BURN,
+    directory.isTerminalDelegateOf(_projectId, msg.sender)
+  ) { ... }
+```
+
+At any point, anyone can distribute a project's reserved tokens to the preprogrammed addresses by calling [`JBController.distributeReservedTokensOf(...)`](../contracts/or-controllers/jbcontroller/write/distributereservedtokensof.md).
+
+```solidity
+function distributeReservedTokensOf(uint256 _projectId, string memory _memo)
+  external
+  nonReentrant
+  returns (uint256) { ... }
+```
+
+Anyone who holds your project's tokens can redeem them for a proportional share of the project's overflow, which is the treasury's balance minus the current funding cycle's target. Redeeming tokens burns them, &#x20;
+
+A project's owner can reconfigure its project's funding cycle at any time by calling [`JBController.reconfigureFundingCyclesOf(...)`](../contracts/or-controllers/jbcontroller/write/reconfigurefundingcyclesof.md). If the project is in the middle of a funding cycle, the update will be queued to take effect next cycle. If the current funding cycle has an attached ballot contract, the reconfiguration must be approved by it before taking effect.
+
+```solidity
+function reconfigureFundingCyclesOf(
+  uint256 _projectId,
+  JBFundingCycleData calldata _data,
+  JBFundingCycleMetadata calldata _metadata,
+  JBOverflowAllowance[] memory _overflowAllowances,
+  JBSplit[] memory _payoutSplits,
+  JBSplit[] memory _reservedTokenSplits
+)
+  external
+  nonReentrant
+  requirePermission(projects.ownerOf(_projectId), _projectId, JBOperations.RECONFIGURE)
+  returns (uint256) { ... }
+```
