@@ -10,7 +10,7 @@ Interface: [`IJBDirectory`](../../../interfaces/ijbdirectory.md)
 
 _Only a project owner or an operator can remove one of its terminals._
 
-## Definition
+### Definition
 
 ```solidity
 function removeTerminalOf(uint256 _projectId, IJBTerminal _terminal)
@@ -26,7 +26,7 @@ function removeTerminalOf(uint256 _projectId, IJBTerminal _terminal)
 * The function overrides a function definition from the `IJBDirectory` interface.
 * The function returns nothing.
 
-## Body
+### Body
 
 1.  Get a reference to the project's terminals.
 
@@ -77,13 +77,15 @@ function removeTerminalOf(uint256 _projectId, IJBTerminal _terminal)
     emit RemoveTerminal(_projectId, _terminal, msg.sender);
     ```
 
-   ```solidity
-   // If the terminal that is being removed is the primary terminal for the token, delete it from being primary terminal.
-   if (_primaryTerminalOf[_projectId][_terminal.token()] == _terminal)
-     delete _primaryTerminalOf[_projectId][_terminal.token()];
-   ```
+```solidity
+// If the terminal that is being removed is the primary terminal for the token, delete it from being primary terminal.
+if (_primaryTerminalOf[_projectId][_terminal.token()] == _terminal)
+  delete _primaryTerminalOf[_projectId][_terminal.token()];
+```
 
-    * [`RemoveTerminal`](../events/removeterminal.md)
+```
+* [`RemoveTerminal`](../events/removeterminal.md)
+```
 {% endtab %}
 
 {% tab title="Code" %}
