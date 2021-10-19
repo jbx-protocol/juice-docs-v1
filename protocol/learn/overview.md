@@ -7,7 +7,7 @@ description: >-
 
 # Overview
 
-The Juicebox protocol is made up of 7 core contracts, and 3 surface contracts. Core contracts store all the independent components that make the protocol work, and the surface contracts glue them together while accept funds on behalf of each project.
+The Juicebox protocol is made up of 7 core contracts (all documented), and 3 surface contracts (documentation WIP). Core contracts store all the independent components that make the protocol work, and the surface contracts glue them together while accept funds on behalf of each project.
 
 The first two core contracts are pretty self explanatory. They store the core opinionated components of the protocol.&#x20;
 
