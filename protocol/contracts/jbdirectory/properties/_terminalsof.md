@@ -2,7 +2,7 @@
 
 Contract:[`JBDirectory`](../)‌
 
-**The Projects contract which mints ERC-721's that represent project ownership and transfers.**
+**For each project ID, the terminals that are currently managing its funds.**
 
 # Definition
 
