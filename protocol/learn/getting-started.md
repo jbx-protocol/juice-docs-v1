@@ -84,7 +84,7 @@ function useAllowanceOf(
   returns (uint256) { ... }
 ```
 
-A project's owner can mint or burn its token by calling [`JBController.mintTokensOf(...)`](../contracts/jbtokenstore/write/mintfor.md) and [`JBController.burnFrom(...)`](../contracts/jbtokenstore/write/burnfrom.md).
+A project's owner can mint more of its token by calling [`JBController.mintTokensOf(...)`](../contracts/jbtokenstore/write/mintfor.md). Anyone can burn their tokens by calling [`JBController.burnFrom(...)`](../contracts/jbtokenstore/write/burnfrom.md).
 
 ```solidity
 function mintTokensOf(
@@ -136,7 +136,7 @@ function distributeReservedTokensOf(uint256 _projectId, string memory _memo)
 
 Anyone who holds your project's tokens can redeem them for a proportional share of the project's overflow by calling [`JBETHPaymentTerminal.redeemTokensOf(...)`](../contracts/or-payment-terminals/jbethpaymentterminal/write/redeemtokensof.md). The overflow amount is the treasury's balance minus the current funding cycle's target.&#x20;
 
-Redeeming tokens burns them, and allows them your token holders to exit the community at any time with their share of the funds.
+Redeeming tokens burns them, and allows your token holders to exit the community at any time with their share of the funds.
 
 ```solidity
 function redeemTokensOf(
