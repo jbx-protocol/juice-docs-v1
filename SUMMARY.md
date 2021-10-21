@@ -224,7 +224,6 @@
         * [mintTokensOf](protocol/contracts/or-controllers/jbcontroller/write/minttokensof.md)
         * [burnTokensOf](protocol/contracts/or-controllers/jbcontroller/write/burntokensof.md)
         * [distributeReservedTokensOf](protocol/contracts/or-controllers/jbcontroller/write/distributereservedtokensof.md)
-        * [swapTerminalOf](protocol/contracts/or-controllers/jbcontroller/write/swapterminalof.md)
         * [prepForMigrationOf](protocol/contracts/or-controllers/jbcontroller/write/prepformigrationof.md)
         * [migrate](protocol/contracts/or-controllers/jbcontroller/write/migrate.md)
   * [| Payment Terminals](protocol/contracts/or-payment-terminals/README.md)

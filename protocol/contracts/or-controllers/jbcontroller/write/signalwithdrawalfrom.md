@@ -5,18 +5,34 @@ Contract:[`JBController`](../)​‌
 Interface: `IJBController`
 
 {% tabs %}
-{% tab title="Step by step" %}
-{% endtab %}
-
 {% tab title="Code" %}
-```
+```solidity
+/**
+  @notice
+  Signals that a project's funds are being withdrawn.
+
+  @dev
+  Only a project's terminal can signal a withdrawal.
+
+  @param _projectId The ID of the project that is being withdrawn from.
+  @param _amount The amount to withdraw.
+*/
+function signalWithdrawlFrom(uint256 _projectId, uint256 _amount)
+  external
+  override
+  onlyTerminal(_projectId)
+  returns (JBFundingCycle memory)
+{
+  // Tap from the project's funding cycle.
+  return fundingCycleStore.tapFrom(_projectId, _amount);
+}
 ```
 {% endtab %}
 
 {% tab title="Errors" %}
-| String                        | Description                                                                   |
-| ----------------------------- | ----------------------------------------------------------------------------- |
-| **`0x0f: SOME_LOCKED`**       | Thrown if the splits that are being set override some splits that are locked. |
+| String                  | Description                                                                   |
+| ----------------------- | ----------------------------------------------------------------------------- |
+| **`0x0f: SOME_LOCKED`** | Thrown if the splits that are being set override some splits that are locked. |
 {% endtab %}
 
 {% tab title="Events" %}

@@ -5,18 +5,37 @@ Contract:[`JBController`](../)​‌
 Interface: `IJBController`
 
 {% tabs %}
-{% tab title="Step by step" %}
-{% endtab %}
-
 {% tab title="Code" %}
-```
+```solidity
+/**
+  @notice
+  Gets the amount of reserved tokens that a project has available to distribute.
+
+  @param _projectId The ID of the project to get a reserved token balance of.
+  @param _reservedRate The reserved rate to use when making the calculation.
+
+  @return The current amount of reserved tokens.
+*/
+function reservedTokenBalanceOf(uint256 _projectId, uint256 _reservedRate)
+  external
+  view
+  override
+  returns (uint256)
+{
+  return
+    _reservedTokenAmountFrom(
+      _processedTokenTrackerOf[_projectId],
+      _reservedRate,
+      tokenStore.totalSupplyOf(_projectId)
+    );
+}
 ```
 {% endtab %}
 
 {% tab title="Errors" %}
-| String                        | Description                                                                   |
-| ----------------------------- | ----------------------------------------------------------------------------- |
-| **`0x0f: SOME_LOCKED`**       | Thrown if the splits that are being set override some splits that are locked. |
+| String                  | Description                                                                   |
+| ----------------------- | ----------------------------------------------------------------------------- |
+| **`0x0f: SOME_LOCKED`** | Thrown if the splits that are being set override some splits that are locked. |
 {% endtab %}
 
 {% tab title="Events" %}

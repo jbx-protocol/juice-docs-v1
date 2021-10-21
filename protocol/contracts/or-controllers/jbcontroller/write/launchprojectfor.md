@@ -5,18 +5,96 @@ Contract:[`JBController`](../)​‌
 Interface: `IJBController`
 
 {% tabs %}
-{% tab title="Step by step" %}
-{% endtab %}
-
 {% tab title="Code" %}
-```
+```solidity
+/**
+  @notice
+  Creates a project. This will mint an ERC-721 into the message sender's account, configure a first funding cycle, and set up any splits.
+
+  @dev
+  Each operation withing this transaction can be done in sequence separately.
+
+  @dev
+  Anyone can deploy a project on an owner's behalf.
+
+  @dev 
+  A project owner will be able to reconfigure the funding cycle's properties as long as it has not yet received a payment.
+
+  @param _owner The address to set as the owner of the project.
+  @param _handle The project's unique handle. This can be updated any time by the owner of the project.
+  @param _uri A link to associate with the project. This can be updated any time by the owner of the project.
+  @param _data The funding cycle configuration data. These properties will remain fixed for the duration of the funding cycle.
+    @dev _data.target The amount that the project wants to payout during a funding cycle. Sent as a wad (18 decimals).
+    @dev _data.currency The currency of the `target`. Send 0 for ETH or 1 for USD.
+    @dev _data.duration The duration of the funding cycle for which the `target` amount is needed. Measured in days. Send 0 for cycles that are reconfigurable at any time.
+    @dev _data.discountRate A number from 0-10000 indicating how valuable a contribution to this funding cycle is compared to previous funding cycles.
+      If it's 0, each funding cycle will have equal weight.
+      If the number is 9000, a contribution to the next funding cycle will only give you 10% of tickets given to a contribution of the same amoutn during the current funding cycle.
+      If the number is 10001, an non-recurring funding cycle will get made.
+    @dev _data.ballot The ballot contract that will be used to approve subsequent reconfigurations. Must adhere to the IFundingCycleBallot interface.
+  @param _metadata A struct specifying the TerminalV2 specific params that a funding cycle can have.
+    @dev _metadata.reservedRate A number from 0-200 (0-100%) indicating the percentage of each contribution's newly minted tokens that will be reserved for the token splits.
+    @dev _metadata.redemptionRate The rate from 0-200 (0-100%) that tunes the bonding curve according to which a project's tokens can be redeemed for overflow.
+      The bonding curve formula is https://www.desmos.com/calculator/sp9ru6zbpk
+      where x is _count, o is _currentOverflow, s is _totalSupply, and r is _redemptionRate.
+    @dev _metadata.ballotRedemptionRate The redemption rate to apply when there is an active ballot.
+    @dev _metadata.pausePay Whether or not the pay functionality should be paused during this cycle.
+    @dev _metadata.pauseWithdraw Whether or not the withdraw functionality should be paused during this cycle.
+    @dev _metadata.pauseRedeem Whether or not the redeem functionality should be paused during this cycle.
+    @dev _metadata.pauseMint Whether or not the mint functionality should be paused during this cycle.
+    @dev _metadata.pauseBurn Whether or not the burn functionality should be paused during this cycle.
+    @dev _metadata.allowTerminalMigration Whether or not the terminal migration functionality should be paused during this cycle.
+    @dev _metadata.allowControllerMigration Whether or not the controller migration functionality should be paused during this cycle.
+    @dev _metadata.holdFees Whether or not fees should be held to be processed at a later time during this cycle.
+    @dev _metadata.useDataSourceForPay Whether or not the data source should be used when processing a payment.
+    @dev _metadata.useDataSourceForRedeem Whether or not the data source should be used when processing a redemption.
+    @dev _metadata.dataSource A contract that exposes data that can be used within pay and redeem transactions. Must adhere to IJBFundingCycleDataSource.
+  @param _overflowAllowances The amount, in wei (18 decimals), of ETH that a project can use from its own overflow on-demand.
+  @param _payoutSplits Any payout splits to set.
+  @param _reservedTokenSplits Any reserved token splits to set.
+
+  @return projectId The ID of the project.
+*/
+function launchProjectFor(
+  address _owner,
+  bytes32 _handle,
+  string calldata _uri,
+  JBFundingCycleData calldata _data,
+  JBFundingCycleMetadata calldata _metadata,
+  JBOverflowAllowance[] memory _overflowAllowances,
+  JBSplit[] memory _payoutSplits,
+  JBSplit[] memory _reservedTokenSplits,
+  IJBTerminal _terminal
+) external returns (uint256 projectId) {
+  // Make sure the metadata is validated and packed into a uint256.
+  uint256 _packedMetadata = _validateAndPackFundingCycleMetadata(_metadata);
+
+  // Create the project for into the wallet of the message sender.
+  projectId = projects.createFor(_owner, _handle, _uri);
+
+  // Set the this contract as the project's controller in the directory.
+  directory.setControllerOf(projectId, this);
+
+  // Add the provided terminal to the list of terminals.
+  if (_terminal != IJBTerminal(address(0))) directory.addTerminalOf(projectId, _terminal);
+
+  _configure(
+    projectId,
+    _data,
+    _packedMetadata,
+    _overflowAllowances,
+    _payoutSplits,
+    _reservedTokenSplits,
+    true
+  );
+}
 ```
 {% endtab %}
 
 {% tab title="Errors" %}
-| String                        | Description                                                                   |
-| ----------------------------- | ----------------------------------------------------------------------------- |
-| **`0x0f: SOME_LOCKED`**       | Thrown if the splits that are being set override some splits that are locked. |
+| String                  | Description                                                                   |
+| ----------------------- | ----------------------------------------------------------------------------- |
+| **`0x0f: SOME_LOCKED`** | Thrown if the splits that are being set override some splits that are locked. |
 {% endtab %}
 
 {% tab title="Events" %}
