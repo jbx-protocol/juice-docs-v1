@@ -1,4 +1,4 @@
-# \_getLatestTimeAfterBallotOf
+# _getLatestTimeAfterBallotOf
 
 Contract:[`JBFundingCycleStore`](../)​
 

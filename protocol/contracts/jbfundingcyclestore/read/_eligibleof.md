@@ -1,4 +1,4 @@
-# \_eligibleOf
+# _eligibleOf
 
 Contract:[`JBFundingCycleStore`](../)​
 

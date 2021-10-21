@@ -1,4 +1,4 @@
-# \_primaryTerminalOf
+# _primaryTerminalOf
 
 Contract:[`JBDirectory`](../)‌
 

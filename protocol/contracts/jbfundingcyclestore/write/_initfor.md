@@ -1,4 +1,4 @@
-# \_initFor
+# _initFor
 
 Contract:[`JBFundingCycleStore`](../)​
 

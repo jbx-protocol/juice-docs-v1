@@ -1,4 +1,4 @@
-# \_targetOf
+# _targetOf
 
 Contract:[`JBFundingCycleStore`](../)​‌
 

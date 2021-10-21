@@ -1,4 +1,4 @@
-# \_latestPermanentCycleFrom
+# _latestPermanentCycleFrom
 
 Contract:[`JBFundingCycleStore`](../)​
 

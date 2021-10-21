@@ -1,4 +1,4 @@
-# \_getStructFor
+# _getStructFor
 
 Contract:[`JBFundingCycleStore`](../)​
 

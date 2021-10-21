@@ -1,4 +1,4 @@
-# \_deriveCycleLimitFrom
+# _deriveCycleLimitFrom
 
 Contract:[`JBFundingCycleStore`](../)​
 

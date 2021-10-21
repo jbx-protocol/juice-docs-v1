@@ -1,4 +1,4 @@
-# \_configurableOf
+# _configurableOf
 
 Contract:[`JBFundingCycleStore`](../)​
 

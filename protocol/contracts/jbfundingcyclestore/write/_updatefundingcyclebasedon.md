@@ -1,4 +1,4 @@
-# \_updateFundingCycleBasedOn
+# _updateFundingCycleBasedOn
 
 Contract:[`JBFundingCycleStore`](../)​
 
