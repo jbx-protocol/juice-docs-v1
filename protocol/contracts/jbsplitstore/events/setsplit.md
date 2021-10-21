@@ -4,7 +4,7 @@ Emitted from:
 
 * [`set`](../write/set.md)
 
-# Definition
+## Definition
 
 ```solidity
 event SetSplit(
@@ -18,7 +18,6 @@ event SetSplit(
 
 * `projectId` is the ID of the project to which the split belongs.
 * `domain` is the namespace that differentiates different split groups for the projectId.
-* `group`  is the property that joins multiple splits into one full group.
+* `group` is the property that joins multiple splits into one full group.
 * `split` is a Split struct.
-*   `caller` is the address that issued the transaction within which the event was emitted.
-
+* `caller` is the address that issued the transaction within which the event was emitted.
