@@ -28,7 +28,7 @@ This function is for convenience. It wraps the following 5 transactions into one
 * [`JBFundingCycleStore.configureFor(...)`](../contracts/jbfundingcyclestore/write/configurefor.md)
 * [`JBSplitStore.set(...)`](../contracts/jbsplitstore/write/set.md)
 
-At any time after the project has been created, it's owner can issue ERC-20 tokens for the protocol to use as its treasury token by calling [`JBTokenStore.issueFor(...)`](../contracts/jbtokenstore/write/issuefor.md). By default the protocol uses an internal accounting mechanism to account for projects' tokens. Once ERC-20's are issued by a project, anyone can claim these internal tokens into the token holders wallet as ERC-20's on their behalf by calling [`JBTokenStore.claimFor(...)`](../contracts/jbtokenstore/write/claimfor.md).
+At any time after the project has been created, its owner can issue ERC-20 tokens for the protocol to use as its treasury token by calling [`JBTokenStore.issueFor(...)`](../contracts/jbtokenstore/write/issuefor.md). By default the protocol uses an internal accounting mechanism to account for projects' tokens. Once ERC-20's are issued by a project, anyone can claim these internal tokens into the token holders wallet as ERC-20's on their behalf by calling [`JBTokenStore.claimFor(...)`](../contracts/jbtokenstore/write/claimfor.md).
 
 ```solidity
 function issueFor(
