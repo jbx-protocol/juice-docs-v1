@@ -5,6 +5,9 @@ Contract:[`JBController`](../)​‌
 Interface: `IJBController`
 
 {% tabs %}
+{% tab title="Step by step" %}
+TODO
+{% endtab %}
 {% tab title="Code" %}
 ```solidity
 /**

@@ -27,5 +27,8 @@ mapping(uint256 => mapping(uint256 => mapping(IJBTerminal => uint256)))
   override overflowAllowanceOf;
 ```
 
+* `uint256` is the ID of the project to get allowances for.
+* `uint256` is the configuration for which the allowances are set.
+* `IJBTerminal` is the terminal the allowance is for.
 * The resulting view function can be accessed externally by anyone. 
 * The resulting function overrides a function definition from the `IJBController` interface.
