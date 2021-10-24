@@ -10,14 +10,47 @@ TODO
 {% endtab %}
 
 {% tab title="Code" %}
-```
+```solidity
+/** 
+  @notice
+  Allows a project to migrate from this controller to another.
+
+  @param _projectId The ID of the project that will be migrated to this controller.
+  @param _to The controller being migrated to.
+*/
+function migrate(uint256 _projectId, IJBController _to)
+    external
+    requirePermission(projects.ownerOf(_projectId), _projectId, JBOperations.MIGRATE_CONTROLLER)
+    nonReentrant
+  {
+    // This controller must be the project's current controller.
+    require(directory.controllerOf(_projectId) == this, 'UNAUTHORIZED');
+
+    // Get a reference to the project's current funding cycle.
+    JBFundingCycle memory _fundingCycle = fundingCycleStore.currentOf(_projectId);
+
+    // Migration must be allowed
+    require(_fundingCycle.controllerMigrationAllowed(), 'TODO');
+
+    // All reserved tokens must be minted before migrating.
+    if (uint256(_processedTokenTrackerOf[_projectId]) != tokenStore.totalSupplyOf(_projectId))
+      _distributeReservedTokensOf(_projectId, '');
+
+    // Make sure the new controller is prepped for the migration.
+    _to.prepForMigrationOf(_projectId, this);
+
+    // Set the new controller.
+    directory.setControllerOf(_projectId, _to);
+
+    emit Migrate(_projectId, _to, msg.sender);
+  }
 ```
 {% endtab %}
 
 {% tab title="Errors" %}
-| String                        | Description                                                                   |
-| ----------------------------- | ----------------------------------------------------------------------------- |
-| **`0x0f: SOME_LOCKED`**       | Thrown if the splits that are being set override some splits that are locked. |
+| String                  | Description                                                                   |
+| ----------------------- | ----------------------------------------------------------------------------- |
+| **`0x0f: SOME_LOCKED`** | Thrown if the splits that are being set override some splits that are locked. |
 {% endtab %}
 
 {% tab title="Events" %}

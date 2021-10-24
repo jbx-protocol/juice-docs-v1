@@ -8,6 +8,7 @@ Interface: `IJBController`
 {% tab title="Step by step" %}
 TODO
 {% endtab %}
+
 {% tab title="Code" %}
 ```solidity
 /**
@@ -70,7 +71,9 @@ function launchProjectFor(
   IJBTerminal _terminal
 ) external returns (uint256 projectId) {
   // Make sure the metadata is validated and packed into a uint256.
-  uint256 _packedMetadata = _validateAndPackFundingCycleMetadata(_metadata);
+  uint256 _packedMetadata = JBFundingCycleMetadataResolver.validateAndPackFundingCycleMetadata(
+    _metadata
+  );
 
   // Create the project for into the wallet of the message sender.
   projectId = projects.createFor(_owner, _handle, _uri);

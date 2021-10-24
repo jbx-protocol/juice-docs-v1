@@ -8,6 +8,7 @@ Interface: `IJBController`
 {% tab title="Step by step" %}
 TODO
 {% endtab %}
+
 {% tab title="Code" %}
 ```solidity
 /**
@@ -64,8 +65,10 @@ function reconfigureFundingCyclesOf(
   returns (uint256)
 {
   // Make sure the metadata is validated and packed into a uint256.
-  uint256 _packedMetadata = _validateAndPackFundingCycleMetadata(_metadata);
-
+  uint256 _packedMetadata = JBFundingCycleMetadataResolver.validateAndPackFundingCycleMetadata(
+    _metadata
+  );
+  
   // All reserved tokens must be minted before configuring.
   if (uint256(_processedTokenTrackerOf[_projectId]) != tokenStore.totalSupplyOf(_projectId))
     _distributeReservedTokensOf(_projectId, '');

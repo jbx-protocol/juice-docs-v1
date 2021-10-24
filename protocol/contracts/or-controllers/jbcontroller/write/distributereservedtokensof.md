@@ -1,4 +1,4 @@
-# burnTokensOf
+# distributeReservedTokensOf
 
 Contract:[`JBController`](../)​‌
 
@@ -10,14 +10,30 @@ TODO
 {% endtab %}
 
 {% tab title="Code" %}
-```
+```solidity
+/**
+  @notice
+  Mints and distributes all outstanding reserved tokens for a project.
+
+  @param _projectId The ID of the project to which the reserved tokens belong.
+  @param _memo A memo to leave with the emitted event.
+
+  @return The amount of reserved tokens that were minted.
+*/
+function distributeReservedTokensOf(uint256 _projectId, string memory _memo)
+  external
+  nonReentrant
+  returns (uint256)
+{
+  return _distributeReservedTokensOf(_projectId, _memo);
+}
 ```
 {% endtab %}
 
 {% tab title="Errors" %}
-| String                        | Description                                                                   |
-| ----------------------------- | ----------------------------------------------------------------------------- |
-| **`0x0f: SOME_LOCKED`**       | Thrown if the splits that are being set override some splits that are locked. |
+| String                  | Description                                                                   |
+| ----------------------- | ----------------------------------------------------------------------------- |
+| **`0x0f: SOME_LOCKED`** | Thrown if the splits that are being set override some splits that are locked. |
 {% endtab %}
 
 {% tab title="Events" %}

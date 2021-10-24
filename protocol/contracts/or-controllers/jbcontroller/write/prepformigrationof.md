@@ -10,14 +10,27 @@ TODO
 {% endtab %}
 
 {% tab title="Code" %}
-```
+```solidity
+/** 
+  @notice
+  Allows other controllers to signal to this one that a migration is expected for the specified project.
+
+  @param _projectId The ID of the project that will be migrated to this controller.
+*/
+function prepForMigrationOf(uint256 _projectId, IJBController) external override {
+  // This controller must not be the project's current controller.
+  require(directory.controllerOf(_projectId) != this, 'UNAUTHORIZED');
+
+  // Set the tracker as the total supply.
+  _processedTokenTrackerOf[_projectId] = int256(tokenStore.totalSupplyOf(_projectId));
+}
 ```
 {% endtab %}
 
 {% tab title="Errors" %}
-| String                        | Description                                                                   |
-| ----------------------------- | ----------------------------------------------------------------------------- |
-| **`0x0f: SOME_LOCKED`**       | Thrown if the splits that are being set override some splits that are locked. |
+| String                  | Description                                                                   |
+| ----------------------- | ----------------------------------------------------------------------------- |
+| **`0x0f: SOME_LOCKED`** | Thrown if the splits that are being set override some splits that are locked. |
 {% endtab %}
 
 {% tab title="Events" %}

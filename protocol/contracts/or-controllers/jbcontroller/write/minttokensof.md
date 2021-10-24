@@ -8,6 +8,7 @@ Interface: `IJBController`
 {% tab title="Step by step" %}
 TODO
 {% endtab %}
+
 {% tab title="Code" %}
 ```solidity
 /**
@@ -52,7 +53,7 @@ function mintTokensOf(
 
   // If the message sender is not a terminal delegate, the current funding cycle must not be paused.
   require(
-      !_fundingCycle.mintPaused() || directory.isTerminalDelegateOf(_projectId, msg.sender),
+    !_fundingCycle.mintPaused() || directory.isTerminalDelegateOf(_projectId, msg.sender),
     'PAUSED'
   );
 

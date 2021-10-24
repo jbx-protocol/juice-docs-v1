@@ -8,6 +8,7 @@ Interface: `IJBController`
 {% tab title="Step by step" %}
 TODO
 {% endtab %}
+
 {% tab title="Code" %}
 ```solidity
 /**
@@ -33,18 +34,6 @@ function reservedTokenBalanceOf(uint256 _projectId, uint256 _reservedRate)
     );
 }
 ```
-{% endtab %}
-
-{% tab title="Errors" %}
-| String                  | Description                                                                   |
-| ----------------------- | ----------------------------------------------------------------------------- |
-| **`0x0f: SOME_LOCKED`** | Thrown if the splits that are being set override some splits that are locked. |
-{% endtab %}
-
-{% tab title="Events" %}
-| Name                                    | Data                                                                                                                                                                                                                 |
-| --------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [**`SetSplit`**](../events/setsplit.md) | <ul><li><code>uint256 indexed projectId</code></li><li><code>uint256 indexed domain</code></li><li><code>uint256 indexed group</code></li><li><code>Split split</code></li><li><code>address caller</code></li></ul> |
 {% endtab %}
 
 {% tab title="Bug bounty" %}
