@@ -3,34 +3,21 @@
 {% tabs %}
 {% tab title="Step by step" %}
 
-**Efficiently stores a funding cycles provided configuration properties.**
+**Distributes all outstanding reserved tokens for a project.**
 
 # Definition
 
 ```solidity
-function _packAndStoreConfigurationProperties(
-  uint256 _fundingCycleId,
-  uint256 _configured,
-  uint256 _cycleLimit,
-  IJBFundingCycleBallot _ballot,
-  uint256 _duration,
-  uint256 _currency,
-  uint256 _fee,
-  uint256 _discountRate
-) private { ... }
+function _distributeReservedTokensOf(uint256 _projectId, string memory _memo)
+  private
+  returns (uint256 count) { ... }
 ```
 
 * Arguments:
-  * `_fundingCycleId` is the ID of the funding cycle to pack and store.
-  * `_configured` is the timestamp of the configuration.
-  * `_cycleLimit` is the number of cycles that this configuration should last for before going back to the last permanent.
-  * `_ballot` is the ballot to use for future reconfiguration approvals.
-  * `_duration` is the duration of the funding cycle.
-  * `_currency` is the currency of the funding cycle.
-  * `_fee` is the fee of the funding cycle.
-  * `_discountRate` is the discount rate of the base funding cycle.
+  * `_projectId` is the ID of the project to which the reserved tokens belong.
+  * `_memo` is a memo to pass along to the emitted event.
 * The function is private to this contract.
-* The function doesn't return anything.
+* The function returns the amount of reserved tokens that were minted.
 
 # Body
 {% endtab %}

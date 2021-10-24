@@ -3,34 +3,25 @@
 {% tabs %}
 {% tab title="Step by step" %}
 
-**Efficiently stores a funding cycles provided configuration properties.**
+**Gets the amount of reserved tokens currently tracked for a project given a reserved rate.**
 
 # Definition
 
 ```solidity
-function _packAndStoreConfigurationProperties(
-  uint256 _fundingCycleId,
-  uint256 _configured,
-  uint256 _cycleLimit,
-  IJBFundingCycleBallot _ballot,
-  uint256 _duration,
-  uint256 _currency,
-  uint256 _fee,
-  uint256 _discountRate
-) private { ... }
+function _reservedTokenAmountFrom(
+  int256 _processedTokenTracker,
+  uint256 _reservedRate,
+  uint256 _totalEligibleTokens
+) private pure returns (uint256) { ... }
 ```
 
 * Arguments:
-  * `_fundingCycleId` is the ID of the funding cycle to pack and store.
-  * `_configured` is the timestamp of the configuration.
-  * `_cycleLimit` is the number of cycles that this configuration should last for before going back to the last permanent.
-  * `_ballot` is the ballot to use for future reconfiguration approvals.
-  * `_duration` is the duration of the funding cycle.
-  * `_currency` is the currency of the funding cycle.
-  * `_fee` is the fee of the funding cycle.
-  * `_discountRate` is the discount rate of the base funding cycle.
-* The function is private to this contract.
-* The function doesn't return anything.
+  * `_processedTokenTracker` is the tracker to make the calculation with.
+  * `_reservedRate` is the reserved rate to use to make the calculation.
+  * `_totalEligibleTokens` is the total amount to make the calculation with.
+* The view function is private to this contract.
+* The function does not alter state on the blockchain.
+* The function returns the reserved token amount.
 
 # Body
 {% endtab %}

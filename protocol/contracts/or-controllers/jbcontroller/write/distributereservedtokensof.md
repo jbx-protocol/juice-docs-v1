@@ -6,9 +6,7 @@ Interface: `IJBController`
 
 {% tabs %}
 {% tab title="Step by step" %}
-**Burns a token holder's supply.**
-
-_Only a token's holder or a designated operator can burn it._
+**Distributes all outstanding reserved tokens for a project.**
 
 # Definition
 
@@ -34,7 +32,7 @@ TODO
 ```solidity
 /**
   @notice
-  Mints and distributes all outstanding reserved tokens for a project.
+  Distributes all outstanding reserved tokens for a project.
 
   @param _projectId The ID of the project to which the reserved tokens belong.
   @param _memo A memo to pass along to the emitted event.

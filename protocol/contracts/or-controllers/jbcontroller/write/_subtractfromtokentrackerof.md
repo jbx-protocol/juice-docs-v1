@@ -3,32 +3,17 @@
 {% tabs %}
 {% tab title="Step by step" %}
 
-**Efficiently stores a funding cycles provided configuration properties.**
+**Subtracts the provided value from the processed token tracker.**
 
 # Definition
 
 ```solidity
-function _packAndStoreConfigurationProperties(
-  uint256 _fundingCycleId,
-  uint256 _configured,
-  uint256 _cycleLimit,
-  IJBFundingCycleBallot _ballot,
-  uint256 _duration,
-  uint256 _currency,
-  uint256 _fee,
-  uint256 _discountRate
-) private { ... }
+function _subtractFromTokenTrackerOf(uint256 _projectId, uint256 _amount) private { ... }
 ```
 
 * Arguments:
-  * `_fundingCycleId` is the ID of the funding cycle to pack and store.
-  * `_configured` is the timestamp of the configuration.
-  * `_cycleLimit` is the number of cycles that this configuration should last for before going back to the last permanent.
-  * `_ballot` is the ballot to use for future reconfiguration approvals.
-  * `_duration` is the duration of the funding cycle.
-  * `_currency` is the currency of the funding cycle.
-  * `_fee` is the fee of the funding cycle.
-  * `_discountRate` is the discount rate of the base funding cycle.
+  * `_projectId` is the ID of the project that is having its tracker subtracted from.
+  * `_amount` is the amount to subtract.
 * The function is private to this contract.
 * The function doesn't return anything.
 

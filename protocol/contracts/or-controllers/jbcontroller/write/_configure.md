@@ -3,34 +3,31 @@
 {% tabs %}
 {% tab title="Step by step" %}
 
-**Efficiently stores a funding cycles provided configuration properties.**
-
+**Configures a funding cycle and stores information pertinent to the configuration.**
 # Definition
 
 ```solidity
-function _packAndStoreConfigurationProperties(
-  uint256 _fundingCycleId,
-  uint256 _configured,
-  uint256 _cycleLimit,
-  IJBFundingCycleBallot _ballot,
-  uint256 _duration,
-  uint256 _currency,
-  uint256 _fee,
-  uint256 _discountRate
-) private { ... }
+function _configure(
+  uint256 _projectId,
+  JBFundingCycleData calldata _data,
+  uint256 _packedMetadata,
+  JBOverflowAllowance[] memory _overflowAllowances,
+  JBSplit[] memory _payoutSplits,
+  JBSplit[] memory _reservedTokenSplits,
+  bool _shouldConfigureActive
+) private returns (uint256) { ... }
 ```
 
 * Arguments:
-  * `_fundingCycleId` is the ID of the funding cycle to pack and store.
-  * `_configured` is the timestamp of the configuration.
-  * `_cycleLimit` is the number of cycles that this configuration should last for before going back to the last permanent.
-  * `_ballot` is the ballot to use for future reconfiguration approvals.
-  * `_duration` is the duration of the funding cycle.
-  * `_currency` is the currency of the funding cycle.
-  * `_fee` is the fee of the funding cycle.
-  * `_discountRate` is the discount rate of the base funding cycle.
+  * `_projectId` is the ID of the project whos funding cycles are being reconfigured.
+  * `_data` is the funding cycle configuration data. These properties will remain fixed for the duration of the funding cycle.
+  * `_metadata` is a struct specifying the controller specific params that a funding cycle can have.
+  * `_overflowAllowances` is an array contraining amounts, in wei (18 decimals), that a project can use from its own overflow on-demand for each payment terminal.
+  * `_payoutSplits` is an array of payout splits to set.
+  * `_reservedTokenSplits` is an array of reserved token splits to set.
+  * `_shouldConfigureActive` is a flag indicating if the active funding cycle should be reconfigured instead of queued up a new one.
 * The function is private to this contract.
-* The function doesn't return anything.
+* The function returns the ID of the funding cycle that was configured.
 
 # Body
 {% endtab %}
