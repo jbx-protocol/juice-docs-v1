@@ -12,7 +12,7 @@ _Only the owner or operator of a project, or the current controller contract of 
 
 _The new splits must include any currently set splits that are locked._
 
-# Definition
+## Definition
 
 ```solidity
 function set(
@@ -40,7 +40,7 @@ function set(
 * The function overrides a function definition from the `IJBSplitsStore` interface.
 * The function doesn't return anything.
 
-# Body
+## Body
 
 1.  Get a reference to the current splits set for the specified `_projectId`'s `_domain`, within the specified `_group`.
 

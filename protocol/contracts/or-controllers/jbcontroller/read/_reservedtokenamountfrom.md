@@ -1,11 +1,10 @@
-# _reservedTokenAmountFrom
+# \_reservedTokenAmountFrom
 
 {% tabs %}
 {% tab title="Step by step" %}
-
 **Gets the amount of reserved tokens currently tracked for a project given a reserved rate.**
 
-# Definition
+## Definition
 
 ```solidity
 function _reservedTokenAmountFrom(
@@ -23,7 +22,8 @@ function _reservedTokenAmountFrom(
 * The function does not alter state on the blockchain.
 * The function returns the reserved token amount.
 
-# Body
+## Body
+
 TODO
 {% endtab %}
 

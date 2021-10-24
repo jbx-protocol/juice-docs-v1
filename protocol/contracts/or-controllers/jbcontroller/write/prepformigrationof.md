@@ -8,7 +8,7 @@ Interface: [`IJBController`](../../../../interfaces/ijbcontroller.md)
 {% tab title="Step by step" %}
 **Allows other controllers to signal to this one that a migration is expected for the specified project.**
 
-## Definition
+### Definition
 
 ```solidity
 function prepForMigrationOf(uint256 _projectId, IJBController) external override { ... }
@@ -20,7 +20,7 @@ function prepForMigrationOf(uint256 _projectId, IJBController) external override
 * The function overrides a function definition from the [`IJBController`](../../../../interfaces/ijbcontroller.md) interface.
 * The function doesn't return anything.
 
-## Body
+### Body
 
 TODO
 {% endtab %}
@@ -44,8 +44,8 @@ function prepForMigrationOf(uint256 _projectId, IJBController) external override
 {% endtab %}
 
 {% tab title="Errors" %}
-| String                  | Description                                                                   |
-| ----------------------- | ----------------------------------------------------------------------------- |
+| String                   | Description                                                         |
+| ------------------------ | ------------------------------------------------------------------- |
 | **`0x34: UNAUTHORIZED`** | Thrown if the controller is the current controller for the project. |
 {% endtab %}
 

@@ -10,7 +10,7 @@ Interface: [`IJBController`](../../../../interfaces/ijbcontroller.md)
 
 _Only a project's owner, a designated operator, or one of its terminal's delegate can mint its tokens._
 
-## Definition
+### Definition
 
 ```solidity
 function burnTokensOf(
@@ -41,7 +41,7 @@ function burnTokensOf(
 * The function overrides a function definition from the [`IJBController`](../../../../interfaces/ijbcontroller.md) interface.
 * The function doesn't return anything.
 
-## Body
+### Body
 
 TODO
 {% endtab %}
@@ -116,17 +116,17 @@ function mintTokensOf(
 {% endtab %}
 
 {% tab title="Errors" %}
-| String                  | Description                                                                   |
-| ----------------------- | ----------------------------------------------------------------------------- |
-| **`0x2f: ZERO_ADDRESS`** | Thrown if the token beneficiary is the zero address. |
-| **`0x30: NO_OP`** | Thrown if no tokens are being minted. |
-| **`0x31: PAUSED`** | Thrown if the request is not being made by a payment terminal, and the project's current funding cycle has paused minting. |
+| String                   | Description                                                                                                                |
+| ------------------------ | -------------------------------------------------------------------------------------------------------------------------- |
+| **`0x2f: ZERO_ADDRESS`** | Thrown if the token beneficiary is the zero address.                                                                       |
+| **`0x30: NO_OP`**        | Thrown if no tokens are being minted.                                                                                      |
+| **`0x31: PAUSED`**       | Thrown if the request is not being made by a payment terminal, and the project's current funding cycle has paused minting. |
 {% endtab %}
 
 {% tab title="Events" %}
-| Name                                    | Data                                                                                                                                                                                                                 |
-| --------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [**`MintTokens`**](../events/minttokens.md) | <<ul><li><code>address indexed beneficiary</code></li><li><code>uint256 indexed projectId</code></li><li><code>uint256 count</code></li><li><code>string memo</code></li><li><code>bool shouldReserveTokens</code></li><li><code>uint256 reservedRate</code></li><li><code>address caller</code></li></ul> |
+| Name                                        | Data                                                                                                                                                                                                                                                                                                                   |
+| ------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [**`MintTokens`**](../events/minttokens.md) | <p>&#x3C;</p><ul><li><code>address indexed beneficiary</code></li><li><code>uint256 indexed projectId</code></li><li><code>uint256 count</code></li><li><code>string memo</code></li><li><code>bool shouldReserveTokens</code></li><li><code>uint256 reservedRate</code></li><li><code>address caller</code></li></ul> |
 {% endtab %}
 
 {% tab title="Bug bounty" %}

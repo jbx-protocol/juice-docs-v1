@@ -1,11 +1,10 @@
-# _subtractFromTokenTrackerOf
+# \_subtractFromTokenTrackerOf
 
 {% tabs %}
 {% tab title="Step by step" %}
-
 **Subtracts the provided value from the processed token tracker.**
 
-# Definition
+## Definition
 
 ```solidity
 function _subtractFromTokenTrackerOf(uint256 _projectId, uint256 _amount) private { ... }
@@ -17,7 +16,8 @@ function _subtractFromTokenTrackerOf(uint256 _projectId, uint256 _amount) privat
 * The function is private to this contract.
 * The function doesn't return anything.
 
-# Body
+## Body
+
 TODO
 {% endtab %}
 

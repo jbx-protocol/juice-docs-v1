@@ -10,7 +10,7 @@ Interface: [`IJBController`](../../../../interfaces/ijbcontroller.md)
 
 _Only a token's holder, a designated operator, or a project's terminal's delegate can burn it._
 
-## Definition
+### Definition
 
 ```solidity
 function burnTokensOf(
@@ -41,7 +41,7 @@ function burnTokensOf(
 * The function overrides a function definition from the [`IJBController`](../../../../interfaces/ijbcontroller.md) interface.
 * The function doesn't return anything.
 
-## Body
+### Body
 
 TODO
 {% endtab %}
@@ -102,16 +102,16 @@ function burnTokensOf(
 {% endtab %}
 
 {% tab title="Errors" %}
-| String                  | Description                                                                   |
-| ----------------------- | ----------------------------------------------------------------------------- |
-| **`0x32: NO_OP`** | Thrown if no tokens are being burned. |
+| String             | Description                                                                                                                |
+| ------------------ | -------------------------------------------------------------------------------------------------------------------------- |
+| **`0x32: NO_OP`**  | Thrown if no tokens are being burned.                                                                                      |
 | **`0x33: PAUSED`** | Thrown if the request is not being made by a payment terminal, and the project's current funding cycle has paused burning. |
 {% endtab %}
 
 {% tab title="Events" %}
-| Name                                    | Data                                                                                                                                                                                                                 |
-| --------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [**`BurnTokens`**](../events/burntokens.md) | ul><li><code>address indexed holder</code></li><li><code>uint256 indexed projectId</code></li><li><code>uint256 count</code></li><li><code>string memo</code></li><li><code>address caller</code></li></ul> |
+| Name                                        | Data                                                                                                                                                                                                                                                       |
+| ------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [**`BurnTokens`**](../events/burntokens.md) | <p>ul></p><ul><li><code>address indexed holder</code></li></ul><ul><li><code>uint256 indexed projectId</code></li></ul><ul><li><code>uint256 count</code></li></ul><ul><li><code>string memo</code></li></ul><ul><li><code>address caller</code></li></ul> |
 {% endtab %}
 
 {% tab title="Bug bounty" %}

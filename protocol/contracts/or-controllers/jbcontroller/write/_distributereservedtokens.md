@@ -1,11 +1,10 @@
-# _distributeReservedTokens
+# \_distributeReservedTokens
 
 {% tabs %}
 {% tab title="Step by step" %}
-
 **Distributes all outstanding reserved tokens for a project.**
 
-# Definition
+## Definition
 
 ```solidity
 function _distributeReservedTokensOf(uint256 _projectId, string memory _memo)
@@ -19,7 +18,8 @@ function _distributeReservedTokensOf(uint256 _projectId, string memory _memo)
 * The function is private to this contract.
 * The function returns the amount of reserved tokens that were minted.
 
-# Body
+## Body
+
 TODO
 {% endtab %}
 

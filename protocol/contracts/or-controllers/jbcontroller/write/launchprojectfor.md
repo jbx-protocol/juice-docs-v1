@@ -10,7 +10,7 @@ _Each operation within this transaction can be done in sequence separately._
 
 _Anyone can deploy a project on an owner's behalf._
 
-## Definition
+### Definition
 
 ```solidity
 function launchProjectFor(
@@ -39,7 +39,7 @@ function launchProjectFor(
 * The function can be accessed externally by anyone.
 * The function returns the ID of the project that was launched.
 
-## Body
+### Body
 
 TODO
 {% endtab %}
@@ -131,17 +131,17 @@ function launchProjectFor(
 {% endtab %}
 
 {% tab title="Errors" %}
-| String                  | Description                                                                   |
-| ----------------------- | ----------------------------------------------------------------------------- |
-| **`0x37: BAD_RESERVED_RATE`** | Thrown if the reserved rate is greater than 100%. |
-| **`0x38: BAD_REDEMPTION_RATE`** | Thrown if the redemption rate is greater than 100%. |
+| String                                 | Description                                                |
+| -------------------------------------- | ---------------------------------------------------------- |
+| **`0x37: BAD_RESERVED_RATE`**          | Thrown if the reserved rate is greater than 100%.          |
+| **`0x38: BAD_REDEMPTION_RATE`**        | Thrown if the redemption rate is greater than 100%.        |
 | **`0x39: BAD_BALLOT_REDEMPTION_RATE`** | Thrown if the ballot redemption rate is greater than 100%. |
 {% endtab %}
 
 {% tab title="Events" %}
-| Name                                    | Data                                                                                                                                                                                                                 |
-| --------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [**`SetOverflowAllowance`**](../events/setoverflowallowance.md) | <ul><li><code>uint256 indexed projectId</code></li><li><code>uint256 indexed configuration</code></li><li><a href="../../../data-structures/jboverflowallowance.md"><code>JBOverflowAllowance</code></a><code>allowance</code></li><li><code>address caller</code></li></ul>  |
+| Name                                                            | Data                                                                                                                                                                                                                                                                         |
+| --------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [**`SetOverflowAllowance`**](../events/setoverflowallowance.md) | <ul><li><code>uint256 indexed projectId</code></li><li><code>uint256 indexed configuration</code></li><li><a href="../../../data-structures/jboverflowallowance.md"><code>JBOverflowAllowance</code></a><code>allowance</code></li><li><code>address caller</code></li></ul> |
 {% endtab %}
 
 {% tab title="Bug bounty" %}
