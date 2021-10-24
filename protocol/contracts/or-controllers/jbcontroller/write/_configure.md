@@ -1,11 +1,11 @@
-# \_configure
+# _configure
 
 {% tabs %}
 {% tab title="Step by step" %}
 
 **Efficiently stores a funding cycles provided configuration properties.**
 
-### Definition
+# Definition
 
 ```solidity
 function _packAndStoreConfigurationProperties(
@@ -32,7 +32,7 @@ function _packAndStoreConfigurationProperties(
 * The function is private to this contract.
 * The function doesn't return anything.
 
-### Body
+# Body
 {% endtab %}
 
 {% tab title="Only code" %}
