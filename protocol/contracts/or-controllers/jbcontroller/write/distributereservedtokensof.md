@@ -6,7 +6,7 @@ Contract:[`JBController`](../)​‌
 {% tab title="Step by step" %}
 **Distributes all outstanding reserved tokens for a project.**
 
-### Definition
+# Definition
 
 ```solidity
 function distributeReservedTokensOf(uint256 _projectId, string memory _memo)
@@ -21,7 +21,7 @@ function distributeReservedTokensOf(uint256 _projectId, string memory _memo)
 * The function can be accessed externally by anyone.
 * The function returns the amount of minted reserved tokens.
 
-### Body
+# Body
 
 TODO
 {% endtab %}
