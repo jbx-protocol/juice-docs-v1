@@ -35,7 +35,7 @@ TODO
 */
 function prepForMigrationOf(uint256 _projectId, IJBController) external override {
   // This controller must not be the project's current controller.
-  require(directory.controllerOf(_projectId) != this, 'UNAUTHORIZED');
+  require(directory.controllerOf(_projectId) != this, '0x34: UNAUTHORIZED');
 
   // Set the tracker as the total supply.
   _processedTokenTrackerOf[_projectId] = int256(tokenStore.totalSupplyOf(_projectId));
@@ -46,7 +46,7 @@ function prepForMigrationOf(uint256 _projectId, IJBController) external override
 {% tab title="Errors" %}
 | String                  | Description                                                                   |
 | ----------------------- | ----------------------------------------------------------------------------- |
-| **`0x0f: SOME_LOCKED`** | Thrown if the splits that are being set override some splits that are locked. |
+| **`0x34: UNAUTHORIZED`** | Thrown if the controller is the current controller for the project. |
 {% endtab %}
 
 {% tab title="Events" %}

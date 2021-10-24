@@ -24,6 +24,7 @@ function _reservedTokenAmountFrom(
 * The function returns the reserved token amount.
 
 # Body
+TODO
 {% endtab %}
 
 {% tab title="Only code" %}

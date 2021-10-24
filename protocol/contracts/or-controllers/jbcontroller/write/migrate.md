@@ -43,13 +43,13 @@ function migrate(uint256 _projectId, IJBController _to)
     nonReentrant
   {
     // This controller must be the project's current controller.
-    require(directory.controllerOf(_projectId) == this, 'UNAUTHORIZED');
+    require(directory.controllerOf(_projectId) == this, '0x35: UNAUTHORIZED');
 
     // Get a reference to the project's current funding cycle.
     JBFundingCycle memory _fundingCycle = fundingCycleStore.currentOf(_projectId);
 
     // Migration must be allowed
-    require(_fundingCycle.controllerMigrationAllowed(), 'TODO');
+    require(_fundingCycle.controllerMigrationAllowed(), '0x36: NOT_ALLOWED');
 
     // All reserved tokens must be minted before migrating.
     if (uint256(_processedTokenTrackerOf[_projectId]) != tokenStore.totalSupplyOf(_projectId))
@@ -69,13 +69,16 @@ function migrate(uint256 _projectId, IJBController _to)
 {% tab title="Errors" %}
 | String                  | Description                                                                   |
 | ----------------------- | ----------------------------------------------------------------------------- |
-| **`0x0f: SOME_LOCKED`** | Thrown if the splits that are being set override some splits that are locked. |
+| **`0x35: UNAUTHORIZED`** | Thrown if the controller isn't the project's current controller. |
+| **`0x36: NOT_ALLOWED`** | Thrown if the project's current funding cycle doesn't allow a controller migration. |
 {% endtab %}
 
 {% tab title="Events" %}
 | Name                                    | Data                                                                                                                                                                                                                 |
 | --------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [**`SetSplit`**](../events/setsplit.md) | <ul><li><code>uint256 indexed projectId</code></li><li><code>uint256 indexed domain</code></li><li><code>uint256 indexed group</code></li><li><code>Split split</code></li><li><code>address caller</code></li></ul> |
+| [**`Migrate`**](../events/migrate.md) | <ul><li><code>uint256 projectId</code></li><li><a href="../../../interfaces/ijbcontroller.md"><code>IJBController</code></a><code>to</code></li><li><code>address caller</code></li></ul> |
+| [**`DistributeReservedTokens`**](../events/distributereservedtokens.md) | <ul><li><code>uint256 indexed fundingCycleId</code></li><li><code>uint256 indexed projectId</code></li><li><code>address indexed beneficiary</code></li><li><code>uint256 count</code></li><li><code>uint256 projectOwnerTokenCount</code></li><li><code>string memo</code></li><li><code>address caller</code></li></ul> |
+| [**`DistributeToReservedTokenSplit`**](../events/distributetoreservedtokensplit.md) | <ul><li><code>uint256 indexed fundingCycleId</code></li><li><code>uint256 indexed projectId</code></li><li><a href="../../../data-structures/jbsplit.md"><code>JBSplit</code></a><code>split</code></li><li><code>uint256 tokenCount</code></li><li><code>address caller</code></li></ul> |
 {% endtab %}
 
 {% tab title="Bug bounty" %}

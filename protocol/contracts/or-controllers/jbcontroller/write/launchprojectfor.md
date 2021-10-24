@@ -133,13 +133,15 @@ function launchProjectFor(
 {% tab title="Errors" %}
 | String                  | Description                                                                   |
 | ----------------------- | ----------------------------------------------------------------------------- |
-| **`0x0f: SOME_LOCKED`** | Thrown if the splits that are being set override some splits that are locked. |
+| **`0x37: BAD_RESERVED_RATE`** | Thrown if the reserved rate is greater than 100%. |
+| **`0x38: BAD_REDEMPTION_RATE`** | Thrown if the redemption rate is greater than 100%. |
+| **`0x39: BAD_BALLOT_REDEMPTION_RATE`** | Thrown if the ballot redemption rate is greater than 100%. |
 {% endtab %}
 
 {% tab title="Events" %}
 | Name                                    | Data                                                                                                                                                                                                                 |
 | --------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [**`SetSplit`**](../events/setsplit.md) | <ul><li><code>uint256 indexed projectId</code></li><li><code>uint256 indexed domain</code></li><li><code>uint256 indexed group</code></li><li><code>Split split</code></li><li><code>address caller</code></li></ul> |
+| [**`SetOverflowAllowance`**](../events/setoverflowallowance.md) | <ul><li><code>uint256 indexed projectId</code></li><li><code>uint256 indexed configuration</code></li><li><a href="../../../data-structures/jboverflowallowance.md"><code>JBOverflowAllowance</code></a><code>allowance</code></li><li><code>address caller</code></li></ul>  |
 {% endtab %}
 
 {% tab title="Bug bounty" %}
