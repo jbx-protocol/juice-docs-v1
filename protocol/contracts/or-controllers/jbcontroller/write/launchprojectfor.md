@@ -6,6 +6,41 @@ Interface: `IJBController`
 
 {% tabs %}
 {% tab title="Step by step" %}
+**Sets a project's splits.**
+
+_Only the owner or operator of a project, or the current controller contract of the project, can set its splits._
+
+_The new splits must include any currently set splits that are locked._
+
+## Definition
+
+```solidity
+function set(
+  uint256 _projectId,
+  uint256 _domain,
+  uint256 _group,
+  JBSplit[] memory _splits
+)
+  external
+  override
+  requirePermissionAllowingOverride(
+      projects.ownerOf(_projectId),
+      _projectId,
+      JBOperations.SET_SPLITS,
+      address(directory.controllerOf(_projectId)) == msg.sender
+  ) { ... }
+```
+
+* Arguments:
+  * `_projectId` is the ID of the project for which splits are being added.
+  * `_domain` is an identifier within which the splits should be considered active.
+  * `_group` is an identifier between of splits being set. All splits within this `_group` must add up to within 100%.
+  * `_splits` are the [`JBSplit`](../../../data-structures/jbsplit.md)s to set.
+* Through the [`requirePermissionAllowingOverride`](../../or-abstract/jboperatable/modifiers/requirepermissionallowingoverride.md) modifier, the function is only accessible by the project's owner, from an operator that has been given the `JBOperations.SET_SPLITS` permission by the project owner for the provided `_projectId` , or from the current controller of the `_projectId` of the specified.
+* The function overrides a function definition from the `IJBSplitsStore` interface.
+* The function doesn't return anything.
+
+## Body
 TODO
 {% endtab %}
 
