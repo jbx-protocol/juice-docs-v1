@@ -10,7 +10,7 @@ Interface: `IJBController`
 
 _Only a project's owner, a designated operator, or one of its terminal's delegate can mint its tokens._
 
-## Definition
+# Definition
 
 ```solidity
 function burnTokensOf(
@@ -41,7 +41,7 @@ function burnTokensOf(
 * The function overrides a function definition from the `IJBController` interface.
 * The function doesn't return anything.
 
-## Body
+# Body
 TODO
 {% endtab %}
 

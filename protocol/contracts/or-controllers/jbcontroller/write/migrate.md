@@ -10,7 +10,7 @@ Interface: `IJBController`
 
 _Only a project's owner or a designated operator can migrate it._
 
-## Definition
+# Definition
 
 ```solidity
 function migrate(uint256 _projectId, IJBController _to)
@@ -26,7 +26,7 @@ function migrate(uint256 _projectId, IJBController _to)
 * The function overrides a function definition from the `IJBController` interface.
 * The function doesn't return anything.
 
-## Body
+# Body
 TODO
 {% endtab %}
 

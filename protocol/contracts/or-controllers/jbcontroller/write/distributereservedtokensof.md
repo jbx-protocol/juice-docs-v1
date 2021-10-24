@@ -10,7 +10,7 @@ Interface: `IJBController`
 
 _Only a token's holder or a designated operator can burn it._
 
-## Definition
+# Definition
 
 ```solidity
 function distributeReservedTokensOf(uint256 _projectId, string memory _memo)
@@ -26,7 +26,7 @@ function distributeReservedTokensOf(uint256 _projectId, string memory _memo)
 * The function overrides a function definition from the `IJBController` interface.
 * The function returns the amount of reserved tokens that were minted.
 
-## Body
+# Body
 TODO
 {% endtab %}
 

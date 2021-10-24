@@ -8,7 +8,7 @@ Contract:[`JBController`](../)​‌
 
 _Only the owner of this contract can change the fee._
 
-## Definition
+# Definition
 
 ```solidity
 function setFee(uint256 _fee) external onlyOwner { ... }
@@ -19,7 +19,7 @@ function setFee(uint256 _fee) external onlyOwner { ... }
 * Through the `onlyOwner` modifier, the function can only be accessed by the owner of this contract.
 * The function doesn't return anything.
 
-## Body
+# Body
 TODO
 {% endtab %}
 {% tab title="Code" %}

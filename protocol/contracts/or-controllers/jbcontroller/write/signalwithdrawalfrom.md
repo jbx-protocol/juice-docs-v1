@@ -10,7 +10,7 @@ Interface: `IJBController`
 
 _Only a project's terminal can signal a withdrawal._
 
-## Definition
+# Definition
 
 ```solidity
 function signalWithdrawlFrom(uint256 _projectId, uint256 _amount)
@@ -27,7 +27,7 @@ function signalWithdrawlFrom(uint256 _projectId, uint256 _amount)
 * The function overrides a function definition from the `IJBController` interface.
 * The function doesn't return anything.
 
-## Body
+# Body
 TODO
 {% endtab %}
 {% tab title="Code" %}
