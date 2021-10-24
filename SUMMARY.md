@@ -208,6 +208,7 @@
         * [MintTokens](protocol/contracts/or-controllers/jbcontroller/events/minttokens.md)
         * [BurnTokens](protocol/contracts/or-controllers/jbcontroller/events/burntokens.md)
         * [Migrate](protocol/contracts/or-controllers/jbcontroller/events/migrate.md)
+        * [SetFee](protocol/contracts/or-controllers/jbcontroller/events/setfee.md)
       * [Properties](protocol/contracts/or-controllers/jbcontroller/properties/README.md)
         * [projects](protocol/contracts/or-controllers/jbcontroller/properties/projects.md)
         * [fundingCycleStore](protocol/contracts/or-controllers/jbcontroller/properties/fundingcyclestore.md)
