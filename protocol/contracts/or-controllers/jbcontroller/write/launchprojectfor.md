@@ -2,8 +2,6 @@
 
 Contract:[`JBController`](../)​‌
 
-Interface: `IJBController`
-
 {% tabs %}
 {% tab title="Step by step" %}
 **Creates a project. This will mint an ERC-721 into the specified owner's account, configure a first funding cycle, and set up any splits.**
@@ -39,7 +37,6 @@ function launchProjectFor(
   * `_reservedTokenSplits` is an array of [`JBSplit`](../../../../data-structures/jbsplit.md) data structures containing reserved token splits to set.
   * `_terminal` is an [`IJBTerminal`](../../../../interfaces/ijbterminal.md) payment terminal to add for the project.
 * The function can be accessed externally by anyone.
-* The function overrides a function definition from the `IJBController` interface.
 * The function returns the ID of the project that was launched.
 
 ## Body

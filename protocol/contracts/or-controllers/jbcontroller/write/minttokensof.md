@@ -2,7 +2,7 @@
 
 Contract:[`JBController`](../)​‌
 
-Interface: `IJBController`
+Interface: [`IJBController`](../../../../interfaces/ijbcontroller.md)
 
 {% tabs %}
 {% tab title="Step by step" %}
@@ -10,7 +10,7 @@ Interface: `IJBController`
 
 _Only a project's owner, a designated operator, or one of its terminal's delegate can mint its tokens._
 
-# Definition
+## Definition
 
 ```solidity
 function burnTokensOf(
@@ -36,12 +36,13 @@ function burnTokensOf(
   * `_tokenCount` is the amount of tokens to mint.
   * `_beneficiary` is the account that the tokens are being minted for.
   * `_memo` is a memo to pass along to the emitted event.
-  * `_preferClaimedTokens` is a flag indicating hether ERC20's should be burned first if they have been issued.
+  * `_preferClaimedTokens` is a flag indicating whether ERC20's should be burned first if they have been issued.
 * Through the [`requirePermissionAllowingOverride`](../../or-abstract/jboperatable/modifiers/requirepermissionallowingoverride.md) modifier, the function is only accessible by the project's owner, from an operator that has been given the `JBOperations.MINT` permission by the project owner for the provided `_projectId`, or from the one of the project's terminal's delegates.
-* The function overrides a function definition from the `IJBController` interface.
+* The function overrides a function definition from the [`IJBController`](../../../../interfaces/ijbcontroller.md) interface.
 * The function doesn't return anything.
 
-# Body
+## Body
+
 TODO
 {% endtab %}
 
@@ -58,7 +59,7 @@ TODO
   @param _tokenCount The amount of tokens to mint.
   @param _beneficiary The account that the tokens are being minted for.
   @param _memo A memo to pass along to the emitted event.
-  @param _preferClaimedTokens A flag indicating hether ERC20's should be burned first if they have been issued.
+  @param _preferClaimedTokens A flag indicating whether ERC20's should be burned first if they have been issued.
 */
 function mintTokensOf(
   uint256 _projectId,

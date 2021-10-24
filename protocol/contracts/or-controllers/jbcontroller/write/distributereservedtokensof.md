@@ -2,13 +2,11 @@
 
 Contract:[`JBController`](../)​‌
 
-Interface: `IJBController`
-
 {% tabs %}
 {% tab title="Step by step" %}
 **Distributes all outstanding reserved tokens for a project.**
 
-# Definition
+## Definition
 
 ```solidity
 function distributeReservedTokensOf(uint256 _projectId, string memory _memo)
@@ -21,10 +19,10 @@ function distributeReservedTokensOf(uint256 _projectId, string memory _memo)
   * `_projectId` is the ID of the project to which the reserved tokens belong.
   * `_memo` is a memo to pass along to the emitted event.
 * The function can be accessed externally by anyone.
-* The function overrides a function definition from the `IJBController` interface.
-* The function returns the amount of reserved tokens that were minted.
+* The function returns the amount of minted reserved tokens.
 
-# Body
+## Body
+
 TODO
 {% endtab %}
 
@@ -37,7 +35,7 @@ TODO
   @param _projectId The ID of the project to which the reserved tokens belong.
   @param _memo A memo to pass along to the emitted event.
 
-  @return The amount of reserved tokens that were minted.
+  @return The amount of minted reserved tokens.
 */
 function distributeReservedTokensOf(uint256 _projectId, string memory _memo)
   external

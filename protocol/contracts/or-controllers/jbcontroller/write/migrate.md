@@ -2,15 +2,13 @@
 
 Contract:[`JBController`](../)​‌
 
-Interface: `IJBController`
-
 {% tabs %}
 {% tab title="Step by step" %}
 **Allows a project to migrate from this controller to another.**
 
 _Only a project's owner or a designated operator can migrate it._
 
-# Definition
+## Definition
 
 ```solidity
 function migrate(uint256 _projectId, IJBController _to)
@@ -21,12 +19,12 @@ function migrate(uint256 _projectId, IJBController _to)
 
 * Arguments:
   * `_projectId` is the ID of the project that will be migrated from this controller..
-  * `_to` is the controller being migrated to.
+  * `_to` is the controller to which the project is migrating.
 * Through the [`requirePermission`](../../or-abstract/jboperatable/modifiers/requirepermission.md) modifier, the function is only accessible by the project's owner, or from an operator that has been given the `JBOperations.MIGRATE_CONTROLLER` permission by the project owner for the provided `_projectId`.
-* The function overrides a function definition from the `IJBController` interface.
 * The function doesn't return anything.
 
-# Body
+## Body
+
 TODO
 {% endtab %}
 
@@ -37,7 +35,7 @@ TODO
   Allows a project to migrate from this controller to another.
 
   @param _projectId The ID of the project that will be migrated from this controller.
-  @param _to The controller being migrated to.
+  @param _to The controller to which the project is migrating.
 */
 function migrate(uint256 _projectId, IJBController _to)
     external

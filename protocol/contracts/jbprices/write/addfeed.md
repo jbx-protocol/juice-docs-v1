@@ -10,7 +10,7 @@ Interface: `IJBPrices`
 
 _Current feeds can't be modified._
 
-# Definition
+## Definition
 
 ```solidity
 function addFeedFor(
@@ -24,11 +24,11 @@ function addFeedFor(
   * `_currency` is the currency that the price feed is for.
   * `_base` is the currency that the price feed is based on.
   * `_feed` is the Chainlink price feed being added. Must adhere to [AggregatorV3Interface](https://github.com/smartcontractkit/chainlink/blob/develop/contracts/src/v0.8/interfaces/AggregatorV3Interface.sol).
-* The function can only be accessed by the address that owns this contract.
+* Through the `onlyOwner` modifier, this function can only be accessed by the address that owns this contract.
 * The function overrides a function definition from the `IJBPrices` interface.
 * The function doesn't return anything.
 
-# Body
+## Body
 
 1.  Make sure there isn't already a price feed set for the `_currency` `_base` pair.
 

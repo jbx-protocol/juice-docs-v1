@@ -28,14 +28,13 @@ function reconfigureFundingCyclesOf(
 ```
 
 * Arguments:
-  * `_projectId` is the ID of the project whos funding cycles are being reconfigured.
+  * `_projectId` is the ID of the project whose funding cycles are being reconfigured.
   * `_data` is a [`JBFundingCycleData`](../../../../data-structures/jbfundingcycledata.md) data structure that defines the project's funding cycle that will be queued. These properties will remain fixed for the duration of the funding cycle.
   * `_metadata` is a [`JBFundingCycleMetadata`](../../../../data-structures/jbfundingcyclemetadata.md) data structure specifying the controller specific params that a funding cycle can have.
   * `_overflowAllowances` is an array of [`JBOverflowAllowance`](../../../../data-structures/jboverflowallowance.md) data structures containing amounts, in wei (18 decimals), that a project can use from its own overflow on-demand for each payment terminal.
   * `_payoutSplits` is an array of [`JBSplit`](../../../../data-structures/jbsplit.md) data structures containing payout splits to set.
   * `_reservedTokenSplits` is an array of [`JBSplit`](../../../../data-structures/jbsplit.md) data structures containing reserved token splits to set.
 * Through the [`requirePermission`](../../or-abstract/jboperatable/modifiers/requirepermission.md) modifier, the function is only accessible by the project's owner, or from an operator that has been given the `JBOperations.RECONFIGURE` permission by the project owner for the provided `_projectId`.
-* The function overrides a function definition from the `IJBController` interface.
 * The function returns the ID of the funding cycle that was configured.
 
 ## Body
@@ -52,7 +51,7 @@ TODO
   @dev
   Only a project's owner or a designated operator can configure its funding cycles.
 
-  @param _projectId The ID of the project whos funding cycles are being reconfigured.
+  @param _projectId The ID of the project whose funding cycles are being reconfigured.
   @param _data The funding cycle configuration data. These properties will remain fixed for the duration of the funding cycle.
     @dev _data.target The amount that the project wants to payout during a funding cycle. Sent as a wad (18 decimals).
     @dev _data.currency The currency of the `target`. Send 0 for ETH or 1 for USD.
