@@ -6,16 +6,16 @@ Interface: `IJBController`
 
 {% tabs %}
 {% tab title="Step by step" %}
-**Get all splits for the specified project ID, within the specified domain, for the specified group.**
+_Gets the amount of reserved tokens that a project has available to distribute._
 
-## Definition
+### Definition
 
 ```solidity
-function splitsOf(
-  uint256 _projectId,
-  uint256 _domain,
-  uint256 _group
-) external view override returns (JBSplit[] memory) { ... }
+function reservedTokenBalanceOf(uint256 _projectId, uint256 _reservedRate)
+  external
+  view
+  override
+  returns (uint256) { ... }
 ```
 
 * Arguments:
@@ -27,7 +27,8 @@ function splitsOf(
 * The function overrides a function definition from the `IJBSplitStore` interface.
 * The function returns an array of [`JBSplit`](../../../data-structures/jbsplit.md)s.
 
-## Body
+### Body
+
 TODO
 {% endtab %}
 
