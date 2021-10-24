@@ -6,7 +6,7 @@ Interface: `IJBController`
 
 **The contract storing all funding cycle configurations.**
 
-# Definition
+## Definition
 
 ```solidity
 /** 

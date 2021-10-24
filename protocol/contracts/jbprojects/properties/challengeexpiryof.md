@@ -8,7 +8,7 @@ Interface:`IJBProjects`
 
 _A value of 0 means a handle isn't yet being challenged._
 
-# Definition
+## Definition
 
 ```solidity
 /** 

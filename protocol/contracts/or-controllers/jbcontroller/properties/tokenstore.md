@@ -6,7 +6,7 @@ Interface: `IJBController`
 
 **The contract that manages token minting and burning.**
 
-# Definition
+## Definition
 
 ```solidity
 /** 

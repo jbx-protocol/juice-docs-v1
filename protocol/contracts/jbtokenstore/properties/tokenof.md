@@ -6,7 +6,7 @@ Interface: `IJBTokenStore`
 
 **Each project's ERC20 Token tokens.**
 
-# Definition
+## Definition
 
 ```solidity
 /** 

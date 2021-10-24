@@ -4,7 +4,7 @@ Emitted from:
 
 * [`changeTokenOf`](../write/changetokenof.md)
 
-# Definition
+## Definition
 
 ```solidity
 event ChangeToken(

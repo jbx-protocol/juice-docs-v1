@@ -6,7 +6,7 @@ Interface: `IJBTokenStore`
 
 **Each holder's balance of unclaimed Tokens for each project.**
 
-# Definition
+## Definition
 
 ```solidity
 /** 

@@ -6,7 +6,7 @@ Interface: `IJBController`
 
 **The amount of overflow that a project is allowed to tap into on-demand.**
 
-# Definition
+## Definition
 
 ```solidity
 /**

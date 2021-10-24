@@ -4,7 +4,7 @@ Emitted from:
 
 * [`configureFor`](../write/configurefor.md)
 
-# Definition
+## Definition
 
 ```solidity
 event Configure(

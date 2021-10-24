@@ -5,7 +5,7 @@ Contract:[`JBDirectory`](../)​‌
 Interface: `IJBDirectory`
 
 **For each project ID, the controller that manages how terminals interact with tokens and funding cycles.**
-# Definition
+## Definition
 
 ```solidity
 /** 
