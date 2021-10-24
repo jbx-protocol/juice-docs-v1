@@ -6,9 +6,9 @@ Interface: `IJBController`
 
 {% tabs %}
 {% tab title="Step by step" %}
-_Gets the amount of reserved tokens that a project has available to distribute._
+**Gets the amount of reserved tokens that a project has available to distribute.**
 
-### Definition
+# Definition
 
 ```solidity
 function reservedTokenBalanceOf(uint256 _projectId, uint256 _reservedRate)
@@ -27,7 +27,7 @@ function reservedTokenBalanceOf(uint256 _projectId, uint256 _reservedRate)
 * The function overrides a function definition from the `IJBSplitStore` interface.
 * The function returns an array of [`JBSplit`](../../../data-structures/jbsplit.md)s.
 
-### Body
+# Body
 
 TODO
 {% endtab %}
