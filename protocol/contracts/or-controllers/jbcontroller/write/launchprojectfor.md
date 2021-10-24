@@ -10,11 +10,11 @@ Interface: `IJBController`
 
 _Each operation within this transaction can be done in sequence separately._
 
-Anyone can deploy a project on an owner's behalf.
+_Anyone can deploy a project on an owner's behalf._
 
 
 
-### Definition
+# Definition
 
 ```solidity
 function launchProjectFor(
@@ -32,19 +32,19 @@ function launchProjectFor(
 
 * Arguments:
   * `_owner` is the address to set as the owner of the project. The project ERC-721 will be owned by this address.
-  * `_handle` is
-  * `_uri` is
-  * `_data` is
-  * `_metadata` is
-  * `_overflowAllowances` is
-  * `_payoutSplits` is
-  * `reservedTokenSplits` is
-  * `_terminal` is
+  * `_handle` is the project's unique handle. This can be updated any time by the owner of the project.
+  * `_uri` is a link to associate with the project. This can be updated any time by the owner of the project.
+  * `_data` is the funding cycle configuration data. These properties will remain fixed for the duration of the funding cycle.
+  * `_metadata` is a struct specifying the controller specific params that a funding cycle can have.
+  * `_overflowAllowances` is an array contraining amounts, in wei (18 decimals), that a project can use from its own overflow on-demand for each payment terminal.
+  * `_payoutSplits` is an array of payout splits to set.
+  * `reservedTokenSplits` is an array of reserved token splits to set.
+  * `_terminal` is a payment terminal to add for the project.
 * The function can be accessed externally by anyone.
 * The function overrides a function definition from the `IJBController` interface.
 * The function doesn't return the ID of the project that was launched.
 
-### Body
+# Body
 
 TODO
 {% endtab %}
@@ -73,7 +73,7 @@ TODO
       If the number is 9000, a contribution to the next funding cycle will only give you 10% of tickets given to a contribution of the same amoutn during the current funding cycle.
       If the number is 10001, an non-recurring funding cycle will get made.
     @dev _data.ballot The ballot contract that will be used to approve subsequent reconfigurations. Must adhere to the IFundingCycleBallot interface.
-  @param _metadata A struct specifying the TerminalV2 specific params that a funding cycle can have.
+  @param _metadata A struct specifying the controller specific params that a funding cycle can have.
     @dev _metadata.reservedRate A number from 0-200 (0-100%) indicating the percentage of each contribution's newly minted tokens that will be reserved for the token splits.
     @dev _metadata.redemptionRate The rate from 0-200 (0-100%) that tunes the bonding curve according to which a project's tokens can be redeemed for overflow.
       The bonding curve formula is https://www.desmos.com/calculator/sp9ru6zbpk
@@ -90,9 +90,10 @@ TODO
     @dev _metadata.useDataSourceForPay Whether or not the data source should be used when processing a payment.
     @dev _metadata.useDataSourceForRedeem Whether or not the data source should be used when processing a redemption.
     @dev _metadata.dataSource A contract that exposes data that can be used within pay and redeem transactions. Must adhere to IJBFundingCycleDataSource.
-  @param _overflowAllowances The amount, in wei (18 decimals), of ETH that a project can use from its own overflow on-demand.
-  @param _payoutSplits Any payout splits to set.
-  @param _reservedTokenSplits Any reserved token splits to set.
+  @param _overflowAllowances An array contraining amounts, in wei (18 decimals), that a project can use from its own overflow on-demand for each payment terminal.
+  @param _payoutSplits An array of payout splits to set.
+  @param _reservedTokenSplits An array of reserved token splits to set.
+  @param _terminal A payment terminal to add for the project.
 
   @return projectId The ID of the project.
 */

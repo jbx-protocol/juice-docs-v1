@@ -6,41 +6,42 @@ Interface: `IJBController`
 
 {% tabs %}
 {% tab title="Step by step" %}
-**Sets a project's splits.**
+**Configures the properties of the current funding cycle if the project hasn't distributed tokens yet, or sets the properties of the proposed funding cycle that will take effect once the current one expires if it is approved by the current funding cycle's ballot.**
 
-_Only the owner or operator of a project, or the current controller contract of the project, can set its splits._
+_Only a project's owner or a designated operator can configure its funding cycles._
 
-_The new splits must include any currently set splits that are locked._
 
-## Definition
+
+# Definition
 
 ```solidity
-function set(
+function reconfigureFundingCyclesOf(
   uint256 _projectId,
-  uint256 _domain,
-  uint256 _group,
-  JBSplit[] memory _splits
+  JBFundingCycleData calldata _data,
+  JBFundingCycleMetadata calldata _metadata,
+  JBOverflowAllowance[] memory _overflowAllowances,
+  JBSplit[] memory _payoutSplits,
+  JBSplit[] memory _reservedTokenSplits
 )
   external
-  override
-  requirePermissionAllowingOverride(
-      projects.ownerOf(_projectId),
-      _projectId,
-      JBOperations.SET_SPLITS,
-      address(directory.controllerOf(_projectId)) == msg.sender
-  ) { ... }
+  nonReentrant
+  requirePermission(projects.ownerOf(_projectId), _projectId, JBOperations.RECONFIGURE)
+  returns (uint256) { ... }
 ```
 
 * Arguments:
-  * `_projectId` is the ID of the project for which splits are being added.
-  * `_domain` is an identifier within which the splits should be considered active.
-  * `_group` is an identifier between of splits being set. All splits within this `_group` must add up to within 100%.
-  * `_splits` are the [`JBSplit`](../../../data-structures/jbsplit.md)s to set.
-* Through the [`requirePermissionAllowingOverride`](../../or-abstract/jboperatable/modifiers/requirepermissionallowingoverride.md) modifier, the function is only accessible by the project's owner, from an operator that has been given the `JBOperations.SET_SPLITS` permission by the project owner for the provided `_projectId` , or from the current controller of the `_projectId` of the specified.
-* The function overrides a function definition from the `IJBSplitsStore` interface.
-* The function doesn't return anything.
+  * `_projectId` is the ID of the project whos funding cycles are being reconfigured.
+  * `_data` is the funding cycle configuration data. These properties will remain fixed for the duration of the funding cycle.
+  * `_metadata` is a struct specifying the controller specific params that a funding cycle can have.
+  * `_overflowAllowances` is an array contraining amounts, in wei (18 decimals), that a project can use from its own overflow on-demand for each payment terminal.
+  * `_payoutSplits` is an array of payout splits to set.
+  * `reservedTokenSplits` is an array of reserved token splits to set.
+* Through the [`requirePermission`](../../or-abstract/jboperatable/modifiers/requirepermission.md) modifier, the function is only accessible by the project's owner, or from an operator that has been given the `JBOperations.RECONFIGURE` permission by the project owner for the provided `_projectId`.
+* The function overrides a function definition from the `IJBController` interface.
+* The function doesn't return the ID of the funding cycle that was configured.
 
-## Body
+# Body
+
 TODO
 {% endtab %}
 
@@ -63,7 +64,7 @@ TODO
       If the number is 9000, a contribution to the next funding cycle will only give you 10% of tickets given to a contribution of the same amoutn during the current funding cycle.
       If the number is 10001, an non-recurring funding cycle will get made.
     @dev _data.ballot The ballot contract that will be used to approve subsequent reconfigurations. Must adhere to the IFundingCycleBallot interface.
-  @param _metadata A struct specifying the TerminalV2 specific params that a funding cycle can have.
+  @param _metadata A struct specifying the controller specific params that a funding cycle can have.
     @dev _metadata.reservedRate A number from 0-200 (0-100%) indicating the percentage of each contribution's newly minted tokens that will be reserved for the token splits.
     @dev _metadata.redemptionRate The rate from 0-200 (0-100%) that tunes the bonding curve according to which a project's tokens can be redeemed for overflow.
       The bonding curve formula is https://www.desmos.com/calculator/sp9ru6zbpk
@@ -80,9 +81,9 @@ TODO
     @dev _metadata.useDataSourceForPay Whether or not the data source should be used when processing a payment.
     @dev _metadata.useDataSourceForRedeem Whether or not the data source should be used when processing a redemption.
     @dev _metadata.dataSource A contract that exposes data that can be used within pay and redeem transactions. Must adhere to IJBFundingCycleDataSource.
-  @param _overflowAllowances The amount, in wei (18 decimals), of ETH that a project can use from its own overflow on-demand.
-  @param _payoutSplits Any payout splits to set.
-  @param _reservedTokenSplits Any reserved token splits to set.
+  @param _overflowAllowances An array contraining amounts, in wei (18 decimals), that a project can use from its own overflow on-demand for each payment terminal.
+  @param _payoutSplits An array of payout splits to set.
+  @param _reservedTokenSplits An array of reserved token splits to set.
 
   @return The ID of the funding cycle that was successfully configured.
 */
