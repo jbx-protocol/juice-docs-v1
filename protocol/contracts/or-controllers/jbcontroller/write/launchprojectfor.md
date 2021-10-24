@@ -12,9 +12,7 @@ _Each operation within this transaction can be done in sequence separately._
 
 _Anyone can deploy a project on an owner's behalf._
 
-
-
-# Definition
+## Definition
 
 ```solidity
 function launchProjectFor(
@@ -34,17 +32,17 @@ function launchProjectFor(
   * `_owner` is the address to set as the owner of the project. The project ERC-721 will be owned by this address.
   * `_handle` is the project's unique handle. This can be updated any time by the owner of the project.
   * `_uri` is a link to associate with the project. This can be updated any time by the owner of the project.
-  * `_data` is the funding cycle configuration data. These properties will remain fixed for the duration of the funding cycle.
-  * `_metadata` is a struct specifying the controller specific params that a funding cycle can have.
-  * `_overflowAllowances` is an array contraining amounts, in wei (18 decimals), that a project can use from its own overflow on-demand for each payment terminal.
-  * `_payoutSplits` is an array of payout splits to set.
-  * `_reservedTokenSplits` is an array of reserved token splits to set.
-  * `_terminal` is a payment terminal to add for the project.
+  * `_data` is a [`JBFundingCycleData`](../../../../data-structures/jbfundingcycledata.md) data structure that defines the project's first funding cycle. These properties will remain fixed for the duration of the funding cycle.
+  * `_metadata` is a [`JBFundingCycleMetadata`](../../../../data-structures/jbfundingcyclemetadata.md) data structure specifying the controller specific params that a funding cycle can have.
+  * `_overflowAllowances` is an array of [`JBOverflowAllowance`](../../../../data-structures/jboverflowallowance.md) data structures containing amounts, in wei (18 decimals), that a project can use from its own overflow on-demand for each payment terminal.
+  * `_payoutSplits` is an array of [`JBSplit`](../../../../data-structures/jbsplit.md) data structures containing payout splits to set.
+  * `_reservedTokenSplits` is an array of [`JBSplit`](../../../../data-structures/jbsplit.md) data structures containing reserved token splits to set.
+  * `_terminal` is an [`IJBTerminal`](../../../../interfaces/ijbterminal.md) payment terminal to add for the project.
 * The function can be accessed externally by anyone.
 * The function overrides a function definition from the `IJBController` interface.
 * The function returns the ID of the project that was launched.
 
-# Body
+## Body
 
 TODO
 {% endtab %}
