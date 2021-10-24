@@ -42,7 +42,7 @@ function launchProjectFor(
   * `_terminal` is a payment terminal to add for the project.
 * The function can be accessed externally by anyone.
 * The function overrides a function definition from the `IJBController` interface.
-* The function doesn't return the ID of the project that was launched.
+* The function returns the ID of the project that was launched.
 
 # Body
 

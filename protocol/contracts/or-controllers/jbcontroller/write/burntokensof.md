@@ -6,38 +6,39 @@ Interface: `IJBController`
 
 {% tabs %}
 {% tab title="Step by step" %}
-**Sets a project's splits.**
+**Burns a token holder's supply.**
 
-_Only the owner or operator of a project, or the current controller contract of the project, can set its splits._
-
-_The new splits must include any currently set splits that are locked._
+_Only a token's holder, a designated operator, or a project's terminal's delegate can burn it._
 
 ## Definition
 
 ```solidity
-function set(
+function burnTokensOf(
+  address _holder,
   uint256 _projectId,
-  uint256 _domain,
-  uint256 _group,
-  JBSplit[] memory _splits
+  uint256 _tokenCount,
+  string calldata _memo,
+  bool _preferClaimedTokens
 )
   external
   override
+  nonReentrant
   requirePermissionAllowingOverride(
-      projects.ownerOf(_projectId),
-      _projectId,
-      JBOperations.SET_SPLITS,
-      address(directory.controllerOf(_projectId)) == msg.sender
+    _holder,
+    _projectId,
+    JBOperations.BURN,
+    directory.isTerminalDelegateOf(_projectId, msg.sender)
   ) { ... }
 ```
 
 * Arguments:
-  * `_projectId` is the ID of the project for which splits are being added.
-  * `_domain` is an identifier within which the splits should be considered active.
-  * `_group` is an identifier between of splits being set. All splits within this `_group` must add up to within 100%.
-  * `_splits` are the [`JBSplit`](../../../data-structures/jbsplit.md)s to set.
-* Through the [`requirePermissionAllowingOverride`](../../or-abstract/jboperatable/modifiers/requirepermissionallowingoverride.md) modifier, the function is only accessible by the project's owner, from an operator that has been given the `JBOperations.SET_SPLITS` permission by the project owner for the provided `_projectId` , or from the current controller of the `_projectId` of the specified.
-* The function overrides a function definition from the `IJBSplitsStore` interface.
+  * `_holder` is the account that is having its tokens burned.
+  * `_projectId` is the ID of the project to which the tokens being burned belong.
+  * `_tokenCount` is the number of tokens to burn.
+  * `_memo` is a memo to pass along to the emitted event.
+  * `_preferClaimedTokens` is a flag indicating whether ERC20's should be burned first if they have been issued.
+* Through the [`requirePermission`](../../or-abstract/jboperatable/modifiers/requirepermission.md) modifier, the function is only accessible by the project's owner, from an operator that has been given the `JBOperations.BURN` permission by the project owner for the provided `_projectId`, or from the one of the project's terminal's delegates..
+* The function overrides a function definition from the `IJBController` interface.
 * The function doesn't return anything.
 
 ## Body
@@ -51,13 +52,13 @@ TODO
   Burns a token holder's supply.
 
   @dev
-  Only a token's holder or a designated operator can burn it.
+  Only a token's holder, a designated operator, or a project's terminal's delegate can burn it.
 
   @param _holder The account that is having its tokens burned.
   @param _projectId The ID of the project to which the tokens being burned belong.
   @param _tokenCount The number of tokens to burn.
   @param _memo A memo to pass along to the emitted event.
-  @param _preferClaimedTokens Whether ERC20's should be burned first if they have been issued.
+  @param _preferClaimedTokens A flag indicating whether ERC20's should be burned first if they have been issued.
 */
 function burnTokensOf(
   address _holder,

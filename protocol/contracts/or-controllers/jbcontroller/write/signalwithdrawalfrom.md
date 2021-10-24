@@ -6,38 +6,25 @@ Interface: `IJBController`
 
 {% tabs %}
 {% tab title="Step by step" %}
-**Sets a project's splits.**
+**Signals that a project's funds are being withdrawn.**
 
-_Only the owner or operator of a project, or the current controller contract of the project, can set its splits._
-
-_The new splits must include any currently set splits that are locked._
+_Only a project's terminal can signal a withdrawal._
 
 ## Definition
 
 ```solidity
-function set(
-  uint256 _projectId,
-  uint256 _domain,
-  uint256 _group,
-  JBSplit[] memory _splits
-)
+function signalWithdrawlFrom(uint256 _projectId, uint256 _amount)
   external
   override
-  requirePermissionAllowingOverride(
-      projects.ownerOf(_projectId),
-      _projectId,
-      JBOperations.SET_SPLITS,
-      address(directory.controllerOf(_projectId)) == msg.sender
-  ) { ... }
+  onlyTerminal(_projectId)
+  returns (JBFundingCycle memory) { ... }
 ```
 
 * Arguments:
-  * `_projectId` is the ID of the project for which splits are being added.
-  * `_domain` is an identifier within which the splits should be considered active.
-  * `_group` is an identifier between of splits being set. All splits within this `_group` must add up to within 100%.
-  * `_splits` are the [`JBSplit`](../../../data-structures/jbsplit.md)s to set.
-* Through the [`requirePermissionAllowingOverride`](../../or-abstract/jboperatable/modifiers/requirepermissionallowingoverride.md) modifier, the function is only accessible by the project's owner, from an operator that has been given the `JBOperations.SET_SPLITS` permission by the project owner for the provided `_projectId` , or from the current controller of the `_projectId` of the specified.
-* The function overrides a function definition from the `IJBSplitsStore` interface.
+  * `_projectId` is the ID of the project that is being withdrawn from.
+  * `_amount` is the amount being withdrawn.
+* Through the [`onlyTerminal`](../../jbcontrollerutility/modifiers/onlyterminal.md) modifier, the function can only be accessed by a terminal of the `_projectId`.
+* The function overrides a function definition from the `IJBController` interface.
 * The function doesn't return anything.
 
 ## Body
@@ -53,7 +40,7 @@ TODO
   Only a project's terminal can signal a withdrawal.
 
   @param _projectId The ID of the project that is being withdrawn from.
-  @param _amount The amount to withdraw.
+  @param _amount The amount being withdrawn.
 */
 function signalWithdrawlFrom(uint256 _projectId, uint256 _amount)
   external

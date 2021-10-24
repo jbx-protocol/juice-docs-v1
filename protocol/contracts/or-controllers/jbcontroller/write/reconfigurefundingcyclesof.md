@@ -38,7 +38,7 @@ function reconfigureFundingCyclesOf(
   * `reservedTokenSplits` is an array of reserved token splits to set.
 * Through the [`requirePermission`](../../or-abstract/jboperatable/modifiers/requirepermission.md) modifier, the function is only accessible by the project's owner, or from an operator that has been given the `JBOperations.RECONFIGURE` permission by the project owner for the provided `_projectId`.
 * The function overrides a function definition from the `IJBController` interface.
-* The function doesn't return the ID of the funding cycle that was configured.
+* The function returns the ID of the funding cycle that was configured.
 
 # Body
 
