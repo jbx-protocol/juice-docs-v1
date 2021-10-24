@@ -8,7 +8,7 @@ Interface: `IJBController`
 {% tab title="Step by step" %}
 **Gets the amount of reserved tokens that a project has available to distribute.**
 
-# Definition
+## Definition
 
 ```solidity
 function reservedTokenBalanceOf(uint256 _projectId, uint256 _reservedRate)
@@ -19,15 +19,14 @@ function reservedTokenBalanceOf(uint256 _projectId, uint256 _reservedRate)
 ```
 
 * Arguments:
-  * `_projectId` is the ID of the project to get splits for.
-  * `_domain` is an identifier within which the returned splits should be considered active.
-  * `_group` is the identifying group of the splits.
+  * `_projectId` is the ID of the project to get a reserved token balance of.
+  * `_reservedRate` is the reserved rate to use when making the calculation.
 * The view function can be accessed externally by anyone.
 * The function does not alter state on the blockchain.
-* The function overrides a function definition from the `IJBSplitStore` interface.
-* The function returns an array of [`JBSplit`](../../../data-structures/jbsplit.md)s.
+* The function overrides a function definition from the `IJBController` interface.
+* The function returns the reserved token balance.
 
-# Body
+## Body
 
 TODO
 {% endtab %}

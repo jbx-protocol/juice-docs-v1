@@ -6,41 +6,46 @@ Interface: `IJBController`
 
 {% tabs %}
 {% tab title="Step by step" %}
-**Sets a project's splits.**
+**Creates a project. This will mint an ERC-721 into the specified owner's account, configure a first funding cycle, and set up any splits.**
 
-_Only the owner or operator of a project, or the current controller contract of the project, can set its splits._
+_Each operation within this transaction can be done in sequence separately._
 
-_The new splits must include any currently set splits that are locked._
+Anyone can deploy a project on an owner's behalf.
 
-## Definition
+
+
+### Definition
 
 ```solidity
-function set(
-  uint256 _projectId,
-  uint256 _domain,
-  uint256 _group,
-  JBSplit[] memory _splits
-)
-  external
-  override
-  requirePermissionAllowingOverride(
-      projects.ownerOf(_projectId),
-      _projectId,
-      JBOperations.SET_SPLITS,
-      address(directory.controllerOf(_projectId)) == msg.sender
-  ) { ... }
+function launchProjectFor(
+  address _owner,
+  bytes32 _handle,
+  string calldata _uri,
+  JBFundingCycleData calldata _data,
+  JBFundingCycleMetadata calldata _metadata,
+  JBOverflowAllowance[] memory _overflowAllowances,
+  JBSplit[] memory _payoutSplits,
+  JBSplit[] memory _reservedTokenSplits,
+  IJBTerminal _terminal
+) external returns (uint256 projectId) { ... }
 ```
 
 * Arguments:
-  * `_projectId` is the ID of the project for which splits are being added.
-  * `_domain` is an identifier within which the splits should be considered active.
-  * `_group` is an identifier between of splits being set. All splits within this `_group` must add up to within 100%.
-  * `_splits` are the [`JBSplit`](../../../data-structures/jbsplit.md)s to set.
-* Through the [`requirePermissionAllowingOverride`](../../or-abstract/jboperatable/modifiers/requirepermissionallowingoverride.md) modifier, the function is only accessible by the project's owner, from an operator that has been given the `JBOperations.SET_SPLITS` permission by the project owner for the provided `_projectId` , or from the current controller of the `_projectId` of the specified.
-* The function overrides a function definition from the `IJBSplitsStore` interface.
-* The function doesn't return anything.
+  * `_owner` is the address to set as the owner of the project. The project ERC-721 will be owned by this address.
+  * `_handle` is
+  * `_uri` is
+  * `_data` is
+  * `_metadata` is
+  * `_overflowAllowances` is
+  * `_payoutSplits` is
+  * `reservedTokenSplits` is
+  * `_terminal` is
+* The function can be accessed externally by anyone.
+* The function overrides a function definition from the `IJBController` interface.
+* The function doesn't return the ID of the project that was launched.
 
-## Body
+### Body
+
 TODO
 {% endtab %}
 
@@ -48,18 +53,15 @@ TODO
 ```solidity
 /**
   @notice
-  Creates a project. This will mint an ERC-721 into the message sender's account, configure a first funding cycle, and set up any splits.
+  Creates a project. This will mint an ERC-721 into the specified owner's account, configure a first funding cycle, and set up any splits.
 
   @dev
-  Each operation withing this transaction can be done in sequence separately.
+  Each operation within this transaction can be done in sequence separately.
 
   @dev
   Anyone can deploy a project on an owner's behalf.
 
-  @dev 
-  A project owner will be able to reconfigure the funding cycle's properties as long as it has not yet received a payment.
-
-  @param _owner The address to set as the owner of the project.
+  @param _owner The address to set as the owner of the project. The project ERC-721 will be owned by this address.
   @param _handle The project's unique handle. This can be updated any time by the owner of the project.
   @param _uri A link to associate with the project. This can be updated any time by the owner of the project.
   @param _data The funding cycle configuration data. These properties will remain fixed for the duration of the funding cycle.
