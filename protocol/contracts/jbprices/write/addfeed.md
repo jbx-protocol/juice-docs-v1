@@ -10,7 +10,7 @@ Interface: `IJBPrices`
 
 _Current feeds can't be modified._
 
-## Definition
+# Definition
 
 ```solidity
 function addFeedFor(
@@ -28,7 +28,7 @@ function addFeedFor(
 * The function overrides a function definition from the `IJBPrices` interface.
 * The function doesn't return anything.
 
-## Body
+# Body
 
 1.  Make sure there isn't already a price feed set for the `_currency` `_base` pair.
 

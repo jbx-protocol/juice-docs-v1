@@ -1,4 +1,4 @@
-# \_eligibleOf
+# _eligibleOf
 
 Contract:[`JBFundingCycleStore`](../)​
 
@@ -10,7 +10,7 @@ _A value of 0 is returned if no funding cycle was found._
 
 \_\_
 
-## Definition
+# Definition
 
 ```solidity
 function _eligibleOf(uint256 _projectId) private view returns (uint256 fundingCycleId) { ... } 
@@ -22,7 +22,7 @@ function _eligibleOf(uint256 _projectId) private view returns (uint256 fundingCy
 * The function does not alter state on the blockchain.
 * The function returns an ID of an eligible funding cycle if one exists, or 0 if one doesn't exist.
 
-## Body
+# Body
 
 1.  Get a reference to the latest funding cycle for the project.
 
