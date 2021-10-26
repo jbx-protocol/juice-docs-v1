@@ -29,7 +29,17 @@ function signalWithdrawlFrom(uint256 _projectId, uint256 _amount)
 
 # Body
 
-TODO
+1.  Tap from the project's funding cycle.
+
+    ```solidity
+    // Tap from the project's funding cycle.
+    return fundingCycleStore.tapFrom(_projectId, _amount);
+    ```
+
+    _External references:_
+
+    * [`tapFrom`](../../../jbfundingcyclestore/write/tapfrom.md)
+
 {% endtab %}
 
 {% tab title="Code" %}

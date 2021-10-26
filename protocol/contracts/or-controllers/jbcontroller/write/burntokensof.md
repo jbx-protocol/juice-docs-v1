@@ -105,7 +105,7 @@ function burnTokensOf(
 
     _Event references:_
 
-    * [`BurnTokens`](../events/burn.md)
+    * [`BurnTokens`](../events/burntokens.md)
 {% endtab %}
 
 {% tab title="Code" %}

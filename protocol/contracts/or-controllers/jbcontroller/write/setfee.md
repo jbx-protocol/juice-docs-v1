@@ -21,7 +21,30 @@ function setFee(uint256 _fee) external onlyOwner { ... }
 
 # Body
 
-TODO
+1.  Make sure the proposed fee is less than the max fee of 5%.
+
+    ```solidity
+    // The max fee is 5%.
+    require(_fee <= 10, '0x36: BAD_FEE');
+    ```
+
+2.  Store the new fee.
+
+    ```solidity
+    // Store the new fee.
+    fee = _fee;
+    ```
+
+3.  Emit a `SetFee` event with the all relevant parameters.
+
+    ```solidity
+    emit SetFee(_fee, msg.sender);
+    ```
+
+    _Event references:_
+
+    * [`SetFee`](../events/setfee.md)
+
 {% endtab %}
 
 {% tab title="Code" %}

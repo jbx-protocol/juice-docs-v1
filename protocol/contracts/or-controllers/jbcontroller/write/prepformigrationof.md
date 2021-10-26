@@ -22,7 +22,28 @@ function prepForMigrationOf(uint256 _projectId, IJBController) external override
 
 # Body
 
-TODO
+1.  Make sure this controller isn't the project's current controller. If it is, there shouldn't be a need to prepare anything.
+
+    ```solidity
+    // This controller must not be the project's current controller.
+    require(directory.controllerOf(_projectId) != this, '0x34: NO_OP');
+    ```
+
+    _External references:_
+
+    * [`controllerOf`](../../../jbdirectory/read/controllerof.md)
+
+2.  Update the processed token tracker to equal the current total supply of tokens. This prevents any inadvertant outstanding reserved tokens from being distributable upon migrating to this controller.
+
+    ```solidity
+    // Set the tracker as the total supply.
+    _processedTokenTrackerOf[_projectId] = int256(tokenStore.totalSupplyOf(_projectId));
+    ```
+
+    _Internal references:_
+
+    * [`_processedTokenTrackerOf`](../properties/_processedtokentrackerof.md)
+
 {% endtab %}
 
 {% tab title="Code" %}
@@ -35,7 +56,7 @@ TODO
 */
 function prepForMigrationOf(uint256 _projectId, IJBController) external override {
   // This controller must not be the project's current controller.
-  require(directory.controllerOf(_projectId) != this, '0x34: UNAUTHORIZED');
+  require(directory.controllerOf(_projectId) != this, '0x34: NO_OP');
 
   // Set the tracker as the total supply.
   _processedTokenTrackerOf[_projectId] = int256(tokenStore.totalSupplyOf(_projectId));
@@ -46,7 +67,7 @@ function prepForMigrationOf(uint256 _projectId, IJBController) external override
 {% tab title="Errors" %}
 | String                   | Description                                                         |
 | ------------------------ | ------------------------------------------------------------------- |
-| **`0x34: UNAUTHORIZED`** | Thrown if the controller is the current controller for the project. |
+| **`0x34: NO_OP`** | Thrown if the controller is the current controller for the project. |
 {% endtab %}
 
 {% tab title="Events" %}
