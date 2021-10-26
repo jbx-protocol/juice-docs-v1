@@ -2,7 +2,7 @@
 
 Contract:[`JBController`](../)​‌
 
-Interface: `IJBController`
+Interface: [`IJBController`](../../../../interfaces/ijbcontroller.md)
 
 {% tabs %}
 {% tab title="Step by step" %}
@@ -23,7 +23,7 @@ function reservedTokenBalanceOf(uint256 _projectId, uint256 _reservedRate)
   * `_reservedRate` is the reserved rate to use when making the calculation.
 * The view function can be accessed externally by anyone.
 * The function does not alter state on the blockchain.
-* The function overrides a function definition from the `IJBController` interface.
+* The function overrides a function definition from the [`IJBController`](../../../../interfaces/ijbcontroller.md) interface.
 * The function returns the reserved token balance.
 
 # Body
