@@ -12,8 +12,7 @@ Contract:[`JBFundingCycleStore`](../)​
 function _configurableOf(
   uint256 _projectId,
   uint256 _configured,
-  uint256 _weight,
-  bool _configureActiveFundingCycle
+  uint256 _weight
 ) private returns (uint256 fundingCycleId) { ... }
 ```
 
@@ -21,7 +20,6 @@ function _configurableOf(
   * `_projectId` is the ID of the project to find a configurable funding cycle for.
   * `_configured` is the time at which the configuration is occurring.
   * `_weight` is the weight to store along with a newly created configurable funding cycle.
-  * `_configureActiveFundingCycles` is if the active funding cycle should be configurable. Otherwise the next funding cycle will be used.
 * The function is private to this contract.
 * The function returns the ID of a configurable funding cycle.
 
@@ -88,8 +86,6 @@ function _configurableOf(
     * [`_eligibleOf`](../read/\_eligibleof.md)
 5.  If there is an eligible cycle, check if it has an approved configuration. If it does not, the configurable funding cycle that will be initialized should not be based on it. Instead, it should be based on the funding cycle that the unapproved funding cycle is based on, which is the last funding cycle with an approved configuration.\
     \
-    If the eligible funding cycle is approved and an active funding cycle can be configured, return its ID.\
-    \
     If an eligible cycle was not found, base the funding cycle that will be initialized on the project's latest funding cycle. If it is not approved, get a reference to the one its based on.
 
     ```solidity
@@ -99,9 +95,7 @@ function _configurableOf(
         // If it hasn't been approved, set the ID to be the based funding cycle,
         // which carries the last approved configuration.
         fundingCycleId = _getStructFor(fundingCycleId).basedOn;
-      } else if (_configureActiveFundingCycle) {
-        return fundingCycleId;
-      }
+      } 
     } else {
       // Get the ID of the latest funding cycle which has the latest reconfiguration.
       fundingCycleId = latestIdOf[_projectId];
@@ -139,30 +133,15 @@ function _configurableOf(
     // Determine if the configurable funding cycle can only take effect on or after a certain date.
     uint256 _mustStartOnOrAfter;
     ```
-9.  If an active funding cycle should be configured, check to see if the funding cycle has a duration. If it does not, the new start time should be the current start time. If it does, the new start time should be that of the current funding cycle of the configuration.\
-    \
-    Otherwise the funding cycle can start any time after the base funding cycle's ballot's duration is up.\\
+9.  The funding cycle can start any time after the base funding cycle's ballot's duration is up.\\
 
     ```solidity
-    if (_configureActiveFundingCycle) {
-      // If the duration is zero, always go back to the original start.
-      if (_fundingCycle.duration == 0) {
-        _mustStartOnOrAfter = _fundingCycle.start;
-      } else {
-        // Set to the start time of the current active funding cycle.
-        uint256 _timeFromStartMultiple = (block.timestamp - _fundingCycle.start) %
-          (_fundingCycle.duration * _SECONDS_IN_DAY);
-        _mustStartOnOrAfter = block.timestamp - _timeFromStartMultiple;
-      }
-    } else {
-      // The ballot must have ended.
-      _mustStartOnOrAfter = _getLatestTimeAfterBallotOf(_fundingCycle, _configured);
-    }
+    // The ballot must have ended.
+    _mustStartOnOrAfter = _getLatestTimeAfterBallotOf(_fundingCycle, _configured);
     ```
 
     _Internal references:_
 
-    * [`_SECONDS_IN_DAY`](../properties/\_seconds\_in\_day.md)
     * [`_getLatestTimeAfterBallotOf`](../read/\_getlatesttimeafterballotof.md)
 10. Return the ID of the newly initialized funding cycle.\\
 
@@ -185,15 +164,13 @@ function _configurableOf(
   @param _projectId The ID of the project to find a configurable funding cycle for.
   @param _configured The time at which the configuration is occurring.
   @param _weight The weight to store along with a newly created configurable funding cycle.
-  @param _configureActiveFundingCycle If the active funding cycle should be configurable. Otherwise the next funding cycle will be used.
 
   @return fundingCycleId The ID of the configurable funding cycle.
 */
 function _configurableOf(
   uint256 _projectId,
   uint256 _configured,
-  uint256 _weight,
-  bool _configureActiveFundingCycle
+  uint256 _weight
 ) private returns (uint256 fundingCycleId) {
   // If there's not yet a funding cycle for the project, return the ID of a newly created one.
   if (latestIdOf[_projectId] == 0)
@@ -229,9 +206,7 @@ function _configurableOf(
       // If it hasn't been approved, set the ID to be the based funding cycle,
       // which carries the last approved configuration.
       fundingCycleId = _getStructFor(fundingCycleId).basedOn;
-    } else if (_configureActiveFundingCycle) {
-      return fundingCycleId;
-    }
+    } 
   } else {
     // Get the ID of the latest funding cycle which has the latest reconfiguration.
     fundingCycleId = latestIdOf[_projectId];
@@ -249,20 +224,8 @@ function _configurableOf(
   // Determine if the configurable funding cycle can only take effect on or after a certain date.
   uint256 _mustStartOnOrAfter;
 
-  if (_configureActiveFundingCycle) {
-    // If the duration is zero, always go back to the original start.
-    if (_fundingCycle.duration == 0) {
-      _mustStartOnOrAfter = _fundingCycle.start;
-    } else {
-      // Set to the start time of the current active funding cycle.
-      uint256 _timeFromStartMultiple = (block.timestamp - _fundingCycle.start) %
-        (_fundingCycle.duration * _SECONDS_IN_DAY);
-      _mustStartOnOrAfter = block.timestamp - _timeFromStartMultiple;
-    }
-  } else {
-    // The ballot must have ended.
-    _mustStartOnOrAfter = _getLatestTimeAfterBallotOf(_fundingCycle, _configured);
-  }
+  // The ballot must have ended.
+  _mustStartOnOrAfter = _getLatestTimeAfterBallotOf(_fundingCycle, _configured);
 
   // Return the newly initialized configurable funding cycle.
   fundingCycleId = _initFor(_projectId, _fundingCycle, _mustStartOnOrAfter, _weight);

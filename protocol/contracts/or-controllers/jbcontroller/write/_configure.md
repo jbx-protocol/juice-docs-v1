@@ -13,8 +13,7 @@ function _configure(
   uint256 _packedMetadata,
   JBOverflowAllowance[] memory _overflowAllowances,
   JBSplit[] memory _payoutSplits,
-  JBSplit[] memory _reservedTokenSplits,
-  bool _shouldConfigureActive
+  JBSplit[] memory _reservedTokenSplits
 ) private returns (uint256) { ... }
 ```
 
@@ -25,7 +24,6 @@ function _configure(
   * `_overflowAllowances` is an array contraining amounts, in wei (18 decimals), that a project can use from its own overflow on-demand for each payment terminal.
   * `_payoutSplits` is an array of payout splits to set.
   * `_reservedTokenSplits` is an array of reserved token splits to set.
-  * `_shouldConfigureActive` is a flag indicating if the active funding cycle should be reconfigured instead of queued up a new one.
 * The function is private to this contract.
 * The function returns the ID of the funding cycle that was configured.
 
@@ -49,8 +47,7 @@ function _configure(
   uint256 _packedMetadata,
   JBOverflowAllowance[] memory _overflowAllowances,
   JBSplit[] memory _payoutSplits,
-  JBSplit[] memory _reservedTokenSplits,
-  bool _shouldConfigureActive
+  JBSplit[] memory _reservedTokenSplits
 ) private returns (uint256) {
   // Configure the funding cycle's properties.
   JBFundingCycle memory _fundingCycle = fundingCycleStore.configureFor(
@@ -58,7 +55,7 @@ function _configure(
     _data,
     _packedMetadata,
     fee,
-    _shouldConfigureActive
+    false 
   );
 
   // Set payout splits if there are any.

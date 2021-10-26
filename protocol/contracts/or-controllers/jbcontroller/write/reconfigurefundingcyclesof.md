@@ -39,7 +39,32 @@ function reconfigureFundingCyclesOf(
 
 # Body
 
-TODO
+1.  Validate and pack the provided metadata into a `uint256`. 
+
+    ```solidity
+    // Make sure the metadata is validated and packed into a uint256.
+    uint256 _packedMetadata = JBFundingCycleMetadataResolver.validateAndPackFundingCycleMetadata(
+      _metadata
+    );
+    ```
+
+2.  Configure the project's funding cycle, overflow allowances, and splits.
+
+    ```solidity
+    return
+      _configure(
+      _projectId,
+      _data,
+      _packedMetadata,
+      _overflowAllowances,
+      _payoutSplits,
+      _reservedTokenSplits
+    );
+    ```
+
+    _Internal references:_
+
+    * [`_configure`](../write/_configure.md)
 {% endtab %}
 
 {% tab title="Code" %}
@@ -101,17 +126,6 @@ function reconfigureFundingCyclesOf(
   uint256 _packedMetadata = JBFundingCycleMetadataResolver.validateAndPackFundingCycleMetadata(
     _metadata
   );
-  
-  // All reserved tokens must be minted before configuring.
-  if (uint256(_processedTokenTrackerOf[_projectId]) != tokenStore.totalSupplyOf(_projectId))
-    _distributeReservedTokensOf(_projectId, '');
-
-  // Set the this contract as the project's controller in the directory if its not already set.
-  if (address(directory.controllerOf(_projectId)) == address(0))
-    directory.setControllerOf(_projectId, this);
-
-  // Configure the active project if its tokens have yet to be minted.
-  bool _shouldConfigureActive = tokenStore.totalSupplyOf(_projectId) == 0;
 
   return
     _configure(
@@ -120,8 +134,7 @@ function reconfigureFundingCyclesOf(
       _packedMetadata,
       _overflowAllowances,
       _payoutSplits,
-      _reservedTokenSplits,
-      _shouldConfigureActive
+      _reservedTokenSplits
     );
 }
 ```

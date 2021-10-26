@@ -21,9 +21,15 @@ function distributeReservedTokensOf(uint256 _projectId, string memory _memo)
 * The function can be accessed externally by anyone.
 * The function returns the amount of minted reserved tokens.
 
-# Body
+1.  Forward the call to the internal version of the function that is also used by other operations.
 
-TODO
+    ```solidity
+    return _distributeReservedTokensOf(_projectId, _memo);
+    ```
+
+    _Internal references:_
+
+    * [`_distributeReservedTokensOf`](../write/_distributereservedtokensof.md)
 {% endtab %}
 
 {% tab title="Code" %}

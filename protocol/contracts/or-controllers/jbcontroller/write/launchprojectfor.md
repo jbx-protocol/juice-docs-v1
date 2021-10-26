@@ -41,7 +41,64 @@ function launchProjectFor(
 
 # Body
 
-TODO
+1.  Validate and pack the provided metadata into a `uint256`. 
+
+    ```solidity
+    // Make sure the metadata is validated and packed into a uint256.
+    uint256 _packedMetadata = JBFundingCycleMetadataResolver.validateAndPackFundingCycleMetadata(
+      _metadata
+    );
+    ```
+
+2.  Create the project. This will mint an ERC-721 in the `_owners` wallet representing ownership over the project.
+
+    ```solidity
+    // Create the project for into the wallet of the message sender.
+    projectId = projects.createFor(_owner, _handle, _uri);
+    ```
+
+    _External references:_
+
+    * [`createFor`](../../../jbprojects/write/createfor.md)
+
+3.  Set this controller as the controller of the project.
+
+    ```solidity
+    // Set the this contract as the project's controller in the directory.
+    directory.setControllerOf(projectId, this);
+    ```
+
+    _External references:_
+
+    * [`setControllerOf`](../../../jbdirectory/write/setcontrollerof.md)
+
+4.  If a terminal was provided, add it to the list of terminals the project can accept funds through.
+
+    ```solidity
+    // Add the provided terminal to the list of terminals.
+    if (_terminal != IJBTerminal(address(0))) directory.addTerminalOf(projectId, _terminal);
+    ```
+
+    _External references:_
+
+    * [`addTerminalOf`](../../../jbdirectory/write/addterminalof.md)
+
+5.  Configure the project's funding cycle, overflow allowances, and splits.
+
+    ```solidity
+    _configure(
+      projectId,
+      _data,
+      _packedMetadata,
+      _overflowAllowances,
+      _payoutSplits,
+      _reservedTokenSplits
+    );
+    ```
+
+    _Internal references:_
+
+    * [`_configure`](../write/_configure.md)
 {% endtab %}
 
 {% tab title="Code" %}
@@ -123,8 +180,7 @@ function launchProjectFor(
     _packedMetadata,
     _overflowAllowances,
     _payoutSplits,
-    _reservedTokenSplits,
-    true
+    _reservedTokenSplits
   );
 }
 ```
