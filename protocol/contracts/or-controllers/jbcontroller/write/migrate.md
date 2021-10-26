@@ -25,7 +25,84 @@ function migrate(uint256 _projectId, IJBController _to)
 
 # Body
 
-TODO
+1.  Make sure this controller is the project's current controller. Migrating away from a controller that isn't the project's current one wouldn't do anything.
+
+    ```solidity
+    // This controller must be the project's current controller.
+    require(directory.controllerOf(_projectId) == this, '0x35: NO_OP');
+    ```
+
+    _External references:_
+
+    * [`controllerOf`](../../../jbdirectory/read/controllerof.md)
+
+2.  Get a reference to the current funding cycle for the project.
+
+    ```solidity
+    // Get a reference to the project's current funding cycle.
+    JBFundingCycle memory _fundingCycle = fundingCycleStore.currentOf(_projectId);
+    ```
+
+    _External references:_
+
+    * [`currentOf`](../../../jbfundingcyclestore/read/currentof.md)
+
+3.  Make sure the project's current funding cycle is configured to allow controller migrations.
+
+    ```solidity
+    // Migration must be allowed
+    require(_fundingCycle.controllerMigrationAllowed(), '0x36: NOT_ALLOWED');
+    ```
+
+4.  Distribute any outstanding reserved tokens. There are reserved tokens to be distributed if the tracker does not equal the token's total supply. 
+
+    ```solidity
+    // All reserved tokens must be minted before migrating.
+    if (uint256(_processedTokenTrackerOf[_projectId]) != tokenStore.totalSupplyOf(_projectId))
+      _distributeReservedTokensOf(_projectId, '');
+    ```
+
+    _Internal references:_
+
+    * [`_processedTokenTrackerOf`](../read/_processedtokentrackerof.md)
+    * [`_distributeReservedTokensOf`](../write/_distributereservedtokensof.md)
+
+    _External references:_
+
+    * [`totalSupplyOf`](../../../jbtokenstore/read/totalsupplyof.md)
+
+5.  Let the new controller know that a migration to it is happening.
+
+    ```solidity
+    // Make sure the new controller is prepped for the migration.
+    _to.prepForMigrationOf(_projectId, this);
+    ```
+
+    _Internal references:_
+
+    * [`prepForMigrationOf`](../write/prepformigrationof.md)
+
+6.  Set the new controller of the project.
+
+    ```solidity
+    // Set the new controller.
+    directory.setControllerOf(_projectId, _to);
+    ```
+
+    _External references:_
+
+    * [`setControllerOf`](../../../jbdirectory/write/setcontrollerof.md)
+
+7.  Emit a `Migrate` event with the all relevant parameters.
+
+    ```solidity
+    emit Migrate(_projectId, _to, msg.sender);
+    ```
+
+    _Event references:_
+
+    * [`Migrate`](../events/migrate.md)
+
 {% endtab %}
 
 {% tab title="Code" %}
@@ -38,38 +115,38 @@ TODO
   @param _to The controller to which the project is migrating.
 */
 function migrate(uint256 _projectId, IJBController _to)
-    external
-    requirePermission(projects.ownerOf(_projectId), _projectId, JBOperations.MIGRATE_CONTROLLER)
-    nonReentrant
-  {
-    // This controller must be the project's current controller.
-    require(directory.controllerOf(_projectId) == this, '0x35: UNAUTHORIZED');
+  external
+  requirePermission(projects.ownerOf(_projectId), _projectId, JBOperations.MIGRATE_CONTROLLER)
+  nonReentrant
+{
+  // This controller must be the project's current controller.
+  require(directory.controllerOf(_projectId) == this, '0x35: NO_OP');
 
-    // Get a reference to the project's current funding cycle.
-    JBFundingCycle memory _fundingCycle = fundingCycleStore.currentOf(_projectId);
+  // Get a reference to the project's current funding cycle.
+  JBFundingCycle memory _fundingCycle = fundingCycleStore.currentOf(_projectId);
 
-    // Migration must be allowed
-    require(_fundingCycle.controllerMigrationAllowed(), '0x36: NOT_ALLOWED');
+  // Migration must be allowed
+  require(_fundingCycle.controllerMigrationAllowed(), '0x36: NOT_ALLOWED');
 
-    // All reserved tokens must be minted before migrating.
-    if (uint256(_processedTokenTrackerOf[_projectId]) != tokenStore.totalSupplyOf(_projectId))
-      _distributeReservedTokensOf(_projectId, '');
+  // All reserved tokens must be minted before migrating.
+  if (uint256(_processedTokenTrackerOf[_projectId]) != tokenStore.totalSupplyOf(_projectId))
+    _distributeReservedTokensOf(_projectId, '');
 
-    // Make sure the new controller is prepped for the migration.
-    _to.prepForMigrationOf(_projectId, this);
+  // Make sure the new controller is prepped for the migration.
+  _to.prepForMigrationOf(_projectId, this);
 
-    // Set the new controller.
-    directory.setControllerOf(_projectId, _to);
+  // Set the new controller.
+  directory.setControllerOf(_projectId, _to);
 
-    emit Migrate(_projectId, _to, msg.sender);
-  }
+  emit Migrate(_projectId, _to, msg.sender);
+}
 ```
 {% endtab %}
 
 {% tab title="Errors" %}
 | String                   | Description                                                                         |
 | ------------------------ | ----------------------------------------------------------------------------------- |
-| **`0x35: UNAUTHORIZED`** | Thrown if the controller isn't the project's current controller.                    |
+| **`0x35: NO_OP`** | Thrown if the controller isn't the project's current controller.                    |
 | **`0x36: NOT_ALLOWED`**  | Thrown if the project's current funding cycle doesn't allow a controller migration. |
 {% endtab %}
 

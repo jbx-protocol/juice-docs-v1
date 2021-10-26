@@ -54,8 +54,7 @@ function _configure(
     _projectId,
     _data,
     _packedMetadata,
-    fee,
-    false 
+    fee
   );
 
   // Set payout splits if there are any.
