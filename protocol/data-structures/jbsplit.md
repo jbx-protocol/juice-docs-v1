@@ -10,8 +10,8 @@ Used in:
 ```solidity
 struct JBSplit {
   // A flag that only has effect if a projectId is also specified, and that project has issued its tokens. 
-  // If so, this flag indicates if the tokens that result from making a payment to the project should be delivered staked or unstaked to the beneficiary.
-  bool preferUnstaked;
+  // If so, this flag indicates if the tokens that result from making a payment to the project should be delivered as claimed ERC-20's to the beneficiary.
+  bool preferClaimed;;
   // The percent of the whole group that this split occupies. This number is out of 10000.
   uint16 percent;
   // Specifies if the split should be unchangeable until the specifies time comes, with the exception of extending the lockedUntil period.
@@ -29,7 +29,7 @@ struct JBSplit {
 }
 ```
 
-* `preferUnstaked` is a flag that only has effect if a `projectId` is also specified, and that project has [`issued`](../contracts/jbtokenstore/write/issuefor.md)its tokens. If so, this flag indicates if the tokens that result from making a payment to the project should be delivered staked or unstaked to the `beneficiary`.
+* `preferClaimed` is a flag that only has effect if a `projectId` is also specified, and that project has [`issued`](../contracts/jbtokenstore/write/issuefor.md)its tokens. If so, this flag indicates if the tokens that result from making a payment to the project should be delivered as claimed ERC-20's to the `beneficiary`.
 * `percent` is the percent of the whole group that this split occupies. This number is out of 10000.
 * `lockedUntil` specifies if the split should be unchangeable until the specifies time comes, with the exception of extending the `lockedUntil` period.
 *   The role the `beneficary` depends on whether or not `projectId` is specified, or whether or not `allocator` is specified. If `allocator` is set, the `beneficiary` will be forwarded to the `allocator` for it to use. `pallocator` is not set but
