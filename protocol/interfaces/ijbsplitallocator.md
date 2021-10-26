@@ -16,7 +16,7 @@ interface IJBSplitAllocator {
     uint256 _projectId,
     uint256 _forProjectId,
     address _beneficiary,
-    bool _preferClaimed
+    bool _preferUnstaked
   ) external payable;
 }sol
 ```

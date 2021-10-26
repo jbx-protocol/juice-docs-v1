@@ -10,7 +10,7 @@ Interface: `IJBController`
 
 _Only a project's owner or a designated operator can configure its funding cycles._
 
-# Definition
+## Definition
 
 ```solidity
 function reconfigureFundingCyclesOf(
@@ -37,9 +37,9 @@ function reconfigureFundingCyclesOf(
 * Through the [`requirePermission`](../../or-abstract/jboperatable/modifiers/requirepermission.md) modifier, the function is only accessible by the project's owner, or from an operator that has been given the `JBOperations.RECONFIGURE` permission by the project owner for the provided `_projectId`.
 * The function returns the ID of the funding cycle that was configured.
 
-# Body
+## Body
 
-1.  Validate and pack the provided metadata into a `uint256`. 
+1.  Validate and pack the provided metadata into a `uint256`.
 
     ```solidity
     // Make sure the metadata is validated and packed into a uint256.
@@ -47,7 +47,6 @@ function reconfigureFundingCyclesOf(
       _metadata
     );
     ```
-
 2.  Configure the project's funding cycle, overflow allowances, and splits.
 
     ```solidity
@@ -64,7 +63,7 @@ function reconfigureFundingCyclesOf(
 
     _Internal references:_
 
-    * [`_configure`](../write/_configure.md)
+    * [`_configure`](\_configure.md)
 {% endtab %}
 
 {% tab title="Code" %}

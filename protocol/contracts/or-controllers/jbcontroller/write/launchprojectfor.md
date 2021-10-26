@@ -10,7 +10,7 @@ _Each operation within this transaction can be done in sequence separately._
 
 _Anyone can deploy a project on an owner's behalf._
 
-# Definition
+## Definition
 
 ```solidity
 function launchProjectFor(
@@ -39,9 +39,9 @@ function launchProjectFor(
 * The function can be accessed externally by anyone.
 * The function returns the ID of the project that was launched.
 
-# Body
+## Body
 
-1.  Validate and pack the provided metadata into a `uint256`. 
+1.  Validate and pack the provided metadata into a `uint256`.
 
     ```solidity
     // Make sure the metadata is validated and packed into a uint256.
@@ -49,7 +49,6 @@ function launchProjectFor(
       _metadata
     );
     ```
-
 2.  Create the project. This will mint an ERC-721 in the `_owners` wallet representing ownership over the project.
 
     ```solidity
@@ -60,7 +59,6 @@ function launchProjectFor(
     _External references:_
 
     * [`createFor`](../../../jbprojects/write/createfor.md)
-
 3.  Set this controller as the controller of the project.
 
     ```solidity
@@ -71,7 +69,6 @@ function launchProjectFor(
     _External references:_
 
     * [`setControllerOf`](../../../jbdirectory/write/setcontrollerof.md)
-
 4.  If a terminal was provided, add it to the list of terminals the project can accept funds through.
 
     ```solidity
@@ -82,7 +79,6 @@ function launchProjectFor(
     _External references:_
 
     * [`addTerminalOf`](../../../jbdirectory/write/addterminalof.md)
-
 5.  Configure the project's funding cycle, overflow allowances, and splits.
 
     ```solidity
@@ -98,7 +94,7 @@ function launchProjectFor(
 
     _Internal references:_
 
-    * [`_configure`](../write/_configure.md)
+    * [`_configure`](\_configure.md)
 {% endtab %}
 
 {% tab title="Code" %}

@@ -10,7 +10,7 @@ Interface: [`IJBController`](../../../../interfaces/ijbcontroller.md)
 
 _Only a project's owner, a designated operator, or one of its terminal's delegate can mint its tokens._
 
-# Definition
+## Definition
 
 ```solidity
 function burnTokensOf(
@@ -41,7 +41,7 @@ function burnTokensOf(
 * The function overrides a function definition from the [`IJBController`](../../../../interfaces/ijbcontroller.md) interface.
 * The function doesn't return anything.
 
-# Body
+## Body
 
 1.  Make sure the provided beneficiary isn't the zero address.
 
@@ -49,15 +49,13 @@ function burnTokensOf(
     // Can't send to the zero address.
     require(_beneficiary != address(0), '0x2f: ZERO_ADDRESS');
     ```
-
 2.  Make sure there is a specified number of tokens to mint.
 
     ```solidity
     // There should be tokens to mint.
     require(_tokenCount > 0, '0x30: NO_OP');
     ```
-
-2.  Get a reference to the current funding cycle for the project.
+3.  Get a reference to the current funding cycle for the project.
 
     ```solidity
     // Get a reference to the project's current funding cycle.
@@ -67,8 +65,7 @@ function burnTokensOf(
     _External references:_
 
     * [`currentOf`](../../../jbfundingcyclestore/read/currentof.md)
-
-3.  Make sure the current funding cycle for the project hasn't paused minting if the request is not coming from one of the project's terminals. If the request is coming from a terminal, allow minting  regardless of the pause state because it could be a sub-routine of another operation such as receiving payments.
+4.  Make sure the current funding cycle for the project hasn't paused minting if the request is not coming from one of the project's terminals. If the request is coming from a terminal, allow minting regardless of the pause state because it could be a sub-routine of another operation such as receiving payments.
 
     ```solidity
     // If the message sender is not a terminal delegate, the current funding cycle must not be paused.
@@ -81,8 +78,7 @@ function burnTokensOf(
     _External references:_
 
     * [`isTerminalDelegateOf`](../../../jbdirectory/read/isterminaldelegateof.md)
-
-4.  If the operation should reserved tokens and the current reserved rate is 100%, instead of minting tokens the token tracker should be updated to add a difference of the specified token count. This will allow a future distribution of reserved tokens to mint the token count to reserved addresses. Otherwise, mint the tokens and update the token tracker if there is no intent to reserve tokens alongside the mint.
+5.  If the operation should reserved tokens and the current reserved rate is 100%, instead of minting tokens the token tracker should be updated to add a difference of the specified token count. This will allow a future distribution of reserved tokens to mint the token count to reserved addresses. Otherwise, mint the tokens and update the token tracker if there is no intent to reserve tokens alongside the mint.
 
     ```solidity
     if (_shouldReserveTokens && _fundingCycle.reservedRate() == 200) {
@@ -104,12 +100,11 @@ function burnTokensOf(
 
     _Internal references:_
 
-    * [`_processedTokenTrackerOf`](../read/_processedtokentrackerof.md)
+    * [`_processedTokenTrackerOf`](../read/\_processedtokentrackerof.md)
 
     _External references:_
 
     * [`mintFor`](../../../jbtokenstore/write/mintFor.md)
-
 6.  Emit a `MintTokens` event with the all relevant parameters.
 
     ```solidity

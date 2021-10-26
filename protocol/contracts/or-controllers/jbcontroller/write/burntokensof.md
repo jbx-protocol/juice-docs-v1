@@ -10,7 +10,7 @@ Interface: [`IJBController`](../../../../interfaces/ijbcontroller.md)
 
 _Only a token's holder, a designated operator, or a project's terminal's delegate can burn it._
 
-# Definition
+## Definition
 
 ```solidity
 function burnTokensOf(
@@ -41,7 +41,7 @@ function burnTokensOf(
 * The function overrides a function definition from the [`IJBController`](../../../../interfaces/ijbcontroller.md) interface.
 * The function doesn't return anything.
 
-# Body
+## Body
 
 1.  Make sure there is a specified number of tokens to burn.
 
@@ -49,7 +49,6 @@ function burnTokensOf(
     // There should be tokens to burn
     require(_tokenCount > 0, '0x32: NO_OP');
     ```
-
 2.  Get a reference to the current funding cycle for the project.
 
     ```solidity
@@ -60,8 +59,7 @@ function burnTokensOf(
     _External references:_
 
     * [`currentOf`](../../../jbfundingcyclestore/read/currentof.md)
-
-3.  Make sure the current funding cycle for the project hasn't paused burning if the request is not coming from one of the project's terminals. If the request is coming from a terminal, allow burning  regardless of the pause state because it could be a sub-routine of another operation such as redemption.
+3.  Make sure the current funding cycle for the project hasn't paused burning if the request is not coming from one of the project's terminals. If the request is coming from a terminal, allow burning regardless of the pause state because it could be a sub-routine of another operation such as redemption.
 
     ```solidity
     // If the message sender is not a terminal delegate, the current funding cycle must not be paused.
@@ -74,7 +72,6 @@ function burnTokensOf(
     _External references:_
 
     * [`isTerminalDelegateOf`](../../../jbdirectory/read/isterminaldelegateof.md)
-
 4.  Update the token tracker so that the correct amount of reserved tokens are still mintable after the burn.
 
     ```solidity
@@ -86,8 +83,7 @@ function burnTokensOf(
 
     _Internal references:_
 
-    * [`_processedTokenTrackerOf`](../write/_processedtokentrackerof.md)
-
+    * [`_processedTokenTrackerOf`](\_processedtokentrackerof.md)
 5.  Burn the tokens.
 
     ```solidity
@@ -98,7 +94,6 @@ function burnTokensOf(
     _External references:_
 
     * [`burnFrom`](../../../jbtokenstore/write/burnfrom.md)
-
 6.  Emit a `BurnTokens` event with the all relevant parameters.
 
     ```solidity

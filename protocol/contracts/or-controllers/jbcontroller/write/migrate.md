@@ -8,7 +8,7 @@ Contract:[`JBController`](../)​‌
 
 _Only a project's owner or a designated operator can migrate it._
 
-# Definition
+## Definition
 
 ```solidity
 function migrate(uint256 _projectId, IJBController _to)
@@ -23,7 +23,7 @@ function migrate(uint256 _projectId, IJBController _to)
 * Through the [`requirePermission`](../../or-abstract/jboperatable/modifiers/requirepermission.md) modifier, the function is only accessible by the project's owner, or from an operator that has been given the `JBOperations.MIGRATE_CONTROLLER` permission by the project owner for the provided `_projectId`.
 * The function doesn't return anything.
 
-# Body
+## Body
 
 1.  Make sure this controller is the project's current controller. Migrating away from a controller that isn't the project's current one wouldn't do anything.
 
@@ -35,7 +35,6 @@ function migrate(uint256 _projectId, IJBController _to)
     _External references:_
 
     * [`controllerOf`](../../../jbdirectory/read/controllerof.md)
-
 2.  Get a reference to the current funding cycle for the project.
 
     ```solidity
@@ -46,15 +45,13 @@ function migrate(uint256 _projectId, IJBController _to)
     _External references:_
 
     * [`currentOf`](../../../jbfundingcyclestore/read/currentof.md)
-
 3.  Make sure the project's current funding cycle is configured to allow controller migrations.
 
     ```solidity
     // Migration must be allowed
     require(_fundingCycle.controllerMigrationAllowed(), '0x36: NOT_ALLOWED');
     ```
-
-4.  Distribute any outstanding reserved tokens. There are reserved tokens to be distributed if the tracker does not equal the token's total supply. 
+4.  Distribute any outstanding reserved tokens. There are reserved tokens to be distributed if the tracker does not equal the token's total supply.
 
     ```solidity
     // All reserved tokens must be minted before migrating.
@@ -64,13 +61,12 @@ function migrate(uint256 _projectId, IJBController _to)
 
     _Internal references:_
 
-    * [`_processedTokenTrackerOf`](../read/_processedtokentrackerof.md)
-    * [`_distributeReservedTokensOf`](../write/_distributereservedtokensof.md)
+    * [`_processedTokenTrackerOf`](../read/\_processedtokentrackerof.md)
+    * [`_distributeReservedTokensOf`](\_distributereservedtokensof.md)
 
     _External references:_
 
     * [`totalSupplyOf`](../../../jbtokenstore/read/totalsupplyof.md)
-
 5.  Let the new controller know that a migration to it is happening.
 
     ```solidity
@@ -80,8 +76,7 @@ function migrate(uint256 _projectId, IJBController _to)
 
     _Internal references:_
 
-    * [`prepForMigrationOf`](../write/prepformigrationof.md)
-
+    * [`prepForMigrationOf`](prepformigrationof.md)
 6.  Set the new controller of the project.
 
     ```solidity
@@ -92,7 +87,6 @@ function migrate(uint256 _projectId, IJBController _to)
     _External references:_
 
     * [`setControllerOf`](../../../jbdirectory/write/setcontrollerof.md)
-
 7.  Emit a `Migrate` event with the all relevant parameters.
 
     ```solidity
@@ -102,7 +96,6 @@ function migrate(uint256 _projectId, IJBController _to)
     _Event references:_
 
     * [`Migrate`](../events/migrate.md)
-
 {% endtab %}
 
 {% tab title="Code" %}
@@ -144,10 +137,10 @@ function migrate(uint256 _projectId, IJBController _to)
 {% endtab %}
 
 {% tab title="Errors" %}
-| String                   | Description                                                                         |
-| ------------------------ | ----------------------------------------------------------------------------------- |
-| **`0x35: NO_OP`** | Thrown if the controller isn't the project's current controller.                    |
-| **`0x36: NOT_ALLOWED`**  | Thrown if the project's current funding cycle doesn't allow a controller migration. |
+| String                  | Description                                                                         |
+| ----------------------- | ----------------------------------------------------------------------------------- |
+| **`0x35: NO_OP`**       | Thrown if the controller isn't the project's current controller.                    |
+| **`0x36: NOT_ALLOWED`** | Thrown if the project's current funding cycle doesn't allow a controller migration. |
 {% endtab %}
 
 {% tab title="Events" %}

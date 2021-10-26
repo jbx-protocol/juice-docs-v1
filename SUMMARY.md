@@ -231,7 +231,6 @@
         * [setFee](protocol/contracts/or-controllers/jbcontroller/write/setfee.md)
         * [\_distributeReservedTokens](protocol/contracts/or-controllers/jbcontroller/write/\_distributereservedtokens.md)
         * [\_distributeToReservedTokenSplitsOf](protocol/contracts/or-controllers/jbcontroller/write/\_distributetoreservedtokensplitsof.md)
-        * [\_subtractFromTokenTrackerOf](protocol/contracts/or-controllers/jbcontroller/write/\_subtractfromtokentrackerof.md)
         * [\_configure](protocol/contracts/or-controllers/jbcontroller/write/\_configure.md)
   * [| Payment Terminals](protocol/contracts/or-payment-terminals/README.md)
     * [JBETHPaymentTerminal](protocol/contracts/or-payment-terminals/jbethpaymentterminal/README.md)
