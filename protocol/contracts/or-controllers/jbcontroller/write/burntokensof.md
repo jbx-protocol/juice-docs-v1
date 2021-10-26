@@ -43,7 +43,69 @@ function burnTokensOf(
 
 # Body
 
-TODO
+1.  Make sure there is a specified number of tokens to burn.
+
+    ```solidity
+    // There should be tokens to burn
+    require(_tokenCount > 0, '0x32: NO_OP');
+    ```
+
+2.  Get a reference to the current funding cycle for the project.
+
+    ```solidity
+    // Get a reference to the project's current funding cycle.
+    JBFundingCycle memory _fundingCycle = fundingCycleStore.currentOf(_projectId);
+    ```
+
+    _External references:_
+
+    * [`currentOf`](../../../jbfundingcyclestore/read/currentof.md)
+
+3.  Make sure the current funding cycle for the project hasn't paused burning if the request is not coming from one of the project's terminals. If the request is coming from a terminal, allow burning  regardless of the pause state because it could be a sub-routine of another operation such as redemption.
+
+    ```solidity
+    // If the message sender is not a terminal delegate, the current funding cycle must not be paused.
+    require(
+      !_fundingCycle.burnPaused() || directory.isTerminalDelegateOf(_projectId, msg.sender),
+      '0x33: PAUSED'
+    );
+    ```
+
+    _External references:_
+
+    * [`isTerminalDelegateOf`](../../../jbdirectory/read/isterminaldelegateof.md)
+
+4.  Update the token tracker so that the correct amount of reserved tokens are still mintable after the burn.
+
+    ```solidity
+    // Update the token tracker so that reserved tokens will still be correctly mintable.
+    _subtractFromTokenTrackerOf(_projectId, _tokenCount);
+    ```
+
+    _Internal references:_
+
+    * [`_subtractFromTokenTrackerOf`](../write/_subtractfromtokentrackerof.md)
+
+5.  Burn the tokens.
+
+    ```solidity
+    // Burn the tokens.
+    tokenStore.burnFrom(_holder, _projectId, _tokenCount, _preferClaimedTokens);
+    ```
+
+    _External references:_
+
+    * [`burnFrom`](../../../jbtokenstore/write/burnfrom.md)
+
+4.  Emit a `BurnTokens` event with the all relevant parameters.
+
+    ```solidity
+    emit BurnTokens(_holder, _projectId, _tokenCount, _memo, msg.sender);
+    ```
+
+    _Event references:_
+
+    * [`BurnTokens`](../events/burn.md)
 {% endtab %}
 
 {% tab title="Code" %}
