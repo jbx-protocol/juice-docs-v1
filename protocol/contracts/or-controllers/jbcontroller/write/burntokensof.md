@@ -79,12 +79,14 @@ function burnTokensOf(
 
     ```solidity
     // Update the token tracker so that reserved tokens will still be correctly mintable.
-    _subtractFromTokenTrackerOf(_projectId, _tokenCount);
+    _processedTokenTrackerOf[_projectId] =
+      _processedTokenTrackerOf[_projectId] -
+      int256(_tokenCount);
     ```
 
     _Internal references:_
 
-    * [`_subtractFromTokenTrackerOf`](../write/_subtractfromtokentrackerof.md)
+    * [`_processedTokenTrackerOf`](../write/_processedtokentrackerof.md)
 
 5.  Burn the tokens.
 
@@ -153,7 +155,9 @@ function burnTokensOf(
   );
 
   // Update the token tracker so that reserved tokens will still be correctly mintable.
-  _subtractFromTokenTrackerOf(_projectId, _tokenCount);
+  _processedTokenTrackerOf[_projectId] =
+    _processedTokenTrackerOf[_projectId] -
+    int256(_tokenCount);
 
   // Burn the tokens.
   tokenStore.burnFrom(_holder, _projectId, _tokenCount, _preferClaimedTokens);
