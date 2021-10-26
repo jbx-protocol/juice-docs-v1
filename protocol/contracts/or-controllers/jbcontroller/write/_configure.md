@@ -29,7 +29,84 @@ function _configure(
 
 # Body
 
-TODO
+1.  Configure the project's funding cycles.
+
+    ```solidity
+    // Configure the funding cycle's properties.
+    JBFundingCycle memory _fundingCycle = fundingCycleStore.configureFor(
+      _projectId,
+      _data,
+      _packedMetadata,
+      fee
+    );
+    ```
+
+    _External references:_
+
+    * [`configureFor`](../../../jbfundingcyclestore/write/configurefor.md)
+
+2.  If needed, set payout splits.
+
+    ```solidity
+    // Set payout splits if there are any.
+    if (_payoutSplits.length > 0)
+      splitsStore.set(
+        _projectId,
+        _fundingCycle.configured,
+        JBSplitsGroups.ETH_PAYOUT,
+        _payoutSplits
+      );
+    ```
+
+    _External references:_
+
+    * [`set`](../../../jbsplitsstore/write/set.md)
+
+3.  If needed, set reserved token splits.
+
+    ```solidity
+    // Set token splits if there are any.
+    if (_reservedTokenSplits.length > 0)
+      splitsStore.set(
+        _projectId,
+        _fundingCycle.configured,
+        JBSplitsGroups.RESERVED_TOKENS,
+        _reservedTokenSplits
+      );
+    ```
+
+    _External references:_
+
+    * [`set`](../../../jbsplitsstore/write/set.md)
+
+4.  For each overflow allowance struct in the array passed in, store its value if its amount is being updated. Emit a `SetOverflowAllowance` event with the all relevant parameters.
+
+    ```solidity
+    // Set overflow allowances if there are any.
+    for (uint256 _i; _i < _overflowAllowances.length; _i++) {
+      JBOverflowAllowance memory _allowance = _overflowAllowances[_i];
+
+      // Set the overflow allowance if the value is different from the currently set value.
+      if (
+        _allowance.amount !=
+        overflowAllowanceOf[_projectId][_fundingCycle.configured][_allowance.terminal]
+      ) {
+        overflowAllowanceOf[_projectId][_fundingCycle.configured][_allowance.terminal] = _allowance
+          .amount;
+
+        emit SetOverflowAllowance(_projectId, _fundingCycle.configured, _allowance, msg.sender);
+      }
+    }
+    ```
+
+    _Internal references:_
+
+    * [`overflowAllowanceOf`](../properties/overflowallowanceof.md)
+
+    _Event references:_
+
+    * [`SetOverflowAllowance`](../events/setoverflowallowance.md)
+
 {% endtab %}
 
 {% tab title="Only code" %}
