@@ -55,7 +55,7 @@ function _distributeReservedTokensOf(uint256 _projectId, string memory _memo)
 
     _Internal references:_
 
-    * [`_reservedTokenAmountFrom`](../properties/_reservedtokenamountfrom.md)
+    * [`_reservedTokenAmountFrom`](../read/_reservedtokenamountfrom.md)
     
 4.  Set the tracker to be equal to the new current total token supply, which is the amount stored plus the amount that will be minted and distributed. 
 

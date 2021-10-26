@@ -28,7 +28,26 @@ function reservedTokenBalanceOf(uint256 _projectId, uint256 _reservedRate)
 
 # Body
 
-TODO
+1.  Forward the call to the internal version of the function that is also used by other operations.
+
+    ```solidity
+    return
+      _reservedTokenAmountFrom(
+        _processedTokenTrackerOf[_projectId],
+        _reservedRate,
+        tokenStore.totalSupplyOf(_projectId)
+      );
+    ```
+
+    _Internal references:_
+
+    * [`_reservedTokenAmountFrom`](../_reservedtokenamountfrom.md)
+    * [`_processedTokenTrackerOf`](../_processedtokentrackerof.md)
+
+    _External references:_
+
+    * [`totalSupplyOf`](../../../jbtokenstore/totalsupplyof.md)
+
 {% endtab %}
 
 {% tab title="Code" %}
