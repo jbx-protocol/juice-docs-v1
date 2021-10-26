@@ -19,11 +19,11 @@ function _configure(
 
 * Arguments:
   * `_projectId` is the ID of the project whos funding cycles are being reconfigured.
-  * `_data` is the funding cycle configuration data. These properties will remain fixed for the duration of the funding cycle.
-  * `_metadata` is a struct specifying the controller specific params that a funding cycle can have.
-  * `_overflowAllowances` is an array contraining amounts, in wei (18 decimals), that a project can use from its own overflow on-demand for each payment terminal.
-  * `_payoutSplits` is an array of payout splits to set.
-  * `_reservedTokenSplits` is an array of reserved token splits to set.
+  * `_data` is a [`JBFundingCycleData`](../../../../data-structures/jbfundingcycledata.md) data structure that defines the project's first funding cycle. These properties will remain fixed for the duration of the funding cycle.
+  * `_metadata` is a [`JBFundingCycleMetadata`](../../../../data-structures/jbfundingcyclemetadata.md) data structure specifying the controller specific params that a funding cycle can have.
+  * `_overflowAllowances` is an array of [`JBOverflowAllowance`](../../../../data-structures/jboverflowallowance.md) data structures containing amounts, in wei (18 decimals), that a project can use from its own overflow on-demand for each payment terminal.
+  * `_payoutSplits` is an array of [`JBSplit`](../../../../data-structures/jbsplit.md) data structures containing payout splits to set.
+  * `_reservedTokenSplits` is an array of [`JBSplit`](../../../../data-structures/jbsplit.md) data structures containing reserved token splits to set.
 * The function is private to this contract.
 * The function returns the ID of the funding cycle that was configured.
 
