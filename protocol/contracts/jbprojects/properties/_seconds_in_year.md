@@ -11,4 +11,5 @@ Contract: [`JBProjects`](../)
 uint256 private constant _SECONDS_IN_YEAR = 31536000;
 ```
 
+* This value must be hardcoded.
 * The resulting view function is private to this contract.

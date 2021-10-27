@@ -1,8 +1,8 @@
 # permissionsOf
 
-Contract:[`JBOperatorStore`](../)​‌
+Contract: [`JBOperatorStore`](../)​‌
 
-Interface: `IJBOperatorStore`
+Interface: [`IJBOperatorStore`](../../../interfaces/ijboperatorstore.md)
 
 **The permissions that an operator has to operate on a specific domain.**
 
@@ -22,13 +22,15 @@ _Permissions are stored in a packed `uint256`. Each 256 bits represents the on/o
   There is no domain with a value of 0 – accounts can use the 0 domain to give an operator
   permissions to all domains on their behalf.
 
-  [_operator][_account][_domain]
+  _operator The address of the operator.
+  _account The address of the account being operated.
+  _domain The domain within which the permissions apply.
 */
 mapping(address => mapping(address => mapping(uint256 => uint256))) public override permissionsOf;
 ```
 
-* `address` is the address of the operator.
-* `address` is the address of the account being operated.
-* `uint256` is the domain within which the permissions apply.
+* `_operator` is the address of the operator.
+* `_account` is the address of the account being operated.
+* `_domain` is the domain within which the permissions apply.
 * The resulting view function can be accessed externally by anyone. 
 * The resulting function overrides a function definition from the `IJBOperatorStore` interface.

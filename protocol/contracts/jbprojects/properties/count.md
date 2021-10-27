@@ -2,7 +2,7 @@
 
 Contract: [`JBProjects`](../)
 
-Interface:`IJBProjects`
+Interface: [`IJBProjects`](../../../interfaces/ijbprojects.md)
 
 **The number of projects that have been created using this contract.**
 

@@ -1,8 +1,8 @@
 # tokenOf
 
-Contract:[`JBTokenStore`](../)​‌
+Contract: [`JBTokenStore`](../)​‌
 
-Interface: `IJBTokenStore`
+Interface: [`IJBTokenStore`](../../../interfaces/ijbtokenstore.md)
 
 **Each project's ERC20 Token tokens.**
 
@@ -13,12 +13,12 @@ Interface: `IJBTokenStore`
   @notice
   Each project's ERC20 Token tokens.
 
-  [_projectId]
+  _projectId The ID of the project to which the token belongs.
 */
 mapping(uint256 => IJBToken) public override tokenOf;
 ```
 
-* `uint256` is the ID of the project to which the token belongs.
+* `_projectId` is the ID of the project to which the token belongs.
 * The resulting view function can be accessed externally by anyone. 
 * The resulting function overrides a function definition from the `IJBTokenStore` interface.
 

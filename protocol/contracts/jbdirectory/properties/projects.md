@@ -1,8 +1,8 @@
 # projects
 
-Contract:[`JBDirectory`](../)​‌
+Contract: [`JBDirectory`](../)​‌
 
-Interface: `IJBDirectory`
+Interface: [`IJBDirectory`](../../../interfaces/ijbdirectory.md)
 
 **The Projects contract which mints ERC-721's that represent project ownership and transfers.**
 
@@ -16,5 +16,6 @@ Interface: `IJBDirectory`
 IJBProjects public immutable override projects;
 ```
 
+* The value cannot be changed. 
 * The resulting view function can be accessed externally by anyone. 
 * The resulting function overrides a function definition from the `IJBDirectory` interface.

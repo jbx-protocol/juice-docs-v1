@@ -4,6 +4,7 @@
 interface IJBFundingCycleDataSource {
   function payParams(JBPayParamsData calldata _param)
     external
+    view
     returns (
       uint256 weight,
       string memory memo,
@@ -13,6 +14,7 @@ interface IJBFundingCycleDataSource {
 
   function redeemParams(JBRedeemParamsData calldata _param)
     external
+    view
     returns (
       uint256 amount,
       string memory memo,

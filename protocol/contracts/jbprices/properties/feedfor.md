@@ -2,7 +2,7 @@
 
 Contract: [`JBPrices`](../)
 
-Interface:** **`IJBPrices`
+Interface: [`IJBPrices`](../../../interfaces/ijbprices.md)
 
 **The available price feeds.**
 
@@ -13,7 +13,8 @@ Interface:** **`IJBPrices`
   @notice 
   The available price feeds.
 
-  [_currency][_base]
+  _currency he currency of the feed.
+  _base he base of the feed. 
 */
 mapping(uint256 => mapping(uint256 => AggregatorV3Interface)) public override feedFor;
 ```

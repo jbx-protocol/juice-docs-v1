@@ -1,8 +1,8 @@
 # reconfigureFundingCyclesOf
 
-Contract:[`JBController`](../)​‌
+Contract: [`JBController`](../)​‌
 
-Interface: `IJBController`
+Interface: [`IJBController`](../../../../interfaces/ijbcontroller.md)
 
 {% tabs %}
 {% tab title="Step by step" %}

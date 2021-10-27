@@ -1,6 +1,6 @@
 # _primaryTerminalOf
 
-Contract:[`JBDirectory`](../)‌
+Contract: [`JBDirectory`](../)‌
 
 **The Projects contract which mints ERC-721's that represent project ownership and transfers.**
 
@@ -11,7 +11,8 @@ Contract:[`JBDirectory`](../)‌
   @notice 
   The project's primary terminal for a token.
 
-  [_projectId][_token]
+  _projectId The ID of the project to get the primary terminal of.
+  _token The token to get the project's primary terminal of.
 */
 mapping(uint256 => mapping(address => IJBTerminal)) private _primaryTerminalOf;
 ```

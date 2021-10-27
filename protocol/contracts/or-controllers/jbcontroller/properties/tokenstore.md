@@ -1,8 +1,8 @@
 # tokenStore
 
-Contract:[`JBController`](../)​‌
+Contract: [`JBController`](../)​‌
 
-Interface: `IJBController`
+Interface: [`IJBController`](../../../../interfaces/ijbcontroller.md)
 
 **The contract that manages token minting and burning.**
 
@@ -16,5 +16,6 @@ Interface: `IJBController`
 IJBTokenStore public immutable tokenStore;
 ```
 
+* The value cannot be changed. 
 * The resulting view function can be accessed externally by anyone. 
 * The resulting function overrides a function definition from the `IJBController` interface.

@@ -1,24 +1,26 @@
-# unclaimedBalanceOf
+# unclaimedTotalSupplyOf
 
-Contract:[`JBTokenStore`](../)​‌
+Contract: [`JBTokenStore`](../)​‌
 
-Interface: `IJBTokenStore`
+Interface: [`IJBTokenStore`](../../../interfaces/ijbtokenstore.md)
 
-**The total supply of unclaimed tokens for each project.**
+**Each holder's balance of unclaimed Tokens for each project.**
 
 ## Definition
 
 ```solidity
 /** 
   @notice
-  The total supply of unclaimed tokens for each project.
+  Each holder's balance of unclaimed Tokens for each project.
 
-  [_projectId]
+  _holder The holder of balance.
+  _projectId The ID of the project to which the token belongs.
 */
-mapping(uint256 => uint256) public override unclaimedTotalSupplyOf;
+mapping(address => mapping(uint256 => uint256)) public override unclaimedBalanceOf;
 ```
 
-* `uint256` is the ID of the project to which the token belongs.
+* `_holder` is the holder of balance.
+* `_projectId` is the ID of the project to which the token belongs.
 * The resulting view function can be accessed externally by anyone. 
 * The resulting function overrides a function definition from the `IJBTokenStore` interface.
 

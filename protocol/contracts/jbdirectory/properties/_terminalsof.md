@@ -1,6 +1,6 @@
 # _terminalsOf
 
-Contract:[`JBDirectory`](../)‌
+Contract: [`JBDirectory`](../)‌
 
 **For each project ID, the terminals that are currently managing its funds.**
 
@@ -11,7 +11,7 @@ Contract:[`JBDirectory`](../)‌
   @notice 
   For each project ID, the terminals that are currently managing its funds.
 
-  [_projectId]
+  _projectId The ID of the project to get terminals of.
 */
 mapping(uint256 => IJBTerminal[]) private _terminalsOf;
 ```

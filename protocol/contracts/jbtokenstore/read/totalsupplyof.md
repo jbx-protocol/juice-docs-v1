@@ -1,8 +1,8 @@
 # totalSupplyOf
 
-Contract:[`JBTokenStore`](../)​‌
+Contract: [`JBTokenStore`](../)​‌
 
-Interface: `IJBTokenStore`
+Interface: [`IJBTokenStore`](../../../interfaces/ijbtokenstore.md)
 
 {% tabs %}
 {% tab title="Step by step" %}

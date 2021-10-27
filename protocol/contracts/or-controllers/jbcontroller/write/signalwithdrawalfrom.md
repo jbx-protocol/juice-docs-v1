@@ -1,6 +1,6 @@
 # signalWithdrawalFrom
 
-Contract:[`JBController`](../)​‌
+Contract: [`JBController`](../)​‌
 
 Interface: [`IJBController`](../../../../interfaces/ijbcontroller.md)
 

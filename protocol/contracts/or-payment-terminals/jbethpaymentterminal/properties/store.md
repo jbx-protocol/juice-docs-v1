@@ -1,19 +1,19 @@
-# projects
+# store
 
 Contract: [`JBETHPaymentTerminal`](../)​‌
 
 Interface: [`IJBETHPaymentTerminal`](../../../../interfaces/ijbethterminalof.md)
 
-**The Projects contract which mints ERC-721's that represent project ownership and transfers.**
+**The contract that stores and manages the terminal's data.** 
 
 ## Definition
 
 ```solidity
-/** 
+/**
   @notice 
-  The Projects contract which mints ERC-721's that represent project ownership and transfers.
-*/ 
-IJBProjects public immutable override projects;
+  The contract that stores and manages the terminal's data.
+*/
+JBETHPaymentTerminalStore public immutable store;
 ```
 
 * The value cannot be changed. 

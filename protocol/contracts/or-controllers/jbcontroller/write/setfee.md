@@ -1,6 +1,6 @@
 # setFee
 
-Contract:[`JBController`](../)​‌
+Contract: [`JBController`](../)​‌
 
 {% tabs %}
 {% tab title="Step by step" %}

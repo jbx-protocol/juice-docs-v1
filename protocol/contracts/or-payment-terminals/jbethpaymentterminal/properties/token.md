@@ -1,19 +1,24 @@
-# projects
+# token
 
 Contract: [`JBETHPaymentTerminal`](../)​‌
 
 Interface: [`IJBETHPaymentTerminal`](../../../../interfaces/ijbethterminalof.md)
 
-**The Projects contract which mints ERC-721's that represent project ownership and transfers.**
+**The token that this terminal accepts.** 
+
+_ETH is represented as address 0x0000000000000000000000000000000000042069._
 
 ## Definition
 
 ```solidity
 /** 
   @notice 
-  The Projects contract which mints ERC-721's that represent project ownership and transfers.
-*/ 
-IJBProjects public immutable override projects;
+  The token that this terminal accepts. 
+
+  @dev
+  ETH is represented as address 0x0000000000000000000000000000000000042069.
+*/
+address public immutable override token = 0x0000000000000000000000000000000000042069;
 ```
 
 * The value cannot be changed. 

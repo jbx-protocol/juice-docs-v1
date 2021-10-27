@@ -1,10 +1,8 @@
 # fee
 
-## fee
+Contract: [`JBController`](../)​‌
 
-Contract:[`JBController`](../)​‌
-
-Interface: `IJBController`
+Interface: [`IJBController`](../../../../interfaces/ijbcontroller.md)
 
 **The platform fee percent.**
 

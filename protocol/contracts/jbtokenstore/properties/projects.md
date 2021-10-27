@@ -1,8 +1,8 @@
 # projects
 
-Contract:[`JBTokenStore`](../)​‌
+Contract: [`JBTokenStore`](../)​‌
 
-Interface: `IJBTokenStore`
+Interface: [`IJBTokenStore`](../../../interfaces/ijbtokenstore.md)
 
 **The Projects contract which mints ERC-721's that represent project ownership and transfers.**
 

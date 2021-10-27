@@ -2,7 +2,7 @@
 
 Contract: [`JBPrices`](../)
 
-Interface:** **`IJBPrices`
+Interface: [`IJBPrices`](../../../interfaces/ijbprices.md)
 
 **The normalized number of decimals each price feed has.**
 
@@ -16,6 +16,6 @@ Interface:** **`IJBPrices`
 uint256 public constant override TARGET_DECIMALS = 18;
 ```
 
-* This value cannot change.
+* This value must be hardcoded.
 * The resulting view function can be accessed externally by anyone. 
 * The resulting function overrides a function definition from the `IJBPrices` interface.

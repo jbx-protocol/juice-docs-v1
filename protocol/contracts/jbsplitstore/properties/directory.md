@@ -1,8 +1,8 @@
 # directory
 
-Contract:[`JBSplitStore`](../)​‌
+Contract: [`JBSplitStore`](../)​‌
 
-Interface: `IJBSplitStore`
+Interface: [`IJBSplitStore`](../../../interfaces/ijbsplitstore.md)
 
 **The directory of terminals and controllers for projects.**
 

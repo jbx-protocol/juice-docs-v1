@@ -1,6 +1,6 @@
 # _SECONDS_IN_DAY
 
-Contract:[`JBFundingCycleStore`](../)​‌
+Contract: [`JBFundingCycleStore`](../)​‌
 
 **The number of seconds in a day.**
 
@@ -14,5 +14,5 @@ Contract:[`JBFundingCycleStore`](../)​‌
 uint256 private constant _SECONDS_IN_DAY = 86400;
 ```
 
-* This value cannot change.
+* This value must be hardcoded.
 * The resulting view function is private to this contract.
