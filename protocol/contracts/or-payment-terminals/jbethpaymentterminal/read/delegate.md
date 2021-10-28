@@ -1,50 +1,46 @@
-# heldFeesOf
+# delegate 
 
 Contract: [`JBETHPaymentTerminal`](../)​‌
 
-Interface: [`IJBETHPaymentTerminal`](../../../../interfaces/ijbethterminalof.md)
-
 {% tabs %}
 {% tab title="Step by step" %}
-**The ETH balance that this terminal holds for each project.**
+**An address that serves as this terminal's delegate when making requests to juicebox ecosystem contracts.**
 
 # Definition
 
 ```solidity
-function heldFeesOf(uint256 _projectId) external view override returns (JBFee[] memory) { ... }
+function delegate() external view override returns (address) { ... }
 ```
-* Arguments:
-  * `_projectId` is the ID of the project to which the held fees belongs.
+
 * The view function can be accessed externally by anyone.
 * The function does not alter state on the blockchain.
-* The resulting function overrides a function definition from the `IJBETHPaymentTerminal` interface.
 * The function returns the delegate address
 
 # Body
 
-1.  This function just reads and returns the stored `_heldFeesOf` the project.
+1.  The store will serve as this terminal's delegate, which will give it access to manipulate the funding cycle store and the token store on behalf of projects that use this terminal.
 
     ```solidity
-    return _heldFeesOf[_projectId];
+    // The store is the delegate.
+    return address(store);
     ```
 
     _Internal references:_
 
-    * [`_heldFeesOf`](../properties/_heldfeesof.md)
+    * [`store`](../properties/store.md)
 {% endtab %}
 
 {% tab title="Code" %}
 ```solidity
 /** 
-  @notice 
-  The fees that are currently being held to be processed later for each project.
+  @notice
+  An address that serves as this terminal's delegate when making requests to juicebox ecosystem contracts.
 
-  @param _projectId The ID of the project for which the returned fees are being held.
-
-  @return An array of fees that are being held.
+  @return The delegate address.
 */
-function heldFeesOf(uint256 _projectId) external view override returns (JBFee[] memory) {
-  return _heldFeesOf[_projectId];
+function delegate() external view override returns (address) {
+  // The store is the delegate.
+  return address(store);
 }
 ```
 {% endtab %}
