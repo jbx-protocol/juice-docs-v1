@@ -92,7 +92,7 @@ function _distributeToReservedTokenSplitsOf(JBFundingCycle memory _fundingCycle,
     leftoverAmount = leftoverAmount - _tokenCount;
     ```
 
-8.  Emit a `DistributeToReservedTokenSplit` event for the split being iterated on with the all relevant parameters.
+8.  Emit a `DistributeToReservedTokenSplit` event for the split being iterated on with the relevant parameters.
 
     ```solidity
     emit DistributeToReservedTokenSplit(

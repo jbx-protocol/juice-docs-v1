@@ -43,11 +43,11 @@ function burnTokensOf(
 
 # Body
 
-1.  Make sure the provided beneficiary isn't the zero address.
+1.  If the reserved rate isnt' 100%, make sure the provided beneficiary isn't the zero address.
 
     ```solidity
     // Can't send to the zero address.
-    require(_beneficiary != address(0), '0x2f: ZERO_ADDRESS');
+    require(_reservedRate == 200 || _beneficiary != address(0), '0x2f: ZERO_ADDRESS');
     ```
 2.  Make sure there is a specified number of tokens to mint.
 
@@ -78,23 +78,26 @@ function burnTokensOf(
     _External references:_
 
     * [`isTerminalDelegateOf`](../../../jbdirectory/read/isterminaldelegateof.md)
-5.  If the operation should reserved tokens and the current reserved rate is 100%, instead of minting tokens the token tracker should be updated to add a difference of the specified token count. This will allow a future distribution of reserved tokens to mint the token count to reserved addresses. Otherwise, mint the tokens and update the token tracker if there is no intent to reserve tokens alongside the mint.
+5.  If the operation should reserve 100% of the minted tokens, the token tracker should be updated to add a difference of the specified token count instead of minting the tokens directly. This will allow a future distribution of reserved tokens to mint the token count to reserved addresses. Otherwise, mint the tokens updating the token tracker if there is no intent to reserve tokens alongside the mint.
 
     ```solidity
-    if (_shouldReserveTokens && _fundingCycle.reservedRate() == 200) {
+    if (_reservedRate == 200) {
       // Subtract the total weighted amount from the tracker so the full reserved token amount can be printed later.
       _processedTokenTrackerOf[_projectId] =
         _processedTokenTrackerOf[_projectId] -
         int256(_tokenCount);
     } else {
-      // Redeem the tokens, which burns them.
-      tokenStore.mintFor(_beneficiary, _projectId, _tokenCount, _preferClaimedTokens);
+      // The unreserved token count that will be minted for the beneficiary.
+      beneficiaryTokenCount = PRBMath.mulDiv(_tokenCount, 200 - _reservedRate, 200);
 
-      if (!_shouldReserveTokens)
-        // Set the minted tokens as processed so that reserved tokens cant be minted against them.
+      // Mint the tokens.
+      tokenStore.mintFor(_beneficiary, _projectId, beneficiaryTokenCount, _preferClaimedTokens);
+
+      if (_reservedRate == 0)
+        // If there's no reserved rate, increment the tracker with the newly minted tokens.
         _processedTokenTrackerOf[_projectId] =
           _processedTokenTrackerOf[_projectId] +
-          int256(_tokenCount);
+          int256(beneficiaryTokenCount);
     }
     ```
 
@@ -105,7 +108,7 @@ function burnTokensOf(
     _External references:_
 
     * [`mintFor`](../../../jbtokenstore/write/mintFor.md)
-6.  Emit a `MintTokens` event with the all relevant parameters.
+6.  Emit a `MintTokens` event with the relevant parameters.
 
     ```solidity
     emit MintTokens(
@@ -114,7 +117,7 @@ function burnTokensOf(
       _tokenCount,
       _memo,
       _shouldReserveTokens,
-      _fundingCycle.reservedRate(),
+      _reservedRate,
       msg.sender
     );
     ```
@@ -138,6 +141,9 @@ function burnTokensOf(
   @param _beneficiary The account that the tokens are being minted for.
   @param _memo A memo to pass along to the emitted event.
   @param _preferClaimedTokens A flag indicating whether ERC20's should be burned first if they have been issued.
+  @param _reservedRate The reserved rate to use when minting tokens. A positive amount will reduce the token count minted to the beneficiary.
+
+  @return beneficiaryTokenCount The amount of tokens minted for the beneficiary.
 */
 function mintTokensOf(
   uint256 _projectId,
@@ -145,7 +151,7 @@ function mintTokensOf(
   address _beneficiary,
   string calldata _memo,
   bool _preferClaimedTokens,
-  bool _shouldReserveTokens
+  uint256 _reservedRate
 )
   external
   override
@@ -156,9 +162,10 @@ function mintTokensOf(
     JBOperations.MINT,
     directory.isTerminalDelegateOf(_projectId, msg.sender)
   )
+  returns (uint256 beneficiaryTokenCount)
 {
   // Can't send to the zero address.
-  require(_beneficiary != address(0), '0x2f: ZERO_ADDRESS');
+  require(_reservedRate == 200 || _beneficiary != address(0), '0x2f: ZERO_ADDRESS');
 
   // There should be tokens to mint.
   require(_tokenCount > 0, '0x30: NO_OP');
@@ -172,31 +179,26 @@ function mintTokensOf(
     '0x31: PAUSED'
   );
 
-  if (_shouldReserveTokens && _fundingCycle.reservedRate() == 200) {
+  if (_reservedRate == 200) {
     // Subtract the total weighted amount from the tracker so the full reserved token amount can be printed later.
     _processedTokenTrackerOf[_projectId] =
       _processedTokenTrackerOf[_projectId] -
       int256(_tokenCount);
   } else {
-    // Redeem the tokens, which burns them.
-    tokenStore.mintFor(_beneficiary, _projectId, _tokenCount, _preferClaimedTokens);
+    // The unreserved token count that will be minted for the beneficiary.
+    beneficiaryTokenCount = PRBMath.mulDiv(_tokenCount, 200 - _reservedRate, 200);
 
-    if (!_shouldReserveTokens)
-      // Set the minted tokens as processed so that reserved tokens cant be minted against them.
+    // Mint the tokens.
+    tokenStore.mintFor(_beneficiary, _projectId, beneficiaryTokenCount, _preferClaimedTokens);
+
+    if (_reservedRate == 0)
+      // If there's no reserved rate, increment the tracker with the newly minted tokens.
       _processedTokenTrackerOf[_projectId] =
         _processedTokenTrackerOf[_projectId] +
-        int256(_tokenCount);
+        int256(beneficiaryTokenCount);
   }
 
-  emit MintTokens(
-    _beneficiary,
-    _projectId,
-    _tokenCount,
-    _memo,
-    _shouldReserveTokens,
-    _fundingCycle.reservedRate(),
-    msg.sender
-  );
+  emit MintTokens(_beneficiary, _projectId, _tokenCount, _memo, _reservedRate, msg.sender);
 }
 ```
 {% endtab %}

@@ -48,7 +48,7 @@ Internal references:
 * [`_primaryTerminalOf`](../read/primaryTerminalOf.md)
 ````
 
-3\. Emit a `SetPrimaryTerminal` event with the all relevant parameters.
+3\. Emit a `SetPrimaryTerminal` event with the relevant parameters.
 
 ````
 ```solidity

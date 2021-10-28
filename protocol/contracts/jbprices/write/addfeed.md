@@ -73,7 +73,7 @@ function addFeedFor(
 
     * [`feedDecimalAdjusterFor`](../properties/feeddecimaladjuster.md)
     * [`TARGET_DECIMALS`](../properties/targetdecimals.md)
-6.  Emit an `AddFeed` event with the all relevant parameters.
+6.  Emit an `AddFeed` event with the relevant parameters.
 
     ```solidity
     emit AddFeed(_currency, _base, _decimals, _feed);

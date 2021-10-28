@@ -60,7 +60,7 @@ function changeTokenOf(
     if (_currentToken != IJBToken(address(0)) && _newOwner != address(0))
       _currentToken.transferOwnership(_newOwner);
     ```
-4.  Emit a `ChangeToken` event with the all relevant parameters.
+4.  Emit a `ChangeToken` event with the relevant parameters.
 
     ```solidity
     emit ChangeToken(_projectId, _token, _newOwner, msg.sender);

@@ -74,7 +74,7 @@ function issueFor(
     _Internal references:_
 
     * [`tokenOf`](../properties/tokenof.md)
-6.  Emit an `Issue` event with the all relevant parameters.
+6.  Emit an `Issue` event with the relevant parameters.
 
     ```solidity
     emit Issue(_projectId, token, _name, _symbol, msg.sender);

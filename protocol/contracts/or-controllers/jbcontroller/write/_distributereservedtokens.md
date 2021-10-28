@@ -103,7 +103,7 @@ function _distributeReservedTokensOf(uint256 _projectId, string memory _memo)
 
     * [`mintFor`](../../../jbtokenstore/write/mintfor.md)
 
-8.  Emit a `DistributeReservedTokens` event with the all relevant parameters.
+8.  Emit a `DistributeReservedTokens` event with the relevant parameters.
 
     ```solidity
     emit DistributeReservedTokens(

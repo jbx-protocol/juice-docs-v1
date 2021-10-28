@@ -76,7 +76,7 @@ function setHandleOf(uint256 _projectId, bytes32 _handle)
     _Internal references:_
 
     * [`idFor`](../properties/idfor.md)
-6.  Emit a `SetHandle` event with the all relevant parameters.
+6.  Emit a `SetHandle` event with the relevant parameters.
 
     ```solidity
     emit SetHandle(_projectId, _handle, msg.sender);

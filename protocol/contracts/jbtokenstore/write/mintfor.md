@@ -76,7 +76,7 @@ function mintFor(
 
     * [`unclaimedBalanceOf`](../properties/unclaimedbalanceof.md)
     * [`unclaimedTotalSupplyOf`](../properties/unclaimedtotalsupplyof.md)
-5.  Emit a `Mint` event with the all relevant parameters.
+5.  Emit a `Mint` event with the relevant parameters.
 
     ```solidity
     emit Mint(_holder, _projectId, _amount, _shouldClaimTokens, _preferClaimedTokens, msg.sender);

@@ -59,7 +59,7 @@ function addTerminalOf(uint256 _projectId, IJBTerminal _terminal)
     Internal references:
 
     * [`_terminalsOf`](../properties/\_terminalsof.md)
-4.  Emit a `AddTerminal` event with the all relevant parameters.
+4.  Emit a `AddTerminal` event with the relevant parameters.
 
     ```solidity
     emit AddTerminal(_projectId, _terminal, msg.sender);

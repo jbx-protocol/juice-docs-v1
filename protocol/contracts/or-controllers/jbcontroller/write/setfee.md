@@ -33,7 +33,7 @@ function setFee(uint256 _fee) external onlyOwner { ... }
     // Store the new fee.
     fee = _fee;
     ```
-3.  Emit a `SetFee` event with the all relevant parameters.
+3.  Emit a `SetFee` event with the relevant parameters.
 
     ```solidity
     emit SetFee(_fee, msg.sender);

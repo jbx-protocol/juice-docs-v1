@@ -38,7 +38,7 @@ function setUriOf(uint256 _projectId, string calldata _uri)
     _Internal references:_
 
     * [`uriOf`](../properties/uriof.md)
-2.  Emit a `SetUri` event with the all relevant parameters.
+2.  Emit a `SetUri` event with the relevant parameters.
 
     ```solidity
     emit SetUri(_projectId, _uri, msg.sender);

@@ -79,7 +79,7 @@ function _configure(
 
     * [`set`](../../../jbsplitsstore/write/set.md)
 
-4.  For each overflow allowance struct in the array passed in, store its value if its amount is being updated. Emit a `SetOverflowAllowance` event with the all relevant parameters.
+4.  For each overflow allowance struct in the array passed in, store its value if its amount is being updated. Emit a `SetOverflowAllowance` event with the relevant parameters.
 
     ```solidity
     // Set overflow allowances if there are any.

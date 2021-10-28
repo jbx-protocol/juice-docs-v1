@@ -87,7 +87,7 @@ function migrate(uint256 _projectId, IJBController _to)
     _External references:_
 
     * [`setControllerOf`](../../../jbdirectory/write/setcontrollerof.md)
-7.  Emit a `Migrate` event with the all relevant parameters.
+7.  Emit a `Migrate` event with the relevant parameters.
 
     ```solidity
     emit Migrate(_projectId, _to, msg.sender);

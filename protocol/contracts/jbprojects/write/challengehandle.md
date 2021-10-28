@@ -72,7 +72,7 @@ function challengeHandle(bytes32 _handle) external override { ... }
     _Internal references:_
 
     * [`challengeExpiryOf`](../properties/challengeexpiryof.md)
-6.  Emit a `ChallengeHandle` event with the all relevant parameters.
+6.  Emit a `ChallengeHandle` event with the relevant parameters.
 
     ```solidity
     emit ChallengeHandle(_handle, _projectId, _challengeExpiry, msg.sender);

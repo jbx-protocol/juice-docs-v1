@@ -88,7 +88,7 @@ function transferTo(
     _Internal references:_
 
     * [`unclaimedBalanceOf`](../properties/unclaimedbalanceof.md)
-8.  Emit a `Transfer` event with the all relevant parameters.
+8.  Emit a `Transfer` event with the relevant parameters.
 
     ```solidity
     emit Transfer(_holder, _projectId, _recipient, _amount, msg.sender);

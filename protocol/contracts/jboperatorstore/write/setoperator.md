@@ -43,7 +43,7 @@ permissionsOf[_operatorData.operator][msg.sender][_operatorData.domain] = _packe
 _Internal references:_
 
 * [`permissionsOf`](../properties/permissionsof.md)
-*   Emit a `SetOperator` event with the all relevant parameters.
+*   Emit a `SetOperator` event with the relevant parameters.
 
     ```solidity
     emit SetOperator(

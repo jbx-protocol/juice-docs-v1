@@ -117,7 +117,7 @@ function burnFrom(
 
     * [`unclaimedBalanceOf`](../properties/unclaimedbalanceof.md)
     * [`unclaimedTotalSupplyOf`](../properties/unclaimedtotalsupplyof.md)
-9.  Emit a `Burn` event with the all relevant parameters.
+9.  Emit a `Burn` event with the relevant parameters.
 
     ```solidity
     emit Burn(_holder, _projectId, _amount, _unclaimedBalance, _preferClaimedTokens, msg.sender);

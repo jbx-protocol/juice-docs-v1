@@ -101,7 +101,7 @@ function transferHandleOf(
     _Internal references:_
 
     * [`transferAddressFor`](../properties/idfor.md)
-8.  Emit a `TransferHandle` event with the all relevant parameters.
+8.  Emit a `TransferHandle` event with the relevant parameters.
 
     ```
     emit TransferHandle(_projectId, _transferAddress, handle, _newHandle, msg.sender);

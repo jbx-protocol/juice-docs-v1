@@ -70,7 +70,7 @@ function _initFor(
     _Internal references:_
 
     * [`latestIdOf`](../properties/latestidof.md)
-3.  Emit an `Init` event with the all relevant parameters.
+3.  Emit an `Init` event with the relevant parameters.
 
     ```solidity
     emit Init(newFundingCycleId, _projectId, _basedFundingCycle.id);

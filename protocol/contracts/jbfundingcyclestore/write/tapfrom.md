@@ -66,7 +66,7 @@ function tapFrom(uint256 _projectId, uint256 _amount)
     // Store the new amount.
     _tappedAmountOf[_fundingCycleId] = _newTappedAmount;
     ```
-6.  Emit a `Tap` event with the all relevant parameters.
+6.  Emit a `Tap` event with the relevant parameters.
 
     ```solidity
     emit Tap(_fundingCycleId, _projectId, _amount, _newTappedAmount, msg.sender);

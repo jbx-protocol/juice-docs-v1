@@ -80,7 +80,7 @@ function setControllerOf(uint256 _projectId, IJBController _controller)
     Internal references:
 
     * [`controllerOf`](../read/controllerof.md)
-6.  Emit a `SetController` event with the all relevant parameters.
+6.  Emit a `SetController` event with the relevant parameters.
 
     ```solidity
     emit SetController(_projectId, _controller, msg.sender);

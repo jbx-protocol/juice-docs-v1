@@ -94,7 +94,7 @@ function burnTokensOf(
     _External references:_
 
     * [`burnFrom`](../../../jbtokenstore/write/burnfrom.md)
-6.  Emit a `BurnTokens` event with the all relevant parameters.
+6.  Emit a `BurnTokens` event with the relevant parameters.
 
     ```solidity
     emit BurnTokens(_holder, _projectId, _tokenCount, _memo, msg.sender);

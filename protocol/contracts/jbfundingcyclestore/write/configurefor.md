@@ -116,7 +116,7 @@ function configureFor(
     _Internal references:_
 
     * [`_metadataOf`](../properties/\_metadataof.md)
-11. Emit a `Configure` event with the all relevant parameters.
+11. Emit a `Configure` event with the relevant parameters.
 
     ```solidity
     emit Configure(_fundingCycleId, _projectId, _configured, _data, _metadata, msg.sender);

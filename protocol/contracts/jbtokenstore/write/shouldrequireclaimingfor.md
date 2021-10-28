@@ -54,7 +54,7 @@ function shouldRequireClaimingFor(uint256 _projectId, bool _flag)
     _Internal references:_
 
     * [`requireClaimFor`](../properties/requireclaimfor.md)
-4.  Emit a `ShouldRequireClaim` event with the all relevant parameters.
+4.  Emit a `ShouldRequireClaim` event with the relevant parameters.
 
     ```solidity
     emit ShouldRequireClaim(_projectId, _flag, msg.sender);

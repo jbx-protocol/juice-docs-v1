@@ -88,7 +88,7 @@ function claimFor(
     // Mint the equivalent amount of ERC20s.
     _token.mint(_holder, _amount);
     ```
-8.  Emit a `Claim` event with the all relevant parameters.
+8.  Emit a `Claim` event with the relevant parameters.
 
     ```solidity
     emit Claim(_holder, _projectId, _amount, msg.sender);

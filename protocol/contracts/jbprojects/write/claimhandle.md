@@ -104,7 +104,7 @@ function claimHandle(
     _Internal references:_
 
     * [`challengeExpiryOf`](../properties/challengeexpiryof.md)
-7.  Emit a `TransferHandle` event with the all relevant parameters.
+7.  Emit a `TransferHandle` event with the relevant parameters.
 
     ```solidity
     emit ClaimHandle(_projectId, _transferAddress, _handle, msg.sender);

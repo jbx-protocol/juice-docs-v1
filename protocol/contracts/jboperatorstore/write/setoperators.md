@@ -49,7 +49,7 @@ _Only an address can set its own operators._
         _Internal references:_
 
         * [`permissionsOf`](../properties/permissionsof.md)
-    3.  Emit a `SetOperator` event with the all relevant parameters.
+    3.  Emit a `SetOperator` event with the relevant parameters.
 
         ```solidity
         emit SetOperator(

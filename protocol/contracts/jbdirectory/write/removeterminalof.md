@@ -71,7 +71,7 @@ function removeTerminalOf(uint256 _projectId, IJBTerminal _terminal)
     Internal references:
 
     * [`_primaryTerminalOf`](../read/\_primaryterminalof.md)
-5.  Emit a `RemoveTerminal` event with the all relevant parameters.
+5.  Emit a `RemoveTerminal` event with the relevant parameters.
 
     ```solidity
     emit RemoveTerminal(_projectId, _terminal, msg.sender);

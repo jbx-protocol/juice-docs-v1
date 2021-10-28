@@ -47,7 +47,7 @@ function renewHandleOf(uint256 _projectId)
     _Internal references:_
 
     * [`challengeExpiryOf`](../properties/challengeexpiryof.md)
-3.  Emit a `RenewHandle` event with the all relevant parameters.
+3.  Emit a `RenewHandle` event with the relevant parameters.
 
     ```solidity
     emit RenewHandle(_handle, _projectId, msg.sender);
