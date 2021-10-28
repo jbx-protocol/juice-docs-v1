@@ -24,7 +24,37 @@ function _reservedTokenAmountFrom(
 
 # Body
 
-TODO
+1.  Get a reference to the number of tokens that have yet to be processed. This is the difference between the total eligible tokens and the tracker. If the tracker is negative, the difference can be found by adding its absolute value to the total eligible tokens.
+
+    ```solidity
+    // Get a reference to the amount of tokens that are unprocessed.
+    uint256 _unprocessedTokenBalanceOf = _processedTokenTracker >= 0
+      ? _totalEligibleTokens - uint256(_processedTokenTracker)
+      : _totalEligibleTokens + uint256(-_processedTokenTracker);
+    ```
+
+2.  If there are no unprocessed tokens, there are no outstanding reserved tokens.
+
+    ```solidity
+    // If there are no unprocessed tokens, return.
+    if (_unprocessedTokenBalanceOf == 0) return 0;
+    ```
+
+3.  If the reserved rate is 100%, the reserved token amount is equal to the unprocessed balance.
+
+    ```solidity
+    // If all tokens are reserved, return the full unprocessed amount.
+    if (_reservedRate == 200) return _unprocessedTokenBalanceOf;
+    ```
+
+3.  The reserved token amount is the reserved percentage of the unprocessed balance. 
+
+    ```solidity
+    return
+      PRBMath.mulDiv(_unprocessedTokenBalanceOf, 200, 200 - _reservedRate) -
+      _unprocessedTokenBalanceOf;
+    ```
+
 {% endtab %}
 
 {% tab title="Only code" %}
@@ -45,7 +75,7 @@ function _reservedTokenAmountFrom(
   uint256 _totalEligibleTokens
 ) private pure returns (uint256) {
   // Get a reference to the amount of tokens that are unprocessed.
-  uint256 _unprocessedTokenBalanceOf = _processedTokenTracker >= 0 // preconfigure tokens shouldn't contribute to the reserved token amount.
+  uint256 _unprocessedTokenBalanceOf = _processedTokenTracker >= 0 
     ? _totalEligibleTokens - uint256(_processedTokenTracker)
     : _totalEligibleTokens + uint256(-_processedTokenTracker);
 

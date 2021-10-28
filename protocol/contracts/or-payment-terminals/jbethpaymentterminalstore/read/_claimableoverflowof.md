@@ -1,0 +1,188 @@
+# _claimableOverflowOf
+
+Contract: [`JBETHPaymentTerminalStore`](../)​‌
+
+{% tabs %}
+{% tab title="Step by step" %}
+**The amount of overflowed ETH that can be claimed by the specified number of tokens.**
+
+_If the project has an active funding cycle reconfiguration ballot, the project's ballot redemption rate is used._
+
+# Definition
+
+```solidity
+function claimableOverflowOf(uint256 _projectId, uint256 _tokenCount)
+  external
+  view
+  returns (uint256) { ... }
+```
+
+* Arguments:
+  * `_projectId` is the ID of the project to get a claimable amount for.
+  * `_tokenCount` is the number of tokens to make the calculation with.
+* The view function is private to this contract.
+* The function does not alter state on the blockchain.
+* The function returns the amount of overflowed ETH that can be claimed.
+
+# Body
+
+1.  Get a reference to the current overflow given the provided funding cycle.
+
+    ```solidity
+    // Get the amount of current overflow.
+    uint256 _currentOverflow = _overflowDuring(_fundingCycle);
+    ```
+
+    _Internal references:_
+
+    * [`_overflowDuring`](../_overflowduring.md)
+
+2.  If there is no overflow, there's also no claimable overflow.
+
+    ```solidity
+    // If there is no overflow, nothing is claimable.
+    if (_currentOverflow == 0) return 0;
+    ```
+
+3.  Get a reference to the total amount of tokens for the funding cycle's project.
+
+    ```solidity
+    // Get the total number of tokens in circulation.
+    uint256 _totalSupply = tokenStore.totalSupplyOf(_fundingCycle.projectId);
+    ```
+
+    _External references:_
+
+    * [`totalSupplyOf`](../../../jbtokenstore/read/totalsupplyof.md)
+
+4.  Get a reference to the total amount of outstanding reserved tokens from the project's current controller. These tokens have not yet been distributed and added to the total supply, but they must still be taken into account as part of the total when calculating the claimable amount given a set of tokens.
+
+    ```solidity
+    // Get the number of reserved tokens the project has.
+    uint256 _reservedTokenAmount = directory
+      .controllerOf(_fundingCycle.projectId)
+      .reservedTokenBalanceOf(_fundingCycle.projectId, _fundingCycle.reservedRate());
+    ```
+
+    _External references:_
+
+    * [`controllerOf`](../../../jbdirectory/read/controllerof.md)
+    * [`reservedTokenBalanceOf`](../../../or-controllers/jbcontroller/read/reservedtokenbalanceof.md)
+
+5.  If there are reserved tokens, add them to the total supply for the purposes of this calculation.
+
+    ```solidity
+    // If there are reserved tokens, add them to the total supply.
+    if (_reservedTokenAmount > 0) _totalSupply = _totalSupply + _reservedTokenAmount;
+    ```
+
+6.  If the calculation is being made to find the claimable amount for all of a project's tokens, return the entire current overflow.
+
+    ```solidity
+    // If the amount being redeemed is the the total supply, return the rest of the overflow.
+    if (_tokenCount == _totalSupply) return _currentOverflow;
+    ```
+
+7.  Get a reference to the redemption rate that should be used in the redemption bonding curve formula. If the current funding cycle has an active ballot, use its ballot redemption rate, otherwise use the standard redemption rate. This lets project's configure different bonding curves depending on the state of pending reconfigurations. This rate is out of 200.
+
+    ```solidity
+    // Use the ballot redemption rate if the queued cycle is pending approval according to the previous funding cycle's ballot.
+    uint256 _redemptionRate = fundingCycleStore.currentBallotStateOf(_fundingCycle.projectId) ==
+      JBBallotState.Active
+      ? _fundingCycle.ballotRedemptionRate()
+      : _fundingCycle.redemptionRate();
+    ```
+
+8.  If the redemption rate is 0%, nothing is claimable regardless of the amount of tokens. 
+
+    ```solidity
+    // If the redemption rate is 0, nothing is claimable.
+    if (_redemptionRate == 0) return 0;
+    ```
+
+9.  The redemption bonding curve formula depends on a base claimable value that is the linear proportion of the provided tokens to the total supply of tokens. Get a reference to this proportion to use in the forumla. 
+
+    ```solidity
+    // Get a reference to the linear proportion.
+    uint256 _base = PRBMath.mulDiv(_currentOverflow, _tokenCount, _totalSupply);
+    ```
+
+10. Return the claimable amount determined by a bonding curve. At a 100% bonding curve the linear base can be returned immediately, this outcome is naturally part of the curve – checking for it first could prevent an unecessary and slightly more expensive mulDiv calculation.
+
+    ```solidity
+    // These conditions are all part of the same curve. Edge conditions are separated because fewer operation are necessary.
+    if (_redemptionRate == 200) return _base;
+    return
+      PRBMath.mulDiv(
+        _base,
+        _redemptionRate + PRBMath.mulDiv(_tokenCount, 200 - _redemptionRate, _totalSupply),
+        200
+      );
+    ```
+{% endtab %}
+
+{% tab title="Code" %}
+```solidity
+/**
+  @notice
+  See docs for `claimableOverflowOf`
+*/
+function _claimableOverflowOf(JBFundingCycle memory _fundingCycle, uint256 _tokenCount)
+  private
+  view
+  returns (uint256)
+{
+  // Get the amount of current overflow.
+  uint256 _currentOverflow = _overflowDuring(_fundingCycle);
+
+  // If there is no overflow, nothing is claimable.
+  if (_currentOverflow == 0) return 0;
+
+  // Get the total number of tokens in circulation.
+  uint256 _totalSupply = tokenStore.totalSupplyOf(_fundingCycle.projectId);
+
+  // Get the number of reserved tokens the project has.
+  uint256 _reservedTokenAmount = directory
+    .controllerOf(_fundingCycle.projectId)
+    .reservedTokenBalanceOf(_fundingCycle.projectId, _fundingCycle.reservedRate());
+
+  // If there are reserved tokens, add them to the total supply.
+  if (_reservedTokenAmount > 0) _totalSupply = _totalSupply + _reservedTokenAmount;
+
+  // If the amount being redeemed is the the total supply, return the rest of the overflow.
+  if (_tokenCount == _totalSupply) return _currentOverflow;
+
+  // Use the ballot redemption rate if the queued cycle is pending approval according to the previous funding cycle's ballot.
+  uint256 _redemptionRate = fundingCycleStore.currentBallotStateOf(_fundingCycle.projectId) ==
+    JBBallotState.Active
+    ? _fundingCycle.ballotRedemptionRate()
+    : _fundingCycle.redemptionRate();
+  
+  // If the redemption rate is 0, nothing is claimable.
+  if (_redemptionRate == 0) return 0;
+
+  // Get a reference to the linear proportion.
+  uint256 _base = PRBMath.mulDiv(_currentOverflow, _tokenCount, _totalSupply);
+
+  // These conditions are all part of the same curve. Edge conditions are separated because fewer operation are necessary.
+  if (_redemptionRate == 200) return _base;
+  return
+    PRBMath.mulDiv(
+      _base,
+      _redemptionRate + PRBMath.mulDiv(_tokenCount, 200 - _redemptionRate, _totalSupply),
+      200
+    );
+}
+```
+{% endtab %}
+
+{% tab title="Bug bounty" %}
+| Category          | Description                                                                                                                            | Reward |
+| ----------------- | -------------------------------------------------------------------------------------------------------------------------------------- | ------ |
+| **Optimization**  | Help make this operation more efficient.                                                                                               | 0.5ETH |
+| **Low severity**  | Identify a vulnerability in this operation that could lead to an inconvenience for a user of the protocol or for a protocol developer. | 1ETH   |
+| **High severity** | Identify a vulnerability in this operation that could lead to data corruption or loss of funds.                                        | 5+ETH  |
+{% endtab %}
+{% endtabs %}
+
+ 

@@ -45,6 +45,10 @@ constructor(
   directory = _directory;
   splitsStore = _splitsStore;
   vault = _vault;
+
+  // Claim the store so that it recognizes this terminal as the address that can access it.
+  _store.claim();
+
   store = _store;
 }
 ```
