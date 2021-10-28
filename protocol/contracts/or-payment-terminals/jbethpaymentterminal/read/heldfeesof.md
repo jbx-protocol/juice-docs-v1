@@ -6,7 +6,7 @@ Interface: [`IJBETHPaymentTerminal`](../../../../interfaces/ijbethterminalof.md)
 
 {% tabs %}
 {% tab title="Step by step" %}
-**The ETH balance that this terminal holds for each project.**
+**The fees that are currently being held to be processed later for each project.**
 
 # Definition
 
@@ -18,7 +18,7 @@ function heldFeesOf(uint256 _projectId) external view override returns (JBFee[] 
 * The view function can be accessed externally by anyone.
 * The function does not alter state on the blockchain.
 * The resulting function overrides a function definition from the `IJBETHPaymentTerminal` interface.
-* The function returns the delegate address
+* The function returns an array of fees that are being held.
 
 # Body
 
@@ -39,7 +39,7 @@ function heldFeesOf(uint256 _projectId) external view override returns (JBFee[] 
   @notice 
   The fees that are currently being held to be processed later for each project.
 
-  @param _projectId The ID of the project for which the returned fees are being held.
+  @param _projectId The ID of the project for which fees are being held.
 
   @return An array of fees that are being held.
 */
