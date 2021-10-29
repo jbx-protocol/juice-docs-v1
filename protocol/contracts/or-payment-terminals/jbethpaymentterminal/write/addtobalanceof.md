@@ -6,8 +6,6 @@ Contract: [`JBETHPaymentTerminalStore`](../)​‌
 {% tab title="Step by step" %}
 **Receives and allocated funds belonging to the specified project.**
 
-_Only the associated payment terminal can record an added balance._
-
 # Definition
 
 ```solidity
