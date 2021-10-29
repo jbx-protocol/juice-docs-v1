@@ -13,30 +13,33 @@ _Only a project's owner, a designated operator, or one of its terminal's delegat
 # Definition
 
 ```solidity
-function burnTokensOf(
-  address _holder,
+function mintTokensOf(
   uint256 _projectId,
   uint256 _tokenCount,
+  address _beneficiary,
   string calldata _memo,
-  bool _preferClaimedTokens
+  bool _preferClaimedTokens,
+  uint256 _reservedRate
 )
   external
   override
   nonReentrant
   requirePermissionAllowingOverride(
-    _holder,
+    projects.ownerOf(_projectId),
     _projectId,
-    JBOperations.BURN,
+    JBOperations.MINT,
     directory.isTerminalDelegateOf(_projectId, msg.sender)
-  ) { ... }
+  )
+  returns (uint256 beneficiaryTokenCount) { ... }
 ```
 
 * Arguments:
-  * `_projectId` is the ID of the project to which the tokens being burned belong.
+  * `_projectId` is the ID of the project to which the tokens being minted belong.
   * `_tokenCount` is the amount of tokens to mint.
   * `_beneficiary` is the account that the tokens are being minted for.
   * `_memo` is a memo to pass along to the emitted event.
-  * `_preferClaimedTokens` is a flag indicating whether ERC20's should be burned first if they have been issued.
+  * `_preferClaimedTokens` is a flag indicating whether ERC20's should be minted if they have been issued.
+  * `_reservedRate` is the reserved rate to use when minting tokens. A positive amount will reduce the token count minted to the beneficiary, instead being reserved for preprogrammed splits. This number is out of 200.
 * Through the [`requirePermissionAllowingOverride`](../../or-abstract/jboperatable/modifiers/requirepermissionallowingoverride.md) modifier, the function is only accessible by the project's owner, from an operator that has been given the `JBOperations.MINT` permission by the project owner for the provided `_projectId`, or from the one of the project's terminal's delegates.
 * The function overrides a function definition from the [`IJBController`](../../../../interfaces/ijbcontroller.md) interface.
 * The function doesn't return anything.
@@ -136,12 +139,12 @@ function burnTokensOf(
   @dev
   Only a project's owner, a designated operator, or one of its terminal's delegate can mint its tokens.
 
-  @param _projectId The ID of the project to which the tokens being burned belong.
+  @param _projectId The ID of the project to which the tokens being minted belong.
   @param _tokenCount The amount of tokens to mint.
   @param _beneficiary The account that the tokens are being minted for.
   @param _memo A memo to pass along to the emitted event.
-  @param _preferClaimedTokens A flag indicating whether ERC20's should be burned first if they have been issued.
-  @param _reservedRate The reserved rate to use when minting tokens. A positive amount will reduce the token count minted to the beneficiary.
+  @param _preferClaimedTokens A flag indicating whether ERC20's should be minted if they have been issued.
+  @param _reservedRate The reserved rate to use when minting tokens. A positive amount will reduce the token count minted to the beneficiary, instead being reserved for preprogrammed splits. This number is out of 200.
 
   @return beneficiaryTokenCount The amount of tokens minted for the beneficiary.
 */
