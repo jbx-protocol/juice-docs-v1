@@ -94,7 +94,7 @@ function addToBalanceOf(uint256 _projectId, string memory _memo) external payabl
 {% tab title="Events" %}
 | Name                                | Data                                                                           |
 | ----------------------------------- | ------------------------------------------------------------------------------ |
-| [**`AddToBalance`**](../events/addtobalance.md) | ul><li><code>uint256 indexed projectId</code></li><li><code>uint256 value</code></li><li><code>string memo</code></li><li><code>address caller</code></li></ul> |
+| [**`AddToBalance`**](../events/addtobalance.md) | <ul><li><code>uint256 indexed projectId</code></li><li><code>uint256 value</code></li><li><code>string memo</code></li><li><code>address caller</code></li></ul> |
 {% endtab %}
 
 {% tab title="Bug bounty" %}
