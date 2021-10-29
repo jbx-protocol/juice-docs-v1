@@ -8,7 +8,7 @@ Contract: [`JBETHPaymentTerminalStore`](../)​‌
 
 _Mint's the project's tokens according to values provided by a configured data source. If no data source is configured, mints tokens proportional to the amount of the contribution._
 
-__
+_Only the associated payment terminal can record a payment._
 
 # Definition
 
@@ -50,7 +50,7 @@ function recordPaymentFrom(
   * `fundingCycle` is the project's funding cycle during which payment was made.
   * `weight` is the weight according to which new token supply was minted.
   * `tokenCount` is the number of tokens that were minted.
-  * `memo` is a memo that should be included in the published event.
+  * `memo` is a memo that should be passed along to the emitted event.
 
 # Body
 
@@ -79,7 +79,7 @@ function recordPaymentFrom(
     require(!fundingCycle.payPaused(), '0x3b: PAUSED');
     ```
 
-4.  Create a variable where a pay delegate will be saved to if there is one. This pay delegate will later have it's method called if it exists.
+4.  Create a variable where a pay delegate will be saved if there is one. This pay delegate will later have it's method called if it exists.
 
     ```solidity
     // Save a reference to the delegate to use.
@@ -186,6 +186,9 @@ function recordPaymentFrom(
   @dev
   Mint's the project's tokens according to values provided by a configured data source. If no data source is configured, mints tokens proportional to the amount of the contribution.
 
+  @dev
+  Only the associated payment terminal can record a payment.
+
   @param _payer The original address that sent the payment to the terminal.
   @param _amount The amount that is being paid.
   @param _projectId The ID of the project being paid.
@@ -201,7 +204,7 @@ function recordPaymentFrom(
   @return fundingCycle The project's funding cycle during which payment was made.
   @return weight The weight according to which new token supply was minted.
   @return tokenCount The number of tokens that were minted.
-  @return memo A memo that should be included in the published event.
+  @return memo A memo that should be passed along to the emitted event.
 */
 function recordPaymentFrom(
   address _payer,
