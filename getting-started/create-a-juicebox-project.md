@@ -5,7 +5,7 @@ description: A step by step guide to kickstart your project.
 # Create a Juicebox Project
 
 {% hint style="warning" %}
-The JBX protocol is not formally audited. All projects built on it may be vulnerable to bugs or exploits. Be smart and be curious, ask questions if you've got any.
+The Juicebox protocol is not formally audited. All projects built on it may be vulnerable to bugs or exploits. Be smart and be curious, ask questions if you've got any.
 {% endhint %}
 
 Welcome folks!&#x20;
