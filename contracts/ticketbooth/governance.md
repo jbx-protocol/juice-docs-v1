@@ -63,4 +63,3 @@ function appointGovernance(
 */
 function acceptGovernance(ITerminalV1 _terminalV1) external onlyOwner 
 ```
-

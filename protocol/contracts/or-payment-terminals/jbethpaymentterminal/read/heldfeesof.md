@@ -8,11 +8,12 @@ Interface: [`IJBETHPaymentTerminal`](../../../../interfaces/ijbethterminalof.md)
 {% tab title="Step by step" %}
 **The fees that are currently being held to be processed later for each project.**
 
-# Definition
+## Definition
 
 ```solidity
 function heldFeesOf(uint256 _projectId) external view override returns (JBFee[] memory) { ... }
 ```
+
 * Arguments:
   * `_projectId` is the ID of the project to which the held fees belongs.
 * The view function can be accessed externally by anyone.
@@ -20,7 +21,7 @@ function heldFeesOf(uint256 _projectId) external view override returns (JBFee[] 
 * The resulting function overrides a function definition from the `IJBETHPaymentTerminal` interface.
 * The function returns an array of fees that are being held.
 
-# Body
+## Body
 
 1.  This function just reads and returns the stored `_heldFeesOf` the project.
 
@@ -30,7 +31,7 @@ function heldFeesOf(uint256 _projectId) external view override returns (JBFee[] 
 
     _Internal references:_
 
-    * [`_heldFeesOf`](../properties/_heldfeesof.md)
+    * [`_heldFeesOf`](../properties/\_heldfeesof.md)
 {% endtab %}
 
 {% tab title="Code" %}

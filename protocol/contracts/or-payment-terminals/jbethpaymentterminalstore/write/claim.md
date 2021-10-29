@@ -6,7 +6,7 @@ Contract: [`JBETHPaymentTerminalStore`](../)​‌
 {% tab title="Step by step" %}
 **Allows this store to be claimed by an address so that it recognized the address as its terminal.**
 
-# Definition
+## Definition
 
 ```solidity
 function claim() external { ... }
@@ -15,7 +15,7 @@ function claim() external { ... }
 * The function can be accessed externally by anyone.
 * The function doesn't return anything.
 
-# Body
+## Body
 
 1.  Make sure the contract hasn't already been claimed.
 
@@ -27,7 +27,6 @@ function claim() external { ... }
     _Internal references:_
 
     * [`terminal`](../properties/terminal.md)
-
 2.  Store the terminal as the address claiming this store.
 
     ```solidity
@@ -57,8 +56,8 @@ function claim() external {
 {% endtab %}
 
 {% tab title="Errors" %}
-| String            | Description                                                         |
-| ----------------- | ------------------------------------------------------------------- |
+| String                      | Description                                      |
+| --------------------------- | ------------------------------------------------ |
 | **`0x4b: ALREADY_CLAIMED`** | Thrown if the contract has already been claimed. |
 {% endtab %}
 

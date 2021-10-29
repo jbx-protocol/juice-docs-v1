@@ -23,7 +23,7 @@ event UseAllowance(
 * `configuration` is the configuration of a project's funding cycle during which an allowance was used.
 * `projectId` is the ID of the project whose allowance was used.
 * `beneficiary` is the address whose received the allowance.
-* `amount` is the amount of allowance that was used in terms of the funding cycle's currency.  
-* `feeAmount` is the amount of ETH protocol fees that were taken from the used allowance.  
-* `transferAmount` is the amount of ETH that was transfered to the beneficiary. 
+* `amount` is the amount of allowance that was used in terms of the funding cycle's currency.
+* `feeAmount` is the amount of ETH protocol fees that were taken from the used allowance.
+* `transferAmount` is the amount of ETH that was transfered to the beneficiary.
 * `caller` is the address that issued the transaction within which the event was emitted.

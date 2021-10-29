@@ -8,7 +8,7 @@ Contract: [`JBETHPaymentTerminalStore`](../)​‌
 
 _Only the associated payment terminal can record an added balance._
 
-# Definition
+## Definition
 
 ```solidity
 function recordAddedBalanceFor(uint256 _projectId, uint256 _amount)
@@ -22,7 +22,7 @@ function recordAddedBalanceFor(uint256 _projectId, uint256 _amount)
 * Through the [`onlyAssociatedPaymentTerminal`](../modifiers/onlyassociatedpaymentterminal.md) modifier, the function is only accessible by the terminal that claimed this store.
 * The function returns the project's current balance.
 
-# Body
+## Body
 
 1.  Get a reference to the project's current funding cycle that should be returned.
 
@@ -34,14 +34,12 @@ function recordAddedBalanceFor(uint256 _projectId, uint256 _amount)
     _External references:_
 
     * [`currentOf`](../../../jbfundingcyclestore/read/currentof.md)
-
 2.  Make sure that migrating terminals is allowed by the current funding cycle.
 
     ```solidity
     // Migration must be allowed
     require(_fundingCycle.terminalMigrationAllowed(), '0x4a: NOT_ALLOWED');
     ```
-
 3.  Get a reference to the project's current balance. Set this to the value that the function will return.
 
     ```solidity
@@ -52,7 +50,6 @@ function recordAddedBalanceFor(uint256 _projectId, uint256 _amount)
     _Internal references:_
 
     * [`balanceOf`](../properties/balanceof.md)
-
 4.  Set the project's balance to 0 since funds are moving away from this terminal.
 
     ```solidity
@@ -96,8 +93,8 @@ function recordMigration(uint256 _projectId)
 {% endtab %}
 
 {% tab title="Errors" %}
-| String            | Description                                                         |
-| ----------------- | ------------------------------------------------------------------- |
+| String                  | Description                                                                  |
+| ----------------------- | ---------------------------------------------------------------------------- |
 | **`0x4a: NOT_ALLOWED`** | Thrown if the project's current funding cycle disallows terminal migrations. |
 {% endtab %}
 

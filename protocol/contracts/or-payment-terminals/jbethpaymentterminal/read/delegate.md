@@ -1,4 +1,4 @@
-# delegate 
+# delegate
 
 Contract: [`JBETHPaymentTerminal`](../)​‌
 
@@ -6,7 +6,7 @@ Contract: [`JBETHPaymentTerminal`](../)​‌
 {% tab title="Step by step" %}
 **An address that serves as this terminal's delegate when making requests to juicebox ecosystem contracts.**
 
-# Definition
+## Definition
 
 ```solidity
 function delegate() external view override returns (address) { ... }
@@ -16,7 +16,7 @@ function delegate() external view override returns (address) { ... }
 * The function does not alter state on the blockchain.
 * The function returns the delegate address
 
-# Body
+## Body
 
 1.  The store will serve as this terminal's delegate, which will give it access to manipulate the funding cycle store and the token store on behalf of projects that use this terminal.
 

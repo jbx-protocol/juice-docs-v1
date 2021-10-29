@@ -2,11 +2,21 @@
 
 ## Welcome to Juicebox docs!
 
-These docs are under active development. Documentation of the v1 protocol can be found in the [Contracts](broken-reference) section. Documentation for the forthcoming Juicebox v2 protocol is being written in the [Protocol](protocol/learn/overview.md) section.
+Documentation for Juicebox Protocol V1 (live on mainnet since July 2021) is available [here](broken-reference).&#x20;
+
+Documentation for the forthcoming Juicebox Protocol V2 protocol is available [here](broken-reference).
+
+{% hint style="warning" %}
+The Juicebox protocol is not formally audited. All projects built on it may be vulnerable to bugs or exploits.
+{% endhint %}
+
+{% hint style="info" %}
+Please note that these docs are under active development.&#x20;
+{% endhint %}
 
 ### Visual walkthrough
 
-For a thorough visual Juicebox Protocol visual walkthrough, check out the Figma [Fluid Dynamics document](https://www.figma.com/file/dHsQ7Bt3ryXbZ2sRBAfBq5/Fluid-Dynamics).
+For a thorough visual walkthrough of Juicebox Protocol V1, please visit the Figma [Fluid Dynamics document](https://www.figma.com/file/dHsQ7Bt3ryXbZ2sRBAfBq5/Fluid-Dynamics).
 
 ### Useful links
 

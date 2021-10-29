@@ -8,7 +8,7 @@ Contract: [`JBETHPaymentTerminalStore`](../)​‌
 
 _Only the associated payment terminal can record a used allowance._
 
-# Definition
+## Definition
 
 ```solidity
 function recordUsedAllowanceOf(
@@ -33,7 +33,7 @@ function recordUsedAllowanceOf(
   * `fundingCycle` is the funding cycle during which the withdrawal was made.
   * `withdrawnAmount` is the amount withdrawn.
 
-# Body
+## Body
 
 1.  Get a reference to the project's first funding cycle.
 
@@ -45,15 +45,13 @@ function recordUsedAllowanceOf(
     _External references:_
 
     * [`currentOf`](../../../jbfundingcyclestore/read/currentof.md)
-
 2.  Make the sure provided currency matches the funding cycle's currency.
 
     ```solidity
     // Make sure the currencies match.
     require(_currency == fundingCycle.currency, '0x42: UNEXPECTED_CURRENCY');
     ```
-
-3.  Convert the amount to ETH. 
+3.  Convert the amount to ETH.
 
     ```solidity
     // Convert the amount to wei.
@@ -62,8 +60,7 @@ function recordUsedAllowanceOf(
       prices.priceFor(fundingCycle.currency, JBCurrencies.ETH)
     );
     ```
-
-4.  Make sure the there is enough allowance to use. 
+4.  Make sure the there is enough allowance to use.
 
     ```solidity
     // There must be sufficient allowance available.
@@ -87,21 +84,18 @@ function recordUsedAllowanceOf(
 
     * [`controllerOf`](../../../jbdirectory/read/controllerof.md)
     * [`overflowAllowanceOf`](../../../or-controller/jbcontroller/properties/overflowallowanceof.md)
-
 5.  Make sure the project has enough of a balance to use the desired amount.
 
     ```solidity
     // The amount being withdrawn must be available.
     require(withdrawnAmount <= balanceOf[_projectId], '0x44: INSUFFICIENT_FUNDS');
     ```
-
-6.  Make sure the there is at least as much wei being returned as expected. 
+6.  Make sure the there is at least as much wei being returned as expected.
 
     ```solidity
     // The amount being withdrawn must be at least as much as was expected.
     require(_minReturnedWei <= withdrawnAmount, '0x45: INADEQUATE');
     ```
-
 7.  Store the incremented value that tracks how much of a project's allowance was used during the current funding cycle configuration.
 
     ```solidity
@@ -110,14 +104,12 @@ function recordUsedAllowanceOf(
       usedOverflowAllowanceOf[_projectId][fundingCycle.configured] +
       withdrawnAmount;
     ```
-
 8.  Store the decremented balance.
 
     ```solidity
     // Update the project's balance.
     balanceOf[_projectId] = balanceOf[_projectId] - withdrawnAmount;
     ```
-
 {% endtab %}
 
 {% tab title="Code" %}
@@ -190,12 +182,12 @@ function recordUsedAllowanceOf(
 {% endtab %}
 
 {% tab title="Errors" %}
-| String            | Description                                                         |
-| ----------------- | ------------------------------------------------------------------- |
+| String                          | Description                                                                                                       |
+| ------------------------------- | ----------------------------------------------------------------------------------------------------------------- |
 | **`0x42: UNEXPECTED_CURRENCY`** | Thrown if the currency of the specified amount doesn't match the currency of the project's current funding cycle. |
-| **`0x43: NOT_ALLOWED`** | Thrown if there isn't enough allowance for the specified terminal to fulfill the desired withdrawal. |
-| **`0x44: INSUFFICIENT_FUNDS`** | Thrown if the project's balance isn't sufficient to fulfill the desired withdrawal. |
-| **`0x45: INADEQUATE`** | Thrown if the withdrawn amount is less than the minimum expected. |
+| **`0x43: NOT_ALLOWED`**         | Thrown if there isn't enough allowance for the specified terminal to fulfill the desired withdrawal.              |
+| **`0x44: INSUFFICIENT_FUNDS`**  | Thrown if the project's balance isn't sufficient to fulfill the desired withdrawal.                               |
+| **`0x45: INADEQUATE`**          | Thrown if the withdrawn amount is less than the minimum expected.                                                 |
 {% endtab %}
 
 {% tab title="Bug bounty" %}

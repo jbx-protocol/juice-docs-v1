@@ -1,7 +1,5 @@
 # JBTerminalUtility
 
-
-
 ## Constructor
 
 ```solidity

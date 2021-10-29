@@ -3,6 +3,7 @@
 Contract: [`JBETHPaymentTerminalStore`](../)​‌
 
 **The contract that exposes price feeds.**
+
 ## Definition
 
 ```solidity
@@ -13,4 +14,4 @@ Contract: [`JBETHPaymentTerminalStore`](../)​‌
 IJBPrices public immutable prices;
 ```
 
-* The resulting view function can be accessed externally by anyone. 
+* The resulting view function can be accessed externally by anyone.

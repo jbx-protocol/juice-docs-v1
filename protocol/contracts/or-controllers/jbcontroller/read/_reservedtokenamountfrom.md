@@ -1,10 +1,10 @@
-# _reservedTokenAmountFrom
+# \_reservedTokenAmountFrom
 
 {% tabs %}
 {% tab title="Step by step" %}
 **Gets the amount of reserved tokens currently tracked for a project given a reserved rate.**
 
-# Definition
+## Definition
 
 ```solidity
 function _reservedTokenAmountFrom(
@@ -22,7 +22,7 @@ function _reservedTokenAmountFrom(
 * The function does not alter state on the blockchain.
 * The function returns the reserved token amount.
 
-# Body
+## Body
 
 1.  Get a reference to the number of tokens that have yet to be processed. This is the difference between the total eligible tokens and the tracker. If the tracker is negative, the difference can be found by adding its absolute value to the total eligible tokens.
 
@@ -32,29 +32,25 @@ function _reservedTokenAmountFrom(
       ? _totalEligibleTokens - uint256(_processedTokenTracker)
       : _totalEligibleTokens + uint256(-_processedTokenTracker);
     ```
-
 2.  If there are no unprocessed tokens, there are no outstanding reserved tokens.
 
     ```solidity
     // If there are no unprocessed tokens, return.
     if (_unprocessedTokenBalanceOf == 0) return 0;
     ```
-
 3.  If the reserved rate is 100%, the reserved token amount is equal to the unprocessed balance.
 
     ```solidity
     // If all tokens are reserved, return the full unprocessed amount.
     if (_reservedRate == 200) return _unprocessedTokenBalanceOf;
     ```
-
-3.  The reserved token amount is the reserved percentage of the unprocessed balance. 
+4.  The reserved token amount is the reserved percentage of the unprocessed balance.
 
     ```solidity
     return
       PRBMath.mulDiv(_unprocessedTokenBalanceOf, 200, 200 - _reservedRate) -
       _unprocessedTokenBalanceOf;
     ```
-
 {% endtab %}
 
 {% tab title="Only code" %}

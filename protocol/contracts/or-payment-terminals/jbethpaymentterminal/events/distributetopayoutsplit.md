@@ -2,7 +2,7 @@
 
 Emitted from:
 
-* [`_distributeToPayoutSplitsOf`](../write/_distributetopayoutsplitsof.md)
+* [`_distributeToPayoutSplitsOf`](../write/\_distributetopayoutsplitsof.md)
 
 ## Definition
 

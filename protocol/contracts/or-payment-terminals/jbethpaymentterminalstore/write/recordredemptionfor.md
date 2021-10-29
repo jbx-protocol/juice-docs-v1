@@ -8,7 +8,7 @@ Contract: [`JBETHPaymentTerminalStore`](../)​‌
 
 _Only the associated payment terminal can record a redemption._
 
-# Definition
+## Definition
 
 ```solidity
 function recordRedemptionFor(
@@ -43,7 +43,7 @@ function recordRedemptionFor(
   * `claimAmount` is the amount of wei claimed.
   * `memo` is a memo that should be included in the published event.
 
-# Body
+## Body
 
 1.  Make sure the holder has at least as many tokens as is being redeemed.
 
@@ -55,7 +55,6 @@ function recordRedemptionFor(
     _External references:_
 
     * [`balanceOf`](../../../jbtokenstore/read/balanceof.md)
-
 2.  Get a reference to the project's current funding cycle.
 
     ```solidity
@@ -66,22 +65,19 @@ function recordRedemptionFor(
     _External references:_
 
     * [`currentOf`](../../../jbfundingcyclestore/read/currentof.md)
-
-3.  Make sure the project's funding cycle isn't configured to pause redemptions. 
+3.  Make sure the project's funding cycle isn't configured to pause redemptions.
 
     ```solidity
     // The current funding cycle must not be paused.
     require(!fundingCycle.redeemPaused(), '0x47: PAUSED');
     ```
-
 4.  Create a variable where a redemption delegate will be saved if there is one. This pay delegate will later have it's method called if it exists.
 
     ```solidity
     // Save a reference to the delegate to use.
     IJBRedemptionDelegate _delegate;
     ```
-
-5.  If the project's current funding cycle is configured to use a data source when making redemptions, ask the data source for the parameters that should be used throughout the rest of the function given provided contextual values. Otherwise default parameters are used. 
+5.  If the project's current funding cycle is configured to use a data source when making redemptions, ask the data source for the parameters that should be used throughout the rest of the function given provided contextual values. Otherwise default parameters are used.
 
     ```solidity
     // If the funding cycle has configured a data source, use it to derive a claim amount and memo.
@@ -102,22 +98,19 @@ function recordRedemptionFor(
       memo = _memo;
     }
     ```
-
-6.  Make sure the amount being claimed is within the bounds of the project's balance. 
+6.  Make sure the amount being claimed is within the bounds of the project's balance.
 
     ```solidity
     // The amount being claimed must be within the project's balance.
     require(claimAmount <= balanceOf[_projectId], '0x48: INSUFFICIENT_FUNDS');
     ```
-
 7.  Make sure there is at least as much being claimed as expected.
 
     ```solidity
     // The amount being claimed must be at least as much as was expected.
     require(claimAmount >= _minReturnedWei, '0x49: INADEQUATE');
     ```
-
-8.  Burn tokens if needed. 
+8.  Burn tokens if needed.
 
     ```solidity
     // Redeem the tokens, which burns them.
@@ -134,7 +127,6 @@ function recordRedemptionFor(
     _External references:_
 
     * [`burnTokensOf`](../../../or-controllers/jbcontroller/write/burntokensof.md)
-
 9.  Decrement any claimed funds from the project's balance if needed.
 
     ```solidity
@@ -145,7 +137,6 @@ function recordRedemptionFor(
     _Internal references:_
 
     * [`balanceOf`](../properties/balanceof.md)
-
 10. If a redemption delegate was provided by the data source, call its `didRedeem` function with a data payload including contextual information. When finished, emit a `DelegateDidRedeem` event with the relevant parameters.
 
     ```solidity
@@ -276,19 +267,20 @@ function recordRedemptionFor(
 {% endtab %}
 
 {% tab title="Errors" %}
-| String            | Description                                                         |
-| ----------------- | ------------------------------------------------------------------- |
+| String                          | Description                                                                                  |
+| ------------------------------- | -------------------------------------------------------------------------------------------- |
 | **`0x46: INSUFFICIENT_TOKENS`** | Thrown if holder doesn't have enough tokens in its balance to make the specified redemption. |
-| **`0x47: PAUSED`** | Thrown if the project has configured its current funding cycle to pause redemptions. |
-| **`0x48: INSUFFICIENT_FUNDS`** | Thrown if the project's balance isn't sufficient to fulfill the desired claim. |
-| **`0x49: INADEQUATE`** | Thrown if the claim amount is less than the minimum expected. |
+| **`0x47: PAUSED`**              | Thrown if the project has configured its current funding cycle to pause redemptions.         |
+| **`0x48: INSUFFICIENT_FUNDS`**  | Thrown if the project's balance isn't sufficient to fulfill the desired claim.               |
+| **`0x49: INADEQUATE`**          | Thrown if the claim amount is less than the minimum expected.                                |
 {% endtab %}
 
 {% tab title="Events" %}
-| Name                                        | Data                                                                                                                                                                                                                                                                                                                   |
-| ------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [**`DelegateDidRedeem`**](../events/delegatedidredeem.md) |  <ul><li><a href="../../../interfaces/ijbredemptiondelegate.md"><code>JBRedemptionDelegate</code></a><code>delegate</code></li><li><a href="../../../data-structures/jbdidredeemdata.md"><code>JBDidRedeemData</code></a><code>data</code></li></ul> |
+| Name                                                      | Data                                                                                                                                                                                                                                                |
+| --------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [**`DelegateDidRedeem`**](../events/delegatedidredeem.md) | <ul><li><a href="../../../interfaces/ijbredemptiondelegate.md"><code>JBRedemptionDelegate</code></a><code>delegate</code></li><li><a href="../../../data-structures/jbdidredeemdata.md"><code>JBDidRedeemData</code></a><code>data</code></li></ul> |
 {% endtab %}
+
 {% tab title="Bug bounty" %}
 | Category          | Description                                                                                                                            | Reward |
 | ----------------- | -------------------------------------------------------------------------------------------------------------------------------------- | ------ |

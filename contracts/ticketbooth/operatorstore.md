@@ -77,4 +77,3 @@ function setOperators(
     uint256[][] calldata _permissionIndexes
 ) external override
 ```
-

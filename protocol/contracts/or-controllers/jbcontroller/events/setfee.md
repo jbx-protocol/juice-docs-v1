@@ -3,6 +3,7 @@
 Emitted from:
 
 * [`setFee`](../write/setfee.md)
+
 ## Definition
 
 ```solidity

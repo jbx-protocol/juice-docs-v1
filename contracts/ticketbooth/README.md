@@ -1,15 +1,19 @@
 ---
-description: 'Manage Ticket printing, redemption, and account balances.'
+description: Manage Ticket printing, redemption, and account balances.
 ---
 
 # TicketBooth
 
-Tickets can be either represented internally staked, or as unstaked ERC-20s. This contract manages these two representations and the conversion between the two.  
+Tickets can be either represented internally staked, or as unstaked ERC-20s. This contract manages these two representations and the conversion between the two.\
 The total supply of a project's tickets and the balance of each account are calculated in this contract.
 
-{% page-ref page="read.md" %}
+{% content-ref url="read.md" %}
+[read.md](read.md)
+{% endcontent-ref %}
 
-{% page-ref page="write.md" %}
+{% content-ref url="write.md" %}
+[write.md](write.md)
+{% endcontent-ref %}
 
 ### Constructor
 
@@ -19,13 +23,10 @@ The total supply of a project's tickets and the balance of each account are calc
 * **\_operatorStore:** A contract storing operator assignments.
 * **\_terminalDirectory:** A directory of a project's current Juicebox terminal to receive payments in.
 
-```text
+```
 constructor(
     IProjects _projects,
     IOperatorStore _operatorStore,
     ITerminalDirectory _terminalDirectory
 );
 ```
-
-
-

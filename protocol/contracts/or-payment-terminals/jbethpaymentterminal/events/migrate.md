@@ -1,4 +1,4 @@
-# Migrate 
+# Migrate
 
 Emitted from:
 

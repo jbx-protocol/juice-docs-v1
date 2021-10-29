@@ -4,8 +4,7 @@
 
 Mainnet:[`0x46C9999A2EDCD5aA177ed7E8af90c68b7d75Ba46`](https://etherscan.io/address/0x46c9999a2edcd5aa177ed7e8af90c68b7d75ba46)
 
-Kovan: `0x71BA69044CbD951AC87124cBEdbC0334AB21F26D`  
-
+Kovan: `0x71BA69044CbD951AC87124cBEdbC0334AB21F26D`
 
 ## Contract
 
@@ -15,14 +14,13 @@ Kovan: `0x71BA69044CbD951AC87124cBEdbC0334AB21F26D`
 
 Stores the active Terminal for each project.
 
-Projects can deploy contracts that will forward a direct payment to the Terminal.  
-
+Projects can deploy contracts that will forward a direct payment to the Terminal.
 
 Projects can deploy contracts that will forward a direct payment to the Terminal.
 
 ### Events
 
-```text
+```
 event DeployAddress( 
     uint256 indexed projectId, 
     string memo, 
@@ -30,8 +28,7 @@ event DeployAddress(
 )
 ```
 
-```text
-
+```
 event SetTerminal(
     uint256 indexed projectId,
     ITerminal indexed terminal,
@@ -39,15 +36,13 @@ event SetTerminal(
 )
 ```
 
-```text
+```
 event SetPayerPreferences(
     address indexed account,
     address beneficiary,
     bool preferUnstakedTickets
 )
 ```
-
-
 
 ### Constructor
 
@@ -103,7 +98,7 @@ function addressesOf(uint256 _projectId)
 }
 ```
 
-## Write 
+## Write
 
 ```javascript
 /** 
@@ -143,4 +138,3 @@ function setPayerPreferences(
     bool _preferUnstakedTickets
 ) external
 ```
-

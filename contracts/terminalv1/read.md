@@ -90,7 +90,6 @@ function reservedTicketBalanceOf(uint256 _projectId, uint256 _reservedRate)
 Read functions yet to be documented
 
 ```
-
 function pendingGovernance() external view returns (address payable);
 
 function projects() external view returns (IProjects);

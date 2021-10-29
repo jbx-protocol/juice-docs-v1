@@ -2,7 +2,7 @@
 
 ## Constructor
 
-```text
+```
 constructor(string memory _name, string memory _symbol)
     ERC20(_name, _symbol)
     ERC20Permit(_name)
@@ -10,7 +10,7 @@ constructor(string memory _name, string memory _symbol)
 
 ## Write
 
-```text
+```
 function print(address _account, uint256 _amount)
     external
     override
@@ -20,7 +20,7 @@ function print(address _account, uint256 _amount)
 }
 ```
 
-```text
+```
 function redeem(address _account, uint256 _amount)
     external
     override
@@ -29,4 +29,3 @@ function redeem(address _account, uint256 _amount)
     return _burn(_account, _amount);
 }
 ```
-

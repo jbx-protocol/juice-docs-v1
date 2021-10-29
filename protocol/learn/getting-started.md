@@ -42,7 +42,7 @@ function issueFor(
   returns (IJBToken token) { ... }
 ```
 
-Once a project has been created, it can begin accepting funds from anyone. ETH can be sent to the project by calling [`JBETHPaymentTerminal.pay(...)`](../contracts/or-payment-terminals/jbethpaymentterminal/write/pay-1.md).
+Once a project has been created, it can begin accepting funds from anyone. ETH can be sent to the project by calling [`JBETHPaymentTerminal.pay(...)`](../contracts/or-payment-terminals/jbethpaymentterminal/write/pay.md).
 
 ```solidity
 function pay(
@@ -134,7 +134,7 @@ function distributeReservedTokensOf(uint256 _projectId, string memory _memo)
   returns (uint256) { ... }
 ```
 
-Anyone who holds your project's tokens can redeem them for a proportional share of the project's overflow by calling [`JBETHPaymentTerminal.redeemTokensOf(...)`](../contracts/or-payment-terminals/jbethpaymentterminal/write/redeemtokensof.md). The overflow amount is the treasury's balance minus the current funding cycle's target.&#x20;
+Anyone who holds your project's tokens can redeem them for a proportional share of the project's overflow by calling [`JBETHPaymentTerminal.redeemTokensOf(...)`](../contracts/or-payment-terminals/jbethpaymentterminal/write/redeemtokensof.md). The overflow amount is the treasury's balance minus the current funding cycle's target.
 
 Redeeming tokens burns them, and allows your token holders to exit the community at any time with their share of the funds.
 

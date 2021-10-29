@@ -8,7 +8,7 @@ Contract: [`JBETHPaymentTerminalStore`](../)​‌
 
 _If the project has an active funding cycle reconfiguration ballot, the project's ballot redemption rate is used._
 
-# Definition
+## Definition
 
 ```solidity
 function currentOverflowOf(uint256 _projectId) external view returns (uint256) { ... }
@@ -20,7 +20,7 @@ function currentOverflowOf(uint256 _projectId) external view returns (uint256) {
 * The function does not alter state on the blockchain.
 * The function returns the current amount of overflow that project has.
 
-# Body
+## Body
 
 1.  Get a reference to the project's current funding cycle.
 
@@ -32,7 +32,6 @@ function currentOverflowOf(uint256 _projectId) external view returns (uint256) {
     _External references:_
 
     * [`currentOf`](../../../jbfundingcyclestore/read/currentOf.md)
-
 2.  Return the overflow given the state of the current funding cycle.
 
     ```solidity
@@ -41,7 +40,7 @@ function currentOverflowOf(uint256 _projectId) external view returns (uint256) {
 
     _Internal references:_
 
-    * [`_overflowDuring`](../read/_overflowDuring.md)
+    * [`_overflowDuring`](\_overflowDuring.md)
 {% endtab %}
 
 {% tab title="Code" %}

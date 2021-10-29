@@ -1,4 +1,4 @@
-# _SECONDS_IN_YEAR
+# \_SECONDS\_IN\_YEAR
 
 Contract: [`JBProjects`](../)
 

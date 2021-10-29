@@ -2,7 +2,7 @@
 
 ### issue
 
-Issues an owner's ERC-20 Tickets that'll be used when unstaking tickets.  
+Issues an owner's ERC-20 Tickets that'll be used when unstaking tickets.\
 Deploys an owner's Ticket ERC-20 token contract.
 
 **Params:**
@@ -11,7 +11,7 @@ Deploys an owner's Ticket ERC-20 token contract.
 * **\_name:** The ERC-20's name. " Juicebox ticket" will be appended.
 * **\_symbol:** The ERC-20's symbol. "j" will be prepended.
 
-```text
+```
 function issue(
     uint256 _projectId,
     string calldata _name,
@@ -21,7 +21,7 @@ function issue(
 
 ### lock
 
-Lock a project's tickets, preventing them from being redeemed and from converting to ERC20s.  
+Lock a project's tickets, preventing them from being redeemed and from converting to ERC20s.\
 Only a ticket holder or an operator can lock its tickets.
 
 **Params:**
@@ -30,7 +30,7 @@ Only a ticket holder or an operator can lock its tickets.
 * **\_projectId:** The ID of the project whos tickets are being locked.
 * **\_amount:** The amount of tickets to lock.
 
-```text
+```
 function lock(
     address _holder,
     uint256 _projectId,
@@ -40,7 +40,7 @@ function lock(
 
 ### unlock
 
-Unlock a project's tickets.  
+Unlock a project's tickets.\
 The address that locked the tickets must be the address that unlocks the tickets.
 
 **Params:**
@@ -49,7 +49,7 @@ The address that locked the tickets must be the address that unlocks the tickets
 * **\_projectId:** The ID of the project whos tickets are being unlocked.
 * **\_amount:** The amount of tickets to unlock.
 
-```text
+```
 function unlock(
     address _holder,
     uint256 _projectId,
@@ -59,7 +59,7 @@ function unlock(
 
 ### print
 
-Print new tickets.  
+Print new tickets.\
 Only a project's current terminal can print its tickets.
 
 **Params:**
@@ -69,7 +69,7 @@ Only a project's current terminal can print its tickets.
 * **\_amount:** The amount to print.
 * **\_preferUnstakedTickets:** Whether ERC20's should be converted automatically if they have been issued.
 
-```text
+```
 function print(
     address _holder,
     uint256 _projectId,
@@ -80,7 +80,7 @@ function print(
 
 ### redeem
 
-Redeems tickets.  
+Redeems tickets.\
 Only a project's current terminal can redeem its tickets.
 
 **Params:**
@@ -90,7 +90,7 @@ Only a project's current terminal can redeem its tickets.
 * **\_amount:** The amount of tickets being redeemed.
 * **\_preferUnstaked:** If the preference is to redeem tickets that have been converted to ERC-20s.
 
-```text
+```
 function redeem(
     address _holder,
     uint256 _projectId,
@@ -101,7 +101,7 @@ function redeem(
 
 ### stake
 
-Stakes ERC20 tickets by burning their supply and creating an internal staked version.  
+Stakes ERC20 tickets by burning their supply and creating an internal staked version.\
 Only a ticket holder or an operator can stake its tickets.
 
 **Params:**
@@ -110,7 +110,7 @@ Only a ticket holder or an operator can stake its tickets.
 * **\_projectId:** The ID of the project whos tickets are being staked.
 * **\_amount:** The amount of tickets to stake.
 
-```text
+```
 function stake(
     address _holder,
     uint256 _projectId,
@@ -120,7 +120,7 @@ function stake(
 
 ### unstake
 
-Unstakes internal tickets by creating and distributing ERC20 tickets.  
+Unstakes internal tickets by creating and distributing ERC20 tickets.\
 Only a ticket holder or an operator can unstake its tickets.
 
 **Params:**
@@ -129,7 +129,7 @@ Only a ticket holder or an operator can unstake its tickets.
 * **\_projectId:** The ID of the project whos tickets are being unstaked.
 * **\_amount:** The amount of tickets to unstake.
 
-```text
+```
 function unstake(
     address _holder,
     uint256 _projectId,
@@ -139,7 +139,7 @@ function unstake(
 
 ### transfer
 
-Allows a ticket holder to transfer its tickets to another account, without unstaking to ERC-20s.  
+Allows a ticket holder to transfer its tickets to another account, without unstaking to ERC-20s.\
 Only a ticket holder or an operator can transfer its tickets.
 
 **Params:**
@@ -149,7 +149,7 @@ Only a ticket holder or an operator can transfer its tickets.
 * **\_amount:** The amount of tickets to transfer.
 * **\_recipient:** The recipient of the tickets.
 
-```text
+```
 function transfer(
     address _holder,
     uint256 _projectId,
@@ -157,4 +157,3 @@ function transfer(
     address _recipient
 ) external;
 ```
-

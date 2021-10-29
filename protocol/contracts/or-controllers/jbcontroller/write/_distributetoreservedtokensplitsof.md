@@ -1,10 +1,10 @@
-# _distributeToReservedTokenSplitsOf
+# \_distributeToReservedTokenSplitsOf
 
 {% tabs %}
 {% tab title="Step by step" %}
 **Distributed tokens to the splits according to the specified funding cycle configuration.**
 
-# Definition
+## Definition
 
 ```solidity
 function _distributeToReservedTokenSplitsOf(JBFundingCycle memory _fundingCycle, uint256 _amount)
@@ -18,7 +18,7 @@ function _distributeToReservedTokenSplitsOf(JBFundingCycle memory _fundingCycle,
 * The function is private to this contract.
 * The function returns the leftover amount after all splits have been distributed.
 
-# Body
+## Body
 
 1.  Save the passed in `_amount` as the `leftoverAmount` that will be returned. The subsequent routine will decrement the leftover amount as splits are settled.
 
@@ -26,8 +26,7 @@ function _distributeToReservedTokenSplitsOf(JBFundingCycle memory _fundingCycle,
     // Set the leftover amount to the initial amount.
     leftoverAmount = _amount;
     ```
-
-2.  Get a reference to reserved token splits for the current funding cycle configuration of the project. 
+2.  Get a reference to reserved token splits for the current funding cycle configuration of the project.
 
     ```solidity
     // Get a reference to the project's reserved token splits.
@@ -41,29 +40,25 @@ function _distributeToReservedTokenSplitsOf(JBFundingCycle memory _fundingCycle,
     _External references:_
 
     * [`splitsOf`](../../../jbsplitstore/read/splitsof.md)
-
 3.  Loop through each split.
 
     ```solidity
     //Transfer between all splits.
     for (uint256 _i = 0; _i < _splits.length; _i++) { ... }
     ```
-
-4.  Get a reference to the current split being iterated on.  
+4.  Get a reference to the current split being iterated on.
 
     ```solidity
     // Get a reference to the split being iterated on.
     JBSplit memory _split = _splits[_i];
     ```
-
-5.  Get a reference to the amount of tokens to distribute to the current split. This amount is the total amount multiplied by the percentage of the split, which is a number out of 10000.  
+5.  Get a reference to the amount of tokens to distribute to the current split. This amount is the total amount multiplied by the percentage of the split, which is a number out of 10000.
 
     ```solidity
     // The amount to send towards the split. JBSplit percents are out of 10000.
     uint256 _tokenCount = PRBMath.mulDiv(_amount, _split.percent, 10000);
     ```
-
-6.  If there are tokens to mint for the given split, do so. If the split has an `allocator` specified, the tokens should go to that address. Otherwise if the split has a `projectId` specified, the tokens should be directed to the project's owner. Otherwise, the tokens should be directed at the `beneficiary` address of the split. 
+6.  If there are tokens to mint for the given split, do so. If the split has an `allocator` specified, the tokens should go to that address. Otherwise if the split has a `projectId` specified, the tokens should be directed to the project's owner. Otherwise, the tokens should be directed at the `beneficiary` address of the split.
 
     ```solidity
     // Mints tokens for the split if needed.
@@ -84,14 +79,12 @@ function _distributeToReservedTokenSplitsOf(JBFundingCycle memory _fundingCycle,
     _External references:_
 
     * [`mintFor`](../../../jbtokenstore/write/mintfor.md)
-
-7.  Reduce the leftover amount by the tokens that were sent to the split. 
+7.  Reduce the leftover amount by the tokens that were sent to the split.
 
     ```solidity
     // Subtract from the amount to be sent to the beneficiary.
     leftoverAmount = leftoverAmount - _tokenCount;
     ```
-
 8.  Emit a `DistributeToReservedTokenSplit` event for the split being iterated on with the relevant parameters.
 
     ```solidity

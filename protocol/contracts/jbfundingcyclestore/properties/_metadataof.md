@@ -1,4 +1,4 @@
-# _metadataOf
+# \_metadataOf
 
 Contract: [`JBFundingCycleStore`](../)​‌
 

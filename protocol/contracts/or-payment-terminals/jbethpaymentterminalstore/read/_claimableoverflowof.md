@@ -1,4 +1,4 @@
-# _claimableOverflowOf
+# \_claimableOverflowOf
 
 Contract: [`JBETHPaymentTerminalStore`](../)​‌
 
@@ -8,7 +8,7 @@ Contract: [`JBETHPaymentTerminalStore`](../)​‌
 
 _If the project has an active funding cycle reconfiguration ballot, the project's ballot redemption rate is used._
 
-# Definition
+## Definition
 
 ```solidity
 function claimableOverflowOf(uint256 _projectId, uint256 _tokenCount)
@@ -24,7 +24,7 @@ function claimableOverflowOf(uint256 _projectId, uint256 _tokenCount)
 * The function does not alter state on the blockchain.
 * The function returns the amount of overflowed ETH that can be claimed.
 
-# Body
+## Body
 
 1.  Get a reference to the current overflow given the provided funding cycle.
 
@@ -35,15 +35,13 @@ function claimableOverflowOf(uint256 _projectId, uint256 _tokenCount)
 
     _Internal references:_
 
-    * [`_overflowDuring`](../_overflowduring.md)
-
+    * [`_overflowDuring`](../\_overflowduring.md)
 2.  If there is no overflow, there's also no claimable overflow.
 
     ```solidity
     // If there is no overflow, nothing is claimable.
     if (_currentOverflow == 0) return 0;
     ```
-
 3.  Get a reference to the total amount of tokens for the funding cycle's project.
 
     ```solidity
@@ -54,7 +52,6 @@ function claimableOverflowOf(uint256 _projectId, uint256 _tokenCount)
     _External references:_
 
     * [`totalSupplyOf`](../../../jbtokenstore/read/totalsupplyof.md)
-
 4.  Get a reference to the total amount of outstanding reserved tokens from the project's current controller. These tokens have not yet been distributed and added to the total supply, but they must still be taken into account as part of the total when calculating the claimable amount given a set of tokens.
 
     ```solidity
@@ -68,21 +65,18 @@ function claimableOverflowOf(uint256 _projectId, uint256 _tokenCount)
 
     * [`controllerOf`](../../../jbdirectory/read/controllerof.md)
     * [`reservedTokenBalanceOf`](../../../or-controllers/jbcontroller/read/reservedtokenbalanceof.md)
-
 5.  If there are reserved tokens, add them to the total supply for the purposes of this calculation.
 
     ```solidity
     // If there are reserved tokens, add them to the total supply.
     if (_reservedTokenAmount > 0) _totalSupply = _totalSupply + _reservedTokenAmount;
     ```
-
 6.  If the calculation is being made to find the claimable amount for all of a project's tokens, return the entire current overflow.
 
     ```solidity
     // If the amount being redeemed is the the total supply, return the rest of the overflow.
     if (_tokenCount == _totalSupply) return _currentOverflow;
     ```
-
 7.  Get a reference to the redemption rate that should be used in the redemption bonding curve formula. If the current funding cycle has an active ballot, use its ballot redemption rate, otherwise use the standard redemption rate. This lets project's configure different bonding curves depending on the state of pending reconfigurations. This rate is out of 200.
 
     ```solidity
@@ -92,21 +86,18 @@ function claimableOverflowOf(uint256 _projectId, uint256 _tokenCount)
       ? _fundingCycle.ballotRedemptionRate()
       : _fundingCycle.redemptionRate();
     ```
-
-8.  If the redemption rate is 0%, nothing is claimable regardless of the amount of tokens. 
+8.  If the redemption rate is 0%, nothing is claimable regardless of the amount of tokens.
 
     ```solidity
     // If the redemption rate is 0, nothing is claimable.
     if (_redemptionRate == 0) return 0;
     ```
-
-9.  The redemption bonding curve formula depends on a base claimable value that is the linear proportion of the provided tokens to the total supply of tokens. Get a reference to this proportion to use in the forumla. 
+9.  The redemption bonding curve formula depends on a base claimable value that is the linear proportion of the provided tokens to the total supply of tokens. Get a reference to this proportion to use in the forumla.
 
     ```solidity
     // Get a reference to the linear proportion.
     uint256 _base = PRBMath.mulDiv(_currentOverflow, _tokenCount, _totalSupply);
     ```
-
 10. Return the claimable amount determined by a bonding curve. At a 100% bonding curve the linear base can be returned immediately, this outcome is naturally part of the curve – checking for it first could prevent an unecessary and slightly more expensive mulDiv calculation.
 
     ```solidity
@@ -184,5 +175,3 @@ function _claimableOverflowOf(JBFundingCycle memory _fundingCycle, uint256 _toke
 | **High severity** | Identify a vulnerability in this operation that could lead to data corruption or loss of funds.                                        | 5+ETH  |
 {% endtab %}
 {% endtabs %}
-
- 

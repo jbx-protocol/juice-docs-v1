@@ -1,4 +1,4 @@
-# unclaimedBalanceOf
+# unclaimedTotalSupplyOf
 
 Contract: [`JBTokenStore`](../)​‌
 
@@ -19,6 +19,5 @@ mapping(uint256 => uint256) public override unclaimedTotalSupplyOf;
 ```
 
 * `_projectId` is the ID of the project to which the token belongs.
-* The resulting view function can be accessed externally by anyone. 
+* The resulting view function can be accessed externally by anyone.
 * The resulting function overrides a function definition from the `IJBTokenStore` interface.
-

@@ -8,7 +8,7 @@ Contract: [`JBETHPaymentTerminalStore`](../)​‌
 
 _Only the associated payment terminal can record a used allowance._
 
-# Definition
+## Definition
 
 ```solidity
 function recordWithdrawalFor(
@@ -32,7 +32,7 @@ function recordWithdrawalFor(
   * `fundingCycle` is the funding cycle during which the withdrawal was made.
   * `withdrawnAmount` is the amount withdrawn.
 
-# Body
+## Body
 
 1.  Tell the project's controller that an amount is being withdrawn.
 
@@ -44,29 +44,25 @@ function recordWithdrawalFor(
     _External references:_
 
     * [`signalWithdrawlFrom`](../../../or-controllers/jbcontroller/write/signalwithdrawlfrom.md)
-
 2.  Make the sure the project has a funding cycle by checking if the returned number is non-zero.
 
     ```solidity
     // Funds cannot be withdrawn if there's no funding cycle.
     require(fundingCycle.id > 0, '0x3d: NOT_FOUND');
     ```
-
 3.  Make sure the project's current funding cycle isn't configured to pause withdrawals.
 
     ```solidity
     // The funding cycle must not be configured to have withdrawals paused.
     require(!fundingCycle.withdrawalsPaused(), '0x3e: PAUSED');
     ```
-
 4.  Make the sure provided currency matches the funding cycle's currency.
 
     ```solidity
     // Make sure the currencies match.
     require(_currency == fundingCycle.currency, '0x3f: UNEXPECTED_CURRENCY');
     ```
-
-3.  Convert the amount to ETH. 
+5.  Convert the amount to ETH.
 
     ```solidity
     // Convert the amount to wei.
@@ -75,28 +71,24 @@ function recordWithdrawalFor(
       prices.priceFor(fundingCycle.currency, JBCurrencies.ETH)
     );
     ```
-
-4.  Make sure the project has enough of a balance to withdraw the desired amount.
+6.  Make sure the project has enough of a balance to withdraw the desired amount.
 
     ```solidity
     // The amount being withdrawn must be available.
     require(withdrawnAmount <= balanceOf[_projectId], '0x40: INSUFFICIENT_FUNDS');
     ```
-
-5.  Make sure the there is at least as much wei being withdrawn as expected. 
+7.  Make sure the there is at least as much wei being withdrawn as expected.
 
     ```solidity
     // The amount being withdrawn must be at least as much as was expected.
     require(_minReturnedWei <= withdrawnAmount, '0x41: INADEQUATE');
     ```
-
-6.  Store the decremented balance.
+8.  Store the decremented balance.
 
     ```solidity
     // Removed the withdrawn funds from the project's balance.
     balanceOf[_projectId] = balanceOf[_projectId] - withdrawnAmount;
     ```
-
 {% endtab %}
 
 {% tab title="Code" %}
@@ -157,14 +149,14 @@ function recordWithdrawalFor(
 {% endtab %}
 
 {% tab title="Errors" %}
-| String            | Description                                                         |
-| ----------------- | ------------------------------------------------------------------- |
-| **`0x3d: NOT_FOUND`** | Thrown if the project doesn't have a funding cycle. |
-| **`0x3e: PAUSED`** | Thrown if the project has configured its current funding cycle to pause withdrawals. |
+| String                          | Description                                                                                                       |
+| ------------------------------- | ----------------------------------------------------------------------------------------------------------------- |
+| **`0x3d: NOT_FOUND`**           | Thrown if the project doesn't have a funding cycle.                                                               |
+| **`0x3e: PAUSED`**              | Thrown if the project has configured its current funding cycle to pause withdrawals.                              |
 | **`0x3f: UNEXPECTED_CURRENCY`** | Thrown if the currency of the specified amount doesn't match the currency of the project's current funding cycle. |
-| **`0x41: NOT_ALLOWED`** | Thrown if there isn't enough allowance for the specified terminal to fulfill the desired withdrawal. |
-| **`0x40: INSUFFICIENT_FUNDS`** | Thrown if the project's balance isn't sufficient to fulfill the desired withdrawal. |
-| **`0x41: INADEQUATE`** | Thrown if the withdrawn amount is less than the minimum expected. |
+| **`0x41: NOT_ALLOWED`**         | Thrown if there isn't enough allowance for the specified terminal to fulfill the desired withdrawal.              |
+| **`0x40: INSUFFICIENT_FUNDS`**  | Thrown if the project's balance isn't sufficient to fulfill the desired withdrawal.                               |
+| **`0x41: INADEQUATE`**          | Thrown if the withdrawn amount is less than the minimum expected.                                                 |
 {% endtab %}
 
 {% tab title="Bug bounty" %}

@@ -1,10 +1,10 @@
-# _distributeReservedTokens
+# \_distributeReservedTokens
 
 {% tabs %}
 {% tab title="Step by step" %}
 **Distributes all outstanding reserved tokens for a project.**
 
-# Definition
+## Definition
 
 ```solidity
 function _distributeReservedTokensOf(uint256 _projectId, string memory _memo)
@@ -18,7 +18,7 @@ function _distributeReservedTokensOf(uint256 _projectId, string memory _memo)
 * The function is private to this contract.
 * The function returns the amount of reserved tokens that were minted.
 
-# Body
+## Body
 
 1.  Get a reference to the current funding cycle of the project.
 
@@ -30,7 +30,6 @@ function _distributeReservedTokensOf(uint256 _projectId, string memory _memo)
     _External references:_
 
     * [`currentOf`](../../../jbfundingcyclestore/read/currentof.md)
-
 2.  Get a reference to the current total supply of tokens issued for the project.
 
     ```solidity
@@ -41,7 +40,6 @@ function _distributeReservedTokensOf(uint256 _projectId, string memory _memo)
     _External references:_
 
     * [`totalSupplyOf`](../../../jbtokenstore/read/totalsupplyof.md)
-
 3.  Get a reference to the current amount of reserved tokens given the current state of the tracker, the current funding cycle's reserved rate, and the current total token supply.
 
     ```solidity
@@ -55,9 +53,8 @@ function _distributeReservedTokensOf(uint256 _projectId, string memory _memo)
 
     _Internal references:_
 
-    * [`_reservedTokenAmountFrom`](../properties/_reservedtokenamountfrom.md)
-
-4.  Set the tracker to be equal to the new current total token supply, which is the amount stored plus the amount that will be minted and distributed. 
+    * [`_reservedTokenAmountFrom`](../properties/\_reservedtokenamountfrom.md)
+4.  Set the tracker to be equal to the new current total token supply, which is the amount stored plus the amount that will be minted and distributed.
 
     ```solidity
     // Set the tracker to be the new total supply.
@@ -66,8 +63,7 @@ function _distributeReservedTokensOf(uint256 _projectId, string memory _memo)
 
     _Internal references:_
 
-    * [`_processedTokenTrackerOf`](../properties/_processedtokentrackerof.md)
-
+    * [`_processedTokenTrackerOf`](../properties/\_processedtokentrackerof.md)
 5.  Get a reference to the project's owner.
 
     ```solidity
@@ -78,8 +74,7 @@ function _distributeReservedTokensOf(uint256 _projectId, string memory _memo)
     _Internal references:_
 
     * [`ownerOf`](https://docs.openzeppelin.com/contracts/2.x/api/token/erc721#IERC721-ownerOf-uint256-)
-
-6.  If there are outstanding reserved tokens, distribute them to reserved token splits. Get a reference to any leftover amount after the splits are settled.  
+6.  If there are outstanding reserved tokens, distribute them to reserved token splits. Get a reference to any leftover amount after the splits are settled.
 
     ```solidity
     // Distribute tokens to splits and get a reference to the leftover amount to mint after all splits have gotten their share.
@@ -90,8 +85,7 @@ function _distributeReservedTokensOf(uint256 _projectId, string memory _memo)
 
     _Internal references:_
 
-    * [`_distributeToReservedTokenSplitsOf`](../properties/_distributetoreservedtokensplitsof.md)
-
+    * [`_distributeToReservedTokenSplitsOf`](../properties/\_distributetoreservedtokensplitsof.md)
 7.  If there are any leftover reserved tokens, mint them for the project's owner.
 
     ```solidity
@@ -102,7 +96,6 @@ function _distributeReservedTokensOf(uint256 _projectId, string memory _memo)
     _Internal references:_
 
     * [`mintFor`](../../../jbtokenstore/write/mintfor.md)
-
 8.  Emit a `DistributeReservedTokens` event with the relevant parameters.
 
     ```solidity
@@ -120,7 +113,6 @@ function _distributeReservedTokensOf(uint256 _projectId, string memory _memo)
     _Event references:_
 
     * [`DistributeReservedTokens`](../events/distributereservedtokens.md)
-
 {% endtab %}
 
 {% tab title="Code" %}

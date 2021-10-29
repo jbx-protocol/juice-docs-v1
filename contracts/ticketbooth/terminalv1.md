@@ -16,7 +16,7 @@ event Configure(
 )
 ```
 
-```text
+```
 event Tap(
     uint256 indexed fundingCycleId,
     uint256 indexed projectId,
@@ -41,7 +41,7 @@ event Redeem(
 )
 ```
 
-```text
+```
 event PrintReserveTickets(
     uint256 indexed fundingCycleId,
     uint256 indexed projectId,
@@ -52,7 +52,7 @@ event PrintReserveTickets(
 )
 ```
 
-```text
+```
 event DistributeToPayoutMod(
     uint256 indexed fundingCycleId,
     uint256 indexed projectId,
@@ -62,7 +62,7 @@ event DistributeToPayoutMod(
 )
 ```
 
-```text
+```
 event DistributeToTicketMod(
     uint256 indexed fundingCycleId,
     uint256 indexed projectId,
@@ -72,15 +72,15 @@ event DistributeToTicketMod(
 )
 ```
 
-```text
+```
 event AppointGovernance(address governance)
 ```
 
-```text
+```
 event AcceptGovernance(address governance)
 ```
 
-```text
+```
 event PrintPreminedTickets(
     uint256 indexed projectId,
     address indexed beneficiary,
@@ -133,7 +133,7 @@ event Migrate(
 
 ### Constructor
 
-```text
+```
 /** 
   @param _projects A Projects contract which mints ERC-721's that represent project ownership and transfers.
   @param _fundingCycles A funding cycle configuration store.
@@ -156,8 +156,6 @@ constructor(
 
 ### Read
 
-
-
 ```javascript
 /// @notice The governance of the contract who makes fees and can allow new TerminalV1 contracts to be migrated to by project owners.
 function governance() external view returns (address payable)
@@ -168,23 +166,23 @@ function governance() external view returns (address payable)
 function pendingGovernance() external view returns (address payable)
 ```
 
-```text
+```
 function projects() external view returns (IProjects)
 ```
 
-```text
+```
 function fundingCycles() external view returns (IFundingCycles)
 ```
 
-```text
+```
 function ticketBooth() external view returns (ITicketBooth)
 ```
 
-```text
+```
 function prices() external view returns (IPrices)
 ```
 
-```text
+```
 function modStore() external view returns (IModStore)
 ```
 
@@ -583,4 +581,3 @@ function printReservedTickets(uint256 _projectId)
     override
     returns (uint256 amount)
 ```
-

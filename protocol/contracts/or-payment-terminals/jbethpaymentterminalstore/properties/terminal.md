@@ -14,4 +14,4 @@ Contract: [`JBETHPaymentTerminalStore`](../)​‌
 address public terminal;
 ```
 
-* The resulting view function can be accessed externally by anyone. 
+* The resulting view function can be accessed externally by anyone.

@@ -8,10 +8,9 @@
 
 ## 📚Resources
 
-* [FAQ](resources/faq.md)
 * [Contract Addresses](resources/contract-addresses.md)
 
-## 👾Protocol
+## 👾Protocol V2
 
 * [README](protocol/readme.md)
 * [Learn](protocol/learn/README.md)
@@ -251,7 +250,7 @@
         * [splitStore](protocol/contracts/or-payment-terminals/jbethpaymentterminal/properties/splitstore.md)
         * [store](protocol/contracts/or-payment-terminals/jbethpaymentterminal/properties/store.md)
         * [token](protocol/contracts/or-payment-terminals/jbethpaymentterminal/properties/token.md)
-        * [_heldFeesOf](protocol/contracts/or-payment-terminals/jbethpaymentterminal/properties/_heldfeesof.md)
+        * [\_heldFeesOf](protocol/contracts/or-payment-terminals/jbethpaymentterminal/properties/\_heldfeesof.md)
       * [Read](protocol/contracts/or-payment-terminals/jbethpaymentterminal/read/README.md)
         * [heldFeesOf](protocol/contracts/or-payment-terminals/jbethpaymentterminal/read/heldfeesof.md)
         * [ethBalanceOf](protocol/contracts/or-payment-terminals/jbethpaymentterminal/read/ethbalanceof.md)
@@ -281,8 +280,8 @@
       * [Read](protocol/contracts/or-payment-terminals/jbethpaymentterminalstore/read/README.md)
         * [currentOverflowOf](protocol/contracts/or-payment-terminals/jbethpaymentterminalstore/read/currentoverflowof.md)
         * [claimableOverflowOf](protocol/contracts/or-payment-terminals/jbethpaymentterminalstore/read/claimableoverflowof.md)
-        * [_claimableOverflowOf](protocol/contracts/or-payment-terminals/jbethpaymentterminalstore/read/_claimableoverflowof.md)
-        * [_overflowDuring](protocol/contracts/or-payment-terminals/jbethpaymentterminalstore/read/_overflowduring.md)
+        * [\_claimableOverflowOf](protocol/contracts/or-payment-terminals/jbethpaymentterminalstore/read/\_claimableoverflowof.md)
+        * [\_overflowDuring](protocol/contracts/or-payment-terminals/jbethpaymentterminalstore/read/\_overflowduring.md)
       * [Write](protocol/contracts/or-payment-terminals/jbethpaymentterminalstore/write/README.md)
         * [recordPaymentFrom](protocol/contracts/or-payment-terminals/jbethpaymentterminalstore/write/recordpaymentfrom.md)
         * [recordWithdrawalFor](protocol/contracts/or-payment-terminals/jbethpaymentterminalstore/write/recordwithdrawalfor.md)
@@ -309,7 +308,7 @@
 
 * [Proposal Process](governance/proposal-process.md)
 
-## Contracts
+## Protocol V1
 
 * [TicketBooth](contracts/ticketbooth/README.md)
   * [Write](contracts/ticketbooth/write.md)

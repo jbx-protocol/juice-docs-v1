@@ -1,4 +1,4 @@
-# _isIdApproved
+# \_isIdApproved
 
 Contract:[`JBFundingCycleStore`](../)​
 
@@ -6,7 +6,7 @@ Contract:[`JBFundingCycleStore`](../)​
 {% tab title="Step by step" %}
 **Checks to see if the funding cycle of the provided ID is approved according to the correct ballot.**
 
-# Definition
+## Definition
 
 ```solidity
 function _isIdApproved(uint256 _fundingCycleId) private view returns (bool) { ... } 
@@ -18,7 +18,7 @@ function _isIdApproved(uint256 _fundingCycleId) private view returns (bool) { ..
 * The function does not alter state on the blockchain.
 * The function returns the approval flag.
 
-# Body
+## Body
 
 1.  Find the [`JBFundingCycle`](../../../data-structures/jbfundingcycle.md) struct for the provided ID.
 

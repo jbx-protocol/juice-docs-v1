@@ -4,9 +4,9 @@
 
 @dev Mods can be used to distribute a percentage of payments or tickets to preconfigured beneficiaries.
 
-## `payoutModsOf(uint256 _projectId, uint256 _configuration) → struct PayoutMod[]` \(external\)
+## `payoutModsOf(uint256 _projectId, uint256 _configuration) → struct PayoutMod[]` (external)
 
-```text
+```
   Get all payout mods for the specified project ID.
 
   @param _projectId The ID of the project to get mods for.
@@ -15,9 +15,9 @@
   @return An array of all mods for the project.
 ```
 
-## `ticketModsOf(uint256 _projectId, uint256 _configuration) → struct TicketMod[]` \(external\)
+## `ticketModsOf(uint256 _projectId, uint256 _configuration) → struct TicketMod[]` (external)
 
-```text
+```
   Get all ticket mods for the specified project ID.
 
   @param _projectId The ID of the project to get mods for.
@@ -26,11 +26,11 @@
   @return An array of all mods for the project.
 ```
 
-## `constructor(contract IProjects _projects, contract IOperatorStore _operatorStore, contract ITerminalDirectory _terminalDirectory)` \(public\)
+## `constructor(contract IProjects _projects, contract IOperatorStore _operatorStore, contract ITerminalDirectory _terminalDirectory)` (public)
 
-## `setPayoutMods(uint256 _projectId, uint256 _configuration, struct PayoutMod[] _mods)` \(external\)
+## `setPayoutMods(uint256 _projectId, uint256 _configuration, struct PayoutMod[] _mods)` (external)
 
-```text
+```
   Adds a mod to the payout mods list.
 
   @dev
@@ -41,9 +41,9 @@
   @param _mods The payout mods to set.
 ```
 
-## `setTicketMods(uint256 _projectId, uint256 _configuration, struct TicketMod[] _mods)` \(external\)
+## `setTicketMods(uint256 _projectId, uint256 _configuration, struct TicketMod[] _mods)` (external)
 
-```text
+```
   Adds a mod to the ticket mods list.
 
   @dev
@@ -53,4 +53,3 @@
   @param _configuration The configuration to set the mods to be active during.
   @param _mods The ticket mods to set.
 ```
-

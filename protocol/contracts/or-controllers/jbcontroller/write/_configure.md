@@ -1,10 +1,10 @@
-# _configure
+# \_configure
 
 {% tabs %}
 {% tab title="Step by step" %}
 **Configures a funding cycle and stores information pertinent to the configuration.**
 
-# Definition
+## Definition
 
 ```solidity
 function _configure(
@@ -27,7 +27,7 @@ function _configure(
 * The function is private to this contract.
 * The function returns the ID of the funding cycle that was configured.
 
-# Body
+## Body
 
 1.  Configure the project's funding cycles.
 
@@ -44,7 +44,6 @@ function _configure(
     _External references:_
 
     * [`configureFor`](../../../jbfundingcyclestore/write/configurefor.md)
-
 2.  If needed, set payout splits.
 
     ```solidity
@@ -61,7 +60,6 @@ function _configure(
     _External references:_
 
     * [`set`](../../../jbsplitsstore/write/set.md)
-
 3.  If needed, set reserved token splits.
 
     ```solidity
@@ -78,7 +76,6 @@ function _configure(
     _External references:_
 
     * [`set`](../../../jbsplitsstore/write/set.md)
-
 4.  For each overflow allowance struct in the array passed in, store its value if its amount is being updated. Emit a `SetOverflowAllowance` event with the relevant parameters.
 
     ```solidity
@@ -104,7 +101,6 @@ function _configure(
     _Event references:_
 
     * [`SetOverflowAllowance`](../events/setoverflowallowance.md)
-
 {% endtab %}
 
 {% tab title="Only code" %}

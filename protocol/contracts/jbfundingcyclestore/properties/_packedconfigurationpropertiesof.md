@@ -1,4 +1,4 @@
-# _packedConfigurationPropertiesOf
+# \_packedConfigurationPropertiesOf
 
 Contract: [`JBFundingCycleStore`](../)​‌
 

@@ -3,6 +3,7 @@
 Contract: [`JBETHPaymentTerminalStore`](../)​‌
 
 **The contract storing all funding cycle configurations.**
+
 ## Definition
 
 ```solidity
@@ -13,4 +14,4 @@ Contract: [`JBETHPaymentTerminalStore`](../)​‌
 IJBFundingCycleStore public immutable fundingCycleStore;
 ```
 
-* The resulting view function can be accessed externally by anyone. 
+* The resulting view function can be accessed externally by anyone.

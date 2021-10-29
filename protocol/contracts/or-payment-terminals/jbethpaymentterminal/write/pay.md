@@ -21,10 +21,6 @@ function pay(
 
 {% tab title="Code" %}
 ```solidity
-
 ```
 {% endtab %}
 {% endtabs %}
-
-
-

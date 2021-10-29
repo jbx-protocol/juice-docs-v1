@@ -1,4 +1,4 @@
-# ShouldRequireClaimFor
+# ShouldRequireClaim
 
 Emitted from:
 

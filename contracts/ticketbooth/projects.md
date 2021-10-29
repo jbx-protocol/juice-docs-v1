@@ -167,6 +167,3 @@ function renewHandle(uint256 _projectId)
         Operations.RenewHandle
     )
 ```
-
-
-

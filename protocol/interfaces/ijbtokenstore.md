@@ -1,7 +1,5 @@
 # IJBTokenStore
 
-
-
 ```solidity
 interface IJBTokenStore {
   event Issue(

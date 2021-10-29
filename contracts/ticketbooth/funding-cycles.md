@@ -143,4 +143,3 @@ function tap(uint256 _projectId, uint256 _amount)
     onlyTerminal(_projectId)
     returns (FundingCycle memory fundingCycle)
 ```
-

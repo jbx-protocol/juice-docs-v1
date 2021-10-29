@@ -1,6 +1,6 @@
 # Read
 
-### 
+###
 
 ### balanceOf
 
@@ -20,7 +20,7 @@ function balanceOf(address _holder, uint256 _projectId)
         returns (uint256 _result);
 ```
 
-### 
+###
 
 ### totalSupplyOf
 
@@ -35,6 +35,3 @@ The total supply of tickets for each project, including staked and unstaked tick
 ```lua
 function totalSupplyOf(uint256 _projectId) external view returns (uint256);
 ```
-
-
-

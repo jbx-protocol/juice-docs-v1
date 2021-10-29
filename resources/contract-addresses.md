@@ -4,7 +4,7 @@ description: Addresses and Etherscan links for deployed JB Protocol and JBX DAO 
 
 # Contract Addresses
 
-## Juicebox Protocol
+## Juicebox Protocol V1
 
 ### Ethereum Mainnet
 
@@ -30,7 +30,7 @@ Active1DayFundingCycleBallot: N/A
 
 Governance: [`0xAc43e14c018490D045a774008648c701cda8C6b3`](https://etherscan.io/address/0xAc43e14c018490D045a774008648c701cda8C6b3)
 
-Prices: [`0xa9537Cc42555564206D4E57c0eb6943d56E83A30`](https://etherscan.io/address/0xa9537Cc42555564206D4E57c0eb6943d56E83A30)``
+Prices: [`0xa9537Cc42555564206D4E57c0eb6943d56E83A30`](https://etherscan.io/address/0xa9537Cc42555564206D4E57c0eb6943d56E83A30)\`\`
 
 ### Rinkeby
 
@@ -61,3 +61,7 @@ TerminalDirectory Kovan: [`0x71BA69044CbD951AC87124cBEdbC0334AB21F26D`](https://
 ### BANNY
 
 Mainnet: [`0x6f5312873DF062413e75d8e59D0f213bD5e4A76C`](https://etherscan.io/address/0x6f5312873DF062413e75d8e59D0f213bD5e4A76C)
+
+## Juicebox Protocol V2
+
+Juicebox Protocol V2 is not yet deployed.

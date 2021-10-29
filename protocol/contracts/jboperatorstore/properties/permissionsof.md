@@ -32,5 +32,5 @@ mapping(address => mapping(address => mapping(uint256 => uint256))) public overr
 * `_operator` is the address of the operator.
 * `_account` is the address of the account being operated.
 * `_domain` is the domain within which the permissions apply.
-* The resulting view function can be accessed externally by anyone. 
+* The resulting view function can be accessed externally by anyone.
 * The resulting function overrides a function definition from the `IJBOperatorStore` interface.

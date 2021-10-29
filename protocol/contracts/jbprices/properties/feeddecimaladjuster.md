@@ -20,6 +20,6 @@ mapping(uint256 => mapping(uint256 => uint256)) public override feedDecimalAdjus
 ```
 
 * `_currency` is the currency of the feed to get the decimal adjuster for.
-* `_base` is the base of the feed to get the decimal adjuster for. 
-* The resulting view function can be accessed externally by anyone. 
+* `_base` is the base of the feed to get the decimal adjuster for.
+* The resulting view function can be accessed externally by anyone.
 * The resulting function overrides a function definition from the `IJBPrices` interface.

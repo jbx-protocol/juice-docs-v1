@@ -1,4 +1,4 @@
-# TARGET_DECIMALS
+# TARGET\_DECIMALS
 
 Contract: [`JBPrices`](../)
 
@@ -17,5 +17,5 @@ uint256 public constant override TARGET_DECIMALS = 18;
 ```
 
 * This value must be hardcoded.
-* The resulting view function can be accessed externally by anyone. 
+* The resulting view function can be accessed externally by anyone.
 * The resulting function overrides a function definition from the `IJBPrices` interface.

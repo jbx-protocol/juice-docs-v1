@@ -10,7 +10,7 @@ Interface: [`IJBProjects`](../../../interfaces/ijbprojects.md)
 
 _Only a project's owner or operator can renew its handle._
 
-# Definition
+## Definition
 
 ```solidity
 function renewHandleOf(uint256 _projectId)
@@ -25,7 +25,7 @@ function renewHandleOf(uint256 _projectId)
 * The function overrides a function definition from the `IJBProjects` interface.
 * The function doesn't return anything.
 
-# Body
+## Body
 
 1.  Get a reference to the project's current handle.
 

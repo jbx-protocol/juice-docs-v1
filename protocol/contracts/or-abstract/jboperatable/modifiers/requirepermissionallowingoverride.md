@@ -1,2 +1,2 @@
-# requirePermissionAcceptingAlternateAddress
+# requirePermissionAllowingOverride
 
