@@ -27,12 +27,14 @@ function setFee(uint256 _fee) external onlyOwner { ... }
     // The max fee is 5%.
     require(_fee <= 10, '0x36: BAD_FEE');
     ```
+
 2.  Store the new fee.
 
     ```solidity
     // Store the new fee.
     fee = _fee;
     ```
+
 3.  Emit a `SetFee` event with the relevant parameters.
 
     ```solidity
