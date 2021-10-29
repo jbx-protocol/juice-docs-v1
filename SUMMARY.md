@@ -53,7 +53,7 @@
   * [IJBControllerUtility](protocol/interfaces/ijbcontrollerutility.md)
   * [IJBTokenStore](protocol/interfaces/ijbtokenstore.md)
   * [IJBVault](protocol/interfaces/ijbvault.md)
-* [Protocol (V1)](protocol/contracts/README.md)
+* [Contracts](protocol/contracts/README.md)
   * [JBProjects](protocol/contracts/jbprojects/README.md)
     * [Events](protocol/contracts/jbprojects/events/README.md)
       * [Create](protocol/contracts/jbprojects/events/create.md)
