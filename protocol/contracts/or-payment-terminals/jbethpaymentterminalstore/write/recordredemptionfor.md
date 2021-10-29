@@ -49,7 +49,7 @@ function recordRedemptionFor(
 
     ```solidity
     // The holder must have the specified number of the project's tokens.
-    require(tokenStore.balanceOf(_holder, _projectId) >= _tokenCount, '0x44: INSUFFICIENT_TOKENS');
+    require(tokenStore.balanceOf(_holder, _projectId) >= _tokenCount, '0x46: INSUFFICIENT_TOKENS');
     ```
 
     _External references:_
@@ -71,7 +71,7 @@ function recordRedemptionFor(
 
     ```solidity
     // The current funding cycle must not be paused.
-    require(!fundingCycle.redeemPaused(), '0x45: PAUSED');
+    require(!fundingCycle.redeemPaused(), '0x47: PAUSED');
     ```
 
 4.  Create a variable where a redemption delegate will be saved if there is one. This pay delegate will later have it's method called if it exists.
@@ -107,14 +107,14 @@ function recordRedemptionFor(
 
     ```solidity
     // The amount being claimed must be within the project's balance.
-    require(claimAmount <= balanceOf[_projectId], '0x46: INSUFFICIENT_FUNDS');
+    require(claimAmount <= balanceOf[_projectId], '0x48: INSUFFICIENT_FUNDS');
     ```
 
 7.  Make sure there is at least as much being claimed as expected.
 
     ```solidity
     // The amount being claimed must be at least as much as was expected.
-    require(claimAmount >= _minReturnedWei, '0x47: INADEQUATE');
+    require(claimAmount >= _minReturnedWei, '0x49: INADEQUATE');
     ```
 
 8.  Burn tokens if needed. 
@@ -209,13 +209,13 @@ function recordRedemptionFor(
   )
 {
   // The holder must have the specified number of the project's tokens.
-  require(tokenStore.balanceOf(_holder, _projectId) >= _tokenCount, '0x44: INSUFFICIENT_TOKENS');
+  require(tokenStore.balanceOf(_holder, _projectId) >= _tokenCount, '0x46: INSUFFICIENT_TOKENS');
 
   // Get a reference to the project's current funding cycle.
   fundingCycle = fundingCycleStore.currentOf(_projectId);
 
   // The current funding cycle must not be paused.
-  require(!fundingCycle.redeemPaused(), '0x45: PAUSED');
+  require(!fundingCycle.redeemPaused(), '0x47: PAUSED');
 
   // Save a reference to the delegate to use.
   IJBRedemptionDelegate _delegate;
@@ -239,10 +239,10 @@ function recordRedemptionFor(
   }
 
   // The amount being claimed must be within the project's balance.
-  require(claimAmount <= balanceOf[_projectId], '0x46: INSUFFICIENT_FUNDS');
+  require(claimAmount <= balanceOf[_projectId], '0x48: INSUFFICIENT_FUNDS');
 
   // The amount being claimed must be at least as much as was expected.
-  require(claimAmount >= _minReturnedWei, '0x47: INADEQUATE');
+  require(claimAmount >= _minReturnedWei, '0x49: INADEQUATE');
 
   // Redeem the tokens, which burns them.
   if (_tokenCount > 0)
@@ -278,10 +278,10 @@ function recordRedemptionFor(
 {% tab title="Errors" %}
 | String            | Description                                                         |
 | ----------------- | ------------------------------------------------------------------- |
-| **`0x44: INSUFFICIENT_TOKENS`** | Thrown if holder doesn't have enough tokens in its balance to make the specified redemption. |
-| **`0x45: PAUSED`** | Thrown if the project has configured its current funding cycle to pause redemptions. |
-| **`0x46: INSUFFICIENT_FUNDS`** | Thrown if the project's balance isn't sufficient to fulfill the desired claim. |
-| **`0x47: INADEQUATE`** | Thrown if the claim amount was less than the minimum expected. |
+| **`0x46: INSUFFICIENT_TOKENS`** | Thrown if holder doesn't have enough tokens in its balance to make the specified redemption. |
+| **`0x47: PAUSED`** | Thrown if the project has configured its current funding cycle to pause redemptions. |
+| **`0x48: INSUFFICIENT_FUNDS`** | Thrown if the project's balance isn't sufficient to fulfill the desired claim. |
+| **`0x49: INADEQUATE`** | Thrown if the claim amount is less than the minimum expected. |
 {% endtab %}
 
 {% tab title="Events" %}

@@ -128,7 +128,7 @@ function launchProjectFor(
       where x is _count, o is _currentOverflow, s is _totalSupply, and r is _redemptionRate.
     @dev _metadata.ballotRedemptionRate The redemption rate to apply when there is an active ballot.
     @dev _metadata.pausePay Whether or not the pay functionality should be paused during this cycle.
-    @dev _metadata.pauseWithdraw Whether or not the withdraw functionality should be paused during this cycle.
+    @dev _metadata.pauseWithdrawals Whether or not the withdraw functionality should be paused during this cycle.
     @dev _metadata.pauseRedeem Whether or not the redeem functionality should be paused during this cycle.
     @dev _metadata.pauseMint Whether or not the mint functionality should be paused during this cycle.
     @dev _metadata.pauseBurn Whether or not the burn functionality should be paused during this cycle.

@@ -21,7 +21,7 @@ function claim() external { ... }
 
     ```solidity
     // This store can only be claimed once.
-    require(terminal == address(0), '0x48: ALREADY_CLAIMED');
+    require(terminal == address(0), '0x4b: ALREADY_CLAIMED');
     ```
 
     _Internal references:_
@@ -48,7 +48,7 @@ function claim() external { ... }
 */
 function claim() external {
   // This store can only be claimed once.
-  require(terminal == address(0), '0x48: ALREADY_CLAIMED');
+  require(terminal == address(0), '0x4b: ALREADY_CLAIMED');
 
   // Set the terminal as the msg.sender.
   terminal = msg.sender;
@@ -59,7 +59,7 @@ function claim() external {
 {% tab title="Errors" %}
 | String            | Description                                                         |
 | ----------------- | ------------------------------------------------------------------- |
-| **`0x48: ALREADY_CLAIMED`** | Thrown if the contract has already been claimed. |
+| **`0x4b: ALREADY_CLAIMED`** | Thrown if the contract has already been claimed. |
 {% endtab %}
 
 {% tab title="Bug bounty" %}

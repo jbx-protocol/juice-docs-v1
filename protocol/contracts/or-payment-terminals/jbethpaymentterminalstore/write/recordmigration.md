@@ -39,7 +39,7 @@ function recordAddedBalanceFor(uint256 _projectId, uint256 _amount)
 
     ```solidity
     // Migration must be allowed
-    require(_fundingCycle.terminalMigrationAllowed(), '0x47: NOT_ALLOWED');
+    require(_fundingCycle.terminalMigrationAllowed(), '0x4a: NOT_ALLOWED');
     ```
 
 3.  Get a reference to the project's current balance. Set this to the value that the function will return.
@@ -84,7 +84,7 @@ function recordMigration(uint256 _projectId)
   JBFundingCycle memory _fundingCycle = fundingCycleStore.currentOf(_projectId);
 
   // Migration must be allowed
-  require(_fundingCycle.terminalMigrationAllowed(), '0x47: NOT_ALLOWED');
+  require(_fundingCycle.terminalMigrationAllowed(), '0x4a: NOT_ALLOWED');
 
   // Return the current balance.
   balance = balanceOf[_projectId];
@@ -98,7 +98,7 @@ function recordMigration(uint256 _projectId)
 {% tab title="Errors" %}
 | String            | Description                                                         |
 | ----------------- | ------------------------------------------------------------------- |
-| **`0x47: NOT_ALLOWED`** | Thrown if the project's current funding cycle disallows terminal migrations. |
+| **`0x4a: NOT_ALLOWED`** | Thrown if the project's current funding cycle disallows terminal migrations. |
 {% endtab %}
 
 {% tab title="Bug bounty" %}

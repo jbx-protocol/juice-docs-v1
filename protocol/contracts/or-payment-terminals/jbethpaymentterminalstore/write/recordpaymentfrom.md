@@ -298,7 +298,7 @@ function recordPaymentFrom(
 | ----------------- | ------------------------------------------------------------------- |
 | **`0x3a: NOT_FOUND`** | Thrown if the project doesn't have a funding cycle. |
 | **`0x3b: PAUSED`** | Thrown if the project has configured its current funding cycle to pause payments. |
-| **`0x3c: INADEQUATE`** | Thrown if the quantity of tokens minted for the beneficiary was less than the minimum expected. |
+| **`0x3c: INADEQUATE`** | Thrown if the quantity of tokens minted for the beneficiary is less than the minimum expected. |
 {% endtab %}
 
 {% tab title="Events" %}
