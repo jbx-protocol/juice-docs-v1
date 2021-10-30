@@ -52,11 +52,11 @@ function _distributeToReservedTokenSplitsOf(JBFundingCycle memory _fundingCycle,
     // Get a reference to the split being iterated on.
     JBSplit memory _split = _splits[_i];
     ```
-5.  Get a reference to the amount of tokens to distribute to the current split. This amount is the total amount multiplied by the percentage of the split, which is a number out of 10000.
+5.  Get a reference to the amount of tokens to distribute to the current split. This amount is the total amount multiplied by the percentage of the split, which is a number out of 10000000.
 
     ```solidity
-    // The amount to send towards the split. JBSplit percents are out of 10000.
-    uint256 _tokenCount = PRBMath.mulDiv(_amount, _split.percent, 10000);
+    // The amount to send towards the split. JBSplit percents are out of 10000000.
+    uint256 _tokenCount = PRBMath.mulDiv(_amount, _split.percent, 10000000);
     ```
 6.  If there are tokens to mint for the given split, do so. If the split has an `allocator` specified, the tokens should go to that address. Otherwise if the split has a `projectId` specified, the tokens should be directed to the project's owner. Otherwise, the tokens should be directed at the `beneficiary` address of the split.
 
@@ -132,8 +132,8 @@ function _distributeToReservedTokenSplitsOf(JBFundingCycle memory _fundingCycle,
     // Get a reference to the split being iterated on.
     JBSplit memory _split = _splits[_i];
 
-    // The amount to send towards the split. JBSplit percents are out of 10000.
-    uint256 _tokenCount = PRBMath.mulDiv(_amount, _split.percent, 10000);
+    // The amount to send towards the split. JBSplit percents are out of 10000000.
+    uint256 _tokenCount = PRBMath.mulDiv(_amount, _split.percent, 10000000);
 
     // Mints tokens for the split if needed.
     if (_tokenCount > 0)
