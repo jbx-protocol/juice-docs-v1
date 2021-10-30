@@ -9,7 +9,7 @@ description: >-
 
 The Juicebox protocol is made up of 7 core contracts and 3 surface contracts. 
 * Core contracts store all the independent components that make the protocol work.
-* Surface contracts glue them together while accepting funds on behalf of each project.
+* Surface contracts glue core contracts together and can accept funds on behalf of projects. Anyone can write new surface contracts for projects to use.
 
 # Core contracts
 
