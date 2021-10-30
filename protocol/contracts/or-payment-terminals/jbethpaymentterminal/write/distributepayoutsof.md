@@ -4,7 +4,9 @@ Contract: [`JBETHPaymentTerminalStore`](../)​‌
 
 {% tabs %}
 {% tab title="Step by step" %}
-**Distributes payouts for a project according to the constraints of its current funding cycle.Payouts are sent to the preprogrammed splits, and any leftover amount is sent to the project owner.**
+**Distributes payouts for a project according to the constraints of its current funding cycle.**
+
+_Payouts are sent to the preprogrammed splits, and any leftover amount is sent to the project owner._
 
 _Anyone can distribute payouts on a project's behalf._
 
@@ -146,6 +148,8 @@ function distributePayoutsOf(
 /**
   @notice 
   Distributes payouts for a project according to the constraints of its current funding cycle.
+
+  @dev
   Payouts are sent to the preprogrammed splits, and any leftover amount is sent to the project owner.
 
   @dev
