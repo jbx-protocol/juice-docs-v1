@@ -36,8 +36,8 @@ function _takeFeeFrom(
 
     _Libraries used:_
 
-    * [`PRBMath`](https://github.com/hifi-finance/prb-math/blob/main/contracts/PRBMath.sol)
-      * `mulDiv`
+    * [`PRBMath`](https://github.com/hifi-finance/prb-math/blob/main/contracts/PRBMath.sol)\
+        `.mulDiv(...)`
 2.  If there's no fee amount, there's no need to take the fee.
 
     ```solidity

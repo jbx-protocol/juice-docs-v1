@@ -81,7 +81,7 @@ function mintTokensOf(
     _Libraries used:_
 
     * [`JBFundingCycleMetadataResolver`](../../../../libraries/jbfundingcyclemetadataresolver.md)\
-        `mintPaused(...)`
+        `.mintPaused(...)`
 
     _External references:_
 
@@ -111,8 +111,8 @@ function mintTokensOf(
 
     _Libraries used:_
 
-    * [`PRBMath`](https://github.com/hifi-finance/prb-math/blob/main/contracts/PRBMath.sol)
-      * `mulDiv`
+    * [`PRBMath`](https://github.com/hifi-finance/prb-math/blob/main/contracts/PRBMath.sol)\
+        `.mulDiv(...)`
 
     _Internal references:_
 

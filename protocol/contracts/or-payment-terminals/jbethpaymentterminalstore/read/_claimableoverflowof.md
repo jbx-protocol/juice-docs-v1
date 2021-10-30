@@ -64,7 +64,7 @@ function claimableOverflowOf(uint256 _projectId, uint256 _tokenCount)
     _Libraries used:_
 
     * [`JBFundingCycleMetadataResolver`](../../../libraries/jbfundingcyclemetadataresolver.md)\
-        `reservedRate(...)`
+        `.reservedRate(...)`
 
     _External references:_
 
@@ -95,8 +95,8 @@ function claimableOverflowOf(uint256 _projectId, uint256 _tokenCount)
     _Libraries used:_
 
     * [`JBFundingCycleMetadataResolver`](../../../libraries/jbfundingcyclemetadataresolver.md)\
-        `ballotRedemptionRate(...)`\
-        `redemptionRate(...)`
+        `.ballotRedemptionRate(...)`\
+        `.redemptionRate(...)`
 
     _External references:_
 
@@ -116,8 +116,9 @@ function claimableOverflowOf(uint256 _projectId, uint256 _tokenCount)
 
     _Libraries used:_
 
-    * [`PRBMath`](https://github.com/hifi-finance/prb-math/blob/main/contracts/PRBMath.sol)
-      * `mulDiv`
+    * [`PRBMath`](https://github.com/hifi-finance/prb-math/blob/main/contracts/PRBMath.sol)\
+        `.mulDiv(...)`
+
 10. Return the claimable amount determined by a bonding curve. At a 100% bonding curve the linear base can be returned immediately, this outcome is naturally part of the curve – checking for it first could prevent an unnecessary and slightly more expensive mulDiv calculation.
 
     ```solidity
@@ -133,8 +134,8 @@ function claimableOverflowOf(uint256 _projectId, uint256 _tokenCount)
 
     _Libraries used:_
 
-    * [`PRBMath`](https://github.com/hifi-finance/prb-math/blob/main/contracts/PRBMath.sol)
-      * `mulDiv`
+    * [`PRBMath`](https://github.com/hifi-finance/prb-math/blob/main/contracts/PRBMath.sol)\
+        `.mulDiv(...)`
 {% endtab %}
 
 {% tab title="Code" %}

@@ -108,9 +108,9 @@ function recordPaymentFrom(
     _Libraries used:_
 
     * [`JBFundingCycleMetadataResolver`](../../../libraries/jbfundingcyclemetadataresolver.md)\
-        `useDataSourceForPay(...)`\
-        `dataSource(...)`\
-        `reservedRate(...)`
+        `.useDataSourceForPay(...)`\
+        `.dataSource(...)`\
+        `.reservedRate(...)`
 
 6.  Calculate the weighted amount, which is the payment amount multiplied by the appropriate weight.
 
@@ -121,8 +121,8 @@ function recordPaymentFrom(
 
     _Libraries used:_
 
-    * [`PRBMathUD60x18`](https://github.com/hifi-finance/prb-math/blob/main/contracts/PRBMathUD60x18.sol)
-      * `mul`
+    * [`PRBMathUD60x18`](https://github.com/hifi-finance/prb-math/blob/main/contracts/PRBMathUD60x18.sol)\
+        `.mul(...)`
 7.  Increment the project's balance by the amount of the payment received.
 
     ```solidity
@@ -150,7 +150,7 @@ function recordPaymentFrom(
     _Libraries used:_
 
     * [`JBFundingCycleMetadataResolver`](../../../libraries/jbfundingcyclemetadataresolver.md)\
-        `reservedRate(...)`
+        `.reservedRate(...)`
 
     _External references:_
 

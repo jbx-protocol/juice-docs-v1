@@ -34,8 +34,9 @@ function _refundHeldFees(
 
     _Libraries used:_
 
-    * [`PRBMath`](https://github.com/hifi-finance/prb-math/blob/main/contracts/PRBMath.sol)
-      * `mulDiv`
+    * [`PRBMath`](https://github.com/hifi-finance/prb-math/blob/main/contracts/PRBMath.sol)\
+        `.mulDiv(...)`
+
 2.  Get a reference to any held [`JBFee`](../../../data-structures/jbfee.md)'s for the project.
 
     ```solidity
