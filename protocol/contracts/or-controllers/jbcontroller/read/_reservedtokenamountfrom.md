@@ -55,7 +55,7 @@ function _reservedTokenAmountFrom(
     _Libraries used:_
 
     * [`PRBMath`](https://github.com/hifi-finance/prb-math/blob/main/contracts/PRBMath.sol)
-      * `mulDiv`
+      * `.mulDiv`
 {% endtab %}
 
 {% tab title="Only code" %}

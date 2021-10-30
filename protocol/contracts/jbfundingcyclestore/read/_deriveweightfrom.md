@@ -35,7 +35,7 @@ function _deriveWeightFrom(JBFundingCycle memory _baseFundingCycle, uint256 _sta
     _Libraries used:_
 
     * [`PRBMath`](https://github.com/hifi-finance/prb-math/blob/main/contracts/PRBMath.sol)
-      * `mulDiv`
+      * `.mulDiv`
 
 2.  The calculations that follow will progressively apply discount rates to the `_baseFundingCycle`'s weight to arrive at the correct weight to return.
 
@@ -70,7 +70,7 @@ function _deriveWeightFrom(JBFundingCycle memory _baseFundingCycle, uint256 _sta
     _Libraries used:_
 
     * [`PRBMath`](https://github.com/hifi-finance/prb-math/blob/main/contracts/PRBMath.sol)
-      * `mulDiv`
+      * `.mulDiv`
 
     _Internal references:_
 

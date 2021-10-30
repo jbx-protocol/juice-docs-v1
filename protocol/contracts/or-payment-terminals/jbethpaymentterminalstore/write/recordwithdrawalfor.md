@@ -81,7 +81,7 @@ function recordWithdrawalFor(
     _Libraries used:_
 
     * [`PRBMathUD60x18`](https://github.com/hifi-finance/prb-math/blob/main/contracts/PRBMathUD60x18.sol)
-      * `div`
+      * `.div`
 6.  Make sure the project has enough of a balance to withdraw the desired amount.
 
     ```solidity

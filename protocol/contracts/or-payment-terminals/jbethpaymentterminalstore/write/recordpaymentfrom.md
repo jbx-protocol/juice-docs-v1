@@ -121,7 +121,7 @@ function recordPaymentFrom(
     _Libraries used:_
 
     * [`PRBMathUD60x18`](https://github.com/hifi-finance/prb-math/blob/main/contracts/PRBMathUD60x18.sol)
-      * `mul`
+      * `.mul`
 7.  Increment the project's balance by the amount of the payment received.
 
     ```solidity

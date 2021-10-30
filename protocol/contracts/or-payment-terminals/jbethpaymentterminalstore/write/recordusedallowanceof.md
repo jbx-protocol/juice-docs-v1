@@ -64,7 +64,7 @@ function recordUsedAllowanceOf(
     _Libraries used:_
 
     * [`PRBMathUD60x18`](https://github.com/hifi-finance/prb-math/blob/main/contracts/PRBMathUD60x18.sol)
-      * `div`
+      * `.div`
 4.  Make sure the there is enough allowance to use.
 
     ```solidity
