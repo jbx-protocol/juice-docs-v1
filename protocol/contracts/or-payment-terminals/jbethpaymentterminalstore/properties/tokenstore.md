@@ -14,4 +14,5 @@ Contract: [`JBETHPaymentTerminalStore`](../)​‌
 IJBTokenStore public immutable tokenStore;
 ```
 
+* The value cannot be changed.
 * The resulting view function can be accessed externally by anyone.

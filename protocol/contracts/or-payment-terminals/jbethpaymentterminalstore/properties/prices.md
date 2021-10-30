@@ -14,4 +14,5 @@ Contract: [`JBETHPaymentTerminalStore`](../)​‌
 IJBPrices public immutable prices;
 ```
 
+* The value cannot be changed.
 * The resulting view function can be accessed externally by anyone.
