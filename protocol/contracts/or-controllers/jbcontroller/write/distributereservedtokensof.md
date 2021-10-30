@@ -25,18 +25,14 @@ function distributeReservedTokensOf(uint256 _projectId, string memory _memo)
 
 1. Forward the call to the internal version of the function that is also used by other operations.
 
-````
-```solidity
-````
+   ```solidity
+   return _distributeReservedTokensOf(_projectId, _memo);
+   ```
 
-````
-return _distributeReservedTokensOf(_projectId, _memo);
-```
+   _Internal references:_
 
-_Internal references:_
-
-* [`_distributeReservedTokensOf`](\_distributereservedtokensof.md)
-````
+   * [`_distributeReservedTokensOf`](\_distributereservedtokensof.md)
+   
 {% endtab %}
 
 {% tab title="Code" %}

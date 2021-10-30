@@ -1,6 +1,6 @@
-# \_overflowDuring
+# _overflowDuring
 
-Contract: [`JBETHPaymentTerminalStore`](broken-reference)​‌
+Contract: [`JBETHPaymentTerminalStore`](../)​‌
 
 {% tabs %}
 {% tab title="Step by step" %}
@@ -8,7 +8,7 @@ Contract: [`JBETHPaymentTerminalStore`](broken-reference)​‌
 
 _This amount changes as the price of ETH changes in relation to the funding cycle's currency._
 
-## Definition
+# Definition
 
 ```solidity
 function _overflowDuring(JBFundingCycle memory _fundingCycle) private view returns (uint256) { ... }
@@ -20,7 +20,7 @@ function _overflowDuring(JBFundingCycle memory _fundingCycle) private view retur
 * The function does not alter state on the blockchain.
 * The function returns the he overflow of funds.
 
-## Body
+# Body
 
 1.  Get a reference to the current balance of the funding cycle's project.
 
@@ -32,19 +32,22 @@ function _overflowDuring(JBFundingCycle memory _fundingCycle) private view retur
     _Internal references:_
 
     * [`balanceOf`](../properties/balanceof.md)
+
 2.  If the project has no balance, there can't be any overflow.
 
     ```solidity
     // If there's no balance, there's no overflow.
     if (_balanceOf == 0) return 0;
     ```
+
 3.  Get a reference to the amount of the funding cycle's target that can still be tapped. This is the difference between its target and what has already been tapped during this funding cycle. This value is in terms of the funding cycle's currency.
 
     ```solidity
     // Get a reference to the amount still withdrawable during the funding cycle.
     uint256 _targetRemaining = _fundingCycle.target - _fundingCycle.tapped;
     ```
-4.  Convert the target remaining into ETH using the appropriate price feed.
+
+4.  Convert the target remaining into ETH using the appropriate price feed.  
 
     ```solidity
     // Convert the _targetRemaining to ETH.
@@ -56,11 +59,10 @@ function _overflowDuring(JBFundingCycle memory _fundingCycle) private view retur
       );
     ```
 
-    _Libraries used:_
-
     _Internal references:_
 
     * [`priceFor`](../../../jbprices/read/pricefor.md)
+
 5.  If the current balance of the project is less than the target remaining, there is no overflow. Otherwise the difference between the project's current balance and the remaining amount is the overflow.
 
     ```solidity
@@ -114,3 +116,5 @@ function _overflowDuring(JBFundingCycle memory _fundingCycle) private view retur
 | **High severity** | Identify a vulnerability in this operation that could lead to data corruption or loss of funds.                                        | 5+ETH  |
 {% endtab %}
 {% endtabs %}
+
+ 
