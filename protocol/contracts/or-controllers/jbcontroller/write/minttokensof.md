@@ -80,7 +80,7 @@ function mintTokensOf(
 
     _Libraries used:_
 
-    * [`JBFundingCycleMetadataResolver`](../../../libraries/jbfundingcyclemetadataresolver.md)
+    * [`JBFundingCycleMetadataResolver`](../../../../libraries/jbfundingcyclemetadataresolver.md)
       * `mintPaused`
 
     _External references:_
