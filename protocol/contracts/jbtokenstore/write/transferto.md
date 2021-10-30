@@ -10,7 +10,7 @@ Interface: [`IJBTokenStore`](../../../interfaces/ijbtokenstore.md)
 
 _Only a token holder or an operator can transfer its unclaimed tokens_.
 
-## Definition
+# Definition
 
 ```solidity
 function transferTo(
@@ -30,7 +30,7 @@ function transferTo(
 * The function overrides a function definition from the `IJBTokenStore` interface.
 * The function returns nothing.
 
-## Body
+# Body
 
 1.  Make sure a recipient was specified.
 

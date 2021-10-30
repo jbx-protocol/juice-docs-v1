@@ -8,7 +8,7 @@ Contract: [`JBETHPaymentTerminalStore`](../)​‌
 
 _Only the associated payment terminal can record a used allowance._
 
-## Definition
+# Definition
 
 ```solidity
 function recordWithdrawalFor(
@@ -32,7 +32,7 @@ function recordWithdrawalFor(
   * `fundingCycle` is the funding cycle during which the withdrawal was made.
   * `withdrawnAmount` is the amount withdrawn.
 
-## Body
+# Body
 
 1.  Tell the project's controller that an amount is being withdrawn.
 

@@ -8,7 +8,7 @@ Contract: [`JBController`](../)​‌
 
 _Only a project's owner or a designated operator can migrate it._
 
-## Definition
+# Definition
 
 ```solidity
 function migrate(uint256 _projectId, IJBController _to)
@@ -23,7 +23,7 @@ function migrate(uint256 _projectId, IJBController _to)
 * Through the [`requirePermission`](../../or-abstract/jboperatable/modifiers/requirepermission.md) modifier, the function is only accessible by the project's owner, or from an operator that has been given the `JBOperations.MIGRATE_CONTROLLER` permission by the project owner for the provided `_projectId`.
 * The function doesn't return anything.
 
-## Body
+# Body
 
 1.  Make sure this controller is the project's current controller. Migrating away from a controller that isn't the project's current one wouldn't do anything.
 

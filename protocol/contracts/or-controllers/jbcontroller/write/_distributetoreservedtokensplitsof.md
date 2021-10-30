@@ -4,7 +4,7 @@
 {% tab title="Step by step" %}
 **Distributed tokens to the splits according to the specified funding cycle configuration.**
 
-## Definition
+# Definition
 
 ```solidity
 function _distributeToReservedTokenSplitsOf(JBFundingCycle memory _fundingCycle, uint256 _amount)
@@ -18,7 +18,7 @@ function _distributeToReservedTokenSplitsOf(JBFundingCycle memory _fundingCycle,
 * The function is private to this contract.
 * The function returns the leftover amount after all splits have been distributed.
 
-## Body
+# Body
 
 1.  Save the passed in `_amount` as the `leftoverAmount` that will be returned. The subsequent routine will decrement the leftover amount as splits are settled.
 

@@ -6,7 +6,7 @@ Contract:[`JBFundingCycleStore`](../)​
 {% tab title="Step by step" %}
 **Updates intrinsic properties for a funding cycle given a base cycle.**\\
 
-## Definition
+# Definition
 
 ```solidity
 function _updateFundingCycleBasedOn(
@@ -25,7 +25,7 @@ function _updateFundingCycleBasedOn(
 * The function is private to this contract.
 * The function returns the ID of the updated funding cycle.
 
-## Body
+# Body
 
 1.  Find the time that the updated funding cycle should start at.
 
