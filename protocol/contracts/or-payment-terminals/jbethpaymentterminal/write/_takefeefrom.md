@@ -18,7 +18,7 @@ function _takeFeeFrom(
 ```
 
 * Arguments:
-  * `_fundingCycle` is the funding cycle during which the fee is being taken.
+  * `_fundingCycle` is the [`JBFundingCycle`](../../../../data-structures/jbfundingcycle.md) during which the fee is being taken.
   * `_amount` is the amount to take a fee from.
   * `_beneficiary` is the address to print the platforms tokens for.
   * `_memo` is a memo to pass along to the emitted event.

@@ -51,6 +51,8 @@ function _distributeReservedTokensOf(uint256 _projectId, string memory _memo)
     );
     ```
 
+    _Libraries used:_
+
     _Internal references:_
 
     * [`_reservedTokenAmountFrom`](../properties/\_reservedtokenamountfrom.md)

@@ -49,6 +49,8 @@ function launchProjectFor(
       _metadata
     );
     ```
+
+    _Libraries used:_
 2.  Create the project. This will mint an ERC-721 in the `_owners` wallet representing ownership over the project.
 
     ```solidity

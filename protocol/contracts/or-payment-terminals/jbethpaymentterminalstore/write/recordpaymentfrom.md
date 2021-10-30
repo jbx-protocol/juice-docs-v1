@@ -104,12 +104,16 @@ function recordPaymentFrom(
       memo = _memo;
     }
     ```
+
+    _Libraries used:_
 6.  Calculate the weighted amount, which is the payment amount multiplied by the appropriate weight.
 
     ```solidity
     // Multiply the amount by the weight to determine the amount of tokens to mint.
     uint256 _weightedAmount = PRBMathUD60x18.mul(_amount, weight);
     ```
+
+    _Libraries used:_
 7.  Increment the project's balance by the amount of the payment received.
 
     ```solidity
@@ -120,7 +124,7 @@ function recordPaymentFrom(
     _Internal references:_
 
     * [`balanceOf`](../properties/balanceof.md)
-8.  If a there is a weighted amount, mint tokens accordingly. Unpakc the `_preferClaimedTokensAndBeneficiary` value into it's parts to pass along.
+8.  If a there is a weighted amount, mint tokens accordingly. Unpack the `_preferClaimedTokensAndBeneficiary` value into its parts to pass along.
 
     ```solidity
     if (_weightedAmount > 0)
@@ -134,6 +138,8 @@ function recordPaymentFrom(
       );
     ```
 
+    _Libraries used:_
+
     _External references:_
 
     * [`mintTokensOf`](../../../or-controllers/jbcontroller/write/minttokensof.md)
@@ -143,7 +149,7 @@ function recordPaymentFrom(
     // The token count must be greater than or equal to the minimum expected.
     require(tokenCount >= _minReturnedTokens, '0x3c: INADEQUATE');
     ```
-10. If a pay delegate was provided by the data source, call its `didPay` function with a data payload including contextual information. When finished, emit a `DelegateDidPay` event with the relevant parameters.
+10. If a pay delegate was provided by the data source, call its `didPay` function with a [`JBDidPayData`](../../../../data-structures/jbdidpaydata.md) payload including contextual information. When finished, emit a `DelegateDidPay` event with the relevant parameters.
 
     ```solidity
     // If a delegate was returned by the data source, issue a callback to it.

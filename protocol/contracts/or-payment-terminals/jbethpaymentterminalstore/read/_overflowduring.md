@@ -56,6 +56,8 @@ function _overflowDuring(JBFundingCycle memory _fundingCycle) private view retur
       );
     ```
 
+    _Libraries used:_
+
     _Internal references:_
 
     * [`priceFor`](../../../jbprices/read/pricefor.md)

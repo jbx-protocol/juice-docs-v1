@@ -40,6 +40,8 @@ function recordAddedBalanceFor(uint256 _projectId, uint256 _amount)
     // Migration must be allowed
     require(_fundingCycle.terminalMigrationAllowed(), '0x4a: NOT_ALLOWED');
     ```
+
+    _Libraries used:_
 3.  Get a reference to the project's current balance. Set this to the value that the function will return.
 
     ```solidity

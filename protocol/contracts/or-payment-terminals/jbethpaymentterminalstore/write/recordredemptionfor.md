@@ -71,7 +71,9 @@ function recordRedemptionFor(
     // The current funding cycle must not be paused.
     require(!fundingCycle.redeemPaused(), '0x47: PAUSED');
     ```
-4.  Create a variable where a redemption delegate will be saved if there is one. This pay delegate will later have it's method called if it exists.
+
+    _Libraries used:_
+4.  Create a variable where a redemption delegate will be saved if there is one. This pay delegate will later have its method called if it exists.
 
     ```solidity
     // Save a reference to the delegate to use.
@@ -98,6 +100,8 @@ function recordRedemptionFor(
       memo = _memo;
     }
     ```
+
+    _Libraries used:_
 6.  Make sure the amount being claimed is within the bounds of the project's balance.
 
     ```solidity
@@ -137,7 +141,7 @@ function recordRedemptionFor(
     _Internal references:_
 
     * [`balanceOf`](../properties/balanceof.md)
-10. If a redemption delegate was provided by the data source, call its `didRedeem` function with a data payload including contextual information. When finished, emit a `DelegateDidRedeem` event with the relevant parameters.
+10. If a redemption delegate was provided by the data source, call its `didRedeem` function with a [`JBDidRedeemData`](../../../../data-structures/jbdidredeemdata.md) payload including contextual information. When finished, emit a `DelegateDidRedeem` event with the relevant parameters.
 
     ```solidity
     // If a delegate was returned by the data source, issue a callback to it.

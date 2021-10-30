@@ -47,6 +47,8 @@ function reconfigureFundingCyclesOf(
       _metadata
     );
     ```
+
+    _Libraries used:_
 2.  Configure the project's funding cycle, overflow allowances, and splits.
 
     ```solidity

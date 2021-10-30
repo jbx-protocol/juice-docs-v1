@@ -78,6 +78,8 @@ function mintTokensOf(
     );
     ```
 
+    _Libraries used:_
+
     _External references:_
 
     * [`isTerminalDelegateOf`](../../../jbdirectory/read/isterminaldelegateof.md)
@@ -103,6 +105,8 @@ function mintTokensOf(
           int256(beneficiaryTokenCount);
     }
     ```
+
+    _Libraries used:_
 
     _Internal references:_
 

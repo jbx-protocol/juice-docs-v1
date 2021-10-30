@@ -13,7 +13,7 @@ function _distributeToReservedTokenSplitsOf(JBFundingCycle memory _fundingCycle,
 ```
 
 * Arguments:
-  * `_fundingCycle` is the funding cycle to base the token distribution on.
+  * `_fundingCycle` is the [`JBFundingCycle`](../../../../data-structures/jbfundingcycle.md)  to base the token distribution on.
   * `_amount` is the total amount of tokens to mint.
 * The function is private to this contract.
 * The function returns the leftover amount after all splits have been distributed.

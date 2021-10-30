@@ -34,7 +34,7 @@ function recordWithdrawalFor(
 
 ## Body
 
-1.  Tell the project's controller that an amount is being withdrawn.
+1.  Tell the project's controller that an amount is being withdrawn. Get the [`JBFundingCycle`](../../../../data-structures/jbfundingcycle.md) data struct during which the withdraw was made.
 
     ```solidity
     // Registers the funds as withdrawn and gets the ID of the funding cycle during which this withdrawal is being made.
@@ -56,6 +56,8 @@ function recordWithdrawalFor(
     // The funding cycle must not be configured to have withdrawals paused.
     require(!fundingCycle.withdrawalsPaused(), '0x3e: PAUSED');
     ```
+
+    _Libraries used:_
 4.  Make the sure provided currency matches the funding cycle's currency.
 
     ```solidity
@@ -71,6 +73,8 @@ function recordWithdrawalFor(
       prices.priceFor(fundingCycle.currency, JBCurrencies.ETH)
     );
     ```
+
+    _Libraries used:_
 6.  Make sure the project has enough of a balance to withdraw the desired amount.
 
     ```solidity

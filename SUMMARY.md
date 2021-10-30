@@ -271,7 +271,7 @@
         * [\_takeFeeFrom](protocol/contracts/or-payment-terminals/jbethpaymentterminal/write/\_takefeefrom.md)
         * [\_takeFee](protocol/contracts/or-payment-terminals/jbethpaymentterminal/write/\_takefee.md)
         * [\_pay](protocol/contracts/or-payment-terminals/jbethpaymentterminal/write/\_pay.md)
-        * [\_takeFee](protocol/contracts/or-payment-terminals/jbethpaymentterminal/write/\_refundheldfees.md)
+        * [\_refundHeldFees](protocol/contracts/or-payment-terminals/jbethpaymentterminal/write/\_refundheldfees.md)
     * [JBETHPaymentTerminalStore](protocol/contracts/or-payment-terminals/jbethpaymentterminalstore/README.md)
       * [Events](protocol/contracts/or-payment-terminals/jbethpaymentterminalstore/events/README.md)
         * [DelegateDidPay](protocol/contracts/or-payment-terminals/jbethpaymentterminalstore/events/delegatedidpay.md)

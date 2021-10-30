@@ -69,6 +69,8 @@ function burnTokensOf(
     );
     ```
 
+    _Libraries used:_
+
     _External references:_
 
     * [`isTerminalDelegateOf`](../../../jbdirectory/read/isterminaldelegateof.md)

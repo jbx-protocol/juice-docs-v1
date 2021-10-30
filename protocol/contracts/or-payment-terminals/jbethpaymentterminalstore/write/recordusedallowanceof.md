@@ -60,6 +60,8 @@ function recordUsedAllowanceOf(
       prices.priceFor(fundingCycle.currency, JBCurrencies.ETH)
     );
     ```
+
+    _Libraries used:_
 4.  Make sure the there is enough allowance to use.
 
     ```solidity

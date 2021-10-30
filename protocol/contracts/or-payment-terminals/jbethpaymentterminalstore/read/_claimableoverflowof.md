@@ -61,6 +61,8 @@ function claimableOverflowOf(uint256 _projectId, uint256 _tokenCount)
       .reservedTokenBalanceOf(_fundingCycle.projectId, _fundingCycle.reservedRate());
     ```
 
+    _Libraries used:_
+
     _External references:_
 
     * [`controllerOf`](../../../jbdirectory/read/controllerof.md)
@@ -86,19 +88,23 @@ function claimableOverflowOf(uint256 _projectId, uint256 _tokenCount)
       ? _fundingCycle.ballotRedemptionRate()
       : _fundingCycle.redemptionRate();
     ```
+
+    _Libraries used:_
 8.  If the redemption rate is 0%, nothing is claimable regardless of the amount of tokens.
 
     ```solidity
     // If the redemption rate is 0, nothing is claimable.
     if (_redemptionRate == 0) return 0;
     ```
-9.  The redemption bonding curve formula depends on a base claimable value that is the linear proportion of the provided tokens to the total supply of tokens. Get a reference to this proportion to use in the forumla.
+9.  The redemption bonding curve formula depends on a base claimable value that is the linear proportion of the provided tokens to the total supply of tokens. Get a reference to this proportion to use in the formula.
 
     ```solidity
     // Get a reference to the linear proportion.
     uint256 _base = PRBMath.mulDiv(_currentOverflow, _tokenCount, _totalSupply);
     ```
-10. Return the claimable amount determined by a bonding curve. At a 100% bonding curve the linear base can be returned immediately, this outcome is naturally part of the curve – checking for it first could prevent an unecessary and slightly more expensive mulDiv calculation.
+
+    _Libraries used:_
+10. Return the claimable amount determined by a bonding curve. At a 100% bonding curve the linear base can be returned immediately, this outcome is naturally part of the curve – checking for it first could prevent an unnecessary and slightly more expensive mulDiv calculation.
 
     ```solidity
     // These conditions are all part of the same curve. Edge conditions are separated because fewer operation are necessary.
@@ -110,6 +116,8 @@ function claimableOverflowOf(uint256 _projectId, uint256 _tokenCount)
         200
       );
     ```
+
+    _Libraries used:_
 {% endtab %}
 
 {% tab title="Code" %}
