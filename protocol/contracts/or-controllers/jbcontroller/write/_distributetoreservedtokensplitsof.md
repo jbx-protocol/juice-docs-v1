@@ -58,11 +58,11 @@ function _distributeToReservedTokenSplitsOf(JBFundingCycle memory _fundingCycle,
     // The amount to send towards the split. JBSplit percents are out of 10000000.
     uint256 _tokenCount = PRBMath.mulDiv(_amount, _split.percent, 10000000);
     ```
-6.  If there are tokens to mint for the given split, do so. If the split has an `allocator` specified, the tokens should go to that address. Otherwise if the split has a `projectId` specified, the tokens should be directed to the project's owner. Otherwise, the tokens should be directed at the `beneficiary` address of the split.
+6.  If there are tokens to mint for the given split, do so. If the split has an `allocator` specified, the tokens should go to that address. Otherwise if the split has a `projectId` specified, the tokens should be directed to the project's owner. Otherwise, the tokens should be directed at the `beneficiary` address of the split. Afterwards, if there's an `allocator` specified, let it know that tokens have been sent. Reduce the leftover amount by the tokens that were sent to the split.
 
     ```solidity
     // Mints tokens for the split if needed.
-    if (_tokenCount > 0)
+    if (_tokenCount > 0) {
       tokenStore.mintFor(
         // If an allocator is set in the splits, set it as the beneficiary. Otherwise if a projectId is set in the split, set the project's owner as the beneficiary. Otherwise use the split's beneficiary.
         _split.allocator != IJBSplitAllocator(address(0))
@@ -74,18 +74,28 @@ function _distributeToReservedTokenSplitsOf(JBFundingCycle memory _fundingCycle,
         _tokenCount,
         _split.preferClaimed
       );
+
+      // If there's an allocator set, trigger its `allocate` function.
+      if (_split.allocator != IJBSplitAllocator(address(0)))
+        _split.allocator.allocate(
+          _tokenCount,
+          JBSplitsGroups.RESERVED_TOKENS,
+          _fundingCycle.projectId,
+          _split.projectId,
+          _split.beneficiary,
+          _split.preferClaimed
+        );
+
+      // Subtract from the amount to be sent to the beneficiary.
+      leftoverAmount = leftoverAmount - _tokenCount;
+    }
     ```
 
     _External references:_
 
     * [`mintFor`](../../../jbtokenstore/write/mintfor.md)
-7.  Reduce the leftover amount by the tokens that were sent to the split.
 
-    ```solidity
-    // Subtract from the amount to be sent to the beneficiary.
-    leftoverAmount = leftoverAmount - _tokenCount;
-    ```
-8.  Emit a `DistributeToReservedTokenSplit` event for the split being iterated on with the relevant parameters.
+7.  Emit a `DistributeToReservedTokenSplit` event for the split being iterated on with the relevant parameters.
 
     ```solidity
     emit DistributeToReservedTokenSplit(
@@ -136,7 +146,7 @@ function _distributeToReservedTokenSplitsOf(JBFundingCycle memory _fundingCycle,
     uint256 _tokenCount = PRBMath.mulDiv(_amount, _split.percent, 10000000);
 
     // Mints tokens for the split if needed.
-    if (_tokenCount > 0)
+    if (_tokenCount > 0) {
       tokenStore.mintFor(
         // If an allocator is set in the splits, set it as the beneficiary. Otherwise if a projectId is set in the split, set the project's owner as the beneficiary. Otherwise use the split's beneficiary.
         _split.allocator != IJBSplitAllocator(address(0))
@@ -149,19 +159,20 @@ function _distributeToReservedTokenSplitsOf(JBFundingCycle memory _fundingCycle,
         _split.preferClaimed
       );
 
-    // If there's an allocator set, trigger its `allocate` function.
-    if (_split.allocator != IJBSplitAllocator(address(0)))
-      _split.allocator.allocate(
-        _tokenCount,
-        JBSplitsGroups.RESERVED_TOKENS,
-        _fundingCycle.projectId,
-        _split.projectId,
-        _split.beneficiary,
-        _split.preferClaimed
-      );
+      // If there's an allocator set, trigger its `allocate` function.
+      if (_split.allocator != IJBSplitAllocator(address(0)))
+        _split.allocator.allocate(
+          _tokenCount,
+          JBSplitsGroups.RESERVED_TOKENS,
+          _fundingCycle.projectId,
+          _split.projectId,
+          _split.beneficiary,
+          _split.preferClaimed
+        );
 
-    // Subtract from the amount to be sent to the beneficiary.
-    leftoverAmount = leftoverAmount - _tokenCount;
+      // Subtract from the amount to be sent to the beneficiary.
+      leftoverAmount = leftoverAmount - _tokenCount;
+    }
 
     emit DistributeToReservedTokenSplit(
       _fundingCycle.id,
@@ -173,6 +184,12 @@ function _distributeToReservedTokenSplitsOf(JBFundingCycle memory _fundingCycle,
   }
 }
 ```
+{% endtab %}
+
+{% tab title="Events" %}
+| Name                                | Data                                                                           |
+| ----------------------------------- | ------------------------------------------------------------------------------ |
+| [**`DistributeToReservedTokenSplit`**](../events/distributetoreservedtokensplit.md) | <ul><li><code>uint256 indexed fundingCycleId</code></li><li><code>uint256 indexed projectId</code></li><li><a href="../../../data-structures/jbsplit.md"><code>JBSplit</code></a><code>split</code></li><li><code>uint256 tokenCount</code></li><li><code>address caller</code></li></ul> |
 {% endtab %}
 
 {% tab title="Bug bounty" %}
