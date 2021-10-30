@@ -77,7 +77,6 @@ function useAllowanceOf(
 
 4.  If the funding cycle during which the distribtion is being made has a fee, and if its project isn't the JuiceboxDAO project with an ID of 1, take a fee from the withdrawal into the JuiceboxDAO project. 
 
-
     ```solidity
     // Take a fee from the _withdrawnAmount, if needed.
     // The project's owner will be the beneficiary of the resulting minted tokens from platform project.

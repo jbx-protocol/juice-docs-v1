@@ -7,9 +7,13 @@ description: >-
 
 # Overview
 
-The Juicebox protocol is made up of 7 core contracts (all documented), and 3 surface contracts (documentation WIP). Core contracts store all the independent components that make the protocol work, and the surface contracts glue them together while accept funds on behalf of each project.
+The Juicebox protocol is made up of 7 core contracts and 3 surface contracts. 
+* Core contracts store all the independent components that make the protocol work.
+* Surface contracts glue them together while accepting funds on behalf of each project.
 
-The first two core contracts are pretty self explanatory. They store the core opinionated components of the protocol.
+# Core contracts
+
+The first two core contracts are pretty self explanatory. They store the core Juicebox components of the protocol.
 
 * [`JBTokenStore`](../contracts/jbtokenstore/) manages token minting and burning for all projects.
 * [`JBFundingCycleStore`](../contracts/jbfundingcyclestore/) manages funding cycle configurations, ballots, accounting, and scheduling. Funding cycles are represented as a [`JBFundingCycle`](../data-structures/jbfundingcycle.md) data structure.
@@ -18,7 +22,7 @@ The next few are a little more abstract. They don't know anything specific to Ju
 
 *   [`JBProjects`](../contracts/jbprojects/) manages ownership over projects, which are represented as ERC-721 tokens.
 
-    The protocol uses these to enforce permissions to access several actions.
+    The protocol uses these to enforce permissions to access several transactions.
 *   [`JBSplitStore`](../contracts/jbsplitstore/) stores information about how arbitrary distributions should be split. The information is represented as a [`JBSplit`](../data-structures/jbsplit.md#jbsplit) data structure.
 
     The protocol uses these to split up payout distributions and reserved token distributions.
@@ -29,13 +33,13 @@ The next few are a little more abstract. They don't know anything specific to Ju
 
     The protocol uses this to allow project owners to give other EOAs or contracts permission to take certain administrative actions on their behalf. This is useful for encouraging a composable ecosystem where proxy contracts can perform actions on a project's behalf as a lego block.
 
-The last core contract stores info about which payment terminal's a project is currently accepting funds through, and which controller contract defines the rules according to which a project's terminal contract interacts with the core contracts.
+The last core contract stores info about which payment terminals a project is currently accepting funds through, and which controller contract defines the rules according to which a project's terminal contract interacts with the core contracts.
 
 * [`JBDirectory`](../contracts/jbdirectory/) keeps a reference of which terminal contracts each project is currently accepting funds through, and which controller contract is managing each project's tokens and funding cycles.
 
-There are currently 3 surface contracts that manage how projects receive funds and define the rules for how all core contracts should be used together.
+# Surface contracts
 
-(The docs for these are WIP)
+There are currently 3 surface contracts that manage how projects receive funds and define how all core contracts should be used together. Anyone can write new surface contracts for projects to use.
 
 * [`JBController`](../contracts/or-controllers/jbcontroller/) stitches together funding cycles and treasury tokens, making sure all activity is accounted for and correct.
 * [`JBETHPaymentTerminal`](../contracts/or-payment-terminals/jbethpaymentterminal/) manages all inflows and outflows of ETH into the Juicebox ecosystem.
