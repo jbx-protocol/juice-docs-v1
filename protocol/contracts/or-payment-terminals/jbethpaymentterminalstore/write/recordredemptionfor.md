@@ -1,6 +1,6 @@
 # recordRedemptionFor
 
-Contract: [`JBETHPaymentTerminalStore`](../)​‌
+Contract: [`JBETHPaymentTerminalStore`](broken-reference)​‌
 
 {% tabs %}
 {% tab title="Step by step" %}
@@ -8,7 +8,7 @@ Contract: [`JBETHPaymentTerminalStore`](../)​‌
 
 _Only the associated payment terminal can record a redemption._
 
-# Definition
+## Definition
 
 ```solidity
 function recordRedemptionFor(
@@ -43,7 +43,7 @@ function recordRedemptionFor(
   * `claimAmount` is the amount of wei claimed.
   * `memo` is a memo that should be included in the published event.
 
-# Body
+## Body
 
 1.  Make sure the holder has at least as many tokens as is being redeemed.
 
@@ -54,7 +54,7 @@ function recordRedemptionFor(
 
     _External references:_
 
-    * [`balanceOf`](../../../jbtokenstore/read/balanceof.md)
+    * [`balanceOf`](broken-reference)
 2.  Get a reference to the project's current funding cycle.
 
     ```solidity
@@ -158,7 +158,7 @@ function recordRedemptionFor(
 
     _Event references:_
 
-    * [`DelegateDidRedeem`](../events/delegatedidredeem.md)
+    * [`DelegateDidRedeem`](broken-reference)
 {% endtab %}
 
 {% tab title="Code" %}
@@ -276,9 +276,9 @@ function recordRedemptionFor(
 {% endtab %}
 
 {% tab title="Events" %}
-| Name                                                      | Data                                                                                                                                                                                                                                                |
-| --------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [**`DelegateDidRedeem`**](../events/delegatedidredeem.md) | <ul><li><a href="../../../interfaces/ijbredemptiondelegate.md"><code>JBRedemptionDelegate</code></a><code>delegate</code></li><li><a href="../../../data-structures/jbdidredeemdata.md"><code>JBDidRedeemData</code></a><code>data</code></li></ul> |
+| Name                                        | Data                                                                                                                                                                                                                                                |
+| ------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [**`DelegateDidRedeem`**](broken-reference) | <ul><li><a href="../../../interfaces/ijbredemptiondelegate.md"><code>JBRedemptionDelegate</code></a><code>delegate</code></li><li><a href="../../../data-structures/jbdidredeemdata.md"><code>JBDidRedeemData</code></a><code>data</code></li></ul> |
 {% endtab %}
 
 {% tab title="Bug bounty" %}

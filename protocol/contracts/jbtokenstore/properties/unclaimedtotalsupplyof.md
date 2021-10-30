@@ -1,6 +1,6 @@
 # unclaimedTotalSupplyOf
 
-Contract: [`JBTokenStore`](../)​‌
+Contract: [`JBTokenStore`](broken-reference)​‌
 
 Interface: [`IJBTokenStore`](../../../interfaces/ijbtokenstore.md)
 

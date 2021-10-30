@@ -1,6 +1,6 @@
 # signalWithdrawalFrom
 
-Contract: [`JBController`](../)​‌
+Contract: [`JBController`](broken-reference)​‌
 
 Interface: [`IJBController`](../../../../interfaces/ijbcontroller.md)
 
@@ -10,7 +10,7 @@ Interface: [`IJBController`](../../../../interfaces/ijbcontroller.md)
 
 _Only a project's terminal can signal a withdrawal._
 
-# Definition
+## Definition
 
 ```solidity
 function signalWithdrawlFrom(uint256 _projectId, uint256 _amount)
@@ -27,7 +27,7 @@ function signalWithdrawlFrom(uint256 _projectId, uint256 _amount)
 * The function overrides a function definition from the [`IJBController`](../../../../interfaces/ijbcontroller.md) interface.
 * The function doesn't return anything.
 
-# Body
+## Body
 
 1.  Tap from the project's funding cycle.
 

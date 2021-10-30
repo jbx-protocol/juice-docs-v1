@@ -8,7 +8,7 @@ Interface: [`IJBTerminal`](../../../interfaces/ijbtokenstore.md)
 {% tab title="Step by step" %}
 **Receives and allocated funds belonging to the specified project.**
 
-# Definition
+## Definition
 
 ```solidity
 function addToBalanceOf(uint256 _projectId, string memory _memo) external payable override { ... }
@@ -22,7 +22,7 @@ function addToBalanceOf(uint256 _projectId, string memory _memo) external payabl
 * The resulting function overrides a function definition from the `IJBTerminal` interface.
 * The function doesn't return anything.
 
-# Body
+## Body
 
 1.  Make sure some ETH was sent along with the function call.
 
@@ -30,7 +30,6 @@ function addToBalanceOf(uint256 _projectId, string memory _memo) external payabl
     // Amount must be greater than 0.
     require(msg.value > 0, '0x4c: NO_OP');
     ```
-
 2.  Record the added balance.
 
     ```solidity
@@ -41,8 +40,7 @@ function addToBalanceOf(uint256 _projectId, string memory _memo) external payabl
     _External references:_
 
     * [`recordAddedBalanceFor`](../../jbethpaymentterminalstore/write/recordaddedbalancefor.md)
-
-3.  Refund any held fees. This is useful to allow a project to withdraw funds from the protocol and subsequently add them back without paying eventually having to pay double fees. 
+3.  Refund any held fees. This is useful to allow a project to withdraw funds from the protocol and subsequently add them back without paying eventually having to pay double fees.
 
     ```solidity
     // Refund any held fees to make sure the project doesn't pay double for funds going in and out of the protocol.
@@ -52,7 +50,6 @@ function addToBalanceOf(uint256 _projectId, string memory _memo) external payabl
     _Internal references:_
 
     * [`_refundHeldFees`](../\_refundheldfees.md)
-
 4.  Emit a `AddToBalance` event with the relevant parameters.
 
     ```solidity
@@ -89,14 +86,14 @@ function addToBalanceOf(uint256 _projectId, string memory _memo) external payabl
 {% endtab %}
 
 {% tab title="Errors" %}
-| String              | Description                                    |
-| ------------------- | ---------------------------------------------- |
+| String            | Description                             |
+| ----------------- | --------------------------------------- |
 | **`0x4c: NO_OP`** | Thrown if the transaction had no value. |
 {% endtab %}
 
 {% tab title="Events" %}
-| Name                                | Data                                                                           |
-| ----------------------------------- | ------------------------------------------------------------------------------ |
+| Name                                            | Data                                                                                                                                                             |
+| ----------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | [**`AddToBalance`**](../events/addtobalance.md) | <ul><li><code>uint256 indexed projectId</code></li><li><code>uint256 value</code></li><li><code>string memo</code></li><li><code>address caller</code></li></ul> |
 {% endtab %}
 
@@ -108,5 +105,3 @@ function addToBalanceOf(uint256 _projectId, string memory _memo) external payabl
 | **High severity** | Identify a vulnerability in this operation that could lead to data corruption or loss of funds.                                        | 5+ETH  |
 {% endtab %}
 {% endtabs %}
-
-

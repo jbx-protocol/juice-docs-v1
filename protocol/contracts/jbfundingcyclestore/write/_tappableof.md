@@ -1,4 +1,4 @@
-# _tappableOf
+# \_tappableOf
 
 Contract:[`JBFundingCycleStore`](../)​
 
@@ -6,7 +6,7 @@ Contract:[`JBFundingCycleStore`](../)​
 {% tab title="Step by step" %}
 **Returns the funding cycle that can be tapped at the time of the call.**\\
 
-# Definition
+## Definition
 
 ```solidity
 function _tappableOf(uint256 _projectId) private returns (uint256 fundingCycleId) { ... }
@@ -17,7 +17,7 @@ function _tappableOf(uint256 _projectId) private returns (uint256 fundingCycleId
 * The function is private to this contract.
 * The function returns the ID of a tappable funding cycle.
 
-# Body
+## Body
 
 1.  Get a reference to the project's eligible funding cycle.
 

@@ -1,4 +1,4 @@
-# _claimableOverflowOf
+# \_claimableOverflowOf
 
 Contract: [`JBETHPaymentTerminalStore`](../)​‌
 
@@ -8,7 +8,7 @@ Contract: [`JBETHPaymentTerminalStore`](../)​‌
 
 _If the project has an active funding cycle reconfiguration ballot, the project's ballot redemption rate is used._
 
-# Definition
+## Definition
 
 ```solidity
 function claimableOverflowOf(uint256 _projectId, uint256 _tokenCount)
@@ -24,7 +24,7 @@ function claimableOverflowOf(uint256 _projectId, uint256 _tokenCount)
 * The function does not alter state on the blockchain.
 * The function returns the amount of overflowed ETH that can be claimed.
 
-# Body
+## Body
 
 1.  Get a reference to the current overflow given the provided funding cycle.
 

@@ -29,7 +29,7 @@ Rinkeby testnet: _Not yet deployed_
 | Contract                                                                     | Description                                                                                                           |
 | ---------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- |
 | [**`ERC721`**](https://docs.openzeppelin.com/contracts/2.x/api/token/erc721) | A standard definition for non-fungible tokens (NFTs)                                                                  |
-| [**`JBOperatable`**](../or-abstract/jboperatable/)                           | Includes convenience functionality for checking a message sender's permissions before executing certain transactions. |
+| [**`JBOperatable`**](broken-reference)                                       | Includes convenience functionality for checking a message sender's permissions before executing certain transactions. |
 
 ## Constructor
 

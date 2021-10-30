@@ -1,6 +1,6 @@
 # fundingCycleStore
 
-Contract: [`JBController`](../)​‌
+Contract: [`JBController`](broken-reference)​‌
 
 Interface: [`IJBController`](../../../../interfaces/ijbcontroller.md)
 

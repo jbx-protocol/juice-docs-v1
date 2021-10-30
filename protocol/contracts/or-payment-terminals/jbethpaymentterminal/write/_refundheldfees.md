@@ -1,4 +1,4 @@
-# _refundHeldFeesOf
+# \_takeFee
 
 Contract: [`JBETHPaymentTerminal`](../)​‌
 
@@ -6,7 +6,7 @@ Contract: [`JBETHPaymentTerminal`](../)​‌
 {% tab title="Step by step" %}
 **Refund fees based on the specified amount.**
 
-# Definition
+## Definition
 
 ```solidity
 function _refundHeldFees(
@@ -23,7 +23,7 @@ function _refundHeldFees(
 * The function is private to this contract.
 * The function doesn't return anything.
 
-# Body
+## Body
 
 1.  Get a reference to the amount that can be refunded. This is the same amount that would have been taken as a fee when the provided `_amount` was distributed as a payout or used allowance.
 
@@ -31,8 +31,7 @@ function _refundHeldFees(
     // The amount of fees that were taken from an original payout to yield the provided amount.
     uint256 _refundAmount = PRBMath.mulDiv(_amount, _percent + 200, 200) - _amount;
     ```
-
-2.  Get a reference to any held [`JBFee`](../../../data-structures/jbfee.md)'s for the project. 
+2.  Get a reference to any held [`JBFee`](../../../data-structures/jbfee.md)'s for the project.
 
     ```solidity
     // Get a reference to the project's held fees.
@@ -42,7 +41,6 @@ function _refundHeldFees(
     _Internal references:_
 
     * [`_heldFeesOf`](../properties/\_heldfeesof.md)
-
 3.  Delete all of the project's held fees. These will be repopulated if they were not refunded.
 
     ```solidity
@@ -53,7 +51,6 @@ function _refundHeldFees(
     _Internal references:_
 
     * [`_heldFeesOf`](../properties/\_heldfeesof.md)
-
 4.  Loop through each held fee, decrementing the `_refundAmount` as held fees are refunded. If the entire refund amount has been refunded, add the `JBFee` back into the project's held fees so that they can be processed or refunded later. If the `_refundAmount` left is greater than the `JBFee`'s amount, decrement the refunded amount and leave the `JBFee` out of the project's held fees. If only some of the `JBFee`'s amount is needed to cover the rest of the remaining `_refundAmount`, set the refunded amount to 0 after adding the `JBFee` back into the project's held fees having subtracted the remaining refund amount.
 
     ```solidity
@@ -75,8 +72,7 @@ function _refundHeldFees(
     _Internal references:_
 
     * [`_heldFeesOf`](../properties/\_heldfeesof.md)
-
-4.  Emit a `Pay` event for the split being iterated on with the relevant parameters.
+5.  Emit a `Pay` event for the split being iterated on with the relevant parameters.
 
     ```solidity
     emit Pay(
@@ -95,8 +91,7 @@ function _refundHeldFees(
     _Event references:_
 
     * [`Pay`](../events/pay.md)
-
-5.  Return the funding cycle's ID.
+6.  Return the funding cycle's ID.
 
     ```solidity
     return _fundingCycle.id;
@@ -152,5 +147,3 @@ function _refundHeldFees(
 | **High severity** | Identify a vulnerability in this operation that could lead to data corruption or loss of funds.                                        | 5+ETH  |
 {% endtab %}
 {% endtabs %}
-
-

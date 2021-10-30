@@ -1,6 +1,6 @@
 # shouldRequireClaimingFor
 
-Contract: [`JBTokenStore`](../)​‌
+Contract: [`JBTokenStore`](broken-reference)​‌
 
 Interface: [`IJBTokenStore`](../../../interfaces/ijbtokenstore.md)
 
@@ -10,7 +10,7 @@ Interface: [`IJBTokenStore`](../../../interfaces/ijbtokenstore.md)
 
 _Only a token holder or an operator can transfer its unclaimed tokens_.
 
-# Definition
+## Definition
 
 ```solidity
 function shouldRequireClaimingFor(uint256 _projectId, bool _flag)
@@ -26,7 +26,7 @@ function shouldRequireClaimingFor(uint256 _projectId, bool _flag)
 * The function overrides a function definition from the `IJBTokenStore` interface.
 * The function returns nothing.
 
-# Body
+## Body
 
 1.  Get a reference to the project's token.
 

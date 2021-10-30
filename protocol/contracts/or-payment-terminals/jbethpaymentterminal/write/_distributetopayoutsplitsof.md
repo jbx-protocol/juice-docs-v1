@@ -1,4 +1,4 @@
-# _distributeToPayoutSplitsOf
+# \_distributeToPayoutSplitsOf
 
 Contract: [`JBETHPaymentTerminal`](../)​‌
 
@@ -6,7 +6,7 @@ Contract: [`JBETHPaymentTerminal`](../)​‌
 {% tab title="Step by step" %}
 **Pays out splits for a project's funding cycle configuration.**
 
-# Definition
+## Definition
 
 ```solidity
 function _distributeToPayoutSplitsOf(
@@ -23,7 +23,7 @@ function _distributeToPayoutSplitsOf(
 * The function is private to this contract.
 * The function returns the leftover amount if the splits don't add up to 100%.
 
-# Body
+## Body
 
 1.  Save the passed in `_amount` as the `leftoverAmount` that will be returned. The subsequent routine will decrement the leftover amount as splits are settled.
 
@@ -51,22 +51,19 @@ function _distributeToPayoutSplitsOf(
     //Transfer between all splits.
     for (uint256 _i = 0; _i < _splits.length; _i++) { ... }
     ```
-
 4.  Get a reference to the current split being iterated on.
 
     ```solidity
     // Get a reference to the mod being iterated on.
     JBSplit memory _split = _splits[_i];
     ```
-
 5.  Get a reference to the payout amount that should be sent to the current split. This amount is the total amount multiplied by the percentage of the split, which is a number out of 10000000.
 
     ```solidity
     // The amount to send towards mods. Mods percents are out of 10000000.
     uint256 _payoutAmount = PRBMath.mulDiv(_amount, _split.percent, 10000000);
     ```
-
-2.  If there's at least some funds to send to the payout, determine where they should go. If the split has an `allocator` set, send the funds to its `allocate` function, passing along any relevant params. Otherwise if a `projectId` is specified in the split, send the payout to that project and use the split's `beneficiary` as the address that should receive the project's tokens in return. Otherwise, send the funds directly to the `beneficiary` address from the split. Decrement the `leftoverAmount` once the split is settled.
+6.  If there's at least some funds to send to the payout, determine where they should go. If the split has an `allocator` set, send the funds to its `allocate` function, passing along any relevant params. Otherwise if a `projectId` is specified in the split, send the payout to that project and use the split's `beneficiary` as the address that should receive the project's tokens in return. Otherwise, send the funds directly to the `beneficiary` address from the split. Decrement the `leftoverAmount` once the split is settled.
 
     ```solidity
     if (_payoutAmount > 0) {
@@ -122,14 +119,13 @@ function _distributeToPayoutSplitsOf(
 
     _Internal references:_
 
-    * [`pay`](./pay.md)
-    * [`_pay`](./\_pay.md)
+    * [`pay`](pay.md)
+    * [`_pay`](\_pay.md)
 
     _External references:_
 
     * [`primaryTerminalOf`](../../../jbdirectory/read/primaryterminalof.md)
-
-3.  Refund any held fees. This is useful to allow a project to withdraw funds from the protocol and subsequently add them back without paying eventually having to pay double fees. 
+7.  Refund any held fees. This is useful to allow a project to withdraw funds from the protocol and subsequently add them back without paying eventually having to pay double fees.
 
     ```solidity
     // Refund any held fees to make sure the project doesn't pay double for funds going in and out of the protocol.
@@ -139,8 +135,7 @@ function _distributeToPayoutSplitsOf(
     _Internal references:_
 
     * [`_refundHeldFees`](../\_refundheldfees.md)
-
-4.  Emit a `DistributeToPayoutSplit` event for the split being iterated on with the relevant parameters.
+8.  Emit a `DistributeToPayoutSplit` event for the split being iterated on with the relevant parameters.
 
     ```solidity
     emit DistributeToPayoutSplit(
@@ -255,14 +250,14 @@ function _distributeToPayoutSplitsOf(
 {% endtab %}
 
 {% tab title="Errors" %}
-| String              | Description                                    |
-| ------------------- | ---------------------------------------------- |
+| String                | Description                                                                |
+| --------------------- | -------------------------------------------------------------------------- |
 | **`0x4d: BAD_SPLIT`** | Thrown if the split specifies a project that doesn't have an ETH terminal. |
 {% endtab %}
 
 {% tab title="Events" %}
-| Name                                | Data                                                                           |
-| ----------------------------------- | ------------------------------------------------------------------------------ |
+| Name                                                                  | Data                                                                                                                                                                                                                                                                                  |
+| --------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | [**`DistributeToPayoutSplit`**](../events/distributetopayoutsplit.md) | <ul><li><code>uint256 indexed fundingCycleId</code></li><li><code>uint256 indexed projectId</code></li><li><a href="../../../data-structures/jbsplit.md"><code>JBSplit</code></a><code>split</code></li><li><code>uint256 amount</code></li><li><code>address caller</code></li></ul> |
 {% endtab %}
 
@@ -274,5 +269,3 @@ function _distributeToPayoutSplitsOf(
 | **High severity** | Identify a vulnerability in this operation that could lead to data corruption or loss of funds.                                        | 5+ETH  |
 {% endtab %}
 {% endtabs %}
-
-

@@ -12,7 +12,7 @@ Interface: [`IJBProjects`](../../../interfaces/ijbprojects.md)
 
 _Only a project's owner or operator can claim a handle for it._
 
-# Definition
+## Definition
 
 ```solidity
 function claimHandle(
@@ -35,7 +35,7 @@ function claimHandle(
 * The function overrides a function definition from the `IJBProjects` interface.
 * The function doesn't return anything.
 
-# Body
+## Body
 
 1.  Check that either the `transferAddressFor` the `_handle` is the provided `_transferAddress`, or that the `_handle` is being challenged and the `challengeExpiryOf` the `_handle` has successfully passed.
 

@@ -1,11 +1,12 @@
 # distributeReservedTokensOf
 
-Contract: [`JBController`](../)​‌
+Contract: [`JBController`](broken-reference)​‌
 
 {% tabs %}
 {% tab title="Step by step" %}
 **Distributes all outstanding reserved tokens for a project.**
-# Definition
+
+## Definition
 
 ```solidity
 function distributeReservedTokensOf(uint256 _projectId, string memory _memo)
@@ -20,16 +21,22 @@ function distributeReservedTokensOf(uint256 _projectId, string memory _memo)
 * The function can be accessed externally by anyone.
 * The function returns the amount of minted reserved tokens.
 
-# Body
-1.   Forward the call to the internal version of the function that is also used by other operations.
+## Body
 
-    ```solidity
-    return _distributeReservedTokensOf(_projectId, _memo);
-    ```
+1. Forward the call to the internal version of the function that is also used by other operations.
 
-    _Internal references:_
+````
+```solidity
+````
 
-    * [`_distributeReservedTokensOf`](\_distributereservedtokensof.md)
+````
+return _distributeReservedTokensOf(_projectId, _memo);
+```
+
+_Internal references:_
+
+* [`_distributeReservedTokensOf`](\_distributereservedtokensof.md)
+````
 {% endtab %}
 
 {% tab title="Code" %}

@@ -12,7 +12,7 @@ _Payouts are sent to the preprogrammed splits, and any leftover amount is sent t
 
 _Anyone can distribute payouts on a project's behalf._
 
-# Definition
+## Definition
 
 ```solidity
 function distributePayoutsOf(
@@ -34,7 +34,7 @@ function distributePayoutsOf(
 * The resulting function overrides a function definition from the `IJBETHPaymentTerminal` interface.
 * The function returns the ID of the funding cycle during which the distribution was made.
 
-# Body
+## Body
 
 1.  Record the withdrawal
 
@@ -51,7 +51,6 @@ function distributePayoutsOf(
     _External references:_
 
     * [`recordWithdrawalFor`](../../jbethpaymentterminalstore/write/recordwithdrawalfor.md)
-
 2.  Get a reference to the project's owner. The owner will be allocated any funds leftover once splits are settled.
 
     ```solidity
@@ -63,7 +62,6 @@ function distributePayoutsOf(
     _External references:_
 
     * [`ownerOf`](https://github.com/OpenZeppelin/openzeppelin-contracts/blob/46ce0cfa3323a2787864f884b3c12960bc53b233/contracts/token/ERC721/ERC721.sol#L70)
-
 3.  Get a reference to the project's handle, which will be included in the emitted event.
 
     ```solidity
@@ -74,8 +72,7 @@ function distributePayoutsOf(
     _External references:_
 
     * [`handleOf`](../../../jbprojects/read/handleof.md)
-
-4.  If the funding cycle during which the distribtion is being made has a fee, and if its project isn't the JuiceboxDAO project with an ID of 1, take a fee from the withdrawal into the JuiceboxDAO project. 
+4.  If the funding cycle during which the distribtion is being made has a fee, and if its project isn't the JuiceboxDAO project with an ID of 1, take a fee from the withdrawal into the JuiceboxDAO project.
 
     ```solidity
     // Take a fee from the _withdrawnAmount, if needed.
@@ -94,7 +91,6 @@ function distributePayoutsOf(
     _Internal references:_
 
     * [`_takeFeeFrom`](../properties/\_takefeefrom.md)
-
 5.  Distribute the withdrawal to the splits specified for the current funding cycle's configurations. The amount to distribute is the withdrawn amount minus any fees that will be withheld. Get a reference to a leftover amount if there is one.
 
     ```solidity
@@ -110,7 +106,6 @@ function distributePayoutsOf(
     _Internal references:_
 
     * [`_distributeToPayoutSplitsOf`](../properties/\_distributetopayoutsplitsof.md)
-
 6.  If there is any, transfer any leftover amount to the project owner.
 
     ```solidity
@@ -118,7 +113,6 @@ function distributePayoutsOf(
     if (_leftoverDistributionAmount > 0)
       Address.sendValue(_projectOwner, _leftoverDistributionAmount);
     ```
-
 7.  Emit a `DistributePayouts` event with the relevant parameters.
 
     ```solidity
@@ -138,7 +132,6 @@ function distributePayoutsOf(
     _Event references:_
 
     * [`DistributePayouts`](../events/distributepayouts.md)
-
 8.  Return the funding cycle ID.
 
     ```solidity
@@ -229,8 +222,8 @@ function distributePayoutsOf(
 {% endtab %}
 
 {% tab title="Events" %}
-| Name                                | Data                                                                           |
-| ----------------------------------- | ------------------------------------------------------------------------------ |
+| Name                                                 | Data                                                                                                                                                                                                                                                                                                                                                                                                     |
+| ---------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | [**`DistributePayouts`**](../events/addtobalance.md) | <ul><li><code>uint256 indexed fundingCycleId</code></li><li><code>uint256 indexed projectId</code></li><li><code>address projectOwner</code></li><li><code>uint256 amount</code></li><li><code>uint256 tappedAmount</code></li><li><code>uint256 feeAmount</code></li><li><code>uint256 projectOwnerTransferAmount</code></li><li><code>string memo</code></li><li><code>address caller</code></li></ul> |
 {% endtab %}
 
@@ -242,5 +235,3 @@ function distributePayoutsOf(
 | **High severity** | Identify a vulnerability in this operation that could lead to data corruption or loss of funds.                                        | 5+ETH  |
 {% endtab %}
 {% endtabs %}
-
-

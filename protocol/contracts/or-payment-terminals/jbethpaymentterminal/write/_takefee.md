@@ -1,4 +1,4 @@
-# _takeFee
+# \_takeFee
 
 Contract: [`JBETHPaymentTerminal`](../)​‌
 
@@ -6,7 +6,7 @@ Contract: [`JBETHPaymentTerminal`](../)​‌
 {% tab title="Step by step" %}
 **Take a fee of the specified amount.**
 
-# Definition
+## Definition
 
 ```solidity
 function _takeFee(
@@ -23,7 +23,7 @@ function _takeFee(
 * The function is private to this contract.
 * The function doesn't return anything.
 
-# Body
+## Body
 
 1.  Get a reference to the protocol project's primary ETH terminal. The project's project has an ID of 1.
 
@@ -35,7 +35,6 @@ function _takeFee(
     _External references:_
 
     * [`primaryTerminalOf`](../../../jbdirectory/read/primaryterminalof.md)
-
 2.  Make a payment to the protocol project. If it's primary ETH terminal is this contract, save gas by just calling the internal `_pay` function. Otherwise, call the terminal's external `pay` function.
 
     ```solidity
@@ -47,9 +46,8 @@ function _takeFee(
 
     _Internal references:_
 
-    * [`pay`](./pay.md)
-    * [`_pay`](./\_pay.md)
-
+    * [`pay`](pay.md)
+    * [`_pay`](\_pay.md)
 {% endtab %}
 
 {% tab title="Code" %}
@@ -86,5 +84,3 @@ function _takeFee(
 | **High severity** | Identify a vulnerability in this operation that could lead to data corruption or loss of funds.                                        | 5+ETH  |
 {% endtab %}
 {% endtabs %}
-
-

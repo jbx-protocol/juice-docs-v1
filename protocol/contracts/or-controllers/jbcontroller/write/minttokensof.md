@@ -1,6 +1,6 @@
 # mintTokensOf
 
-Contract: [`JBController`](../)​‌
+Contract: [`JBController`](broken-reference)​‌
 
 Interface: [`IJBController`](../../../../interfaces/ijbcontroller.md)
 
@@ -10,7 +10,7 @@ Interface: [`IJBController`](../../../../interfaces/ijbcontroller.md)
 
 _Only a project's owner, a designated operator, or one of its terminal's delegate can mint its tokens._
 
-# Definition
+## Definition
 
 ```solidity
 function mintTokensOf(
@@ -44,7 +44,7 @@ function mintTokensOf(
 * The function overrides a function definition from the [`IJBController`](../../../../interfaces/ijbcontroller.md) interface.
 * The function doesn't return anything.
 
-# Body
+## Body
 
 1.  If the reserved rate isnt' 100%, make sure the provided beneficiary isn't the zero address.
 

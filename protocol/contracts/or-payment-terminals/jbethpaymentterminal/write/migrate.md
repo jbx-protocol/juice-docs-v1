@@ -10,7 +10,7 @@ Interface: [`IJBETHPaymentTerminal`](../../../../interfaces/ijbethterminalof.md)
 
 _Only a project's owner or a designated operator can migrate it._
 
-# Definition
+## Definition
 
 ```solidity
 function migrate(uint256 _projectId, IJBTerminal _to)
@@ -28,7 +28,7 @@ function migrate(uint256 _projectId, IJBTerminal _to)
 * The resulting function overrides a function definition from the `IJBETHPaymentTerminal` interface.
 * The function doesn't return anything.
 
-# Body
+## Body
 
 1.  Make sure the token type of the terminal being migrated to matches the token type of this terminal.
 
@@ -40,7 +40,6 @@ function migrate(uint256 _projectId, IJBTerminal _to)
     _Internal references:_
 
     * [`token`](../properties/token.md)
-
 2.  Record the migration and get a reference to the project's balance.
 
     ```solidity
@@ -51,8 +50,7 @@ function migrate(uint256 _projectId, IJBTerminal _to)
     _External references:_
 
     * [`recordMigration`](../../jbethpaymentterminalstore/write/recordmigration.md)
-
-3.  If there's a balance to migrate, move the funds over to the new terminal. 
+3.  If there's a balance to migrate, move the funds over to the new terminal.
 
     ```solidity
     if (_balance > 0)
@@ -62,8 +60,7 @@ function migrate(uint256 _projectId, IJBTerminal _to)
 
     _Internal references:_
 
-    * [`addToBalanceOf`](../write/addtobalanceof.md)
-
+    * [`addToBalanceOf`](addtobalanceof.md)
 4.  Emit a `Migrate` event with the relevant parameters.
 
     ```solidity
@@ -73,7 +70,6 @@ function migrate(uint256 _projectId, IJBTerminal _to)
     _Event references:_
 
     * [`Migrate`](../events/migrate.md)
-
 {% endtab %}
 
 {% tab title="Code" %}
@@ -110,14 +106,14 @@ function migrate(uint256 _projectId, IJBTerminal _to)
 {% endtab %}
 
 {% tab title="Errors" %}
-| String              | Description                                    |
-| ------------------- | ---------------------------------------------- |
+| String                   | Description                                                                           |
+| ------------------------ | ------------------------------------------------------------------------------------- |
 | **`0x4d: INCOMPATIBLE`** | Thrown if the terminal being migrated to doesn't use the same token as this terminal. |
 {% endtab %}
 
 {% tab title="Events" %}
-| Name                                | Data                                                                           |
-| ----------------------------------- | ------------------------------------------------------------------------------ |
+| Name                                       | Data                                                                                                                                                                                                                                            |
+| ------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | [**`Migrate`**](../events/addtobalance.md) | <ul><li><code>uint256 indexed projectId</code></li><li><a href="../../../interfaces/ijbterminal.md"><code>IJBTerminal</code></a><code>indexed terminal</code></li><li><code>uint256 amount</code></li><li><code>address caller</code></li></ul> |
 {% endtab %}
 

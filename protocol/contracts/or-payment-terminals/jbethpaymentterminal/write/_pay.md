@@ -1,4 +1,4 @@
-# _pay 
+# \_pay
 
 Contract: [`JBETHPaymentTerminal`](../)​‌
 
@@ -6,7 +6,7 @@ Contract: [`JBETHPaymentTerminal`](../)​‌
 {% tab title="Step by step" %}
 **Contribute ETH to a project.**
 
-# Definition
+## Definition
 
 ```solidity
 function _pay(
@@ -31,7 +31,7 @@ function _pay(
 * The function is private to this contract.
 * The function returns the leftover amount if the splits don't add up to 100%.
 
-# Body
+## Body
 
 1.  Make sure the provided beneficiary isn't the zero address.
 
@@ -39,14 +39,13 @@ function _pay(
     // Cant send tokens to the zero address.
     require(_beneficiary != address(0), '0x4e: ZERO_ADDRESS');
     ```
-2.  Create definitions for the funding cycle, weight, and token count. These will be later populated and used by the rest of the routine. 
+2.  Create definitions for the funding cycle, weight, and token count. These will be later populated and used by the rest of the routine.
 
     ```solidity
     JBFundingCycle memory _fundingCycle;
     uint256 _weight;
     uint256 _tokenCount;
     ```
-
 3.  Record the payment in the store. The return value will populate the previously defined variables. The `_preferClaimedTokens` and `_beneficiary` properties should be passed along packed into one `uint256`.
 
     ```solidity
@@ -65,7 +64,6 @@ function _pay(
     _External references:_
 
     * [`recordPaymentFrom`](../../jbethpaymentterminalstore/write/recordpaymentfrom.md)
-
 4.  Emit a `Pay` event for the split being iterated on with the relevant parameters.
 
     ```solidity
@@ -85,7 +83,6 @@ function _pay(
     _Event references:_
 
     * [`Pay`](../events/pay.md)
-
 5.  Return the funding cycle's ID.
 
     ```solidity
@@ -144,14 +141,14 @@ function _pay(
 {% endtab %}
 
 {% tab title="Errors" %}
-| String              | Description                                    |
-| ------------------- | ---------------------------------------------- |
+| String                   | Description                                            |
+| ------------------------ | ------------------------------------------------------ |
 | **`0x4e: ZERO_ADDRESS`** | Thrown if the provided benificary is the zero address. |
 {% endtab %}
 
 {% tab title="Events" %}
-| Name                                | Data                                                                           |
-| ----------------------------------- | ------------------------------------------------------------------------------ |
+| Name                          | Data                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| ----------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | [**`Pay`**](../events/pay.md) | <ul><li><code>uint256 indexed fundingCycleId</code></li><li><code>uint256 indexed projectId</code></li><li><code>address indexed beneficiary</code></li><li><a href="../../../data-structures/jbfundingcycle.md"><code>JBFundingCycle</code></a><code>fundingCycle</code></li><li><code>uint256 amount</code></li><li><code>uint256 weight</code></li><li><code>uint256 tokenCount</code></li><li><code>string memo</code></li><li><code>address caller</code></li></ul> |
 {% endtab %}
 
@@ -163,5 +160,3 @@ function _pay(
 | **High severity** | Identify a vulnerability in this operation that could lead to data corruption or loss of funds.                                        | 5+ETH  |
 {% endtab %}
 {% endtabs %}
-
-

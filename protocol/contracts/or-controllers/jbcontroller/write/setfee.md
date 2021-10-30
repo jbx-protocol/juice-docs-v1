@@ -1,6 +1,6 @@
 # setFee
 
-Contract: [`JBController`](../)​‌
+Contract: [`JBController`](broken-reference)​‌
 
 {% tabs %}
 {% tab title="Step by step" %}
@@ -8,7 +8,7 @@ Contract: [`JBController`](../)​‌
 
 _Only the owner of this contract can change the fee._
 
-# Definition
+## Definition
 
 ```solidity
 function setFee(uint256 _fee) external onlyOwner { ... }
@@ -19,7 +19,7 @@ function setFee(uint256 _fee) external onlyOwner { ... }
 * Through the `onlyOwner` modifier, the function can only be accessed by the owner of this contract.
 * The function doesn't return anything.
 
-# Body
+## Body
 
 1.  Make sure the proposed fee is less than the max fee of 5%.
 
@@ -27,14 +27,12 @@ function setFee(uint256 _fee) external onlyOwner { ... }
     // The max fee is 5%.
     require(_fee <= 10, '0x36: BAD_FEE');
     ```
-
 2.  Store the new fee.
 
     ```solidity
     // Store the new fee.
     fee = _fee;
     ```
-
 3.  Emit a `SetFee` event with the relevant parameters.
 
     ```solidity

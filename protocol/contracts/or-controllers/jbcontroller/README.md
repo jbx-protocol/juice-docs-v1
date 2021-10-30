@@ -1,7 +1,7 @@
 ---
 description: >-
-  Stitches together funding cycles and community tokens, making sure all activity
-  is accounted for and correct.
+  Stitches together funding cycles and community tokens, making sure all
+  activity is accounted for and correct.
 ---
 
 # JBController
@@ -27,8 +27,8 @@ Rinkeby testnet: _Not yet deployed_
 
 | Contract                                                                          | Description                                                                                                                               |
 | --------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
-| [**`JBTerminalUtility`**](../../or-abstract/jbterminalutility/)                   | Includes convenience functionality for checking if the message sender is a current terminal of the project who data is being manipulated. |
-| [**`JBOperatable`**](../../or-abstract/jboperatable/)                             | Includes convenience functionality for checking a message sender's permissions before executing certain transactions.                     |
+| [**`JBTerminalUtility`**](broken-reference)                                       | Includes convenience functionality for checking if the message sender is a current terminal of the project who data is being manipulated. |
+| [**`JBOperatable`**](broken-reference)                                            | Includes convenience functionality for checking a message sender's permissions before executing certain transactions.                     |
 | [**`Ownable`**](https://docs.openzeppelin.com/contracts/2.x/api/ownership)        | Includes convenience functionality for specifying an address that owns the contract, with modifiers that only allow access by the owner.  |
 | [**`ReentrancyGuard`**](https://docs.openzeppelin.com/contracts/4.x/api/security) | Includes convenience functionality for preventing access to certain functions while certain other functions are being executed.           |
 

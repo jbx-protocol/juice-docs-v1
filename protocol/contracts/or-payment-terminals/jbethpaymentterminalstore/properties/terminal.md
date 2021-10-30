@@ -1,6 +1,6 @@
 # terminal
 
-Contract: [`JBETHPaymentTerminalStore`](../)​‌
+Contract: [`JBETHPaymentTerminalStore`](broken-reference)​‌
 
 **The associated payment terminal for which this contract stores data.**
 

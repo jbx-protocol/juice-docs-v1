@@ -8,7 +8,7 @@ Contract: [`JBETHPaymentTerminal`](../)​‌
 
 _Only a project owner, an operator, or the contract's owner can process held fees._
 
-# Definition
+## Definition
 
 ```solidity
 function processFees(uint256 _projectId)
@@ -29,7 +29,7 @@ function processFees(uint256 _projectId)
 * The resulting function overrides a function definition from the `IJBETHPaymentTerminal` interface.
 * The function doesn't return anything.
 
-# Body
+## Body
 
 1.  Get a reference to all held fees for the project.
 
@@ -41,7 +41,6 @@ function processFees(uint256 _projectId)
     _Internal references:_
 
     * [`_heldFeesOf`](../read/\_heldFeesOf.md)
-
 2.  Iterate through the array. Take fee's for each [`JBFee`](../../../../data-structures/jbfee.md) data structure.
 
     ```solidity
@@ -53,8 +52,7 @@ function processFees(uint256 _projectId)
     _Internal references:_
 
     * [`_takeFee`](../\_takeFee.md)
-
-3.  Remove all fees now that they have been processed. 
+3.  Remove all fees now that they have been processed.
 
     ```solidity
     // Delete the held fee's now that they've been processed.
@@ -64,7 +62,6 @@ function processFees(uint256 _projectId)
     _Internal references:_
 
     * [`_heldFeesOf`](../read/\_heldFeesOf.md)
-
 4.  Emit a `ProcessFees` event with the relevant parameters.
 
     ```solidity
@@ -74,7 +71,6 @@ function processFees(uint256 _projectId)
     _Event references:_
 
     * [`ProcessFees`](../events/processfees.md)
-
 {% endtab %}
 
 {% tab title="Code" %}
@@ -114,8 +110,8 @@ function processFees(uint256 _projectId)
 {% endtab %}
 
 {% tab title="Events" %}
-| Name                                | Data                                                                           |
-| ----------------------------------- | ------------------------------------------------------------------------------ |
+| Name                                          | Data                                                                                                                                                    |
+| --------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | [**`ProcessFees`**](../events/processfees.md) | <ul><li><a href="../../../data-structures/jbfee.md"><code>JBFee</code></a><code>[] fees</code></li><li><code>uint256 indexed projectId</code></li></ul> |
 {% endtab %}
 

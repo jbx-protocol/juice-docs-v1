@@ -10,7 +10,7 @@ Interface: [`IJBETHPaymentTerminal`](../../../../interfaces/ijbethterminalof.md)
 
 _Only a token's holder or a designated operator can redeem it._
 
-# Definition
+## Definition
 
 ```solidity
 function useAllowanceOf(
@@ -36,7 +36,7 @@ function useAllowanceOf(
 * The resulting function overrides a function definition from the `IJBETHPaymentTerminal` interface.
 * The function returns the ID of the funding cycle during which the allowance was use.
 
-# Body
+## Body
 
 1.  Record the use of the allowed funds.
 
@@ -54,7 +54,6 @@ function useAllowanceOf(
     _External references:_
 
     * [`recordUsedAllowanceOf`](../../jbethpaymentterminalstore/write/recordusedallowanceof.md)
-
 2.  Get a reference to the project's owner to which the tokens generated from paying platform fees will be sent.
 
     ```solidity
@@ -66,7 +65,6 @@ function useAllowanceOf(
     _External references:_
 
     * [`ownerOf`](https://github.com/OpenZeppelin/openzeppelin-contracts/blob/46ce0cfa3323a2787864f884b3c12960bc53b233/contracts/token/ERC721/ERC721.sol#L70)
-
 3.  Get a reference to the project's handle, which will be included in the emitted event.
 
     ```solidity
@@ -77,8 +75,7 @@ function useAllowanceOf(
     _External references:_
 
     * [`handleOf`](../../../jbprojects/read/handleof.md)
-
-4.  If the funding cycle during which the distribtion is being made has a fee, and if its project isn't the JuiceboxDAO project with an ID of 1, take a fee from the withdrawal into the JuiceboxDAO project. 
+4.  If the funding cycle during which the distribtion is being made has a fee, and if its project isn't the JuiceboxDAO project with an ID of 1, take a fee from the withdrawal into the JuiceboxDAO project.
 
     ```solidity
     // Take a fee from the _withdrawnAmount, if needed.
@@ -97,15 +94,12 @@ function useAllowanceOf(
     _Internal references:_
 
     * [`_takeFeeFrom`](../properties/\_takefeefrom.md)
-
-5.  Transfer the amount minus the fees to the beneficiary. 
-
+5.  Transfer the amount minus the fees to the beneficiary.
 
     ```solidity
     // Transfer any remaining balance to the project owner.
     Address.sendValue(_beneficiary, _withdrawnAmount - _feeAmount);
     ```
-
 6.  Emit a `UseAllowance` event with the relevant parameters.
 
     ```solidity
@@ -124,7 +118,6 @@ function useAllowanceOf(
     _Event references:_
 
     * [`UseAllowance`](../events/useallowance.md)
-
 7.  Return the funding cycle's ID.
 
     ```solidity
@@ -208,8 +201,8 @@ function useAllowanceOf(
 {% endtab %}
 
 {% tab title="Events" %}
-| Name                                | Data                                                                           |
-| ----------------------------------- | ------------------------------------------------------------------------------ |
+| Name                                            | Data                                                                                                                                                                                                                                                                                                                                                                |
+| ----------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | [**`UseAllowance`**](../events/useallowance.md) | <ul><li><code>uint256 indexed fundingCycleId</code></li><li><code>uint256 indexed configuration</code></li><li><code>uint256 indexed projectId</code></li><li><code>address beneficiary</code></li><li><code>uint256 amount</code></li><li><code>uint256 feeAmount</code></li><li><code>uint256 transferAmount</code></li><li><code>address caller</code></li></ul> |
 {% endtab %}
 

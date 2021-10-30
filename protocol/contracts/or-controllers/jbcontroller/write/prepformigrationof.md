@@ -1,6 +1,6 @@
 # prepForMigrationOf
 
-Contract: [`JBController`](../)​‌
+Contract: [`JBController`](broken-reference)​‌
 
 Interface: [`IJBController`](../../../../interfaces/ijbcontroller.md)
 
@@ -8,7 +8,7 @@ Interface: [`IJBController`](../../../../interfaces/ijbcontroller.md)
 {% tab title="Step by step" %}
 **Allows other controllers to signal to this one that a migration is expected for the specified project.**
 
-# Definition
+## Definition
 
 ```solidity
 function prepForMigrationOf(uint256 _projectId, IJBController) external override { ... }
@@ -20,7 +20,7 @@ function prepForMigrationOf(uint256 _projectId, IJBController) external override
 * The function overrides a function definition from the [`IJBController`](../../../../interfaces/ijbcontroller.md) interface.
 * The function doesn't return anything.
 
-# Body
+## Body
 
 1.  Make sure this controller isn't the project's current controller. If it is, there shouldn't be a need to prepare anything.
 
