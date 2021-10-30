@@ -149,7 +149,7 @@ function recordPaymentFrom(
     _Libraries used:_
 
     * [`JBFundingCycleMetadataResolver`](../../../libraries/jbfundingcyclemetadataresolver.md)\
-      `reservedRate(...)`
+      `.reservedRate(...)`
 
     _External references:_
 
