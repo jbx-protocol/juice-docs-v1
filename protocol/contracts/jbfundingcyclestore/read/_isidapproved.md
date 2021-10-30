@@ -1,4 +1,4 @@
-# \_isIdApproved
+# _isIdApproved
 
 Contract:[`JBFundingCycleStore`](../)​
 

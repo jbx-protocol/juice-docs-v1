@@ -48,7 +48,7 @@ function _takeFee(
     _Internal references:_
 
     * [`pay`](./pay.md)
-    * [`_pay`](./_pay.md)
+    * [`_pay`](./\_pay.md)
 
 {% endtab %}
 

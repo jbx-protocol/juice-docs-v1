@@ -40,7 +40,7 @@ function processFees(uint256 _projectId)
 
     _Internal references:_
 
-    * [`_heldFeesOf`](../read/_heldFeesOf.md)
+    * [`_heldFeesOf`](../read/\_heldFeesOf.md)
 
 2.  Iterate through the array. Take fee's for each [`JBFee`](../../../../data-structures/jbfee.md) data structure.
 
@@ -52,7 +52,7 @@ function processFees(uint256 _projectId)
 
     _Internal references:_
 
-    * [`_takeFee`](../_takeFee.md)
+    * [`_takeFee`](../\_takeFee.md)
 
 3.  Remove all fees now that they have been processed. 
 
@@ -63,7 +63,7 @@ function processFees(uint256 _projectId)
 
     _Internal references:_
 
-    * [`_heldFeesOf`](../read/_heldFeesOf.md)
+    * [`_heldFeesOf`](../read/\_heldFeesOf.md)
 
 4.  Emit a `ProcessFees` event with the relevant parameters.
 

@@ -96,7 +96,7 @@ function useAllowanceOf(
 
     _Internal references:_
 
-    * [`_takeFeeFrom`](../properties/_takefeefrom.md)
+    * [`_takeFeeFrom`](../properties/\_takefeefrom.md)
 
 5.  Transfer the amount minus the fees to the beneficiary. 
 

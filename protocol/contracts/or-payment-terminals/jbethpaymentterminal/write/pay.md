@@ -53,7 +53,7 @@ function pay(
 
     _Internal references:_
 
-    * [`_pay`](../_pay.md)
+    * [`_pay`](../\_pay.md)
 
 {% endtab %}
 

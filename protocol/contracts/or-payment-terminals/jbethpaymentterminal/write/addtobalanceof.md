@@ -51,7 +51,7 @@ function addToBalanceOf(uint256 _projectId, string memory _memo) external payabl
 
     _Internal references:_
 
-    * [`_refundHeldFees`](../_refundheldfees.md)
+    * [`_refundHeldFees`](../\_refundheldfees.md)
 
 4.  Emit a `AddToBalance` event with the relevant parameters.
 

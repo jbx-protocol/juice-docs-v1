@@ -1,4 +1,4 @@
-# \_mockFundingCycleBasedOn
+# _mockFundingCycleBasedOn
 
 Contract:[`JBFundingCycleStore`](../)​
 

@@ -93,7 +93,7 @@ function distributePayoutsOf(
 
     _Internal references:_
 
-    * [`_takeFeeFrom`](../properties/_takefeefrom.md)
+    * [`_takeFeeFrom`](../properties/\_takefeefrom.md)
 
 5.  Distribute the withdrawal to the splits specified for the current funding cycle's configurations. The amount to distribute is the withdrawn amount minus any fees that will be withheld. Get a reference to a leftover amount if there is one.
 
@@ -109,7 +109,7 @@ function distributePayoutsOf(
 
     _Internal references:_
 
-    * [`_distributeToPayoutSplitsOf`](../properties/_distributetopayoutsplitsof.md)
+    * [`_distributeToPayoutSplitsOf`](../properties/\_distributetopayoutsplitsof.md)
 
 6.  If there is any, transfer any leftover amount to the project owner.
 

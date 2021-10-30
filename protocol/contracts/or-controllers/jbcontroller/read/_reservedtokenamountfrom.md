@@ -1,4 +1,4 @@
-# \_reservedTokenAmountFrom
+# _reservedTokenAmountFrom
 
 {% tabs %}
 {% tab title="Step by step" %}

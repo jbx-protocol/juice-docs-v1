@@ -1,4 +1,4 @@
-# \_tappedAmountOf
+# _tappedAmountOf
 
 Contract: [`JBFundingCycleStore`](../)​
 

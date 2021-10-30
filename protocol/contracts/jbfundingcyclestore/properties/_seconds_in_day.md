@@ -1,4 +1,4 @@
-# \_SECONDS\_IN\_DAY
+# _SECONDS\_IN\_DAY
 
 Contract: [`JBFundingCycleStore`](../)​‌
 

@@ -41,7 +41,7 @@ function _refundHeldFees(
 
     _Internal references:_
 
-    * [`_heldFeesOf`](../properties/_heldfeesof.md)
+    * [`_heldFeesOf`](../properties/\_heldfeesof.md)
 
 3.  Delete all of the project's held fees. These will be repopulated if they were not refunded.
 
@@ -52,7 +52,7 @@ function _refundHeldFees(
 
     _Internal references:_
 
-    * [`_heldFeesOf`](../properties/_heldfeesof.md)
+    * [`_heldFeesOf`](../properties/\_heldfeesof.md)
 
 4.  Loop through each held fee, decrementing the `_refundAmount` as held fees are refunded. If the entire refund amount has been refunded, add the `JBFee` back into the project's held fees so that they can be processed or refunded later. If the `_refundAmount` left is greater than the `JBFee`'s amount, decrement the refunded amount and leave the `JBFee` out of the project's held fees. If only some of the `JBFee`'s amount is needed to cover the rest of the remaining `_refundAmount`, set the refunded amount to 0 after adding the `JBFee` back into the project's held fees having subtracted the remaining refund amount.
 
@@ -74,7 +74,7 @@ function _refundHeldFees(
 
     _Internal references:_
 
-    * [`_heldFeesOf`](../properties/_heldfeesof.md)
+    * [`_heldFeesOf`](../properties/\_heldfeesof.md)
 
 4.  Emit a `Pay` event for the split being iterated on with the relevant parameters.
 

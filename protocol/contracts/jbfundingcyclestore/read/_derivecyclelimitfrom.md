@@ -41,7 +41,7 @@ function _deriveCycleLimitFrom(JBFundingCycle memory _fundingCycle, uint256 _sta
 
    _Internal references:_
 
-   * [`_SECONDS_IN_DAY`](../properties/_seconds_in_day.md)
+   * [`_SECONDS_IN_DAY`](../properties/\_seconds_in_day.md)
 
 
 3. There's no longer a cycle limit if more cycles have passed than the provided cycle's limit.

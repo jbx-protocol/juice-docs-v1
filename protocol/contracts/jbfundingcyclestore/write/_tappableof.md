@@ -1,4 +1,4 @@
-# \_tappableOf
+# _tappableOf
 
 Contract:[`JBFundingCycleStore`](../)​
 

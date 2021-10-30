@@ -123,7 +123,7 @@ function _distributeToPayoutSplitsOf(
     _Internal references:_
 
     * [`pay`](./pay.md)
-    * [`_pay`](./_pay.md)
+    * [`_pay`](./\_pay.md)
 
     _External references:_
 
@@ -138,7 +138,7 @@ function _distributeToPayoutSplitsOf(
 
     _Internal references:_
 
-    * [`_refundHeldFees`](../_refundheldfees.md)
+    * [`_refundHeldFees`](../\_refundheldfees.md)
 
 4.  Emit a `DistributeToPayoutSplit` event for the split being iterated on with the relevant parameters.
 
