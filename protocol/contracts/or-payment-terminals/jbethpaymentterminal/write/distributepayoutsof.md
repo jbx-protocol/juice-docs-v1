@@ -2,6 +2,8 @@
 
 Contract: [`JBETHPaymentTerminalStore`](../)​‌
 
+Interface: [`IJBETHPaymentTerminal`](../../../../interfaces/ijbethterminalof.md)
+
 {% tabs %}
 {% tab title="Step by step" %}
 **Distributes payouts for a project according to the constraints of its current funding cycle.**
@@ -29,6 +31,7 @@ function distributePayoutsOf(
   * `_minReturnedWei` is the minimum number of wei that the amount should be valued at.
 * The function can be accessed externally by anyone.
 * The function cannot be accessed recursively or while other `nonReentrant` functions in this contract are in progress.
+* The resulting function overrides a function definition from the `IJBETHPaymentTerminal` interface.
 * The function returns the ID of the funding cycle during which the distribution was made.
 
 # Body

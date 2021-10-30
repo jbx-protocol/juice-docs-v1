@@ -1,6 +1,8 @@
 # migrate
 
-Contract: [`JBETHPaymentTerminalStore`](../)​‌
+Contract: [`JBETHPaymentTerminal`](../)​‌
+
+Interface: [`IJBETHPaymentTerminal`](../../../../interfaces/ijbethterminalof.md)
 
 {% tabs %}
 {% tab title="Step by step" %}
@@ -23,6 +25,7 @@ function migrate(uint256 _projectId, IJBTerminal _to)
   * `_to` is the terminal contract that will gain the project's funds.
 * Through the [`requirePermission`](../../or-abstract/jboperatable/modifiers/requirepermission.md) modifier, the function is only accessible by the project's owner, or from an operator that has been given the `JBOperations.MIGRATE_TERMINAL` permission by the project owner for the provided `_projectId`.
 * The function cannot be accessed recursively or while other `nonReentrant` functions in this contract are in progress.
+* The resulting function overrides a function definition from the `IJBETHPaymentTerminal` interface.
 * The function doesn't return anything.
 
 # Body

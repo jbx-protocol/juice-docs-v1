@@ -1,6 +1,8 @@
 # addToBalanceOf
 
-Contract: [`JBETHPaymentTerminalStore`](../)​‌
+Contract: [`JBETHPaymentTerminal`](../)​‌
+
+Interface: [`IJBTerminal`](../../../interfaces/ijbtokenstore.md)
 
 {% tabs %}
 {% tab title="Step by step" %}
@@ -17,6 +19,7 @@ function addToBalanceOf(uint256 _projectId, string memory _memo) external payabl
   * `_memo` is a memo to pass along to the emitted event.
 * The function can be accessed externally by anyone.
 * The function accepts ETH.
+* The resulting function overrides a function definition from the `IJBTerminal` interface.
 * The function doesn't return anything.
 
 # Body

@@ -2,6 +2,8 @@
 
 Contract: [`JBETHPaymentTerminal`](../)​‌
 
+Interface: [`IJBTerminal`](../../../../interfaces/ijbterminal.md)
+
 {% tabs %}
 {% tab title="Step by step" %}
 **An address that serves as this terminal's delegate when making requests to juicebox ecosystem contracts.**
@@ -14,6 +16,7 @@ function delegate() external view override returns (address) { ... }
 
 * The view function can be accessed externally by anyone.
 * The function does not alter state on the blockchain.
+* The resulting function overrides a function definition from the `IJBTerminal` interface.
 * The function returns the delegate address
 
 # Body

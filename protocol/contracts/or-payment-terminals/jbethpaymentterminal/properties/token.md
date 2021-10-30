@@ -2,7 +2,7 @@
 
 Contract: [`JBETHPaymentTerminal`](../)​‌
 
-Interface: [`IJBETHPaymentTerminal`](../../../../interfaces/ijbethterminalof.md)
+Interface: [`IJBTerminal`](../../../../interfaces/ijberminal.md)
 
 **The token that this terminal accepts.**
 
@@ -23,4 +23,4 @@ address public immutable override token = 0x000000000000000000000000000000000004
 
 * The value cannot be changed.
 * The resulting view function can be accessed externally by anyone.
-* The resulting function overrides a function definition from the `IJBETHPaymentTerminal` interface.
+* The resulting function overrides a function definition from the `IJBTerminal` interface.

@@ -1,6 +1,8 @@
 # redeemTokensOf
 
-Contract: [`JBETHPaymentTerminalStore`](../)​‌
+Contract: [`JBETHPaymentTerminal`](../)​‌
+
+Interface: [`IJBETHPaymentTerminal`](../../../../interfaces/ijbethterminalof.md)
 
 {% tabs %}
 {% tab title="Step by step" %}
@@ -37,6 +39,7 @@ function redeemTokensOf(
   * `_delegateMetadata` are bytes to send along to the delegate, if one is provided.
 * Through the [`requirePermission`](../../or-abstract/jboperatable/modifiers/requirepermission.md) modifier, the function is only accessible by the project's owner, or from an operator that has been given the `JBOperations.REDEEM` permission by the project owner for the provided `_projectId`.
 * The function cannot be accessed recursively or while other `nonReentrant` functions in this contract are in progress.
+* The resulting function overrides a function definition from the `IJBETHPaymentTerminal` interface.
 * The function returns the amount of ETH that the tokens were redeemed for, in wei.
 
 # Body

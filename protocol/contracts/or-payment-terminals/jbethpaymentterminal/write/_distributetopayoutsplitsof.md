@@ -1,6 +1,6 @@
 # distributeToPayoutSplitsOf
 
-Contract: [`JBETHPaymentTerminalStore`](../)​‌
+Contract: [`JBETHPaymentTerminal`](../)​‌
 
 {% tabs %}
 {% tab title="Step by step" %}

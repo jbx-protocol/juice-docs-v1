@@ -51,7 +51,6 @@
   * [IJBTerminalUtility](protocol/interfaces/ijbterminalutility.md)
   * [IJBControllerUtility](protocol/interfaces/ijbcontrollerutility.md)
   * [IJBTokenStore](protocol/interfaces/ijbtokenstore.md)
-  * [IJBVault](protocol/interfaces/ijbvault.md)
 * [Contracts](protocol/contracts/README.md)
   * [JBProjects](protocol/contracts/jbprojects/README.md)
     * [Events](protocol/contracts/jbprojects/events/README.md)

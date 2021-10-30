@@ -1,6 +1,8 @@
 # useAllowanceOf
 
-Contract: [`JBETHPaymentTerminalStore`](../)​‌
+Contract: [`JBETHPaymentTerminal`](../)​‌
+
+Interface: [`IJBETHPaymentTerminal`](../../../../interfaces/ijbethterminalof.md)
 
 {% tabs %}
 {% tab title="Step by step" %}
@@ -31,6 +33,7 @@ function useAllowanceOf(
   * `_beneficiary` is the address to send the funds to.
 * Through the [`requirePermission`](../../or-abstract/jboperatable/modifiers/requirepermission.md) modifier, the function is only accessible by the project's owner, or from an operator that has been given the `JBOperations.USE_ALLOWANCE` permission by the project owner for the provided `_projectId`.
 * The function cannot be accessed recursively or while other `nonReentrant` functions in this contract are in progress.
+* The resulting function overrides a function definition from the `IJBETHPaymentTerminal` interface.
 * The function returns the ID of the funding cycle during which the allowance was use.
 
 # Body

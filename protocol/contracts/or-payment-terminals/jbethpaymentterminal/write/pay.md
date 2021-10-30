@@ -1,6 +1,8 @@
 # pay
 
-Contract: [`JBETHPaymentTerminalStore`](../)​‌
+Contract: [`JBETHPaymentTerminal`](../)​‌
+
+Interface: [`IJBTerminal`](../../../../interfaces/ijbterminal.md)
 
 {% tabs %}
 {% tab title="Step by step" %}
@@ -30,6 +32,7 @@ function pay(
   * `_delegateMetadata` are bytes to send along to the delegate, if one is provided.
 * The function can be accessed externally by anyone.
 * The function accepts ETH.
+* The resulting function overrides a function definition from the `IJBTerminal` interface.
 * The function returns the id of the funding cycle that the payment was made during.
 
 # Body
