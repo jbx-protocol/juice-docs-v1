@@ -6,7 +6,7 @@ Contract: [`JBETHPaymentTerminal`](../)​‌
 {% tab title="Step by step" %}
 **Refund fees based on the specified amount.**
 
-## Definition
+# Definition
 
 ```solidity
 function _refundHeldFees(
@@ -23,7 +23,7 @@ function _refundHeldFees(
 * The function is private to this contract.
 * The function doesn't return anything.
 
-## Body
+# Body
 
 1.  Get a reference to the amount that can be refunded. This is the same amount that would have been taken as a fee when the provided `_amount` was distributed as a payout or used allowance.
 
@@ -31,6 +31,11 @@ function _refundHeldFees(
     // The amount of fees that were taken from an original payout to yield the provided amount.
     uint256 _refundAmount = PRBMath.mulDiv(_amount, _percent + 200, 200) - _amount;
     ```
+
+    _Libraries used:_
+
+    * [`PRBMath`](https://github.com/hifi-finance/prb-math/blob/main/contracts/PRBMath.sol)
+      * `mulDiv`
 2.  Get a reference to any held [`JBFee`](../../../data-structures/jbfee.md)'s for the project.
 
     ```solidity

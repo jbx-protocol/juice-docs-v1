@@ -10,7 +10,7 @@ _Mint's the project's tokens according to values provided by a configured data s
 
 _Only the associated payment terminal can record a payment._
 
-## Definition
+# Definition
 
 ```solidity
 function recordPaymentFrom(
@@ -52,7 +52,7 @@ function recordPaymentFrom(
   * `tokenCount` is the number of tokens that were minted.
   * `memo` is a memo that should be passed along to the emitted event.
 
-## Body
+# Body
 
 1.  Get a reference to the project's current funding cycle that should be returned.
 
@@ -106,6 +106,12 @@ function recordPaymentFrom(
     ```
 
     _Libraries used:_
+
+    * [`JBFundingCycleMetadataResolver`](../../../libraries/jbfundingcyclemetadataresolver.md)
+      * `useDataSourceForPay`
+      * `dataSource`
+      * `reservedRate`
+
 6.  Calculate the weighted amount, which is the payment amount multiplied by the appropriate weight.
 
     ```solidity
@@ -114,6 +120,9 @@ function recordPaymentFrom(
     ```
 
     _Libraries used:_
+
+    * [`PRBMathUD60x18`](https://github.com/hifi-finance/prb-math/blob/main/contracts/PRBMathUD60x18.sol)
+      * `mul`
 7.  Increment the project's balance by the amount of the payment received.
 
     ```solidity
@@ -139,6 +148,9 @@ function recordPaymentFrom(
     ```
 
     _Libraries used:_
+
+    * [`JBFundingCycleMetadataResolver`](../../../libraries/jbfundingcyclemetadataresolver.md)
+      * `reservedRate`
 
     _External references:_
 

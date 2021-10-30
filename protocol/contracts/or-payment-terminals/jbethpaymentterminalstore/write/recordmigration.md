@@ -8,7 +8,7 @@ Contract: [`JBETHPaymentTerminalStore`](broken-reference)​‌
 
 _Only the associated payment terminal can record an added balance._
 
-## Definition
+# Definition
 
 ```solidity
 function recordAddedBalanceFor(uint256 _projectId, uint256 _amount)
@@ -22,7 +22,7 @@ function recordAddedBalanceFor(uint256 _projectId, uint256 _amount)
 * Through the [`onlyAssociatedPaymentTerminal`](../modifiers/onlyassociatedpaymentterminal.md) modifier, the function is only accessible by the terminal that claimed this store.
 * The function returns the project's current balance.
 
-## Body
+# Body
 
 1.  Get a reference to the project's current funding cycle that should be returned.
 
@@ -42,6 +42,10 @@ function recordAddedBalanceFor(uint256 _projectId, uint256 _amount)
     ```
 
     _Libraries used:_
+
+    * [`JBFundingCycleMetadataResolver`](../../../libraries/jbfundingcyclemetadataresolver.md)
+      * `terminalMigrationAllowed`
+
 3.  Get a reference to the project's current balance. Set this to the value that the function will return.
 
     ```solidity

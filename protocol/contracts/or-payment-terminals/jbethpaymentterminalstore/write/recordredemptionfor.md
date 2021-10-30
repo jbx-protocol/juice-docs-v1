@@ -8,7 +8,7 @@ Contract: [`JBETHPaymentTerminalStore`](broken-reference)​‌
 
 _Only the associated payment terminal can record a redemption._
 
-## Definition
+# Definition
 
 ```solidity
 function recordRedemptionFor(
@@ -43,7 +43,7 @@ function recordRedemptionFor(
   * `claimAmount` is the amount of wei claimed.
   * `memo` is a memo that should be included in the published event.
 
-## Body
+# Body
 
 1.  Make sure the holder has at least as many tokens as is being redeemed.
 
@@ -73,6 +73,10 @@ function recordRedemptionFor(
     ```
 
     _Libraries used:_
+
+    * [`JBFundingCycleMetadataResolver`](../../../libraries/jbfundingcyclemetadataresolver.md)
+      * `redeemPaused`
+
 4.  Create a variable where a redemption delegate will be saved if there is one. This pay delegate will later have its method called if it exists.
 
     ```solidity
@@ -102,6 +106,12 @@ function recordRedemptionFor(
     ```
 
     _Libraries used:_
+
+    * [`JBFundingCycleMetadataResolver`](../../../libraries/jbfundingcyclemetadataresolver.md)
+      * `useDataSourceForRedeem`
+      * `dataSource`
+      * `redemptionRate`
+      * `ballotRedemptionRate`
 6.  Make sure the amount being claimed is within the bounds of the project's balance.
 
     ```solidity

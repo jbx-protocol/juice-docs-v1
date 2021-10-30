@@ -10,7 +10,7 @@ Interface: [`IJBProjects`](../../../interfaces/ijbprojects.md)
 
 _Only a project's owner or operator can transfer its handle._
 
-## Definition
+# Definition
 
 ```solidity
 function transferHandleOf(
@@ -32,7 +32,7 @@ function transferHandleOf(
 * The function overrides a function definition from the `IJBProjects` interface.
 * The function returns the `handle` that has been transferred.
 
-## Body
+# Body
 
 1.  Check that the provided `_newHandle` is not empty.
 

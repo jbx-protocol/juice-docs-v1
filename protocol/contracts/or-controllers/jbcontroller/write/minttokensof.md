@@ -10,7 +10,7 @@ Interface: [`IJBController`](../../../../interfaces/ijbcontroller.md)
 
 _Only a project's owner, a designated operator, or one of its terminal's delegate can mint its tokens._
 
-## Definition
+# Definition
 
 ```solidity
 function mintTokensOf(
@@ -44,7 +44,7 @@ function mintTokensOf(
 * The function overrides a function definition from the [`IJBController`](../../../../interfaces/ijbcontroller.md) interface.
 * The function doesn't return anything.
 
-## Body
+# Body
 
 1.  If the reserved rate isnt' 100%, make sure the provided beneficiary isn't the zero address.
 
@@ -80,6 +80,9 @@ function mintTokensOf(
 
     _Libraries used:_
 
+    * [`JBFundingCycleMetadataResolver`](../../../libraries/jbfundingcyclemetadataresolver.md)
+      * `mintPaused`
+
     _External references:_
 
     * [`isTerminalDelegateOf`](../../../jbdirectory/read/isterminaldelegateof.md)
@@ -107,6 +110,9 @@ function mintTokensOf(
     ```
 
     _Libraries used:_
+
+    * [`PRBMath`](https://github.com/hifi-finance/prb-math/blob/main/contracts/PRBMath.sol)
+      * `mulDiv`
 
     _Internal references:_
 

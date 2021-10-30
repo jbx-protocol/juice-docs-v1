@@ -12,7 +12,7 @@ _Payouts are sent to the preprogrammed splits, and any leftover amount is sent t
 
 _Anyone can distribute payouts on a project's behalf._
 
-## Definition
+# Definition
 
 ```solidity
 function distributePayoutsOf(
@@ -34,7 +34,7 @@ function distributePayoutsOf(
 * The resulting function overrides a function definition from the `IJBETHPaymentTerminal` interface.
 * The function returns the ID of the funding cycle during which the distribution was made.
 
-## Body
+# Body
 
 1.  Record the withdrawal
 

@@ -10,7 +10,7 @@ Interface: [`IJBDirectory`](../../../interfaces/ijbdirectory.md)
 
 Only a project owner, an operator, or its controller can add a terminal.
 
-## Definition
+# Definition
 
 ```solidity
 function addTerminalOf(uint256 _projectId, IJBTerminal _terminal)
@@ -31,7 +31,7 @@ function addTerminalOf(uint256 _projectId, IJBTerminal _terminal)
 * The function overrides a function definition from the `IJBDirectory` interface.
 * The function returns nothing.
 
-## Body
+# Body
 
 1.  Make sure the provided terminal isn't the zero address.
 

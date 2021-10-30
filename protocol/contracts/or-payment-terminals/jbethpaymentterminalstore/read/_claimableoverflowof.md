@@ -8,7 +8,7 @@ Contract: [`JBETHPaymentTerminalStore`](../)​‌
 
 _If the project has an active funding cycle reconfiguration ballot, the project's ballot redemption rate is used._
 
-## Definition
+# Definition
 
 ```solidity
 function claimableOverflowOf(uint256 _projectId, uint256 _tokenCount)
@@ -24,7 +24,7 @@ function claimableOverflowOf(uint256 _projectId, uint256 _tokenCount)
 * The function does not alter state on the blockchain.
 * The function returns the amount of overflowed ETH that can be claimed.
 
-## Body
+# Body
 
 1.  Get a reference to the current overflow given the provided funding cycle.
 
@@ -58,10 +58,13 @@ function claimableOverflowOf(uint256 _projectId, uint256 _tokenCount)
     // Get the number of reserved tokens the project has.
     uint256 _reservedTokenAmount = directory
       .controllerOf(_fundingCycle.projectId)
-      .reservedTokenBalanceOf(_fundingCycle.projectId, _fundingCycle.reservedRate());
+      .reservedTokenBalanceOf(_fundingCycle.projectId, _fundingCycle.());
     ```
 
     _Libraries used:_
+
+    * [`JBFundingCycleMetadataResolver`](../../../libraries/jbfundingcyclemetadataresolver.md)
+      * `reservedRate`
 
     _External references:_
 
@@ -90,6 +93,14 @@ function claimableOverflowOf(uint256 _projectId, uint256 _tokenCount)
     ```
 
     _Libraries used:_
+
+    * [`JBFundingCycleMetadataResolver`](../../../libraries/jbfundingcyclemetadataresolver.md)
+      * `ballotRedemptionRate`
+      * `redemptionRate`
+
+    _External references:_
+
+    * [`currentBallotStateOf`](../../../jbfundingcyclestore/write/currentballotstateof.md)
 8.  If the redemption rate is 0%, nothing is claimable regardless of the amount of tokens.
 
     ```solidity
@@ -104,6 +115,9 @@ function claimableOverflowOf(uint256 _projectId, uint256 _tokenCount)
     ```
 
     _Libraries used:_
+
+    * [`PRBMath`](https://github.com/hifi-finance/prb-math/blob/main/contracts/PRBMath.sol)
+      * `mulDiv`
 10. Return the claimable amount determined by a bonding curve. At a 100% bonding curve the linear base can be returned immediately, this outcome is naturally part of the curve – checking for it first could prevent an unnecessary and slightly more expensive mulDiv calculation.
 
     ```solidity
@@ -118,6 +132,9 @@ function claimableOverflowOf(uint256 _projectId, uint256 _tokenCount)
     ```
 
     _Libraries used:_
+
+    * [`PRBMath`](https://github.com/hifi-finance/prb-math/blob/main/contracts/PRBMath.sol)
+      * `mulDiv`
 {% endtab %}
 
 {% tab title="Code" %}

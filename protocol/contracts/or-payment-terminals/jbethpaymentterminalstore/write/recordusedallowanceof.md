@@ -8,7 +8,7 @@ Contract: [`JBETHPaymentTerminalStore`](../)​‌
 
 _Only the associated payment terminal can record a used allowance._
 
-## Definition
+# Definition
 
 ```solidity
 function recordUsedAllowanceOf(
@@ -33,7 +33,7 @@ function recordUsedAllowanceOf(
   * `fundingCycle` is the funding cycle during which the withdrawal was made.
   * `withdrawnAmount` is the amount withdrawn.
 
-## Body
+# Body
 
 1.  Get a reference to the project's first funding cycle.
 
@@ -62,6 +62,9 @@ function recordUsedAllowanceOf(
     ```
 
     _Libraries used:_
+
+    * [`PRBMathUD60x18`](https://github.com/hifi-finance/prb-math/blob/main/contracts/PRBMathUD60x18.sol)
+      * `div`
 4.  Make sure the there is enough allowance to use.
 
     ```solidity

@@ -6,7 +6,7 @@ Contract: [`JBETHPaymentTerminal`](../)​‌
 {% tab title="Step by step" %}
 **Pays out splits for a project's funding cycle configuration.**
 
-## Definition
+# Definition
 
 ```solidity
 function _distributeToPayoutSplitsOf(
@@ -23,7 +23,7 @@ function _distributeToPayoutSplitsOf(
 * The function is private to this contract.
 * The function returns the leftover amount if the splits don't add up to 100%.
 
-## Body
+# Body
 
 1.  Save the passed in `_amount` as the `leftoverAmount` that will be returned. The subsequent routine will decrement the leftover amount as splits are settled.
 
@@ -63,6 +63,11 @@ function _distributeToPayoutSplitsOf(
     // The amount to send towards mods. Mods percents are out of 10000000.
     uint256 _payoutAmount = PRBMath.mulDiv(_amount, _split.percent, 10000000);
     ```
+
+    _Libraries used:_
+
+    * [`PRBMath`](https://github.com/hifi-finance/prb-math/blob/main/contracts/PRBMath.sol)
+      * `mulDiv`
 6.  If there's at least some funds to send to the payout, determine where they should go. If the split has an `allocator` set, send the funds to its `allocate` function, passing along any relevant params. Otherwise if a `projectId` is specified in the split, send the payout to that project and use the split's `beneficiary` as the address that should receive the project's tokens in return. Otherwise, send the funds directly to the `beneficiary` address from the split. Decrement the `leftoverAmount` once the split is settled.
 
     ```solidity

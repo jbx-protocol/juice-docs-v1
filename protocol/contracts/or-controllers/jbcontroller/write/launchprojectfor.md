@@ -10,7 +10,7 @@ _Each operation within this transaction can be done in sequence separately._
 
 _Anyone can deploy a project on an owner's behalf._
 
-## Definition
+# Definition
 
 ```solidity
 function launchProjectFor(
@@ -39,7 +39,7 @@ function launchProjectFor(
 * The function can be accessed externally by anyone.
 * The function returns the ID of the project that was launched.
 
-## Body
+# Body
 
 1.  Validate and pack the provided metadata into a `uint256`.
 
@@ -51,6 +51,9 @@ function launchProjectFor(
     ```
 
     _Libraries used:_
+
+    * [`JBFundingCycleMetadataResolver`](../../../libraries/jbfundingcyclemetadataresolver.md)
+      * `validateAndPackFundingCycleMetadata`
 2.  Create the project. This will mint an ERC-721 in the `_owners` wallet representing ownership over the project.
 
     ```solidity
