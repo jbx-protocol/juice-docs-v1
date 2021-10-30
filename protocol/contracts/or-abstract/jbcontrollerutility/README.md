@@ -7,6 +7,9 @@ description: >-
 
 ## Overview
 
+### Traits
+
+`abstract`
 ### Code
 
 {% embed url="https://github.com/jbx-protocol/juice-contracts/tree/main/contracts/v2/abstract/JBControllerUtility.sol" %}
