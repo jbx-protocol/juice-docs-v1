@@ -107,11 +107,11 @@ function recordRedemptionFor(
 
     _Libraries used:_
 
-    * [`JBFundingCycleMetadataResolver`](../../../libraries/jbfundingcyclemetadataresolver.md)
-      `useDataSourceForRedeem`
-      `dataSource`
-      `redemptionRate`
-      `ballotRedemptionRate`
+    * [`JBFundingCycleMetadataResolver`](../../../libraries/jbfundingcyclemetadataresolver.md)\
+      `useDataSourceForRedeem`\
+      `dataSource`\
+      `redemptionRate`\
+      `ballotRedemptionRate`\
 6.  Make sure the amount being claimed is within the bounds of the project's balance.
 
     ```solidity
