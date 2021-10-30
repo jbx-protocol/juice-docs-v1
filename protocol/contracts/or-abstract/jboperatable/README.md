@@ -38,4 +38,4 @@ constructor(IJBOperatorStore _operatorStore) {
 
 | Function                                     | Definition                                                                                                                                                          |
 | -------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [**`operatorStore`**](read/operatorstore.md) | <p><strong>Traits</strong></p><ul><li><code>immutable</code></li></ul><p><strong>Returns</strong></p><ul><li><code>IJBOperationStore operatorStore</code></li></ul> |
+| [**`operatorStore`**](properties/operatorstore.md) | <p><strong>Traits</strong></p><ul><li><code>immutable</code></li></ul><p><strong>Returns</strong></p><ul><li><code>IJBOperationStore operatorStore</code></li></ul> |
