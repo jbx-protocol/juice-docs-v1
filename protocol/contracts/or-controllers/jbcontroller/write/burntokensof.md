@@ -72,7 +72,7 @@ function burnTokensOf(
     _Libraries used:_
     
     * [`JBFundingCycleMetadataResolver`](../../../../libraries/jbfundingcyclemetadataresolver.md)
-      * `burnPause(...)`
+      `burnPause(...)`
 
     _External references:_
 

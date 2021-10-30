@@ -75,7 +75,7 @@ function recordRedemptionFor(
     _Libraries used:_
 
     * [`JBFundingCycleMetadataResolver`](../../../libraries/jbfundingcyclemetadataresolver.md)
-      * `redeemPaused(...)`
+      `redeemPaused(...)`
 
 4.  Create a variable where a redemption delegate will be saved if there is one. This pay delegate will later have its method called if it exists.
 
@@ -108,10 +108,10 @@ function recordRedemptionFor(
     _Libraries used:_
 
     * [`JBFundingCycleMetadataResolver`](../../../libraries/jbfundingcyclemetadataresolver.md)
-      * `useDataSourceForRedeem`
-      * `dataSource`
-      * `redemptionRate`
-      * `ballotRedemptionRate`
+      `useDataSourceForRedeem`
+      `dataSource`
+      `redemptionRate`
+      `ballotRedemptionRate`
 6.  Make sure the amount being claimed is within the bounds of the project's balance.
 
     ```solidity
