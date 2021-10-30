@@ -14,7 +14,7 @@ Interface: [`IJBTokenStore`](../../../interfaces/ijbtokenstore.md)
 function totalSupplyOf(uint256 _projectId) external view override returns (uint256 supply) { ... }
 ```
 
-* `_projectId` is the ID of the project to get a total supply of.
+* `_projectId` is the ID of the project to get a total token supply of.
 * The view function can be accessed externally by anyone.
 * The function does not alter state on the blockchain.
 * The function overrides a function definition from the `IJBTokenStore` interface.
@@ -48,7 +48,7 @@ function totalSupplyOf(uint256 _projectId) external view override returns (uint2
   @notice 
   The total supply of tokens for each project, including claimed and unclaimed tokens.
 
-  @param _projectId The ID of the project to get the total supply of.
+  @param _projectId The ID of the project to get the total token supply of.
 
   @return supply The total supply.
 */

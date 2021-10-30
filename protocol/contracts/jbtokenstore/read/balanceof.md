@@ -19,7 +19,7 @@ function balanceOf(address _holder, uint256 _projectId)
 ```
 
 * `_holder` is the address who's balance is being queried.
-* `_projectId` is the ID of the project to get a total supply of.
+* `_projectId` is the ID of the project to get a total token supply of.
 * The view function can be accessed externally by anyone.
 * The function does not alter state on the blockchain.
 * The function overrides a function definition from the `IJBTokenStore` interface.
