@@ -52,8 +52,8 @@ function launchProjectFor(
 
     _Libraries used:_
 
-    * [`JBFundingCycleMetadataResolver`](../../../../libraries/jbfundingcyclemetadataresolver.md)
-      `validateAndPackFundingCycleMetadata(...)`
+    * [`JBFundingCycleMetadataResolver`](../../../../libraries/jbfundingcyclemetadataresolver.md)\
+        `validateAndPackFundingCycleMetadata(...)`
 2.  Create the project. This will mint an ERC-721 in the `_owners` wallet representing ownership over the project.
 
     ```solidity

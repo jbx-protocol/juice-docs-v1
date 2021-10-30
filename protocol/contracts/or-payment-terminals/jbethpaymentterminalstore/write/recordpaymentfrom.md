@@ -107,10 +107,10 @@ function recordPaymentFrom(
 
     _Libraries used:_
 
-    * [`JBFundingCycleMetadataResolver`](../../../libraries/jbfundingcyclemetadataresolver.md)
-      `useDataSourceForPay(...)`
-      `dataSource(...)`
-      `reservedRate(...)`
+    * [`JBFundingCycleMetadataResolver`](../../../libraries/jbfundingcyclemetadataresolver.md)\
+        `useDataSourceForPay(...)`\
+        `dataSource(...)`\
+        `reservedRate(...)`
 
 6.  Calculate the weighted amount, which is the payment amount multiplied by the appropriate weight.
 
@@ -149,8 +149,8 @@ function recordPaymentFrom(
 
     _Libraries used:_
 
-    * [`JBFundingCycleMetadataResolver`](../../../libraries/jbfundingcyclemetadataresolver.md)
-      `reservedRate(...)`
+    * [`JBFundingCycleMetadataResolver`](../../../libraries/jbfundingcyclemetadataresolver.md)\
+        `reservedRate(...)`
 
     _External references:_
 

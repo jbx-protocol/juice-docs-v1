@@ -59,8 +59,8 @@ function recordWithdrawalFor(
 
     _Libraries used:_
 
-    * [`JBFundingCycleMetadataResolver`](../../../libraries/jbfundingcyclemetadataresolver.md)
-      `withdrawalsPaused(...)`
+    * [`JBFundingCycleMetadataResolver`](../../../libraries/jbfundingcyclemetadataresolver.md)\
+        `withdrawalsPaused(...)`
 
 4.  Make the sure provided currency matches the funding cycle's currency.
 

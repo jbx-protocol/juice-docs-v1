@@ -43,8 +43,8 @@ function recordAddedBalanceFor(uint256 _projectId, uint256 _amount)
 
     _Libraries used:_
 
-    * [`JBFundingCycleMetadataResolver`](../../../libraries/jbfundingcyclemetadataresolver.md)
-      `terminalMigrationAllowed(...)`
+    * [`JBFundingCycleMetadataResolver`](../../../libraries/jbfundingcyclemetadataresolver.md)\
+        `terminalMigrationAllowed(...)`
 
 3.  Get a reference to the project's current balance. Set this to the value that the function will return.
 
