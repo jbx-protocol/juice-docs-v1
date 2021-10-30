@@ -1,4 +1,4 @@
-# _heldFeesOf
+# \_heldFeesOf
 
 Contract:[`JBETHPaymentTerminal`](../)​‌
 
