@@ -239,7 +239,7 @@
         * [DistributePayouts](protocol/contracts/or-payment-terminals/jbethpaymentterminal/events/distributepayouts.md)
         * [UseAllowance](protocol/contracts/or-payment-terminals/jbethpaymentterminal/events/useallowance.md)
         * [Pay](protocol/contracts/or-payment-terminals/jbethpaymentterminal/events/pay.md)
-        * [Redeem](protocol/contracts/or-payment-terminals/jbethpaymentterminal/events/redeem.md)
+        * [RedeemTokens](protocol/contracts/or-payment-terminals/jbethpaymentterminal/events/redeemtokens.md)
         * [DistributeToPayoutSplit](protocol/contracts/or-payment-terminals/jbethpaymentterminal/events/distributetopayoutsplit.md)
         * [DelegateDidPay](protocol/contracts/or-payment-terminals/jbethpaymentterminal/events/delegatedidpay.md)
         * [DelegateDidRedeem](protocol/contracts/or-payment-terminals/jbethpaymentterminal/events/delegatedidredeem.md)

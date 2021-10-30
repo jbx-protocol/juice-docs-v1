@@ -36,7 +36,7 @@ function distributePayoutsOf(
 1.  Record the withdrawal
 
     ```solidity
-    // Record the withdrawal in the data layer.
+    // Record the withdrawal.
     (JBFundingCycle memory _fundingCycle, uint256 _withdrawnAmount) = store.recordWithdrawalFor(
       _projectId,
       _amount,
@@ -61,7 +61,7 @@ function distributePayoutsOf(
 
     * [`ownerOf`](https://github.com/OpenZeppelin/openzeppelin-contracts/blob/46ce0cfa3323a2787864f884b3c12960bc53b233/contracts/token/ERC721/ERC721.sol#L70)
 
-3.  Refund any held fees. This is useful to allow a project to withdraw funds from the protocol and subsequently add them back without paying eventually having to pay double fees. 
+3.  Get a reference to the project's handle, which will be included in the emitted event.
 
     ```solidity
     // Get a reference to the handle of the project paying the fee and sending payouts.
@@ -169,7 +169,7 @@ function distributePayoutsOf(
   uint256 _minReturnedWei,
   string memory _memo
 ) external override nonReentrant returns (uint256) {
-  // Record the withdrawal in the data layer.
+  // Record the withdrawal.
   (JBFundingCycle memory _fundingCycle, uint256 _withdrawnAmount) = store.recordWithdrawalFor(
     _projectId,
     _amount,

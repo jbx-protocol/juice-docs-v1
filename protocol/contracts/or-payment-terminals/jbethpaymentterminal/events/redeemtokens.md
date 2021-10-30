@@ -1,4 +1,4 @@
-# Redeem
+# RedeemTokens
 
 Emitted from:
 
@@ -7,7 +7,7 @@ Emitted from:
 ## Definition
 
 ```solidity
-event Redeem(
+event RedeemTokens(
   uint256 indexed fundingCycleId,
   uint256 indexed projectId,
   address indexed holder,
