@@ -31,6 +31,7 @@
   * [JBSplit](protocol/data-structures/jbsplit.md)
 * [Enums](protocol/enums/README.md)
   * [JBBallotState](protocol/enums/jbballotstate.md)
+* [Libraries](protocol/libraries/README.md)
 * [Interfaces](protocol/interfaces/README.md)
   * [IJBController](protocol/interfaces/ijbcontroller.md)
   * [IJBDirectory](protocol/interfaces/ijbdirectory.md)
