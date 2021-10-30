@@ -1,4 +1,4 @@
-# \_deriveStartFrom
+# _deriveStartFrom
 
 Contract:[`JBFundingCycleStore`](../)​
 

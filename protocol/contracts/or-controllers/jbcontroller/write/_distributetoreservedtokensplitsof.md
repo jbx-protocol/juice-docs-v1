@@ -1,4 +1,4 @@
-# \_distributeToReservedTokenSplitsOf
+# _distributeToReservedTokenSplitsOf
 
 {% tabs %}
 {% tab title="Step by step" %}

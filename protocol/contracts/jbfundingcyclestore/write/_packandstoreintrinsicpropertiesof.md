@@ -1,4 +1,4 @@
-# \_packAndStoreIntrinsicPropertiesOf
+# _packAndStoreIntrinsicPropertiesOf
 
 Contract:[`JBFundingCycleStore`](../)​
 

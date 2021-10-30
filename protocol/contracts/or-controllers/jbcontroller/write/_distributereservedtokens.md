@@ -1,4 +1,4 @@
-# \_distributeReservedTokens
+# _distributeReservedTokens
 
 {% tabs %}
 {% tab title="Step by step" %}

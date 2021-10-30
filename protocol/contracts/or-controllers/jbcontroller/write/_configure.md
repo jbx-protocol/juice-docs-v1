@@ -1,4 +1,4 @@
-# \_configure
+# _configure
 
 {% tabs %}
 {% tab title="Step by step" %}

@@ -1,4 +1,4 @@
-# \_takeFee
+# _takeFee
 
 Contract: [`JBETHPaymentTerminal`](../)​‌
 

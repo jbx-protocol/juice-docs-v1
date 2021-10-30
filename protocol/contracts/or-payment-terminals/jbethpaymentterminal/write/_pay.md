@@ -1,4 +1,4 @@
-# \_pay
+# _pay
 
 Contract: [`JBETHPaymentTerminal`](../)​‌
 

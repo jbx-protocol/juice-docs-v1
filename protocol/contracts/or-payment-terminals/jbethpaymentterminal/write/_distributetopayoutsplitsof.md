@@ -1,4 +1,4 @@
-# \_distributeToPayoutSplitsOf
+# _distributeToPayoutSplitsOf
 
 Contract: [`JBETHPaymentTerminal`](../)​‌
 

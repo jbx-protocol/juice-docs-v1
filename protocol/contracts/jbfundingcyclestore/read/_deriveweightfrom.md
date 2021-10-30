@@ -1,4 +1,4 @@
-# \_deriveWeightFrom
+# _deriveWeightFrom
 
 Contract:[`JBFundingCycleStore`](../)​
 

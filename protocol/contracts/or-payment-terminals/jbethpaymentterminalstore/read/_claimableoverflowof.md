@@ -1,4 +1,4 @@
-# \_claimableOverflowOf
+# _claimableOverflowOf
 
 Contract: [`JBETHPaymentTerminalStore`](../)​‌
 
