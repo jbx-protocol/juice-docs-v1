@@ -35,5 +35,5 @@ interface IJBController {
     uint256 _configuration,
     IJBTerminal _terminal
   ) external view returns (uint256);
-}sol
+}
 ```

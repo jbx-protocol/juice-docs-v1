@@ -33,5 +33,5 @@ interface IJBOperatorStore {
   function setOperator(JBOperatorData calldata _operatorData) external;
 
   function setOperators(JBOperatorData[] calldata _operatorData) external;
-}sol
+}
 ```

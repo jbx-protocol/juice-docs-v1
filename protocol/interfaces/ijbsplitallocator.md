@@ -18,5 +18,5 @@ interface IJBSplitAllocator {
     address _beneficiary,
     bool _preferClaimed
   ) external payable;
-}sol
+}
 ```
