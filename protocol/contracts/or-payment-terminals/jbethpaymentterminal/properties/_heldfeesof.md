@@ -1,4 +1,4 @@
-# store
+# _heldFeesOf
 
 Contract:[`JBETHPaymentTerminal`](../)​‌
 
