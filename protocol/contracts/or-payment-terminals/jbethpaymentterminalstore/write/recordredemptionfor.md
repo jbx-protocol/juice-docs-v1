@@ -75,7 +75,7 @@ function recordRedemptionFor(
     _Libraries used:_
 
     * [`JBFundingCycleMetadataResolver`](../../../libraries/jbfundingcyclemetadataresolver.md)
-      * `redeemPaused`
+      * `redeemPaused(...)`
 
 4.  Create a variable where a redemption delegate will be saved if there is one. This pay delegate will later have its method called if it exists.
 
