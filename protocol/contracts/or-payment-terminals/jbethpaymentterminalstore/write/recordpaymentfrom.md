@@ -114,7 +114,7 @@ function recordPaymentFrom(
 
     ```solidity
     // Add the amount to the balance of the project.
-    balanceOf[_projectId] = balanceOf[_projectId] + _amount;
+    if (_amount > 0) balanceOf[_projectId] = balanceOf[_projectId] + _amount;
     ```
 
     _Internal references:_
@@ -250,7 +250,7 @@ function recordPaymentFrom(
   uint256 _weightedAmount = PRBMathUD60x18.mul(_amount, weight);
 
   // Add the amount to the balance of the project.
-  balanceOf[_projectId] = balanceOf[_projectId] + _amount;
+  if (_amount > 0) balanceOf[_projectId] = balanceOf[_projectId] + _amount;
 
   if (_weightedAmount > 0)
     tokenCount = directory.controllerOf(_projectId).mintTokensOf(

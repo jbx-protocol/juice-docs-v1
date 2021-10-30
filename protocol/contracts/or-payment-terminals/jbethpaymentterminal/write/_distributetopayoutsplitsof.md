@@ -1,4 +1,4 @@
-# distributeToPayoutSplitsOf
+# _distributeToPayoutSplitsOf
 
 Contract: [`JBETHPaymentTerminal`](../)​‌
 
@@ -17,7 +17,6 @@ function _distributeToPayoutSplitsOf(
 ```
 
 * Arguments:
-
   * `_fundingCycle` is the funding cycle during which the distribution is being made.
   * `_amount` is the total amount being distributed.
   * `_memo` is a memo to pass along to the emitted events.
