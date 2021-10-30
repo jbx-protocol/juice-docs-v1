@@ -5,7 +5,7 @@ Juicebox is composed of the following contracts:
 | Contract | Description |
 | :--- | :--- |
 | **TerminalV2PaymentLayer** | Manages all inflows and outflows of funds into the Juicebox ecosystem. This contract also stores all treasury funds for all projects. |
-| **TerminalV2DataLayer** | Stitches together funding cycles and treasury tokens, making sure all activity is accounted for and correct. |
+| **TerminalV2DataLayer** | Stitches together funding cycles and community tokens, making sure all activity is accounted for and correct. |
 | **TerminalDirectory** | Keeps a reference of which terminal contract each project is currently accepting funds through. When a project migrates from one terminal to another, the change is reflected in this contract.  |
 | **TicketBooth** | Manages token minting and burning for all projects, while keeping track of unclaimed token balances for all accounts. |
 | **FundingCycles** | Manage funding cycle configurations, ballots, accounting, and scheduling. |
