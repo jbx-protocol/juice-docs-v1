@@ -51,7 +51,7 @@ function reconfigureFundingCyclesOf(
     _Libraries used:_
 
     * [`JBFundingCycleMetadataResolver`](../../../../libraries/jbfundingcyclemetadataresolver.md)\
-        `.validateAndPackFundingCycleMetadata(...)`
+        `validateAndPackFundingCycleMetadata(...)`
 
 2.  Configure the project's funding cycle, overflow allowances, and splits.
 

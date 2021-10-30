@@ -1,6 +1,6 @@
 # recordRedemptionFor
 
-Contract: [`JBETHPaymentTerminalStore`](broken-reference)​‌
+Contract: [`JBETHPaymentTerminalStore`](broken-reference/)​‌
 
 {% tabs %}
 {% tab title="Step by step" %}
@@ -8,7 +8,7 @@ Contract: [`JBETHPaymentTerminalStore`](broken-reference)​‌
 
 _Only the associated payment terminal can record a redemption._
 
-# Definition
+## Definition
 
 ```solidity
 function recordRedemptionFor(
@@ -43,7 +43,7 @@ function recordRedemptionFor(
   * `claimAmount` is the amount of wei claimed.
   * `memo` is a memo that should be included in the published event.
 
-# Body
+## Body
 
 1.  Make sure the holder has at least as many tokens as is being redeemed.
 
@@ -54,7 +54,7 @@ function recordRedemptionFor(
 
     _External references:_
 
-    * [`balanceOf`](broken-reference)
+    * [`balanceOf`](broken-reference/)
 2.  Get a reference to the project's current funding cycle.
 
     ```solidity
@@ -75,15 +75,14 @@ function recordRedemptionFor(
     _Libraries used:_
 
     * [`JBFundingCycleMetadataResolver`](../../../libraries/jbfundingcyclemetadataresolver.md)\
-        `.redeemPaused(...)`
-
+      `redeemPaused(...)`
 4.  Create a variable where a redemption delegate will be saved if there is one. This pay delegate will later have its method called if it exists.
 
     ```solidity
     // Save a reference to the delegate to use.
     IJBRedemptionDelegate _delegate;
     ```
-5.  If the project's current funding cycle is configured to use a data source when making redemptions, ask the data source for the parameters that should be used throughout the rest of the function given provided contextual values. Otherwise default parameters are used.
+5.  If the project's current funding cycle is configured to use a data source when making redemptions, ask the data source for the parameters that should be used throughout the rest of the function given provided contextual values in a [`JBRedeemParamsData`](../../../../data-structures/jbredeemparamsdata.md) structure. Otherwise default parameters are used.
 
     ```solidity
     // If the funding cycle has configured a data source, use it to derive a claim amount and memo.
@@ -108,10 +107,10 @@ function recordRedemptionFor(
     _Libraries used:_
 
     * [`JBFundingCycleMetadataResolver`](../../../libraries/jbfundingcyclemetadataresolver.md)\
-        `.useDataSourceForRedeem(...)`\
-        `.dataSource(...)`\
-        `.redemptionRate(...)`\
-        `.ballotRedemptionRate(...)`
+      `useDataSourceForRedeem(...)`\
+      `dataSource(...)`\
+      `redemptionRate(...)`\
+      `ballotRedemptionRate(...)`
 6.  Make sure the amount being claimed is within the bounds of the project's balance.
 
     ```solidity
@@ -172,7 +171,7 @@ function recordRedemptionFor(
 
     _Event references:_
 
-    * [`DelegateDidRedeem`](broken-reference)
+    * [`DelegateDidRedeem`](broken-reference/)
 {% endtab %}
 
 {% tab title="Code" %}
@@ -290,9 +289,9 @@ function recordRedemptionFor(
 {% endtab %}
 
 {% tab title="Events" %}
-| Name                                        | Data                                                                                                                                                                                                                                                |
-| ------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [**`DelegateDidRedeem`**](broken-reference) | <ul><li><a href="../../../interfaces/ijbredemptiondelegate.md"><code>JBRedemptionDelegate</code></a><code>delegate</code></li><li><a href="../../../data-structures/jbdidredeemdata.md"><code>JBDidRedeemData</code></a><code>data</code></li></ul> |
+| Name                                         | Data                                                                                                                                                                                                                                                |
+| -------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [**`DelegateDidRedeem`**](broken-reference/) | <ul><li><a href="../../../interfaces/ijbredemptiondelegate.md"><code>JBRedemptionDelegate</code></a><code>delegate</code></li><li><a href="../../../data-structures/jbdidredeemdata.md"><code>JBDidRedeemData</code></a><code>data</code></li></ul> |
 {% endtab %}
 
 {% tab title="Bug bounty" %}

@@ -60,7 +60,7 @@ function recordWithdrawalFor(
     _Libraries used:_
 
     * [`JBFundingCycleMetadataResolver`](../../../libraries/jbfundingcyclemetadataresolver.md)\
-        `.withdrawalsPaused(...)`
+        `withdrawalsPaused(...)`
 
 4.  Make the sure provided currency matches the funding cycle's currency.
 
@@ -80,8 +80,8 @@ function recordWithdrawalFor(
 
     _Libraries used:_
 
-    * [`PRBMathUD60x18`](https://github.com/hifi-finance/prb-math/blob/main/contracts/PRBMathUD60x18.sol)\
-        `.div(...)`
+    * [`PRBMathUD60x18`](https://github.com/hifi-finance/prb-math/blob/main/contracts/PRBMathUD60x18.sol)
+      * `div`
 6.  Make sure the project has enough of a balance to withdraw the desired amount.
 
     ```solidity
