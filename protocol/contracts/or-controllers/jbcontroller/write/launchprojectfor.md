@@ -41,11 +41,32 @@ function launchProjectFor(
 
 # Body
 
-1.  Validate and pack the provided metadata into a `uint256`.
+1.  Make sure the reserved rate is a valid number out of 10000.
+
+    ```solidity
+    // The reserved project token rate must be less than or equal to 10000.
+    require(_metadata.reservedRate <= 10000, '0x37: BAD_RESERVED_RATE');
+    ```
+
+2.  Make sure the redemption rate is a valid number out of 10000.
+
+    ```solidity
+    // The redemption rate must be between 0 and 10000.
+    require(_metadata.redemptionRate <= 10000, '0x38: BAD_REDEMPTION_RATE');
+    ```
+
+3.  Make sure the ballot redemption rate is less than 100%.
+
+    ```solidity
+    // The ballot redemption rate must be less than or equal to 10000.
+    require(_metadata.ballotRedemptionRate <= 10000, '0x39: BAD_BALLOT_REDEMPTION_RATE');
+    ```
+
+4.  Validate and pack the provided metadata into a `uint256`.
 
     ```solidity
     // Make sure the metadata is validated and packed into a uint256.
-    uint256 _packedMetadata = JBFundingCycleMetadataResolver.validateAndPackFundingCycleMetadata(
+    uint256 _packedMetadata = JBFundingCycleMetadataResolver.packFundingCycleMetadata(
       _metadata
     );
     ```
@@ -53,8 +74,8 @@ function launchProjectFor(
     _Libraries used:_
 
     * [`JBFundingCycleMetadataResolver`](../../../../libraries/jbfundingcyclemetadataresolver.md)\
-        `.validateAndPackFundingCycleMetadata(...)`
-2.  Create the project. This will mint an ERC-721 in the `_owners` wallet representing ownership over the project.
+        `.packFundingCycleMetadata(...)`
+5.  Create the project. This will mint an ERC-721 in the `_owners` wallet representing ownership over the project.
 
     ```solidity
     // Create the project for into the wallet of the message sender.
@@ -64,7 +85,7 @@ function launchProjectFor(
     _External references:_
 
     * [`createFor`](../../../jbprojects/write/createfor.md)
-3.  Set this controller as the controller of the project.
+6.  Set this controller as the controller of the project.
 
     ```solidity
     // Set the this contract as the project's controller in the directory.
@@ -74,7 +95,7 @@ function launchProjectFor(
     _External references:_
 
     * [`setControllerOf`](../../../jbdirectory/write/setcontrollerof.md)
-4.  If a terminal was provided, add it to the list of terminals the project can accept funds through.
+7.  If a terminal was provided, add it to the list of terminals the project can accept funds through.
 
     ```solidity
     // Add the provided terminal to the list of terminals.
@@ -84,7 +105,7 @@ function launchProjectFor(
     _External references:_
 
     * [`addTerminalOf`](../../../jbdirectory/write/addterminalof.md)
-5.  Configure the project's funding cycle, overflow allowances, and splits.
+8.  Configure the project's funding cycle, overflow allowances, and splits.
 
     ```solidity
     _configure(
@@ -127,8 +148,8 @@ function launchProjectFor(
       If the number is 10001, an non-recurring funding cycle will get made.
     @dev _data.ballot The ballot contract that will be used to approve subsequent reconfigurations. Must adhere to the IFundingCycleBallot interface.
   @param _metadata A struct specifying the controller specific params that a funding cycle can have.
-    @dev _metadata.reservedRate A number from 0-200 (0-100%) indicating the percentage of each contribution's newly minted tokens that will be reserved for the token splits.
-    @dev _metadata.redemptionRate The rate from 0-200 (0-100%) that tunes the bonding curve according to which a project's tokens can be redeemed for overflow.
+    @dev _metadata.reservedRate A number from 0-10000 (0-100%) indicating the percentage of each contribution's newly minted tokens that will be reserved for the token splits.
+    @dev _metadata.redemptionRate The rate from 0-10000 (0-100%) that tunes the bonding curve according to which a project's tokens can be redeemed for overflow.
       The bonding curve formula is https://www.desmos.com/calculator/sp9ru6zbpk
       where x is _count, o is _currentOverflow, s is _totalSupply, and r is _redemptionRate.
     @dev _metadata.ballotRedemptionRate The redemption rate to apply when there is an active ballot.
@@ -162,7 +183,7 @@ function launchProjectFor(
   IJBTerminal _terminal
 ) external returns (uint256 projectId) {
   // Make sure the metadata is validated and packed into a uint256.
-  uint256 _packedMetadata = JBFundingCycleMetadataResolver.validateAndPackFundingCycleMetadata(
+  uint256 _packedMetadata = JBFundingCycleMetadataResolver.packFundingCycleMetadata(
     _metadata
   );
 

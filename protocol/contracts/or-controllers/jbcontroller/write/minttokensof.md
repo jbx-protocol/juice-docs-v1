@@ -39,7 +39,7 @@ function mintTokensOf(
   * `_beneficiary` is the account that the tokens are being minted for.
   * `_memo` is a memo to pass along to the emitted event.
   * `_preferClaimedTokens` is a flag indicating whether ERC20's should be minted if they have been issued.
-  * `_reservedRate` is the reserved rate to use when minting tokens. A positive amount will reduce the token count minted to the beneficiary, instead being reserved for preprogrammed splits. This number is out of 200.
+  * `_reservedRate` is the reserved rate to use when minting tokens. A positive amount will reduce the token count minted to the beneficiary, instead being reserved for preprogrammed splits. This number is out of 10000.
 * Through the [`requirePermissionAllowingOverride`](../../or-abstract/jboperatable/modifiers/requirepermissionallowingoverride.md) modifier, the function is only accessible by the project's owner, from an operator that has been given the `JBOperations.MINT` permission by the project owner for the provided `_projectId`, or from one of the project's terminal's delegates.
 * The function overrides a function definition from the [`IJBController`](../../../../interfaces/ijbcontroller.md) interface.
 * The function doesn't return anything.
@@ -50,7 +50,7 @@ function mintTokensOf(
 
     ```solidity
     // Can't send to the zero address.
-    require(_reservedRate == 200 || _beneficiary != address(0), '0x2f: ZERO_ADDRESS');
+    require(_reservedRate == 10000 || _beneficiary != address(0), '0x2f: ZERO_ADDRESS');
     ```
 2.  Make sure there is a specified number of tokens to mint.
 
@@ -89,14 +89,14 @@ function mintTokensOf(
 5.  If the operation should reserve 100% of the minted tokens, the token tracker should be updated to add a difference of the specified token count instead of minting the tokens directly. This will allow a future distribution of reserved tokens to mint the token count to reserved addresses. Otherwise, mint the tokens updating the token tracker if there is no intent to reserve tokens alongside the mint.
 
     ```solidity
-    if (_reservedRate == 200) {
+    if (_reservedRate == 10000) {
       // Subtract the total weighted amount from the tracker so the full reserved token amount can be printed later.
       _processedTokenTrackerOf[_projectId] =
         _processedTokenTrackerOf[_projectId] -
         int256(_tokenCount);
     } else {
       // The unreserved token count that will be minted for the beneficiary.
-      beneficiaryTokenCount = PRBMath.mulDiv(_tokenCount, 200 - _reservedRate, 200);
+      beneficiaryTokenCount = PRBMath.mulDiv(_tokenCount, 10000 - _reservedRate, 10000);
 
       // Mint the tokens.
       tokenStore.mintFor(_beneficiary, _projectId, beneficiaryTokenCount, _preferClaimedTokens);
@@ -154,7 +154,7 @@ function mintTokensOf(
   @param _beneficiary The account that the tokens are being minted for.
   @param _memo A memo to pass along to the emitted event.
   @param _preferClaimedTokens A flag indicating whether ERC20's should be minted if they have been issued.
-  @param _reservedRate The reserved rate to use when minting tokens. A positive amount will reduce the token count minted to the beneficiary, instead being reserved for preprogrammed splits. This number is out of 200.
+  @param _reservedRate The reserved rate to use when minting tokens. A positive amount will reduce the token count minted to the beneficiary, instead being reserved for preprogrammed splits. This number is out of 10000.
 
   @return beneficiaryTokenCount The amount of tokens minted for the beneficiary.
 */
@@ -178,7 +178,7 @@ function mintTokensOf(
   returns (uint256 beneficiaryTokenCount)
 {
   // Can't send to the zero address.
-  require(_reservedRate == 200 || _beneficiary != address(0), '0x2f: ZERO_ADDRESS');
+  require(_reservedRate == 10000 || _beneficiary != address(0), '0x2f: ZERO_ADDRESS');
 
   // There should be tokens to mint.
   require(_tokenCount > 0, '0x30: NO_OP');
@@ -192,14 +192,14 @@ function mintTokensOf(
     '0x31: PAUSED'
   );
 
-  if (_reservedRate == 200) {
+  if (_reservedRate == 10000) {
     // Subtract the total weighted amount from the tracker so the full reserved token amount can be printed later.
     _processedTokenTrackerOf[_projectId] =
       _processedTokenTrackerOf[_projectId] -
       int256(_tokenCount);
   } else {
     // The unreserved token count that will be minted for the beneficiary.
-    beneficiaryTokenCount = PRBMath.mulDiv(_tokenCount, 200 - _reservedRate, 200);
+    beneficiaryTokenCount = PRBMath.mulDiv(_tokenCount, 10000 - _reservedRate, 10000);
 
     // Mint the tokens.
     tokenStore.mintFor(_beneficiary, _projectId, beneficiaryTokenCount, _preferClaimedTokens);
