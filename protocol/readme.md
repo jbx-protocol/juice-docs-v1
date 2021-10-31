@@ -1,6 +1,6 @@
 # README
 
-Welcome all curious developers to the Juicebox V2 protocol docs!
+Welcome all curious developers to the Juicebox V2 protocol docs.
 
 The goal of this section is for you to find any protocol related information that you're looking for. Whether you're auditing, developing your own JB project, creating your own JB extensions, looking for bug bounties, or just looking to learning some solidity, these docs should give you just what you're looking for. These docs should allow you to click around and get a real good deep dive, and should just as easily allow you to find overview information.
 
