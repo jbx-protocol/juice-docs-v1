@@ -6,7 +6,7 @@ Interface: [`IJBTerminal`](../../../interfaces/ijbtokenstore.md)
 
 {% tabs %}
 {% tab title="Step by step" %}
-**Receives and allocated funds belonging to the specified project.**
+**Receives funds belonging to the specified project.**
 
 # Definition
 
@@ -65,7 +65,7 @@ function addToBalanceOf(uint256 _projectId, string memory _memo) external payabl
 ```solidity
 /**
   @notice
-  Receives and allocated funds belonging to the specified project.
+  Receives funds belonging to the specified project.
 
   @param _projectId The ID of the project to which the funds received belong.
   @param _memo A memo to pass along to the emitted event.
