@@ -20,15 +20,7 @@ function launchProjectFor(
 ) external { ... }
 ```
 
-This function is for convenience. It wraps the following 5 transactions into one, preventing you from having to call them sequentially:
-
-* [`JBProjects.createFor(...)`](../contracts/jbprojects/write/createfor.md)
-* [`JBDirectory.setControllerOf(...)`](../contracts/jbdirectory/write/setcontrollerof.md)
-* [`JBDirectory.addTerminalOf(...)`](../contracts/jbdirectory/write/addterminalof.md)
-* [`JBFundingCycleStore.configureFor(...)`](../contracts/jbfundingcyclestore/write/configurefor.md)
-* [`JBSplitStore.set(...)`](../contracts/jbsplitstore/write/set.md)
-
-At any time after the project has been created, its owner can issue ERC-20 tokens for the protocol to use as its community token by calling [`JBTokenStore.issueFor(...)`](../contracts/jbtokenstore/write/issuefor.md). By default the protocol uses an internal accounting mechanism to account for projects' tokens. Once ERC-20's are issued by a project, anyone can claim these internal tokens into the token holders wallet as ERC-20's on their behalf by calling [`JBTokenStore.claimFor(...)`](../contracts/jbtokenstore/write/claimfor.md).
+At any time after the project has been created, its owner can issue ERC-20 tokens for the protocol to use as its community token by calling [`JBTokenStore.issueFor(...)`](../contracts/jbtokenstore/write/issuefor.md). By default the protocol uses an internal accounting mechanism to account for projects' tokens. 
 
 ```solidity
 function issueFor(
@@ -40,14 +32,6 @@ function issueFor(
   override
   requirePermission(projects.ownerOf(_projectId), _projectId, JBOperations.ISSUE)
   returns (IJBToken token) { ... }
-```
-
-```solidity
-function claimFor(
-    address _holder,
-    uint256 _projectId,
-    uint256 _amount
-  ) external { ... }
 ```
 
 Once a project has been created, it can begin accepting funds from anyone. ETH can be sent to the project by calling [`JBETHPaymentTerminal.pay(...)`](../contracts/or-payment-terminals/jbethpaymentterminal/write/pay.md).
@@ -183,4 +167,14 @@ At any point, anyone can inject funds into a project's treasury by calling [`JBE
 
 ```solidity
  function addToBalanceOf(uint256 _projectId, string memory _memo) external payable override { ... }
+```
+
+If a project has issued its ERC-20's, anyone can claim tokens that are being represented via the internal accounting mechanism into the token holders wallet as ERC-20's on their behalf by calling [`JBTokenStore.claimFor(...)`](../contracts/jbtokenstore/write/claimfor.md).
+
+```solidity
+function claimFor(
+    address _holder,
+    uint256 _projectId,
+    uint256 _amount
+  ) external { ... }
 ```
