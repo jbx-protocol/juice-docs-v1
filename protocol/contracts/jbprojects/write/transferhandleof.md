@@ -100,7 +100,7 @@ function transferHandleOf(
 
     _Internal references:_
 
-    * [`transferAddressFor`](../properties/idfor.md)
+    * [`transferAddressFor`](../properties/transferaddressfor.md)
 8.  Emit a `TransferHandle` event with the relevant parameters.
 
     ```
@@ -109,7 +109,7 @@ function transferHandleOf(
 
     _Event references:_
 
-    * [`TransferHandle`](../events/seturi.md)
+    * [`TransferHandle`](../events/transferhandle.md)
 {% endtab %}
 
 {% tab title="Code" %}

@@ -10,7 +10,7 @@ The first transaction to call when getting started is [`JBController.launchProje
 function launchProjectFor(
   address _owner,
   bytes32 _handle,
-  string calldata _uri,
+  string calldata _metadataCid,
   JBFundingCycleData calldata _data,
   JBFundingCycleMetadata calldata _metadata,
   JBOverflowAllowance[] memory _overflowAllowances,

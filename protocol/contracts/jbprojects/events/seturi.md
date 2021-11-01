@@ -1,13 +1,13 @@
-# SetUri
+# SetMetadataCid
 
 Emitted from:
 
-* [`setUriOf`](../write/seturiof.md)
+* [`setMetadataCidOf`](../write/setmetadatacidof.md)
 
 ## Definition
 
 ```solidity
-event SetUri(uint256 indexed projectId, string uri, address caller);
+event SetMetadataCid(uint256 indexed projectId, string uri, address caller);
 ```
 
 * `projectId` is the token ID of the NFT (ERC-721) that represents the project who's URI was set.

@@ -1,4 +1,4 @@
-# uriOf
+# metadataCidOf
 
 Contract: [`JBProjects`](../)
 
@@ -20,7 +20,7 @@ _This is optional for each project._
 
   _projectId The ID of the project to which the URI belongs.
 */
-mapping(uint256 => string) public override uriOf;
+mapping(uint256 => string) public override metadataCidOf;
 ```
 
 * `_projectId` is the ID of the project to which the URI belongs.

@@ -16,7 +16,7 @@ _Anyone can deploy a project on an owner's behalf._
 function launchProjectFor(
   address _owner,
   bytes32 _handle,
-  string calldata _uri,
+  string calldata _metadataCid,
   JBFundingCycleData calldata _data,
   JBFundingCycleMetadata calldata _metadata,
   JBOverflowAllowance[] memory _overflowAllowances,
@@ -29,7 +29,7 @@ function launchProjectFor(
 * Arguments:
   * `_owner` is the address to set as the owner of the project. The project ERC-721 will be owned by this address.
   * `_handle` is the project's unique handle. This can be updated any time by the owner of the project.
-  * `_uri` is a link to associate with the project. This can be updated any time by the owner of the project.
+  * `_metadataCid` is a link to associate with the project. This can be updated any time by the owner of the project.
   * `_data` is a [`JBFundingCycleData`](../../../../data-structures/jbfundingcycledata.md) data structure that defines the project's first funding cycle. These properties will remain fixed for the duration of the funding cycle.
   * `_metadata` is a [`JBFundingCycleMetadata`](../../../../data-structures/jbfundingcyclemetadata.md) data structure specifying the controller specific params that a funding cycle can have.
   * `_overflowAllowances` is an array of [`JBOverflowAllowance`](../../../../data-structures/jboverflowallowance.md) data structures containing amounts, in wei (18 decimals), that a project can use from its own overflow on-demand for each payment terminal.
@@ -79,7 +79,7 @@ function launchProjectFor(
 
     ```solidity
     // Create the project for into the wallet of the message sender.
-    projectId = projects.createFor(_owner, _handle, _uri);
+    projectId = projects.createFor(_owner, _handle, _metadataCid);
     ```
 
     _External references:_
@@ -137,7 +137,7 @@ function launchProjectFor(
 
   @param _owner The address to set as the owner of the project. The project ERC-721 will be owned by this address.
   @param _handle The project's unique handle. This can be updated any time by the owner of the project.
-  @param _uri A link to associate with the project. This can be updated any time by the owner of the project.
+  @param _metadataCid A link to associate with the project. This can be updated any time by the owner of the project.
   @param _data The funding cycle configuration data. These properties will remain fixed for the duration of the funding cycle.
     @dev _data.target The amount that the project wants to payout during a funding cycle. Sent as a wad (18 decimals).
     @dev _data.currency The currency of the `target`. Send 0 for ETH or 1 for USD.
@@ -174,7 +174,7 @@ function launchProjectFor(
 function launchProjectFor(
   address _owner,
   bytes32 _handle,
-  string calldata _uri,
+  string calldata _metadataCid,
   JBFundingCycleData calldata _data,
   JBFundingCycleMetadata calldata _metadata,
   JBOverflowAllowance[] memory _overflowAllowances,
@@ -188,7 +188,7 @@ function launchProjectFor(
   );
 
   // Create the project for into the wallet of the message sender.
-  projectId = projects.createFor(_owner, _handle, _uri);
+  projectId = projects.createFor(_owner, _handle, _metadataCid);
 
   // Set the this contract as the project's controller in the directory.
   directory.setControllerOf(projectId, this);

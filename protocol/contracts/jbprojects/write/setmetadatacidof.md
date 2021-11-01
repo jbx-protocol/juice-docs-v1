@@ -1,4 +1,4 @@
-# setUriOf
+# setMetadataCidOf
 
 Contract: [`JBProjects`](../)
 
@@ -13,40 +13,40 @@ _Only a project's owner or operator can set its URI._
 # Definition
 
 ```solidity
-function setUriOf(uint256 _projectId, string calldata _uri)
+function setMetadataCidOf(uint256 _projectId, string calldata _metadataCid)
   external
   override
-  requirePermission(ownerOf(_projectId), _projectId, JBOperations.SET_URI) { ... }
+  requirePermission(ownerOf(_projectId), _projectId, JBOperations.SET_METADATA_CID) { ... }
 ```
 
 * Arguments:
   * `_projectId` is the ID of the project who's URI is being changed.
-  * `_uri` is the new IPFS CID hash where metadata about the project has been uploaded.
-* Through the [`requirePermission`](../../or-abstract/jboperatable/modifiers/requirepermission.md) modifier, the function is only accessible by the project's owner, or from an operator that has been given the `JBOperations.SET_URI` permission by the project owner for the provided `_projectId`.
+  * `_metadataCid` is the new IPFS CID hash where metadata about the project has been uploaded.
+* Through the [`requirePermission`](../../or-abstract/jboperatable/modifiers/requirepermission.md) modifier, the function is only accessible by the project's owner, or from an operator that has been given the `JBOperations.SET_METADATA_CID` permission by the project owner for the provided `_projectId`.
 * The function overrides a function definition from the `IJBProjects` interface.
 * The function doesn't return anything.
 
 # Body
 
-1.  Store the new `_uri` as the `uriOf` the project.
+1.  Store the new `_metadataCid` as the `metadataCidOf` the project.
 
     ```solidity
     // Set the new uri.
-    uriOf[_projectId] = _uri;
+    metadataCidOf[_projectId] = _metadataCid;
     ```
 
     _Internal references:_
 
-    * [`uriOf`](../properties/uriof.md)
-2.  Emit a `SetUri` event with the relevant parameters.
+    * [`metadataCidOf`](../properties/metadatacidof.md)
+2.  Emit a `SetMetadataCid` event with the relevant parameters.
 
     ```solidity
-    emit SetUri(_projectId, _uri, msg.sender);
+    emit SetMetadataCid(_projectId, _metadataCid, msg.sender);
     ```
 
     _Event references:_
 
-    * [`SetUri`](../events/seturi.md)
+    * [`SetMetadataCid`](../events/setmetadatacid.md)
 {% endtab %}
 
 {% tab title="Code" %}
@@ -59,17 +59,17 @@ function setUriOf(uint256 _projectId, string calldata _uri)
   Only a project's owner or operator can set its URI.
 
   @param _projectId The ID of the project who's URI is being changed.
-  @param _uri The new IPFS CID hash where metadata about the project has been uploaded.
+  @param _metadataCid The new IPFS CID hash where metadata about the project has been uploaded.
 */
-function setUriOf(uint256 _projectId, string calldata _uri)
+function setMetadataCidOf(uint256 _projectId, string calldata _metadataCid)
   external
   override
-  requirePermission(ownerOf(_projectId), _projectId, JBOperations.SET_URI)
+  requirePermission(ownerOf(_projectId), _projectId, JBOperations.SET_METADATA_CID)
 {
   // Set the new uri.
-  uriOf[_projectId] = _uri;
+  metadataCidOf[_projectId] = _metadataCid;
 
-  emit SetUri(_projectId, _uri, msg.sender);
+  emit SetMetadataCid(_projectId, _metadataCid, msg.sender);
 }
 ```
 {% endtab %}
@@ -77,7 +77,7 @@ function setUriOf(uint256 _projectId, string calldata _uri)
 {% tab title="Events" %}
 | Name                                | Data                                                                                                                         |
 | ----------------------------------- | ---------------------------------------------------------------------------------------------------------------------------- |
-| [**`SetUri`**](../events/seturi.md) | <ul><li><code>uint256 indexed projectId</code></li><li><code>string uri</code></li><li><code>address caller</code></li></ul> |
+| [**`SetMetadataCid`**](../events/setmetadatacid.md) | <ul><li><code>uint256 indexed projectId</code></li><li><code>string uri</code></li><li><code>address caller</code></li></ul> |
 {% endtab %}
 
 {% tab title="Bug bounty" %}

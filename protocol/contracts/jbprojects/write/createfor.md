@@ -16,14 +16,14 @@ _Anyone can create a project on an owner's behalf._
 function createFor(
   address _owner,
   bytes32 _handle,
-  string calldata _uri
+  string calldata _metadataCid
 ) external override returns (uint256) { ... }
 ```
 
 * Arguments:
   * `_owner` is the address that will be the owner of the project.
   * `_handle` is a unique string to associate with the project that will resolve to its token ID.
-  * `_uri` is an IPFS CID hash where metadata about the project has been uploaded. An empty string is acceptable if no metadata is being provided.
+  * `_metadataCid` is an IPFS CID hash where metadata about the project has been uploaded. An empty string is acceptable if no metadata is being provided.
 * The function can be accessed externally by anyone.
 * The function overrides a function definition from the `IJBProjects` interface.
 * Returns the token ID of the newly created project.
@@ -83,20 +83,20 @@ function createFor(
     _Internal references:_
 
     * [`idFor`](../properties/idfor.md)
-7.  If a URI was provided (meaning it's not an empty string), store it as the `uriOf` the newly created project.
+7.  If a URI was provided (meaning it's not an empty string), store it as the `metadataCidOf` the newly created project.
 
     ```solidity
     // Set the URI if one was provided.
-    if (bytes(_uri).length > 0) uriOf[count] = _uri;
+    if (bytes(_metadataCid).length > 0) metadataCidOf[count] = _metadataCid;
     ```
 
     _Internal references:_
 
-    * [`uriOf`](../properties/uriof.md)
+    * [`metadataCidOf`](../properties/metadatacidof.md)
 8.  Emit a `Create` event with all relevant parameters.
 
     ```
-    emit Create(count, _owner, _handle, _uri, _terminal, msg.sender);
+    emit Create(count, _owner, _handle, _metadataCid, _terminal, msg.sender);
     ```
 
     _Event references:_
@@ -120,14 +120,14 @@ function createFor(
 
   @param _owner The address that will be the owner of the project.
   @param _handle A unique string to associate with the project that will resolve to its token ID.
-  @param _uri An IPFS CID hash where metadata about the project has been uploaded. An empty string is acceptable if no metadata is being provided.
+  @param _metadataCid An IPFS CID hash where metadata about the project has been uploaded. An empty string is acceptable if no metadata is being provided.
 
   @return The token ID of the newly created project
 */
 function createFor(
   address _owner,
   bytes32 _handle,
-  string calldata _uri
+  string calldata _metadataCid
 ) external override returns (uint256) {
   // Handle must exist.
   require(_handle != bytes32(0), '0x06: EMPTY_HANDLE');
@@ -148,9 +148,9 @@ function createFor(
   idFor[_handle] = count;
 
   // Set the URI if one was provided.
-  if (bytes(_uri).length > 0) uriOf[count] = _uri;
+  if (bytes(_metadataCid).length > 0) metadataCidOf[count] = _metadataCid;
 
-  emit Create(count, _owner, _handle, _uri, msg.sender);
+  emit Create(count, _owner, _handle, _metadataCid, msg.sender);
 
   return count;
 }
