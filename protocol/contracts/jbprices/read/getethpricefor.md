@@ -55,16 +55,28 @@ function priceFor(uint256 _currency, uint256 _base) external view override retur
     // Get the latest round information. Only need the price is needed.
     (, int256 _price, , , ) = _feed.latestRoundData();
     ```
+5.  Get the number of decimals being reported by the price feed that the `_price` is expected to have. 
+
+    ```solidity
+    // Get a reference to the number of decimals the feed uses.
+    uint256 _decimals = _feed.decimals();
+    ```
 5.  Return the `_price`, normalizing the value to `TARGET_DECIMALS` decimal fidelity.
 
     ```solidity
-    // Multiply the price by the decimal adjuster to get the normalized result.
-    return uint256(_price) * feedDecimalAdjusterFor[_currency][_base];
+    // If decimals need adjusting, multiply or divide the price by the decimal adjuster to get the normalized result.
+    if (TARGET_DECIMALS == _decimals) {
+      return uint256(_price);
+    } else if (TARGET_DECIMALS > _decimals) {
+      return uint256(_price) * 10**(TARGET_DECIMALS - _decimals);
+    } else {
+      return uint256(_price) / 10**(_decimals - TARGET_DECIMALS);
+    }
     ```
 
     Internal references:
 
-    * [`feedDecimalAdjusterFor`](../properties/feeddecimaladjuster.md)
+    * [`TARGET_DECIMALS`](../properties/TARGET_DECIMALS.md)
 {% endtab %}
 
 {% tab title="Code" %}
@@ -91,8 +103,17 @@ function priceFor(uint256 _currency, uint256 _base) external view override retur
   // Get the latest round information. Only need the price is needed.
   (, int256 _price, , , ) = _feed.latestRoundData();
 
-  // Multiply the price by the decimal adjuster to get the normalized result.
-  return uint256(_price) * feedDecimalAdjusterFor[_currency][_base];
+  // Get a reference to the number of decimals the feed uses.
+  uint256 _decimals = _feed.decimals();
+
+  // If decimals need adjusting, multiply or divide the price by the decimal adjuster to get the normalized result.
+  if (TARGET_DECIMALS == _decimals) {
+    return uint256(_price);
+  } else if (TARGET_DECIMALS > _decimals) {
+    return uint256(_price) * 10**(TARGET_DECIMALS - _decimals);
+  } else {
+    return uint256(_price) / 10**(_decimals - TARGET_DECIMALS);
+  }
  }
 ```
 {% endtab %}

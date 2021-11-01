@@ -2,7 +2,7 @@
 
 Contract:[`JBPrices`](../)​‌
 
-Interface: `IJBPrices`
+Interface: [`IJBPrices`](../../../interfaces/ijbprices.md)
 
 {% tabs %}
 {% tab title="Step by step" %}
@@ -40,43 +40,16 @@ function addFeedFor(
     Internal references:
 
     * [`feedFor`](../properties/feedfor.md)
-2.  Get a reference to how many decimal places the provided price feed uses in the quoted rates.
-
-    ```solidity
-    // Get a reference to the number of decimals the feed uses.
-    uint256 _decimals = _feed.decimals();
-    ```
-3.  Make sure the feed doesn't use more decimals than what the contract expects. This contract isn't design to support feeds that use more than 18 decimals of fidelity.
-
-    ```solidity
-    // Decimals should be less than or equal to the target number of decimals.
-    require(_decimals <= TARGET_DECIMALS, '0x05: BAD_DECIMALS');
-    ```
-
-    Internal references:
-
-    * [`TARGET_DECIMALS`](../properties/targetdecimals.md)
-4.  Store the provided feed for the `_currency` `_base` pair.
+2.  Store the provided feed for the `_currency` `_base` pair.
 
     ```solidity
     // Set the feed.
     feedFor[_currency][_base] = _feed;
     ```
-5.  Store a value that price feed results will be multiplied by in order to always be reported with `TARGET_DECIMALS` fidelity. The prices from this contract are always reported with `TARGET_DECIMALS` fidelity – if the provided feed reports with fewer decimals, the contract must know how to adjust the price feed to normalize results.
+3.  Emit an `AddFeed` event with the relevant parameters.
 
     ```solidity
-    // Set the decimal adjuster for the currency.
-    feedDecimalAdjusterFor[_currency][_base] = 10**(TARGET_DECIMALS - _decimals);
-    ```
-
-    Internal references:
-
-    * [`feedDecimalAdjusterFor`](../properties/feeddecimaladjuster.md)
-    * [`TARGET_DECIMALS`](../properties/targetdecimals.md)
-6.  Emit an `AddFeed` event with the relevant parameters.
-
-    ```solidity
-    emit AddFeed(_currency, _base, _decimals, _feed);
+    emit AddFeed(_currency, _base, _feed);
     ```
 
     _Event references:_
@@ -105,19 +78,10 @@ function addFeedFor(
   // There can't already be a feed for the specified currency.
   require(feedFor[_currency][_base] == AggregatorV3Interface(address(0)), '0x04: ALREADY_EXISTS');
 
-  // Get a reference to the number of decimals the feed uses.
-  uint256 _decimals = _feed.decimals();
-
-  // Decimals should be less than or equal to the target number of decimals.
-  require(_decimals <= targetDecimals, '0x05: BAD_DECIMALS');
-
   // Set the feed.
   feedFor[_currency][_base] = _feed;
 
-  // Set the decimal adjuster for the currency.
-  feedDecimalAdjusterFor[_currency][_base] = 10**(targetDecimals - _decimals);
-
-  emit AddFeed(_currency, _base, _decimals, _feed);
+  emit AddFeed(_currency, _base, _feed);
 }
 ```
 {% endtab %}
@@ -126,13 +90,12 @@ function addFeedFor(
 | String                     | Description                                                                                                                                       |
 | -------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **`0x04: ALREADY_EXISTS`** | Thrown if the specified currency already has an associated price feed.                                                                            |
-| **`0x05: BAD_DECIMALS`**   | Thrown if the amount of decimals specified in the provided feed contract is greater than the [`targetDecimals`](../properties/targetdecimals.md). |
 {% endtab %}
 
 {% tab title="Events" %}
 | Name                                  | Data                                                                                                                                                                                                                                                                                                                                 |
 | ------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| [**`AddFeed`**](../events/addfeed.md) | <ul><li><code>uint256 indexed currency</code></li><li><code>uint256 indexed base</code></li><li><code>uint256 decimals</code></li><li><a href="https://github.com/smartcontractkit/chainlink/blob/develop/contracts/src/v0.8/interfaces/AggregatorV3Interface.sol"><code>AggregatorV3Interface</code></a><code>feed</code></li></ul> |
+| [**`AddFeed`**](../events/addfeed.md) | <ul><li><code>uint256 indexed currency</code></li><li><code>uint256 indexed base</code></li><li><a href="https://github.com/smartcontractkit/chainlink/blob/develop/contracts/src/v0.8/interfaces/AggregatorV3Interface.sol"><code>AggregatorV3Interface</code></a><code>feed</code></li></ul> |
 {% endtab %}
 
 {% tab title="Bug bounty" %}

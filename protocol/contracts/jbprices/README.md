@@ -42,14 +42,13 @@ constructor(address _owner) {
 
 | Name                               | Data                                                                                                                                                                                    |
 | ---------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [**`AddFeed`**](events/addfeed.md) | <ul><li><code>uint256 indexed currency</code></li><li><code>uint256 indexed base</code></li><li><code>uint256 decimals</code></li><li><code>AggregatorV3Interface feed</code></li></ul> |
+| [**`AddFeed`**](events/addfeed.md) | <ul><li><code>uint256 indexed currency</code></li><li><code>uint256 indexed base</code></li><li><code>AggregatorV3Interface feed</code></li></ul> |
 
 ## Properties
 
 | Function                                                          | Definition                                                                                                                                                                                                |
 | ----------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | [**`TARGET_DECIMALS`**](properties/targetdecimals.md)             | <p><strong>Traits</strong></p><ul><li><code>constant</code></li></ul><p><strong>Returns</strong></p><ul><li><code>uint256 18</code></li></ul>                                                             |
-| [**`feedDecimalAdjusterFor`**](properties/feeddecimaladjuster.md) | <p><strong>Params</strong></p><ul><li><code>uint256 _currency</code></li></ul><p><strong>Returns</strong></p><ul><li><code>uint256 adjustmentAmount</code></li></ul>                                      |
 | [**`feedFor`**](properties/feedfor.md)                            | <p><strong>Params</strong></p><ul><li><code>uint256 _currency</code></li><li><code>uint256 _base</code></li></ul><p><strong>Returns</strong></p><ul><li><code>AggregatorV3Interface feed</code></li></ul> |
 
 ## Read
