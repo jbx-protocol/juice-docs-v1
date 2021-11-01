@@ -16,7 +16,7 @@ description: >-
 ### **Addresses**
 
 Ethereum mainnet: _Not yet deployed_\
-Rinkeby testnet: _Not yet deployed_
+Rinkeby testnet: 0xAa818525455C52061455a87C4Fb6F3a5E6f91090
 
 ### **Interfaces**
 

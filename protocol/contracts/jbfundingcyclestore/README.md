@@ -13,7 +13,7 @@ description: Manages funding cycle configurations, ballots, accounting, and sche
 ### **Addresses**
 
 Ethereum mainnet: _Not yet deployed_\
-Rinkeby testnet: _Not yet deployed_
+Rinkeby testnet: 0xfd6Bc33C9e25c6d9Bbd00b04992E3639E786DCEd
 
 ### **Interfaces**
 

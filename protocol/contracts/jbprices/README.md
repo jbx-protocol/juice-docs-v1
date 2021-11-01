@@ -13,7 +13,7 @@ description: Manages and normalizes price feeds.
 ### **Addresses**
 
 Ethereum mainnet: _Not yet deployed_\
-Rinkeby testnet: _Not yet deployed_
+Rinkeby testnet: 0x47C6072ccDb899C016ED07ae8aEb7b2cfFe3C82e
 
 ### **Interfaces**
 
