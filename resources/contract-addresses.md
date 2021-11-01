@@ -67,12 +67,21 @@ Mainnet: [`0x6f5312873DF062413e75d8e59D0f213bD5e4A76C`](https://etherscan.io/add
 ### Rinkeby
 
 JBOperatorStore: [`0x55d4dfb578daA4d60380995ffF7a706471d7c719`](https://rinkeby.etherscan.io/address/0x55d4dfb578daA4d60380995ffF7a706471d7c719)
+
 JBPrices: [`0x47C6072ccDb899C016ED07ae8aEb7b2cfFe3C82e`](https://rinkeby.etherscan.io/address/0x47C6072ccDb899C016ED07ae8aEb7b2cfFe3C82e)
+
 JBProjects: [`0x2B0b6BD05a2F1f2a399F73528a99a495555C4c52`](https://rinkeby.etherscan.io/address/0x2B0b6BD05a2F1f2a399F73528a99a495555C4c52)
+
 JBDirectory: [`0xF77Cc21F7Ffdb0700D6d01FCF32EBE654f1A389b`](https://rinkeby.etherscan.io/address/0xF77Cc21F7Ffdb0700D6d01FCF32EBE654f1A389b)
+
 JBFundingCycleStore: [`0xF77Cc21F7Ffdb0700D6d01FCF32EBE654f1A389b`](https://rinkeby.etherscan.io/address/0xfd6Bc33C9e25c6d9Bbd00b04992E3639E786DCEd)
+
 JBTokenStore: [`0x29431d36f382f50878399C1D529b20582573AAb6`](https://rinkeby.etherscan.io/address/0x29431d36f382f50878399C1D529b20582573AAb6)
+
 JBSplitsStore: [`0xAa818525455C52061455a87C4Fb6F3a5E6f91090`](https://rinkeby.etherscan.io/address/0xAa818525455C52061455a87C4Fb6F3a5E6f91090)
+
 JBController: [`0xd2eEEdB22f075eBFf0a2A7D38781AA320CBc357E`](https://rinkeby.etherscan.io/address/0xd2eEEdB22f075eBFf0a2A7D38781AA320CBc357E)
+
 JBETHPaymentTerminalStore: [`0x92239434A7d0D17c4d8F876C7DB75E54680Bc85e`](https://rinkeby.etherscan.io/address/0x92239434A7d0D17c4d8F876C7DB75E54680Bc85e)
+
 JBETHPaymentTerminal: [`0x9d5687A9A175308773Bb289159Aa61D326E3aDB5`](https://rinkeby.etherscan.io/address/0x9d5687A9A175308773Bb289159Aa61D326E3aDB5)
