@@ -41,6 +41,7 @@ function mintTokensOf(
   * `_preferClaimedTokens` is a flag indicating whether ERC20's should be minted if they have been issued.
   * `_reservedRate` is the reserved rate to use when minting tokens. A positive amount will reduce the token count minted to the beneficiary, instead being reserved for preprogrammed splits. This number is out of 10000.
 * Through the [`requirePermissionAllowingOverride`](../../or-abstract/jboperatable/modifiers/requirepermissionallowingoverride.md) modifier, the function is only accessible by the project's owner, from an operator that has been given the `JBOperations.MINT` permission by the project owner for the provided `_projectId`, or from one of the project's terminal's delegates.
+* The function cannot be accessed recursively or while other `nonReentrant` functions in this contract are in progress.
 * The function overrides a function definition from the [`IJBController`](../../../../interfaces/ijbcontroller.md) interface.
 * The function doesn't return anything.
 

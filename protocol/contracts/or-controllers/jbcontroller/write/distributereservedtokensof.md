@@ -19,6 +19,7 @@ function distributeReservedTokensOf(uint256 _projectId, string memory _memo)
   * `_projectId` is the ID of the project to which the reserved tokens belong.
   * `_memo` is a memo to pass along to the emitted event.
 * The function can be accessed externally by anyone.
+* The function cannot be accessed recursively or while other `nonReentrant` functions in this contract are in progress.
 * The function returns the amount of minted reserved tokens.
 
 # Body

@@ -22,7 +22,6 @@ function reconfigureFundingCyclesOf(
   JBSplit[] memory _reservedTokenSplits
 )
   external
-  nonReentrant
   requirePermission(projects.ownerOf(_projectId), _projectId, JBOperations.RECONFIGURE)
   returns (uint256) { ... }
 ```
@@ -144,7 +143,6 @@ function reconfigureFundingCyclesOf(
   JBSplit[] memory _reservedTokenSplits
 )
   external
-  nonReentrant
   requirePermission(projects.ownerOf(_projectId), _projectId, JBOperations.RECONFIGURE)
   returns (uint256)
 {

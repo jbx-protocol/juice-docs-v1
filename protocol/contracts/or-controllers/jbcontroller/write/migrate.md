@@ -21,6 +21,7 @@ function migrate(uint256 _projectId, IJBController _to)
   * `_projectId` is the ID of the project that will be migrated from this controller..
   * `_to` is the controller to which the project is migrating.
 * Through the [`requirePermission`](../../or-abstract/jboperatable/modifiers/requirepermission.md) modifier, the function is only accessible by the project's owner, or from an operator that has been given the `JBOperations.MIGRATE_CONTROLLER` permission by the project owner for the provided `_projectId`.
+* The function cannot be accessed recursively or while other `nonReentrant` functions in this contract are in progress.
 * The function doesn't return anything.
 
 # Body
