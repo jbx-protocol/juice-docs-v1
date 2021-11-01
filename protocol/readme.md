@@ -6,7 +6,7 @@ The goal of this section is for you to find any protocol related information tha
 
 Looking for general guides on how the protocol works? See the [Learn](learn/overview.md) section.
 
-Looking for a user flow and how to launch a project? See the [Build](build/gettingstarted.md) section.
+Looking for a user flow and how to launch a project? See the [Build](build/getting-started.md) section.
 
 Looking for an outline of the protocol's API, or a deep dive on each line of code in the project? Click around in the [Contracts](contracts/) section. There are bug bounties posted for each documented function.
 
