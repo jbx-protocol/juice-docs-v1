@@ -76,6 +76,10 @@ function mintFor(
 
     * [`unclaimedBalanceOf`](../properties/unclaimedbalanceof.md)
     * [`unclaimedTotalSupplyOf`](../properties/unclaimedtotalsupplyof.md)
+
+    _External references:_
+
+    * [`mint`](../../jbtoken/write/mint.md)
 5.  Emit a `Mint` event with the relevant parameters.
 
     ```solidity

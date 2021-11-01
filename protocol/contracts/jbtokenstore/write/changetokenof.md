@@ -60,6 +60,10 @@ function changeTokenOf(
     if (_currentToken != IJBToken(address(0)) && _newOwner != address(0))
       _currentToken.transferOwnership(_newOwner);
     ```
+
+    _External references:_
+
+    * [`transferOwnership`](../../jbtoken/write/transferownership.md)
 4.  Emit a `ChangeToken` event with the relevant parameters.
 
     ```solidity

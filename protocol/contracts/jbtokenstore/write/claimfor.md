@@ -88,6 +88,10 @@ function claimFor(
     // Mint the equivalent amount of ERC20s.
     _token.mint(_holder, _amount, _projectId);
     ```
+
+    _External references:_
+
+    * [`mint`](../../jbtoken/write/mint.md)
 8.  Emit a `Claim` event with the relevant parameters.
 
     ```solidity

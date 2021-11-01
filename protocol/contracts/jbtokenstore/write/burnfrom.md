@@ -99,6 +99,10 @@ function burnFrom(
     // burn the tokens.
     if (_claimedTokensToBurn > 0) _token.burn(_holder, _claimedTokensToBurn, _projectId);
     ```
+
+    _External references:_
+
+    * [`burn`](../../jbtoken/write/burn.md)
 8.  If there are unclaimed tokens to burn, subtract the amount from the `unclaimedBalanceOf` the holder for the project, and from the `unclaimedTotalSupplyOf` the project.
 
     ```solidity
