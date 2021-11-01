@@ -27,6 +27,17 @@ Rinkeby testnet: _Not yet deployed_
 | ------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- |
 | [**`Ownable`**](https://docs.openzeppelin.com/contracts/4.x/api/security) | Includes convenience functionality for specifying an address that owns the contract, with modifiers that only allow access by the owner. |
 
+## Constructor
+
+```solidity
+constructor(address _owner) {
+  // Transfer the ownership.
+  transferOwnership(_owner);
+}
+```
+
+* **Arguments:**
+  * `_owner` is the address that will own the contract.
 ## Events
 
 | Name                               | Data                                                                                                                                                                                    |

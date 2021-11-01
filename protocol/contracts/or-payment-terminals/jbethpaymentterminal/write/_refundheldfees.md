@@ -77,30 +77,6 @@ function _refundHeldFees(
     _Internal references:_
 
     * [`_heldFeesOf`](../properties/\_heldfeesof.md)
-5.  Emit a `Pay` event for the split being iterated on with the relevant parameters.
-
-    ```solidity
-    emit Pay(
-      _fundingCycle.id,
-      _projectId,
-      _beneficiary,
-      _fundingCycle,
-      _amount,
-      _weight,
-      _tokenCount,
-      _memo,
-      msg.sender
-    );
-    ```
-
-    _Event references:_
-
-    * [`Pay`](../events/pay.md)
-6.  Return the funding cycle's ID.
-
-    ```solidity
-    return _fundingCycle.id;
-    ```
 {% endtab %}
 
 {% tab title="Code" %}

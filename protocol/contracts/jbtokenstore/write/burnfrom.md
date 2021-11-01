@@ -97,7 +97,7 @@ function burnFrom(
 
     ```solidity
     // burn the tokens.
-    if (_claimedTokensToBurn > 0) _token.burn(_holder, _claimedTokensToBurn);
+    if (_claimedTokensToBurn > 0) _token.burn(_holder, _claimedTokensToBurn, _projectId);
     ```
 8.  If there are unclaimed tokens to burn, subtract the amount from the `unclaimedBalanceOf` the holder for the project, and from the `unclaimedTotalSupplyOf` the project.
 
@@ -184,7 +184,7 @@ function burnFrom(
   uint256 _unclaimedTokensToBurn = _amount - _claimedTokensToBurn;
 
   // burn the tokens.
-  if (_claimedTokensToBurn > 0) _token.burn(_holder, _claimedTokensToBurn);
+  if (_claimedTokensToBurn > 0) _token.burn(_holder, _claimedTokensToBurn, _projectId);
   if (_unclaimedTokensToBurn > 0) {
     // Reduce the holders balance and the total supply.
     unclaimedBalanceOf[_holder][_projectId] =

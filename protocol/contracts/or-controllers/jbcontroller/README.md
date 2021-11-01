@@ -41,12 +41,16 @@ constructor(
   IJBDirectory _directory,
   IJBFundingCycleStore _fundingCycleStore,
   IJBTokenStore _tokenStore,
-  IJBSplitsStore _splitsStore
+  IJBSplitsStore _splitsStore,
+  address _owner
 ) JBTerminalUtility(_directory) JBOperatable(_operatorStore) {
   projects = _projects;
   fundingCycleStore = _fundingCycleStore;
   tokenStore = _tokenStore;
   splitsStore = _splitsStore;
+
+  // Transfer the ownership.
+  transferOwnership(_owner);
 }
 ```
 
@@ -57,6 +61,7 @@ constructor(
   * `_fundingCycleStore` is an [`IJBFundingCycleStore`](../../../interfaces/ijbfundingcyclestore.md) contract storing all funding cycle configurations.
   * `_tokenStore` is an [`IJBTokenStore`](../../../interfaces/ijbtokenstore.md) contract that manages token minting and burning.
   * `_splitStore` is an [`IJBSplitStore`](../../../interfaces/ijbsplitstore/) contract that stores splits for each project.
+  * `_owner` is the address that will own the contract.
 
 ## Events
 

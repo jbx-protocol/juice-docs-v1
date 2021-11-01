@@ -86,7 +86,7 @@ function claimFor(
 
     ```solidity
     // Mint the equivalent amount of ERC20s.
-    _token.mint(_holder, _amount);
+    _token.mint(_holder, _amount, _projectId);
     ```
 8.  Emit a `Claim` event with the relevant parameters.
 
@@ -136,7 +136,7 @@ function claimFor(
   unclaimedTotalSupplyOf[_projectId] = unclaimedTotalSupplyOf[_projectId] - _amount;
 
   // Mint the equivalent amount of ERC20s.
-  _token.mint(_holder, _amount);
+  _token.mint(_holder, _amount, _projectId);
 
   emit Claim(_holder, _projectId, _amount, msg.sender);
 }

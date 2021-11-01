@@ -64,7 +64,7 @@ function mintFor(
     ```solidity
     if (_shouldClaimTokens) {
       // Mint the equivalent amount of ERC20s.
-      _token.mint(_holder, _amount);
+      _token.mint(_holder, _amount, _projectId);
     } else {
       // Add to the unclaimed balance and total supply.
       unclaimedBalanceOf[_holder][_projectId] = unclaimedBalanceOf[_holder][_projectId] + _amount;
@@ -119,7 +119,7 @@ function mintFor(
 
   if (_shouldClaimTokens) {
     // Mint the equivalent amount of ERC20s.
-    _token.mint(_holder, _amount);
+    _token.mint(_holder, _amount, _projectId);
   } else {
     // Add to the unclaimed balance and total supply.
     unclaimedBalanceOf[_holder][_projectId] = unclaimedBalanceOf[_holder][_projectId] + _amount;
