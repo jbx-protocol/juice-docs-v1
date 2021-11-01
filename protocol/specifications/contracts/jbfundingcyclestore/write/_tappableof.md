@@ -88,7 +88,7 @@ function _tappableOf(uint256 _projectId) private returns (uint256 fundingCycleId
     // The funding cycle cant be 0.
     require(fundingCycleId > 0, '0x1d: NOT_FOUND');
     ```
-6.  Get a reference to the [`JBFundingCycle`](../../../../data-structures/jbfundingcycle.md) structure.
+6.  Get a reference to the [`JBFundingCycle`](../../../data-structures/jbfundingcycle.md) structure.
 
     ```solidity
     // Set the eligible funding cycle.

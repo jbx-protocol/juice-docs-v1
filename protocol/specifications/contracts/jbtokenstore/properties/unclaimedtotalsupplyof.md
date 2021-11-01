@@ -2,7 +2,7 @@
 
 Contract: [`JBTokenStore`](broken-reference)​‌
 
-Interface: [`IJBTokenStore`](../../../../interfaces/ijbtokenstore.md)
+Interface: [`IJBTokenStore`](../../../interfaces/ijbtokenstore.md)
 
 **The total supply of unclaimed tokens for each project.**
 

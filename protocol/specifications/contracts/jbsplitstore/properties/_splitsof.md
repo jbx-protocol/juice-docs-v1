@@ -21,5 +21,5 @@ mapping(uint256 => mapping(uint256 => mapping(uint256 => JBSplit[]))) private _s
 * `_projectId` is the ID of the project to get splits for.
 * `_domain` is an identifier within which the returned splits should be considered active.
 * `_group` is the identifying group of the splits.
-* Returns an array of [`JBSplit`](../../../../data-structures/jbsplit.md)s.
+* Returns an array of [`JBSplit`](../../../data-structures/jbsplit.md)s.
 * The resulting view function is private to this contract.

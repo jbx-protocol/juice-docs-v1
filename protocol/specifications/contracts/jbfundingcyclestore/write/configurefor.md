@@ -23,12 +23,12 @@ function configureFor(
 
 * Arguments:
   * `_projectId` is the ID of the project being configured.
-  * `_data` is the [`JBFundingCycleData`](../../../../data-structures/jbfundingcycledata.md)for the configuration.
+  * `_data` is the [`JBFundingCycleData`](../../../data-structures/jbfundingcycledata.md)for the configuration.
   * `_metadata` is data to associate with this funding cycle configuration.
   * `_fee` is the fee that this configuration incurs when tapping.
 * Through the [`onlyController`](../../jbcontrollerutility/modifiers/onlycontroller.md) modifier, the function can only be accessed by the controller of the `_projectId`.
 * The function overrides a function definition from the `IJBFundingCycleStore` interface.
-* Returns the [`JBFundingCycle`](../../../../data-structures/jbfundingcycle.md) that was configured.
+* Returns the [`JBFundingCycle`](../../../data-structures/jbfundingcycle.md) that was configured.
 
 # Body
 
@@ -125,7 +125,7 @@ function configureFor(
     _Event references:_
 
     * [`Configure`](../events/configure.md)
-12. Return the [`JBFundingCycle`](../../../../data-structures/jbfundingcycle.md) struct that carries the new configuration.
+12. Return the [`JBFundingCycle`](../../../data-structures/jbfundingcycle.md) struct that carries the new configuration.
 
     ```solidity
     return _getStructFor(_fundingCycleId);
@@ -225,7 +225,7 @@ function configureFor(
 {% tab title="Events" %}
 | Name                                      | Data                                                                                                                                                                                                                                                                                                                                                         |
 | ----------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| [**`Configure`**](../events/configure.md) | <ul><li><code>uint256 indexed fundingCycleId</code></li><li><code>uint256 indexed projectId</code></li><li><code>uint256 indexed configured</code></li><li><a href="../../../../data-structures/jbfundingcycledata.md"><code>JBFundingCycleData</code></a><code>data</code></li><li><code>uint256 metadata</code></li><li><code>address caller</code></li></ul> |
+| [**`Configure`**](../events/configure.md) | <ul><li><code>uint256 indexed fundingCycleId</code></li><li><code>uint256 indexed projectId</code></li><li><code>uint256 indexed configured</code></li><li><a href="../../../data-structures/jbfundingcycledata.md"><code>JBFundingCycleData</code></a><code>data</code></li><li><code>uint256 metadata</code></li><li><code>address caller</code></li></ul> |
 | [**`Init`**](../events/init.md)           | <ul><li><code>uint256 indexed fundingCycleId</code></li><li><code>uint256 indexed projectId</code></li><li><code>uint256 indexed basedOn</code></li></ul>                                                                                                                                                                                                    |
 {% endtab %}
 

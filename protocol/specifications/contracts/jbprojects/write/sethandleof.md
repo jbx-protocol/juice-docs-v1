@@ -2,7 +2,7 @@
 
 Contract :[`JBProjects`](../)
 
-Interface: [`IJBProjects`](../../../../interfaces/ijbprojects.md)
+Interface: [`IJBProjects`](../../../interfaces/ijbprojects.md)
 
 {% tabs %}
 {% tab title="Step by step" %}

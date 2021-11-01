@@ -23,7 +23,7 @@ function queuedOf(uint256 _projectId) public view override returns (JBFundingCyc
 * The view function can be accessed externally by anyone, and internally by the contract.
 * The function does not alter state on the blockchain.
 * The function overrides a function definition from the `IJBFundingCycleStore` interface.
-* The function returns a [`JBFundingCycle`](../../../../data-structures/jbfundingcycle.md).
+* The function returns a [`JBFundingCycle`](../../../data-structures/jbfundingcycle.md).
 
 # Body
 

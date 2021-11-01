@@ -2,7 +2,7 @@
 
 Contract:[`JBDirectory`](../)​‌
 
-Interface: [`IJBDirectory`](../../../../interfaces/ijbdirectory.md)
+Interface: [`IJBDirectory`](../../../interfaces/ijbdirectory.md)
 
 {% tabs %}
 {% tab title="Step by step" %}
@@ -147,7 +147,7 @@ function setControllerOf(uint256 _projectId, IJBController _controller)
 {% tab title="Events" %}
 | Name                                     | Data                                                                                                                                                                                                          |
 | ---------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [**`SetController`**](../events/burn.md) | <ul><li><code>int256 indexed projectId</code></li><li><a href="../../../interfaces/ijbcontroller.md"><code>IJBController</code></a><code>indexed controller</code></li><li><code>address caller</code></li></ul> |
+| [**`SetController`**](../events/burn.md) | <ul><li><code>int256 indexed projectId</code></li><li><a href="../../interfaces/ijbcontroller.md"><code>IJBController</code></a><code>indexed controller</code></li><li><code>address caller</code></li></ul> |
 {% endtab %}
 
 {% tab title="Bug bounty" %}

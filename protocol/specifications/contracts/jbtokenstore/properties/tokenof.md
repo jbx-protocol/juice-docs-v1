@@ -2,7 +2,7 @@
 
 Contract: [`JBTokenStore`](broken-reference)​‌
 
-Interface: [`IJBTokenStore`](../../../../interfaces/ijbtokenstore.md)
+Interface: [`IJBTokenStore`](../../../interfaces/ijbtokenstore.md)
 
 **Each project's ERC20 Token tokens.**
 

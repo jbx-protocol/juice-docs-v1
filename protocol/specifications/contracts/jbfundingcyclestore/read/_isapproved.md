@@ -13,7 +13,7 @@ function _isApproved(JBFundingCycle memory _fundingCycle) private view returns (
 ```
 
 * Arguments:
-  * `_fundingCycle` is the [`JBFundingCycle`](../../../../data-structures/jbfundingcycle.md) to get an approval flag for.
+  * `_fundingCycle` is the [`JBFundingCycle`](../../../data-structures/jbfundingcycle.md) to get an approval flag for.
 * The view function is private to this contract.
 * The function does not alter state on the blockchain.
 * The function returns the approval flag.

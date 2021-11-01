@@ -111,7 +111,7 @@ function _configurableOf(
     * [`_isIdApproved`](../read/\_isidapproved.md)
     * [`_getStructFor`](../read/\_getstructfor.md)
     * [`latestIdOf`](../properties/latestidof.md)
-6.  At this point, the `fundingCycleId` is the ID of the funding cycle that the one that'll be initialized should be based on. Get a reference to the [`JBFundingCycle`](../../../../data-structures/jbfundingcycle.md)for the ID.\\
+6.  At this point, the `fundingCycleId` is the ID of the funding cycle that the one that'll be initialized should be based on. Get a reference to the [`JBFundingCycle`](../../../data-structures/jbfundingcycle.md)for the ID.\\
 
     ```solidity
     // Get a reference to the funding cycle.

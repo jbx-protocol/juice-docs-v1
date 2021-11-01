@@ -2,7 +2,7 @@
 
 Contract: [`JBTokenStore`](broken-reference)​‌
 
-Interface: [`IJBTokenStore`](../../../../interfaces/ijbtokenstore.md)
+Interface: [`IJBTokenStore`](../../../interfaces/ijbtokenstore.md)
 
 {% tabs %}
 {% tab title="Step by step" %}

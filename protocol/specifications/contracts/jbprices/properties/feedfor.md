@@ -2,7 +2,7 @@
 
 Contract: [`JBPrices`](../)
 
-Interface: [`IJBPrices`](../../../../interfaces/ijbprices.md)
+Interface: [`IJBPrices`](../../../interfaces/ijbprices.md)
 
 **The available price feeds.**
 
