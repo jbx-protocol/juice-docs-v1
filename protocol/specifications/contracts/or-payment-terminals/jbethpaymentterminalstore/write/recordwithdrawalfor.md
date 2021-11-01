@@ -34,7 +34,7 @@ function recordWithdrawalFor(
 
 # Body
 
-1.  Tell the project's controller that an amount is being withdrawn. Get the [`JBFundingCycle`](../../../../data-structures/jbfundingcycle.md) data struct during which the withdraw was made.
+1.  Tell the project's controller that an amount is being withdrawn. Get the [`JBFundingCycle`](../../../../../data-structures/jbfundingcycle.md) data struct during which the withdraw was made.
 
     ```solidity
     // Registers the funds as withdrawn and gets the ID of the funding cycle during which this withdrawal is being made.
@@ -59,7 +59,7 @@ function recordWithdrawalFor(
 
     _Libraries used:_
 
-    * [`JBFundingCycleMetadataResolver`](../../../libraries/jbfundingcyclemetadataresolver.md)\
+    * [`JBFundingCycleMetadataResolver`](../../../../libraries/jbfundingcyclemetadataresolver.md)\
         `.withdrawalsPaused(...)`
 
 4.  Make the sure provided currency matches the funding cycle's currency.

@@ -18,7 +18,7 @@ function _takeFeeFrom(
 ```
 
 * Arguments:
-  * `_fundingCycle` is the [`JBFundingCycle`](../../../../data-structures/jbfundingcycle.md) during which the fee is being taken.
+  * `_fundingCycle` is the [`JBFundingCycle`](../../../../../data-structures/jbfundingcycle.md) during which the fee is being taken.
   * `_amount` is the amount to take a fee from.
   * `_beneficiary` is the address to print the platforms tokens for.
   * `_memo` is a memo to pass along to the emitted event.
@@ -44,7 +44,7 @@ function _takeFeeFrom(
     // Nothing to do if there's no fee to take.
     if (feeAmount == 0) return 0;
     ```
-3.  If the funding cycle is configured to hold fees, add a [`JBFee`](../../../data-structures/jbfee.md) data structure to the project's stored held fees to be either processed or refunded later. Otherwise, take the fee.
+3.  If the funding cycle is configured to hold fees, add a [`JBFee`](../../../../data-structures/jbfee.md) data structure to the project's stored held fees to be either processed or refunded later. Otherwise, take the fee.
 
     ```solidity
     _fundingCycle.shouldHoldFees()

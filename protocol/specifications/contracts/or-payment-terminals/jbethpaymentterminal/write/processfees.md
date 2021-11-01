@@ -41,7 +41,7 @@ function processFees(uint256 _projectId)
     _Internal references:_
 
     * [`_heldFeesOf`](../read/\_heldFeesOf.md)
-2.  Iterate through the array. Take fee's for each [`JBFee`](../../../../data-structures/jbfee.md) data structure.
+2.  Iterate through the array. Take fee's for each [`JBFee`](../../../../../data-structures/jbfee.md) data structure.
 
     ```solidity
     // Process each fee.
@@ -112,7 +112,7 @@ function processFees(uint256 _projectId)
 {% tab title="Events" %}
 | Name                                          | Data                                                                                                                                                    |
 | --------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [**`ProcessFees`**](../events/processfees.md) | <ul><li><a href="../../../data-structures/jbfee.md"><code>JBFee</code></a><code>[] fees</code></li><li><code>uint256 indexed projectId</code></li></ul> |
+| [**`ProcessFees`**](../events/processfees.md) | <ul><li><a href="../../../../data-structures/jbfee.md"><code>JBFee</code></a><code>[] fees</code></li><li><code>uint256 indexed projectId</code></li></ul> |
 {% endtab %}
 
 {% tab title="Bug bounty" %}

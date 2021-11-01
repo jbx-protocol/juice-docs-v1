@@ -2,7 +2,7 @@
 
 Contract: [`JBOperatorStore`](../)​‌
 
-Interface: [`IJBOperatorStore`](../../../interfaces/ijboperatorstore.md)
+Interface: [`IJBOperatorStore`](../../../../interfaces/ijboperatorstore.md)
 
 **The permissions that an operator has to operate on a specific domain.**
 

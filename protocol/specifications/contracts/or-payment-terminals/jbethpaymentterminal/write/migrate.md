@@ -2,7 +2,7 @@
 
 Contract: [`JBETHPaymentTerminal`](../)​‌
 
-Interface: [`IJBETHPaymentTerminal`](../../../../interfaces/ijbethterminalof.md)
+Interface: [`IJBETHPaymentTerminal`](../../../../../interfaces/ijbethterminalof.md)
 
 {% tabs %}
 {% tab title="Step by step" %}
@@ -114,7 +114,7 @@ function migrate(uint256 _projectId, IJBTerminal _to)
 {% tab title="Events" %}
 | Name                                       | Data                                                                                                                                                                                                                                            |
 | ------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [**`Migrate`**](../events/addtobalance.md) | <ul><li><code>uint256 indexed projectId</code></li><li><a href="../../../interfaces/ijbterminal.md"><code>IJBTerminal</code></a><code>indexed terminal</code></li><li><code>uint256 amount</code></li><li><code>address caller</code></li></ul> |
+| [**`Migrate`**](../events/addtobalance.md) | <ul><li><code>uint256 indexed projectId</code></li><li><a href="../../../../interfaces/ijbterminal.md"><code>IJBTerminal</code></a><code>indexed terminal</code></li><li><code>uint256 amount</code></li><li><code>address caller</code></li></ul> |
 {% endtab %}
 
 {% tab title="Bug bounty" %}

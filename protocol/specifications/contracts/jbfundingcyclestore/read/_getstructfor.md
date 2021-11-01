@@ -16,7 +16,7 @@ function _getStructFor(uint256 _id) private view returns (JBFundingCycle memory 
   * `_id` is the funding cycle ID to get the full struct for.
 * The view function is private to this contract.
 * The function does not alter state on the blockchain.
-* The function returns a [`JBFundingCycle`](../../../data-structures/jbfundingcycle.md) stored in the `fundingCycle` reference.
+* The function returns a [`JBFundingCycle`](../../../../data-structures/jbfundingcycle.md) stored in the `fundingCycle` reference.
 
 # Body
 

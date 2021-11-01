@@ -30,12 +30,12 @@ function launchProjectFor(
   * `_owner` is the address to set as the owner of the project. The project ERC-721 will be owned by this address.
   * `_handle` is the project's unique handle. This can be updated any time by the owner of the project.
   * `_metadataCid` is a link to associate with the project. This can be updated any time by the owner of the project.
-  * `_data` is a [`JBFundingCycleData`](../../../../data-structures/jbfundingcycledata.md) data structure that defines the project's first funding cycle. These properties will remain fixed for the duration of the funding cycle.
-  * `_metadata` is a [`JBFundingCycleMetadata`](../../../../data-structures/jbfundingcyclemetadata.md) data structure specifying the controller specific params that a funding cycle can have.
-  * `_overflowAllowances` is an array of [`JBOverflowAllowance`](../../../../data-structures/jboverflowallowance.md) data structures containing amounts, in wei (18 decimals), that a project can use from its own overflow on-demand for each payment terminal.
-  * `_payoutSplits` is an array of [`JBSplit`](../../../../data-structures/jbsplit.md) data structures containing payout splits to set.
-  * `_reservedTokenSplits` is an array of [`JBSplit`](../../../../data-structures/jbsplit.md) data structures containing reserved token splits to set.
-  * `_terminal` is an [`IJBTerminal`](../../../../interfaces/ijbterminal.md) payment terminal to add for the project.
+  * `_data` is a [`JBFundingCycleData`](../../../../../data-structures/jbfundingcycledata.md) data structure that defines the project's first funding cycle. These properties will remain fixed for the duration of the funding cycle.
+  * `_metadata` is a [`JBFundingCycleMetadata`](../../../../../data-structures/jbfundingcyclemetadata.md) data structure specifying the controller specific params that a funding cycle can have.
+  * `_overflowAllowances` is an array of [`JBOverflowAllowance`](../../../../../data-structures/jboverflowallowance.md) data structures containing amounts, in wei (18 decimals), that a project can use from its own overflow on-demand for each payment terminal.
+  * `_payoutSplits` is an array of [`JBSplit`](../../../../../data-structures/jbsplit.md) data structures containing payout splits to set.
+  * `_reservedTokenSplits` is an array of [`JBSplit`](../../../../../data-structures/jbsplit.md) data structures containing reserved token splits to set.
+  * `_terminal` is an [`IJBTerminal`](../../../../../interfaces/ijbterminal.md) payment terminal to add for the project.
 * The function can be accessed externally by anyone.
 * The function returns the ID of the project that was launched.
 
@@ -73,7 +73,7 @@ function launchProjectFor(
 
     _Libraries used:_
 
-    * [`JBFundingCycleMetadataResolver`](../../../../libraries/jbfundingcyclemetadataresolver.md)\
+    * [`JBFundingCycleMetadataResolver`](../../../../../libraries/jbfundingcyclemetadataresolver.md)\
         `.packFundingCycleMetadata(...)`
 5.  Create the project. This will mint an ERC-721 in the `_owners` wallet representing ownership over the project.
 
@@ -219,7 +219,7 @@ function launchProjectFor(
 {% tab title="Events" %}
 | Name                                                            | Data                                                                                                                                                                                                                                                                         |
 | --------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [**`SetOverflowAllowance`**](../events/setoverflowallowance.md) | <ul><li><code>uint256 indexed projectId</code></li><li><code>uint256 indexed configuration</code></li><li><a href="../../../data-structures/jboverflowallowance.md"><code>JBOverflowAllowance</code></a><code>allowance</code></li><li><code>address caller</code></li></ul> |
+| [**`SetOverflowAllowance`**](../events/setoverflowallowance.md) | <ul><li><code>uint256 indexed projectId</code></li><li><code>uint256 indexed configuration</code></li><li><a href="../../../../data-structures/jboverflowallowance.md"><code>JBOverflowAllowance</code></a><code>allowance</code></li><li><code>address caller</code></li></ul> |
 {% endtab %}
 
 {% tab title="Bug bounty" %}

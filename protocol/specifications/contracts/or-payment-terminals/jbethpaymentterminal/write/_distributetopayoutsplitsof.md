@@ -17,7 +17,7 @@ function _distributeToPayoutSplitsOf(
 ```
 
 * Arguments:
-  * `_fundingCycle` is the [`JBFundingCycle`](../../../../data-structures/jbfundingcycle.md) during which the distribution is being made.
+  * `_fundingCycle` is the [`JBFundingCycle`](../../../../../data-structures/jbfundingcycle.md) during which the distribution is being made.
   * `_amount` is the total amount being distributed.
   * `_memo` is a memo to pass along to the emitted events.
 * The function is private to this contract.
@@ -263,7 +263,7 @@ function _distributeToPayoutSplitsOf(
 {% tab title="Events" %}
 | Name                                                                  | Data                                                                                                                                                                                                                                                                                  |
 | --------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [**`DistributeToPayoutSplit`**](../events/distributetopayoutsplit.md) | <ul><li><code>uint256 indexed fundingCycleId</code></li><li><code>uint256 indexed projectId</code></li><li><a href="../../../data-structures/jbsplit.md"><code>JBSplit</code></a><code>split</code></li><li><code>uint256 amount</code></li><li><code>address caller</code></li></ul> |
+| [**`DistributeToPayoutSplit`**](../events/distributetopayoutsplit.md) | <ul><li><code>uint256 indexed fundingCycleId</code></li><li><code>uint256 indexed projectId</code></li><li><a href="../../../../data-structures/jbsplit.md"><code>JBSplit</code></a><code>split</code></li><li><code>uint256 amount</code></li><li><code>address caller</code></li></ul> |
 {% endtab %}
 
 {% tab title="Bug bounty" %}

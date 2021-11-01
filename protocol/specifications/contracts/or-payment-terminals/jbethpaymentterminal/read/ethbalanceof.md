@@ -2,7 +2,7 @@
 
 Contract: [`JBETHPaymentTerminal`](../)​‌
 
-Interface: [`IJBTerminal`](../../../../interfaces/ijbterminal.md)
+Interface: [`IJBTerminal`](../../../../../interfaces/ijbterminal.md)
 
 {% tabs %}
 {% tab title="Step by step" %}

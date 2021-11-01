@@ -82,7 +82,7 @@ function recordPaymentFrom(
     // Save a reference to the delegate to use.
     IJBPayDelegate _delegate;
     ```
-5.  If the project's current funding cycle is configured to use a data source when receiving payments, ask the data source for the parameters that should be used throughout the rest of the function given provided contextual values in a [`JBPayParamsData`](../../../../data-structures/jbpayparamsdata.md) structure. Otherwise default parameters are used.
+5.  If the project's current funding cycle is configured to use a data source when receiving payments, ask the data source for the parameters that should be used throughout the rest of the function given provided contextual values in a [`JBPayParamsData`](../../../../../data-structures/jbpayparamsdata.md) structure. Otherwise default parameters are used.
 
     ```solidity
     // If the funding cycle has configured a data source, use it to derive a weight and memo.
@@ -107,7 +107,7 @@ function recordPaymentFrom(
 
     _Libraries used:_
 
-    * [`JBFundingCycleMetadataResolver`](../../../libraries/jbfundingcyclemetadataresolver.md)\
+    * [`JBFundingCycleMetadataResolver`](../../../../libraries/jbfundingcyclemetadataresolver.md)\
       `.useDataSourceForPay(...)`\
       `.dataSource(...)`\
       `.reservedRate(...)`
@@ -148,7 +148,7 @@ function recordPaymentFrom(
 
     _Libraries used:_
 
-    * [`JBFundingCycleMetadataResolver`](../../../libraries/jbfundingcyclemetadataresolver.md)\
+    * [`JBFundingCycleMetadataResolver`](../../../../libraries/jbfundingcyclemetadataresolver.md)\
       `.reservedRate(...)`
 
     _External references:_
@@ -160,7 +160,7 @@ function recordPaymentFrom(
     // The token count must be greater than or equal to the minimum expected.
     require(tokenCount >= _minReturnedTokens, '0x3c: INADEQUATE');
     ```
-10. If a pay delegate was provided by the data source, call its `didPay` function with a [`JBDidPayData`](../../../../data-structures/jbdidpaydata.md) payload including contextual information. When finished, emit a `DelegateDidPay` event with the relevant parameters.
+10. If a pay delegate was provided by the data source, call its `didPay` function with a [`JBDidPayData`](../../../../../data-structures/jbdidpaydata.md) payload including contextual information. When finished, emit a `DelegateDidPay` event with the relevant parameters.
 
     ```solidity
     // If a delegate was returned by the data source, issue a callback to it.
@@ -312,7 +312,7 @@ function recordPaymentFrom(
 {% tab title="Events" %}
 | Name                                                | Data                                                                                                                                                                                                                             |
 | --------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [**`DelegateDidPay`**](../events/delegatedidpay.md) | <ul><li><a href="../../../interfaces/ijbpaydelegate.md"><code>IJBPayDelegate</code></a><code>delegate</code></li><li><a href="../../../data-structures/jbdidpaydata.md"><code>JBDidPayData</code></a><code>data</code></li></ul> |
+| [**`DelegateDidPay`**](../events/delegatedidpay.md) | <ul><li><a href="../../../../interfaces/ijbpaydelegate.md"><code>IJBPayDelegate</code></a><code>delegate</code></li><li><a href="../../../../data-structures/jbdidpaydata.md"><code>JBDidPayData</code></a><code>data</code></li></ul> |
 {% endtab %}
 
 {% tab title="Bug bounty" %}

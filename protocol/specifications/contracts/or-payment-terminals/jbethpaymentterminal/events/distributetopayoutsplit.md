@@ -18,6 +18,6 @@ event DistributeToPayoutSplit(
 
 * `fundingCycleId` is the ID of the funding cycle during which payout split was distributed.
 * `projectId` is the ID of the project that had a payout split distributed.
-* `split` is the [`JBSplit`](../../../data-structures/jbsplit.md) to which the distribution was made.
+* `split` is the [`JBSplit`](../../../../data-structures/jbsplit.md) to which the distribution was made.
 * `amount` is the total ETH amount that was distributed to the split.
 * `caller` is the address that issued the transaction within which the event was emitted.

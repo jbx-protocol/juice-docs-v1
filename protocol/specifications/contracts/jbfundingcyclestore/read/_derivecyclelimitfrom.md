@@ -16,7 +16,7 @@ function _deriveCycleLimitFrom(JBFundingCycle memory _fundingCycle, uint256 _sta
 ```
 
 * Arguments:
-  * `_fundingCycle` is The [`JBFundingCycle`](../../../data-structures/jbfundingcycle.md) to make the calculation for.
+  * `_fundingCycle` is The [`JBFundingCycle`](../../../../data-structures/jbfundingcycle.md) to make the calculation for.
   * `_start` is a time that the cycle having a cycle limit derived for starts.
 * The view function is private to this contract.
 * The function does not alter state on the blockchain.

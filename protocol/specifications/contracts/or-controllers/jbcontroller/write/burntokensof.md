@@ -2,7 +2,7 @@
 
 Contract: [`JBController`](broken-reference)​‌
 
-Interface: [`IJBController`](../../../../interfaces/ijbcontroller.md)
+Interface: [`IJBController`](../../../../../interfaces/ijbcontroller.md)
 
 {% tabs %}
 {% tab title="Step by step" %}
@@ -39,7 +39,7 @@ function burnTokensOf(
   * `_preferClaimedTokens` is a flag indicating whether ERC20's should be burned first if they have been issued.
 * Through the [`requirePermissionAllowingOverride`](../../or-abstract/jboperatable/modifiers/requirepermissionallowingoverride.md) modifier, the function is only accessible by the project's owner, from an operator that has been given the `JBOperations.BURN` permission by the project owner for the provided `_projectId`, or from one of the project's terminal's delegates..
 * The function cannot be accessed recursively or while other `nonReentrant` functions in this contract are in progress.
-* The function overrides a function definition from the [`IJBController`](../../../../interfaces/ijbcontroller.md) interface.
+* The function overrides a function definition from the [`IJBController`](../../../../../interfaces/ijbcontroller.md) interface.
 * The function doesn't return anything.
 
 # Body
@@ -72,7 +72,7 @@ function burnTokensOf(
 
     _Libraries used:_
     
-    * [`JBFundingCycleMetadataResolver`](../../../../libraries/jbfundingcyclemetadataresolver.md)\
+    * [`JBFundingCycleMetadataResolver`](../../../../../libraries/jbfundingcyclemetadataresolver.md)\
         `.burnPause(...)`
 
     _External references:_

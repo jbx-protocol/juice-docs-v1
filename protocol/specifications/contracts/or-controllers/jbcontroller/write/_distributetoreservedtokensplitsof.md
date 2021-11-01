@@ -13,7 +13,7 @@ function _distributeToReservedTokenSplitsOf(JBFundingCycle memory _fundingCycle,
 ```
 
 * Arguments:
-  * `_fundingCycle` is the [`JBFundingCycle`](../../../../data-structures/jbfundingcycle.md)  to base the token distribution on.
+  * `_fundingCycle` is the [`JBFundingCycle`](../../../../../data-structures/jbfundingcycle.md)  to base the token distribution on.
   * `_amount` is the total amount of tokens to mint.
 * The function is private to this contract.
 * The function returns the leftover amount after all splits have been distributed.
@@ -194,7 +194,7 @@ function _distributeToReservedTokenSplitsOf(JBFundingCycle memory _fundingCycle,
 {% tab title="Events" %}
 | Name                                                                                | Data                                                                                                                                                                                                                                                                                      |
 | ----------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [**`DistributeToReservedTokenSplit`**](../events/distributetoreservedtokensplit.md) | <ul><li><code>uint256 indexed fundingCycleId</code></li><li><code>uint256 indexed projectId</code></li><li><a href="../../../data-structures/jbsplit.md"><code>JBSplit</code></a><code>split</code></li><li><code>uint256 tokenCount</code></li><li><code>address caller</code></li></ul> |
+| [**`DistributeToReservedTokenSplit`**](../events/distributetoreservedtokensplit.md) | <ul><li><code>uint256 indexed fundingCycleId</code></li><li><code>uint256 indexed projectId</code></li><li><a href="../../../../data-structures/jbsplit.md"><code>JBSplit</code></a><code>split</code></li><li><code>uint256 tokenCount</code></li><li><code>address caller</code></li></ul> |
 {% endtab %}
 
 {% tab title="Bug bounty" %}

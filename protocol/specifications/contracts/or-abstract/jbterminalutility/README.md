@@ -19,7 +19,7 @@ description: >-
 
 | Name                                                     | Description                                                                                                                              |
 | -------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- |
-| [**`IJBTerminalUtility`**](../../interfaces/ijbterminalutility.md) | General interface for the methods in this contract that interact with the blockchain's state according to the Juicebox protocol's rules. |
+| [**`IJBTerminalUtility`**](../../../interfaces/ijbterminalutility.md) | General interface for the methods in this contract that interact with the blockchain's state according to the Juicebox protocol's rules. |
 
 ## Constructor
 
@@ -30,7 +30,7 @@ constructor(IJBDirectory _directory) {
 ```
 
 * **Arguments:**
-  * `_directory` is an [`IJBDirectory`](../../../interfaces/ijbdirectory.md) contract storing directories of terminals and controllers for each project.
+  * `_directory` is an [`IJBDirectory`](../../../../interfaces/ijbdirectory.md) contract storing directories of terminals and controllers for each project.
 
 ## Read
 

@@ -63,7 +63,7 @@ function claimableOverflowOf(uint256 _projectId, uint256 _tokenCount)
 
     _Libraries used:_
 
-    * [`JBFundingCycleMetadataResolver`](../../../libraries/jbfundingcyclemetadataresolver.md)\
+    * [`JBFundingCycleMetadataResolver`](../../../../libraries/jbfundingcyclemetadataresolver.md)\
         `.reservedRate(...)`
 
     _External references:_
@@ -94,7 +94,7 @@ function claimableOverflowOf(uint256 _projectId, uint256 _tokenCount)
 
     _Libraries used:_
 
-    * [`JBFundingCycleMetadataResolver`](../../../libraries/jbfundingcyclemetadataresolver.md)\
+    * [`JBFundingCycleMetadataResolver`](../../../../libraries/jbfundingcyclemetadataresolver.md)\
         `.ballotRedemptionRate(...)`\
         `.redemptionRate(...)`
 

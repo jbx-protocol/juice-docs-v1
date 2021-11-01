@@ -2,7 +2,7 @@
 
 Contract: [`JBSplitStore`](../)​‌
 
-Interface: [`IJBSplitStore`](../../../interfaces/ijbsplitstore.md)
+Interface: [`IJBSplitStore`](../../../../interfaces/ijbsplitstore.md)
 
 {% tabs %}
 {% tab title="Step by step" %}
@@ -35,7 +35,7 @@ function set(
   * `_projectId` is the ID of the project for which splits are being added.
   * `_domain` is an identifier within which the splits should be considered active.
   * `_group` is an identifier between of splits being set. All splits within this `_group` must add up to within 100%.
-  * `_splits` are the [`JBSplit`](../../../data-structures/jbsplit.md)s to set.
+  * `_splits` are the [`JBSplit`](../../../../data-structures/jbsplit.md)s to set.
 * Through the [`requirePermissionAllowingOverride`](../../or-abstract/jboperatable/modifiers/requirepermissionallowingoverride.md) modifier, the function is only accessible by the project's owner, from an operator that has been given the `JBOperations.SET_SPLITS` permission by the project owner for the provided `_projectId` , or from the current controller of the `_projectId` of the specified.
 * The function overrides a function definition from the `IJBSplitsStore` interface.
 * The function doesn't return anything.

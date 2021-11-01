@@ -2,7 +2,7 @@
 
 Contract: [`JBController`](broken-reference)​‌
 
-Interface: [`IJBController`](../../../../interfaces/ijbcontroller.md)
+Interface: [`IJBController`](../../../../../interfaces/ijbcontroller.md)
 
 {% tabs %}
 {% tab title="Step by step" %}
@@ -17,7 +17,7 @@ function prepForMigrationOf(uint256 _projectId, IJBController) external override
 * Arguments:
   * `_projectId` is the ID of the project that will be migrated to this controller.
 * The function can be accessed externally by anyone.
-* The function overrides a function definition from the [`IJBController`](../../../../interfaces/ijbcontroller.md) interface.
+* The function overrides a function definition from the [`IJBController`](../../../../../interfaces/ijbcontroller.md) interface.
 * The function doesn't return anything.
 
 # Body

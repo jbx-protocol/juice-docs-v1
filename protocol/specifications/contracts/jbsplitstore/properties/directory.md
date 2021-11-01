@@ -2,7 +2,7 @@
 
 Contract: [`JBSplitStore`](../)​‌
 
-Interface: [`IJBSplitStore`](../../../interfaces/ijbsplitstore.md)
+Interface: [`IJBSplitStore`](../../../../interfaces/ijbsplitstore.md)
 
 **The directory of terminals and controllers for projects.**
 

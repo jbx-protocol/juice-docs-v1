@@ -2,7 +2,7 @@
 
 Contract: [`JBControllerUtility`](../)​‌
 
-Interface: [`IJBControllerUtility`](../../../interfaces/ijbcontrollerutility.md)
+Interface: [`IJBControllerUtility`](../../../../interfaces/ijbcontrollerutility.md)
 
 **The directory of terminals and controllers for projects.**
 

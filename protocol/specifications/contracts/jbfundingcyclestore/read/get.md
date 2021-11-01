@@ -23,7 +23,7 @@ function get(uint256 _fundingCycleId)
 * The view function can be accessed externally by anyone.
 * The function does not alter state on the blockchain.
 * The function overrides a function definition from the `IJBFundingCycleStore` interface.
-* The function returns a [`JBFundingCycle`](../../../data-structures/jbfundingcycle.md).
+* The function returns a [`JBFundingCycle`](../../../../data-structures/jbfundingcycle.md).
 
 # Body
 

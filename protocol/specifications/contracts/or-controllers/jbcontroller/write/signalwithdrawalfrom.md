@@ -2,7 +2,7 @@
 
 Contract: [`JBController`](broken-reference)​‌
 
-Interface: [`IJBController`](../../../../interfaces/ijbcontroller.md)
+Interface: [`IJBController`](../../../../../interfaces/ijbcontroller.md)
 
 {% tabs %}
 {% tab title="Step by step" %}
@@ -24,7 +24,7 @@ function signalWithdrawlFrom(uint256 _projectId, uint256 _amount)
   * `_projectId` is the ID of the project that is being withdrawn from.
   * `_amount` is the amount being withdrawn.
 * Through the [`onlyTerminal`](../../jbcontrollerutility/modifiers/onlyterminal.md) modifier, the function can only be accessed by a terminal of the `_projectId`.
-* The function overrides a function definition from the [`IJBController`](../../../../interfaces/ijbcontroller.md) interface.
+* The function overrides a function definition from the [`IJBController`](../../../../../interfaces/ijbcontroller.md) interface.
 * The function doesn't return anything.
 
 # Body

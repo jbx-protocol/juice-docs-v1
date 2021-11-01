@@ -20,7 +20,7 @@ function _latestPermanentCycleFrom(JBFundingCycle memory _fundingCycle)
 ```
 
 * Arguments:
-  * `_fundingCycle` is the [`JBFundingCycle`](../../../data-structures/jbfundingcycle.md) to get the latest permanent cycle from.
+  * `_fundingCycle` is the [`JBFundingCycle`](../../../../data-structures/jbfundingcycle.md) to get the latest permanent cycle from.
 * The view function is private to this contract.
 * The function does not alter state on the blockchain.
 * The function returns the latest permanent funding cycle. If the provided cycle is permanent, it will be returned.

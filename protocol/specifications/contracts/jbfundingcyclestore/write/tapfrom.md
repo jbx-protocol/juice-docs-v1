@@ -24,7 +24,7 @@ function tapFrom(uint256 _projectId, uint256 _amount)
 * `_amount` is the amount being tapped.
 * Through the [`onlyController`](../../jbcontrollerutility/modifiers/onlycontroller.md) modifier, the function can only be accessed by the controller of the `_projectId`.
 * The function overrides a function definition from the `IJBFundingCycleStore` interface.
-* Returns the [`JBFundingCycle`](../../../data-structures/jbfundingcycle.md) that was tapped.
+* Returns the [`JBFundingCycle`](../../../../data-structures/jbfundingcycle.md) that was tapped.
 
 # Body
 
@@ -75,7 +75,7 @@ function tapFrom(uint256 _projectId, uint256 _amount)
     _Event references:_
 
     * [`Tap`](../events/tap.md)
-7.  Return the [`JBFundingCycle`](../../../data-structures/jbfundingcycle.md) struct that has been tapped.
+7.  Return the [`JBFundingCycle`](../../../../data-structures/jbfundingcycle.md) struct that has been tapped.
 
     ```solidity
     return _getStructFor(_fundingCycleId);

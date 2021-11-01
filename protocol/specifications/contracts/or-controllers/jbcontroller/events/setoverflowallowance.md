@@ -18,5 +18,5 @@ event SetOverflowAllowance(
 
 * `projectId` is the ID of the project who has set an overflow allowance.
 * `configuration` is the configuration during which the overflow allowance is valid.
-* `allowance` is the [`JBOverflowAllowance`](../../../../data-structures/jboverflowallowance.md) data structure.
+* `allowance` is the [`JBOverflowAllowance`](../../../../../data-structures/jboverflowallowance.md) data structure.
 * `caller` is the address that issued the transaction within which the event was emitted.

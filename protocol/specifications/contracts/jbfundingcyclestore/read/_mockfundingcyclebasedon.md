@@ -18,11 +18,11 @@ function _mockFundingCycleBasedOn(JBFundingCycle memory _baseFundingCycle, bool 
 ```
 
 * Arguments:
-  * `_baseFundingCycle` is the [`JBFundingCycle`](../../../data-structures/jbfundingcycle.md) that the resulting funding cycle should follow.
+  * `_baseFundingCycle` is the [`JBFundingCycle`](../../../../data-structures/jbfundingcycle.md) that the resulting funding cycle should follow.
   * `_allowMidCycle` is a flag indicating if the mocked funding cycle is allowed to already be mid cycle.
 * The view function is private to this contract.
 * The function does not alter state on the blockchain.
-* The function returns a mock [`JBFundingCycle`](../../../data-structures/jbfundingcycle.md) of what the next funding cycle will be.
+* The function returns a mock [`JBFundingCycle`](../../../../data-structures/jbfundingcycle.md) of what the next funding cycle will be.
 
 # Body
 
@@ -76,7 +76,7 @@ function _mockFundingCycleBasedOn(JBFundingCycle memory _baseFundingCycle, bool 
     _Internal references:_
 
     * [`_deriveNumberFrom`](\_derivenumberfrom.md)
-5. Return a [`JBFundingCycle`](../../../data-structures/jbfundingcycle.md) with the aggregated configuration.
+5. Return a [`JBFundingCycle`](../../../../data-structures/jbfundingcycle.md) with the aggregated configuration.
 
 ````
 ```solidity

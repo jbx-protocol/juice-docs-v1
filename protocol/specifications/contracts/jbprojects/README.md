@@ -22,7 +22,7 @@ Rinkeby testnet: 0x2B0b6BD05a2F1f2a399F73528a99a495555C4c52
 
 | Name                                                 | Description                                                                                                                              |
 | ---------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- |
-| [**`IJBProjects`**](../../interfaces/ijbprojects.md) | General interface for the methods in this contract that interact with the blockchain's state according to the Juicebox protocol's rules. |
+| [**`IJBProjects`**](../../../interfaces/ijbprojects.md) | General interface for the methods in this contract that interact with the blockchain's state according to the Juicebox protocol's rules. |
 
 ### **Inheritance**
 
@@ -41,7 +41,7 @@ constructor(IJBOperatorStore _operatorStore)
 ```
 
 * **Arguments:**
-  * `_operatorStore` is an [`IJBOperatorStore`](../../interfaces/ijboperatorstore.md) contract storing operator assignments.
+  * `_operatorStore` is an [`IJBOperatorStore`](../../../interfaces/ijboperatorstore.md) contract storing operator assignments.
 
 ## Events
 

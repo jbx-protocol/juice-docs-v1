@@ -2,7 +2,7 @@
 
 Contract: [`JBTokenStore`](broken-reference)​‌
 
-Interface: [`IJBTokenStore`](../../../interfaces/ijbtokenstore.md)
+Interface: [`IJBTokenStore`](../../../../interfaces/ijbtokenstore.md)
 
 **Each holder's balance of unclaimed Tokens for each project.**
 

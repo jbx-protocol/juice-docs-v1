@@ -2,7 +2,7 @@
 
 Contract: [`JBOperatable`](../)​‌
 
-Interface: [`IJBOperatable`](../../../interfaces/ijboperatable.md)
+Interface: [`IJBOperatable`](../../../../interfaces/ijboperatable.md)
 **A contract storing operator assignments.**
 
 ## Definition

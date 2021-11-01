@@ -2,7 +2,7 @@
 
 Contract: [`JBPrices`](../)
 
-Interface: [`IJBPrices`](../../../interfaces/ijbprices.md)
+Interface: [`IJBPrices`](../../../../interfaces/ijbprices.md)
 
 **The number to multiply each price feed by to get to the target decimals.**
 

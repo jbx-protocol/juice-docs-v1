@@ -2,7 +2,7 @@
 
 Contract: [`JBETHPaymentTerminal`](../)​‌
 
-Interface: [`IJBTerminal`](../../../../interfaces/ijberminal.md)
+Interface: [`IJBTerminal`](../../../../../interfaces/ijberminal.md)
 
 **The token that this terminal accepts.**
 

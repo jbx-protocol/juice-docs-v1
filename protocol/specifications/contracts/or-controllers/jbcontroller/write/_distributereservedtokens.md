@@ -53,7 +53,7 @@ function _distributeReservedTokensOf(uint256 _projectId, string memory _memo)
 
     _Libraries used:_
     
-    * [`JBFundingCycleMetadataResolver`](../../../../libraries/jbfundingcyclemetadataresolver.md)\
+    * [`JBFundingCycleMetadataResolver`](../../../../../libraries/jbfundingcyclemetadataresolver.md)\
         `.reservedRate(...)`
 
     _Internal references:_

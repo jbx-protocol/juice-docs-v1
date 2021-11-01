@@ -21,7 +21,7 @@ Rinkeby testnet: 0x29431d36f382f50878399C1D529b20582573AAb6
 
 | Name                                                     | Description                                                                                                                              |
 | -------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- |
-| [**`IJBTokenStore`**](../../interfaces/ijbtokenstore.md) | General interface for the methods in this contract that interact with the blockchain's state according to the Juicebox protocol's rules. |
+| [**`IJBTokenStore`**](../../../interfaces/ijbtokenstore.md) | General interface for the methods in this contract that interact with the blockchain's state according to the Juicebox protocol's rules. |
 
 ### **Inheritance**
 
@@ -43,9 +43,9 @@ constructor(
 ```
 
 * **Arguments:**
-  * `_operatorStore` is an [`IJBOperatorStore`](../../interfaces/ijboperatorstore.md) contract storing operator assignments.
-  * `_projects` is an [`IJBProjects`](../../interfaces/ijbprojects.md) contract which mints ERC-721's that represent project ownership and transfers.
-  * `_directory` is an [`IJBDirectory`](../../interfaces/ijbdirectory.md) contract storing directories of terminals and controllers for each project.
+  * `_operatorStore` is an [`IJBOperatorStore`](../../../interfaces/ijboperatorstore.md) contract storing operator assignments.
+  * `_projects` is an [`IJBProjects`](../../../interfaces/ijbprojects.md) contract which mints ERC-721's that represent project ownership and transfers.
+  * `_directory` is an [`IJBDirectory`](../../../interfaces/ijbdirectory.md) contract storing directories of terminals and controllers for each project.
 
 ## Events
 

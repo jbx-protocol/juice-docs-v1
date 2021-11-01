@@ -16,7 +16,7 @@ function _deriveNumberFrom(JBFundingCycle memory _baseFundingCycle, uint256 _sta
 ```
 
 * Arguments:
-  * `_baseFundingCycle` is The [`JBFundingCycle`](../../../data-structures/jbfundingcycle.md) to make the calculation for.
+  * `_baseFundingCycle` is The [`JBFundingCycle`](../../../../data-structures/jbfundingcycle.md) to make the calculation for.
   * `_start` is a time that the cycle having a weight derived for starts.
 * The view function is private to this contract.
 * The function does not alter state on the blockchain.

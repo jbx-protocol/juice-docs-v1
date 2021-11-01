@@ -2,7 +2,7 @@
 
 Contract: [`JBSplitStore`](../)​‌
 
-Interface: [`IJBSplitStore`](../../../interfaces/ijbsplitstore.md)
+Interface: [`IJBSplitStore`](../../../../interfaces/ijbsplitstore.md)
 
 {% tabs %}
 {% tab title="Step by step" %}
@@ -25,7 +25,7 @@ function splitsOf(
 * The view function can be accessed externally by anyone.
 * The function does not alter state on the blockchain.
 * The function overrides a function definition from the `IJBSplitStore` interface.
-* The function returns an array of [`JBSplit`](../../../data-structures/jbsplit.md)s.
+* The function returns an array of [`JBSplit`](../../../../data-structures/jbsplit.md)s.
 
 # Body
 

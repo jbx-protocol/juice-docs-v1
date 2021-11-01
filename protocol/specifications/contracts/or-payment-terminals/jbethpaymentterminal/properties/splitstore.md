@@ -2,7 +2,7 @@
 
 Contract: [`JBETHPaymentTerminal`](../)​‌
 
-Interface: [`IJBETHPaymentTerminal`](../../../../interfaces/ijbethterminalof.md)
+Interface: [`IJBETHPaymentTerminal`](../../../../../interfaces/ijbethterminalof.md)
 
 **The contract that stores splits for each project.**
 

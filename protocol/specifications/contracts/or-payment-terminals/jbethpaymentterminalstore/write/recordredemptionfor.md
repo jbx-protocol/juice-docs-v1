@@ -74,7 +74,7 @@ function recordRedemptionFor(
 
     _Libraries used:_
 
-    * [`JBFundingCycleMetadataResolver`](../../../libraries/jbfundingcyclemetadataresolver.md)\
+    * [`JBFundingCycleMetadataResolver`](../../../../libraries/jbfundingcyclemetadataresolver.md)\
       `.redeemPaused(...)`
 4.  Create a variable where a redemption delegate will be saved if there is one. This pay delegate will later have its method called if it exists.
 
@@ -82,7 +82,7 @@ function recordRedemptionFor(
     // Save a reference to the delegate to use.
     IJBRedemptionDelegate _delegate;
     ```
-5.  If the project's current funding cycle is configured to use a data source when making redemptions, ask the data source for the parameters that should be used throughout the rest of the function given provided contextual values in a [`JBRedeemParamsData`](../../../../data-structures/jbredeemparamsdata.md) structure. Otherwise default parameters are used.
+5.  If the project's current funding cycle is configured to use a data source when making redemptions, ask the data source for the parameters that should be used throughout the rest of the function given provided contextual values in a [`JBRedeemParamsData`](../../../../../data-structures/jbredeemparamsdata.md) structure. Otherwise default parameters are used.
 
     ```solidity
     // If the funding cycle has configured a data source, use it to derive a claim amount and memo.
@@ -106,7 +106,7 @@ function recordRedemptionFor(
 
     _Libraries used:_
 
-    * [`JBFundingCycleMetadataResolver`](../../../libraries/jbfundingcyclemetadataresolver.md)\
+    * [`JBFundingCycleMetadataResolver`](../../../../libraries/jbfundingcyclemetadataresolver.md)\
       `.useDataSourceForRedeem(...)`\
       `.dataSource(...)`\
       `.redemptionRate(...)`\
@@ -150,7 +150,7 @@ function recordRedemptionFor(
     _Internal references:_
 
     * [`balanceOf`](../properties/balanceof.md)
-10. If a redemption delegate was provided by the data source, call its `didRedeem` function with a [`JBDidRedeemData`](../../../../data-structures/jbdidredeemdata.md) payload including contextual information. When finished, emit a `DelegateDidRedeem` event with the relevant parameters.
+10. If a redemption delegate was provided by the data source, call its `didRedeem` function with a [`JBDidRedeemData`](../../../../../data-structures/jbdidredeemdata.md) payload including contextual information. When finished, emit a `DelegateDidRedeem` event with the relevant parameters.
 
     ```solidity
     // If a delegate was returned by the data source, issue a callback to it.
@@ -291,7 +291,7 @@ function recordRedemptionFor(
 {% tab title="Events" %}
 | Name                                         | Data                                                                                                                                                                                                                                                |
 | -------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [**`DelegateDidRedeem`**](broken-reference/) | <ul><li><a href="../../../interfaces/ijbredemptiondelegate.md"><code>JBRedemptionDelegate</code></a><code>delegate</code></li><li><a href="../../../data-structures/jbdidredeemdata.md"><code>JBDidRedeemData</code></a><code>data</code></li></ul> |
+| [**`DelegateDidRedeem`**](broken-reference/) | <ul><li><a href="../../../../interfaces/ijbredemptiondelegate.md"><code>JBRedemptionDelegate</code></a><code>delegate</code></li><li><a href="../../../../data-structures/jbdidredeemdata.md"><code>JBDidRedeemData</code></a><code>data</code></li></ul> |
 {% endtab %}
 
 {% tab title="Bug bounty" %}

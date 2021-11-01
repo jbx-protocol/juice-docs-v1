@@ -16,7 +16,7 @@ function _deriveWeightFrom(JBFundingCycle memory _baseFundingCycle, uint256 _sta
 ```
 
 * Arguments:
-  * `_baseFundingCycle` is The [`JBFundingCycle`](../../../data-structures/jbfundingcycle.md) to make the calculation for.
+  * `_baseFundingCycle` is The [`JBFundingCycle`](../../../../data-structures/jbfundingcycle.md) to make the calculation for.
   * `_start` is a time that the cycle having a weight derived for starts.
 * The view function is private to this contract.
 * The function does not alter state on the blockchain.
@@ -24,7 +24,7 @@ function _deriveWeightFrom(JBFundingCycle memory _baseFundingCycle, uint256 _sta
 
 # Body
 
-1.  If the base funding cycle has no duration, the derived weight should be calculated from it no matter how much time has passed since it was active. The `discountRate` property in a [`JBFundingCycle`](../../../data-structures/jbfundingcycle.md)is out of 10000. Discount rates represent a number between 0-100%, with 0.01% fidelity, so the calculation must be made out of 10000.
+1.  If the base funding cycle has no duration, the derived weight should be calculated from it no matter how much time has passed since it was active. The `discountRate` property in a [`JBFundingCycle`](../../../../data-structures/jbfundingcycle.md)is out of 10000. Discount rates represent a number between 0-100%, with 0.01% fidelity, so the calculation must be made out of 10000.
 
     ```solidity
     // A subsequent cycle to one with a duration of 0 should have the next possible weight.

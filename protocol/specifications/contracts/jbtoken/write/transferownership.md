@@ -2,7 +2,7 @@
 
 Contract: [`JBToken`](../)​‌
 
-Interface: [`IJBToken`](../../../interfaces/ijbtoken.md)
+Interface: [`IJBToken`](../../../../interfaces/ijbtoken.md)
 
 {% tabs %}
 {% tab title="Step by step" %}
