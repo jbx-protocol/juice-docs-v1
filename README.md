@@ -2,7 +2,7 @@
 
 ## Welcome to Juicebox docs!
 
-Documentation for Juicebox Protocol V1 (live on mainnet since July 2021) is available [here](protocol-v2/specifications/contracts/).
+Documentation for Juicebox Protocol V1 (live on mainnet since July 2021) is available [here](protocol/specifications/contracts/).
 
 Documentation for the forthcoming Juicebox Protocol V2 protocol is available [here.](broken-reference)
 
