@@ -1,6 +1,6 @@
 # usedOverflowAllowanceOf
 
-Contract: [`JBETHPaymentTerminalStore`](broken-reference)​‌
+Contract: [`JBETHPaymentTerminalStore`](../)​‌
 
 **The amount of overflow that a project is allowed to tap into on-demand for the specified project configuration.**
 

@@ -1,6 +1,6 @@
 # setFee
 
-Contract: [`JBController`](broken-reference)​‌
+Contract: [`JBController`](../)​‌
 
 {% tabs %}
 {% tab title="Step by step" %}

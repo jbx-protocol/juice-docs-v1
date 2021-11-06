@@ -25,7 +25,7 @@ Rinkeby testnet: 0xfd6Bc33C9e25c6d9Bbd00b04992E3639E786DCEd
 
 | Contract                                      | Description                                                                                                                                   |
 | --------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
-| [**`JBControllerUtility`**](broken-reference) | Includes convenience functionality for checking if the message sender is the current controller of the project who data is being manipulated. |
+| [**`JBControllerUtility`**](../or-abstract/jbcontrollerutility/README.md) | Includes convenience functionality for checking if the message sender is the current controller of the project who data is being manipulated. |
 
 ## Constructor
 

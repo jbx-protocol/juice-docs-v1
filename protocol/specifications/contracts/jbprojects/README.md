@@ -29,7 +29,7 @@ Rinkeby testnet: 0x2B0b6BD05a2F1f2a399F73528a99a495555C4c52
 | Contract                                                                     | Description                                                                                                           |
 | ---------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- |
 | [**`ERC721`**](https://docs.openzeppelin.com/contracts/2.x/api/token/erc721) | A standard definition for non-fungible tokens (NFTs)                                                                  |
-| [**`JBOperatable`**](broken-reference)                                       | Includes convenience functionality for checking a message sender's permissions before executing certain transactions. |
+| [**`JBOperatable`**](../or-abstract/jboperatable/)                                       | Includes convenience functionality for checking a message sender's permissions before executing certain transactions. |
 
 ## Constructor
 

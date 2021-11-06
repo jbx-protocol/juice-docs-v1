@@ -1,6 +1,6 @@
 # migrate
 
-Contract: [`JBController`](broken-reference)​‌
+Contract: [`JBController`](../)​‌
 
 {% tabs %}
 {% tab title="Step by step" %}
@@ -67,7 +67,7 @@ function migrate(uint256 _projectId, IJBController _to)
 
     _External references:_
 
-    * [`totalSupplyOf`](broken-reference)
+    * [`totalSupplyOf`](../../../jbtokenstore/read/totalsupplyof.md)
 5.  Let the new controller know that a migration to it is happening.
 
     ```solidity

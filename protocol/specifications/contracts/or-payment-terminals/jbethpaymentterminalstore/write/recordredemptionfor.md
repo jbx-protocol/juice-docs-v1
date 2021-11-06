@@ -1,6 +1,6 @@
 # recordRedemptionFor
 
-Contract: [`JBETHPaymentTerminalStore`](broken-reference/)​‌
+Contract: [`JBETHPaymentTerminalStore`](../)​‌
 
 {% tabs %}
 {% tab title="Step by step" %}
@@ -54,7 +54,7 @@ function recordRedemptionFor(
 
     _External references:_
 
-    * [`balanceOf`](broken-reference/)
+    * [`balanceOf`](../../../jbtokenstore/read/balanceof.md)
 2.  Get a reference to the project's current funding cycle.
 
     ```solidity
@@ -171,7 +171,7 @@ function recordRedemptionFor(
 
     _Event references:_
 
-    * [`DelegateDidRedeem`](broken-reference/)
+    * [`DelegateDidRedeem`](../events/delegatedidredeem.md)
 {% endtab %}
 
 {% tab title="Code" %}
@@ -291,7 +291,7 @@ function recordRedemptionFor(
 {% tab title="Events" %}
 | Name                                         | Data                                                                                                                                                                                                                                                |
 | -------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [**`DelegateDidRedeem`**](broken-reference/) | <ul><li><a href="../../../../interfaces/ijbredemptiondelegate.md"><code>JBRedemptionDelegate</code></a><code>delegate</code></li><li><a href="../../../../data-structures/jbdidredeemdata.md"><code>JBDidRedeemData</code></a><code>data</code></li></ul> |
+| [**`DelegateDidRedeem`**](../events/delegatedidredeem.md)) | <ul><li><a href="../../../../interfaces/ijbredemptiondelegate.md"><code>JBRedemptionDelegate</code></a><code>delegate</code></li><li><a href="../../../../data-structures/jbdidredeemdata.md"><code>JBDidRedeemData</code></a><code>data</code></li></ul> |
 {% endtab %}
 
 {% tab title="Bug bounty" %}

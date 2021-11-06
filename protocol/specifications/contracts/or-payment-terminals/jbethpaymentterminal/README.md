@@ -26,7 +26,7 @@ Rinkeby testnet: 0x9d5687A9A175308773Bb289159Aa61D326E3aDB5
 
 | Contract                                                                          | Description                                                                                                                              |
 | --------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- |
-| [**`JBOperatable`**](broken-reference)                                            | Includes convenience functionality for checking a message sender's permissions before executing certain transactions.                    |
+| [**`JBOperatable`**](../../or-abstract/jboperatable/)                                            | Includes convenience functionality for checking a message sender's permissions before executing certain transactions.                    |
 | [**`Ownable`**](https://docs.openzeppelin.com/contracts/2.x/api/ownership)        | Includes convenience functionality for specifying an address that owns the contract, with modifiers that only allow access by the owner. |
 | [**`ReentrancyGuard`**](https://docs.openzeppelin.com/contracts/4.x/api/security) | Includes convenience functionality for preventing access to certain functions while certain other functions are being executed.          |
 
@@ -78,17 +78,16 @@ constructor(
 
 | Function                                                                  | Definition                                                                                                                                                                                                                     |
 | ------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| [**`projects`**](broken-reference/)                                       | <p><strong>Traits</strong></p><ul><li><code>immutable</code></li></ul><p><strong>Returns</strong></p><ul><li><a href="../../../../interfaces/ijbprojects.md"><code>IJBProjects</code></a><code>projects</code></li></ul>          |
+| [**`projects`**](properties/projects.md)                                       | <p><strong>Traits</strong></p><ul><li><code>immutable</code></li></ul><p><strong>Returns</strong></p><ul><li><a href="../../../../interfaces/ijbprojects.md"><code>IJBProjects</code></a><code>projects</code></li></ul>          |
 | [**`directory`**](properties/directory.md)                                | <p><strong>Traits</strong></p><ul><li><code>immutable</code></li></ul><p><strong>Returns</strong></p><ul><li><a href="../../../../interfaces/ijbdirectory.md"><code>IJBDirectory</code></a><code>directory</code></li></ul>       |
 | [**`splitStore`**](../jbethpaymentterminalstore/properties/splitstore.md) | <p><strong>Traits</strong></p><ul><li><code>immutable</code></li></ul><p><strong>Returns</strong></p><ul><li><a href="../../../../interfaces/ijbsplitsstore.md"><code>IJBSplitsStore</code></a><code>splitsStore</code></li></ul> |
-| [**`vault`**](properties/vault.md)                                        | <p><strong>Traits</strong></p><ul><li><code>immutable</code></li></ul><p><strong>Returns</strong></p><ul><li><a href="broken-reference"><code>IJBVault</code></a><code>vault</code></li></ul>                                  |
-| [**`store`**](properties/store.md)                                        | <p><strong>Traits</strong></p><ul><li><code>immutable</code></li></ul><p><strong>Returns</strong></p><ul><li><a href="broken-reference"><code>JBETHPaymentTerminalStore</code></a><code>store</code></li></ul>                 |
+| [**`store`**](properties/store.md)                                        | <p><strong>Traits</strong></p><ul><li><code>immutable</code></li></ul><p><strong>Returns</strong></p><ul><li><a href="../../jbethpaymenterminalstore/"><code>JBETHPaymentTerminalStore</code></a><code>store</code></li></ul>                 |
 
 ## Read
 
 | Function                               | Definition                                                                                                                                                                                                             |
 | -------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [**`ethBalanceOf`**](broken-reference) | <p><strong>Params</strong></p><ul><li><code>uint256 _projectId</code></li></ul><p><strong>Returns</strong></p><ul><li><code>uint256ethBalance</code></li></ul>                                                         |
+| [**`ethBalanceOf`**](read/ethbalanceof.md) | <p><strong>Params</strong></p><ul><li><code>uint256 _projectId</code></li></ul><p><strong>Returns</strong></p><ul><li><code>uint256ethBalance</code></li></ul>                                                         |
 | [**`heldFeesOf`**](read/heldfeesof.md) | <p><strong>Params</strong></p><ul><li><code>uint256 _projectId</code></li></ul><p><strong>Returns</strong></p><ul><li><a href="../../../../data-structures/jbfee.md"><code>JBFee</code></a><code>[] fees</code></li></ul> |
 | [**`delegate`**](read/delegate.md)     | <p><strong>Returns</strong></p><ul><li><code>address claimableOverflow</code></li></ul>                                                                                                                                |
 

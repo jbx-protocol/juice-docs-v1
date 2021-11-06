@@ -1,6 +1,6 @@
 # currentOverflowOf
 
-Contract: [`JBETHPaymentTerminalStore`](broken-reference)​‌
+Contract: [`JBETHPaymentTerminalStore`](../)​‌
 
 {% tabs %}
 {% tab title="Step by step" %}

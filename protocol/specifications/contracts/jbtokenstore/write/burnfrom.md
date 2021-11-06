@@ -1,6 +1,6 @@
 # burnFrom
 
-Contract: [`JBTokenStore`](broken-reference)​‌
+Contract: [`JBTokenStore`](../)​‌
 
 Interface: [`IJBTokenStore`](../../../interfaces/ijbtokenstore.md)
 

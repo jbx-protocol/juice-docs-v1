@@ -1,6 +1,6 @@
 # balanceOf
 
-Contract: [`JBETHPaymentTerminalStore`](broken-reference)​‌
+Contract: [`JBETHPaymentTerminalStore`](../)​‌
 
 **The amount of ETH that each project has.**
 

@@ -1,6 +1,6 @@
 # fee
 
-Contract: [`JBController`](broken-reference)​‌
+Contract: [`JBController`](../)​‌
 
 Interface: [`IJBController`](../../../../../interfaces/ijbcontroller.md)
 
