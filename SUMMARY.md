@@ -18,6 +18,7 @@
   * [Glossary](protocol/learn/terminology.md)
   * [Lessons](protocol-v2/learn/lessons/README.md)
     * [Project](protocol-v2/learn/lessons/project.md)
+    * [Funding cycle](protocol-v2/learn/lessons/funding-cycle.md)
 * [Build](protocol/build/README.md)
   * [Getting started](protocol/build/getting-started.md)
 * [Specifications](protocol/specifications/README.md)
