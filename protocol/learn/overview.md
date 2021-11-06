@@ -7,8 +7,6 @@ description: >-
 
 # Overview
 
-## Overview
-
 The Juicebox protocol is made up of 7 core contracts and 3 surface contracts.
 
 * Core contracts store all the independent components that make the protocol work.
@@ -18,7 +16,7 @@ The Juicebox protocol is made up of 7 core contracts and 3 surface contracts.
 
 The first two core contracts are pretty self explanatory. They store the core Juicebox components of the protocol.
 
-* [`JBTokenStore`](broken-reference) manages token minting and burning for all projects.
+* [`JBTokenStore`](broken-reference/) manages token minting and burning for all projects.
 * [`JBFundingCycleStore`](../specifications/contracts/jbfundingcyclestore/) manages funding cycle configurations, ballots, accounting, and scheduling. Funding cycles are represented as a [`JBFundingCycle`](../data-structures/jbfundingcycle.md) data structure.
 
 The next few are a little more abstract. They don't know anything specific to Juicebox, and are open for use by other protocols or future Juicebox extensions.
