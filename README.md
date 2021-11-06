@@ -2,16 +2,16 @@
 
 ## Welcome to Juicebox docs!
 
-Documentation for Juicebox Protocol V1 (live on mainnet since July 2021) is available [here](./contracts).&#x20;
+Documentation for Juicebox Protocol V1 (live on mainnet since July 2021) is available [here](protocol-v2/specifications/contracts/).
 
-Documentation for the forthcoming Juicebox Protocol V2 protocol is available [here](./protocol).
+Documentation for the forthcoming Juicebox Protocol V2 protocol is available [here.](broken-reference)
 
 {% hint style="warning" %}
 The Juicebox protocol is not formally audited. All projects built on it may be vulnerable to bugs or exploits.
 {% endhint %}
 
 {% hint style="info" %}
-Please note that these docs are under active development.&#x20;
+Please note that these docs are under active development.
 {% endhint %}
 
 ### Visual walkthrough

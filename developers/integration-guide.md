@@ -10,7 +10,7 @@ Add the Juicebox contract dependency to your project:
 $ yarn add @jbox/sol
 ```
 
-Inherit from `JuiceboxProject` in your contract. You will need to provide a `Project ID` and [`Terminal Directory`](../contracts/terminal-directory.md) address to the `JuiceboxProject` constructor.
+Inherit from `JuiceboxProject` in your contract. You will need to provide a `Project ID` and [`Terminal Directory`](../protocol-v1/terminal-directory.md) address to the `JuiceboxProject` constructor.
 
 ```
 // SPDX-License-Identifier: MIT
