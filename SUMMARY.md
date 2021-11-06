@@ -300,7 +300,7 @@
           * [currentOverflowOf](protocol/specifications/contracts/or-payment-terminals/jbethpaymentterminalstore/read/currentoverflowof.md)
           * [claimableOverflowOf](protocol/specifications/contracts/or-payment-terminals/jbethpaymentterminalstore/read/claimableoverflowof.md)
           * [\_claimableOverflowOf](protocol/specifications/contracts/or-payment-terminals/jbethpaymentterminalstore/read/\_claimableoverflowof.md)
-          * [\_overflowDuring](protocol/specifications/contracts/or-payment-terminals/jbethpaymentterminalstore/read/\_overflowduring.md)
+          * [\_overflowDuring](protocol-v2/specifications/contracts/or-payment-terminals/jbethpaymentterminalstore/read/\_overflowduring.md)
         * [Write](protocol/specifications/contracts/or-payment-terminals/jbethpaymentterminalstore/write/README.md)
           * [recordPaymentFrom](protocol/specifications/contracts/or-payment-terminals/jbethpaymentterminalstore/write/recordpaymentfrom.md)
           * [recordWithdrawalFor](protocol/specifications/contracts/or-payment-terminals/jbethpaymentterminalstore/write/recordwithdrawalfor.md)
