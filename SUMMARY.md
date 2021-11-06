@@ -14,9 +14,10 @@
 
 * [README](protocol/readme.md)
 * [Learn](protocol/learn/README.md)
-  * [Terminology](protocol/learn/terminology.md)
   * [Architecture](protocol/learn/overview.md)
-  * [Project](protocol/learn/project.md)
+  * [Glossary](protocol/learn/terminology.md)
+  * [Lessons](protocol-v2/learn/lessons/README.md)
+    * [Project](protocol-v2/learn/lessons/project.md)
 * [Build](protocol/build/README.md)
   * [Getting started](protocol/build/getting-started.md)
 * [Specifications](protocol/specifications/README.md)

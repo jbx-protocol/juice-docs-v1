@@ -1,6 +1,6 @@
 # recordWithdrawalFor
 
-Contract: [`JBETHPaymentTerminalStore`](../../../jbprices/write/)​‌
+Contract: [`JBETHPaymentTerminalStore`](./)​‌
 
 {% tabs %}
 {% tab title="Step by step" %}

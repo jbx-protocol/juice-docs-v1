@@ -10,7 +10,7 @@ Interface: [`IJBProjects`](../../../interfaces/ijbprojects.md)
 
 _Only a project's owner or operator can set its URI._
 
-# Definition
+## Definition
 
 ```solidity
 function setMetadataCidOf(uint256 _projectId, string calldata _metadataCid)
@@ -26,7 +26,7 @@ function setMetadataCidOf(uint256 _projectId, string calldata _metadataCid)
 * The function overrides a function definition from the `IJBProjects` interface.
 * The function doesn't return anything.
 
-# Body
+## Body
 
 1.  Store the new `_metadataCid` as the `metadataCidOf` the project.
 
@@ -75,8 +75,8 @@ function setMetadataCidOf(uint256 _projectId, string calldata _metadataCid)
 {% endtab %}
 
 {% tab title="Events" %}
-| Name                                | Data                                                                                                                         |
-| ----------------------------------- | ---------------------------------------------------------------------------------------------------------------------------- |
+| Name                                                | Data                                                                                                                         |
+| --------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------- |
 | [**`SetMetadataCid`**](../events/setmetadatacid.md) | <ul><li><code>uint256 indexed projectId</code></li><li><code>string uri</code></li><li><code>address caller</code></li></ul> |
 {% endtab %}
 
