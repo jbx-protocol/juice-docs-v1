@@ -8,7 +8,7 @@ Contract: [`JBETHPaymentTerminal`](../)​‌
 
 _Only a project owner, an operator, or the contract's owner can process held fees._
 
-# Definition
+## Definition
 
 ```solidity
 function processFees(uint256 _projectId)
@@ -29,7 +29,7 @@ function processFees(uint256 _projectId)
 * The resulting function overrides a function definition from the `IJBETHPaymentTerminal` interface.
 * The function doesn't return anything.
 
-# Body
+## Body
 
 1.  Get a reference to all held fees for the project.
 
@@ -110,8 +110,8 @@ function processFees(uint256 _projectId)
 {% endtab %}
 
 {% tab title="Events" %}
-| Name                                          | Data                                                                                                                                                    |
-| --------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Name                                          | Data                                                                                                                                                       |
+| --------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | [**`ProcessFees`**](../events/processfees.md) | <ul><li><a href="../../../../data-structures/jbfee.md"><code>JBFee</code></a><code>[] fees</code></li><li><code>uint256 indexed projectId</code></li></ul> |
 {% endtab %}
 

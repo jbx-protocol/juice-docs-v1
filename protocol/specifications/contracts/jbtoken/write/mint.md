@@ -10,7 +10,7 @@ Interface: [`IJBToken`](../../../interfaces/ijbtoken.md)
 
 _Only the owner of this contract cant mint more of it._
 
-# Definition
+## Definition
 
 ```solidity
 function mint(
@@ -27,7 +27,7 @@ function mint(
 * The function overrides a function definition from the `IJBToken` interface.
 * The function returns nothing.
 
-# Body
+## Body
 
 1.  Forward the call to the internal version of the function.
 
@@ -37,8 +37,7 @@ function mint(
 
     _Internal references:_
 
-    * [`_mint`](https://docs.openzeppelin.com/contracts/4.x/api/token/erc20#ERC20-_mint-address-uint256-)
-
+    * [`_mint`](https://docs.openzeppelin.com/contracts/4.x/api/token/erc20#ERC20-\_mint-address-uint256-)
 {% endtab %}
 
 {% tab title="Code" %}
@@ -62,7 +61,6 @@ function mint(
 }
 ```
 {% endtab %}
-
 
 {% tab title="Bug bounty" %}
 | Category          | Description                                                                                                                            | Reward |

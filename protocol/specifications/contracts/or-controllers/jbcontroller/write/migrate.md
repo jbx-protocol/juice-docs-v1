@@ -8,7 +8,7 @@ Contract: [`JBController`](../)​‌
 
 _Only a project's owner or a designated operator can migrate it._
 
-# Definition
+## Definition
 
 ```solidity
 function migrate(uint256 _projectId, IJBController _to)
@@ -24,7 +24,7 @@ function migrate(uint256 _projectId, IJBController _to)
 * The function cannot be accessed recursively or while other `nonReentrant` functions in this contract are in progress.
 * The function doesn't return anything.
 
-# Body
+## Body
 
 1.  Make sure this controller is the project's current controller. Migrating away from a controller that isn't the project's current one wouldn't do anything.
 
@@ -147,9 +147,9 @@ function migrate(uint256 _projectId, IJBController _to)
 {% tab title="Events" %}
 | Name                                                                                | Data                                                                                                                                                                                                                                                                                                                      |
 | ----------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [**`Migrate`**](../events/migrate.md)                                               | <ul><li><code>uint256 projectId</code></li><li><a href="../../../../interfaces/ijbcontroller.md"><code>IJBController</code></a><code>to</code></li><li><code>address caller</code></li></ul>                                                                                                                                 |
+| [**`Migrate`**](../events/migrate.md)                                               | <ul><li><code>uint256 projectId</code></li><li><a href="../../../../interfaces/ijbcontroller.md"><code>IJBController</code></a><code>to</code></li><li><code>address caller</code></li></ul>                                                                                                                              |
 | [**`DistributeReservedTokens`**](../events/distributereservedtokens.md)             | <ul><li><code>uint256 indexed fundingCycleId</code></li><li><code>uint256 indexed projectId</code></li><li><code>address indexed beneficiary</code></li><li><code>uint256 count</code></li><li><code>uint256 projectOwnerTokenCount</code></li><li><code>string memo</code></li><li><code>address caller</code></li></ul> |
-| [**`DistributeToReservedTokenSplit`**](../events/distributetoreservedtokensplit.md) | <ul><li><code>uint256 indexed fundingCycleId</code></li><li><code>uint256 indexed projectId</code></li><li><a href="../../../../data-structures/jbsplit.md"><code>JBSplit</code></a><code>split</code></li><li><code>uint256 tokenCount</code></li><li><code>address caller</code></li></ul>                                 |
+| [**`DistributeToReservedTokenSplit`**](../events/distributetoreservedtokensplit.md) | <ul><li><code>uint256 indexed fundingCycleId</code></li><li><code>uint256 indexed projectId</code></li><li><a href="../../../../data-structures/jbsplit.md"><code>JBSplit</code></a><code>split</code></li><li><code>uint256 tokenCount</code></li><li><code>address caller</code></li></ul>                              |
 {% endtab %}
 
 {% tab title="Bug bounty" %}

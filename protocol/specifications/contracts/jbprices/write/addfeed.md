@@ -10,7 +10,7 @@ Interface: [`IJBPrices`](../../../interfaces/ijbprices.md)
 
 _Current feeds can't be modified._
 
-# Definition
+## Definition
 
 ```solidity
 function addFeedFor(
@@ -28,7 +28,7 @@ function addFeedFor(
 * The function overrides a function definition from the `IJBPrices` interface.
 * The function doesn't return anything.
 
-# Body
+## Body
 
 1.  Make sure there isn't already a price feed set for the `_currency` `_base` pair.
 
@@ -87,14 +87,14 @@ function addFeedFor(
 {% endtab %}
 
 {% tab title="Errors" %}
-| String                     | Description                                                                                                                                       |
-| -------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **`0x04: ALREADY_EXISTS`** | Thrown if the specified currency already has an associated price feed.                                                                            |
+| String                     | Description                                                            |
+| -------------------------- | ---------------------------------------------------------------------- |
+| **`0x04: ALREADY_EXISTS`** | Thrown if the specified currency already has an associated price feed. |
 {% endtab %}
 
 {% tab title="Events" %}
-| Name                                  | Data                                                                                                                                                                                                                                                                                                                                 |
-| ------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Name                                  | Data                                                                                                                                                                                                                                                                                           |
+| ------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | [**`AddFeed`**](../events/addfeed.md) | <ul><li><code>uint256 indexed currency</code></li><li><code>uint256 indexed base</code></li><li><a href="https://github.com/smartcontractkit/chainlink/blob/develop/contracts/src/v0.8/interfaces/AggregatorV3Interface.sol"><code>AggregatorV3Interface</code></a><code>feed</code></li></ul> |
 {% endtab %}
 

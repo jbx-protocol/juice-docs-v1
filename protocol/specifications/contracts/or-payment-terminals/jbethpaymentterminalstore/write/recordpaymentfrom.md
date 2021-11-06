@@ -10,7 +10,7 @@ _Mint's the project's tokens according to values provided by a configured data s
 
 _Only the associated payment terminal can record a payment._
 
-# Definition
+## Definition
 
 ```solidity
 function recordPaymentFrom(
@@ -52,7 +52,7 @@ function recordPaymentFrom(
   * `tokenCount` is the number of tokens that were minted.
   * `memo` is a memo that should be passed along to the emitted event.
 
-# Body
+## Body
 
 1.  Get a reference to the project's current funding cycle that should be returned.
 
@@ -310,8 +310,8 @@ function recordPaymentFrom(
 {% endtab %}
 
 {% tab title="Events" %}
-| Name                                                | Data                                                                                                                                                                                                                             |
-| --------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Name                                                | Data                                                                                                                                                                                                                                   |
+| --------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | [**`DelegateDidPay`**](../events/delegatedidpay.md) | <ul><li><a href="../../../../interfaces/ijbpaydelegate.md"><code>IJBPayDelegate</code></a><code>delegate</code></li><li><a href="../../../../data-structures/jbdidpaydata.md"><code>JBDidPayData</code></a><code>data</code></li></ul> |
 {% endtab %}
 

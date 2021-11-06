@@ -6,7 +6,7 @@ Contract: [`JBETHPaymentTerminalStore`](../)​‌
 {% tab title="Step by step" %}
 **Allows this store to be claimed by an address so that it recognized the address as its terminal.**
 
-# Definition
+## Definition
 
 ```solidity
 function claim() external { ... }
@@ -15,7 +15,7 @@ function claim() external { ... }
 * The function can be accessed externally by anyone.
 * The function doesn't return anything.
 
-# Body
+## Body
 
 1.  Make sure the contract hasn't already been claimed.
 

@@ -10,7 +10,7 @@ Interface: [`IJBETHPaymentTerminal`](../../../../../interfaces/ijbethterminalof.
 
 _Only a project's owner or a designated operator can migrate it._
 
-# Definition
+## Definition
 
 ```solidity
 function migrate(uint256 _projectId, IJBTerminal _to)
@@ -28,7 +28,7 @@ function migrate(uint256 _projectId, IJBTerminal _to)
 * The resulting function overrides a function definition from the `IJBETHPaymentTerminal` interface.
 * The function doesn't return anything.
 
-# Body
+## Body
 
 1.  Make sure the token type of the terminal being migrated to matches the token type of this terminal.
 
@@ -112,8 +112,8 @@ function migrate(uint256 _projectId, IJBTerminal _to)
 {% endtab %}
 
 {% tab title="Events" %}
-| Name                                       | Data                                                                                                                                                                                                                                            |
-| ------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Name                                       | Data                                                                                                                                                                                                                                               |
+| ------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | [**`Migrate`**](../events/addtobalance.md) | <ul><li><code>uint256 indexed projectId</code></li><li><a href="../../../../interfaces/ijbterminal.md"><code>IJBTerminal</code></a><code>indexed terminal</code></li><li><code>uint256 amount</code></li><li><code>address caller</code></li></ul> |
 {% endtab %}
 

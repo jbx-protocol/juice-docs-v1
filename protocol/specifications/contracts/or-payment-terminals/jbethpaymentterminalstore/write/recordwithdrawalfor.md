@@ -1,6 +1,6 @@
 # recordWithdrawalFor
 
-Contract: [`JBETHPaymentTerminalStore`](./)​‌
+Contract: [`JBETHPaymentTerminalStore`](../../../jbprices/write/)​‌
 
 {% tabs %}
 {% tab title="Step by step" %}
@@ -8,7 +8,7 @@ Contract: [`JBETHPaymentTerminalStore`](./)​‌
 
 _Only the associated payment terminal can record a used allowance._
 
-# Definition
+## Definition
 
 ```solidity
 function recordWithdrawalFor(
@@ -32,7 +32,7 @@ function recordWithdrawalFor(
   * `fundingCycle` is the funding cycle during which the withdrawal was made.
   * `withdrawnAmount` is the amount withdrawn.
 
-# Body
+## Body
 
 1.  Tell the project's controller that an amount is being withdrawn. Get the [`JBFundingCycle`](../../../../../data-structures/jbfundingcycle.md) data struct during which the withdraw was made.
 
@@ -60,8 +60,7 @@ function recordWithdrawalFor(
     _Libraries used:_
 
     * [`JBFundingCycleMetadataResolver`](../../../../libraries/jbfundingcyclemetadataresolver.md)\
-        `.withdrawalsPaused(...)`
-
+      `.withdrawalsPaused(...)`
 4.  Make the sure provided currency matches the funding cycle's currency.
 
     ```solidity

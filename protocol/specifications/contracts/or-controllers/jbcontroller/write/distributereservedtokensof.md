@@ -6,7 +6,7 @@ Contract: [`JBController`](../)​‌
 {% tab title="Step by step" %}
 **Distributes all outstanding reserved tokens for a project.**
 
-# Definition
+## Definition
 
 ```solidity
 function distributeReservedTokensOf(uint256 _projectId, string memory _memo)
@@ -22,18 +22,17 @@ function distributeReservedTokensOf(uint256 _projectId, string memory _memo)
 * The function cannot be accessed recursively or while other `nonReentrant` functions in this contract are in progress.
 * The function returns the amount of minted reserved tokens.
 
-# Body
+## Body
 
-1. Forward the call to the internal version of the function that is also used by other operations.
+1.  Forward the call to the internal version of the function that is also used by other operations.
 
-   ```solidity
-   return _distributeReservedTokensOf(_projectId, _memo);
-   ```
+    ```solidity
+    return _distributeReservedTokensOf(_projectId, _memo);
+    ```
 
-   _Internal references:_
+    _Internal references:_
 
-   * [`_distributeReservedTokensOf`](\_distributereservedtokensof.md)
-
+    * [`_distributeReservedTokensOf`](\_distributereservedtokensof.md)
 {% endtab %}
 
 {% tab title="Code" %}
@@ -67,7 +66,7 @@ function distributeReservedTokensOf(uint256 _projectId, string memory _memo)
 | Name                                                                                | Data                                                                                                                                                                                                                                                                                                                      |
 | ----------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | [**`DistributeReservedTokens`**](../events/distributereservedtokens.md)             | <ul><li><code>uint256 indexed fundingCycleId</code></li><li><code>uint256 indexed projectId</code></li><li><code>address indexed beneficiary</code></li><li><code>uint256 count</code></li><li><code>uint256 projectOwnerTokenCount</code></li><li><code>string memo</code></li><li><code>address caller</code></li></ul> |
-| [**`DistributeToReservedTokenSplit`**](../events/distributetoreservedtokensplit.md) | <ul><li><code>uint256 indexed fundingCycleId</code></li><li><code>uint256 indexed projectId</code></li><li><a href="../../../../data-structures/jbsplit.md"><code>JBSplit</code></a><code>split</code></li><li><code>uint256 tokenCount</code></li><li><code>address caller</code></li></ul>                                 |
+| [**`DistributeToReservedTokenSplit`**](../events/distributetoreservedtokensplit.md) | <ul><li><code>uint256 indexed fundingCycleId</code></li><li><code>uint256 indexed projectId</code></li><li><a href="../../../../data-structures/jbsplit.md"><code>JBSplit</code></a><code>split</code></li><li><code>uint256 tokenCount</code></li><li><code>address caller</code></li></ul>                              |
 {% endtab %}
 
 {% tab title="Bug bounty" %}

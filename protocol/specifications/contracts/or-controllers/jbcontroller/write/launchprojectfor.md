@@ -10,7 +10,7 @@ _Each operation within this transaction can be done in sequence separately._
 
 _Anyone can deploy a project on an owner's behalf._
 
-# Definition
+## Definition
 
 ```solidity
 function launchProjectFor(
@@ -39,7 +39,7 @@ function launchProjectFor(
 * The function can be accessed externally by anyone.
 * The function returns the ID of the project that was launched.
 
-# Body
+## Body
 
 1.  Make sure the reserved rate is a valid number out of 10000.
 
@@ -47,21 +47,18 @@ function launchProjectFor(
     // The reserved project token rate must be less than or equal to 10000.
     require(_metadata.reservedRate <= 10000, '0x37: BAD_RESERVED_RATE');
     ```
-
 2.  Make sure the redemption rate is a valid number out of 10000.
 
     ```solidity
     // The redemption rate must be between 0 and 10000.
     require(_metadata.redemptionRate <= 10000, '0x38: BAD_REDEMPTION_RATE');
     ```
-
 3.  Make sure the ballot redemption rate is less than 100%.
 
     ```solidity
     // The ballot redemption rate must be less than or equal to 10000.
     require(_metadata.ballotRedemptionRate <= 10000, '0x39: BAD_BALLOT_REDEMPTION_RATE');
     ```
-
 4.  Validate and pack the provided metadata into a `uint256`.
 
     ```solidity
@@ -74,7 +71,7 @@ function launchProjectFor(
     _Libraries used:_
 
     * [`JBFundingCycleMetadataResolver`](../../../../../libraries/jbfundingcyclemetadataresolver.md)\
-        `.packFundingCycleMetadata(...)`
+      `.packFundingCycleMetadata(...)`
 5.  Create the project. This will mint an ERC-721 in the `_owners` wallet representing ownership over the project.
 
     ```solidity
@@ -217,8 +214,8 @@ function launchProjectFor(
 {% endtab %}
 
 {% tab title="Events" %}
-| Name                                                            | Data                                                                                                                                                                                                                                                                         |
-| --------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Name                                                            | Data                                                                                                                                                                                                                                                                            |
+| --------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | [**`SetOverflowAllowance`**](../events/setoverflowallowance.md) | <ul><li><code>uint256 indexed projectId</code></li><li><code>uint256 indexed configuration</code></li><li><a href="../../../../data-structures/jboverflowallowance.md"><code>JBOverflowAllowance</code></a><code>allowance</code></li><li><code>address caller</code></li></ul> |
 {% endtab %}
 

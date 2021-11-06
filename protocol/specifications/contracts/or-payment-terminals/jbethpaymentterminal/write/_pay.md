@@ -1,4 +1,4 @@
-# _pay
+# \_pay
 
 Contract: [`JBETHPaymentTerminal`](../)​‌
 
@@ -6,7 +6,7 @@ Contract: [`JBETHPaymentTerminal`](../)​‌
 {% tab title="Step by step" %}
 **Contribute ETH to a project.**
 
-# Definition
+## Definition
 
 ```solidity
 function _pay(
@@ -31,7 +31,7 @@ function _pay(
 * The function is private to this contract.
 * The function returns the leftover amount if the splits don't add up to 100%.
 
-# Body
+## Body
 
 1.  Make sure the provided beneficiary isn't the zero address.
 
@@ -147,8 +147,8 @@ function _pay(
 {% endtab %}
 
 {% tab title="Events" %}
-| Name                          | Data                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
-| ----------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Name                          | Data                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
+| ----------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | [**`Pay`**](../events/pay.md) | <ul><li><code>uint256 indexed fundingCycleId</code></li><li><code>uint256 indexed projectId</code></li><li><code>address indexed beneficiary</code></li><li><a href="../../../../data-structures/jbfundingcycle.md"><code>JBFundingCycle</code></a><code>fundingCycle</code></li><li><code>uint256 amount</code></li><li><code>uint256 weight</code></li><li><code>uint256 tokenCount</code></li><li><code>string memo</code></li><li><code>address caller</code></li></ul> |
 {% endtab %}
 

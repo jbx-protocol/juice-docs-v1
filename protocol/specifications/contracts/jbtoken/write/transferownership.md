@@ -10,7 +10,7 @@ Interface: [`IJBToken`](../../../interfaces/ijbtoken.md)
 
 _Only the owner of this contract can transfer it._
 
-# Definition
+## Definition
 
 ```solidity
 function transferOwnership(address _newOwner)
@@ -26,7 +26,7 @@ function transferOwnership(address _newOwner)
 * The function overrides a function definition from the `IJBToken` interface.
 * The function returns nothing.
 
-# Body
+## Body
 
 1.  Forward the call to the inherited version from `Ownable`.
 
@@ -37,7 +37,6 @@ function transferOwnership(address _newOwner)
     _Internal references:_
 
     * [`transferOwnership`](https://docs.openzeppelin.com/contracts/4.x/api/access#Ownable-transferOwnership-address-)
-
 {% endtab %}
 
 {% tab title="Code" %}
@@ -64,7 +63,6 @@ function transferOwnership(address _newOwner)
 }
 ```
 {% endtab %}
-
 
 {% tab title="Bug bounty" %}
 | Category          | Description                                                                                                                            | Reward |

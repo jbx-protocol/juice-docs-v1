@@ -10,7 +10,7 @@ Interface: [`IJBToken`](../../../interfaces/ijbtoken.md)
 
 _Only the owner of this contract cant burn some of its supply._
 
-# Definition
+## Definition
 
 ```solidity
 function burn(
@@ -27,7 +27,7 @@ function burn(
 * The function overrides a function definition from the `IJBToken` interface.
 * The function returns nothing.
 
-# Body
+## Body
 
 1.  Forward the call to the internal version of the function.
 
@@ -37,8 +37,7 @@ function burn(
 
     _Internal references:_
 
-    * [`_burn`](https://docs.openzeppelin.com/contracts/4.x/api/token/erc20#ERC20-_burn-address-uint256-)
-
+    * [`_burn`](https://docs.openzeppelin.com/contracts/4.x/api/token/erc20#ERC20-\_burn-address-uint256-)
 {% endtab %}
 
 {% tab title="Code" %}
@@ -62,7 +61,6 @@ function burn(
 }
 ```
 {% endtab %}
-
 
 {% tab title="Bug bounty" %}
 | Category          | Description                                                                                                                            | Reward |

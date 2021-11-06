@@ -8,7 +8,7 @@ Interface: `IJBPrices`
 {% tab title="Step by step" %}
 **Gets the current price of the provided currency in terms of the provided base currency.**
 
-# Definition
+## Definition
 
 ```solidity
 function priceFor(uint256 _currency, uint256 _base) external view override returns (uint256) { ... }
@@ -21,7 +21,7 @@ function priceFor(uint256 _currency, uint256 _base) external view override retur
 * The function overrides a function definition from the `IJBPrices` interface.
 * The function returns the price of the currency in terms of the base, with 18 decimals.
 
-# Body
+## Body
 
 1.  Return 1 if the `_currency` and the `_base` are the same, since they have the same price. Normalize to `targetDecimals` number of decimals.
 
@@ -55,13 +55,13 @@ function priceFor(uint256 _currency, uint256 _base) external view override retur
     // Get the latest round information. Only need the price is needed.
     (, int256 _price, , , ) = _feed.latestRoundData();
     ```
-5.  Get the number of decimals being reported by the price feed that the `_price` is expected to have. 
+5.  Get the number of decimals being reported by the price feed that the `_price` is expected to have.
 
     ```solidity
     // Get a reference to the number of decimals the feed uses.
     uint256 _decimals = _feed.decimals();
     ```
-5.  Return the `_price`, normalizing the value to `TARGET_DECIMALS` decimal fidelity.
+6.  Return the `_price`, normalizing the value to `TARGET_DECIMALS` decimal fidelity.
 
     ```solidity
     // If decimals need adjusting, multiply or divide the price by the decimal adjuster to get the normalized result.
@@ -76,7 +76,7 @@ function priceFor(uint256 _currency, uint256 _base) external view override retur
 
     Internal references:
 
-    * [`TARGET_DECIMALS`](../properties/TARGET_DECIMALS.md)
+    * [`TARGET_DECIMALS`](../properties/TARGET\_DECIMALS.md)
 {% endtab %}
 
 {% tab title="Code" %}

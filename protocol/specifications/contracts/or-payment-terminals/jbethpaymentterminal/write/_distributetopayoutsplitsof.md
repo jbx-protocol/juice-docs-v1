@@ -1,4 +1,4 @@
-# _distributeToPayoutSplitsOf
+# \_distributeToPayoutSplitsOf
 
 Contract: [`JBETHPaymentTerminal`](../)​‌
 
@@ -6,7 +6,7 @@ Contract: [`JBETHPaymentTerminal`](../)​‌
 {% tab title="Step by step" %}
 **Pays out splits for a project's funding cycle configuration.**
 
-# Definition
+## Definition
 
 ```solidity
 function _distributeToPayoutSplitsOf(
@@ -23,7 +23,7 @@ function _distributeToPayoutSplitsOf(
 * The function is private to this contract.
 * The function returns the leftover amount if the splits don't add up to 100%.
 
-# Body
+## Body
 
 1.  Save the passed in `_amount` as the `leftoverAmount` that will be returned. The subsequent routine will decrement the leftover amount as splits are settled.
 
@@ -261,8 +261,8 @@ function _distributeToPayoutSplitsOf(
 {% endtab %}
 
 {% tab title="Events" %}
-| Name                                                                  | Data                                                                                                                                                                                                                                                                                  |
-| --------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Name                                                                  | Data                                                                                                                                                                                                                                                                                     |
+| --------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | [**`DistributeToPayoutSplit`**](../events/distributetopayoutsplit.md) | <ul><li><code>uint256 indexed fundingCycleId</code></li><li><code>uint256 indexed projectId</code></li><li><a href="../../../../data-structures/jbsplit.md"><code>JBSplit</code></a><code>split</code></li><li><code>uint256 amount</code></li><li><code>address caller</code></li></ul> |
 {% endtab %}
 

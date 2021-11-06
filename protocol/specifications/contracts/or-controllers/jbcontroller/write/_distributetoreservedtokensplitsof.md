@@ -1,10 +1,10 @@
-# _distributeToReservedTokenSplitsOf
+# \_distributeToReservedTokenSplitsOf
 
 {% tabs %}
 {% tab title="Step by step" %}
 **Distributed tokens to the splits according to the specified funding cycle configuration.**
 
-# Definition
+## Definition
 
 ```solidity
 function _distributeToReservedTokenSplitsOf(JBFundingCycle memory _fundingCycle, uint256 _amount)
@@ -13,12 +13,12 @@ function _distributeToReservedTokenSplitsOf(JBFundingCycle memory _fundingCycle,
 ```
 
 * Arguments:
-  * `_fundingCycle` is the [`JBFundingCycle`](../../../../../data-structures/jbfundingcycle.md)  to base the token distribution on.
+  * `_fundingCycle` is the [`JBFundingCycle`](../../../../../data-structures/jbfundingcycle.md) to base the token distribution on.
   * `_amount` is the total amount of tokens to mint.
 * The function is private to this contract.
 * The function returns the leftover amount after all splits have been distributed.
 
-# Body
+## Body
 
 1.  Save the passed in `_amount` as the `leftoverAmount` that will be returned. The subsequent routine will decrement the leftover amount as splits are settled.
 
@@ -63,7 +63,6 @@ function _distributeToReservedTokenSplitsOf(JBFundingCycle memory _fundingCycle,
 
     * [`PRBMath`](https://github.com/hifi-finance/prb-math/blob/main/contracts/PRBMath.sol)
       * `.mulDiv`
-
 6.  If there are tokens to mint for the given split, do so. If the split has an `allocator` specified, the tokens should go to that address. Otherwise if the split has a `projectId` specified, the tokens should be directed to the project's owner. Otherwise, the tokens should be directed at the `beneficiary` address of the split. Afterwards, if there's an `allocator` specified, let it know that tokens have been sent. Reduce the leftover amount by the tokens that were sent to the split.
 
     ```solidity
@@ -192,8 +191,8 @@ function _distributeToReservedTokenSplitsOf(JBFundingCycle memory _fundingCycle,
 {% endtab %}
 
 {% tab title="Events" %}
-| Name                                                                                | Data                                                                                                                                                                                                                                                                                      |
-| ----------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Name                                                                                | Data                                                                                                                                                                                                                                                                                         |
+| ----------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | [**`DistributeToReservedTokenSplit`**](../events/distributetoreservedtokensplit.md) | <ul><li><code>uint256 indexed fundingCycleId</code></li><li><code>uint256 indexed projectId</code></li><li><a href="../../../../data-structures/jbsplit.md"><code>JBSplit</code></a><code>split</code></li><li><code>uint256 tokenCount</code></li><li><code>address caller</code></li></ul> |
 {% endtab %}
 

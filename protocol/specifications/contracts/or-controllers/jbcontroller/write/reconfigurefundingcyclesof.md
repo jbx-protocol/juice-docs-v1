@@ -10,7 +10,7 @@ Interface: [`IJBController`](../../../../../interfaces/ijbcontroller.md)
 
 _Only a project's owner or a designated operator can configure its funding cycles._
 
-# Definition
+## Definition
 
 ```solidity
 function reconfigureFundingCyclesOf(
@@ -36,7 +36,7 @@ function reconfigureFundingCyclesOf(
 * Through the [`requirePermission`](../../or-abstract/jboperatable/modifiers/requirepermission.md) modifier, the function is only accessible by the project's owner, or from an operator that has been given the `JBOperations.RECONFIGURE` permission by the project owner for the provided `_projectId`.
 * The function returns the ID of the funding cycle that was configured.
 
-# Body
+## Body
 
 1.  Make sure the reserved rate is a valid number out of 10000.
 
@@ -44,21 +44,18 @@ function reconfigureFundingCyclesOf(
     // The reserved project token rate must be less than or equal to 10000.
     require(_metadata.reservedRate <= 10000, '0x37: BAD_RESERVED_RATE');
     ```
-
 2.  Make sure the redemption rate is a valid number out of 10000.
 
     ```solidity
     // The redemption rate must be between 0 and 10000.
     require(_metadata.redemptionRate <= 10000, '0x38: BAD_REDEMPTION_RATE');
     ```
-
 3.  Make sure the ballot redemption rate is less than 100%.
 
     ```solidity
     // The ballot redemption rate must be less than or equal to 10000.
     require(_metadata.ballotRedemptionRate <= 10000, '0x39: BAD_BALLOT_REDEMPTION_RATE');
     ```
-
 4.  Validate and pack the provided metadata into a `uint256`.
 
     ```solidity
@@ -71,8 +68,7 @@ function reconfigureFundingCyclesOf(
     _Libraries used:_
 
     * [`JBFundingCycleMetadataResolver`](../../../../../libraries/jbfundingcyclemetadataresolver.md)\
-        `.packFundingCycleMetadata(...)`
-
+      `.packFundingCycleMetadata(...)`
 5.  Configure the project's funding cycle, overflow allowances, and splits.
 
     ```solidity
@@ -185,8 +181,8 @@ function reconfigureFundingCyclesOf(
 | Name                                                                                | Data                                                                                                                                                                                                                                                                                                                      |
 | ----------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | [**`DistributeReservedTokens`**](../events/distributereservedtokens.md)             | <ul><li><code>uint256 indexed fundingCycleId</code></li><li><code>uint256 indexed projectId</code></li><li><code>address indexed beneficiary</code></li><li><code>uint256 count</code></li><li><code>uint256 projectOwnerTokenCount</code></li><li><code>string memo</code></li><li><code>address caller</code></li></ul> |
-| [**`DistributeToReservedTokenSplit`**](../events/distributetoreservedtokensplit.md) | <ul><li><code>uint256 indexed fundingCycleId</code></li><li><code>uint256 indexed projectId</code></li><li><a href="../../../../data-structures/jbsplit.md"><code>JBSplit</code></a><code>split</code></li><li><code>uint256 tokenCount</code></li><li><code>address caller</code></li></ul>                                 |
-| [**`SetOverflowAllowance`**](../events/setoverflowallowance.md)                     | <ul><li><code>uint256 indexed projectId</code></li><li><code>uint256 indexed configuration</code></li><li><a href="../../../../data-structures/jboverflowallowance.md"><code>JBOverflowAllowance</code></a><code>allowance</code></li><li><code>address caller</code></li></ul>                                              |
+| [**`DistributeToReservedTokenSplit`**](../events/distributetoreservedtokensplit.md) | <ul><li><code>uint256 indexed fundingCycleId</code></li><li><code>uint256 indexed projectId</code></li><li><a href="../../../../data-structures/jbsplit.md"><code>JBSplit</code></a><code>split</code></li><li><code>uint256 tokenCount</code></li><li><code>address caller</code></li></ul>                              |
+| [**`SetOverflowAllowance`**](../events/setoverflowallowance.md)                     | <ul><li><code>uint256 indexed projectId</code></li><li><code>uint256 indexed configuration</code></li><li><a href="../../../../data-structures/jboverflowallowance.md"><code>JBOverflowAllowance</code></a><code>allowance</code></li><li><code>address caller</code></li></ul>                                           |
 {% endtab %}
 
 {% tab title="Bug bounty" %}

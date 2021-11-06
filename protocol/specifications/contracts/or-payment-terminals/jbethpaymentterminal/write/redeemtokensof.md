@@ -10,7 +10,7 @@ Interface: [`IJBETHPaymentTerminal`](../../../../../interfaces/ijbethterminalof.
 
 _Only a token's holder or a designated operator can redeem it._
 
-# Definition
+## Definition
 
 ```solidity
 function redeemTokensOf(
@@ -42,7 +42,7 @@ function redeemTokensOf(
 * The resulting function overrides a function definition from the `IJBETHPaymentTerminal` interface.
 * The function returns the amount of ETH that the tokens were redeemed for, in wei.
 
-# Body
+## Body
 
 1.  Make sure the provided beneficiary of the claimed funds isn't the zero address.
 
@@ -171,8 +171,8 @@ function redeemTokensOf(
 {% endtab %}
 
 {% tab title="Events" %}
-| Name                                           | Data                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
-| ---------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Name                                           | Data                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+| ---------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | [**`RedeemTokens`**](../events/processfees.md) | <ul><li><code>uint256 indexed fundingCycleId</code></li><li><code>uint256 indexed projectId</code></li><li><code>address indexed holder</code></li><li><a href="../../../../data-structures/jbfundingcycle.md"><code>JBFundingCycle</code></a><code>fundingCycle</code></li><li><code>address beneficiary</code></li><li><code>uint256 tokenCount</code></li><li><code>uint256 claimedAmount</code></li><li><code>string memo</code></li><li><code>address caller</code></li></ul> |
 {% endtab %}
 

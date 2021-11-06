@@ -1,4 +1,4 @@
-# _takeFee
+# \_refundHeldFees
 
 Contract: [`JBETHPaymentTerminal`](../)​‌
 
@@ -6,7 +6,7 @@ Contract: [`JBETHPaymentTerminal`](../)​‌
 {% tab title="Step by step" %}
 **Refund fees based on the specified amount.**
 
-# Definition
+## Definition
 
 ```solidity
 function _refundHeldFees(
@@ -23,7 +23,7 @@ function _refundHeldFees(
 * The function is private to this contract.
 * The function doesn't return anything.
 
-# Body
+## Body
 
 1.  Get a reference to the amount that can be refunded. This is the same amount that would have been taken as a fee when the provided `_amount` was distributed as a payout or used allowance.
 
