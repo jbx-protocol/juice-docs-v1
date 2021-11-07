@@ -46,7 +46,7 @@ function _ballotStateOf(
     return
       _ballotFundingCycle.ballot == IJBFundingCycleBallot(address(0))
         ? JBBallotState.Approved
-        : _ballotFundingCycle.ballot.state(_id, _configuration);
+        : _ballotFundingCycle.ballot.stateOf(_id, _configuration);
     ```
 {% endtab %}
 
@@ -78,7 +78,7 @@ function _ballotStateOf(
   return
     _ballotFundingCycle.ballot == IJBFundingCycleBallot(address(0))
       ? JBBallotState.Approved
-      : _ballotFundingCycle.ballot.state(_id, _configuration);
+      : _ballotFundingCycle.ballot.stateOf(_id, _configuration);
 }
 ```
 {% endtab %}
