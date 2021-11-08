@@ -18,10 +18,10 @@ function _configure(
 
 * Arguments:
   * `_projectId` is the ID of the project whose funding cycles are being reconfigured.
-  * `_data` is a [`JBFundingCycleData`](../../../../../../protocol/data-structures/jbfundingcycledata.md) data structure that defines the project's first funding cycle. These properties will remain fixed for the duration of the funding cycle.
-  * `_metadata` is a [`JBFundingCycleMetadata`](../../../../../../protocol/data-structures/jbfundingcyclemetadata.md) data structure specifying the controller specific params that a funding cycle can have.
-  * `_fundAccessConstraints` is an array of [`JBFundAccessConstraints`](../../../../../../protocol/data-structures/jbfundaccessconstraints.md) data structures containing amounts that a project can distribute during each funding cycle and amounts that can be used from its own overflow on-demand for each payment terminal.
-  * `_groupedSplits` is an array of [`JBGroupedSplits`](../../../../../../protocol/data-structures/jbgroupedsplits.md) data structures containing splits to set for any number of groups.
+  * `_data` is a [`JBFundingCycleData`](../../../../data-structures/jbfundingcycledata.md) data structure that defines the project's first funding cycle. These properties will remain fixed for the duration of the funding cycle.
+  * `_metadata` is a [`JBFundingCycleMetadata`](../../../../data-structures/jbfundingcyclemetadata.md) data structure specifying the controller specific params that a funding cycle can have.
+  * `_fundAccessConstraints` is an array of [`JBFundAccessConstraints`](../../../../data-structures/jbfundaccessconstraints.md) data structures containing amounts that a project can distribute during each funding cycle and amounts that can be used from its own overflow on-demand for each payment terminal.
+  * `_groupedSplits` is an array of [`JBGroupedSplits`](../../../../data-structures/jbgroupedsplits.md) data structures containing splits to set for any number of groups.
 * The function is private to this contract.
 * The function returns the ID of the funding cycle that was configured.
 
@@ -44,7 +44,7 @@ function _configure(
 
     _Libraries used:_
 
-    * [`JBFundingCycleMetadataResolver`](../../../../../../protocol/libraries/jbfundingcyclemetadataresolver.md)\
+    * [`JBFundingCycleMetadataResolver`](../../../../libraries/jbfundingcyclemetadataresolver.md)\
       `.packFundingCycleMetadata(...)`
 
 2.  For each provided group splits, set the splits for the specified group if there are any.
@@ -63,7 +63,7 @@ function _configure(
 
     _External references:_
 
-    * [`set`](../../../../../../protocol/specifications/contracts/jbsplitsstore/write/set.md)
+    * [`set`](../../../jbsplitstore/write/set.md)
 
 3.  For each fund access constraint struct in the array passed in, store the values of the distribution limit, the overflow allowance, and the currency. Emit a `SetFundAccessConstraints` event with the relevant parameters.
 

@@ -2,7 +2,7 @@
 
 Contract: [`JBController`](../)​‌
 
-Interface: [`IJBController`](../../../../../../protocol/interfaces/ijbcontroller.md)
+Interface: [`IJBController`](../../../../interfaces/ijbcontroller.md)
 
 {% tabs %}
 {% tab title="Step by step" %}
@@ -37,9 +37,9 @@ function burnTokensOf(
   * `_tokenCount` is the number of tokens to burn.
   * `_memo` is a memo to pass along to the emitted event.
   * `_preferClaimedTokens` is a flag indicating whether ERC20's should be burned first if they have been issued.
-* Through the [`requirePermissionAllowingOverride`](../../../../../../protocol/specifications/contracts/or-controllers/or-abstract/jboperatable/modifiers/requirepermissionallowingoverride.md) modifier, the function is only accessible by the project's owner, from an operator that has been given the `JBOperations.BURN` permission by the project owner for the provided `_projectId`, or from one of the project's terminal's delegates..
+* Through the [`requirePermissionAllowingOverride`](../../../or-abstract/jboperatable/modifiers/requirepermissionallowingoverride.md) modifier, the function is only accessible by the project's owner, from an operator that has been given the `JBOperations.BURN` permission by the project owner for the provided `_projectId`, or from one of the project's terminal's delegates..
 * The function cannot be accessed recursively or while other `nonReentrant` functions in this contract are in progress.
-* The function overrides a function definition from the [`IJBController`](../../../../../../protocol/interfaces/ijbcontroller.md) interface.
+* The function overrides a function definition from the [`IJBController`](../../../../interfaces/ijbcontroller.md) interface.
 * The function doesn't return anything.
 
 ## Body
@@ -72,7 +72,7 @@ function burnTokensOf(
 
     _Libraries used:_
 
-    * [`JBFundingCycleMetadataResolver`](../../../../../../protocol/libraries/jbfundingcyclemetadataresolver.md)\
+    * [`JBFundingCycleMetadataResolver`](../../../../libraries/jbfundingcyclemetadataresolver.md)\
       `.burnPause(...)`
 
     _External references:_
@@ -89,7 +89,7 @@ function burnTokensOf(
 
     _Internal references:_
 
-    * [`_processedTokenTrackerOf`](../../../../../../protocol/specifications/contracts/or-controllers/jbcontroller/write/\_processedtokentrackerof.md)
+    * [`_processedTokenTrackerOf`](../properties/_processedtokentrackerof.md)
 5.  Burn the tokens.
 
     ```solidity

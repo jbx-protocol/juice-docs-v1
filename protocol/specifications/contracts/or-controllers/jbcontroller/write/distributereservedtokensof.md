@@ -32,7 +32,7 @@ function distributeReservedTokensOf(uint256 _projectId, string memory _memo)
 
     _Internal references:_
 
-    * [`_distributeReservedTokensOf`](../../../../../../protocol/specifications/contracts/or-controllers/jbcontroller/write/\_distributereservedtokensof.md)
+    * [`_distributeReservedTokensOf`](_distributereservedtokensof.md)
 {% endtab %}
 
 {% tab title="Code" %}

@@ -2,7 +2,7 @@
 
 Contract: [`JBController`](../)​‌
 
-Interface: [`IJBController`](../../../../../../protocol/interfaces/ijbcontroller.md)
+Interface: [`IJBController`](../../../../interfaces/ijbcontroller.md)
 
 **The contract storing all funding cycle configurations.**
 

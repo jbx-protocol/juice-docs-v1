@@ -2,7 +2,7 @@
 
 Contract: [`JBETHPaymentTerminalStore`](../)​‌
 
-Interface: [`IJBETHPaymentTerminal`](../../../../../../protocol/interfaces/ijbethterminalof.md)
+Interface: [`IJBETHPaymentTerminal`](../../../../interfaces/ijbethpaymentterminal.md)
 
 {% tabs %}
 {% tab title="Step by step" %}
@@ -71,7 +71,7 @@ function distributePayoutsOf(
 
     _External references:_
 
-    * [`handleOf`](../../../../../../protocol/specifications/contracts/jbprojects/read/handleof.md)
+    * [`handleOf`](../../../jbprojects/properties/handleof.md)
 4.  If the funding cycle during which the distribtion is being made has a fee, and if its project isn't the JuiceboxDAO project with an ID of 1, take a fee from the withdrawal into the JuiceboxDAO project.
 
     ```solidity
@@ -90,7 +90,7 @@ function distributePayoutsOf(
 
     _Internal references:_
 
-    * [`_takeFeeFrom`](../../../../../../protocol/specifications/contracts/or-payment-terminals/jbethpaymentterminal/properties/\_takefeefrom.md)
+    * [`_takeFeeFrom`](../write/_takefeefrom.md)
 5.  Distribute the withdrawal to the splits specified for the current funding cycle's configurations. The amount to distribute is the withdrawn amount minus any fees that will be withheld. Get a reference to a leftover amount if there is one.
 
     ```solidity
@@ -105,7 +105,7 @@ function distributePayoutsOf(
 
     _Internal references:_
 
-    * [`_distributeToPayoutSplitsOf`](../../../../../../protocol/specifications/contracts/or-payment-terminals/jbethpaymentterminal/properties/\_distributetopayoutsplitsof.md)
+    * [`_distributeToPayoutSplitsOf`](../write/_distributetopayoutsplitsof.md)
 6.  If there is any, transfer any leftover amount to the project owner.
 
     ```solidity

@@ -1,4 +1,4 @@
-# \_distributeReservedTokens
+# \_distributeReservedTokensOf
 
 {% tabs %}
 {% tab title="Step by step" %}
@@ -53,12 +53,12 @@ function _distributeReservedTokensOf(uint256 _projectId, string memory _memo)
 
     _Libraries used:_
 
-    * [`JBFundingCycleMetadataResolver`](../../../../../../protocol/libraries/jbfundingcyclemetadataresolver.md)\
+    * [`JBFundingCycleMetadataResolver`](../../../../libraries/jbfundingcyclemetadataresolver.md)\
       `.reservedRate(...)`
 
     _Internal references:_
 
-    * [`_reservedTokenAmountFrom`](../../../../../../protocol/specifications/contracts/or-controllers/jbcontroller/properties/\_reservedtokenamountfrom.md)
+    * [`_reservedTokenAmountFrom`](../read/_reservedtokenamountfrom.md)
 4.  Set the tracker to be equal to the new current total token supply, which is the amount stored plus the amount that will be minted and distributed.
 
     ```solidity
@@ -68,7 +68,7 @@ function _distributeReservedTokensOf(uint256 _projectId, string memory _memo)
 
     _Internal references:_
 
-    * [`_processedTokenTrackerOf`](../../../../../../protocol/specifications/contracts/or-controllers/jbcontroller/properties/\_processedtokentrackerof.md)
+    * [`_processedTokenTrackerOf`](../properties/_processedtokentrackerof.md)
 5.  Get a reference to the project's owner.
 
     ```solidity
@@ -90,7 +90,7 @@ function _distributeReservedTokensOf(uint256 _projectId, string memory _memo)
 
     _Internal references:_
 
-    * [`_distributeToReservedTokenSplitsOf`](../../../../../../protocol/specifications/contracts/or-controllers/jbcontroller/properties/\_distributetoreservedtokensplitsof.md)
+    * [`_distributeToReservedTokenSplitsOf`](_distributetoreservedtokensplitsof.md)
 7.  If there are any leftover reserved tokens, mint them for the project's owner.
 
     ```solidity

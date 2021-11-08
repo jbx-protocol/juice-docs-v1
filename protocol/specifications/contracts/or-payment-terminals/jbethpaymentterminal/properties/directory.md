@@ -2,7 +2,7 @@
 
 Contract:[`JBETHPaymentTerminal`](../)​‌
 
-Interface: [`IJBETHPaymentTerminal`](../../../../../../protocol/interfaces/ijbethterminalof.md)
+Interface: [`IJBETHPaymentTerminal`](../../../../interfaces/ijbethpaymentterminal.md)
 
 **The directory of terminals and controllers for projects.**
 

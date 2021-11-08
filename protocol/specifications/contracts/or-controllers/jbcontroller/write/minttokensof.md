@@ -2,7 +2,7 @@
 
 Contract: [`JBController`](../)​‌
 
-Interface: [`IJBController`](../../../../../../protocol/interfaces/ijbcontroller.md)
+Interface: [`IJBController`](../../../../interfaces/ijbcontroller.md)
 
 {% tabs %}
 {% tab title="Step by step" %}
@@ -40,9 +40,9 @@ function mintTokensOf(
   * `_memo` is a memo to pass along to the emitted event.
   * `_preferClaimedTokens` is a flag indicating whether ERC20's should be minted if they have been issued.
   * `_reservedRate` is the reserved rate to use when minting tokens. A positive amount will reduce the token count minted to the beneficiary, instead being reserved for preprogrammed splits. This number is out of 10000.
-* Through the [`requirePermissionAllowingOverride`](../../../../../../protocol/specifications/contracts/or-controllers/or-abstract/jboperatable/modifiers/requirepermissionallowingoverride.md) modifier, the function is only accessible by the project's owner, from an operator that has been given the `JBOperations.MINT` permission by the project owner for the provided `_projectId`, or from one of the project's terminal's delegates.
+* Through the [`requirePermissionAllowingOverride`](../../../or-abstract/jboperatable/modifiers/requirepermissionallowingoverride.md) modifier, the function is only accessible by the project's owner, from an operator that has been given the `JBOperations.MINT` permission by the project owner for the provided `_projectId`, or from one of the project's terminal's delegates.
 * The function cannot be accessed recursively or while other `nonReentrant` functions in this contract are in progress.
-* The function overrides a function definition from the [`IJBController`](../../../../../../protocol/interfaces/ijbcontroller.md) interface.
+* The function overrides a function definition from the [`IJBController`](../../../../interfaces/ijbcontroller.md) interface.
 * The function doesn't return anything.
 
 ## Body
@@ -81,7 +81,7 @@ function mintTokensOf(
 
     _Libraries used:_
 
-    * [`JBFundingCycleMetadataResolver`](../../../../../../protocol/libraries/jbfundingcyclemetadataresolver.md)\
+    * [`JBFundingCycleMetadataResolver`](../../../../libraries/jbfundingcyclemetadataresolver.md)\
       `.mintPaused(...)`
 
     _External references:_
@@ -117,11 +117,11 @@ function mintTokensOf(
 
     _Internal references:_
 
-    * [`_processedTokenTrackerOf`](../../../../../../protocol/specifications/contracts/or-controllers/jbcontroller/read/\_processedtokentrackerof.md)
+    * [`_processedTokenTrackerOf`](../properties/_processedtokentrackerof.md)
 
     _External references:_
 
-    * [`mintFor`](../../../../../../protocol/specifications/contracts/jbtokenstore/write/mintFor.md)
+    * [`mintFor`](../../../jbtokenstore/write/mintFor.md)
 6.  Emit a `MintTokens` event with the relevant parameters.
 
     ```solidity

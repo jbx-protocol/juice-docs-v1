@@ -20,7 +20,7 @@ function migrate(uint256 _projectId, IJBController _to)
 * Arguments:
   * `_projectId` is the ID of the project that will be migrated from this controller..
   * `_to` is the controller to which the project is migrating.
-* Through the [`requirePermission`](../../../../../../protocol/specifications/contracts/or-controllers/or-abstract/jboperatable/modifiers/requirepermission.md) modifier, the function is only accessible by the project's owner, or from an operator that has been given the `JBOperations.MIGRATE_CONTROLLER` permission by the project owner for the provided `_projectId`.
+* Through the [`requirePermission`](../../../or-abstract/jboperatable/modifiers/requirepermission.md) modifier, the function is only accessible by the project's owner, or from an operator that has been given the `JBOperations.MIGRATE_CONTROLLER` permission by the project owner for the provided `_projectId`.
 * The function cannot be accessed recursively or while other `nonReentrant` functions in this contract are in progress.
 * The function doesn't return anything.
 
@@ -35,7 +35,7 @@ function migrate(uint256 _projectId, IJBController _to)
 
     _External references:_
 
-    * [`controllerOf`](../../../../../../protocol/specifications/contracts/jbdirectory/read/controllerof.md)
+    * [`controllerOf`](../../../jbdirectory/properties/controllerof.md)
 2.  Get a reference to the current funding cycle for the project.
 
     ```solidity
@@ -62,8 +62,8 @@ function migrate(uint256 _projectId, IJBController _to)
 
     _Internal references:_
 
-    * [`_processedTokenTrackerOf`](../../../../../../protocol/specifications/contracts/or-controllers/jbcontroller/read/\_processedtokentrackerof.md)
-    * [`_distributeReservedTokensOf`](../../../../../../protocol/specifications/contracts/or-controllers/jbcontroller/write/\_distributereservedtokensof.md)
+    * [`_processedTokenTrackerOf`](../properties/_processedtokentrackerof.md)
+    * [`_distributeReservedTokensOf`](./_distributereservedtokensof.md)
 
     _External references:_
 

@@ -2,7 +2,7 @@
 
 Contract: [`JBController`](../)​‌
 
-Interface: [`IJBController`](../../../../../../protocol/interfaces/ijbcontroller.md)
+Interface: [`IJBController`](../../../../interfaces/ijbcontroller.md)
 
 **The contract that manages token minting and burning.**
 

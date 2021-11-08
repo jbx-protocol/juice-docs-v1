@@ -2,7 +2,7 @@
 
 Contract: [`JBController`](../)​‌
 
-Interface: [`IJBController`](../../../../../../protocol/interfaces/ijbcontroller.md)
+Interface: [`IJBController`](../../../../interfaces/ijbcontroller.md)
 
 {% tabs %}
 {% tab title="Step by step" %}
@@ -17,7 +17,7 @@ function prepForMigrationOf(uint256 _projectId, IJBController) external override
 * Arguments:
   * `_projectId` is the ID of the project that will be migrated to this controller.
 * The function can be accessed externally by anyone.
-* The function overrides a function definition from the [`IJBController`](../../../../../../protocol/interfaces/ijbcontroller.md) interface.
+* The function overrides a function definition from the [`IJBController`](../../../../interfaces/ijbcontroller.md) interface.
 * The function doesn't return anything.
 
 ## Body
@@ -31,7 +31,7 @@ function prepForMigrationOf(uint256 _projectId, IJBController) external override
 
     _External references:_
 
-    * [`controllerOf`](../../../../../../protocol/specifications/contracts/jbdirectory/read/controllerof.md)
+    * [`controllerOf`](../../../jbdirectory/properties/controllerof.md)
 2.  Update the processed token tracker to equal the current total supply of tokens. This prevents any inadvertant outstanding reserved tokens from being distributable upon migrating to this controller.
 
     ```solidity
@@ -41,7 +41,7 @@ function prepForMigrationOf(uint256 _projectId, IJBController) external override
 
     _Internal references:_
 
-    * [`_processedTokenTrackerOf`](../../../../../../protocol/specifications/contracts/or-controllers/jbcontroller/properties/\_processedtokentrackerof.md)
+    * [`_processedTokenTrackerOf`](../properties/_processedtokentrackerof.md)
 {% endtab %}
 
 {% tab title="Code" %}
@@ -66,12 +66,6 @@ function prepForMigrationOf(uint256 _projectId, IJBController) external override
 | String            | Description                                                         |
 | ----------------- | ------------------------------------------------------------------- |
 | **`0x34: NO_OP`** | Thrown if the controller is the current controller for the project. |
-{% endtab %}
-
-{% tab title="Events" %}
-| Name                                                                                                                 | Data                                                                                                                                                                                                                 |
-| -------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [**`SetSplit`**](../../../../../../protocol/specifications/contracts/or-controllers/jbcontroller/events/setsplit.md) | <ul><li><code>uint256 indexed projectId</code></li><li><code>uint256 indexed domain</code></li><li><code>uint256 indexed group</code></li><li><code>Split split</code></li><li><code>address caller</code></li></ul> |
 {% endtab %}
 
 {% tab title="Bug bounty" %}

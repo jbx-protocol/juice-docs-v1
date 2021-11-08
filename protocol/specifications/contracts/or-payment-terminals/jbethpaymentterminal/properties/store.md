@@ -2,7 +2,7 @@
 
 Contract: [`JBETHPaymentTerminal`](../)​‌
 
-Interface: [`IJBETHPaymentTerminal`](../../../../../../protocol/interfaces/ijbethterminalof.md)
+Interface: [`IJBETHPaymentTerminal`](../../../../interfaces/ijbethpaymentterminal.md)
 
 **The contract that stores and manages the terminal's data.**
 

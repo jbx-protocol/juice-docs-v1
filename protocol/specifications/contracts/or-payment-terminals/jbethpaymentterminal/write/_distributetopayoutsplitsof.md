@@ -17,7 +17,7 @@ function _distributeToPayoutSplitsOf(
 ```
 
 * Arguments:
-  * `_fundingCycle` is the [`JBFundingCycle`](../../../../../../protocol/data-structures/jbfundingcycle.md) during which the distribution is being made.
+  * `_fundingCycle` is the [`JBFundingCycle`](../../../../data-structures/jbfundingcycle.md) during which the distribution is being made.
   * `_amount` is the total amount being distributed.
   * `_memo` is a memo to pass along to the emitted events.
 * The function is private to this contract.
@@ -139,7 +139,7 @@ function _distributeToPayoutSplitsOf(
 
     _Internal references:_
 
-    * [`_refundHeldFees`](../../../../../../protocol/specifications/contracts/or-payment-terminals/jbethpaymentterminal/\_refundheldfees.md)
+    * [`_refundHeldFees`](_refundheldfees.md)
 8.  Emit a `DistributeToPayoutSplit` event for the split being iterated on with the relevant parameters.
 
     ```solidity

@@ -29,11 +29,11 @@ function launchProjectFor(
   * `_owner` is the address to set as the owner of the project. The project ERC-721 will be owned by this address.
   * `_handle` is the project's unique handle. This can be updated any time by the owner of the project.
   * `_metadataCid` is a link to associate with the project. This can be updated any time by the owner of the project.
-  * `_data` is a [`JBFundingCycleData`](../../../../../../protocol/data-structures/jbfundingcycledata.md) data structure that defines the project's first funding cycle. These properties will remain fixed for the duration of the funding cycle.
-  * `_metadata` is a [`JBFundingCycleMetadata`](../../../../../../protocol/data-structures/jbfundingcyclemetadata.md) data structure specifying the controller specific params that a funding cycle can have. These properties will remain fixed for the duration of the funding cycle.
-  * `_fundAccessConstraints` is an array of [`JBFundAccessConstraints`](../../../../../../protocol/data-structures/jbfundaccessconstraints.md) data structures containing amounts that a project can distribute during each funding cycle and amounts that can be used from its own overflow on-demand for each payment terminal. The `distributionLimit` applies for each funding cycle, and the `overflowAllowance` applies for the entirety of the configuration.
-  * `_groupedSplits` is an array of [`JBGroupedSplits`](../../../../../../protocol/data-structures/jbgroupedsplits.md) data structures containing splits to set for any number of groups.
-  * `_terminals` is an array of [`IJBTerminal`](../../../../../../protocol/interfaces/ijbterminal.md) payment terminals to add for the project.
+  * `_data` is a [`JBFundingCycleData`](../../../../data-structures/jbfundingcycledata.md) data structure that defines the project's first funding cycle. These properties will remain fixed for the duration of the funding cycle.
+  * `_metadata` is a [`JBFundingCycleMetadata`](../../../../data-structures/jbfundingcyclemetadata.md) data structure specifying the controller specific params that a funding cycle can have. These properties will remain fixed for the duration of the funding cycle.
+  * `_fundAccessConstraints` is an array of [`JBFundAccessConstraints`](../../../../data-structures/jbfundaccessconstraints.md) data structures containing amounts that a project can distribute during each funding cycle and amounts that can be used from its own overflow on-demand for each payment terminal. The `distributionLimit` applies for each funding cycle, and the `overflowAllowance` applies for the entirety of the configuration.
+  * `_groupedSplits` is an array of [`JBGroupedSplits`](../../../../data-structures/jbgroupedsplits.md) data structures containing splits to set for any number of groups.
+  * `_terminals` is an array of [`IJBTerminal`](../../../../interfaces/ijbterminal.md) payment terminals to add for the project.
 * The function can be accessed externally by anyone.
 * The function returns the ID of the project that was launched.
 

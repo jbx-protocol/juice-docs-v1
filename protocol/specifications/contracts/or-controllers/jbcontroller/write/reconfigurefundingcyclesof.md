@@ -2,7 +2,7 @@
 
 Contract: [`JBController`](../)​‌
 
-Interface: [`IJBController`](../../../../../../protocol/interfaces/ijbcontroller.md)
+Interface: [`IJBController`](../../../../interfaces/ijbcontroller.md)
 
 {% tabs %}
 {% tab title="Step by step" %}
@@ -27,11 +27,11 @@ function reconfigureFundingCyclesOf(
 
 * Arguments:
   * `_projectId` is the ID of the project whose funding cycles are being reconfigured.
-  * `_data` is a [`JBFundingCycleData`](../../../../../../protocol/data-structures/jbfundingcycledata.md) data structure that defines the project's funding cycle that will be queued. These properties will remain fixed for the duration of the funding cycle.
-  * `_metadata` is a [`JBFundingCycleMetadata`](../../../../../../protocol/data-structures/jbfundingcyclemetadata.md) data structure specifying the controller specific params that a funding cycle can have. These properties will remain fixed for the duration of the funding cycle.
-  * `_fundAccessConstraints` is an array of [`JBFundAccessConstraints`](../../../../../../protocol/data-structures/jbfundaccessconstraints.md) data structures containing amounts that a project can distribute during each funding cycle and amounts that can be used from its own overflow on-demand for each payment terminal. The `distributionLimit` applies for each funding cycle, and the `overflowAllowance` applies for the entirety of the configuration.
-  * `_groupedSplits` is an array of [`JBGroupedSplits`](../../../../../../protocol/data-structures/jbgroupedsplits.md) data structures containing splits to set for any number of groups.
-* Through the [`requirePermission`](../../../../../../protocol/specifications/contracts/or-controllers/or-abstract/jboperatable/modifiers/requirepermission.md) modifier, the function is only accessible by the project's owner, or from an operator that has been given the `JBOperations.RECONFIGURE` permission by the project owner for the provided `_projectId`.
+  * `_data` is a [`JBFundingCycleData`](../../../../data-structures/jbfundingcycledata.md) data structure that defines the project's funding cycle that will be queued. These properties will remain fixed for the duration of the funding cycle.
+  * `_metadata` is a [`JBFundingCycleMetadata`](../../../../data-structures/jbfundingcyclemetadata.md) data structure specifying the controller specific params that a funding cycle can have. These properties will remain fixed for the duration of the funding cycle.
+  * `_fundAccessConstraints` is an array of [`JBFundAccessConstraints`](../../../../data-structures/jbfundaccessconstraints.md) data structures containing amounts that a project can distribute during each funding cycle and amounts that can be used from its own overflow on-demand for each payment terminal. The `distributionLimit` applies for each funding cycle, and the `overflowAllowance` applies for the entirety of the configuration.
+  * `_groupedSplits` is an array of [`JBGroupedSplits`](../../../../data-structures/jbgroupedsplits.md) data structures containing splits to set for any number of groups.
+* Through the [`requirePermission`](../../../or-abstract/jboperatable/modifiers/requirepermission.md) modifier, the function is only accessible by the project's owner, or from an operator that has been given the `JBOperations.RECONFIGURE` permission by the project owner for the provided `_projectId`.
 * The function returns the ID of the funding cycle that was configured.
 
 ## Body
