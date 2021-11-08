@@ -1,8 +1,8 @@
-# usedOverflowAllowanceOf
+# usedDistributionLimitOf
 
 Contract: [`JBETHPaymentTerminalStore`](../)​‌
 
-**The amount of overflow that a project is allowed to tap into on-demand for the specified project configuration.**
+**The amount that a project has distributed from its limit during the current funding cycle.**
 
 _Increases as projects use their distribution limit._
 
@@ -22,6 +22,6 @@ _Increases as projects use their distribution limit._
 mapping(uint256 => mapping(uint256 => uint256)) public usedDistributionLimitOf;
 ```
 
-* `_projectId` is the ID of the project to get the used distribution limit of.
-* `_configuration` is the configuration of the during which the disitrution limit applies.
+* `_projectId` is the ID of the project to get the used overflow allowance of.
+* `_configuration` is the  configuration of the during which the allowance applies.
 * The resulting view function can be accessed externally by anyone.
