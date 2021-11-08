@@ -83,8 +83,8 @@ function configureFor(
 7.  Store the provided `_metadata` for the `_fundingCycleId`.
 
     ```solidity
-    // Set the metadata.
-    _metadataOf[_fundingCycleId] = _metadata;
+    // Set the metadata if needed.
+    if (_metadata > 0) _metadataOf[_fundingCycleId] = _metadata;
     ```
 
     _Internal references:_
@@ -162,8 +162,8 @@ function configureFor(
     _data.discountRate
   );
 
-  // Set the metadata.
-  _metadataOf[_fundingCycleId] = _metadata;
+  // Set the metadata if needed.
+  if (_metadata > 0) _metadataOf[_fundingCycleId] = _metadata;
 
   emit Configure(_fundingCycleId, _projectId, _configured, _data, _metadata, msg.sender);
 
