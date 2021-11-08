@@ -9,34 +9,18 @@ Contract: [`JBETHPaymentTerminal`](../)​‌
 ## Definition
 
 ```solidity
-function _refundHeldFees(
-  uint256 _projectId,
-  uint256 _amount,
-  uint256 _percent
-) private { ... }
+function _refundHeldFees(uint256 _projectId, uint256 _amount) private { ... }
 ```
 
 * Arguments:
   * `_projectId` is the project for which fees are being refunded.
   * `_amount` is the amount to base the refund on.
-  * `_percent` is the current fee percent to issue a refund based on.
 * The function is private to this contract.
 * The function doesn't return anything.
 
 ## Body
 
-1.  Get a reference to the amount that can be refunded. This is the same amount that would have been taken as a fee when the provided `_amount` was distributed as a payout or used allowance.
-
-    ```solidity
-    // The amount of fees that were taken from an original payout to yield the provided amount.
-    uint256 _refundAmount = PRBMath.mulDiv(_amount, _percent + 200, 200) - _amount;
-    ```
-
-    _Libraries used:_
-
-    * [`PRBMath`](https://github.com/hifi-finance/prb-math/blob/main/contracts/PRBMath.sol)
-      * `.mulDiv`
-2.  Get a reference to any held [`JBFee`](../../../../data-structures/jbfee.md)'s for the project.
+1.  Get a reference to any held [`JBFee`](../../../../data-structures/jbfee.md)'s for the project.
 
     ```solidity
     // Get a reference to the project's held fees.
@@ -46,7 +30,7 @@ function _refundHeldFees(
     _Internal references:_
 
     * [`_heldFeesOf`](../properties/\_heldfeesof.md)
-3.  Delete all of the project's held fees. These will be repopulated if they were not refunded.
+2.  Delete all of the project's held fees. These will be repopulated if they were not refunded.
 
     ```solidity
     // Delete the current held fees.
@@ -56,20 +40,25 @@ function _refundHeldFees(
     _Internal references:_
 
     * [`_heldFeesOf`](../properties/\_heldfeesof.md)
-4.  Loop through each held fee, decrementing the `_refundAmount` as held fees are refunded. If the entire refund amount has been refunded, add the `JBFee` back into the project's held fees so that they can be processed or refunded later. If the `_refundAmount` left is greater than the `JBFee`'s amount, decrement the refunded amount and leave the `JBFee` out of the project's held fees. If only some of the `JBFee`'s amount is needed to cover the rest of the remaining `_refundAmount`, set the refunded amount to 0 after adding the `JBFee` back into the project's held fees having subtracted the remaining refund amount.
+3.  Loop through each held fee, decrementing the `_amount` as held fees are refunded. If the entire refund amount has been refunded, add the `JBFee` back into the project's held fees so that they can be processed or refunded later. If the `_amount` left is greater than the `JBFee`'s amount, decrement the refunded amount and leave the `JBFee` out of the project's held fees. If only some of the `JBFee`'s amount is needed to cover the rest of the remaining `_amount`, set the amount to 0 after adding the `JBFee` back into the project's held fees having subtracted the remaining refund amount.
 
     ```solidity
     // Process each fee.
     for (uint256 _i = 0; _i < _heldFees.length; _i++) {
-      if (_refundAmount == 0) {
+      if (_amount == 0) {
         _heldFeesOf[_projectId].push(_heldFees[_i]);
-      } else if (_refundAmount >= _heldFees[_i].amount) {
-        _refundAmount = _refundAmount - _heldFees[_i].amount;
+      } else if (_amount >= _heldFees[_i].amount) {
+        _amount = _amount - _heldFees[_i].amount;
       } else {
         _heldFeesOf[_projectId].push(
-          JBFee(_heldFees[_i].amount - _refundAmount, _heldFees[_i].beneficiary, _heldFees[_i].memo)
+          JBFee(
+            _heldFees[_i].amount - _amount,
+            _heldFees[_i].fee,
+            _heldFees[_i].beneficiary,
+            _heldFees[_i].memo
+          )
         );
-        _refundAmount = 0;
+        _amount = 0;
       }
     }
     ```
@@ -87,16 +76,8 @@ function _refundHeldFees(
 
   @param _projectId The project for which fees are being refunded.
   @param _amount The amount to base the refund on.
-  @param _percent The current fee percent to issue a refund based on.
 */
-function _refundHeldFees(
-  uint256 _projectId,
-  uint256 _amount,
-  uint256 _percent
-) private {
-  // The amount of fees that were taken from an original payout to yield the provided amount.
-  uint256 _refundAmount = PRBMath.mulDiv(_amount, _percent + 200, 200) - _amount;
-
+function _refundHeldFees(uint256 _projectId, uint256 _amount) private {
   // Get a reference to the project's held fees.
   JBFee[] memory _heldFees = _heldFeesOf[_projectId];
 
@@ -105,15 +86,20 @@ function _refundHeldFees(
 
   // Process each fee.
   for (uint256 _i = 0; _i < _heldFees.length; _i++) {
-    if (_refundAmount == 0) {
+    if (_amount == 0) {
       _heldFeesOf[_projectId].push(_heldFees[_i]);
-    } else if (_refundAmount >= _heldFees[_i].amount) {
-      _refundAmount = _refundAmount - _heldFees[_i].amount;
+    } else if (_amount >= _heldFees[_i].amount) {
+      _amount = _amount - _heldFees[_i].amount;
     } else {
       _heldFeesOf[_projectId].push(
-        JBFee(_heldFees[_i].amount - _refundAmount, _heldFees[_i].beneficiary, _heldFees[_i].memo)
+        JBFee(
+          _heldFees[_i].amount - _amount,
+          _heldFees[_i].fee,
+          _heldFees[_i].beneficiary,
+          _heldFees[_i].memo
+        )
       );
-      _refundAmount = 0;
+      _amount = 0;
     }
   }
 }

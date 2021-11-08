@@ -48,7 +48,7 @@ function _takeFeeFrom(
 
     ```solidity
     _fundingCycle.shouldHoldFees()
-      ? _heldFeesOf[_fundingCycle.projectId].push(JBFee(feeAmount, _beneficiary, _memo)) // Take the fee.
+      ? _heldFeesOf[_fundingCycle.projectId].push(JBFee(_amount, uint8(fee), _beneficiary, _memo)) // Take the fee.
       : _takeFee(feeAmount, _beneficiary, _memo);
     ```
 
@@ -78,13 +78,13 @@ function _takeFeeFrom(
   string memory _memo
 ) private returns (uint256 feeAmount) {
   // The amount of ETH from the _amount to pay as a fee.
-  feeAmount = _amount - PRBMath.mulDiv(_amount, 200, _fundingCycle.fee + 200);
+  feeAmount = _amount - PRBMath.mulDiv(_amount, 200, fee + 200);
 
   // Nothing to do if there's no fee to take.
   if (feeAmount == 0) return 0;
 
   _fundingCycle.shouldHoldFees()
-    ? _heldFeesOf[_fundingCycle.projectId].push(JBFee(feeAmount, _beneficiary, _memo)) // Take the fee.
+    ? _heldFeesOf[_fundingCycle.projectId].push(JBFee(_amount, uint8(fee), _beneficiary, _memo)) // Take the fee.
     : _takeFee(feeAmount, _beneficiary, _memo);
 }
 ```

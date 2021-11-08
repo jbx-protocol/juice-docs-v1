@@ -46,7 +46,11 @@ function processFees(uint256 _projectId)
     ```solidity
     // Process each fee.
     for (uint256 _i = 0; _i < _heldFees.length; _i++)
-      _takeFee(_heldFees[_i].amount, _heldFees[_i].beneficiary, _heldFees[_i].memo);
+      _takeFee(
+        _heldFees[_i].amount - PRBMath.mulDiv(_heldFees[_i].amount, 200, _heldFees[_i].fee + 200),
+        _heldFees[_i].beneficiary,
+        _heldFees[_i].memo
+      );
     ```
 
     _Internal references:_
@@ -99,7 +103,11 @@ function processFees(uint256 _projectId)
 
   // Process each fee.
   for (uint256 _i = 0; _i < _heldFees.length; _i++)
-    _takeFee(_heldFees[_i].amount, _heldFees[_i].beneficiary, _heldFees[_i].memo);
+    _takeFee(
+      _heldFees[_i].amount - PRBMath.mulDiv(_heldFees[_i].amount, 200, _heldFees[_i].fee + 200),
+      _heldFees[_i].beneficiary,
+      _heldFees[_i].memo
+    );
 
   // Delete the held fee's now that they've been processed.
   delete _heldFeesOf[_projectId];

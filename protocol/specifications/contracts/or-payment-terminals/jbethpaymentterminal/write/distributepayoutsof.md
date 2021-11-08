@@ -78,7 +78,7 @@ function distributePayoutsOf(
     // Take a fee from the _withdrawnAmount, if needed.
     // The project's owner will be the beneficiary of the resulting minted tokens from platform project.
     // The platform project's ID is 1.
-    uint256 _feeAmount = _fundingCycle.fee == 0 || _projectId == 1
+    uint256 _feeAmount = fee == 0 || _projectId == 1
       ? 0
       : _takeFeeFrom(
         _fundingCycle,
@@ -183,7 +183,7 @@ function distributePayoutsOf(
   // Take a fee from the _withdrawnAmount, if needed.
   // The project's owner will be the beneficiary of the resulting minted tokens from platform project.
   // The platform project's ID is 1.
-  uint256 _feeAmount = _fundingCycle.fee == 0 || _projectId == 1
+  uint256 _feeAmount = fee == 0 || _projectId == 1
     ? 0
     : _takeFeeFrom(
       _fundingCycle,

@@ -44,7 +44,6 @@ function useAllowanceOf(
     // Record the use of the allowance.
     (JBFundingCycle memory _fundingCycle, uint256 _withdrawnAmount) = store.recordUsedAllowanceOf(
       _projectId,
-      this,
       _amount,
       _currency,
       _minReturnedWei
@@ -81,7 +80,7 @@ function useAllowanceOf(
     // Take a fee from the _withdrawnAmount, if needed.
     // The project's owner will be the beneficiary of the resulting minted tokens from platform project.
     // The platform project's ID is 1.
-    uint256 _feeAmount = _fundingCycle.fee == 0 || _projectId == 1
+    uint256 _feeAmount = fee == 0 || _projectId == 1
       ? 0
       : _takeFeeFrom(
         _fundingCycle,
@@ -156,7 +155,6 @@ function useAllowanceOf(
   // Record the use of the allowance.
   (JBFundingCycle memory _fundingCycle, uint256 _withdrawnAmount) = store.recordUsedAllowanceOf(
     _projectId,
-    this,
     _amount,
     _currency,
     _minReturnedWei
@@ -172,7 +170,7 @@ function useAllowanceOf(
   // Take a fee from the _withdrawnAmount, if needed.
   // The project's owner will be the beneficiary of the resulting minted tokens from platform project.
   // The platform project's ID is 1.
-  uint256 _feeAmount = _fundingCycle.fee == 0 || _projectId == 1
+  uint256 _feeAmount = fee == 0 || _projectId == 1
     ? 0
     : _takeFeeFrom(
       _fundingCycle,

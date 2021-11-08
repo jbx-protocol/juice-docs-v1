@@ -33,8 +33,8 @@ function addToBalanceOf(uint256 _projectId, string memory _memo) external payabl
 2.  Record the added balance.
 
     ```solidity
-    // Record the added funds in the data later.
-    JBFundingCycle memory _fundingCycle = store.recordAddedBalanceFor(_projectId, msg.value);
+    // Record the added funds.
+    store.recordAddedBalanceFor(_projectId, msg.value);
     ```
 
     _External references:_
@@ -44,7 +44,7 @@ function addToBalanceOf(uint256 _projectId, string memory _memo) external payabl
 
     ```solidity
     // Refund any held fees to make sure the project doesn't pay double for funds going in and out of the protocol.
-    _refundHeldFees(_projectId, msg.value, _fundingCycle.fee);
+    _refundHeldFees(_projectId, msg.value);
     ```
 
     _Internal references:_
@@ -74,11 +74,11 @@ function addToBalanceOf(uint256 _projectId, string memory _memo) external payabl
   // Amount must be greater than 0.
   require(msg.value > 0, '0x4c: NO_OP');
 
-  // Record the added funds in the data later.
-  JBFundingCycle memory _fundingCycle = store.recordAddedBalanceFor(_projectId, msg.value);
+  // Record the added funds.
+  store.recordAddedBalanceFor(_projectId, msg.value);
 
   // Refund any held fees to make sure the project doesn't pay double for funds going in and out of the protocol.
-  _refundHeldFees(_projectId, msg.value, _fundingCycle.fee);
+  _refundHeldFees(_projectId, msg.value);
 
   emit AddToBalance(_projectId, msg.value, _memo, msg.sender);
 }
