@@ -10,5 +10,5 @@ Emitted from:
 event DelegateDidRedeem(IJBRedemptionDelegate indexed delegate, JBDidRedeemData data);
 ```
 
-* `delegate` is the [`IJBRedeemDelegate`](../../../../../../protocol/specifications/interfaces/ijbredeemdelegate.md) whos `didRedeem` function that was triggered.
+* `delegate` is the [`IJBRedeemDelegate`](../../../../interfaces/ijbredemptiondelegate.md) whos `didRedeem` function that was triggered.
 * `data` is the [`JBDidRedeemData`](../../../../data-structures/jbdidredeemdata.md) that was sent to the `IJBRedeemDelegate`'s `didRedeem` function.

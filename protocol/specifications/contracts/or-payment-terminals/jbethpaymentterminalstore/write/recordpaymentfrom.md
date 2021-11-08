@@ -82,7 +82,7 @@ function recordPaymentFrom(
     // Save a reference to the delegate to use.
     IJBPayDelegate _delegate;
     ```
-5.  If the project's current funding cycle is configured to use a data source when receiving payments, ask the data source for the parameters that should be used throughout the rest of the function given provided contextual values in a [`JBPayParamsData`](../../../../../../protocol/data-structures/jbpayparamsdata.md) structure. Otherwise default parameters are used.
+5.  If the project's current funding cycle is configured to use a data source when receiving payments, ask the data source for the parameters that should be used throughout the rest of the function given provided contextual values in a [`JBPayParamsData`](../../../../data-structures/jbpayparamsdata.md) structure. Otherwise default parameters are used.
 
     ```solidity
     // If the funding cycle has configured a data source, use it to derive a weight and memo.
@@ -160,7 +160,7 @@ function recordPaymentFrom(
     // The token count must be greater than or equal to the minimum expected.
     require(tokenCount >= _minReturnedTokens, '0x3c: INADEQUATE');
     ```
-10. If a pay delegate was provided by the data source, call its `didPay` function with a [`JBDidPayData`](../../../../../../protocol/data-structures/jbdidpaydata.md) payload including contextual information. When finished, emit a `DelegateDidPay` event with the relevant parameters.
+10. If a pay delegate was provided by the data source, call its `didPay` function with a [`JBDidPayData`](../../../../data-structures/jbdidpaydata.md) payload including contextual information. When finished, emit a `DelegateDidPay` event with the relevant parameters.
 
     ```solidity
     // If a delegate was returned by the data source, issue a callback to it.

@@ -2,7 +2,7 @@
 
 Contract: [`JBETHPaymentTerminal`](../)​‌
 
-Interface: [`IJBETHPaymentTerminal`](../../../../../../protocol/interfaces/ijbethterminalof.md)
+Interface: [`IJBETHPaymentTerminal`](../../../../interfaces/ijbethpaymentterminal.md)
 
 {% tabs %}
 {% tab title="Step by step" %}
@@ -31,7 +31,7 @@ function useAllowanceOf(
   * `_projectId` is the ID of the project to use the allowance of.
   * `_amount` is the amount of the allowance to use.
   * `_beneficiary` is the address to send the funds to.
-* Through the [`requirePermission`](../../../../../../protocol/specifications/contracts/or-payment-terminals/or-abstract/jboperatable/modifiers/requirepermission.md) modifier, the function is only accessible by the project's owner, or from an operator that has been given the `JBOperations.USE_ALLOWANCE` permission by the project owner for the provided `_projectId`.
+* Through the [`requirePermission`](../../../or-abstract/jboperatable/modifiers/requirepermission.md) modifier, the function is only accessible by the project's owner, or from an operator that has been given the `JBOperations.USE_ALLOWANCE` permission by the project owner for the provided `_projectId`.
 * The function cannot be accessed recursively or while other `nonReentrant` functions in this contract are in progress.
 * The resulting function overrides a function definition from the `IJBETHPaymentTerminal` interface.
 * The function returns the ID of the funding cycle during which the allowance was use.
@@ -73,7 +73,7 @@ function useAllowanceOf(
 
     _External references:_
 
-    * [`handleOf`](../../../../../../protocol/specifications/contracts/jbprojects/read/handleof.md)
+    * [`handleOf`](../../../jbprojects/properties/handleof.md)
 4.  If the funding cycle during which the distribtion is being made has a fee, and if its project isn't the JuiceboxDAO project with an ID of 1, take a fee from the withdrawal into the JuiceboxDAO project.
 
     ```solidity
@@ -92,7 +92,7 @@ function useAllowanceOf(
 
     _Internal references:_
 
-    * [`_takeFeeFrom`](../../../../../../protocol/specifications/contracts/or-payment-terminals/jbethpaymentterminal/properties/\_takefeefrom.md)
+    * [`_takeFeeFrom`](./_takefeefrom.md)
 5.  Transfer the amount minus the fees to the beneficiary.
 
     ```solidity

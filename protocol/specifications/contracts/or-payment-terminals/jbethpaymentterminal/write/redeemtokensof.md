@@ -2,7 +2,7 @@
 
 Contract: [`JBETHPaymentTerminal`](../)​‌
 
-Interface: [`IJBETHPaymentTerminal`](../../../../../../protocol/interfaces/ijbethterminalof.md)
+Interface: [`IJBETHPaymentTerminal`](../../../../interfaces/ijbethpaymentterminal.md)
 
 {% tabs %}
 {% tab title="Step by step" %}
@@ -37,7 +37,7 @@ function redeemTokensOf(
   * `_beneficiary` is the address to send the ETH to. Send the address this contract to burn the count.
   * `_memo` is a memo to pass along to the emitted event.
   * `_delegateMetadata` are bytes to send along to the delegate, if one is provided.
-* Through the [`requirePermission`](../../../../../../protocol/specifications/contracts/or-payment-terminals/or-abstract/jboperatable/modifiers/requirepermission.md) modifier, the function is only accessible by the project's owner, or from an operator that has been given the `JBOperations.REDEEM` permission by the project owner for the provided `_projectId`.
+* Through the [`requirePermission`](../../../or-abstract/jboperatable/modifiers/requirepermission.md) modifier, the function is only accessible by the project's owner, or from an operator that has been given the `JBOperations.REDEEM` permission by the project owner for the provided `_projectId`.
 * The function cannot be accessed recursively or while other `nonReentrant` functions in this contract are in progress.
 * The resulting function overrides a function definition from the `IJBETHPaymentTerminal` interface.
 * The function returns the amount of ETH that the tokens were redeemed for, in wei.
@@ -80,10 +80,10 @@ function redeemTokensOf(
     // Send the claimed funds to the beneficiary.
     if (claimAmount > 0) Address.sendValue(_beneficiary, claimAmount);
     ```
-5.  Emit a `Redeem` event with the relevant parameters.
+5.  Emit a `RedeemTokens` event with the relevant parameters.
 
     ```solidity
-    emit Redeem(
+    emit RedeemTokens(
       _fundingCycle.id,
       _projectId,
       _holder,
@@ -98,7 +98,7 @@ function redeemTokensOf(
 
     _Event references:_
 
-    * [`Redeem`](../../../../../../protocol/specifications/contracts/or-payment-terminals/jbethpaymentterminal/events/redeem.md)
+    * [`RedeemTokens`](../events/redeemtokens.md)
 {% endtab %}
 
 {% tab title="Code" %}
@@ -155,7 +155,7 @@ function redeemTokensOf(
   // Send the claimed funds to the beneficiary.
   if (claimAmount > 0) Address.sendValue(_beneficiary, claimAmount);
 
-  emit Redeem(
+  emit RedeemTokens(
     _fundingCycle.id,
     _projectId,
     _holder,

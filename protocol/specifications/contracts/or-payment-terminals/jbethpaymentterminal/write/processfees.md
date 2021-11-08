@@ -24,7 +24,7 @@ function processFees(uint256 _projectId)
 
 * Arguments:
   * `_projectId` is thhe ID of the project whos held fees should be processed.
-* Through the [`requirePermissionAllowingOverride`](../../../../../../protocol/specifications/contracts/or-payment-terminals/or-abstract/jboperatable/modifiers/requirepermissionallowingoverride.md) modifier, the function is only accessible by the project's owner, from an operator that has been given the `JBOperations.PROCESS_FEES` permission by the project owner for the provided `_projectId`, or from the owner of this contract.
+* Through the [`requirePermissionAllowingOverride`](../../../or-abstract/jboperatable/modifiers/requirepermissionallowingoverride.md) modifier, the function is only accessible by the project's owner, from an operator that has been given the `JBOperations.PROCESS_FEES` permission by the project owner for the provided `_projectId`, or from the owner of this contract.
 * The function cannot be accessed recursively or while other `nonReentrant` functions in this contract are in progress.
 * The resulting function overrides a function definition from the `IJBETHPaymentTerminal` interface.
 * The function doesn't return anything.
@@ -40,8 +40,8 @@ function processFees(uint256 _projectId)
 
     _Internal references:_
 
-    * [`_heldFeesOf`](../../../../../../protocol/specifications/contracts/or-payment-terminals/jbethpaymentterminal/read/\_heldFeesOf.md)
-2.  Iterate through the array. Take fee's for each [`JBFee`](../../../../../../protocol/data-structures/jbfee.md) data structure.
+    * [`_heldFeesOf`](../properties/_heldFeesOf.md)
+2.  Iterate through the array. Take fee's for each [`JBFee`](../../../../data-structures/jbfee.md) data structure.
 
     ```solidity
     // Process each fee.
@@ -55,7 +55,7 @@ function processFees(uint256 _projectId)
 
     _Internal references:_
 
-    * [`_takeFee`](../../../../../../protocol/specifications/contracts/or-payment-terminals/jbethpaymentterminal/\_takeFee.md)
+    * [`_takeFee`](_takeFee.md)
 3.  Remove all fees now that they have been processed.
 
     ```solidity
@@ -65,7 +65,7 @@ function processFees(uint256 _projectId)
 
     _Internal references:_
 
-    * [`_heldFeesOf`](../../../../../../protocol/specifications/contracts/or-payment-terminals/jbethpaymentterminal/read/\_heldFeesOf.md)
+    * [`_heldFeesOf`](../properties/_heldFeesOf.md)
 4.  Emit a `ProcessFees` event with the relevant parameters.
 
     ```solidity

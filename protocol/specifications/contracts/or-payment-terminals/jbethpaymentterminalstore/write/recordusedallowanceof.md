@@ -101,7 +101,7 @@ function recordUsedAllowanceOf(
 
     _External references:_
 
-    * [`controllerOf`](../../../../../../protocol/specifications/contracts/jbdirectory/read/controllerof.md)
+    * [`controllerOf`](../../../jbdirectory/properties/controllerof.md)
     * [`overflowAllowanceOf`](../../../or-controllers/jbcontroller/properties/overflowallowanceof.md)
 5.  Make sure the project has enough of a balance to use the desired amount.
 

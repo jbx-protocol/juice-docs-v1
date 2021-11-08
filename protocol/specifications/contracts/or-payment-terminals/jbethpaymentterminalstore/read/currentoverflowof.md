@@ -31,7 +31,7 @@ function currentOverflowOf(uint256 _projectId) external view returns (uint256) {
 
     _External references:_
 
-    * [`currentOf`](../../../../../../protocol/specifications/contracts/jbfundingcyclestore/read/currentOf.md)
+    * [`currentOf`](../../../jbfundingcyclestore/read/currentOf.md)
 2.  Return the overflow given the state of the current funding cycle.
 
     ```solidity
@@ -40,7 +40,7 @@ function currentOverflowOf(uint256 _projectId) external view returns (uint256) {
 
     _Internal references:_
 
-    * [`_overflowDuring`](../../../../../../protocol/specifications/contracts/or-payment-terminals/jbethpaymentterminalstore/read/\_overflowDuring.md)
+    * [`_overflowDuring`](../../../or-payment-terminals/jbethpaymentterminalstore/read/\_overflowDuring.md)
 {% endtab %}
 
 {% tab title="Code" %}

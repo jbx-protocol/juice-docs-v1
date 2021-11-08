@@ -86,7 +86,7 @@ function _overflowDuring(JBFundingCycle memory _fundingCycle) private view retur
 
     _Internal references:_
 
-    * [`priceFor`](../../../../../../protocol-v2/specifications/contracts/jbprices/read/pricefor.md)
+    * [`priceFor`](../../../jbprices/read/pricefor.md)
 6.  If the current balance of the project is less than the target remaining, there is no overflow. Otherwise the difference between the project's current balance and the remaining amount is the overflow.
 
     ```solidity

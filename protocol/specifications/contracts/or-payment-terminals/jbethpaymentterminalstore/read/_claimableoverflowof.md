@@ -35,7 +35,7 @@ function claimableOverflowOf(uint256 _projectId, uint256 _tokenCount)
 
     _Internal references:_
 
-    * [`_overflowDuring`](../../../../../../protocol/specifications/contracts/or-payment-terminals/jbethpaymentterminalstore/\_overflowduring.md)
+    * [`_overflowDuring`](./\_overflowduring.md)
 2.  If there is no overflow, there's also no claimable overflow.
 
     ```solidity
@@ -68,7 +68,7 @@ function claimableOverflowOf(uint256 _projectId, uint256 _tokenCount)
 
     _External references:_
 
-    * [`controllerOf`](../../../../../../protocol/specifications/contracts/jbdirectory/read/controllerof.md)
+    * [`controllerOf`](../../../jbdirectory/properties/controllerof.md)
     * [`reservedTokenBalanceOf`](../../../or-controllers/jbcontroller/read/reservedtokenbalanceof.md)
 5.  If there are reserved tokens, add them to the total supply for the purposes of this calculation.
 
@@ -100,7 +100,7 @@ function claimableOverflowOf(uint256 _projectId, uint256 _tokenCount)
 
     _External references:_
 
-    * [`currentBallotStateOf`](../../../../../../protocol/specifications/contracts/jbfundingcyclestore/write/currentballotstateof.md)
+    * [`currentBallotStateOf`](../../../jbfundingcyclestore/read/currentballotstateof.md)
 8.  If the redemption rate is 0%, nothing is claimable regardless of the amount of tokens.
 
     ```solidity
