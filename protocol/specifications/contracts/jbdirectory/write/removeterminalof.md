@@ -70,7 +70,7 @@ function removeTerminalOf(uint256 _projectId, IJBTerminal _terminal)
 
     Internal references:
 
-    * [`_primaryTerminalOf`](../../../../../protocol/specifications/contracts/jbdirectory/read/\_primaryterminalof.md)
+    * [`_primaryTerminalOf`](../properties/\_primaryterminalof.md)
 5.  Emit a `RemoveTerminal` event with the relevant parameters.
 
     ```solidity
