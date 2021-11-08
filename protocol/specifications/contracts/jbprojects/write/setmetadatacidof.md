@@ -46,7 +46,7 @@ function setMetadataCidOf(uint256 _projectId, string calldata _metadataCid)
 
     _Event references:_
 
-    * [`SetMetadataCid`](../../../../../protocol/specifications/contracts/jbprojects/events/setmetadatacid.md)
+    * [`SetMetadataCid`](../events/setmetadatacid.md)
 {% endtab %}
 
 {% tab title="Code" %}
@@ -77,7 +77,7 @@ function setMetadataCidOf(uint256 _projectId, string calldata _metadataCid)
 {% tab title="Events" %}
 | Name                                                                                                         | Data                                                                                                                         |
 | ------------------------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------- |
-| [**`SetMetadataCid`**](../../../../../protocol/specifications/contracts/jbprojects/events/setmetadatacid.md) | <ul><li><code>uint256 indexed projectId</code></li><li><code>string uri</code></li><li><code>address caller</code></li></ul> |
+| [**`SetMetadataCid`**](../events/setmetadatacid.md) | <ul><li><code>uint256 indexed projectId</code></li><li><code>string uri</code></li><li><code>address caller</code></li></ul> |
 {% endtab %}
 
 {% tab title="Bug bounty" %}

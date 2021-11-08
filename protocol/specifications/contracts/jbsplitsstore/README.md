@@ -5,13 +5,13 @@ description: >-
   these to split up payout distributions and reserved
 ---
 
-# JBSplitStore
+# JBSplitsStore
 
 ## Overview
 
 ### Code
 
-{% embed url="https://github.com/jbx-protocol/juice-contracts/tree/main/contracts/v2/JBSplitStore.sol" %}
+{% embed url="https://github.com/jbx-protocol/juice-contracts/tree/main/contracts/v2/JBSplitsStore.sol" %}
 
 ### **Addresses**
 

@@ -29,7 +29,7 @@ An address can set operators for its project through the [`JBOperatorStore.setOp
 * [`JBProjects.setMetadataCidOf(...)`](../../specifications/contracts/jbprojects/write/setmetadatacidof.md)
 * [`JBProjects.transferHandleOf(...)`](../../specifications/contracts/jbprojects/write/transferhandleof.md)
 * [`JBProjects.renewHandleOf(...)`](../../specifications/contracts/jbprojects/write/renewhandleof.md)
-* [`JBSplitStore.set(...)`](../../specifications/contracts/jbsplitstore/write/set.md)
+* [`JBSplitsStore.set(...)`](../../specifications/contracts/jbsplitsstore/write/set.md)
 * [`JBTokenStore.issueFor(...)`](../../specifications/contracts/jbtokenstore/write/issuefor.md)
 * [`JBTokenStore.changeTokenOf(...)`](../../specifications/contracts/jbtokenstore/write/changetokenof.md)
 * [`JBTokenStore.shouldRequireClaimingFor(...)`](../../specifications/contracts/jbtokenstore/write/shouldrequireclaimingfor.md)

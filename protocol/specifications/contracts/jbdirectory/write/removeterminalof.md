@@ -122,7 +122,7 @@ function removeTerminalOf(uint256 _projectId, IJBTerminal _terminal)
 {% tab title="Events" %}
 | Name                                                | Data                                                                                                                                                                                                                                                |
 | --------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [**`RemoveTerminal`**](../events/removeterminal.md) | <ul><li><code>uint256 indexed projectId</code></li><li><a href="../../../../../protocol/specifications/contracts/interfaces/ijbterminal.md"><code>IJBTerminal</code></a><code>indexed terminal</code></li><li><code>address caller</code></li></ul> |
+| [**`RemoveTerminal`**](../events/removeterminal.md) | <ul><li><code>uint256 indexed projectId</code></li><li><a href="../../../interfaces/ijbterminal.md"><code>IJBTerminal</code></a><code>indexed terminal</code></li><li><code>address caller</code></li></ul> |
 {% endtab %}
 
 {% tab title="Bug bounty" %}

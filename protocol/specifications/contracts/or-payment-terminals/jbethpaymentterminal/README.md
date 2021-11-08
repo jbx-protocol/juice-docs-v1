@@ -57,7 +57,7 @@ constructor(
   * `_operatorStore` is an [`IJBOperatorStore`](../../../interfaces/ijboperatorstore.md) contract storing operator assignments.
   * `_projects` is an [`IJBProjects`](../../../interfaces/ijbprojects.md) contract which mints ERC-721's that represent project ownership and transfers.
   * `_directory` is an [`IJBDirectory`](../../../interfaces/ijbdirectory.md) contract storing directories of terminals and controllers for each project.
-  * `_splitStore` is an [`IJBSplitStore`](../../../interfaces/ijbsplitstore/) contract that stores splits for each project.
+  * `_splitsStore` is an [`IJBSplitsStore`](../../../interfaces/ijbsplitsstore/) contract that stores splits for each project.
   * `_vault` is an [`IJBVault`](../../../interfaces/ijbvault/) contract to store funds in.
   * `_store` is a contract that stores the terminal's data.
 

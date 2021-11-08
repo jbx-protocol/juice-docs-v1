@@ -92,7 +92,7 @@ function createFor(
 
     _Internal references:_
 
-    * [`metadataCidOf`](../../../../../protocol/specifications/contracts/jbprojects/properties/metadatacidof.md)
+    * [`metadataCidOf`](../properties/metadatacidof.md)
 8.  Emit a `Create` event with all relevant parameters.
 
     ```

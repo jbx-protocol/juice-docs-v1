@@ -63,7 +63,7 @@ function _configure(
 
     _External references:_
 
-    * [`set`](../../../jbsplitstore/write/set.md)
+    * [`set`](../../../jbsplitsstore/write/set.md)
 
 3.  For each fund access constraint struct in the array passed in, store the values of the distribution limit, the overflow allowance, and the currency. Emit a `SetFundAccessConstraints` event with the relevant parameters.
 

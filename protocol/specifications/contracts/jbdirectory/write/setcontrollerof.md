@@ -47,7 +47,7 @@ function setControllerOf(uint256 _projectId, IJBController _controller)
 
     Internal references:
 
-    * [`controllerOf`](../../../../../protocol/specifications/contracts/jbdirectory/read/controllerof.md)
+    * [`controllerOf`](../properties/controllerof.md)
 2.  If the provided controller is already set, there's nothing to do.
 
     ```solidity
@@ -63,7 +63,7 @@ function setControllerOf(uint256 _projectId, IJBController _controller)
 
     Internal references:
 
-    * [`projects`](../../../../../protocol/specifications/contracts/jbdirectory/read/projects.md)
+    * [`projects`](../properties/projects.md)
 4.  Make sure the provided controller isn't the zero address.
 
     ```solidity
@@ -79,7 +79,7 @@ function setControllerOf(uint256 _projectId, IJBController _controller)
 
     Internal references:
 
-    * [`controllerOf`](../../../../../protocol/specifications/contracts/jbdirectory/read/controllerof.md)
+    * [`controllerOf`](../properties/controllerof.md)
 6.  Emit a `SetController` event with the relevant parameters.
 
     ```solidity
@@ -147,7 +147,7 @@ function setControllerOf(uint256 _projectId, IJBController _controller)
 {% tab title="Events" %}
 | Name                                                                                               | Data                                                                                                                                                                                                                                                     |
 | -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [**`SetController`**](../../../../../protocol/specifications/contracts/jbdirectory/events/burn.md) | <ul><li><code>int256 indexed projectId</code></li><li><a href="../../../../../protocol/specifications/contracts/interfaces/ijbcontroller.md"><code>IJBController</code></a><code>indexed controller</code></li><li><code>address caller</code></li></ul> |
+| [**`SetController`**](../events/setcontroller.md) | <ul><li><code>int256 indexed projectId</code></li><li><a href="../../../interfaces/ijbcontroller.md"><code>IJBController</code></a><code>indexed controller</code></li><li><code>address caller</code></li></ul> |
 {% endtab %}
 
 {% tab title="Bug bounty" %}

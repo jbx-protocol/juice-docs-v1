@@ -58,7 +58,7 @@ function issueFor(
     _Internal references:_
 
     * [`tokenOf`](../properties/tokenof.md)
-4.  Deploy a new instance of a [`JBToken`](../../../../../protocol/specifications/contracts/jbtoken.md) contract. Assign it to the return value.
+4.  Deploy a new instance of a [`JBToken`](../../jbtoken/) contract. Assign it to the return value.
 
     ```solidity
     // Deploy the token contract.

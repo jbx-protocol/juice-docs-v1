@@ -76,7 +76,7 @@ function priceFor(uint256 _currency, uint256 _base) external view override retur
 
     Internal references:
 
-    * [`TARGET_DECIMALS`](../../../../../protocol/specifications/contracts/jbprices/properties/TARGET\_DECIMALS.md)
+    * [`TARGET_DECIMALS`](../properties/targetdecimals.md)
 {% endtab %}
 
 {% tab title="Code" %}

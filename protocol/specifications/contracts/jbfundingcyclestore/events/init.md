@@ -2,7 +2,7 @@
 
 Emitted from:
 
-* [`configureFor`](../../jbsplitstore/write/set.md)
+* [`configureFor`](../../jbsplitsstore/write/set.md)
 * [`tapFrom`](../write/tapfrom.md)
 
 ## Definition

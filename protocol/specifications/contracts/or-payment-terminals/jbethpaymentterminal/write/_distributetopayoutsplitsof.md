@@ -44,7 +44,7 @@ function _distributeToPayoutSplitsOf(
 
     _External references:_
 
-    * [`splitsOf`](../../../jbsplitstore/read/splitsof.md)
+    * [`splitsOf`](../../../jbsplitsstore/read/splitsof.md)
 3.  Loop through each split.
 
     ```solidity

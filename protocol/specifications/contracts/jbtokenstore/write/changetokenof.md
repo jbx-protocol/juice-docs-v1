@@ -72,7 +72,7 @@ function changeTokenOf(
 
     _Event references:_
 
-    * [`ChangeToken`](../../../../../protocol/specifications/contracts/jbtokenstore/events/changetoken.md)
+    * [`ChangeToken`](../events/changetoken.md)
 {% endtab %}
 
 {% tab title="Code" %}

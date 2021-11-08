@@ -26,7 +26,7 @@ function mintFor(
   * `_projectId` is the ID of the project to which the tokens belong.
   * `_amount` is the amount of tokens to mint.
   * `_preferClaimedTokens` is a flag indicating whether there's a preference for ERC20's to be claimed automatically if they have been issued.
-* Through the [`onlyController`](../../../../../protocol/specifications/contracts/jbcontrollerutility/modifiers/onlycontroller.md) modifier, the function can only be accessed by the controller of the `_projectId`.
+* Through the [`onlyController`](../../or-abstract/jbcontrollerutility/modifiers/onlycontroller.md) modifier, the function can only be accessed by the controller of the `_projectId`.
 * The function overrides a function definition from the `IJBTokenStore` interface.
 * The function returns nothing.
 
@@ -48,7 +48,7 @@ function mintFor(
     _Internal references:_
 
     * [`tokenOf`](../properties/tokenof.md)
-3.  Check if tokens should be minted using the internal accounting mechanism, or if they should be claimed into the holder's wallet. Tokens should be claimed if the project has issued tokens, and either the project forces tokens to be claimed or if `_preferClaimedTokens` flag is true. The internal accounting mechanism uses less gas, and can later be claimed into the holders wallet by anyone who submits a [`claimFor`](../../../../../protocol/specifications/contracts/jbtokenstore/claimfor/) transaction.
+3.  Check if tokens should be minted using the internal accounting mechanism, or if they should be claimed into the holder's wallet. Tokens should be claimed if the project has issued tokens, and either the project forces tokens to be claimed or if `_preferClaimedTokens` flag is true. The internal accounting mechanism uses less gas, and can later be claimed into the holders wallet by anyone who submits a [`claimFor`](claimfor.md) transaction.
 
     ```solidity
     // If there exists ERC-20 tokens and the caller prefers these claimed tokens or the project requires it.

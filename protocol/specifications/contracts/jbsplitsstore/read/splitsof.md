@@ -1,8 +1,8 @@
 # splitsOf
 
-Contract: [`JBSplitStore`](../)​‌
+Contract: [`JBSplitsStore`](../)​‌
 
-Interface: [`IJBSplitStore`](../../../../../protocol/specifications/interfaces/ijbsplitstore.md)
+Interface: [`IJBSplitsStore`](../../../interfaces/ijbsplitsstore.md)
 
 {% tabs %}
 {% tab title="Step by step" %}
@@ -24,7 +24,7 @@ function splitsOf(
   * `_group` is the identifying group of the splits.
 * The view function can be accessed externally by anyone.
 * The function does not alter state on the blockchain.
-* The function overrides a function definition from the `IJBSplitStore` interface.
+* The function overrides a function definition from the `IJBSplitsStore` interface.
 * The function returns an array of [`JBSplit`](../../../data-structures/jbsplit.md)s.
 
 ## Body

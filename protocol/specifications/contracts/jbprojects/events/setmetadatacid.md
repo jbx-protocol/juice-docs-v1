@@ -1,4 +1,4 @@
-# SetUri
+# SetMetadataCid
 
 Emitted from:
 

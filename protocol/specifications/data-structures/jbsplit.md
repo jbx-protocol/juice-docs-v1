@@ -2,8 +2,8 @@
 
 Used in:
 
-* [`JBSplitStore`](../contracts/jbsplitstore/)
-  * [`set`](../contracts/jbsplitstore/write/set.md)
+* [`JBSplitsStore`](../contracts/jbsplitsstore/)
+  * [`set`](../contracts/jbsplitsstore/write/set.md)
 
 ## Definition
 

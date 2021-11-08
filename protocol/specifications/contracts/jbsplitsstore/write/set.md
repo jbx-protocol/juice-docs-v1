@@ -1,8 +1,8 @@
 # set
 
-Contract: [`JBSplitStore`](../)​‌
+Contract: [`JBSplitsStore`](../)​‌
 
-Interface: [`IJBSplitStore`](../../../../../protocol/specifications/interfaces/ijbsplitstore.md)
+Interface: [`IJBSplitsStore`](../../../interfaces/ijbsplitsstore.md)
 
 {% tabs %}
 {% tab title="Step by step" %}

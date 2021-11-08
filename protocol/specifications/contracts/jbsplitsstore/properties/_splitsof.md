@@ -1,6 +1,6 @@
 # _splitsOf
 
-Contract: [`JBSplitStore`](../)​‌
+Contract: [`JBSplitsStore`](../)​‌
 
 **All splits for each project ID's configurations.**
 
