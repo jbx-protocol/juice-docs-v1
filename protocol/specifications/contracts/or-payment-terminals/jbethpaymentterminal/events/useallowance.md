@@ -4,7 +4,7 @@ Emitted from:
 
 * [`useAllowanceOf`](../write/useallowanceof.md)
 
-## Definition
+# Definition
 
 ```solidity
 event UseAllowance(

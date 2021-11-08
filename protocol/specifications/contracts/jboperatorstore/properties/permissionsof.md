@@ -10,7 +10,7 @@ _An account can give an operator permissions that only pertain to a specific dom
 
 _Permissions are stored in a packed `uint256`. Each 256 bits represents the on/off state of a permission. Applications can specify the significance of each index._
 
-## Definition
+# Definition
 
 ```solidity
 /** 

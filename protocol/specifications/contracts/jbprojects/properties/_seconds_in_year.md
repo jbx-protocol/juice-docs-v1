@@ -4,7 +4,7 @@ Contract: [`JBProjects`](../)
 
 **365 days worth of seconds.**
 
-## Definition
+# Definition
 
 ```solidity
 // The number of seconds in 365 days.

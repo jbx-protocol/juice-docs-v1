@@ -6,7 +6,7 @@ Interface: [`IJBController`](../../../../interfaces/ijbcontroller.md)
 
 **The contract that stores splits for each project.**
 
-## Definition
+# Definition
 
 ```solidity
 /** 

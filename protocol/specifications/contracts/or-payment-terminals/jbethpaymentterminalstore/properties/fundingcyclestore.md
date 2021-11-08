@@ -4,7 +4,7 @@ Contract: [`JBETHPaymentTerminalStore`](../)​‌
 
 **The contract storing all funding cycle configurations.**
 
-## Definition
+# Definition
 
 ```solidity
 /** 

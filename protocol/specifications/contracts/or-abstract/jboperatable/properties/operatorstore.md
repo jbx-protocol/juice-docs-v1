@@ -5,7 +5,7 @@ Contract: [`JBOperatable`](../)​‌
 Interface: [`IJBOperatable`](../../../../interfaces/ijboperatable.md)
 **A contract storing operator assignments.**
 
-## Definition
+# Definition
 
 ```solidity
 /** 

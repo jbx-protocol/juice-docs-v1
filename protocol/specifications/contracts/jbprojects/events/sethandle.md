@@ -4,7 +4,7 @@ Emitted from:
 
 * [`setHandleOf`](../write/sethandleof.md)
 
-## Definition
+# Definition
 
 ```solidity
 event SetHandle(

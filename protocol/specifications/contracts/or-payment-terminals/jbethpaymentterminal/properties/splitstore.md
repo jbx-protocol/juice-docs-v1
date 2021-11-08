@@ -6,7 +6,7 @@ Interface: [`IJBETHPaymentTerminal`](../../../../interfaces/ijbethpaymenttermina
 
 **The contract that stores splits for each project.**
 
-## Definition
+# Definition
 
 ```solidity
 /** 

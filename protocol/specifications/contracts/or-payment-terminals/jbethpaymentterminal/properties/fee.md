@@ -8,7 +8,7 @@ Interface: [`IJBController`](../../../../interfaces/ijbcontroller.md)
 
 _Out of 200._
 
-## Definition
+# Definition
 
 ```solidity
 /** 

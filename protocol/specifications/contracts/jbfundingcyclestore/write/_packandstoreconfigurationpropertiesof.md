@@ -6,7 +6,7 @@ Contract:[`JBFundingCycleStore`](../)​
 {% tab title="Step by step" %}
 **Efficiently stores a funding cycles provided configuration properties.**
 
-## Definition
+# Definition
 
 ```solidity
 function _packAndStoreConfigurationProperties(
@@ -29,7 +29,7 @@ function _packAndStoreConfigurationProperties(
 * The function is private to this contract.
 * The function doesn't return anything.
 
-## Body
+# Body
 
 1.  Store the ballot in the first 160 bits of the packed `uint256`.
 

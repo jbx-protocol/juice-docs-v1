@@ -4,7 +4,7 @@ Emitted from:
 
 * [`renewHandleOf`](../write/renewhandleof.md)
 
-## Definition
+# Definition
 
 ```solidity
 event RenewHandle(

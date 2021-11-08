@@ -4,7 +4,7 @@ Emitted from:
 
 * [`claimHandle`](../write/claimhandle.md)
 
-## Definition
+# Definition
 
 ```solidity
 event ClaimHandle(

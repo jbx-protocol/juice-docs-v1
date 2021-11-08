@@ -4,7 +4,7 @@ Emitted from:
 
 * [`migrate`](../write/migrate.md)
 
-## Definition
+# Definition
 
 ```solidity
 event Migrate(uint256 indexed projectId, IJBController to, address caller);

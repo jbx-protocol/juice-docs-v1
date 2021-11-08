@@ -4,7 +4,7 @@ Emitted from:
 
 * [`recordPaymentFrom`](../write/recordpaymentfrom.md)
 
-## Definition
+# Definition
 
 ```solidity
 event DelegateDidPay(IJBPayDelegate indexed delegate, JBDidPayData data);

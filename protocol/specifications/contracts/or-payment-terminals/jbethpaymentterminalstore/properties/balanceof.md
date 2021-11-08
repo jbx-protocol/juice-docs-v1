@@ -4,7 +4,7 @@ Contract: [`JBETHPaymentTerminalStore`](../)​‌
 
 **The amount of ETH that each project has.**
 
-## Definition
+# Definition
 
 ```solidity
 /** 

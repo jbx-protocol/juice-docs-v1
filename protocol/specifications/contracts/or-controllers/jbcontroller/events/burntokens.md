@@ -4,7 +4,7 @@ Emitted from:
 
 * [`burnTokensOf`](../write/burntokensof.md)
 
-## Definition
+# Definition
 
 ```solidity
 event BurnTokens(

@@ -6,7 +6,7 @@ Interface: [`IJBTerminalUtility`](../../../../interfaces/ijbterminalutility.md)
 
 **The directory of terminals and controllers for projects.**
 
-## Definition
+# Definition
 
 ```solidity
 /** 

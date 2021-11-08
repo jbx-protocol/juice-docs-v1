@@ -4,7 +4,7 @@ Contract: [`JBDirectory`](../)‌
 
 **For each project ID, the terminals that are currently managing its funds.**
 
-## Definition
+# Definition
 
 ```solidity
 /** 

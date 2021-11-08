@@ -4,7 +4,7 @@ Contract:[`JBETHPaymentTerminal`](../)​‌
 
 **Fees that are being held to be processed later.** 
 
-## Definition
+# Definition
 
 ```solidity
 /**

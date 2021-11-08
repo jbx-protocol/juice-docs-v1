@@ -14,7 +14,7 @@ _A controller can be set if:_
 * or, the controller hasn't been set yet and the message sender is the controller being set.
 * or, the current controller is setting a new controller.
 
-## Definition
+# Definition
 
 ```solidity
 function setControllerOf(uint256 _projectId, IJBController _controller)
@@ -36,7 +36,7 @@ function setControllerOf(uint256 _projectId, IJBController _controller)
 * The function overrides a function definition from the `IJBDirectory` interface.
 * The function returns nothing.
 
-## Body
+# Body
 
 1.  Get a reference to the current controller the project is using.
 

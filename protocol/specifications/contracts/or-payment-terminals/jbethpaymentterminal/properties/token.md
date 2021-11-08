@@ -8,7 +8,7 @@ Interface: [`IJBTerminal`](../../../../interfaces/ijbterminal.md)
 
 _ETH is represented as address 0x0000000000000000000000000000000000042069._
 
-## Definition
+# Definition
 
 ```solidity
 /** 

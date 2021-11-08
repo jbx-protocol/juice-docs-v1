@@ -8,7 +8,7 @@ Interface: [`IJBTerminal`](../../../../interfaces/ijbterminal.md)
 {% tab title="Step by step" %}
 **The ETH balance that this terminal holds for each project.**
 
-## Definition
+# Definition
 
 ```solidity
 function ethBalanceOf(uint256 _projectId) external view override returns (uint256) { ... }
@@ -21,7 +21,7 @@ function ethBalanceOf(uint256 _projectId) external view override returns (uint25
 * The resulting function overrides a function definition from the `IJBTerminal` interface.
 * The function returns the delegate address
 
-## Body
+# Body
 
 1.  Since this terminal stores ETH, simply return the project's ETH balance.
 

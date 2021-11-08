@@ -6,7 +6,7 @@ Contract: [`JBETHPaymentTerminalStore`](../)​‌
 
 _Increases as projects use their distribution limit._
 
-## Definition
+# Definition
 
 ```solidity
 /**

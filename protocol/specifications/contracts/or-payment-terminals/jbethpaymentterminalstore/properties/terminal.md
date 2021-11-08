@@ -4,7 +4,7 @@ Contract: [`JBETHPaymentTerminalStore`](../)​‌
 
 **The associated payment terminal for which this contract stores data.**
 
-## Definition
+# Definition
 
 ```solidity
 /** 

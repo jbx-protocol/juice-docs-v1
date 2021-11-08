@@ -8,7 +8,7 @@ Contract: [`JBETHPaymentTerminalStore`](../)​‌
 
 _This amount changes as the price of ETH changes in relation to the funding cycle's currency._
 
-## Definition
+# Definition
 
 ```solidity
 function _overflowDuring(JBFundingCycle memory _fundingCycle) private view returns (uint256) { ... }
@@ -20,7 +20,7 @@ function _overflowDuring(JBFundingCycle memory _fundingCycle) private view retur
 * The function does not alter state on the blockchain.
 * The function returns the he overflow of funds.
 
-## Body
+# Body
 
 1.  Get a reference to the current balance of the funding cycle's project.
 

@@ -4,7 +4,7 @@ Emitted from:
 
 * [`mintFor`](../write/mintfor.md)
 
-## Definition
+# Definition
 
 ```solidity
 event Mint(

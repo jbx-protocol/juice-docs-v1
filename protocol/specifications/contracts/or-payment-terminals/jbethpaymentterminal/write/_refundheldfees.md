@@ -6,7 +6,7 @@ Contract: [`JBETHPaymentTerminal`](../)​‌
 {% tab title="Step by step" %}
 **Refund fees based on the specified amount.**
 
-## Definition
+# Definition
 
 ```solidity
 function _refundHeldFees(uint256 _projectId, uint256 _amount) private { ... }
@@ -18,7 +18,7 @@ function _refundHeldFees(uint256 _projectId, uint256 _amount) private { ... }
 * The function is private to this contract.
 * The function doesn't return anything.
 
-## Body
+# Body
 
 1.  Get a reference to any held [`JBFee`](../../../../data-structures/jbfee.md)'s for the project.
 

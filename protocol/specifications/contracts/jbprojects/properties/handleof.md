@@ -8,7 +8,7 @@ Interface: [`IJBProjects`](../../../interfaces/ijbprojects.md)
 
 _Each project must have a handle._
 
-## Definition
+# Definition
 
 ```solidity
 /** 

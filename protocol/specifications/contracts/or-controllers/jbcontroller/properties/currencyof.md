@@ -6,7 +6,7 @@ Interface: [`IJBController`](../../../../interfaces/ijbcontroller.md)
 
 **The currency that overflowAllowances and distribution limits are measured in for a particular funding cycle configuration, applied only to the specified terminal.**
 
-## Definition
+# Definition
 
 ```solidity
 /**

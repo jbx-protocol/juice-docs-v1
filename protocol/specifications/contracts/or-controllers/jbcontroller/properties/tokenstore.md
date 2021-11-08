@@ -6,7 +6,7 @@ Interface: [`IJBController`](../../../../interfaces/ijbcontroller.md)
 
 **The contract that manages token minting and burning.**
 
-## Definition
+# Definition
 
 ```solidity
 /** 

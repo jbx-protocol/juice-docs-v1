@@ -6,7 +6,7 @@ Interface: [`IJBETHPaymentTerminal`](../../../../interfaces/ijbethpaymenttermina
 
 **The contract that stores and manages the terminal's data.**
 
-## Definition
+# Definition
 
 ```solidity
 /**

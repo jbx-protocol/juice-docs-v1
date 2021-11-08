@@ -4,7 +4,7 @@ Emitted from:
 
 * [`redeemTokensOf`](../write/redeemtokensof.md)
 
-## Definition
+# Definition
 
 ```solidity
 event RedeemTokens(

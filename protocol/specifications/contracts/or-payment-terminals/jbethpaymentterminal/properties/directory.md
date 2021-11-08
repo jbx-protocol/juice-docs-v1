@@ -6,7 +6,7 @@ Interface: [`IJBETHPaymentTerminal`](../../../../interfaces/ijbethpaymenttermina
 
 **The directory of terminals and controllers for projects.**
 
-## Definition
+# Definition
 
 ```solidity
 /** 

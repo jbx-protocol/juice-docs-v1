@@ -4,7 +4,7 @@ Contract: [`JBETHPaymentTerminalStore`](../)​‌
 
 **The contract that exposes price feeds.**
 
-## Definition
+# Definition
 
 ```solidity
 /** 

@@ -6,7 +6,7 @@ Interface: [`IJBPrices`](../../../interfaces/ijbprices.md)
 
 **The available price feeds.**
 
-## Definition
+# Definition
 
 ```solidity
 /** 

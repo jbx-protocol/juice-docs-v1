@@ -4,7 +4,7 @@ Emitted from:
 
 * [`distributePayoutsOf`](../write/distributepayoutsof.md)
 
-## Definition
+# Definition
 
 ```solidity
 event DistributePayouts(

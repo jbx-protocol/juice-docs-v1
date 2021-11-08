@@ -4,7 +4,7 @@ Contract: [`JBFundingCycleStore`](../)​‌
 
 **The number of seconds in a day.**
 
-## Definition
+# Definition
 
 ```solidity
 /** 

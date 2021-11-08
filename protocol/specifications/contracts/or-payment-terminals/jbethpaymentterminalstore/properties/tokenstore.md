@@ -4,7 +4,7 @@ Contract: [`JBETHPaymentTerminalStore`](../)​‌
 
 **The contract that manages token minting and burning.**
 
-## Definition
+# Definition
 
 ```solidity
 /** 

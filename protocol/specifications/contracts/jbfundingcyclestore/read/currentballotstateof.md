@@ -8,7 +8,7 @@ Interface: `IJBFundingCycleStore`
 {% tab title="Step by step" %}
 **The currency ballot state of the project.**
 
-## Definition
+# Definition
 
 ```solidity
 function currentBallotStateOf(uint256 _projectId) external view override returns (JBBallotState) { ... } 
@@ -21,7 +21,7 @@ function currentBallotStateOf(uint256 _projectId) external view override returns
 * The function overrides a function definition from the `IJBFundingCycleStore` interface.
 * The function returns a [`JBBallotState`](../../../enums/jbballotstate.md).
 
-## Body
+# Body
 
 1.  Get a reference to the latest funding cycle for the `_projectId`.
 

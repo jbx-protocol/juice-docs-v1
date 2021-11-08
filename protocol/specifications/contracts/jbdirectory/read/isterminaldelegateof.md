@@ -4,7 +4,7 @@
 {% tab title="Step by step" %}
 **Whether or not a specified terminal is a terminal of the specified project.**
 
-## Definition
+# Definition
 
 ```solidity
 function isTerminalDelegateOf(uint256 _projectId, address _contract)
@@ -22,7 +22,7 @@ function isTerminalDelegateOf(uint256 _projectId, address _contract)
 * The function overrides a function definition from the `IJBDirectory` interface.
 * The function returns a flag indicating whether or not the specified terminal is a terminal of the specified project.
 
-## Body
+# Body
 
 1.  Loop through each of the project's terminals looking for one with the provided contract as its delegate. If it's found, return true.
 

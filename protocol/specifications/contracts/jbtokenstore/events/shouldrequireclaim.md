@@ -4,7 +4,7 @@ Emitted from:
 
 * [`shouldRequireClaimingFor`](../write/shouldrequireclaimingfor.md)
 
-## Definition
+# Definition
 
 ```solidity
 event ShouldRequireClaim(uint256 indexed projectId, bool indexed flag, address caller)

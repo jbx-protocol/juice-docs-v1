@@ -4,7 +4,7 @@ Emitted from:
 
 * [`challengeHandle`](../write/claimhandle.md)
 
-## Definition
+# Definition
 
 ```solidity
 event ChallengeHandle(

@@ -4,7 +4,7 @@ Emitted from:
 
 * [`addFeedFor`](../write/addfeed.md)
 
-## Definition
+# Definition
 
 ```solidity
 event AddFeed(

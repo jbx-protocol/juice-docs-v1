@@ -4,7 +4,7 @@ Emitted from:
 
 * [`claimFor`](../write/burnfrom.md)
 
-## Definition
+# Definition
 
 ```solidity
 event Claim(address indexed holder, uint256 indexed projectId, uint256 amount, address caller)

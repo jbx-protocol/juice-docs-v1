@@ -4,7 +4,7 @@ Emitted from:
 
 * [`set`](../write/set.md)
 
-## Definition
+# Definition
 
 ```solidity
 event SetSplit(

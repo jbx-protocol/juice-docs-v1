@@ -6,7 +6,7 @@ Interface: [`IJBController`](../../../../interfaces/ijbcontroller.md)
 
 **The amount of that a project can withdraw per funding cycle.**
 
-## Definition
+# Definition
 
 ```solidity
 /**

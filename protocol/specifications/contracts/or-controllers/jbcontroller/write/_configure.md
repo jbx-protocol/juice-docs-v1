@@ -4,7 +4,7 @@
 {% tab title="Step by step" %}
 **Configures a funding cycle and stores information pertinent to the configuration.**
 
-## Definition
+# Definition
 
 ```solidity
 function _configure(
@@ -25,7 +25,7 @@ function _configure(
 * The function is private to this contract.
 * The function returns the ID of the funding cycle that was configured.
 
-## Body
+# Body
 
 1.  Configure the project's funding cycles. Pack the metadata into a `uint256`.
 

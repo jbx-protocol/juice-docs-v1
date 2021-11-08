@@ -6,7 +6,7 @@ Contract: [`JBETHPaymentTerminal`](../)​‌
 {% tab title="Step by step" %}
 **Takes a fee into the platform's project, which has an id of 1.**
 
-## Definition
+# Definition
 
 ```solidity
 function _takeFeeFrom(
@@ -25,7 +25,7 @@ function _takeFeeFrom(
 * The function is private to this contract.
 * The function returns the amount of the fee taken.
 
-## Body
+# Body
 
 1.  Calculate the fee amount from the provided amount using the funding cycle's fee percent, which is out of 200. The fee's percentage should be of the `_amount` without the fee, not of the total `_amount`.
 

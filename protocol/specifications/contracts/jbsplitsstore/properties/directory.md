@@ -6,7 +6,7 @@ Interface: [`IJBSplitsStore`](../../../interfaces/ijbsplitsstore.md)
 
 **The directory of terminals and controllers for projects.**
 
-## Definition
+# Definition
 
 ```solidity
 /** 
