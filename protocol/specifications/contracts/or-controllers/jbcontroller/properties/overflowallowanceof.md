@@ -4,7 +4,7 @@ Contract: [`JBController`](../)​‌
 
 Interface: [`IJBController`](../../../../../../protocol/interfaces/ijbcontroller.md)
 
-**The amount of overflow that a project is allowed to tap into on-demand.**
+**The amount of overflow that a project is allowed to tap into on-demand throughout configuration.**
 
 ## Definition
 

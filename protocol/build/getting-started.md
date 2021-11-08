@@ -13,11 +13,10 @@ function launchProjectFor(
   string calldata _metadataCid,
   JBFundingCycleData calldata _data,
   JBFundingCycleMetadata calldata _metadata,
-  JBOverflowAllowance[] memory _overflowAllowances,
-  JBSplit[] memory _payoutSplits,
-  JBSplit[] memory _reservedTokenSplits,
-  IJBTerminal _terminal
-) external { ... }
+  JBFundAccessConstraints[] memory _fundAccessConstraints,
+  JBGroupedSplits[] memory _groupedSplits,
+  IJBTerminal[] memory _terminals
+) external returns (uint256 projectId) { ... }
 ```
 
 At any time after the project has been created, its owner can issue ERC-20 tokens for the protocol to use as its community token by calling [`JBTokenStore.issueFor(...)`](../specifications/contracts/jbtokenstore/write/issuefor.md). By default the protocol uses an internal accounting mechanism to account for projects' tokens. 

@@ -6,9 +6,9 @@ Interface: [`IJBDirectory`](../../../interfaces/ijbdirectory.md)
 
 {% tabs %}
 {% tab title="Step by step" %}
-**Add a terminal to project's list of terminals.**
+**Add terminals to project's list of terminals.**
 
-Only a project owner, an operator, or its controller can add a terminal.
+Only a project owner, an operator, or its controller can add terminals.
 
 ## Definition
 
@@ -19,7 +19,7 @@ function addTerminalsOf(uint256 _projectId, IJBTerminal _terminal)
   requirePermissionAllowingOverride(
     projects.ownerOf(_projectId),
     _projectId,
-    JBOperations.ADD_TERMINAL,
+    JBOperations.ADD_TERMINALS,
     msg.sender == address(controllerOf[_projectId])
   ) { ... }
 ```
@@ -27,19 +27,25 @@ function addTerminalsOf(uint256 _projectId, IJBTerminal _terminal)
 * Arguments:
   * `_projectId` is the ID of the project having a terminal added.
   * `_terminal` is the terminal to add.
-* Through the [`requirePermission`](../../or-abstract/jboperatable/modifiers/requirepermission.md) modifier, the function is only accessible by the project's owner, or from an operator that has been given the `JBOperations.ADD_TERMINAL`permission by the project owner for the provided `_projectId`.
+* Through the [`requirePermission`](../../or-abstract/jboperatable/modifiers/requirepermission.md) modifier, the function is only accessible by the project's owner, or from an operator that has been given the `JBOperations.ADD_TERMINALS`permission by the project owner for the provided `_projectId`.
 * The function overrides a function definition from the `IJBDirectory` interface.
 * The function returns nothing.
 
 ## Body
 
-1.  Make sure the provided terminal isn't the zero address.
+1.  For each terminal passed in
+    ```solidity
+    for (uint256 _i = 0; _i < _terminals.length; _i++) { ... }
+    ```
+
+2.  Make sure the provided terminal isn't the zero address.
 
     ```solidity
     // Can't set the zero address.
     require(_terminal != IJBTerminal(address(0)), '0x2d: ZERO_ADDRESS');
     ```
-2.  If the terminal is already in the project's list of terminals, there's nothing left to do.
+
+3.  If the terminal is already in the project's list of terminals, there's nothing left to do.
 
     ```solidity
     // If the terminal is already in the project's list of terminals, return.
@@ -49,7 +55,8 @@ function addTerminalsOf(uint256 _projectId, IJBTerminal _terminal)
     Internal references:
 
     * [`isTerminalOf`](../read/isterminalof.md)
-3.  Add the terminal to the project's list of terminals.
+
+4.  Add the terminal to the project's list of terminals.
 
     ```solidity
     // Set the new terminal.
@@ -59,7 +66,8 @@ function addTerminalsOf(uint256 _projectId, IJBTerminal _terminal)
     Internal references:
 
     * [`_terminalsOf`](../properties/\_terminalsof.md)
-4.  Emit a `AddTerminal` event with the relevant parameters.
+
+5.  Emit a `AddTerminal` event with the relevant parameters.
 
     ```solidity
     emit AddTerminal(_projectId, _terminal, msg.sender);
@@ -74,34 +82,36 @@ function addTerminalsOf(uint256 _projectId, IJBTerminal _terminal)
 ```solidity
 /** 
   @notice 
-  Add a terminal to project's list of terminals.
+  Add terminals to project's list of terminals.
 
   @dev
-  Only a project owner, an operator, or its controller can add a terminal. 
+  Only a project owner, an operator, or its controller can add terminals.
 
   @param _projectId The ID of the project having a terminal added.
-  @param _terminal The terminal to add.
+  @param _terminals The terminals to add.
 */
-function addTerminalOf(uint256 _projectId, IJBTerminal _terminal)
+function addTerminalsOf(uint256 _projectId, IJBTerminal[] calldata _terminals)
   external
   override
   requirePermissionAllowingOverride(
     projects.ownerOf(_projectId),
     _projectId,
-    JBOperations.ADD_TERMINAL,
+    JBOperations.ADD_TERMINALs,
     msg.sender == address(controllerOf[_projectId])
   )
 {
-  // Can't set the zero address.
-  require(_terminal != IJBTerminal(address(0)), '0x2d: ZERO_ADDRESS');
+  for (uint256 _i = 0; _i < _terminals.length; _i++) {
+    // Can't set the zero address.
+    require(_terminals[_i] != IJBTerminal(address(0)), '0x2d: ZERO_ADDRESS');
 
-  // If the terminal is already in the project's list of terminals, return.
-  if (isTerminalOf(_projectId, _terminal)) return;
+    // If the terminal is already in the project's list of terminals, return.
+    if (isTerminalOf(_projectId, _terminals[_i])) continue;
 
-  // Set the new terminal.
-  _terminalsOf[_projectId].push(_terminal);
+    // Set the new terminal.
+    _terminalsOf[_projectId].push(_terminals[_i]);
 
-  emit AddTerminal(_projectId, _terminal, msg.sender);
+    emit AddTerminal(_projectId, _terminals[_i], msg.sender);
+  }
 }
 ```
 {% endtab %}

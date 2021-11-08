@@ -10,97 +10,104 @@
 function _configure(
   uint256 _projectId,
   JBFundingCycleData calldata _data,
-  uint256 _packedMetadata,
-  JBOverflowAllowance[] memory _overflowAllowances,
-  JBSplit[] memory _payoutSplits,
-  JBSplit[] memory _reservedTokenSplits
+  JBFundingCycleMetadata calldata _metadata,
+  JBFundAccessConstraints[] memory _fundAccessConstraints,
+  JBGroupedSplits[] memory _groupedSplits
 ) private returns (uint256) { ... }
 ```
 
 * Arguments:
-  * `_projectId` is the ID of the project whos funding cycles are being reconfigured.
+  * `_projectId` is the ID of the project whose funding cycles are being reconfigured.
   * `_data` is a [`JBFundingCycleData`](../../../../../../protocol/data-structures/jbfundingcycledata.md) data structure that defines the project's first funding cycle. These properties will remain fixed for the duration of the funding cycle.
   * `_metadata` is a [`JBFundingCycleMetadata`](../../../../../../protocol/data-structures/jbfundingcyclemetadata.md) data structure specifying the controller specific params that a funding cycle can have.
-  * `_overflowAllowances` is an array of [`JBOverflowAllowance`](../../../../../../protocol/data-structures/jboverflowallowance.md) data structures containing amounts, in wei (18 decimals), that a project can use from its own overflow on-demand for each payment terminal.
-  * `_payoutSplits` is an array of [`JBSplit`](../../../../../../protocol/data-structures/jbsplit.md) data structures containing payout splits to set.
-  * `_reservedTokenSplits` is an array of [`JBSplit`](../../../../../../protocol/data-structures/jbsplit.md) data structures containing reserved token splits to set.
+  * `_fundAccessConstraints` is an array of [`JBFundAccessConstraints`](../../../../../../protocol/data-structures/jbfundaccessconstraints.md) data structures containing amounts that a project can distribute during each funding cycle and amounts that can be used from its own overflow on-demand for each payment terminal.
+  * `_groupedSplits` is an array of [`JBGroupedSplits`](../../../../../../protocol/data-structures/jbgroupedsplits.md) data structures containing splits to set for any number of groups.
 * The function is private to this contract.
 * The function returns the ID of the funding cycle that was configured.
 
 ## Body
 
-1.  Configure the project's funding cycles.
+1.  Configure the project's funding cycles. Pack the metadata into a `uint256`.
 
     ```solidity
     // Configure the funding cycle's properties.
     JBFundingCycle memory _fundingCycle = fundingCycleStore.configureFor(
       _projectId,
       _data,
-      _packedMetadata,
-      fee
+      JBFundingCycleMetadataResolver.packFundingCycleMetadata(_metadata)
     );
     ```
 
     _External references:_
 
     * [`configureFor`](../../../jbfundingcyclestore/write/configurefor.md)
-2.  If needed, set payout splits.
+
+    _Libraries used:_
+
+    * [`JBFundingCycleMetadataResolver`](../../../../../../protocol/libraries/jbfundingcyclemetadataresolver.md)\
+      `.packFundingCycleMetadata(...)`
+
+2.  For each provided group splits, set the splits for the specified group if there are any.
 
     ```solidity
-    // Set payout splits if there are any.
-    if (_payoutSplits.length > 0)
-      splitsStore.set(
-        _projectId,
-        _fundingCycle.configured,
-        JBSplitsGroups.ETH_PAYOUT,
-        _payoutSplits
-      );
+    for (uint256 _i; _i < _groupedSplits.length; _i++)
+      // Set payout splits if there are any.
+      if (_groupedSplits[_i].splits.length > 0)
+        splitsStore.set(
+          _projectId,
+          _fundingCycle.configured,
+          _groupedSplits[_i].group,
+          _groupedSplits[_i].splits
+        );
     ```
 
     _External references:_
 
     * [`set`](../../../../../../protocol/specifications/contracts/jbsplitsstore/write/set.md)
-3.  If needed, set reserved token splits.
 
-    ```solidity
-    // Set token splits if there are any.
-    if (_reservedTokenSplits.length > 0)
-      splitsStore.set(
-        _projectId,
-        _fundingCycle.configured,
-        JBSplitsGroups.RESERVED_TOKENS,
-        _reservedTokenSplits
-      );
-    ```
-
-    _External references:_
-
-    * [`set`](../../../../../../protocol/specifications/contracts/jbsplitsstore/write/set.md)
-4.  For each overflow allowance struct in the array passed in, store its value if its amount is being updated. Emit a `SetOverflowAllowance` event with the relevant parameters.
+3.  For each fund access constraint struct in the array passed in, store the values of the distribution limit, the overflow allowance, and the currency. Emit a `SetFundAccessConstraints` event with the relevant parameters.
 
     ```solidity
     // Set overflow allowances if there are any.
-    for (uint256 _i; _i < _overflowAllowances.length; _i++) {
-      JBOverflowAllowance memory _allowance = _overflowAllowances[_i];
-      // Set the overflow allowance if the value is different from the currently set value.
-      if (
-        _allowance.amount !=
-        overflowAllowanceOf[_projectId][_fundingCycle.configured][_allowance.terminal]
-      ) {
-        overflowAllowanceOf[_projectId][_fundingCycle.configured][_allowance.terminal] = _allowance
-          .amount;
-        emit SetOverflowAllowance(_projectId, _fundingCycle.configured, _allowance, msg.sender);
-      }
+    for (uint256 _i; _i < _fundAccessConstraints.length; _i++) {
+      JBFundAccessConstraints memory _constraints = _fundAccessConstraints[_i];
+
+      // Set the distribution limit if there is one.
+      if (_constraints.distributionLimit > 0)
+        distributionLimitOf[_projectId][_fundingCycle.configured][
+          _constraints.terminal
+        ] = _constraints.distributionLimit;
+
+      // Set the overflow allowance if there is one.
+      if (_constraints.overflowAllowance > 0)
+        overflowAllowanceOf[_projectId][_fundingCycle.configured][
+          _constraints.terminal
+        ] = _constraints.overflowAllowance;
+
+      if (_constraints.currency > 0)
+        currencyOf[_projectId][_fundingCycle.configured][_constraints.terminal] = _constraints
+          .currency;
+
+      emit SetFundAccessConstraints(_projectId, _fundingCycle.configured, _constraints, msg.sender);
     }
     ```
 
     _Internal references:_
 
+    * [`distributionLimitOf`](../properties/distributionlimitof.md)
     * [`overflowAllowanceOf`](../properties/overflowallowanceof.md)
+    * [`currencyOf`](../properties/currencyof.md)
 
     _Event references:_
 
-    * [`SetOverflowAllowance`](../events/setoverflowallowance.md)
+    * [`SetFundAccessConstraints`](../events/setfundaccessconstraints.md)
+
+4.  Return the funding cycle's ID.
+
+    ```solidity
+    return _fundingCycle.id;
+    ``
+
 {% endtab %}
 
 {% tab title="Only code" %}
@@ -110,56 +117,53 @@ function _configure(
   Configures a funding cycle and stores information pertinent to the configuration.
 
   @dev
-  See the docs for `launchProject` and `configureFundingCycles`.
+  See the docs for `launchProjectFor` and `reconfigureFundingCyclesOf`.
 */
 function _configure(
   uint256 _projectId,
   JBFundingCycleData calldata _data,
-  uint256 _packedMetadata,
-  JBOverflowAllowance[] memory _overflowAllowances,
-  JBSplit[] memory _payoutSplits,
-  JBSplit[] memory _reservedTokenSplits
+  JBFundingCycleMetadata calldata _metadata,
+  JBFundAccessConstraints[] memory _fundAccessConstraints,
+  JBGroupedSplits[] memory _groupedSplits
 ) private returns (uint256) {
   // Configure the funding cycle's properties.
   JBFundingCycle memory _fundingCycle = fundingCycleStore.configureFor(
     _projectId,
     _data,
-    _packedMetadata,
-    fee
+    JBFundingCycleMetadataResolver.packFundingCycleMetadata(_metadata)
   );
 
-  // Set payout splits if there are any.
-  if (_payoutSplits.length > 0)
-    splitsStore.set(
-      _projectId,
-      _fundingCycle.configured,
-      JBSplitsGroups.ETH_PAYOUT,
-      _payoutSplits
-    );
-
-  // Set token splits if there are any.
-  if (_reservedTokenSplits.length > 0)
-    splitsStore.set(
-      _projectId,
-      _fundingCycle.configured,
-      JBSplitsGroups.RESERVED_TOKENS,
-      _reservedTokenSplits
-    );
+  for (uint256 _i; _i < _groupedSplits.length; _i++)
+    // Set payout splits if there are any.
+    if (_groupedSplits[_i].splits.length > 0)
+      splitsStore.set(
+        _projectId,
+        _fundingCycle.configured,
+        _groupedSplits[_i].group,
+        _groupedSplits[_i].splits
+      );
 
   // Set overflow allowances if there are any.
-  for (uint256 _i; _i < _overflowAllowances.length; _i++) {
-    JBOverflowAllowance memory _allowance = _overflowAllowances[_i];
+  for (uint256 _i; _i < _fundAccessConstraints.length; _i++) {
+    JBFundAccessConstraints memory _constraints = _fundAccessConstraints[_i];
 
-    // Set the overflow allowance if the value is different from the currently set value.
-    if (
-      _allowance.amount !=
-      overflowAllowanceOf[_projectId][_fundingCycle.configured][_allowance.terminal]
-    ) {
-      overflowAllowanceOf[_projectId][_fundingCycle.configured][_allowance.terminal] = _allowance
-        .amount;
+    // Set the distribution limit if there is one.
+    if (_constraints.distributionLimit > 0)
+      distributionLimitOf[_projectId][_fundingCycle.configured][
+        _constraints.terminal
+      ] = _constraints.distributionLimit;
 
-      emit SetOverflowAllowance(_projectId, _fundingCycle.configured, _allowance, msg.sender);
-    }
+    // Set the overflow allowance if there is one.
+    if (_constraints.overflowAllowance > 0)
+      overflowAllowanceOf[_projectId][_fundingCycle.configured][
+        _constraints.terminal
+      ] = _constraints.overflowAllowance;
+
+    if (_constraints.currency > 0)
+      currencyOf[_projectId][_fundingCycle.configured][_constraints.terminal] = _constraints
+        .currency;
+
+    emit SetFundAccessConstraints(_projectId, _fundingCycle.configured, _constraints, msg.sender);
   }
 
   return _fundingCycle.id;
