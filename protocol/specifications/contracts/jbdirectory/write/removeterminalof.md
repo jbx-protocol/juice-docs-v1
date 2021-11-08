@@ -77,15 +77,9 @@ function removeTerminalOf(uint256 _projectId, IJBTerminal _terminal)
     emit RemoveTerminal(_projectId, _terminal, msg.sender);
     ```
 
-```solidity
-// If the terminal that is being removed is the primary terminal for the token, delete it from being primary terminal.
-if (_primaryTerminalOf[_projectId][_terminal.token()] == _terminal)
-  delete _primaryTerminalOf[_projectId][_terminal.token()];
-```
+    _Event references:_
 
-```
-* [`RemoveTerminal`](../events/removeterminal.md)
-```
+    * [`RemoveTerminal`](../events/removeterminal.md)
 {% endtab %}
 
 {% tab title="Code" %}
