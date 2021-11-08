@@ -9,7 +9,7 @@ Contract: [`JBETHPaymentTerminalStore`](../)​‌
 ## Definition
 
 ```solidity
-function claim() external { ... }
+function claimFor(IJBTerminal _terminal) external { ... }
 ```
 
 * The function can be accessed externally by anyone.
@@ -21,7 +21,7 @@ function claim() external { ... }
 
     ```solidity
     // This store can only be claimed once.
-    require(terminal == address(0), '0x4b: ALREADY_CLAIMED');
+    require(terminal == IJBTerminal(address(0)), '0x4b: ALREADY_CLAIMED');
     ```
 
     _Internal references:_
@@ -30,8 +30,8 @@ function claim() external { ... }
 2.  Store the terminal as the address claiming this store.
 
     ```solidity
-    // Set the terminal as the msg.sender.
-    terminal = msg.sender;
+    // Set the terminal.
+    terminal = _terminal;
     ```
 
     _Internal references:_
@@ -45,12 +45,12 @@ function claim() external { ... }
   @notice
   Allows this store to be claimed by an address so that it recognized the address as its terminal.
 */
-function claim() external {
+function claimFor(IJBTerminal _terminal) external {
   // This store can only be claimed once.
-  require(terminal == address(0), '0x4b: ALREADY_CLAIMED');
+  require(terminal == IJBTerminal(address(0)), '0x4b: ALREADY_CLAIMED');
 
-  // Set the terminal as the msg.sender.
-  terminal = msg.sender;
+  // Set the terminal.
+  terminal = _terminal;
 }
 ```
 {% endtab %}

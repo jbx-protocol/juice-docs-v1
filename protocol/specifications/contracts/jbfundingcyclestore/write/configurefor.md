@@ -16,8 +16,7 @@ _Only a project's current controller can configure its funding cycles._
 function configureFor(
   uint256 _projectId,
   JBFundingCycleData calldata _data,
-  uint256 _metadata,
-  uint256 _fee
+  uint256 _metadata
 ) external override onlyController(_projectId) returns (JBFundingCycle memory) { ... }
 ```
 
@@ -25,7 +24,6 @@ function configureFor(
   * `_projectId` is the ID of the project being configured.
   * `_data` is the [`JBFundingCycleData`](../../../data-structures/jbfundingcycledata.md)for the configuration.
   * `_metadata` is data to associate with this funding cycle configuration.
-  * `_fee` is the fee that this configuration incurs when tapping.
 * Through the [`onlyController`](../../../../../protocol/specifications/contracts/jbcontrollerutility/modifiers/onlycontroller.md) modifier, the function can only be accessed by the controller of the `_projectId`.
 * The function overrides a function definition from the `IJBFundingCycleStore` interface.
 * Returns the [`JBFundingCycle`](../../../data-structures/jbfundingcycle.md) that was configured.
@@ -44,31 +42,19 @@ function configureFor(
     // Discount rate token must be less than or equal to 100%. A value of 10001 means non-recurring.
     require(_data.discountRate <= 10001, '0x16: BAD_DISCOUNT_RATE');
     ```
-3.  Make sure the `_data.currency` fits in a `uint8`.
-
-    ```solidity
-    // Currency must fit into a uint8.
-    require(_data.currency <= type(uint8).max, '0x17: BAD_CURRENCY');
-    ```
-4.  Make sure the `_data.weight` fits in a `uint80`.
+3.  Make sure the `_data.weight` fits in a `uint80`.
 
     ```solidity
     // Weight must fit into a uint8.
     require(_data.weight <= type(uint80).max, '0x18: BAD_WEIGHT');
     ```
-5.  Make sure the provided `_fee` is at most 200.
-
-    ```solidity
-    // Fee must be less than or equal to 100%.
-    require(_fee <= 200, '0x19: BAD_FEE');
-    ```
-6.  Get a reference to the time at which the configuration is occurring.
+4.  Get a reference to the time at which the configuration is occurring.
 
     ```solidity
     // Set the configuration timestamp is now.
     uint256 _configured = block.timestamp;
     ```
-7.  Find the ID of the funding cycle that should be configured.
+5.  Find the ID of the funding cycle that should be configured.
 
     ```solidity
     // Gets the ID of the funding cycle to reconfigure.
@@ -78,7 +64,7 @@ function configureFor(
     _Internal references:_
 
     * [`_configurableOf`](\_configurableof.md)
-8.  Store all of the configuration properties provided onto the `_fundingCycleId`. These properties can all be packed into one `uint256` storage slot.
+6.  Store all of the configuration properties provided onto the `_fundingCycleId`. These properties can all be packed into one `uint256` storage slot.
 
     ```solidity
     // Store the configuration.
@@ -87,8 +73,6 @@ function configureFor(
       _configured,
       _data.ballot,
       _data.duration,
-      _data.currency,
-      _fee,
       _data.discountRate
     );
     ```
@@ -96,17 +80,7 @@ function configureFor(
     _Internal references:_
 
     * [`_packAndStoreConfigurationPropertiesOf`](\_packandstoreconfigurationpropertiesof.md)
-9.  Store the provided `_data.target` for the `_fundingCycleId`.
-
-    ```solidity
-    // Set the target amount.
-    _targetOf[_fundingCycleId] = _data.target;
-    ```
-
-    _Internal references:_
-
-    * [`_targetOf`](../properties/\_targetof.md)
-10. Store the provided `_metadata` for the `_fundingCycleId`.
+7.  Store the provided `_metadata` for the `_fundingCycleId`.
 
     ```solidity
     // Set the metadata.
@@ -116,7 +90,7 @@ function configureFor(
     _Internal references:_
 
     * [`_metadataOf`](../properties/\_metadataof.md)
-11. Emit a `Configure` event with the relevant parameters.
+8.  Emit a `Configure` event with the relevant parameters.
 
     ```solidity
     emit Configure(_fundingCycleId, _projectId, _configured, _data, _metadata, msg.sender);
@@ -125,7 +99,7 @@ function configureFor(
     _Event references:_
 
     * [`Configure`](../events/configure.md)
-12. Return the [`JBFundingCycle`](../../../data-structures/jbfundingcycle.md) struct that carries the new configuration.
+9. Return the [`JBFundingCycle`](../../../data-structures/jbfundingcycle.md) struct that carries the new configuration.
 
     ```solidity
     return _getStructFor(_fundingCycleId);
@@ -148,7 +122,6 @@ function configureFor(
   @param _projectId The ID of the project being configured.
   @param _data The funding cycle configuration.
     @dev _data.target The amount that the project wants to receive in each funding cycle. 18 decimals.
-    @dev _data.currency The currency of the `_target`. Send 0 for ETH or 1 for USD.
     @dev _data.duration The duration of the funding cycle for which the `_target` amount is needed. Measured in days. 
       Set to 0 for no expiry and to be able to reconfigure anytime.
     @dev _data.discountRate A number from 0-10000 indicating how valuable a contribution to this funding cycle is compared to previous funding cycles.
@@ -157,15 +130,13 @@ function configureFor(
       If the number is 10001, an non-recurring funding cycle will get made.
     @dev _data.ballot The new ballot that will be used to approve subsequent reconfigurations.
   @param _metadata Data to associate with this funding cycle configuration.
-  @param _fee The fee that this configuration incurs when tapping.
 
   @return The funding cycle that the configuration will take effect during.
 */
 function configureFor(
   uint256 _projectId,
   JBFundingCycleData calldata _data,
-  uint256 _metadata,
-  uint256 _fee
+  uint256 _metadata
 ) external override onlyController(_projectId) returns (JBFundingCycle memory) {
   // Duration must fit in a uint16.
   require(_data.duration <= type(uint16).max, '0x15: BAD_DURATION');
@@ -173,14 +144,8 @@ function configureFor(
   // Discount rate token must be less than or equal to 100%. A value of 201 means non-recurring.
   require(_data.discountRate <= 201, '0x17: BAD_DISCOUNT_RATE');
 
-  // Currency must fit into a uint8.
-  require(_data.currency <= type(uint8).max, '0x18: BAD_CURRENCY');
-
   // Weight must fit into a uint8.
   require(_data.weight <= type(uint80).max, '0x19: BAD_WEIGHT');
-
-  // Fee must be less than or equal to 100%.
-  require(_fee <= 200, '0x1a: BAD_FEE');
 
   // Set the configuration timestamp is now.
   uint256 _configured = block.timestamp;
@@ -194,13 +159,8 @@ function configureFor(
     _configured,
     _data.ballot,
     _data.duration,
-    _data.currency,
-    _fee,
     _data.discountRate
   );
-
-  // Set the target amount.
-  _targetOf[_fundingCycleId] = _data.target;
 
   // Set the metadata.
   _metadataOf[_fundingCycleId] = _metadata;

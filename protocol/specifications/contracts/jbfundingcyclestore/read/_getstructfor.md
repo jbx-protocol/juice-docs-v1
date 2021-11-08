@@ -54,33 +54,13 @@ function _getStructFor(uint256 _id) private view returns (JBFundingCycle memory 
     fundingCycle.ballot = IJBFundingCycleBallot(address(uint160(_packedConfigurationProperties)));
     fundingCycle.configured = uint256(uint48(_packedConfigurationProperties >> 160));
     fundingCycle.duration = uint256(uint16(_packedConfigurationProperties >> 208));
-    fundingCycle.currency = uint256(uint8(_packedConfigurationProperties >> 224));
-    fundingCycle.fee = uint256(uint8(_packedConfigurationProperties >> 232));
     fundingCycle.discountRate = uint256(uint16(_packedConfigurationProperties >> 240));
     ```
 
     _Internal references:_
 
     * [`_packedConfigurationPropertiesOf`](../properties/\_packedconfigurationpropertiesof.md)
-5.  Populate the `target` property of the struct by reading from what's stored in `_targetOf`.
-
-    ```solidity
-    fundingCycle.target = _targetOf[_id];
-    ```
-
-    _Internal references:_
-
-    * [`_targetOf`](../properties/\_targetof.md)
-6.  Populate the `tapped` property of the struct by reading from what's stored in `_tappedAmountOf`.
-
-    ```solidity
-    fundingCycle.tapped = _tappedAmountOf[_id];
-    ```
-
-    _Internal references:_
-
-    * [`_tappedAmountOf`](../properties/\_targetof.md)
-7.  Populate the `metadata` property of the struct by reading from what's stored in `_metadataOf`.
+5.  Populate the `metadata` property of the struct by reading from what's stored in `_metadataOf`.
 
     ```solidity
     fundingCycle.metadata = _metadataOf[_id];
@@ -120,12 +100,8 @@ function _getStructFor(uint256 _id) private view returns (JBFundingCycle memory 
   fundingCycle.ballot = IJBFundingCycleBallot(address(uint160(_packedConfigurationProperties)));
   fundingCycle.configured = uint256(uint48(_packedConfigurationProperties >> 160));
   fundingCycle.duration = uint256(uint16(_packedConfigurationProperties >> 208));
-  fundingCycle.currency = uint256(uint8(_packedConfigurationProperties >> 224));
-  fundingCycle.fee = uint256(uint8(_packedConfigurationProperties >> 232));
   fundingCycle.discountRate = uint256(uint8(_packedConfigurationProperties >> 240));
   
-  fundingCycle.target = _targetOf[_id];
-  fundingCycle.tapped = _tappedAmountOf[_id];
   fundingCycle.metadata = _metadataOf[_id];
 }
 ```

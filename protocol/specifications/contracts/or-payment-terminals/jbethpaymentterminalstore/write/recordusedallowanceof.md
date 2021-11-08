@@ -45,20 +45,34 @@ function recordUsedAllowanceOf(
     _External references:_
 
     * [`currentOf`](../../../jbfundingcyclestore/read/currentof.md)
-2.  Make the sure provided currency matches the funding cycle's currency.
+
+2.  Make the sure the provided currency matches the expected currency for the overflow allowance.
 
     ```solidity
     // Make sure the currencies match.
-    require(_currency == fundingCycle.currency, '0x42: UNEXPECTED_CURRENCY');
+    require(
+      _currency ==
+        directory.controllerOf(_projectId).currencyOf(
+          _projectId,
+          fundingCycle.configured,
+          terminal
+        ),
+      '0x42: UNEXPECTED_CURRENCY'
+    );
     ```
-3.  Convert the amount to ETH.
+
+    _External references:_
+
+    * [`currencyOf`](../../../or-controllers/jbcontroller/read/currencyof.md)
+
+3.  Find the amount to withdraw by converting the amount to ETH. If the currency is 0, it is assumed that the currency is the same as the token being withdrawn so no conversion is necessary.
 
     ```solidity
     // Convert the amount to wei.
-    withdrawnAmount = PRBMathUD60x18.div(
-      _amount,
-      prices.priceFor(fundingCycle.currency, JBCurrencies.ETH)
-    );
+    // A currency of 0 should be interpreted as whatever the currency being withdrawn is.
+    withdrawnAmount = _currency == 0
+      ? _amount
+      : PRBMathUD60x18.div(_amount, prices.priceFor(_currency, JBCurrencies.ETH));
     ```
 
     _Libraries used:_
@@ -74,7 +88,7 @@ function recordUsedAllowanceOf(
         directory.controllerOf(_projectId).overflowAllowanceOf(
           _projectId,
           fundingCycle.configured,
-          _terminal
+          terminal
         ) -
           usedOverflowAllowanceOf[_projectId][fundingCycle.configured],
       '0x43: NOT_ALLOWED'
@@ -149,13 +163,21 @@ function recordUsedAllowanceOf(
   fundingCycle = fundingCycleStore.currentOf(_projectId);
 
   // Make sure the currencies match.
-  require(_currency == fundingCycle.currency, '0x42: UNEXPECTED_CURRENCY');
+  require(
+    _currency ==
+      directory.controllerOf(_projectId).currencyOf(
+        _projectId,
+        fundingCycle.configured,
+        terminal
+      ),
+    '0x42: UNEXPECTED_CURRENCY'
+  );
 
   // Convert the amount to wei.
-  withdrawnAmount = PRBMathUD60x18.div(
-    _amount,
-    prices.priceFor(fundingCycle.currency, JBCurrencies.ETH)
-  );
+  // A currency of 0 should be interpreted as whatever the currency being withdrawn is.
+  withdrawnAmount = _currency == 0
+    ? _amount
+    : PRBMathUD60x18.div(_amount, prices.priceFor(_currency, JBCurrencies.ETH));
 
   // There must be sufficient allowance available.
   require(
@@ -163,7 +185,7 @@ function recordUsedAllowanceOf(
       directory.controllerOf(_projectId).overflowAllowanceOf(
         _projectId,
         fundingCycle.configured,
-        _terminal
+        terminal
       ) -
         usedOverflowAllowanceOf[_projectId][fundingCycle.configured],
     '0x43: NOT_ALLOWED'

@@ -38,28 +38,56 @@ function _overflowDuring(JBFundingCycle memory _fundingCycle) private view retur
     // If there's no balance, there's no overflow.
     if (_balanceOf == 0) return 0;
     ```
-3.  Get a reference to the amount of the funding cycle's target that can still be tapped. This is the difference between its target and what has already been tapped during this funding cycle. This value is in terms of the funding cycle's currency.
+3.  Get a reference to the amount of the funding cycle's target that can still be distributed. This is the difference between its distribution limit and what has already been distributed during this funding cycle.
 
     ```solidity
     // Get a reference to the amount still withdrawable during the funding cycle.
-    uint256 _targetRemaining = _fundingCycle.target - _fundingCycle.tapped;
+    uint256 _targetRemaining = directory.controllerOf(_fundingCycle.projectId).distributionLimitOf(
+      _fundingCycle.projectId,
+      _fundingCycle.configured,
+      terminal
+    ) - usedDistributionLimitOf[_fundingCycle.projectId][_fundingCycle.id];
     ```
-4.  Convert the target remaining into ETH using the appropriate price feed.
+
+    _Internal references:_
+
+    * [`usedDistributionLimitOf`](../properties/useddistributionlimitof.md)
+
+    _External references:_
+
+    * [`distributionLimitOf`](../../../or-controllers/jbcontroller/properties/distributionlimitof.md)
+
+4.  Get the currency for the distribution limit.
+
+    ```solidity
+    // Get a reference to the current funding cycle's currency for this terminal.
+    uint256 _currency = directory.controllerOf(_fundingCycle.projectId).currencyOf(
+      _fundingCycle.projectId,
+      _fundingCycle.configured,
+      terminal
+    );
+    ```
+
+    _External references:_
+
+    * [`currencyOf`](../../../or-controllers/jbcontroller/properties/currencyof.md)
+5.  Convert the target remaining into ETH using the appropriate price feed. If the currency is 0, it is assumed that the currency is the same as the token being withdrawn so no conversion is necessary.
 
     ```solidity
     // Convert the _targetRemaining to ETH.
     uint256 _ethTargetRemaining = _targetRemaining == 0
       ? 0 // Get the current price of ETH.
-      : PRBMathUD60x18.div(
-        _targetRemaining,
-        prices.priceFor(_fundingCycle.currency, JBCurrencies.ETH)
+      : // A currency of 0 should be interpreted as whatever the currency being withdrawn is.
+      _currency == 0
+      ? _targetRemaining
+      : PRBMathUD60x18.div(_targetRemaining, prices.priceFor(_currency, JBCurrencies.ETH));
       );
     ```
 
     _Internal references:_
 
     * [`priceFor`](../../../../../../protocol-v2/specifications/contracts/jbprices/read/pricefor.md)
-5.  If the current balance of the project is less than the target remaining, there is no overflow. Otherwise the difference between the project's current balance and the remaining amount is the overflow.
+6.  If the current balance of the project is less than the target remaining, there is no overflow. Otherwise the difference between the project's current balance and the remaining amount is the overflow.
 
     ```solidity
     // Overflow is the balance of this project minus the amount that can still be withdrawn.
@@ -88,14 +116,26 @@ function _overflowDuring(JBFundingCycle memory _fundingCycle) private view retur
   if (_balanceOf == 0) return 0;
 
   // Get a reference to the amount still withdrawable during the funding cycle.
-  uint256 _targetRemaining = _fundingCycle.target - _fundingCycle.tapped;
+  uint256 _targetRemaining = directory.controllerOf(_fundingCycle.projectId).distributionLimitOf(
+    _fundingCycle.projectId,
+    _fundingCycle.configured,
+    terminal
+  ) - usedDistributionLimitOf[_fundingCycle.projectId][_fundingCycle.id]; 
+
+  // Get a reference to the current funding cycle's currency for this terminal.
+  uint256 _currency = directory.controllerOf(_fundingCycle.projectId).currencyOf(
+    _fundingCycle.projectId,
+    _fundingCycle.configured,
+    terminal
+  );
 
   // Convert the _targetRemaining to ETH.
   uint256 _ethTargetRemaining = _targetRemaining == 0
     ? 0 // Get the current price of ETH.
-    : PRBMathUD60x18.div(
-      _targetRemaining,
-      prices.priceFor(_fundingCycle.currency, JBCurrencies.ETH)
+    : // A currency of 0 should be interpreted as whatever the currency being withdrawn is.
+    _currency == 0
+    ? _targetRemaining
+    : PRBMathUD60x18.div(_targetRemaining, prices.priceFor(_currency, JBCurrencies.ETH));
     );
 
   // Overflow is the balance of this project minus the amount that can still be withdrawn.

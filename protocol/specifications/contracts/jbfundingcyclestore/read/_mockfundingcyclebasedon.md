@@ -94,11 +94,7 @@ return
     _baseFundingCycle.ballot,
     _start,
     _baseFundingCycle.duration,
-    _baseFundingCycle.target,
-    _baseFundingCycle.currency,
-    _baseFundingCycle.fee,
     _baseFundingCycle.discountRate,
-    0,
     _baseFundingCycle.metadata
   );
 ```
@@ -159,11 +155,7 @@ function _mockFundingCycleBasedOn(JBFundingCycle memory _baseFundingCycle, bool 
       _baseFundingCycle.ballot,
       _start,
       _baseFundingCycle.duration,
-      _baseFundingCycle.target,
-      _baseFundingCycle.currency,
-      _baseFundingCycle.fee,
       _baseFundingCycle.discountRate,
-      0,
       _baseFundingCycle.metadata
     );
 }
