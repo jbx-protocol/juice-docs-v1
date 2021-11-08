@@ -33,7 +33,7 @@ function isTerminalDelegateOf(uint256 _projectId, address _contract)
 
     Internal references:
 
-    * [`_terminalsOf`](../properties/\_terminalsof.md)
+    * [`_terminalsOf`](../properties/_terminalsof.md)
 2.  If a terminal with a matching delegate is not found, return false.
 
     ```solidity

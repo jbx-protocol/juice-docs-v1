@@ -37,7 +37,7 @@ function _configurableOf(
 
     * [`latestOf`](../properties/latestidof.md)
     * [`_initFor`](\_initfor.md)
-    * [`_getStructFor`](../read/\_getstructfor.md)
+    * [`_getStructFor`](../read/_getstructfor.md)
 2.  Get a reference to the project's standby funding cycle.
 
     ```solidity
@@ -47,7 +47,7 @@ function _configurableOf(
 
     _Internal references:_
 
-    * [`_standbyOf`](../read/\_standbyof.md)
+    * [`_standbyOf`](../read/_standbyof.md)
 3.  If there is a standby funding cycle, return it after updating it. It must be updated because there's a chance the new reconfiguration will have a new start time than the previous reconfiguration that was in standby, depending on the specifications of the `_baseFundingCycle`'s ballot.
 
     ```solidity
@@ -70,10 +70,10 @@ function _configurableOf(
 
     _Internal references:_
 
-    * [`_standbyOf`](../read/\_standbyof.md)
-    * [`_getStructFor`](../read/\_getstructfor.md)
+    * [`_standbyOf`](../read/_standbyof.md)
+    * [`_getStructFor`](../read/_getstructfor.md)
     * [`_updateFundingCycleBasedOn`](\_updatefundingcyclebasedon.md)
-    * [`_getLatestTimeAfterBallotOf`](../read/\_getlatesttimeafterballotof.md)
+    * [`_getLatestTimeAfterBallotOf`](../read/_getlatesttimeafterballotof.md)
 4.  If there's no standby funding cycle, get a reference to the project's eligible funding cycle. The configurable funding cycle will have to be initialized based on the eligible cycle.
 
     ```solidity
@@ -83,7 +83,7 @@ function _configurableOf(
 
     _Internal references:_
 
-    * [`_eligibleOf`](../read/\_eligibleof.md)
+    * [`_eligibleOf`](../read/_eligibleof.md)
 5.  If there is an eligible cycle, check if it has an approved configuration. If it does not, the configurable funding cycle that will be initialized should not be based on it. Instead, it should be based on the funding cycle that the unapproved funding cycle is based on, which is the last funding cycle with an approved configuration.\
     \
     If an eligible cycle was not found, base the funding cycle that will be initialized on the project's latest funding cycle. If it is not approved, get a reference to the one its based on.
@@ -108,8 +108,8 @@ function _configurableOf(
 
     _Internal references:_
 
-    * [`_isIdApproved`](../read/\_isidapproved.md)
-    * [`_getStructFor`](../read/\_getstructfor.md)
+    * [`_isIdApproved`](../read/_isidapproved.md)
+    * [`_getStructFor`](../read/_getstructfor.md)
     * [`latestIdOf`](../properties/latestidof.md)
 6.  At this point, the `fundingCycleId` is the ID of the funding cycle that the one that'll be initialized should be based on. Get a reference to the [`JBFundingCycle`](../../../data-structures/jbfundingcycle.md)for the ID.\\
 
@@ -120,7 +120,7 @@ function _configurableOf(
 
     _Internal references:_
 
-    * [`_getStructFor`](../read/\_getstructfor.md)
+    * [`_getStructFor`](../read/_getstructfor.md)
 7.  Make sure the cycle is recurring, otherwise throw an error since a new funding cycle cannot be created based on a non-recurring cycle.
 
     ```solidity
@@ -142,7 +142,7 @@ function _configurableOf(
 
     _Internal references:_
 
-    * [`_getLatestTimeAfterBallotOf`](../read/\_getlatesttimeafterballotof.md)
+    * [`_getLatestTimeAfterBallotOf`](../read/_getlatesttimeafterballotof.md)
 10. Return the ID of the newly initialized funding cycle.\\
 
     ```solidity
@@ -152,7 +152,7 @@ function _configurableOf(
 
     _Internal references:_
 
-    * [`_initFor`](../read/\_getstructfor.md)
+    * [`_initFor`](../read/_getstructfor.md)
 {% endtab %}
 
 {% tab title="Code" %}

@@ -68,7 +68,7 @@ function _packAndStoreIntrinsicPropertiesOf(
 
     _Internal references:_
 
-    * [`_idFor`](../read/\_idfor.md)
+    * [`_idFor`](../read/_idfor.md)
 7.  Store the packed intrinsic properties for the funding cycle.
 
     ```solidity

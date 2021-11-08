@@ -35,7 +35,7 @@ function claimableOverflowOf(uint256 _projectId, uint256 _tokenCount)
 
     _Internal references:_
 
-    * [`_overflowDuring`](./\_overflowduring.md)
+    * [`_overflowDuring`](./_overflowduring.md)
 2.  If there is no overflow, there's also no claimable overflow.
 
     ```solidity

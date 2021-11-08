@@ -89,7 +89,7 @@ function configureFor(
 
     _Internal references:_
 
-    * [`_metadataOf`](../properties/\_metadataof.md)
+    * [`_metadataOf`](../properties/_metadataof.md)
 8.  Emit a `Configure` event with the relevant parameters.
 
     ```solidity
@@ -107,7 +107,7 @@ function configureFor(
 
     _Internal references:_
 
-    * [`_getStructFor`](../read/\_getstructfor.md)
+    * [`_getStructFor`](../read/_getstructfor.md)
 {% endtab %}
 
 {% tab title="Code" %}

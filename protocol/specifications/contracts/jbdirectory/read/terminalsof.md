@@ -27,7 +27,7 @@ function terminalsOf(uint256 _projectId) external view override returns (IJBTerm
 
     Internal references:
 
-    * [`_terminalsOf`](../properties/\_terminalsof.md)
+    * [`_terminalsOf`](../properties/_terminalsof.md)
 {% endtab %}
 
 {% tab title="Code" %}

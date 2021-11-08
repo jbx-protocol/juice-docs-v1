@@ -37,7 +37,7 @@ function splitsOf(
 
     Internal references:
 
-    * [`_splitsOf`](../properties/\_splitsof.md)
+    * [`_splitsOf`](../properties/_splitsof.md)
 {% endtab %}
 
 {% tab title="Code" %}

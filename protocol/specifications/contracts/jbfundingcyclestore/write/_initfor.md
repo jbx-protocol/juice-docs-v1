@@ -57,7 +57,7 @@ function _initFor(
 
     _Internal references:_
 
-    * [`_idFor`](../read/\_idfor.md)
+    * [`_idFor`](../read/_idfor.md)
     * [`_packAndStoreIntrinsicPropertiesOf`](\_packandstoreintrinsicpropertiesof.md)
     * [`_updateFundingCycleBasedOn`](\_updatefundingcyclebasedon.md)
 2.  Store the initialized ID as the `latestIdOf` the project.

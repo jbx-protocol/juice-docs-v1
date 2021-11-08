@@ -61,7 +61,7 @@ function challengeHandle(bytes32 _handle) external override { ... }
 
     _Internal references:_
 
-    * [`_SECONDS_IN_YEAR`](../properties/\_seconds\_in\_year.md)
+    * [`_SECONDS_IN_YEAR`](../properties/_seconds\_in\_year.md)
 5.  Store the `_challengeExpiry` as the `challengeExpiryOf` the provided `_handle`.
 
     ```solidity

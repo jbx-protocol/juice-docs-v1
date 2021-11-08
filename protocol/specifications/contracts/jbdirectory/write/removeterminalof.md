@@ -37,7 +37,7 @@ function removeTerminalOf(uint256 _projectId, IJBTerminal _terminal)
 
     Internal references:
 
-    * [`_terminalsOf`](../properties/\_terminalsof.md)
+    * [`_terminalsOf`](../properties/_terminalsof.md)
 2.  Delete all terminals from storage. All terminals except the one being removed will later be repupulated.
 
     ```solidity
@@ -47,7 +47,7 @@ function removeTerminalOf(uint256 _projectId, IJBTerminal _terminal)
 
     Internal references:
 
-    * [`_terminalsOf`](../properties/\_terminalsof.md)
+    * [`_terminalsOf`](../properties/_terminalsof.md)
 3.  Loop through the terminals, adding all terminals that aren't the one being removed back into storage.
 
     ```solidity
@@ -59,7 +59,7 @@ function removeTerminalOf(uint256 _projectId, IJBTerminal _terminal)
 
     Internal references:
 
-    * [`_terminalsOf`](../properties/\_terminalsof.md)
+    * [`_terminalsOf`](../properties/_terminalsof.md)
 4.  If the terminal being removed is set to be the primary terminal for its vault's token, delete it from being the primary terminal.
 
     ```solidity
@@ -70,7 +70,7 @@ function removeTerminalOf(uint256 _projectId, IJBTerminal _terminal)
 
     Internal references:
 
-    * [`_primaryTerminalOf`](../properties/\_primaryterminalof.md)
+    * [`_primaryTerminalOf`](../properties/_primaryterminalof.md)
 5.  Emit a `RemoveTerminal` event with the relevant parameters.
 
     ```solidity

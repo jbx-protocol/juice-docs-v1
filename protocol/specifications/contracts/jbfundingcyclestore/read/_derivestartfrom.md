@@ -39,7 +39,7 @@ function _deriveStartFrom(
 
     _Internal references:_
 
-    * [`_SECONDS_IN_DAY`](../properties/\_seconds\_in\_day.md)
+    * [`_SECONDS_IN_DAY`](../properties/_seconds\_in\_day.md)
 3.  Get a reference to the start time of the cycle immediately following the base cycle. This is the base cycles start time plus the base cycle's duration.
 
     ```solidity

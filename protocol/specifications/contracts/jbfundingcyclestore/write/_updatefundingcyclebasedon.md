@@ -36,7 +36,7 @@ function _updateFundingCycleBasedOn(
 
     _Internal references:_
 
-    * [`_deriveStartFrom`](../read/\_derivestartfrom.md)
+    * [`_deriveStartFrom`](../read/_derivestartfrom.md)
 2.  Find the weight that the updated funding cycle should use. If a weight was provided to the function, use it. Otherwise derive one from the previous weight.\
     \
     If the provided weight is the number 1, treat is like the number 0. A weight of 0 means that no specific weight was passed in.
@@ -50,7 +50,7 @@ function _updateFundingCycleBasedOn(
 
     _Internal references:_
 
-    * [`_deriveWeightFrom`](../read/\_deriveweightfrom.md)
+    * [`_deriveWeightFrom`](../read/_deriveweightfrom.md)
 3.  Find the number that the updated funding cycle should use.
 
     ```solidity
@@ -60,7 +60,7 @@ function _updateFundingCycleBasedOn(
 
     _Internal references:_
 
-    * [`_deriveNumberFrom`](../read/\_derivenumberfrom.md)
+    * [`_deriveNumberFrom`](../read/_derivenumberfrom.md)
 4.  Store the properties for the updated funding cycle.
 
     ```solidity

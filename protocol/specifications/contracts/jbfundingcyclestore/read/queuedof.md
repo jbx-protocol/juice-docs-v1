@@ -10,7 +10,7 @@ Interface: `IJBFundingCycleStore`
 
 _Returns an empty funding cycle with an ID of 0 if a queued funding cycle of the project is not found._
 
-_This runs roughly similar logic to _[_`_configurableOf`_](../write/\_configurableof.md)_._
+_This runs roughly similar logic to _[_`_configurableOf`_](../write/_configurableof.md)_._
 
 ## Definition
 

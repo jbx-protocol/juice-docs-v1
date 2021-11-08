@@ -36,7 +36,7 @@ function primaryTerminalOf(uint256 _projectId, address _token)
 
     Internal references:
 
-    * [`_primaryTerminalOf`](../properties/\_primaryterminalof.md)
+    * [`_primaryTerminalOf`](../properties/_primaryterminalof.md)
 2.  Loop through each of the project's terminals looking for one that has a vault that uses the same token as the one specified. If one is found, return it.
 
     ```solidity

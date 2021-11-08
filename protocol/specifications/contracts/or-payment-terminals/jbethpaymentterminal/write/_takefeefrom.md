@@ -54,7 +54,7 @@ function _takeFeeFrom(
 
     _Internal references:_
 
-    * [`_heldFeesOf`](../properties/\_heldfeesof.md)
+    * [`_heldFeesOf`](../properties/_heldfeesof.md)
     * [`_takeFee`](\_takefee.md)
 {% endtab %}
 

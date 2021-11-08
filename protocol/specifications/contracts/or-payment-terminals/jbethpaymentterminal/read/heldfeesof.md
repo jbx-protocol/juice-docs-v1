@@ -31,7 +31,7 @@ function heldFeesOf(uint256 _projectId) external view override returns (JBFee[] 
 
     _Internal references:_
 
-    * [`_heldFeesOf`](../properties/\_heldfeesof.md)
+    * [`_heldFeesOf`](../properties/_heldfeesof.md)
 {% endtab %}
 
 {% tab title="Code" %}

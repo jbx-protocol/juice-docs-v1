@@ -45,7 +45,7 @@ function _getStructFor(uint256 _id) private view returns (JBFundingCycle memory 
 
     _Internal references:_
 
-    * [`_packedIntrinsicPropertiesOf`](../properties/\_packedintrinsicpropertiesof.md)
+    * [`_packedIntrinsicPropertiesOf`](../properties/_packedintrinsicpropertiesof.md)
 4.  Get the stored configuration properties of the funding cycle. Populate the struct values by unpacking the `uint256`.
 
     ```solidity
@@ -59,7 +59,7 @@ function _getStructFor(uint256 _id) private view returns (JBFundingCycle memory 
 
     _Internal references:_
 
-    * [`_packedConfigurationPropertiesOf`](../properties/\_packedconfigurationpropertiesof.md)
+    * [`_packedConfigurationPropertiesOf`](../properties/_packedconfigurationpropertiesof.md)
 5.  Populate the `metadata` property of the struct by reading from what's stored in `_metadataOf`.
 
     ```solidity
@@ -68,7 +68,7 @@ function _getStructFor(uint256 _id) private view returns (JBFundingCycle memory 
 
     _Internal references:_
 
-    * [`_metadataOf`](../properties/\_metadataof.md)
+    * [`_metadataOf`](../properties/_metadataof.md)
 {% endtab %}
 
 {% tab title="Code" %}

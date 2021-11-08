@@ -63,7 +63,7 @@ function _eligibleOf(uint256 _projectId) private view returns (uint256 fundingCy
 
     _Internal references:_
 
-    * [`_SECONDS_IN_DAY`](../properties/\_seconds\_in\_day.md)
+    * [`_SECONDS_IN_DAY`](../properties/_seconds\_in\_day.md)
 5.  Get a reference to the funding cycle that the current cycle is based on.
 
     ```solidity
@@ -87,7 +87,7 @@ function _eligibleOf(uint256 _projectId) private view returns (uint256 fundingCy
 
     _Internal references:_
 
-    * [`_SECONDS_IN_DAY`](../properties/\_seconds\_in\_day.md)
+    * [`_SECONDS_IN_DAY`](../properties/_seconds\_in\_day.md)
 7.  Return the ID that the latest funding cycle is based on.
 
     ```solidity

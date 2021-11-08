@@ -65,7 +65,7 @@ function addTerminalsOf(uint256 _projectId, IJBTerminal _terminal)
 
     Internal references:
 
-    * [`_terminalsOf`](../properties/\_terminalsof.md)
+    * [`_terminalsOf`](../properties/_terminalsof.md)
 
 5.  Emit a `AddTerminal` event with the relevant parameters.
 

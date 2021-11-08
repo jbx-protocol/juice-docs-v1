@@ -52,7 +52,7 @@ function _mockFundingCycleBasedOn(JBFundingCycle memory _baseFundingCycle, bool 
 
     _Internal references:_
 
-    * [`_SECONDS_IN_DAY`](../properties/\_seconds\_in\_day.md)
+    * [`_SECONDS_IN_DAY`](../properties/_seconds\_in\_day.md)
 3.  Find the correct start time for the mock funding cycle.
 
     ```solidity

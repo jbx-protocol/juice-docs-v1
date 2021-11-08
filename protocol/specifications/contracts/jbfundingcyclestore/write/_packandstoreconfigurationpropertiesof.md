@@ -64,7 +64,7 @@ function _packAndStoreConfigurationProperties(
 
     _Internal references:_
 
-    * [`_packAndStoreConfigurationPropertiesOf`](../properties/\_packedconfigurationpropertiesof.md)
+    * [`_packAndStoreConfigurationPropertiesOf`](../properties/_packedconfigurationpropertiesof.md)
 {% endtab %}
 
 {% tab title="Code" %}

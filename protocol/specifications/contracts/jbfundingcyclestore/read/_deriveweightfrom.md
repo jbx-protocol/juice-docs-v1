@@ -73,7 +73,7 @@ function _deriveWeightFrom(JBFundingCycle memory _baseFundingCycle, uint256 _sta
 
     _Internal references:_
 
-    * [`_SECONDS_IN_DAY`](../properties/\_seconds\_in\_day.md)
+    * [`_SECONDS_IN_DAY`](../properties/_seconds\_in\_day.md)
 {% endtab %}
 
 {% tab title="Code" %}
