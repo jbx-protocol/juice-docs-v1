@@ -69,7 +69,7 @@ function currentOf(uint256 _projectId)
 ```javascript
 /** 
   @notice 
-  The currency ballot state of the project.
+  The current ballot state of the project.
 
   @param _projectId The ID of the project to check for a pending reconfiguration.
 

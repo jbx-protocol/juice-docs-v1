@@ -13,7 +13,7 @@ Only a project owner, an operator, or its controller can add a terminal.
 ## Definition
 
 ```solidity
-function addTerminalOf(uint256 _projectId, IJBTerminal _terminal)
+function addTerminalsOf(uint256 _projectId, IJBTerminal _terminal)
   external
   override
   requirePermissionAllowingOverride(

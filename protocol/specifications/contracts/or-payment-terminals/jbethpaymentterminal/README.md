@@ -47,7 +47,7 @@ constructor(
   vault = _vault;
 
   // Claim the store so that it recognizes this terminal as the address that can access it.
-  _store.claim();
+  _store.claimFor(this);
 
   store = _store;
 }
@@ -73,6 +73,7 @@ constructor(
 | [**`Pay`**](events/pay.md)                                         | <ul><li><code>uint256 indexed fundingCycleId</code></li><li><code>uint256 indexed projectId</code></li><li><code>address indexed beneficiary</code></li><li><a href="../../../../../protocol/data-structures/jbfundingcycle.md"><code>JBFundingCycle</code></a><code>fundingCycle</code></li><li><code>uint256 amount</code></li><li><code>uint256 weight</code></li><li><code>uint256 tokenCount</code></li><li><code>string memo</code></li><li><code>address caller</code></li></ul>        |
 | [**`RedeemTokens`**](events/redeemtokens.md)                       | <ul><li><code>uint256 indexed fundingCycleId</code></li><li><code>uint256 indexed projectId</code></li><li><code>address indexed holder</code></li><li><a href="../../../../../protocol/data-structures/jbfundingcycle.md"><code>JBFundingCycle</code></a><code>fundingCycle</code></li><li><code>address beneficiary</code></li><li><code>uint256 tokenCount</code></li><li><code>uint256 claimedAmount</code></li><li><code>string memo</code></li><li><code>address caller</code></li></ul> |
 | [**`DistributeToPayoutSplit`**](events/distributetopayoutsplit.md) | <ul><li><code>uint256 indexed fundingCycleId</code></li><li><code>uint256 indexed projectId</code></li><li><a href="../../../../../protocol/data-structures/jbsplit.md"><code>JBSplit</code></a><code>split</code></li><li><code>uint256 amount</code></li><li><code>address caller</code></li></ul>                                                                                                                                                                                           |
+| [**`SetFee`**](events/setfee.md)                                                 | <ul><li><code>uint256 fee</code></li><li><code>address caller</code></li></ul>                                                                                                                                                                                                                                            |
 
 ## Properties
 
@@ -80,8 +81,10 @@ constructor(
 | ------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | [**`projects`**](properties/projects.md)                                  | <p><strong>Traits</strong></p><ul><li><code>immutable</code></li></ul><p><strong>Returns</strong></p><ul><li><a href="../../../../../protocol/interfaces/ijbprojects.md"><code>IJBProjects</code></a><code>projects</code></li></ul>                                     |
 | [**`directory`**](properties/directory.md)                                | <p><strong>Traits</strong></p><ul><li><code>immutable</code></li></ul><p><strong>Returns</strong></p><ul><li><a href="../../../../../protocol/interfaces/ijbdirectory.md"><code>IJBDirectory</code></a><code>directory</code></li></ul>                                  |
-| [**`splitStore`**](../jbethpaymentterminalstore/properties/splitstore.md) | <p><strong>Traits</strong></p><ul><li><code>immutable</code></li></ul><p><strong>Returns</strong></p><ul><li><a href="../../../../../protocol/interfaces/ijbsplitsstore.md"><code>IJBSplitsStore</code></a><code>splitsStore</code></li></ul>                            |
+| [**`splitStore`**](properties/splitstore.md) | <p><strong>Traits</strong></p><ul><li><code>immutable</code></li></ul><p><strong>Returns</strong></p><ul><li><a href="../../../../../protocol/interfaces/ijbsplitsstore.md"><code>IJBSplitsStore</code></a><code>splitsStore</code></li></ul>                            |
 | [**`store`**](properties/store.md)                                        | <p><strong>Traits</strong></p><ul><li><code>immutable</code></li></ul><p><strong>Returns</strong></p><ul><li><a href="../../../../../protocol/specifications/contracts/jbethpaymenterminalstore/"><code>JBETHPaymentTerminalStore</code></a><code>store</code></li></ul> |
+| [**`token`**](properties/token.md)                                        | <p><strong>Traits</strong></p><ul><li><code>immutable</code></li></ul><p><strong>Returns</strong></p><ul><li><code>address token</code></li></ul> |
+| [**`fee`**](properties/fee.md)                                        | <p><strong>Returns</strong></p><ul><li><code>uint256 store</code></li></ul> |
 
 ## Read
 

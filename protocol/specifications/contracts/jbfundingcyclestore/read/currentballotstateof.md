@@ -70,7 +70,7 @@ function currentBallotStateOf(uint256 _projectId) external view override returns
 ```solidity
 /** 
   @notice 
-  The currency ballot state of the project.
+  The current ballot state of the project.
 
   @param _projectId The ID of the project to check the ballot state of.
 
