@@ -7,9 +7,11 @@
 # Definition
 
 ```solidity
-function _distributeToReservedTokenSplitsOf(JBFundingCycle memory _fundingCycle, uint256 _amount)
-  private
-  returns (uint256 leftoverAmount) { ... }
+function _distributeToReservedTokenSplitsOf(
+  uint256 _projectId,
+  JBFundingCycle memory _fundingCycle,
+  uint256 _amount
+) private returns (uint256 leftoverAmount) { ... }
 ```
 
 * Arguments:
@@ -31,8 +33,8 @@ function _distributeToReservedTokenSplitsOf(JBFundingCycle memory _fundingCycle,
     ```solidity
     // Get a reference to the project's reserved token splits.
     JBSplit[] memory _splits = splitsStore.splitsOf(
-      _fundingCycle.projectId,
-      _fundingCycle.configured,
+      _projectId,
+      _fundingCycle.configuration,
       JBSplitsGroups.RESERVED_TOKENS
     );
     ```
@@ -75,7 +77,7 @@ function _distributeToReservedTokenSplitsOf(JBFundingCycle memory _fundingCycle,
           : _split.projectId != 0
           ? projects.ownerOf(_split.projectId)
           : _split.beneficiary,
-        _fundingCycle.projectId,
+        _projectId,
         _tokenCount,
         _split.preferClaimed
       );
@@ -85,7 +87,7 @@ function _distributeToReservedTokenSplitsOf(JBFundingCycle memory _fundingCycle,
         _split.allocator.allocate(
           _tokenCount,
           JBSplitsGroups.RESERVED_TOKENS,
-          _fundingCycle.projectId,
+          _projectId,
           _split.projectId,
           _split.beneficiary,
           _split.preferClaimed
@@ -103,8 +105,9 @@ function _distributeToReservedTokenSplitsOf(JBFundingCycle memory _fundingCycle,
 
     ```solidity
     emit DistributeToReservedTokenSplit(
-      _fundingCycle.id,
-      _fundingCycle.projectId,
+      _fundingCycle.configuration,
+      _fundingCycle.number,
+      _projectId,
       _split,
       _tokenCount,
       msg.sender
@@ -122,21 +125,23 @@ function _distributeToReservedTokenSplitsOf(JBFundingCycle memory _fundingCycle,
   @notice
   Distributed tokens to the splits according to the specified funding cycle configuration.
 
+  @param _projectId The ID of the project for which reserved token splits are being distributed.
   @param _fundingCycle The funding cycle to base the token distribution on.
   @param _amount The total amount of tokens to mint.
 
   @return leftoverAmount If the splits percents dont add up to 100%, the leftover amount is returned.
 */
-function _distributeToReservedTokenSplitsOf(JBFundingCycle memory _fundingCycle, uint256 _amount)
-  private
-  returns (uint256 leftoverAmount)
-{
+function _distributeToReservedTokenSplitsOf(
+  uint256 _projectId,
+  JBFundingCycle memory _fundingCycle,
+  uint256 _amount
+) private returns (uint256 leftoverAmount) {
   // Set the leftover amount to the initial amount.
   leftoverAmount = _amount;
 
   // Get a reference to the project's reserved token splits.
   JBSplit[] memory _splits = splitsStore.splitsOf(
-    _fundingCycle.projectId,
+    _projectId,
     _fundingCycle.configured,
     JBSplitsGroups.RESERVED_TOKENS
   );
@@ -158,7 +163,7 @@ function _distributeToReservedTokenSplitsOf(JBFundingCycle memory _fundingCycle,
           : _split.projectId != 0
           ? projects.ownerOf(_split.projectId)
           : _split.beneficiary, 
-        _fundingCycle.projectId,
+        _projectId,
         _tokenCount,
         _split.preferClaimed
       );
@@ -168,7 +173,7 @@ function _distributeToReservedTokenSplitsOf(JBFundingCycle memory _fundingCycle,
         _split.allocator.allocate(
           _tokenCount,
           JBSplitsGroups.RESERVED_TOKENS,
-          _fundingCycle.projectId,
+          _projectId,
           _split.projectId,
           _split.beneficiary,
           _split.preferClaimed
@@ -179,8 +184,9 @@ function _distributeToReservedTokenSplitsOf(JBFundingCycle memory _fundingCycle,
     }
 
     emit DistributeToReservedTokenSplit(
-      _fundingCycle.id,
-      _fundingCycle.projectId,
+      _fundingCycle.configuration,
+      _fundingCycle.number,
+      _projectId,
       _split,
       _tokenCount,
       msg.sender

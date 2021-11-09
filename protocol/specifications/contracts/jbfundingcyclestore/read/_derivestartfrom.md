@@ -30,46 +30,36 @@ function _deriveStartFrom(
     // A subsequent cycle to one with a duration of 0 should start as soon as possible.
     if (_baseFundingCycle.duration == 0) return _mustStartOnOrAfter;
     ```
-2.  Get a reference to the duration of the base cycle in seconds.\\
-
-    ```solidity
-    // Save a reference to the cycle's duration measured in seconds.
-    uint256 _cycleDurationInSeconds = _baseFundingCycle.duration * _SECONDS_IN_DAY;
-    ```
-
-    _Internal references:_
-
-    * [`_SECONDS_IN_DAY`](../properties/_seconds\_in\_day.md)
-3.  Get a reference to the start time of the cycle immediately following the base cycle. This is the base cycles start time plus the base cycle's duration.
+2.  Get a reference to the start time of the cycle immediately following the base cycle. This is the base cycles start time plus the base cycle's duration.
 
     ```solidity
     // The time when the funding cycle immediately after the specified funding cycle starts.
-    uint256 _nextImmediateStart = _baseFundingCycle.start + _baseCycleDurationInSeconds;
+    uint256 _nextImmediateStart = _baseFundingCycle.start + _baseFundingCycle.duration;
     ```
-4.  If the `_nextImmediateStart` is allowed, it should be used. Otherwise we'll have to calculate a value depending on how much time has passed since the `_nextImmediateStart`.
+3.  If the `_nextImmediateStart` is allowed, it should be used. Otherwise we'll have to calculate a value depending on how much time has passed since the `_nextImmediateStart`.
 
     ```solidity
     // If the next immediate start is now or in the future, return it.
     if (_nextImmediateStart >= _mustStartOnOrAfter) return _nextImmediateStart;
     ```
-5.  Save a reference to the amount of seconds since the `_mustStartOnOrAfter` time that results in a start time that might satisfy the specified constraints.
+4.  Save a reference to the amount of seconds since the `_mustStartOnOrAfter` time that results in a start time that might satisfy the specified constraints.
 
     ```solidity
     // The amount of seconds since the `_mustStartOnOrAfter` time that results in a start time that might satisfy the specified constraints.
     uint256 _timeFromImmediateStartMultiple = (_mustStartOnOrAfter - _nextImmediateStart) %
-      _cycleDurationInSeconds;
+      _baseFundingCycle.duration;
     ```
-6.  Save a reference to the first possible start time.
+5.  Save a reference to the first possible start time.
 
     ```solidity
     // A reference to the first possible start timestamp.
     start = _mustStartOnOrAfter - _timeFromImmediateStartMultiple;
     ```
-7.  It's possible that the `start` time doesn't satisfy the specified constraints. If so, add increments of the funding cycle's duration as necessary to satisfy the threshold.
+6.  It's possible that the `start` time doesn't satisfy the specified constraints. If so, add increments of the funding cycle's duration as necessary to satisfy the threshold.
 
     ```solidity
     // Add increments of duration as necessary to satisfy the threshold.
-    while (_mustStartOnOrAfter > start) start = start + _cycleDurationInSeconds;
+    while (_mustStartOnOrAfter > start) start = start + _baseFundingCycle.duration;
     ```
 {% endtab %}
 
@@ -88,24 +78,21 @@ function _deriveStartFrom(JBFundingCycle memory _baseFundingCycle, uint256 _must
   // A subsequent cycle to one with a duration of 0 should start as soon as possible.
   if (_baseFundingCycle.duration == 0) return _mustStartOnOrAfter;
 
-  // Save a reference to the cycle's duration measured in seconds.
-  uint256 _cycleDurationInSeconds = _baseFundingCycle.duration * _SECONDS_IN_DAY;
-
   // The time when the funding cycle immediately after the specified funding cycle starts.
-  uint256 _nextImmediateStart = _baseFundingCycle.start + _cycleDurationInSeconds;
+  uint256 _nextImmediateStart = _baseFundingCycle.start + _baseFundingCycle.duration;
 
   // If the next immediate start is now or in the future, return it.
   if (_nextImmediateStart >= _mustStartOnOrAfter) return _nextImmediateStart;
 
   // The amount of seconds since the `_mustStartOnOrAfter` time that results in a start time that might satisfy the specified constraints.
   uint256 _timeFromImmediateStartMultiple = (_mustStartOnOrAfter - _nextImmediateStart) %
-    _cycleDurationInSeconds;
+    _baseFundingCycle.duration;
   
   // A reference to the first possible start timestamp.
   start = _mustStartOnOrAfter - _timeFromImmediateStartMultiple;
 
   // Add increments of duration as necessary to satisfy the threshold.
-  while (_mustStartOnOrAfter > start) start = start + _cycleDurationInSeconds;
+  while (_mustStartOnOrAfter > start) start = start + _baseFundingCycle.duration;
 }
 ```
 {% endtab %}

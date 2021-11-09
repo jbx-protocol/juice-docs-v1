@@ -21,7 +21,7 @@ function distributePayoutsOf(
   uint256 _currency,
   uint256 _minReturnedWei,
   string memory _memo
-) external override nonReentrant returns (uint256) { ... }
+) external override nonReentrant { ... }
 ```
 
 * Arguments:
@@ -32,15 +32,15 @@ function distributePayoutsOf(
 * The function can be accessed externally by anyone.
 * The function cannot be accessed recursively or while other `nonReentrant` functions in this contract are in progress.
 * The resulting function overrides a function definition from the `IJBETHPaymentTerminal` interface.
-* The function returns the ID of the funding cycle during which the distribution was made.
+* The function returns doesn't return anything.
 
 # Body
 
 1.  Record the withdrawal
 
     ```solidity
-    // Record the withdrawal.
-    (JBFundingCycle memory _fundingCycle, uint256 _withdrawnAmount) = store.recordWithdrawalFor(
+    // Record the distribution.
+    (JBFundingCycle memory _fundingCycle, uint256 _distributedAmount) = store.recordDistributionFor(
       _projectId,
       _amount,
       _currency,
@@ -50,7 +50,7 @@ function distributePayoutsOf(
 
     _External references:_
 
-    * [`recordWithdrawalFor`](../../jbethpaymentterminalstore/write/recordwithdrawalfor.md)
+    * [`recordDistributionFor`](../../jbethpaymentterminalstore/write/recorddistributionfor.md)
 2.  Get a reference to the project's owner. The owner will be allocated any funds leftover once splits are settled.
 
     ```solidity
@@ -75,14 +75,15 @@ function distributePayoutsOf(
 4.  If the funding cycle during which the distribtion is being made has a fee, and if its project isn't the JuiceboxDAO project with an ID of 1, take a fee from the withdrawal into the JuiceboxDAO project.
 
     ```solidity
-    // Take a fee from the _withdrawnAmount, if needed.
+    // Take a fee from the _distributedAmount, if needed.
     // The project's owner will be the beneficiary of the resulting minted tokens from platform project.
     // The platform project's ID is 1.
     uint256 _feeAmount = fee == 0 || _projectId == 1
       ? 0
       : _takeFeeFrom(
+        _projectId,
         _fundingCycle,
-        _withdrawnAmount,
+        _distributedAmount,
         _projectOwner,
         string(bytes.concat('Fee from @', _handle))
       );
@@ -98,7 +99,7 @@ function distributePayoutsOf(
     // The net transfer amount is the withdrawn amount minus the fee.
     uint256 _leftoverDistributionAmount = _distributeToPayoutSplitsOf(
       _fundingCycle,
-      _withdrawnAmount - _feeAmount,
+      _distributedAmount - _feeAmount,
       string(bytes.concat('Payout from @', _handle))
     );
     ```
@@ -117,11 +118,12 @@ function distributePayoutsOf(
 
     ```solidity
     emit DistributePayouts(
-      _fundingCycle.id,
+      _fundingCycle.configuration,
+      _fundingCycle.number,
       _projectId,
       _projectOwner,
       _amount,
-      _withdrawnAmount,
+      _distributedAmount,
       _feeAmount,
       _leftoverDistributionAmount,
       _memo,
@@ -132,11 +134,6 @@ function distributePayoutsOf(
     _Event references:_
 
     * [`DistributePayouts`](../events/distributepayouts.md)
-8.  Return the funding cycle ID.
-
-    ```solidity
-    return _fundingCycle.id;
-    ```
 {% endtab %}
 
 {% tab title="Code" %}
@@ -155,8 +152,6 @@ function distributePayoutsOf(
   @param _amount The amount being distributed.
   @param _currency The expected currency of the amount being distributed. Must match the project's current funding cycle's currency.
   @param _minReturnedWei The minimum number of wei that the amount should be valued at.
-
-  @return The ID of the funding cycle during which the distribution was made.
 */
 function distributePayoutsOf(
   uint256 _projectId,
@@ -164,9 +159,9 @@ function distributePayoutsOf(
   uint256 _currency,
   uint256 _minReturnedWei,
   string memory _memo
-) external override nonReentrant returns (uint256) {
-  // Record the withdrawal.
-  (JBFundingCycle memory _fundingCycle, uint256 _withdrawnAmount) = store.recordWithdrawalFor(
+) external override nonReentrant {
+  // Record the distribution.
+  (JBFundingCycle memory _fundingCycle, uint256 _distributedAmount) = store.recordDistributionFor(
     _projectId,
     _amount,
     _currency,
@@ -180,14 +175,15 @@ function distributePayoutsOf(
   // Get a reference to the handle of the project paying the fee and sending payouts.
   bytes32 _handle = projects.handleOf(_projectId);
 
-  // Take a fee from the _withdrawnAmount, if needed.
+  // Take a fee from the _distributedAmount, if needed.
   // The project's owner will be the beneficiary of the resulting minted tokens from platform project.
   // The platform project's ID is 1.
   uint256 _feeAmount = fee == 0 || _projectId == 1
     ? 0
     : _takeFeeFrom(
+      _projectId,
       _fundingCycle,
-      _withdrawnAmount,
+      _distributedAmount,
       _projectOwner,
       string(bytes.concat('Fee from @', _handle))
     );
@@ -196,7 +192,7 @@ function distributePayoutsOf(
   // The net transfer amount is the withdrawn amount minus the fee.
   uint256 _leftoverDistributionAmount = _distributeToPayoutSplitsOf(
     _fundingCycle,
-    _withdrawnAmount - _feeAmount,
+    _distributedAmount - _feeAmount,
     string(bytes.concat('Payout from @', _handle))
   );
 
@@ -205,18 +201,17 @@ function distributePayoutsOf(
     Address.sendValue(_projectOwner, _leftoverDistributionAmount);
 
   emit DistributePayouts(
-    _fundingCycle.id,
+    _fundingCycle.configuration,
+    _fundingCycle.number,
     _projectId,
     _projectOwner,
     _amount,
-    _withdrawnAmount,
+    _distributedAmount,
     _feeAmount,
     _leftoverDistributionAmount,
     _memo,
     msg.sender
   );
-
-  return _fundingCycle.id;
 }
 ```
 {% endtab %}

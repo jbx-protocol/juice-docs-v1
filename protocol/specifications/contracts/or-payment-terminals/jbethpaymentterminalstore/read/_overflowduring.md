@@ -11,10 +11,14 @@ _This amount changes as the price of ETH changes in relation to the funding cycl
 # Definition
 
 ```solidity
-function _overflowDuring(JBFundingCycle memory _fundingCycle) private view returns (uint256) { ... }
+function _overflowDuring(uint256 _projectId, JBFundingCycle memory _fundingCycle)
+  private
+  view
+  returns (uint256) { ... }
 ```
 
 * Arguments:
+  * `_projectId` is the ID of the project to get overflow for.
   * `_fundingCycle` is the ID of the funding cycle to base the overflow on.
 * The view function is private to this contract.
 * The function does not alter state on the blockchain.
@@ -42,11 +46,11 @@ function _overflowDuring(JBFundingCycle memory _fundingCycle) private view retur
 
     ```solidity
     // Get a reference to the amount still withdrawable during the funding cycle.
-    uint256 _targetRemaining = directory.controllerOf(_fundingCycle.projectId).distributionLimitOf(
-      _fundingCycle.projectId,
-      _fundingCycle.configured,
+    uint256 _targetRemaining = directory.controllerOf(_projectId).distributionLimitOf(
+      _projectId,
+      _fundingCycle.configuration,
       terminal
-    ) - usedDistributionLimitOf[_fundingCycle.projectId][_fundingCycle.id];
+    ) - usedDistributionLimitOf[_projectId][_fundingCycle.number];
     ```
 
     _Internal references:_
@@ -61,9 +65,9 @@ function _overflowDuring(JBFundingCycle memory _fundingCycle) private view retur
 
     ```solidity
     // Get a reference to the current funding cycle's currency for this terminal.
-    uint256 _currency = directory.controllerOf(_fundingCycle.projectId).currencyOf(
-      _fundingCycle.projectId,
-      _fundingCycle.configured,
+    uint256 _currency = directory.controllerOf(_projectId).currencyOf(
+      _projectId,
+      _fundingCycle.configuration,
       terminal
     );
     ```
@@ -103,29 +107,33 @@ function _overflowDuring(JBFundingCycle memory _fundingCycle) private view retur
 
   @dev
   This amount changes as the price of ETH changes in relation to the funding cycle's currency.
-
+  
+  @param _projectId The ID of the project to get overflow for.
   @param _fundingCycle The ID of the funding cycle to base the overflow on.
 
   @return overflow The overflow of funds.
 */
-function _overflowDuring(JBFundingCycle memory _fundingCycle) private view returns (uint256) {
+function _overflowDuring(uint256 _projectId, JBFundingCycle memory _fundingCycle)
+private
+view
+returns (uint256) {
   // Get the current balance of the project.
-  uint256 _balanceOf = balanceOf[_fundingCycle.projectId];
+  uint256 _balanceOf = balanceOf[_projectId];
 
   // If there's no balance, there's no overflow.
   if (_balanceOf == 0) return 0;
 
   // Get a reference to the amount still withdrawable during the funding cycle.
-  uint256 _targetRemaining = directory.controllerOf(_fundingCycle.projectId).distributionLimitOf(
-    _fundingCycle.projectId,
-    _fundingCycle.configured,
+  uint256 _targetRemaining = directory.controllerOf(_projectId).distributionLimitOf(
+    _projectId,
+    _fundingCycle.configuration,
     terminal
-  ) - usedDistributionLimitOf[_fundingCycle.projectId][_fundingCycle.id]; 
+  ) - usedDistributionLimitOf[_projectId][_fundingCycle.number];
 
   // Get a reference to the current funding cycle's currency for this terminal.
-  uint256 _currency = directory.controllerOf(_fundingCycle.projectId).currencyOf(
-    _fundingCycle.projectId,
-    _fundingCycle.configured,
+  uint256 _currency = directory.controllerOf(_projectId).currencyOf(
+    _projectId,
+    _fundingCycle.configuration,
     terminal
   );
 

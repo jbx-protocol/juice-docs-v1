@@ -9,57 +9,59 @@ Contract:[`JBFundingCycleStore`](../)​
 # Definition
 
 ```solidity
-function _getStructFor(uint256 _id) private view returns (JBFundingCycle memory fundingCycle) { ... }
+function _getStructFor(uint256 _projectId, uint256 _configuration)
+  private
+  view
+  returns (JBFundingCycle memory fundingCycle) { ... }
 ```
 
 * Arguments:
-  * `_id` is the funding cycle ID to get the full struct for.
+  * `_projectId` is the ID of the project to which the funding cycle belongs.
+  * `_configuration` is the funding cycle configuration to get the full struct for.
 * The view function is private to this contract.
 * The function does not alter state on the blockchain.
 * The function returns a [`JBFundingCycle`](../../../data-structures/jbfundingcycle.md) stored in the `fundingCycle` reference.
 
 # Body
 
-1.  If the `_id` provided is 0, return an empty funding cycle.
+1.  If the `_configuration` provided is 0, return an empty funding cycle.
 
     ```solidity
-    // Return an empty funding cycle if the ID specified is 0.
-    if (_id == 0) return fundingCycle;
+    // Return an empty funding cycle if the configuration specified is 0.
+    if (_configuration == 0) return fundingCycle;
     ```
-2.  Set the funding cycle's id to the provided value.
+2.  Set the funding cycle's configuration to the provided value.
 
     ```solidity
-    fundingCycle.id = _id;
+    fundingCycle.configuration = _configuration;
     ```
-3.  Get the stored intrinsic properties of the funding cycle. Populate the struct values by de-packing the `uint256`.
+3.  Get the stored intrinsic properties of the funding cycle. Populate the struct values by unpacking the `uint256`.
 
     ```solidity
-    uint256 _packedIntrinsicProperties = _packedIntrinsicPropertiesOf[_id];
+    uint256 _packedIntrinsicProperties = _packedIntrinsicPropertiesOf[_projectId][_configuration];
 
-    fundingCycle.weight = uint256(uint80(_packedIntrinsicProperties));
-    fundingCycle.projectId = uint256(uint56(_packedIntrinsicProperties >> 80));
-    fundingCycle.basedOn = uint256(uint48(_packedIntrinsicProperties >> 136));
-    fundingCycle.start = uint256(uint48(_packedIntrinsicProperties >> 184));
-    fundingCycle.number = uint256(uint24(_packedIntrinsicProperties >> 232));
+    fundingCycle.weight = uint256(uint88(_packedIntrinsicProperties));
+    fundingCycle.basedOn = uint256(uint56(_packedIntrinsicProperties >> 136));
+    fundingCycle.start = uint256(uint56(_packedIntrinsicProperties >> 128));
+    fundingCycle.number = uint256(uint56(_packedIntrinsicProperties >> 176));
     ```
 
     _Internal references:_
 
     * [`_packedIntrinsicPropertiesOf`](../properties/_packedintrinsicpropertiesof.md)
-4.  Get the stored configuration properties of the funding cycle. Populate the struct values by unpacking the `uint256`.
+4.  Get the stored user properties of the funding cycle. Populate the struct values by unpacking the `uint256`.
 
     ```solidity
-    uint256 _packedConfigurationProperties = _packedConfigurationPropertiesOf[_id];
-      
-    fundingCycle.ballot = IJBFundingCycleBallot(address(uint160(_packedConfigurationProperties)));
-    fundingCycle.configured = uint256(uint48(_packedConfigurationProperties >> 160));
-    fundingCycle.duration = uint256(uint16(_packedConfigurationProperties >> 208));
-    fundingCycle.discountRate = uint256(uint16(_packedConfigurationProperties >> 240));
+    uint256 _packedUserProperties = _packedUserPropertiesOf[_projectId][_configuration];
+
+    fundingCycle.ballot = IJBFundingCycleBallot(address(uint160(_packedUserProperties)));
+    fundingCycle.duration = uint256(uint64(_packedUserProperties >> 208));
+    fundingCycle.discountRate = uint256(uint32(_packedUserProperties >> 224));
     ```
 
     _Internal references:_
 
-    * [`_packedConfigurationPropertiesOf`](../properties/_packedconfigurationpropertiesof.md)
+    * [`_packedUserPropertiesOf`](../properties/_packeduserpropertiesof.md)
 5.  Populate the `metadata` property of the struct by reading from what's stored in `_metadataOf`.
 
     ```solidity
@@ -77,32 +79,35 @@ function _getStructFor(uint256 _id) private view returns (JBFundingCycle memory 
   @notice 
   Unpack a funding cycle's packed stored values into an easy-to-work-with funding cycle struct.
 
-  @param _id The funding cycle ID to get the full struct for.
+  @param _projectId The ID of the project to which the funding cycle belongs.
+  @param _configuration The funding cycle configuration to get the full struct for.
 
-  @return _fundingCycle The funding cycle struct.
+  @return fundingCycle The funding cycle struct.
 */
-function _getStructFor(uint256 _id) private view returns (JBFundingCycle memory fundingCycle) {
+function _getStructFor(uint256 _projectId, uint256 _configuration)
+  private
+  view
+  returns (JBFundingCycle memory fundingCycle)
+{
   // Return an empty funding cycle if the ID specified is 0.
-  if (_id == 0) return fundingCycle;
+  if (_configuration == 0) return fundingCycle;
 
-  fundingCycle.id = _id;
+  fundingCycle.configuration = _configuration;
 
-  uint256 _packedIntrinsicProperties = _packedIntrinsicPropertiesOf[_id];
+  uint256 _packedIntrinsicProperties = _packedIntrinsicPropertiesOf[_projectId][_configuration];
 
-  fundingCycle.weight = uint256(uint80(_packedIntrinsicProperties));
-  fundingCycle.projectId = uint256(uint56(_packedIntrinsicProperties >> 80));
-  fundingCycle.basedOn = uint256(uint48(_packedIntrinsicProperties >> 136));
-  fundingCycle.start = uint256(uint48(_packedIntrinsicProperties >> 184));
-  fundingCycle.number = uint256(uint24(_packedIntrinsicProperties >> 232));
+  fundingCycle.weight = uint256(uint88(_packedIntrinsicProperties));
+  fundingCycle.basedOn = uint256(uint56(_packedIntrinsicProperties >> 136));
+  fundingCycle.start = uint256(uint56(_packedIntrinsicProperties >> 128));
+  fundingCycle.number = uint256(uint56(_packedIntrinsicProperties >> 176));
 
-  uint256 _packedConfigurationProperties = _packedConfigurationPropertiesOf[_id];
-  
-  fundingCycle.ballot = IJBFundingCycleBallot(address(uint160(_packedConfigurationProperties)));
-  fundingCycle.configured = uint256(uint48(_packedConfigurationProperties >> 160));
-  fundingCycle.duration = uint256(uint16(_packedConfigurationProperties >> 208));
-  fundingCycle.discountRate = uint256(uint8(_packedConfigurationProperties >> 240));
-  
-  fundingCycle.metadata = _metadataOf[_id];
+  uint256 _packedUserProperties = _packedUserPropertiesOf[_projectId][_configuration];
+
+  fundingCycle.ballot = IJBFundingCycleBallot(address(uint160(_packedUserProperties)));
+  fundingCycle.duration = uint256(uint64(_packedUserProperties >> 208));
+  fundingCycle.discountRate = uint256(uint32(_packedUserProperties >> 224));
+
+  fundingCycle.metadata = _metadataOf[_projectId][_configuration];
 }
 ```
 {% endtab %}

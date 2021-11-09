@@ -6,12 +6,12 @@ Interface: `IJBFundingCycleStore`
 
 {% tabs %}
 {% tab title="Step by step" %}
-**Get the funding cycle with the given ID.**
+**Get the funding cycle with the given configuration for the specified project.**
 
 # Definition
 
 ```solidity
-function get(uint256 _fundingCycleId)
+function get(uint256 _projectId, uint256 _configuration)
   external
   view
   override
@@ -19,7 +19,8 @@ function get(uint256 _fundingCycleId)
 ```
 
 * Arguments:
-  * `_fundingCycleId` is the ID of the funding cycle to get.
+  * `_projectId` is the ID of the project to which the funding cycle belongs.
+  * `_configuration` is the configuration of the funding cycle to get.
 * The view function can be accessed externally by anyone.
 * The function does not alter state on the blockchain.
 * The function overrides a function definition from the `IJBFundingCycleStore` interface.
@@ -27,65 +28,10 @@ function get(uint256 _fundingCycleId)
 
 # Body
 
-1.  Check that the provided funding cycle ID is valid.
+1.  Return the struct for the provided configuration and project.
 
     ```solidity
-    // The funding cycle should exist.
-    require(_fundingCycleId > 0, '0x13 BAD_ID');
-    ```
-2.  Try to get the full funding cycle struct for the provided ID.
-
-    ```solidity
-    // See if there's stored info for the provided ID.
-    fundingCycle = _getStructFor(_fundingCycleId);
-    ```
-
-    _Internal references:_
-
-    * [`_getStructFor`](\_getstructfor.md)
-3.  If the funding cycle exists in storage, return it.
-
-    ```solidity
-    // If so, return it.
-    if (fundingCycle.number > 0) return fundingCycle;
-    ```
-4.  If the funding cycle was not found in storage, it's possible that it still exists as a consequence of a previous funding cycle rolling over, but hasn't yet been stored. Check to see if there's a current funding cycle.
-
-    ```solidity
-    // Get the current funding cycle. It might exist but not yet have been stored.
-    fundingCycle = currentOf(_fundingCycleId);
-    ```
-
-    _Internal references:_
-
-    * [`currentOf`](currentof.md)
-5.  If the funding cycle ID being queried matches the current funding cycle of the project, return it.
-
-    ```solidity
-     // If the IDs match, return it.
-     if (fundingCycle.id == _fundingCycleId) return fundingCycle;
-    ```
-6.  The upcoming funding cycle might also not yet be in storage, but might be reference-able.
-
-    ```solidity
-    // Get the queued funding cycle. It might exist but not yet have been stored.
-    fundingCycle = queuedOf(_fundingCycleId);
-    ```
-
-    _Internal references:_
-
-    * [`queuedOf`](queuedof.md)
-7.  If the funding cycle ID being queried matches the queued funding cycle of the project, return it.
-
-    ```solidity
-    // If the IDs match, return it.
-    if (fundingCycle.id == _fundingCycleId) return fundingCycle;
-    ```
-8.  If the ID being queried hasn't been found, return an empty Funding cycle struct.
-
-    ```solidity
-    // Return an empty Funding Cycle.
-    return _getStructFor(0);
+    return _getStructFor(_projectId, _configuration);
     ```
 
     _Internal references:_
@@ -97,49 +43,22 @@ function get(uint256 _fundingCycleId)
 ```solidity
 /**
   @notice 
-  Get the funding cycle with the given ID.
+  Get the funding cycle with the given configuration for the specified project.
 
-  @param _fundingCycleId The ID of the funding cycle to get.
+  @param _projectId The ID of the project to which the funding cycle belongs.
+  @param _configuration The configuration of the funding cycle to get.
 
   @return fundingCycle The funding cycle.
 */
-function get(uint256 _fundingCycleId)
+function get(uint256 _projectId, uint256 _configuration)
   external
   view
   override
   returns (JBFundingCycle memory fundingCycle)
 {
-  // The funding cycle should exist.
-  require(_fundingCycleId > 0, '0x13 BAD_ID');
-
-  // See if there's stored info for the provided ID.
-  fundingCycle = _getStructFor(_fundingCycleId);
-  
-  // If so, return it.
-  if (fundingCycle.number > 0) return fundingCycle;
-  
-  // Get the current funding cycle. It might exist but not yet have been stored.
-  fundingCycle = currentOf(_fundingCycleId);
-  
-  // If the IDs match, return it.
-  if (fundingCycle.id == _fundingCycleId) return fundingCycle;
-  
-  // Get the queued funding cycle. It might exist but not yet have been stored.
-  fundingCycle = queuedOf(_fundingCycleId);
-  
-  // If the IDs match, return it.
-  if (fundingCycle.id == _fundingCycleId) return fundingCycle;
-
-  // Return an empty Funding Cycle.
-  return _getStructFor(0);
+  return _getStructFor(_projectId, _configuration);
 }
 ```
-{% endtab %}
-
-{% tab title="Errors" %}
-| String             | Description                         |
-| ------------------ | ----------------------------------- |
-| **`0x13: BAD_ID`** | Thrown if the ID can't be resolved. |
 {% endtab %}
 
 {% tab title="Bug bounty" %}

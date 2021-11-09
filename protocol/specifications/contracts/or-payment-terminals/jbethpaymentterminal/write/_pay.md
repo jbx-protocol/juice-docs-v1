@@ -17,7 +17,7 @@ function _pay(
   bool _preferClaimedTokens,
   string memory _memo,
   bytes memory _delegateMetadata
-) private returns (uint256) { ... }
+) private { ... }
 ```
 
 * Arguments:
@@ -29,7 +29,7 @@ function _pay(
   * `_memo` is a memo to pass along to the emitted event, and passed along the the funding cycle's data source and delegate.
   * `_delegateMetadata` are bytes to send along to the delegate, if one is provided.
 * The function is private to this contract.
-* The function returns the leftover amount if the splits don't add up to 100%.
+* The function doesn't return anything. 
 
 # Body
 
@@ -68,7 +68,8 @@ function _pay(
 
     ```solidity
     emit Pay(
-      _fundingCycle.id,
+      _fundingCycle.configuration,
+      _fundingCycle.number,
       _projectId,
       _beneficiary,
       _fundingCycle,
@@ -83,11 +84,6 @@ function _pay(
     _Event references:_
 
     * [`Pay`](../events/pay.md)
-5.  Return the funding cycle's ID.
-
-    ```solidity
-    return _fundingCycle.id;
-    ```
 {% endtab %}
 
 {% tab title="Code" %}
@@ -104,7 +100,7 @@ function _pay(
   bool _preferClaimedTokens,
   string memory _memo,
   bytes memory _delegateMetadata
-) private returns (uint256) {
+) private {
   // Cant send tokens to the zero address.
   require(_beneficiary != address(0), '0x4e: ZERO_ADDRESS');
 
@@ -124,18 +120,16 @@ function _pay(
   );
 
   emit Pay(
-    _fundingCycle.id,
+    _fundingCycle.configuration,
+    _fundingCycle.number,
     _projectId,
     _beneficiary,
-    _fundingCycle,
     _amount,
     _weight,
     _tokenCount,
     _memo,
     msg.sender
   );
-
-  return _fundingCycle.id;
 }
 ```
 {% endtab %}

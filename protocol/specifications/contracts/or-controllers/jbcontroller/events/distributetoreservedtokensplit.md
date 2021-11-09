@@ -8,7 +8,8 @@ Emitted from:
 
 ```solidity
 event DistributeToReservedTokenSplit(
-  uint256 indexed fundingCycleId,
+  uint256 indexed fundingCycleConfiguration,
+  uint256 indexed fundingCycleNumber,
   uint256 indexed projectId,
   JBSplit split,
   uint256 count,
@@ -16,7 +17,8 @@ event DistributeToReservedTokenSplit(
 );
 ```
 
-* `fundingCycleId` is the ID of the funding cycle during which the reserved tokens were distributed.
+* `fundingCycleConfiguration` is the funding cycle configuration during which the reserved tokens were distributed.
+* `fundingCycleNumber` is the number of the funding cycle during which the reserved tokens were distributed.
 * `projectId` is the ID of the token's project.
 * `split` is the [`JBSplit`](../../../../data-structures/jbsplit.md) data structure that the split was made for.
 * `projectOwner` is the address that received any leftover tokens after splits were applied.

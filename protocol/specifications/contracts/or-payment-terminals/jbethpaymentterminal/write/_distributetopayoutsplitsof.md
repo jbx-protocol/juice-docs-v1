@@ -10,6 +10,7 @@ Contract: [`JBETHPaymentTerminal`](../)​‌
 
 ```solidity
 function _distributeToPayoutSplitsOf(
+  uint256 _projectId,
   JBFundingCycle memory _fundingCycle,
   uint256 _amount,
   string memory _memo
@@ -17,6 +18,7 @@ function _distributeToPayoutSplitsOf(
 ```
 
 * Arguments:
+  * `_projectId` is the ID of the project for which payout splits are being distributed.
   * `_fundingCycle` is the [`JBFundingCycle`](../../../../data-structures/jbfundingcycle.md) during which the distribution is being made.
   * `_amount` is the total amount being distributed.
   * `_memo` is a memo to pass along to the emitted events.
@@ -36,8 +38,8 @@ function _distributeToPayoutSplitsOf(
     ```solidity
     // Get a reference to the project's payout splits.
     JBSplit[] memory _splits = splitsStore.splitsOf(
-      _fundingCycle.projectId,
-      _fundingCycle.configured,
+      _projectId,
+      _fundingCycle.configuration,
       JBSplitsGroups.ETH_PAYOUT
     );
     ```
@@ -78,7 +80,7 @@ function _distributeToPayoutSplitsOf(
         _split.allocator.allocate{value: _payoutAmount}(
           _payoutAmount,
           JBSplitsGroups.ETH_PAYOUT,
-          _fundingCycle.projectId,
+          _projectId,
           _split.projectId,
           _split.beneficiary,
           _split.preferClaimed
@@ -144,8 +146,9 @@ function _distributeToPayoutSplitsOf(
 
     ```solidity
     emit DistributeToPayoutSplit(
-      _fundingCycle.id,
-      _fundingCycle.projectId,
+      _fundingCycle.configuration,
+      _fundingCycle.number,
+      _projectId,
       _split,
       _payoutAmount,
       msg.sender
@@ -162,7 +165,8 @@ function _distributeToPayoutSplitsOf(
 /** 
   @notice
   Pays out splits for a project's funding cycle configuration.
-
+  
+  @param _projectId The ID of the project for which payout splits are being distributed.
   @param _fundingCycle The funding cycle during which the distribution is being made.
   @param _amount The total amount being distributed.
   @param _memo A memo to pass along to the emitted events.
@@ -179,8 +183,8 @@ function _distributeToPayoutSplitsOf(
 
   // Get a reference to the project's payout splits.
   JBSplit[] memory _splits = splitsStore.splitsOf(
-    _fundingCycle.projectId,
-    _fundingCycle.configured,
+    _projectId,
+    _fundingCycle.configuration,
     JBSplitsGroups.ETH_PAYOUT
   );
 
@@ -199,7 +203,7 @@ function _distributeToPayoutSplitsOf(
         _split.allocator.allocate{value: _payoutAmount}(
           _payoutAmount,
           JBSplitsGroups.ETH_PAYOUT,
-          _fundingCycle.projectId,
+          _projectId,
           _split.projectId,
           _split.beneficiary,
           _split.preferClaimed
@@ -243,8 +247,9 @@ function _distributeToPayoutSplitsOf(
     }
 
     emit DistributeToPayoutSplit(
-      _fundingCycle.id,
-      _fundingCycle.projectId,
+      _fundingCycle.configuration,
+      _fundingCycle.number,
+      _projectId,
       _split,
       _payoutAmount,
       msg.sender

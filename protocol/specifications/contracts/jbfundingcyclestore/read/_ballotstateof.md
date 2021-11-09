@@ -10,14 +10,14 @@ Contract:[`JBFundingCycleStore`](../)​
 
 ```solidity
 function _ballotStateOf(
-  uint256 _id,
+  uint256 _projectId,
   uint256 _configuration,
   uint256 _ballotFundingCycleId
 ) private view returns (JBBallotState) { ... }
 ```
 
 * Arguments:
-  * `_id` is the ID of the funding cycle configuration to check the status of.
+  * `_projectId` is the ID of the project to which the funding cycle belongs.
   * `_configuration` is the timestamp when the configuration took place. This differentiates reconfigurations onto the same upcoming funding cycle, which all would have the same ID but different configuration times.
   * `_ballotFundingCycleId` is the ID of the funding cycle which is configured with the ballot that should be used.
 * The view function is private to this contract.
@@ -36,7 +36,7 @@ function _ballotStateOf(
 
     ```solidity
     // Get the ballot funding cycle.
-    JBFundingCycle memory _ballotFundingCycle = _getStructFor(_ballotFundingCycleId);
+    JBFundingCycle memory _ballotFundingCycle = _getStructFor(_projectId, _ballotFundingCycleId);
     ```
 3.  If there's no ballot, implicitly the funding cycle configuration is implicitly approved. Otherwise, return the state that the ballot for the provided `_id` and `_configuration`.
 
@@ -46,7 +46,7 @@ function _ballotStateOf(
     return
       _ballotFundingCycle.ballot == IJBFundingCycleBallot(address(0))
         ? JBBallotState.Approved
-        : _ballotFundingCycle.ballot.stateOf(_id, _configuration);
+        : _ballotFundingCycle.ballot.stateOf(_configuration);
     ```
 {% endtab %}
 
@@ -71,14 +71,14 @@ function _ballotStateOf(
   if (_ballotFundingCycleId == 0) return JBBallotState.Approved;
 
   // Get the ballot funding cycle.
-  JBFundingCycle memory _ballotFundingCycle = _getStructFor(_ballotFundingCycleId);
+  JBFundingCycle memory _ballotFundingCycle = _getStructFor(_projectId, _ballotFundingCycleId);
 
   // If there is no ballot, the ID is auto approved.
   // Otherwise, return the ballot's state.
   return
     _ballotFundingCycle.ballot == IJBFundingCycleBallot(address(0))
       ? JBBallotState.Approved
-      : _ballotFundingCycle.ballot.stateOf(_id, _configuration);
+      : _ballotFundingCycle.ballot.stateOf(_configuration);
 }
 ```
 {% endtab %}

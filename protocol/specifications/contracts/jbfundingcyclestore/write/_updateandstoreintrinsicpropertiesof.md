@@ -1,29 +1,31 @@
-# \_updateFundingCycleBasedOn
+# \_updateAndStoreIntrinsicPropertiesOf
 
 Contract:[`JBFundingCycleStore`](../)​
 
 {% tabs %}
 {% tab title="Step by step" %}
-**Updates intrinsic properties for a funding cycle given a base cycle.**\\
+**Updates and stores intrinsic properties for a funding cycle.**
 
 # Definition
 
 ```solidity
-function _updateFundingCycleBasedOn(
+function _updateAndStoreIntrinsicPropertiesOf(
+  uint256 _configuration,
+  uint256 _projectId,
   JBFundingCycle memory _baseFundingCycle,
   uint256 _mustStartOnOrAfter,
-  uint256 _weight,
-  bool _copy
-) private returns (uint256 fundingCycleId) { ... }
+  uint256 _weight
+) private { ... }
 ```
 
 * Arguments:
+  * `_configuration` is the configuration of the funding cycle being updated.
+  * `_projectId` is the ID of the project whose funding cycle is being updated.
   * `_baseFundingCycle` is the cycle that the one being updated is based on.
-  * `_mustStartOnOrAfter` is the time before which the initialized funding cycle can't start.
-  * `_weight` is the weight to store along with a newly updated configurable funding cycle.
-  * `_copy` is a flag indicating if non-intrinsic properties should be copied from the base funding cycle.
+  * `_mustStartOnOrAfter` is the time before which the new updated funding cycle can't start.
+  * `_weight` is the weight to store along with a newly updated funding cycle.
 * The function is private to this contract.
-* The function returns the ID of the updated funding cycle.
+* The function doesn't return anything. 
 
 # Body
 
@@ -66,10 +68,11 @@ function _updateFundingCycleBasedOn(
     ```solidity
     // Update the intrinsic properties.
     fundingCycleId = _packAndStoreIntrinsicPropertiesOf(
-      _baseFundingCycle.projectId,
+      _configuration,
+      _projectId,
       _number,
       _weight,
-      _baseFundingCycle.id,
+      _baseFundingCycle.configuration,
       _start
     );
     ```
@@ -83,21 +86,21 @@ function _updateFundingCycleBasedOn(
 ```solidity
 /** 
   @notice
-  Updates intrinsic properties for a funding cycle given a base cycle.
+  Updates and stores intrinsic properties for a funding cycle.
 
+  @param _configuration The configuration of the funding cycle being updated.
+  @param _projectId The ID of the project whose funding cycle is being updated.
   @param _baseFundingCycle The cycle that the one being updated is based on.
-  @param _mustStartOnOrAfter The time before which the initialized funding cycle can't start.
-  @param _weight The weight to store along with a newly updated configurable funding cycle.
-  @param _copy A flag indicating if non-intrinsic properties should be copied from the base funding cycle.
-
-  @return fundingCycleId The ID of the funding cycle that was updated.
+  @param _mustStartOnOrAfter The time before which the new updated funding cycle can't start.
+  @param _weight The weight to store along with a newly updated funding cycle.
 */
-function _updateFundingCycleBasedOn(
+function _updateAndStoreIntrinsicPropertiesOf(
+  uint256 _configuration,
+  uint256 _projectId,
   JBFundingCycle memory _baseFundingCycle,
   uint256 _mustStartOnOrAfter,
-  uint256 _weight,
-  bool _copy
-) private returns (uint256 fundingCycleId) {
+  uint256 _weight
+) private {
   // Derive the correct next start time from the base.
   uint256 _start = _deriveStartFrom(_baseFundingCycle, _mustStartOnOrAfter);
 
@@ -110,11 +113,12 @@ function _updateFundingCycleBasedOn(
   uint256 _number = _deriveNumberFrom(_baseFundingCycle, _start);
 
   // Update the intrinsic properties.
-  fundingCycleId = _packAndStoreIntrinsicPropertiesOf(
-    _baseFundingCycle.projectId,
+  _packAndStoreIntrinsicPropertiesOf(
+    _configuration,
+    _projectId,
     _number,
     _weight,
-    _baseFundingCycle.id,
+    _baseFundingCycle.configuration,
     _start
   );
 }

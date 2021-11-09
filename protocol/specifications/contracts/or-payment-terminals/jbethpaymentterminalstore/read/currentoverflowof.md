@@ -35,7 +35,7 @@ function currentOverflowOf(uint256 _projectId) external view returns (uint256) {
 2.  Return the overflow given the state of the current funding cycle.
 
     ```solidity
-    return _overflowDuring(_fundingCycle);
+    return _overflowDuring(_projectId, _fundingCycle);
     ```
 
     _Internal references:_
@@ -57,7 +57,7 @@ function currentOverflowOf(uint256 _projectId) external view returns (uint256) {
   // Get a reference to the project's current funding cycle.
   JBFundingCycle memory _fundingCycle = fundingCycleStore.currentOf(_projectId);
 
-  return _overflowFrom(_fundingCycle);
+  return _overflowFrom(_projectId, _fundingCycle);
 }
 ```
 {% endtab %}

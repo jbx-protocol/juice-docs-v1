@@ -11,14 +11,16 @@ _If the project has an active funding cycle reconfiguration ballot, the project'
 # Definition
 
 ```solidity
-function claimableOverflowOf(uint256 _projectId, uint256 _tokenCount)
-  external
-  view
-  returns (uint256) { ... }
+function _claimableOverflowOf(
+  uint256 _projectId,
+  JBFundingCycle memory _fundingCycle,
+  uint256 _tokenCount
+) private view returns (uint256) { ... }
 ```
 
 * Arguments:
   * `_projectId` is the ID of the project to get a claimable amount for.
+  * `_fundingCycle` is the funding cycle during which the claimable amount applies.
   * `_tokenCount` is the number of tokens to make the calculation with.
 * The view function is private to this contract.
 * The function does not alter state on the blockchain.
@@ -30,7 +32,7 @@ function claimableOverflowOf(uint256 _projectId, uint256 _tokenCount)
 
     ```solidity
     // Get the amount of current overflow.
-    uint256 _currentOverflow = _overflowDuring(_fundingCycle);
+    uint256 _currentOverflow = _overflowDuring(_projectId, _fundingCycle);
     ```
 
     _Internal references:_
@@ -46,7 +48,7 @@ function claimableOverflowOf(uint256 _projectId, uint256 _tokenCount)
 
     ```solidity
     // Get the total number of tokens in circulation.
-    uint256 _totalSupply = tokenStore.totalSupplyOf(_fundingCycle.projectId);
+    uint256 _totalSupply = tokenStore.totalSupplyOf(_projectId);
     ```
 
     _External references:_
@@ -56,9 +58,10 @@ function claimableOverflowOf(uint256 _projectId, uint256 _tokenCount)
 
     ```solidity
     // Get the number of reserved tokens the project has.
-    uint256 _reservedTokenAmount = directory
-      .controllerOf(_fundingCycle.projectId)
-      .reservedTokenBalanceOf(_fundingCycle.projectId, _fundingCycle.());
+    uint256 _reservedTokenAmount = directory.controllerOf(_projectId).reservedTokenBalanceOf(
+      _projectId,
+      _fundingCycle.reservedRate()
+    );
     ```
 
     _Libraries used:_
@@ -86,7 +89,7 @@ function claimableOverflowOf(uint256 _projectId, uint256 _tokenCount)
 
     ```solidity
     // Use the ballot redemption rate if the queued cycle is pending approval according to the previous funding cycle's ballot.
-    uint256 _redemptionRate = fundingCycleStore.currentBallotStateOf(_fundingCycle.projectId) ==
+    uint256 _redemptionRate = fundingCycleStore.currentBallotStateOf(_projectId) ==
       JBBallotState.Active
       ? _fundingCycle.ballotRedemptionRate()
       : _fundingCycle.redemptionRate();
@@ -143,24 +146,25 @@ function claimableOverflowOf(uint256 _projectId, uint256 _tokenCount)
   @notice
   See docs for `claimableOverflowOf`
 */
-function _claimableOverflowOf(JBFundingCycle memory _fundingCycle, uint256 _tokenCount)
-  private
-  view
-  returns (uint256)
-{
+function _claimableOverflowOf(
+  uint256 _projectId,
+  JBFundingCycle memory _fundingCycle,
+  uint256 _tokenCount
+) private view returns (uint256) {
   // Get the amount of current overflow.
-  uint256 _currentOverflow = _overflowDuring(_fundingCycle);
+  uint256 _currentOverflow = _overflowDuring(_projectId, _fundingCycle);
 
   // If there is no overflow, nothing is claimable.
   if (_currentOverflow == 0) return 0;
 
   // Get the total number of tokens in circulation.
-  uint256 _totalSupply = tokenStore.totalSupplyOf(_fundingCycle.projectId);
+  uint256 _totalSupply = tokenStore.totalSupplyOf(_projectId);
 
   // Get the number of reserved tokens the project has.
-  uint256 _reservedTokenAmount = directory
-    .controllerOf(_fundingCycle.projectId)
-    .reservedTokenBalanceOf(_fundingCycle.projectId, _fundingCycle.reservedRate());
+  uint256 _reservedTokenAmount = directory.controllerOf(_projectId).reservedTokenBalanceOf(
+    _projectId,
+    _fundingCycle.reservedRate()
+  );
 
   // If there are reserved tokens, add them to the total supply.
   if (_reservedTokenAmount > 0) _totalSupply = _totalSupply + _reservedTokenAmount;
@@ -169,7 +173,7 @@ function _claimableOverflowOf(JBFundingCycle memory _fundingCycle, uint256 _toke
   if (_tokenCount == _totalSupply) return _currentOverflow;
 
   // Use the ballot redemption rate if the queued cycle is pending approval according to the previous funding cycle's ballot.
-  uint256 _redemptionRate = fundingCycleStore.currentBallotStateOf(_fundingCycle.projectId) ==
+  uint256 _redemptionRate = fundingCycleStore.currentBallotStateOf(_projectId) ==
     JBBallotState.Active
     ? _fundingCycle.ballotRedemptionRate()
     : _fundingCycle.redemptionRate();

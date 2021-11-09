@@ -10,6 +10,7 @@ Contract: [`JBETHPaymentTerminal`](../)​‌
 
 ```solidity
 function _takeFeeFrom(
+  uint256 _projectId,
   JBFundingCycle memory _fundingCycle,
   uint256 _amount,
   address _beneficiary,
@@ -18,6 +19,7 @@ function _takeFeeFrom(
 ```
 
 * Arguments:
+  * `_projectId` is the ID of the project having fees taken from.
   * `_fundingCycle` is the [`JBFundingCycle`](../../../../data-structures/jbfundingcycle.md) during which the fee is being taken.
   * `_amount` is the amount to take a fee from.
   * `_beneficiary` is the address to print the platforms tokens for.
@@ -48,7 +50,7 @@ function _takeFeeFrom(
 
     ```solidity
     _fundingCycle.shouldHoldFees()
-      ? _heldFeesOf[_fundingCycle.projectId].push(JBFee(_amount, uint8(fee), _beneficiary, _memo)) // Take the fee.
+      ? _heldFeesOf[_projectId].push(JBFee(_amount, uint8(fee), _beneficiary, _memo)) // Take the fee.
       : _takeFee(feeAmount, _beneficiary, _memo);
     ```
 
@@ -63,7 +65,8 @@ function _takeFeeFrom(
 /** 
   @notice 
   Takes a fee into the platform's project, which has an id of 1.
-
+  
+  @param _projectId The ID of the project having fees taken from.
   @param _fundingCycle The funding cycle during which the fee is being taken. 
   @param _amount The amount to take a fee from.
   @param _beneficiary The address to print the platforms tokens for.
@@ -72,6 +75,7 @@ function _takeFeeFrom(
   @return feeAmount The amount of the fee taken.
 */
 function _takeFeeFrom(
+  uint256 _projectId,
   JBFundingCycle memory _fundingCycle,
   uint256 _amount,
   address _beneficiary,
@@ -84,7 +88,7 @@ function _takeFeeFrom(
   if (feeAmount == 0) return 0;
 
   _fundingCycle.shouldHoldFees()
-    ? _heldFeesOf[_fundingCycle.projectId].push(JBFee(_amount, uint8(fee), _beneficiary, _memo)) // Take the fee.
+    ? _heldFeesOf[_projectId].push(JBFee(_amount, uint8(fee), _beneficiary, _memo)) // Take the fee.
     : _takeFee(feeAmount, _beneficiary, _memo);
 }
 ```

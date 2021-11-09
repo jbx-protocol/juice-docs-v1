@@ -23,7 +23,7 @@ function _configure(
   * `_fundAccessConstraints` is an array of [`JBFundAccessConstraints`](../../../../data-structures/jbfundaccessconstraints.md) data structures containing amounts that a project can distribute during each funding cycle and amounts that can be used from its own overflow on-demand for each payment terminal.
   * `_groupedSplits` is an array of [`JBGroupedSplits`](../../../../data-structures/jbgroupedsplits.md) data structures containing splits to set for any number of groups.
 * The function is private to this contract.
-* The function returns the ID of the funding cycle that was configured.
+* The function returns the funding cycle configuration that was successfully updated.
 
 # Body
 
@@ -55,7 +55,7 @@ function _configure(
       if (_groupedSplits[_i].splits.length > 0)
         splitsStore.set(
           _projectId,
-          _fundingCycle.configured,
+          _fundingCycle.configuration,
           _groupedSplits[_i].group,
           _groupedSplits[_i].splits
         );
@@ -74,21 +74,27 @@ function _configure(
 
       // Set the distribution limit if there is one.
       if (_constraints.distributionLimit > 0)
-        distributionLimitOf[_projectId][_fundingCycle.configured][
+        distributionLimitOf[_projectId][_fundingCycle.configuration][
           _constraints.terminal
         ] = _constraints.distributionLimit;
 
       // Set the overflow allowance if there is one.
       if (_constraints.overflowAllowance > 0)
-        overflowAllowanceOf[_projectId][_fundingCycle.configured][
+        overflowAllowanceOf[_projectId][_fundingCycle.configuration][
           _constraints.terminal
         ] = _constraints.overflowAllowance;
 
       if (_constraints.currency > 0)
-        currencyOf[_projectId][_fundingCycle.configured][_constraints.terminal] = _constraints
+        currencyOf[_projectId][_fundingCycle.configuration][_constraints.terminal] = _constraints
           .currency;
 
-      emit SetFundAccessConstraints(_projectId, _fundingCycle.configured, _constraints, msg.sender);
+      emit SetFundAccessConstraints(
+        _fundingCycle.configuration,
+        _fundingCycle.number,
+        _projectId,
+        _constraints,
+        msg.sender
+      );
     }
     ```
 
@@ -102,10 +108,10 @@ function _configure(
 
     * [`SetFundAccessConstraints`](../events/setfundaccessconstraints.md)
 
-4.  Return the funding cycle's ID.
+4.  Return the funding cycle's configuration.
 
     ```solidity
-    return _fundingCycle.id;
+    return _fundingCycle.configuration;
     ``
 
 {% endtab %}
@@ -138,7 +144,7 @@ function _configure(
     if (_groupedSplits[_i].splits.length > 0)
       splitsStore.set(
         _projectId,
-        _fundingCycle.configured,
+        _fundingCycle.configuration,
         _groupedSplits[_i].group,
         _groupedSplits[_i].splits
       );
@@ -149,21 +155,27 @@ function _configure(
 
     // Set the distribution limit if there is one.
     if (_constraints.distributionLimit > 0)
-      distributionLimitOf[_projectId][_fundingCycle.configured][
+      distributionLimitOf[_projectId][_fundingCycle.configuration][
         _constraints.terminal
       ] = _constraints.distributionLimit;
 
     // Set the overflow allowance if there is one.
     if (_constraints.overflowAllowance > 0)
-      overflowAllowanceOf[_projectId][_fundingCycle.configured][
+      overflowAllowanceOf[_projectId][_fundingCycle.configuration][
         _constraints.terminal
       ] = _constraints.overflowAllowance;
 
     if (_constraints.currency > 0)
-      currencyOf[_projectId][_fundingCycle.configured][_constraints.terminal] = _constraints
+      currencyOf[_projectId][_fundingCycle.configuration][_constraints.terminal] = _constraints
         .currency;
 
-    emit SetFundAccessConstraints(_projectId, _fundingCycle.configured, _constraints, msg.sender);
+    emit SetFundAccessConstraints(
+      _fundingCycle.configuration,
+      _fundingCycle.number,
+      _projectId,
+      _constraints,
+      msg.sender
+    );
   }
 
   return _fundingCycle.id;

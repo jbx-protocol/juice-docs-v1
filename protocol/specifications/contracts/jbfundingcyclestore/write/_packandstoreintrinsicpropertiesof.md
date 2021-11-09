@@ -10,22 +10,24 @@ Contract:[`JBFundingCycleStore`](../)​
 
 ```solidity
 function _packAndStoreIntrinsicPropertiesOf(
+  uint256 _configuration,
   uint256 _projectId,
   uint256 _number,
   uint256 _weight,
   uint256 _basedOn,
   uint256 _start
-) private returns (uint256 fundingCycleId) { ... }
+) private { ... }
 ```
 
 * Arguments:
+  * `_configuration` is the configuration of the funding cycle to pack and store.
   * `_projectId` is the ID of the project to which the funding cycle belongs.
   * `_number` is the number of the funding cycle.
   * `_weight` is the weight of the funding cycle.
-  * `_basedOn` is the ID of the based funding cycle.
+  * `_basedOn` is the configuration of the based funding cycle.
   * `_start` is the start time of this funding cycle.
 * The function is private to this contract.
-* The function returns the ID of the funding cycle whose intrinsic properties have been packed and stored.
+* The function doesn't return anything. 
 
 # Body
 
@@ -35,50 +37,34 @@ function _packAndStoreIntrinsicPropertiesOf(
     // weight in bytes 0-79 bits.
     uint256 packed = _weight;
     ```
-2.  The `_projectId` should take up the next 56 bits.
+2.  The `_basedOn` should take up the next 56 bits.
 
     ```solidity
-    // projectId in bytes 80-135 bytes.
-    packed |= _projectId << 80;
+    // basedOn in bits 88-143.
+    packed |= _basedOn << 88;
     ```
-3.  The `_basedOn` should take up the next 48 bits.
+3.  The `_start` should take up the next 56 bits.
 
     ```solidity
-    // basedOn in bytes 136-183 bytes.
-    packed |= _basedOn << 136;
+    // start in bits 144-199.
+    packed |= _start << 144;
     ```
-4.  The `_start` should take up the next 48 bits.
+4.  The `_number` should take up the last 56 bits.
 
     ```solidity
-    // start in bytes 184-231 bytes.
-    packed |= _start << 184;
+    // number in bits 200-255.
+    packed |= _number << 200;
     ```
-5.  The `_number` should take up the last 24 bits.
-
-    ```solidity
-    // number in bytes 232-255 bytes.
-    packed |= _number << 232;
-    ```
-6.  Derive the ID from the `_projectId` and the `_number`.
-
-    ```solidity
-    // Construct the ID.
-    fundingCycleId = _idFor(_projectId, _number);
-    ```
-
-    _Internal references:_
-
-    * [`_idFor`](../read/_idfor.md)
-7.  Store the packed intrinsic properties for the funding cycle.
+5.  Store the packed intrinsic properties for the funding cycle.
 
     ```solidity
     // Set in storage.
-    _packedIntrinsicPropertiesOf[fundingCycleId] = packed;
+    _packedIntrinsicPropertiesOf[_projectId][_configuration] = packed;
     ```
 
     _Internal references:_
 
-    * [`_packAndStoreIntrinsicPropertiesOf`](\_packandstoreintrinsicpropertiesof.md)
+    * [`_packedIntrinsicPropertiesOf`](../properties/_packedintrinsicpropertiesof.md)
 {% endtab %}
 
 {% tab title="Code" %}
@@ -87,37 +73,32 @@ function _packAndStoreIntrinsicPropertiesOf(
   @notice 
   Efficiently stores a funding cycle's provided intrinsic properties.
 
+  @param _configuration The configuration of the funding cycle to pack and store.
   @param _projectId The ID of the project to which the funding cycle belongs.
   @param _number The number of the funding cycle.
   @param _weight The weight of the funding cycle.
-  @param _basedOn The ID of the based funding cycle.
+  @param _basedOn The configuration of the based funding cycle.
   @param _start The start time of this funding cycle.
-
-  @return fundingCycleId The ID of the funding cycle that was updated.
 */
 function _packAndStoreIntrinsicPropertiesOf(
+  uint256 _configuration,
   uint256 _projectId,
   uint256 _number,
   uint256 _weight,
   uint256 _basedOn,
   uint256 _start
-) private returns (uint256 fundingCycleId) {
-  // weight in bytes 0-79 bytes.
+) private {
+  // weight in bits 0-87.
   uint256 packed = _weight;
-  // projectId in bytes 80-135 bytes.
-  packed |= _projectId << 80;
-  // basedOn in bytes 136-183 bytes.
-  packed |= _basedOn << 136;
-  // start in bytes 184-231 bytes.
-  packed |= _start << 184;
-  // number in bytes 232-255 bytes.
-  packed |= _number << 232;
-
-  // Construct the ID.
-  fundingCycleId = _idFor(_projectId, _number);
+  // basedOn in bits 88-143.
+  packed |= _basedOn << 88;
+  // start in bits 144-199.
+  packed |= _start << 144;
+  // number in bits 200-255.
+  packed |= _number << 200;
 
   // Set in storage.
-  _packedIntrinsicPropertiesOf[fundingCycleId] = packed;
+  _packedIntrinsicPropertiesOf[_projectId][_configuration] = packed;
 }
 ```
 {% endtab %}

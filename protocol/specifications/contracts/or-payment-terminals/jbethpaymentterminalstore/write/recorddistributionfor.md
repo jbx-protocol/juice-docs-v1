@@ -65,7 +65,7 @@ function recordWithdrawalFor(
       _currency ==
         directory.controllerOf(_projectId).currencyOf(
           _projectId,
-          fundingCycle.configured,
+          fundingCycle.configuration,
           terminal
         ),
       '0x3f: UNEXPECTED_CURRENCY'
@@ -80,7 +80,7 @@ function recordWithdrawalFor(
 
     ```solidity
     // The new total amount that has been distributed during this funding cycle.
-    uint256 _newUsedDistributionLimitOf = usedDistributionLimitOf[_projectId][fundingCycle.id] +
+    uint256 _newUsedDistributionLimitOf = usedDistributionLimitOf[_projectId][fundingCycle.number] +
       _amount;
     ```
 
@@ -95,7 +95,7 @@ function recordWithdrawalFor(
       _newUsedDistributionLimitOf <=
         directory.controllerOf(_projectId).distributionLimitOf(
           _projectId,
-          fundingCycle.configured,
+          fundingCycle.configuration,
           terminal
         ),
       '0x1b: INSUFFICIENT_FUNDS'
@@ -143,7 +143,7 @@ function recordWithdrawalFor(
 
     ```solidity
     // Store the new amount.
-    usedDistributionLimitOf[_projectId][fundingCycle.id] = _newUsedDistributionLimitOf;
+    usedDistributionLimitOf[_projectId][fundingCycle.number] = _newUsedDistributionLimitOf;
     ```
 
     _Internal references:_
@@ -200,14 +200,14 @@ function recordDistributionFor(
     _currency ==
       directory.controllerOf(_projectId).currencyOf(
         _projectId,
-        fundingCycle.configured,
+        fundingCycle.configuration,
         terminal
       ),
     '0x3f: UNEXPECTED_CURRENCY'
   );
 
   // The new total amount that has been distributed during this funding cycle.
-  uint256 _newUsedDistributionLimitOf = usedDistributionLimitOf[_projectId][fundingCycle.id] +
+  uint256 _newUsedDistributionLimitOf = usedDistributionLimitOf[_projectId][fundingCycle.number] +
     _amount;
 
   // Amount must be within what is still distributable.
@@ -215,7 +215,7 @@ function recordDistributionFor(
     _newUsedDistributionLimitOf <=
       directory.controllerOf(_projectId).distributionLimitOf(
         _projectId,
-        fundingCycle.configured,
+        fundingCycle.configuration,
         terminal
       ),
     '0x1b: LIMIT_REACHED'
@@ -234,7 +234,7 @@ function recordDistributionFor(
   require(_minReturnedWei <= distributedAmount, '0x41: INADEQUATE');
 
   // Store the new amount.
-  usedDistributionLimitOf[_projectId][fundingCycle.id] = _newUsedDistributionLimitOf;
+  usedDistributionLimitOf[_projectId][fundingCycle.number] = _newUsedDistributionLimitOf;
 
   // Removed the distributed funds from the project's balance.
   balanceOf[_projectId] = balanceOf[_projectId] - distributedAmount;

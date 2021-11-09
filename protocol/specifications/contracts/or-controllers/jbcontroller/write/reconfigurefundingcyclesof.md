@@ -32,27 +32,27 @@ function reconfigureFundingCyclesOf(
   * `_fundAccessConstraints` is an array of [`JBFundAccessConstraints`](../../../../data-structures/jbfundaccessconstraints.md) data structures containing amounts that a project can distribute during each funding cycle and amounts that can be used from its own overflow on-demand for each payment terminal. The `distributionLimit` applies for each funding cycle, and the `overflowAllowance` applies for the entirety of the configuration.
   * `_groupedSplits` is an array of [`JBGroupedSplits`](../../../../data-structures/jbgroupedsplits.md) data structures containing splits to set for any number of groups.
 * Through the [`requirePermission`](../../../or-abstract/jboperatable/modifiers/requirepermission.md) modifier, the function is only accessible by the project's owner, or from an operator that has been given the `JBOperations.RECONFIGURE` permission by the project owner for the provided `_projectId`.
-* The function returns the ID of the funding cycle that was configured.
+* The function returns the configuration of the funding cycle that was successfully updated.
 
 # Body
 
-1.  Make sure the reserved rate is a valid number out of 10000.
+1.  Make sure the reserved rate is a valid number out of 200.
 
     ```solidity
-    // The reserved project token rate must be less than or equal to 10000.
-    require(_metadata.reservedRate <= 10000, '0x37: BAD_RESERVED_RATE');
+    // The reserved project token rate must be less than or equal to 200.
+    require(_metadata.reservedRate <= 200, '0x37: BAD_RESERVED_RATE');
     ```
-2.  Make sure the redemption rate is a valid number out of 10000.
+2.  Make sure the redemption rate is a valid number out of 200.
 
     ```solidity
-    // The redemption rate must be between 0 and 10000.
-    require(_metadata.redemptionRate <= 10000, '0x38: BAD_REDEMPTION_RATE');
+    // The redemption rate must be between 0 and 200.
+    require(_metadata.redemptionRate <= 200, '0x38: BAD_REDEMPTION_RATE');
     ```
 3.  Make sure the ballot redemption rate is less than 100%.
 
     ```solidity
-    // The ballot redemption rate must be less than or equal to 10000.
-    require(_metadata.ballotRedemptionRate <= 10000, '0x39: BAD_BALLOT_REDEMPTION_RATE');
+    // The ballot redemption rate must be less than or equal to 200.
+    require(_metadata.ballotRedemptionRate <= 200, '0x39: BAD_BALLOT_REDEMPTION_RATE');
     ```
 4.  Configure the project's funding cycle, fund access constraints, and splits.
 
@@ -81,14 +81,14 @@ function reconfigureFundingCyclesOf(
     @dev _data.target The amount that the project wants to payout during a funding cycle. Sent as a wad (18 decimals).
     @dev _data.currency The currency of the `target`. Send 0 for ETH or 1 for USD.
     @dev _data.duration The duration of the funding cycle for which the `target` amount is needed. Measured in days. Send 0 for cycles that are reconfigurable at any time.
-    @dev _data.discountRate A number from 0-10000 indicating how valuable a contribution to this funding cycle is compared to previous funding cycles.
+    @dev _data.discountRate A number from 0-1000000000 indicating how valuable a contribution to this funding cycle is compared to previous funding cycles.
       If it's 0, each funding cycle will have equal weight.
-      If the number is 9000, a contribution to the next funding cycle will only give you 10% of tickets given to a contribution of the same amoutn during the current funding cycle.
-      If the number is 10001, an non-recurring funding cycle will get made.
+      If the number is 900000000, a contribution to the next funding cycle will only give you 10% of tickets given to a contribution of the same amoutn during the current funding cycle.
+      If the number is 1000000001, an non-recurring funding cycle will get made.
     @dev _data.ballot The ballot contract that will be used to approve subsequent reconfigurations. Must adhere to the IFundingCycleBallot interface.
   @param _metadata A JBFundingCycleMetadata data structure specifying the controller specific params that a funding cycle can have. These properties will remain fixed for the duration of the funding cycle.
-    @dev _metadata.reservedRate A number from 0-10000 (0-100%) indicating the percentage of each contribution's newly minted tokens that will be reserved for the token splits.
-    @dev _metadata.redemptionRate The rate from 0-10000 (0-100%) that tunes the bonding curve according to which a project's tokens can be redeemed for overflow.
+    @dev _metadata.reservedRate A number from 0-200 (0-100%) indicating the percentage of each contribution's newly minted tokens that will be reserved for the token splits.
+    @dev _metadata.redemptionRate The rate from 0-200 (0-100%) that tunes the bonding curve according to which a project's tokens can be redeemed for overflow.
       The bonding curve formula is https://www.desmos.com/calculator/sp9ru6zbpk
       where x is _count, o is _currentOverflow, s is _totalSupply, and r is _redemptionRate.
     @dev _metadata.ballotRedemptionRate The redemption rate to apply when there is an active ballot.
@@ -106,7 +106,7 @@ function reconfigureFundingCyclesOf(
   @param _fundAccessConstraints An array containing amounts, in wei (18 decimals), that a project can use from its own overflow on-demand for each payment terminal. The `distributionLimit` applies for each funding cycle, and the `overflowAllowance` applies for the entirety of the configuration.
   @param _groupedSplits An array of splits to set for any number of group.
 
-  @return The ID of the funding cycle that was successfully configured.
+  @return The configuration of the funding cycle that was successfully updated.
 */
 function reconfigureFundingCyclesOf(
   uint256 _projectId,
@@ -119,14 +119,14 @@ function reconfigureFundingCyclesOf(
   requirePermission(projects.ownerOf(_projectId), _projectId, JBOperations.RECONFIGURE)
   returns (uint256)
 {
-  // The reserved project token rate must be less than or equal to 10000.
-  require(_metadata.reservedRate <= 10000, '0x51: BAD_RESERVED_RATE');
+  // The reserved project token rate must be less than or equal to 200.
+  require(_metadata.reservedRate <= 200, '0x51: BAD_RESERVED_RATE');
 
-  // The redemption rate must be between 0 and 10000.
-  require(_metadata.redemptionRate <= 10000, '0x52: BAD_REDEMPTION_RATE');
+  // The redemption rate must be between 0 and 200.
+  require(_metadata.redemptionRate <= 200, '0x52: BAD_REDEMPTION_RATE');
 
-  // The ballot redemption rate must be less than or equal to 10000.
-  require(_metadata.ballotRedemptionRate <= 10000, '0x53: BAD_BALLOT_REDEMPTION_RATE');
+  // The ballot redemption rate must be less than or equal to 200.
+  require(_metadata.ballotRedemptionRate <= 200, '0x53: BAD_BALLOT_REDEMPTION_RATE');
 
   return _configure(_projectId, _data, _metadata, _fundAccessConstraints, _groupedSplits);
 }

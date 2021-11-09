@@ -23,8 +23,7 @@ function useAllowanceOf(
   external
   override
   nonReentrant
-  requirePermission(projects.ownerOf(_projectId), _projectId, JBOperations.USE_ALLOWANCE)
-  returns (uint256) { ... }
+  requirePermission(projects.ownerOf(_projectId), _projectId, JBOperations.USE_ALLOWANCE) { ... }
 ```
 
 * Arguments:
@@ -83,6 +82,7 @@ function useAllowanceOf(
     uint256 _feeAmount = fee == 0 || _projectId == 1
       ? 0
       : _takeFeeFrom(
+        _projectId,
         _fundingCycle,
         _withdrawnAmount,
         _projectOwner,
@@ -103,8 +103,8 @@ function useAllowanceOf(
 
     ```solidity
     emit UseAllowance(
-      _fundingCycle.id,
-      _fundingCycle.configured,
+      _fundingCycle.configuration,
+      _fundingCycle.number,
       _projectId,
       _beneficiary,
       _withdrawnAmount,
@@ -117,11 +117,6 @@ function useAllowanceOf(
     _Event references:_
 
     * [`UseAllowance`](../events/useallowance.md)
-7.  Return the funding cycle's ID.
-
-    ```solidity
-    return _fundingCycle.id;
-    ```
 {% endtab %}
 
 {% tab title="Code" %}
@@ -173,6 +168,7 @@ function useAllowanceOf(
   uint256 _feeAmount = fee == 0 || _projectId == 1
     ? 0
     : _takeFeeFrom(
+      _projectId,
       _fundingCycle,
       _withdrawnAmount,
       _projectOwner,
@@ -183,8 +179,8 @@ function useAllowanceOf(
   Address.sendValue(_beneficiary, _withdrawnAmount - _feeAmount);
 
   emit UseAllowance(
-    _fundingCycle.id,
-    _fundingCycle.configured,
+    _fundingCycle.configuration,
+    _fundingCycle.number,
     _projectId,
     _beneficiary,
     _withdrawnAmount,
@@ -192,8 +188,6 @@ function useAllowanceOf(
     _withdrawnAmount - _feeAmount,
     msg.sender
   );
-
-  return _fundingCycle.id;
 }
 ```
 {% endtab %}

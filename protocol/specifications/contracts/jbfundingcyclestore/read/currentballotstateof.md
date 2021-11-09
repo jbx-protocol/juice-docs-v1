@@ -26,24 +26,24 @@ function currentBallotStateOf(uint256 _projectId) external view override returns
 1.  Get a reference to the latest funding cycle for the `_projectId`.
 
     ```solidity
-    // Get a reference to the latest funding cycle ID.
-    uint256 _fundingCycleId = latestIdOf[_projectId];
-    ```
-2.  Check that there is a funding cycle for the project.
-
-    ```solidity
-    // The project must have funding cycles.
-    require(_fundingCycleId > 0, '0x14: NOT_FOUND');
+    // Get a reference to the latest funding cycle configuration.
+    uint256 _fundingCycleConfiguration = latestConfigurationOf[_projectId];
     ```
 
     _Internal references:_
 
-    * [`latestIdOf`](../properties/latestidof.md)
+    * [`latestConfigurationOf`](../properties/latestconfigurationof.md)
+2.  Check that there is a funding cycle for the project.
+
+    ```solidity
+    // The project must have funding cycles.
+    require(_fundingCycleConfiguration > 0, '0x14: NOT_FOUND');
+    ```
 3.  Get a reference to the funding cycle for the latest funding cycle.
 
     ```solidity
-    // Get the necessary properties for the latest funding cycle.
-    JBFundingCycle memory _fundingCycle = _getStructFor(_fundingCycleId);
+    // Resolve the funding cycle for the for the latest configuration.
+    JBFundingCycle memory _fundingCycle = _getStructFor(_projectId, _fundingCycleConfiguration);
     ```
 
     _Internal references:_
@@ -55,10 +55,10 @@ function currentBallotStateOf(uint256 _projectId) external view override returns
     // If the latest funding cycle is the first, or if it has already started, it must be approved.
     if (_fundingCycle.basedOn == 0) return JBBallotState.Approved;
     ```
-5.  Return the `_ballotStateOf` the latest funding cycle ID as is determined by the current configuration and the funding cycle it's based on.
+5.  Return the `_ballotStateOf` the latest funding cycle configuration as is determined by the current configuration and the funding cycle it's based on.
 
     ```solidity
-    return _ballotStateOf(_fundingCycleId, _fundingCycle.configured, _fundingCycle.basedOn);
+    return _ballotStateOf(_projectId, _fundingCycle.configuration, _fundingCycle.basedOn);
     ```
 
     _Internal references:_
@@ -77,19 +77,19 @@ function currentBallotStateOf(uint256 _projectId) external view override returns
   @return The current ballot's state.
 */
 function currentBallotStateOf(uint256 _projectId) external view override returns (JBBallotState) {
-  // Get a reference to the latest funding cycle ID.
-  uint256 _fundingCycleId = latestIdOf[_projectId];
+  // Get a reference to the latest funding cycle configuration.
+  uint256 _fundingCycleConfiguration = latestConfigurationOf[_projectId];
   
   // The project must have funding cycles.
-  require(latestIdOf[_projectId] > 0, '0x14: NOT_FOUND');
+  require(_fundingCycleConfiguration > 0, '0x14: NOT_FOUND');
 
-  // Get the necessary properties for the latest funding cycle.
-  JBFundingCycle memory _fundingCycle = _getStructFor(_fundingCycleId);
+  // Resolve the funding cycle for the for the latest configuration.
+  JBFundingCycle memory _fundingCycle = _getStructFor(_projectId, _fundingCycleConfiguration);
 
   // If the latest funding cycle is the first, or if it has already started, it must be approved.
   if (_fundingCycle.basedOn == 0) return JBBallotState.Approved;
 
-  return _ballotStateOf(_fundingCycleId, _fundingCycle.configured, _fundingCycle.basedOn);
+  return _ballotStateOf(_projectId, _fundingCycle.configuration, _fundingCycle.basedOn);
 }
 ```
 {% endtab %}

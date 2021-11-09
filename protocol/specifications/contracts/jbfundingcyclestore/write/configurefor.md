@@ -30,47 +30,47 @@ function configureFor(
 
 # Body
 
-1.  Make sure the `_data.duration` fits in a `uint16`.
+1.  Make sure the `_data.duration` fits in a `uint64`. It must also be greater than 1000 seconds to prevent extractive miner behavior that is possible with timestamp based calculations within short intervals.
 
     ```solidity
-    // Duration must fit in a uint16.
-    require(_data.duration <= type(uint16).max, '0x15: BAD_DURATION');
+    // Duration must fit in a uint64, and must be greater than 1000 seconds to prevent manipulative miner behavior.
+    require(_data.duration <= type(uint64).max && _data.duration > 1000, '0x15: BAD_DURATION');
     ```
 2.  Make sure the `_data.discountRate` is at most 201.
 
     ```solidity
-    // Discount rate token must be less than or equal to 100%. A value of 10001 means non-recurring.
-    require(_data.discountRate <= 10001, '0x16: BAD_DISCOUNT_RATE');
+    // Discount rate token must be less than or equal to 100%. A value of 1000000001 means non-recurring.
+    require(_data.discountRate <= 1000000001, '0x16: BAD_DISCOUNT_RATE');
     ```
 3.  Make sure the `_data.weight` fits in a `uint80`.
 
     ```solidity
-    // Weight must fit into a uint8.
-    require(_data.weight <= type(uint80).max, '0x18: BAD_WEIGHT');
+    // Weight must fit into a uint88.
+    require(_data.weight <= type(uint88).max, '0x18: BAD_WEIGHT');
     ```
 4.  Get a reference to the time at which the configuration is occurring.
 
     ```solidity
-    // Set the configuration timestamp is now.
-    uint256 _configured = block.timestamp;
+    // The configuration timestamp is now.
+    uint256 _configuration = block.timestamp;
     ```
-5.  Find the ID of the funding cycle that should be configured.
+5.  Configure the intrinsic properties. This'll create a new funding cycle if there isn't a queued one already.
 
     ```solidity
-    // Gets the ID of the funding cycle to reconfigure.
-    uint256 _fundingCycleId = _configurableOf(_projectId, _configured, _data.weight);
+    // Set up a reconfiguration by configuring intrinsic properties.
+    _configureIntrinsicProperiesFor(_projectId, _configuration, _data.weight);
     ```
 
     _Internal references:_
 
-    * [`_configurableOf`](\_configurableof.md)
-6.  Store all of the configuration properties provided onto the `_fundingCycleId`. These properties can all be packed into one `uint256` storage slot.
+    * [`_configureIntrinsicProperiesFor`](\_configureintrinsicproperiesfor.md)
+6.  Store all of the user properties provided. These properties can all be packed into one `uint256` storage slot.
 
     ```solidity
     // Store the configuration.
-    _packAndStoreConfigurationPropertiesOf(
-      _fundingCycleId,
-      _configured,
+    _packAndStoreUserPropertiesOf(
+      _configuration,
+      _projectId,
       _data.ballot,
       _data.duration,
       _data.discountRate
@@ -79,12 +79,12 @@ function configureFor(
 
     _Internal references:_
 
-    * [`_packAndStoreConfigurationPropertiesOf`](\_packandstoreconfigurationpropertiesof.md)
-7.  Store the provided `_metadata` for the `_fundingCycleId`.
+    * [`_packAndStoreUserPropertiesOf`](\_packandstoreuserpropertiesof.md)
+7.  Store the provided `_metadata` for the configuration.
 
     ```solidity
     // Set the metadata if needed.
-    if (_metadata > 0) _metadataOf[_fundingCycleId] = _metadata;
+    if (_metadata > 0) _metadataOf[_projectId][_configuration] = _metadata;
     ```
 
     _Internal references:_
@@ -93,7 +93,7 @@ function configureFor(
 8.  Emit a `Configure` event with the relevant parameters.
 
     ```solidity
-    emit Configure(_fundingCycleId, _projectId, _configured, _data, _metadata, msg.sender);
+    emit Configure(_configuration, _projectId, _data, _metadata, msg.sender);
     ```
 
     _Event references:_
@@ -102,7 +102,8 @@ function configureFor(
 9. Return the [`JBFundingCycle`](../../../data-structures/jbfundingcycle.md) struct that carries the new configuration.
 
     ```solidity
-    return _getStructFor(_fundingCycleId);
+    // Return the funding cycle for the new configuration.
+    return _getStructFor(_projectId, _configuration);
     ```
 
     _Internal references:_
@@ -124,10 +125,10 @@ function configureFor(
     @dev _data.target The amount that the project wants to receive in each funding cycle. 18 decimals.
     @dev _data.duration The duration of the funding cycle for which the `_target` amount is needed. Measured in days. 
       Set to 0 for no expiry and to be able to reconfigure anytime.
-    @dev _data.discountRate A number from 0-10000 indicating how valuable a contribution to this funding cycle is compared to previous funding cycles.
+    @dev _data.discountRate A number from 0-1000000000 indicating how valuable a contribution to this funding cycle is compared to previous funding cycles.
       If it's 0, each funding cycle will have equal weight.
-      If the number is 9000, a contribution to the next funding cycle will only give you 10% of tickets given to a contribution of the same amoutn during the current funding cycle.
-      If the number is 10001, an non-recurring funding cycle will get made.
+      If the number is 900000000, a contribution to the next funding cycle will only give you 10% of tickets given to a contribution of the same amoutn during the current funding cycle.
+      If the number is 1000000001, an non-recurring funding cycle will get made.
     @dev _data.ballot The new ballot that will be used to approve subsequent reconfigurations.
   @param _metadata Data to associate with this funding cycle configuration.
 
@@ -138,36 +139,37 @@ function configureFor(
   JBFundingCycleData calldata _data,
   uint256 _metadata
 ) external override onlyController(_projectId) returns (JBFundingCycle memory) {
-  // Duration must fit in a uint16.
-  require(_data.duration <= type(uint16).max, '0x15: BAD_DURATION');
+  // Duration must fit in a uint64, and must be greater than 1000 seconds to prevent manipulative miner behavior.
+  require(_data.duration <= type(uint64).max && _data.duration > 1000, '0x15: BAD_DURATION');
 
-  // Discount rate token must be less than or equal to 100%. A value of 201 means non-recurring.
-  require(_data.discountRate <= 201, '0x17: BAD_DISCOUNT_RATE');
+  // Discount rate token must be less than or equal to 100%. A value of 1000000001 means non-recurring.
+  require(_data.discountRate <= 1000000001, '0x16: BAD_DISCOUNT_RATE');
 
-  // Weight must fit into a uint8.
-  require(_data.weight <= type(uint80).max, '0x19: BAD_WEIGHT');
+  // Weight must fit into a uint88.
+  require(_data.weight <= type(uint88).max, '0x18: BAD_WEIGHT');
 
-  // Set the configuration timestamp is now.
-  uint256 _configured = block.timestamp;
+  // The configuration timestamp is now.
+  uint256 _configuration = block.timestamp;
 
-  // Gets the ID of the funding cycle to reconfigure.
-  uint256 _fundingCycleId = _configurableOf(_projectId, _configured, _data.weight);
+  // Set up a reconfiguration by configuring intrinsic properties.
+  _configureIntrinsicProperiesFor(_projectId, _configuration, _data.weight);
 
   // Store the configuration.
-  _packAndStoreConfigurationPropertiesOf(
-    _fundingCycleId,
-    _configured,
+  _packAndStoreUserPropertiesOf(
+    _configuration,
+    _projectId,
     _data.ballot,
     _data.duration,
     _data.discountRate
   );
 
   // Set the metadata if needed.
-  if (_metadata > 0) _metadataOf[_fundingCycleId] = _metadata;
+  if (_metadata > 0) _metadataOf[_projectId][_configuration] = _metadata;
 
-  emit Configure(_fundingCycleId, _projectId, _configured, _data, _metadata, msg.sender);
+  emit Configure(_configuration, _projectId, _data, _metadata, msg.sender);
 
-  return _getStructFor(_fundingCycleId);
+  // Return the funding cycle for the new configuration.
+  return _getStructFor(_projectId, _configuration);
 }
 ```
 {% endtab %}

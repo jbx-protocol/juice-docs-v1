@@ -9,10 +9,14 @@ Contract:[`JBFundingCycleStore`](../)​
 # Definition
 
 ```solidity
-function _isApproved(JBFundingCycle memory _fundingCycle) private view returns (bool) { ... }
+function _isApproved(uint256 _projectId, JBFundingCycle memory _fundingCycle)
+  private
+  view
+  returns (bool) { ... }
 ```
 
 * Arguments:
+  * `_projectId` is the ID of the project to which the funding cycle belongs.
   * `_fundingCycle` is the [`JBFundingCycle`](../../../data-structures/jbfundingcycle.md) to get an approval flag for.
 * The view function is private to this contract.
 * The function does not alter state on the blockchain.
@@ -24,7 +28,7 @@ function _isApproved(JBFundingCycle memory _fundingCycle) private view returns (
 
     ```solidity
     return
-      _ballotStateOf(_fundingCycle.id, _fundingCycle.configured, _fundingCycle.basedOn) ==
+      _ballotStateOf(_projectId, _fundingCycle.configuration, _fundingCycle.basedOn) ==
       JBBallotState.Approved;
     ```
 
@@ -39,13 +43,17 @@ function _isApproved(JBFundingCycle memory _fundingCycle) private view returns (
   @notice 
   Checks to see if the provided funding cycle is approved according to the correct ballot.
 
+  @param _projectId The ID of the project to which the funding cycle belongs.
   @param _fundingCycle The ID of the funding cycle to get an approval flag for.
 
   @return The approval flag.
 */
-function _isApproved(JBFundingCycle memory _fundingCycle) private view returns (bool) {
+function _isApproved(uint256 _projectId, JBFundingCycle memory _fundingCycle)
+  private
+  view
+  returns (bool) {
   return
-    _ballotStateOf(_fundingCycle.id, _fundingCycle.configured, _fundingCycle.basedOn) ==
+    _ballotStateOf(_projectId, _fundingCycle.configuration, _fundingCycle.basedOn) ==
     JBBallotState.Approved;
 }
 ```

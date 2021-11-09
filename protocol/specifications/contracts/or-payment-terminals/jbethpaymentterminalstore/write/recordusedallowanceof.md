@@ -54,7 +54,7 @@ function recordUsedAllowanceOf(
       _currency ==
         directory.controllerOf(_projectId).currencyOf(
           _projectId,
-          fundingCycle.configured,
+          fundingCycle.configuration,
           terminal
         ),
       '0x42: UNEXPECTED_CURRENCY'
@@ -87,10 +87,10 @@ function recordUsedAllowanceOf(
       withdrawnAmount <=
         directory.controllerOf(_projectId).overflowAllowanceOf(
           _projectId,
-          fundingCycle.configured,
+          fundingCycle.configuration,
           terminal
         ) -
-          usedOverflowAllowanceOf[_projectId][fundingCycle.configured],
+          usedOverflowAllowanceOf[_projectId][fundingCycle.configuration],
       '0x43: NOT_ALLOWED'
     );
     ```
@@ -119,8 +119,8 @@ function recordUsedAllowanceOf(
 
     ```solidity
     // Store the decremented value.
-    usedOverflowAllowanceOf[_projectId][fundingCycle.configured] =
-      usedOverflowAllowanceOf[_projectId][fundingCycle.configured] +
+    usedOverflowAllowanceOf[_projectId][fundingCycle.configuration] =
+      usedOverflowAllowanceOf[_projectId][fundingCycle.configuration] +
       withdrawnAmount;
     ```
 8.  Store the decremented balance.
@@ -167,7 +167,7 @@ function recordUsedAllowanceOf(
     _currency ==
       directory.controllerOf(_projectId).currencyOf(
         _projectId,
-        fundingCycle.configured,
+        fundingCycle.configuration,
         terminal
       ),
     '0x42: UNEXPECTED_CURRENCY'
@@ -184,10 +184,10 @@ function recordUsedAllowanceOf(
     withdrawnAmount <=
       directory.controllerOf(_projectId).overflowAllowanceOf(
         _projectId,
-        fundingCycle.configured,
+        fundingCycle.configuration,
         terminal
       ) -
-        usedOverflowAllowanceOf[_projectId][fundingCycle.configured],
+        usedOverflowAllowanceOf[_projectId][fundingCycle.configuration],
     '0x43: NOT_ALLOWED'
   );
 
@@ -198,8 +198,8 @@ function recordUsedAllowanceOf(
   require(_minReturnedWei <= withdrawnAmount, '0x45: INADEQUATE');
 
   // Store the decremented value.
-  usedOverflowAllowanceOf[_projectId][fundingCycle.configured] =
-    usedOverflowAllowanceOf[_projectId][fundingCycle.configured] +
+  usedOverflowAllowanceOf[_projectId][fundingCycle.configuration] =
+    usedOverflowAllowanceOf[_projectId][fundingCycle.configuration] +
     withdrawnAmount;
 
   // Update the project's balance.

@@ -85,7 +85,7 @@ function _distributeReservedTokensOf(uint256 _projectId, string memory _memo)
     // Distribute tokens to splits and get a reference to the leftover amount to mint after all splits have gotten their share.
     uint256 _leftoverTokenCount = count == 0
       ? 0
-      : _distributeToReservedTokenSplitsOf(_fundingCycle, count);
+      : _distributeToReservedTokenSplitsOf(_projectId, _fundingCycle, count);
     ```
 
     _Internal references:_
@@ -105,7 +105,8 @@ function _distributeReservedTokensOf(uint256 _projectId, string memory _memo)
 
     ```solidity
     emit DistributeReservedTokens(
-      _fundingCycle.id,
+      _fundingCycle.configuration,
+      _fundingCycle.number,
       _projectId,
       _owner,
       count,
@@ -152,13 +153,14 @@ function _distributeReservedTokensOf(uint256 _projectId, string memory _memo)
   // Distribute tokens to splits and get a reference to the leftover amount to mint after all splits have gotten their share.
   uint256 _leftoverTokenCount = count == 0
     ? 0
-    : _distributeToReservedTokenSplitsOf(_fundingCycle, count);
+    : _distributeToReservedTokenSplitsOf(_projectId, _fundingCycle, count);
 
   // Mint any leftover tokens to the project owner.
   if (_leftoverTokenCount > 0) tokenStore.mintFor(_owner, _projectId, _leftoverTokenCount, false);
 
   emit DistributeReservedTokens(
-    _fundingCycle.id,
+    _fundingCycle.configuration,
+    _fundingCycle.number,
     _projectId,
     _owner,
     count,

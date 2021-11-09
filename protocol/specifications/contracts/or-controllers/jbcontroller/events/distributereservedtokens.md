@@ -8,17 +8,19 @@ Emitted from:
 
 ```solidity
 event DistributeReservedTokens(
-  uint256 indexed fundingCycleId,
+  uint256 indexed fundingCycleConfiguration,
+  uint256 indexed fundingCycleNumber,
   uint256 indexed projectId,
-  address indexed projectOwner,
+  address beneficiary,
   uint256 count,
-  uint256 projectOwnerTokenCount,
+  uint256 beneficiaryTokenCount,
   string memo,
   address caller
 );
 ```
 
-* `fundingCycleId` is the ID of the funding cycle during which the reserved tokens were distributed.
+* `fundingCycleConfiguration` is the funding cycle configuration during which the reserved tokens were distributed.
+* `fundingCycleNumber` is the number of the funding cycle during which the reserved tokens were distributed.
 * `projectId` is the ID of the token's project.
 * `projectOwner` is the address that received any leftover tokens after splits were applied.
 * `count` is the total number of tokens that were distributed.

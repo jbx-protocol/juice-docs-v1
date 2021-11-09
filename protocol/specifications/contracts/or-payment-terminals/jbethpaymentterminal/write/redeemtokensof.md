@@ -84,10 +84,10 @@ function redeemTokensOf(
 
     ```solidity
     emit RedeemTokens(
-      _fundingCycle.id,
+      _fundingCycle.configuration,
+      _fundingCycle.number,
       _projectId,
       _holder,
-      _fundingCycle,
       _beneficiary,
       _tokenCount,
       claimAmount,
@@ -156,10 +156,10 @@ function redeemTokensOf(
   if (claimAmount > 0) Address.sendValue(_beneficiary, claimAmount);
 
   emit RedeemTokens(
-    _fundingCycle.id,
+    _fundingCycle.configuration,
+    _fundingCycle.number,
     _projectId,
     _holder,
-    _fundingCycle,
     _beneficiary,
     _tokenCount,
     claimAmount,

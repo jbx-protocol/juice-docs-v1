@@ -40,8 +40,7 @@ function _deriveNumberFrom(JBFundingCycle memory _baseFundingCycle, uint256 _sta
 
     ```solidity
     // Find the number of base cycles that fit in the base distance.
-    return
-      _baseFundingCycle.number + (_startDistance / (_baseFundingCycle.duration * _SECONDS_IN_DAY));
+    return _baseFundingCycle.number + (_startDistance / _baseFundingCycle.duration);
     ```
 
     _Internal references:_
@@ -73,8 +72,7 @@ function _deriveNumberFrom(JBFundingCycle memory _baseFundingCycle, uint256 _sta
   uint256 _startDistance = _start - _baseFundingCycle.start;
 
   // Find the number of base cycles that fit in the base distance.
-  return
-    _baseFundingCycle.number + (_startDistance / (_baseFundingCycle.duration * _SECONDS_IN_DAY));
+  return _baseFundingCycle.number + (_startDistance / _baseFundingCycle.duration);
 }
 ```
 {% endtab %}

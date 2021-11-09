@@ -26,11 +26,11 @@ function _mockFundingCycleBasedOn(JBFundingCycle memory _baseFundingCycle, bool 
 
 # Body
 
-1.  A funding cycle with a `discountRate` of 201 is a non-recurring funding cycle. An empty funding cycle should be returned if the base is non-recurring since there can't be subsequent cycles.
+1.  A funding cycle with a `discountRate` of 1000000001 is a non-recurring funding cycle. An empty funding cycle should be returned if the base is non-recurring since there can't be subsequent cycles.
 
     ```solidity
     // Can't mock a non recurring funding cycle.
-    if (_baseFundingCycle.discountRate == 201) return _getStructFor(0);
+    if (_baseFundingCycle.discountRate == 1000000001) return _getStructFor(0, 0);
     ```
 
     _Internal references:_
@@ -47,7 +47,7 @@ function _mockFundingCycleBasedOn(JBFundingCycle memory _baseFundingCycle, bool 
     // If the base funding cycle doesn't have a duration, no adjustment is necessary because the next cycle can start immediately.
     uint256 _timeFromImmediateStartMultiple = !_allowMidCycle || _baseFundingCycle.duration == 0
       ? 0
-      : _baseFundingCycle.duration * _SECONDS_IN_DAY;
+      : _baseFundingCycle.duration;
     ```
 
     _Internal references:_
@@ -76,34 +76,27 @@ function _mockFundingCycleBasedOn(JBFundingCycle memory _baseFundingCycle, bool 
     _Internal references:_
 
     * [`_deriveNumberFrom`](\_derivenumberfrom.md)
-5. Return a [`JBFundingCycle`](../../../data-structures/jbfundingcycle.md) with the aggregated configuration.
+5.  Return a [`JBFundingCycle`](../../../data-structures/jbfundingcycle.md) with the aggregated configuration.
 
-````
-```solidity
-````
+    ```solidity
+    return
+      JBFundingCycle(
+        _number,
+        _baseFundingCycle.configuration,
+        _baseFundingCycle.basedOn,
+        _deriveWeightFrom(_baseFundingCycle, _start),
+        _baseFundingCycle.ballot,
+        _start,
+        _baseFundingCycle.duration,
+        _baseFundingCycle.discountRate,
+        _baseFundingCycle.metadata
+      );
+    ```
 
-````
-return
-  JBFundingCycle(
-    _idFor(_baseFundingCycle.projectId, _number),
-    _baseFundingCycle.projectId,
-    _number,
-    _baseFundingCycle.id,
-    _baseFundingCycle.configured,
-    _deriveWeightFrom(_baseFundingCycle, _start),
-    _baseFundingCycle.ballot,
-    _start,
-    _baseFundingCycle.duration,
-    _baseFundingCycle.discountRate,
-    _baseFundingCycle.metadata
-  );
-```
+    _Internal references:_
 
-_Internal references:_
+    * [`_deriveWeightFrom`](\_deriveweightfrom.md)
 
-* [`_idFor`](\_idfor.md)
-* [`_deriveWeightFrom`](\_deriveweightfrom.md)
-````
 {% endtab %}
 
 {% tab title="Code" %}
@@ -126,14 +119,14 @@ function _mockFundingCycleBasedOn(JBFundingCycle memory _baseFundingCycle, bool 
   returns (JBFundingCycle memory)
 {
   // Can't mock a non recurring funding cycle.
-  if (_baseFundingCycle.discountRate == 10001) return _getStructFor(0);
+  if (_baseFundingCycle.discountRate == 1000000001) return _getStructFor(0, 0);
     
   // The distance of the current time to the start of the next possible funding cycle.
   // If the returned mock cycle must not yet have started, the start time of the mock must be in the future so no need to adjust backwards.
   // If the base funding cycle doesn't have a duration, no adjustment is necessary because the next cycle can start immediately.
   uint256 _timeFromImmediateStartMultiple = !_allowMidCycle || _baseFundingCycle.duration == 0
     ? 0
-    : _baseFundingCycle.duration * _SECONDS_IN_DAY;
+    : _baseFundingCycle.duration;
     
   // Derive what the start time should be.
   uint256 _start = _deriveStartFrom(
@@ -146,11 +139,9 @@ function _mockFundingCycleBasedOn(JBFundingCycle memory _baseFundingCycle, bool 
 
   return
     JBFundingCycle(
-      _idFor(_baseFundingCycle.projectId, _number),
-      _baseFundingCycle.projectId,
       _number,
-      _baseFundingCycle.id,
-      _baseFundingCycle.configured,
+      _baseFundingCycle.configuration,
+      _baseFundingCycle.basedOn,
       _deriveWeightFrom(_baseFundingCycle, _start),
       _baseFundingCycle.ballot,
       _start,
