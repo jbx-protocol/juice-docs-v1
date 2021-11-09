@@ -4,14 +4,14 @@ Contract: [`JBController`](../)​‌
 
 Interface: [`IJBController`](../../../../interfaces/ijbcontroller.md)
 
-**The currency that overflowAllowances and distribution limits are measured in for a particular funding cycle configuration, applied only to the specified terminal.**
+**The currency that overflow allowances and distribution limits are measured in for a particular funding cycle configuration, applied only to the specified terminal.**
 
 # Definition
 
 ```solidity
 /**
   @notice 
-  The currency that overflowAllowances and distribution limits are measured in for a particular funding cycle configuration, applied only to the specified terminal.
+  The currency that overflow allowances and distribution limits are measured in for a particular funding cycle configuration, applied only to the specified terminal.
 
   _projectId The ID of the project to get the currency of.
   _configuration The configuration during which the currency applies.

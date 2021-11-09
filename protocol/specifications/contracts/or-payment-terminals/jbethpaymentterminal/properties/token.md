@@ -6,7 +6,7 @@ Interface: [`IJBTerminal`](../../../../interfaces/ijbterminal.md)
 
 **The token that this terminal accepts.**
 
-_ETH is represented as address 0x0000000000000000000000000000000000042069._
+_ETH is represented as address 0x0000000000000000000000000000000000069420._
 
 # Definition
 
@@ -16,9 +16,9 @@ _ETH is represented as address 0x0000000000000000000000000000000000042069._
   The token that this terminal accepts. 
 
   @dev
-  ETH is represented as address 0x0000000000000000000000000000000000042069.
+  ETH is represented as address 0x0000000000000000000000000000000000069420.
 */
-address public immutable override token = 0x0000000000000000000000000000000000042069;
+address public immutable override token = 0x0000000000000000000000000000000000069420;
 ```
 
 * The value cannot be changed.
