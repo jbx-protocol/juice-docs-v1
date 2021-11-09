@@ -84,11 +84,11 @@ function _mockFundingCycleBasedOn(JBFundingCycle memory _baseFundingCycle, bool 
         _number,
         _baseFundingCycle.configuration,
         _baseFundingCycle.basedOn,
-        _deriveWeightFrom(_baseFundingCycle, _start),
-        _baseFundingCycle.ballot,
         _start,
         _baseFundingCycle.duration,
+        _deriveWeightFrom(_baseFundingCycle, _start),
         _baseFundingCycle.discountRate,
+        _baseFundingCycle.ballot,
         _baseFundingCycle.metadata
       );
     ```
@@ -142,11 +142,11 @@ function _mockFundingCycleBasedOn(JBFundingCycle memory _baseFundingCycle, bool 
       _number,
       _baseFundingCycle.configuration,
       _baseFundingCycle.basedOn,
-      _deriveWeightFrom(_baseFundingCycle, _start),
-      _baseFundingCycle.ballot,
       _start,
       _baseFundingCycle.duration,
+      _deriveWeightFrom(_baseFundingCycle, _start),
       _baseFundingCycle.discountRate,
+      _baseFundingCycle.ballot,
       _baseFundingCycle.metadata
     );
 }
