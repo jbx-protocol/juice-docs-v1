@@ -2,10 +2,10 @@
 
 #### What everyone needs to know
 
-* Each project can configure funding cycles to create contractual boundaries around its treasury's inflows and outflows. 
-* Funding cycle parameters can't be changed while in progress, but the project owner can propose reconfigurations to future cycles at any time.   
-* Funding cycle's roll over automatically. If there is a reconfiguration in place and it has been approved by the current cycle's ballot, it will be used. Otherwise, a copy of the current funding cycle will be used.
-* Projects can vary dramatically depending on how they configure their funding cycles and any properties around their funding cycles.
+* Each project can configure funding cycles to create contractual boundaries around its treasury's inflows and outflows of funds. 
+* A funding cycle's parameters can't be changed while it is in progress, but the project owner can propose reconfigurations to future cycles at any time. 
+* Funding cycles roll over automatically. If there is a reconfiguration in place and it has been approved by the current cycle's ballot, it will be used. Otherwise, a copy of the current funding cycle will be used.
+* The mechanics of each project can vary dramatically depending on how its funding cycles are configured over time. 
 
 #### What you'll want to know if you're building
 
