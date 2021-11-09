@@ -116,7 +116,7 @@ function queuedOf(uint256 _projectId) public view override returns (JBFundingCyc
     // If it hasn't been approved, set the configuration to be that of its base funding cycle, which carries the last approved configuration.
     _fundingCycleConfiguration = _fundingCycle.basedOn;
     ```
-10.  If there's not a reference to a possible funding cycle to base a queued cycle on, there must not be a queued cycle.
+10. If there's not a reference to a possible funding cycle to base a queued cycle on, there must not be a queued cycle.
 
     ```solidity
     // A funding cycle must exist.
@@ -126,7 +126,7 @@ function queuedOf(uint256 _projectId) public view override returns (JBFundingCyc
     _Internal references:_
 
     * [`_getStructFor`](\_getstructfor.md)
-11. Return a funding cycle based on the one current referenced, which must be the last approved cycle. The mock funding cycle is not allowed to have started already, which is why a `false` flag is passed in.
+11.  Return a funding cycle based on the one current referenced, which must be the last approved cycle. The mock funding cycle is not allowed to have started already, which is why a `false` flag is passed in.
 
     ```solidity
     // Return a mock of the next up funding cycle.
