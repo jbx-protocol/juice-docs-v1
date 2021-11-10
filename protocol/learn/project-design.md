@@ -77,12 +77,14 @@ Under these conditions:
 Let's see what happens when basic `_fundAccessConstraints` are specified, such as:
 
 ```javascript
-{
-  terminal: <address of JBETHPaymentTerminal>,
-  distributionLimit: 4200000000000000000,
-  overflowAllowance: 0,
-  currency: 0
-}
+[
+  {
+    terminal: <address of JBETHPaymentTerminal>,
+    distributionLimit: 4200000000000000000,
+    overflowAllowance: 0,
+    currency: 0
+  }
+]
 ```
 
 _wip_\
