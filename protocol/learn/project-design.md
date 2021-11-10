@@ -26,7 +26,7 @@ This transaction launches a project. It does so by:
 * Then storing any provided constraints on how the project will be able to access funds within any specified payment terminals by storing values in [`JBController.distributionLimitOf(...)`](../specifications/contracts/or-controllers/jbcontroller/properties/distributionlimitof.md), [`JBController.overflowAllowanceOf(...)`](../specifications/contracts/or-controllers/jbcontroller/properties/overflowallowanceof.md), and [`JBController.currencyOf(...)`](../specifications/contracts/or-controllers/jbcontroller/properties/currencyof.md).
 * Then giving the provided `_terminals` access to the `JBController` contract that is handling the `launchProjectFor` transaction that's currently being executed, and also allowing anyone or any other contract in Web3 to know that the project is currently accepting funds through them by calling [`JBDirectory.setTerminalsOf(...)`](../specifications/contracts/jbdirectory/write/setterminalsof.md). 
 
-Whew, that's a lot. Let's use an example, starting with the simplest one:
+Here's are some examples, starting with the simplest version:
 
 * For `_data` send the following [`JBFundingCycleMetadata`](../specifications/data-structures/jbfundingcyclemetadata.md) values:
 
