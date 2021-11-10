@@ -3,7 +3,7 @@ description: >-
   A breakdown of how projects can design their treasury mechanism when building on the juicebox protocol. 
 ---
 
-In order to understand what Juicebox can do, all you have to do is understand how one transaction works: [`JBController.launchProjectFor(...)`](../specifications/contracts/or-controllers/jbcontroller/write/launchprojectfor.md).
+In order to understand what Juicebox can do for your project, all you have to do is understand how one transaction works: [`JBController.launchProjectFor(...)`](../specifications/contracts/or-controllers/jbcontroller/write/launchprojectfor.md).
 
 ```solidity
 function launchProjectFor(
