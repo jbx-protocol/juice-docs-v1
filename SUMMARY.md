@@ -12,7 +12,7 @@
 
 ## 👾 Protocol V2 <a href="protocol" id="protocol"></a>
 
-* [README](protocol/protocol.md)
+* [README](protocol/README.md)
 * [Learn](protocol/learn/README.md)
   * [Architecture](protocol/learn/overview.md)
   * [Project design](protocol/learn/project-design.md)
