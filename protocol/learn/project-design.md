@@ -68,7 +68,7 @@ This is the most vanilla project you can launch, which also makes it cheapest to
 
 Under these conditions:
 * Your project can begin receiving funds through the `JBETHPaymentTerminal`.
-* 1,000,000 of your project's tokens will be minted per ETH received since the configured `_data.weight` of `1000000000000000000000000`. (The raw value sent has 18 decimal places).
+* 1,000,000 of your project's tokens will be minted per ETH received since the configured `_data.weight` is `1000000000000000000000000`. (The raw value sent has 18 decimal places).
 * All tokens minted as a result of recieved ETH will go to the beneficiary address specified by the payer of the ETH since the configured `_metadata.reservedRate` of 0.
 * Nothing fancy will happen outside of the default token minting behavior since the configured `_metadata.useDataSourceForPay` is `false`. 
 * None of the funds in the treasury can be distributed to the project owner since no `_fundAccessConstraints` were specified. This means all funds in the treasury are considered overflow. Since the configured `_metadata.redemptionRate` is 200 (which represents 100%), all outstanding tokens can be redeemed/burned to claim a proportional part of the overflow. This lets everyone who contributed funds have access to their ETH back.
