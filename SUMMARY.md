@@ -300,6 +300,7 @@
           * [usedDistributionLimitOf](protocol/specifications/contracts/or-payment-terminals/jbethpaymentterminalstore/properties/useddistributionlimitof.md)
         * [Read](protocol/specifications/contracts/or-payment-terminals/jbethpaymentterminalstore/read/README.md)
           * [currentOverflowOf](protocol/specifications/contracts/or-payment-terminals/jbethpaymentterminalstore/read/currentoverflowof.md)
+          * [currentTotalOverflowOf](protocol/specifications/contracts/or-payment-terminals/jbethpaymentterminalstore/read/currenttotaloverflowof.md)
           * [claimableOverflowOf](protocol/specifications/contracts/or-payment-terminals/jbethpaymentterminalstore/read/claimableoverflowof.md)
           * [\_claimableOverflowOf](protocol/specifications/contracts/or-payment-terminals/jbethpaymentterminalstore/read/\_claimableoverflowof.md)
           * [\_overflowDuring](protocol/specifications/contracts/or-payment-terminals/jbethpaymentterminalstore/read/\_overflowduring.md)
