@@ -19,7 +19,7 @@ The first two core contracts are pretty self explanatory. They store the core Ju
 * [`JBTokenStore`](../specifications/contracts/jbtokenstore/) manages token minting and burning for all projects.
 * [`JBFundingCycleStore`](../specifications/contracts/jbfundingcyclestore/) manages funding cycle configurations and scheduling. Funding cycles are represented as a [`JBFundingCycle`](../../protocol/data-structures/jbfundingcycle.md) data structure.
 
-The next few are a little more abstract. They don't know anything specific to Juicebox, and are open for use by other protocols or future Juicebox extensions.
+The next few are a little more generic. They don't know anything specific to Juicebox, and are open for use by other protocols or future Juicebox extensions.
 
 *   [`JBProjects`](../specifications/contracts/jbprojects/) manages ownership over projects, which are represented as ERC-721 tokens.
 
