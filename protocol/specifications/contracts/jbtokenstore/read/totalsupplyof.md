@@ -38,7 +38,7 @@ function totalSupplyOf(uint256 _projectId) external view override returns (uint2
 
     ```solidity
     // If the project has issued a token, add it's total supply to the total.
-    if (_token != IJBToken(address(0))) supply = supply + _token.totalSupply();
+    if (_token != IJBToken(address(0))) supply = supply + _token.totalSupply(_projectId);
     ```
 {% endtab %}
 
@@ -60,7 +60,7 @@ function totalSupplyOf(uint256 _projectId) external view override returns (uint2
   IJBToken _token = tokenOf[_projectId];
 
   // If the project has issued a token, add it's total supply to the total.
-  if (_token != IJBToken(address(0))) supply = supply + _token.totalSupply();
+  if (_token != IJBToken(address(0))) supply = supply + _token.totalSupply(_projectId);
 }
 ```
 {% endtab %}

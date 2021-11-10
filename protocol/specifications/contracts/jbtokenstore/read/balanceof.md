@@ -43,7 +43,7 @@ function balanceOf(address _holder, uint256 _projectId)
 
     ```solidity
     // If the project has issued a token, add the holder's balance to the total.
-    if (_token != IJBToken(address(0))) balance = balance + _token.balanceOf(_holder);
+    if (_token != IJBToken(address(0))) balance = balance + _token.balanceOf(_projectId, _holder);
     ```
 {% endtab %}
 
@@ -71,7 +71,7 @@ function balanceOf(address _holder, uint256 _projectId)
   IJBToken _token = tokenOf[_projectId];
 
   // If the project has issued a token, add the holder's balance to the total.
-  if (_token != IJBToken(address(0))) balance = balance + _token.balanceOf(_holder);
+  if (_token != IJBToken(address(0))) balance = balance + _token.balanceOf(_projectId, _holder);
 }
 ```
 {% endtab %}

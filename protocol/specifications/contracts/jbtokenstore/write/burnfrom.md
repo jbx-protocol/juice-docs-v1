@@ -56,7 +56,7 @@ function burnFrom(
 
     ```solidity
     // Get a reference to the number of tokens there are.
-    uint256 _claimedBalance = _token == IJBToken(address(0)) ? 0 : _token.balanceOf(_holder);
+    uint256 _claimedBalance = _token == IJBToken(address(0)) ? 0 : _token.balanceOf(_projectId, _holder);
     ```
 4.  Make sure the holder has enough tokens to burn. This is true if either the amount to burn is less than both the holder's claimed balance and unclaimed balance, if the amount is greater than the claimed balance and there are enough unclaimed tokens to cover the difference, or if the amount is greater than the unclaimed balance and there are enough claimed tokens to cover the difference.
 
@@ -97,7 +97,7 @@ function burnFrom(
 
     ```solidity
     // burn the tokens.
-    if (_claimedTokensToBurn > 0) _token.burn(_holder, _claimedTokensToBurn, _projectId);
+    if (_claimedTokensToBurn > 0) _token.burn(_projectId, _holder, _claimedTokensToBurn);
     ```
 
     _External references:_
@@ -159,7 +159,7 @@ function burnFrom(
   uint256 _unclaimedBalance = unclaimedBalanceOf[_holder][_projectId];
 
   // Get a reference to the number of tokens there are.
-  uint256 _claimedBalance = _token == IJBToken(address(0)) ? 0 : _token.balanceOf(_holder);
+  uint256 _claimedBalance = _token == IJBToken(address(0)) ? 0 : _token.balanceOf(_projectId, _holder);
 
   // There must be enough tokens.
   // Prevent potential overflow by not relying on addition.
@@ -188,7 +188,7 @@ function burnFrom(
   uint256 _unclaimedTokensToBurn = _amount - _claimedTokensToBurn;
 
   // burn the tokens.
-  if (_claimedTokensToBurn > 0) _token.burn(_holder, _claimedTokensToBurn, _projectId);
+  if (_claimedTokensToBurn > 0) _token.burn(_projectId, _holder, _claimedTokensToBurn);
   if (_unclaimedTokensToBurn > 0) {
     // Reduce the holders balance and the total supply.
     unclaimedBalanceOf[_holder][_projectId] =

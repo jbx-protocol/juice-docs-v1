@@ -14,9 +14,9 @@ _Only the owner of this contract cant burn some of its supply._
 
 ```solidity
 function burn(
+  uint256,
   address _account,
-  uint256 _amount,
-  uint256
+  uint256 _amount
 ) external override onlyOwner { ... }
 ```
 
@@ -53,9 +53,9 @@ function burn(
   @param _amount The amount of tokens to burn.
 */
 function burn(
+  uint256,
   address _account,
-  uint256 _amount,
-  uint256
+  uint256 _amount
 ) external override onlyOwner {
   return _burn(_account, _amount);
 }

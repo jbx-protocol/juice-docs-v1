@@ -14,9 +14,9 @@ _Only the owner of this contract cant mint more of it._
 
 ```solidity
 function mint(
+  uint256,
   address _account,
-  uint256 _amount,
-  uint256
+  uint256 _amount
 ) external override onlyOwner { ... }
 ```
 
@@ -53,9 +53,9 @@ function mint(
   @param _amount The amount of tokens to mint.
 */
 function mint(
+  uint256,
   address _account,
-  uint256 _amount,
-  uint256
+  uint256 _amount
 ) external override onlyOwner {
   return _mint(_account, _amount);
 }

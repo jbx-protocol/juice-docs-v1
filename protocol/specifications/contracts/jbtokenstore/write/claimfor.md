@@ -86,7 +86,7 @@ function claimFor(
 
     ```solidity
     // Mint the equivalent amount of ERC20s.
-    _token.mint(_holder, _amount, _projectId);
+    _token.mint(_projectId, _holder, _amount);
     ```
 
     _External references:_
@@ -140,7 +140,7 @@ function claimFor(
   unclaimedTotalSupplyOf[_projectId] = unclaimedTotalSupplyOf[_projectId] - _amount;
 
   // Mint the equivalent amount of ERC20s.
-  _token.mint(_holder, _amount, _projectId);
+  _token.mint(_projectId, _holder, _amount);
 
   emit Claim(_holder, _projectId, _amount, msg.sender);
 }
