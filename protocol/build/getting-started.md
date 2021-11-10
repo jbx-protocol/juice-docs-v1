@@ -46,7 +46,7 @@ function pay(
  ) external payable override returns (uint256 fundingCycleId) { ... }
 ```
 
-At any point, anyone can distribute a project's funds up to its current funding cycle's distribution limit to its preprogrammed splits by calling [`JBETHPaymentTerminal.distributePayoutsOf(...)`](../specifications/contracts/or-payment-terminals/jbethpaymentterminal/write/distributepayoutsof.md).
+At any point, anyone can distribute a project's funds up to its current funding cycle's distribution limit to its preprogrammed payout splits by calling [`JBETHPaymentTerminal.distributePayoutsOf(...)`](../specifications/contracts/or-payment-terminals/jbethpaymentterminal/write/distributepayoutsof.md).
 
 ```solidity
 function distributePayoutsOf(
@@ -116,7 +116,7 @@ function burnTokensOf(
   ) { ... }
 ```
 
-At any point, anyone can distribute a project's reserved tokens to the preprogrammed addresses by calling [`JBController.distributeReservedTokensOf(...)`](../specifications/contracts/or-controllers/jbcontroller/write/distributereservedtokensof.md).
+At any point, anyone can distribute a project's reserved tokens to the project's preprogrammed reserved token splits by calling [`JBController.distributeReservedTokensOf(...)`](../specifications/contracts/or-controllers/jbcontroller/write/distributereservedtokensof.md).
 
 ```solidity
 function distributeReservedTokensOf(uint256 _projectId, string memory _memo)
