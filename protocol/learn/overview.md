@@ -23,7 +23,7 @@ The next few are a little more abstract. They don't know anything specific to Ju
 
 *   [`JBProjects`](../specifications/contracts/jbprojects/) manages ownership over projects, which are represented as ERC-721 tokens.
 
-    The protocol uses this to enforce permissions to access several project-oriented transactions.
+    The protocol uses this to enforce permissions needed to access several project-oriented transactions.
 *   [`JBSplitsStore`](../specifications/contracts/jbsplitsstore/) stores information about how arbitrary distributions should be split. The information is represented as a [`JBSplit`](../../protocol/data-structures/jbsplit.md#jbsplit) data structure.
 
     The surface contracts currently use these to split up payout distributions and reserved token distributions.
