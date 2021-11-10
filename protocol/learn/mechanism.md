@@ -19,7 +19,7 @@ function launchProjectFor(
 ```
 
 This transaction launches a project. It does so by:
-* Creating a project by minting a token in the `JBProjects` NFT contract by calling [`JBProjects.createFor(...)`](../specifications/contracts/jbprojects/write/createfor.md). 
+* Minting a project in the `JBProjects` NFT contract by calling [`JBProjects.createFor(...)`](../specifications/contracts/jbprojects/write/createfor.md). 
 * Then giving the `JBController` contract that is handling the `launchProjectFor` transaction that's currently being executed authority to write to the `JBFundingCycleStore` and the `JBTokenStore` on the project's behalf by calling [`JBDirectory.setControllerOf(...)`](../specifications/contracts/jbdirectory/write/setcontrollerof.md). 
 * Then creating the project's first funding cycle using the provided `_data` and `_metadata` parameters by calling [`JBFundingCycleStore.configureFor(...)`](../specifications/contracts/jbfundingcyclestore/write/configurefor.md).
 * Then storing splits for any provided split groups by calling [`JBSplitStore.set(...)`](../specifications/contracts/jbsplitsstore/write/set.md).
