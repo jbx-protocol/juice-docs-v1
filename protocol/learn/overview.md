@@ -26,7 +26,7 @@ The next few are a little more abstract. They don't know anything specific to Ju
     The protocol uses these to enforce permissions to access several transactions.
 *   [`JBSplitsStore`](../specifications/contracts/jbsplitsstore/) stores information about how arbitrary distributions should be split. The information is represented as a [`JBSplit`](../../protocol/data-structures/jbsplit.md#jbsplit) data structure.
 
-    The protocol uses these to split up payout distributions and reserved token distributions.
+    The surface contracts currently use these to split up payout distributions and reserved token distributions.
 *   [`JBPrices`](../specifications/contracts/jbprices/) manages and normalizes price feeds.
 
     The protocol uses this to allow projects to do their accounting in any number of fiat currencies, but manage all funds in ETH.
