@@ -44,8 +44,8 @@ Whew, that's a lot. Let's use an example, starting with the simplest one:
   ```javascript
   {
     reservedRate: 0,
-    redemptionRate: 0,
-    ballotRedemptionRate: 0,
+    redemptionRate: 200,
+    ballotRedemptionRate: 200,
     pausePay: 0, 
     pauseDistributions: 0, 
     pauseRedeem: 0, 
@@ -54,6 +54,7 @@ Whew, that's a lot. Let's use an example, starting with the simplest one:
     allowTerminalMigration: 0, 
     allowControllerMigration: 0, 
     holdFees: 0, 
+    useLocalBalanceForRedemptions: 0,
     useDataSourceForPay: 0, 
     useDataSourceForRedeem: 0, 
     dataSource: 0x0000000000000000000000000000000000000000, 
@@ -61,8 +62,17 @@ Whew, that's a lot. Let's use an example, starting with the simplest one:
   ```
 * For `_groupedSplits` send an empty array.
 * For `_fundAccessConstraints` send an empty array.
-* For `_terminals` send an empty array with the contract address of the `JBETHPaymentTerminal`.
+* For `_terminals` send an array only including the contract address of the `JBETHPaymentTerminal`.
  
+This is the most vanilla project you can launch, which also makes it cheapest to launch gas-wise since relatively little needs to get saved into storage.
+
+Under these conditions:
+* Your project can begin receiving funds through the `JBETHPaymentTerminal`.
+* 1,000,000 of your project's tokens will be minted per ETH received into a wallet specified by the payer of the ETH since the configured `_data.weight` of `1000000000000000000000000`. (The raw value sent has 18 decimal places).
+* A new funding cycle with an updated configuration can be triggered at any time by the project owner since the configured `_data.duration` of 0 and `_data.ballot` of `0x0000000000000000000000000000000000000000`.
+* All tokens minted as a result of recieved ETH will go to the beneficiary address specified by the payer of the ETH since the configured `_metadata.reservedRate` of 0.
+* Nothing fancy will happen outside of the default token minting behavior since the configured `_metadata.useDataSourceForPay` is `false`. 
+* None of the funds in the treasury can be distributed to the project owner since no `_fundAccessConstraints` were specified. This means all funds in the treasury are considered overflow. Since the configured `_metadata.redemptionRate` is 200 (which represents 100%), all outstanding tokens can be redeemed/burned to claim a proportional part of the overflow. This lets everyone who contributed funds have access to their ETH back.
 
 _wip_
 _to be continued_
