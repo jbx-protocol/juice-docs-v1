@@ -125,7 +125,7 @@ function distributeReservedTokensOf(uint256 _projectId, string memory _memo)
   returns (uint256) { ... }
 ```
 
-Anyone who holds your project's tokens can burn them for a proportional share of the project's overflow by calling [`JBETHPaymentTerminal.redeemTokensOf(...)`](../specifications/contracts/or-payment-terminals/jbethpaymentterminal/write/redeemtokensof.md). The overflow amount is the treasury's balance minus the current funding cycle's target.
+Anyone who holds your project's tokens can burn them for a proportional share of the project's overflow by calling [`JBETHPaymentTerminal.redeemTokensOf(...)`](../specifications/contracts/or-payment-terminals/jbethpaymentterminal/write/redeemtokensof.md). The overflow amount is the treasury's balance minus the current funding cycle's distribution limit.
 
 Redeeming tokens allows your token holders to exit the community at any time with their share of the funds.
 
