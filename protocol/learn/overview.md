@@ -34,7 +34,7 @@ The next few are a little more abstract. They don't know anything specific to Ju
 
     The protocol uses this to allow project owners to give other EOAs or contracts permission to take certain administrative actions on their behalf. This is useful for encouraging a composable ecosystem where proxy contracts can perform actions on a project's behalf as a lego block.
 
-The last core contract stores info about which payment terminals a project is currently accepting funds through, and which controller contract defines the rules according to which a project's terminal contract interacts with the core contracts.
+The last core contract stores info about which surface contracts each project is currently using, mainly which payment terminals each project is currently accepting funds through, and which controller contract defines the rules according to which each project's terminal contract interacts with the core contracts.
 
 * [`JBDirectory`](../specifications/contracts/jbdirectory/) keeps a reference of which terminal contracts each project is currently accepting funds through, and which controller contract is managing each project's tokens and funding cycles.
 
