@@ -10,7 +10,7 @@ description: >-
 The Juicebox protocol is made up of 7 core contracts and 3 surface contracts.
 
 * Core contracts store all the independent components that make the protocol work.
-* Surface contracts glue core contracts together and can accept funds on behalf of projects. Anyone can write new surface contracts for projects to use.
+* Surface contracts glue core contracts together and manage funds. Anyone can write new surface contracts for projects to use.
 
 ## Core contracts
 
@@ -40,7 +40,7 @@ The last core contract stores info about which payment terminals a project is cu
 
 ## Surface contracts
 
-There are currently 3 surface contracts that manage how projects receive funds and define how all core contracts should be used together. Anyone can write new surface contracts for projects to use.
+There are currently 3 surface contracts that manage how projects manage funds and define how all core contracts should be used together. Anyone can write new surface contracts for projects to use.
 
 * [`JBController`](../specifications/contracts/or-controllers/jbcontroller/) stitches together funding cycles and community tokens, making sure all activity is accounted for and correct.
 * [`JBETHPaymentTerminal`](../specifications/contracts/or-payment-terminals/jbethpaymentterminal/) manages all inflows and outflows of ETH into the Juicebox ecosystem.
