@@ -28,16 +28,20 @@ function _claimableOverflowOf(
 
 # Body
 
-1.  Get a reference to the current overflow given the provided funding cycle.
+1.  Get a reference to the current overflow given the provided funding cycle. If the funding cycle specifies that the local balance should be used for redemptions, get the overflow taking only the local balance and distribution limit into account. Otherwise get the overflow taking the balances and distribution limits of all of the project's terminals into account. 
 
     ```solidity
     // Get the amount of current overflow.
-    uint256 _currentOverflow = _overflowDuring(_projectId, _fundingCycle);
+    // Use the local overflow if the funding cycle specifies that it should be used. Otherwise use the project's total overflow across all of its terminals.
+    uint256 _currentOverflow = _fundingCycle.shouldUseLocalBalanceForRedemptions()
+      ? _overflowDuring(_projectId, _fundingCycle)
+      : _totalOverflowDuring(_projectId, _fundingCycle);
     ```
 
     _Internal references:_
 
     * [`_overflowDuring`](./_overflowduring.md)
+    * [`_totalOverflowDuring`](./_totaloverflowduring.md)
 2.  If there is no overflow, there's also no claimable overflow.
 
     ```solidity
@@ -152,7 +156,10 @@ function _claimableOverflowOf(
   uint256 _tokenCount
 ) private view returns (uint256) {
   // Get the amount of current overflow.
-  uint256 _currentOverflow = _overflowDuring(_projectId, _fundingCycle);
+  // Use the local overflow if the funding cycle specifies that it should be used. Otherwise use the project's total overflow across all of its terminals.
+  uint256 _currentOverflow = _fundingCycle.shouldUseLocalBalanceForRedemptions()
+    ? _overflowDuring(_projectId, _fundingCycle)
+    : _totalOverflowDuring(_projectId, _fundingCycle);
 
   // If there is no overflow, nothing is claimable.
   if (_currentOverflow == 0) return 0;

@@ -19,7 +19,7 @@ function ethBalanceOf(uint256 _projectId) external view override returns (uint25
 * The view function can be accessed externally by anyone.
 * The function does not alter state on the blockchain.
 * The resulting function overrides a function definition from the `IJBTerminal` interface.
-* The function returns the delegate address
+* The function returns the ETH balance. 
 
 # Body
 

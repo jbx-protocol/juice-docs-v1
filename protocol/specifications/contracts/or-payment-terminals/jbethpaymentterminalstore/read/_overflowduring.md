@@ -6,7 +6,7 @@ Contract: [`JBETHPaymentTerminalStore`](../)​‌
 {% tab title="Step by step" %}
 **Gets the amount that is overflowing when measured from the specified funding cycle.**
 
-_This amount changes as the price of ETH changes in relation to the funding cycle's currency._
+_This amount changes as the price of ETH changes in relation to the currency being used to measure the distribution limit._
 
 # Definition
 
@@ -22,7 +22,7 @@ function _overflowDuring(uint256 _projectId, JBFundingCycle memory _fundingCycle
   * `_fundingCycle` is the ID of the funding cycle to base the overflow on.
 * The view function is private to this contract.
 * The function does not alter state on the blockchain.
-* The function returns the he overflow of funds.
+* The function returns the the overflow of funds.
 
 # Body
 
@@ -88,10 +88,10 @@ function _overflowDuring(uint256 _projectId, JBFundingCycle memory _fundingCycle
       );
     ```
 
-    _Internal references:_
+    _External references:_
 
     * [`priceFor`](../../../jbprices/read/pricefor.md)
-6.  If the current balance of the project is less than the target remaining, there is no overflow. Otherwise the difference between the project's current balance and the remaining amount is the overflow.
+6.  If the current balance of the project is less than the target remaining, there is no overflow. Otherwise the difference between the project's current balance and the remaining distribution limit is the overflow.
 
     ```solidity
     // Overflow is the balance of this project minus the amount that can still be withdrawn.
