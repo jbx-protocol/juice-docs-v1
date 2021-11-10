@@ -6,7 +6,7 @@ Interface: [`IJBTerminal`](../../../../interfaces/ijbterminal.md)
 
 {% tabs %}
 {% tab title="Step by step" %}
-**The amount of funds that can still be distributed within the preconfigured limit.**
+**The amount of a project's funds that can still be distributed within the preconfigured limit.**
 
 # Definition
 
@@ -29,7 +29,7 @@ function remainingDistributionLimitOf(
 
 # Body
 
-1.  Since this terminal stores ETH, simply return the project's ETH balance.
+1.  Subtract the used distribution limit during the specified funding cycle from the preconfigured distribution limit.
 
     ```solidity
     // Subtract the used distribution limit during the specified funding cycle from the preconfigured distribution limit.
