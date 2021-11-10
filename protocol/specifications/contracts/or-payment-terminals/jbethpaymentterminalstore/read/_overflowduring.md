@@ -124,7 +124,7 @@ returns (uint256) {
   if (_balanceOf == 0) return 0;
 
   // Get a reference to the amount still withdrawable during the funding cycle.
-  uint256 _targetRemaining = directory.controllerOf(_projectId).distributionLimitOf(
+  uint256 _distributionRemaining = directory.controllerOf(_projectId).distributionLimitOf(
     _projectId,
     _fundingCycle.configuration,
     terminal
@@ -137,17 +137,16 @@ returns (uint256) {
     terminal
   );
 
-  // Convert the _targetRemaining to ETH.
-  uint256 _ethTargetRemaining = _targetRemaining == 0
+  // Convert the _distributionRemaining to ETH.
+  uint256 _ethDistributionRemaining = _distributionRemaining == 0
     ? 0 // Get the current price of ETH.
     : // A currency of 0 should be interpreted as whatever the currency being withdrawn is.
     _currency == 0
-    ? _targetRemaining
-    : PRBMathUD60x18.div(_targetRemaining, prices.priceFor(_currency, JBCurrencies.ETH));
-    );
+    ? _distributionRemaining
+    : PRBMathUD60x18.div(_distributionRemaining, prices.priceFor(_currency, JBCurrencies.ETH));
 
-  // Overflow is the balance of this project minus the amount that can still be withdrawn.
-  return _balanceOf < _ethTargetRemaining ? 0 : _balanceOf - _ethTargetRemaining;
+  // Overflow is the balance of this project minus the amount that can still be distributed.
+  return _balanceOf < _ethDistributionRemaining ? 0 : _balanceOf - _ethDistributionRemaining;
 }
 ```
 {% endtab %}

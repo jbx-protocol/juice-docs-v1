@@ -19,8 +19,8 @@ function launchProjectFor(
   string calldata _metadataCid,
   JBFundingCycleData calldata _data,
   JBFundingCycleMetadata calldata _metadata,
-  JBFundAccessConstraints[] memory _fundAccessConstraints,
   JBGroupedSplits[] memory _groupedSplits,
+  JBFundAccessConstraints[] memory _fundAccessConstraints,
   IJBTerminal[] memory _terminals
 ) external returns (uint256 projectId) { ... }
 ```
@@ -31,8 +31,8 @@ function launchProjectFor(
   * `_metadataCid` is a link to associate with the project. This can be updated any time by the owner of the project.
   * `_data` is a [`JBFundingCycleData`](../../../../data-structures/jbfundingcycledata.md) data structure that defines the project's first funding cycle. These properties will remain fixed for the duration of the funding cycle.
   * `_metadata` is a [`JBFundingCycleMetadata`](../../../../data-structures/jbfundingcyclemetadata.md) data structure specifying the controller specific params that a funding cycle can have. These properties will remain fixed for the duration of the funding cycle.
-  * `_fundAccessConstraints` is an array of [`JBFundAccessConstraints`](../../../../data-structures/jbfundaccessconstraints.md) data structures containing amounts that a project can distribute during each funding cycle and amounts that can be used from its own overflow on-demand for each payment terminal. The `distributionLimit` applies for each funding cycle, and the `overflowAllowance` applies for the entirety of the configuration.
   * `_groupedSplits` is an array of [`JBGroupedSplits`](../../../../data-structures/jbgroupedsplits.md) data structures containing splits to set for any number of groups.
+  * `_fundAccessConstraints` is an array of [`JBFundAccessConstraints`](../../../../data-structures/jbfundaccessconstraints.md) data structures containing amounts that a project can distribute during each funding cycle and amounts that can be used from its own overflow on-demand for each payment terminal. The `distributionLimit` applies for each funding cycle, and the `overflowAllowance` applies for the entirety of the configuration.
   * `_terminals` is an array of [`IJBTerminal`](../../../../interfaces/ijbterminal.md) payment terminals to add for the project.
 * The function can be accessed externally by anyone.
 * The function returns the ID of the project that was launched.
@@ -77,7 +77,16 @@ function launchProjectFor(
     _External references:_
 
     * [`setControllerOf`](../../../jbdirectory/write/setcontrollerof.md)
-6.  If terminals were provided, add them to the list of terminals the project can accept funds through.
+6.  Configure the project's funding cycle, fund access constraints, and splits.
+
+    ```solidity
+    _configure(projectId, _data, _metadata, _groupedSplits, _fundAccessConstraints);
+    ```
+
+    _Internal references:_
+
+    * [`_configure`](\_configure.md)
+7.  If terminals were provided, add them to the list of terminals the project can accept funds through.
 
     ```solidity
     // Add the provided terminals to the list of terminals.
@@ -87,15 +96,6 @@ function launchProjectFor(
     _External references:_
 
     * [`addTerminalsOf`](../../../jbdirectory/write/addterminalsof.md)
-8.  Configure the project's funding cycle, fund access constraints, and splits.
-
-    ```solidity
-    _configure(projectId, _data, _metadata, _fundAccessConstraints, _groupedSplits);
-    ```
-
-    _Internal references:_
-
-    * [`_configure`](\_configure.md)
 {% endtab %}
 
 {% tab title="Code" %}
@@ -117,6 +117,12 @@ function launchProjectFor(
     @dev _data.target The amount that the project wants to payout during a funding cycle. Sent as a wad (18 decimals).
     @dev _data.currency The currency of the `target`. Send 0 for ETH or 1 for USD.
     @dev _data.duration The duration of the funding cycle for which the `target` amount is needed. Measured in days. Send 0 for cycles that are reconfigurable at any time.
+    @dev _data.weight The weight of the funding cycle.
+      This number is interpreted as a wad, meaning it has 18 decimal places.
+      The protocol uses the weight to determine how many tokens to mint upon receiving a payment during a funding cycle.
+      A value of 0 means that the weight should be inherited and potentially discounted from the currently active cycle if possible. Otherwise a weight of 0 will be used.
+      A value of 1 means that no tokens should be minted regardless of how many ETH was paid. The protocol will set the stored weight value to 0.
+      A value of 1 X 10^18 means that one token should be minted per ETH received.
     @dev _data.discountRate A number from 0-1000000000 indicating how valuable a contribution to this funding cycle is compared to previous funding cycles.
       If it's 0, each funding cycle will have equal weight.
       If the number is 900000000, a contribution to the next funding cycle will only give you 10% of tickets given to a contribution of the same amoutn during the current funding cycle.
@@ -139,8 +145,8 @@ function launchProjectFor(
     @dev _metadata.useDataSourceForPay Whether or not the data source should be used when processing a payment.
     @dev _metadata.useDataSourceForRedeem Whether or not the data source should be used when processing a redemption.
     @dev _metadata.dataSource A contract that exposes data that can be used within pay and redeem transactions. Must adhere to IJBFundingCycleDataSource.
-  @param _fundAccessConstraints An array containing amounts, in wei (18 decimals), that a project can use from its own overflow on-demand for each payment terminal. The `distributionLimit` applies for each funding cycle, and the `overflowAllowance` applies for the entirety of the configuration.
   @param _groupedSplits An array of splits to set for any number of group.
+  @param _fundAccessConstraints An array containing amounts, in wei (18 decimals), that a project can use from its own overflow on-demand for each payment terminal. The `distributionLimit` applies for each funding cycle, and the `overflowAllowance` applies for the entirety of the configuration.
   @param _terminals Payment terminals to add for the project.
 
   @return projectId The ID of the project.
@@ -151,8 +157,8 @@ function launchProjectFor(
   string calldata _metadataCid,
   JBFundingCycleData calldata _data,
   JBFundingCycleMetadata calldata _metadata,
-  JBFundAccessConstraints[] memory _fundAccessConstraints,
   JBGroupedSplits[] memory _groupedSplits,
+  JBFundAccessConstraints[] memory _fundAccessConstraints,
   IJBTerminal[] memory _terminals
 ) external returns (uint256 projectId) {
   // The reserved project token rate must be less than or equal to 200.
@@ -170,10 +176,10 @@ function launchProjectFor(
   // Set the this contract as the project's controller in the directory.
   directory.setControllerOf(projectId, this);
 
+  _configure(projectId, _data, _metadata, _groupedSplits, _fundAccessConstraints);
+
   // Add the provided terminals to the list of terminals.
   if (_terminals.length > 0) directory.addTerminalsOf(projectId, _terminals);
-
-  _configure(projectId, _data, _metadata, _fundAccessConstraints, _groupedSplits);
 }
 ```
 {% endtab %}

@@ -11,8 +11,8 @@ function _configure(
   uint256 _projectId,
   JBFundingCycleData calldata _data,
   JBFundingCycleMetadata calldata _metadata,
-  JBFundAccessConstraints[] memory _fundAccessConstraints,
-  JBGroupedSplits[] memory _groupedSplits
+  JBGroupedSplits[] memory _groupedSplits,
+  JBFundAccessConstraints[] memory _fundAccessConstraints
 ) private returns (uint256) { ... }
 ```
 
@@ -129,8 +129,8 @@ function _configure(
   uint256 _projectId,
   JBFundingCycleData calldata _data,
   JBFundingCycleMetadata calldata _metadata,
-  JBFundAccessConstraints[] memory _fundAccessConstraints,
-  JBGroupedSplits[] memory _groupedSplits
+  JBGroupedSplits[] memory _groupedSplits,
+  JBFundAccessConstraints[] memory _fundAccessConstraints
 ) private returns (uint256) {
   // Configure the funding cycle's properties.
   JBFundingCycle memory _fundingCycle = fundingCycleStore.configureFor(
@@ -140,7 +140,7 @@ function _configure(
   );
 
   for (uint256 _i; _i < _groupedSplits.length; _i++)
-    // Set payout splits if there are any.
+    // Set splits for the current group being iterated on if there are any.
     if (_groupedSplits[_i].splits.length > 0)
       splitsStore.set(
         _projectId,

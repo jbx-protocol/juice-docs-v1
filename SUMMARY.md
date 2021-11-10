@@ -15,6 +15,7 @@
 * [README](protocol/protocol.md)
 * [Learn](protocol/learn/README.md)
   * [Architecture](protocol/learn/overview.md)
+  * [Mechanism](protocol/learn/mechanism.md)
   * [Glossary](protocol/learn/terminology.md)
   * [Topics](protocol/learn/topics/README.md)
     * [Project](protocol/learn/topics/project.md)

@@ -136,7 +136,7 @@ Internal references:
 *   Make sure the accumulated percents are under 100%. Split percents are out of 10000000.
 
     ```solidity
-    // The total percent should be less than 10000000.
+    // The total percent should be at most 10000000.
     require(_percentTotal <= 10000000, '0x12: BAD_TOTAL_PERCENT');
     ```
 *   Push the split onto the stored `_splits` value.
@@ -237,7 +237,7 @@ function set(
     // Add to the total percents.
     _percentTotal = _percentTotal + _splits[_i].percent;
 
-    // The total percent should be less than 10000000.
+    // The total percent should be at most 10000000.
     require(_percentTotal <= 10000000, '0x12: BAD_TOTAL_PERCENT');
 
     // Push the new split into the project's list of splits.

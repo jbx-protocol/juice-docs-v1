@@ -13,8 +13,8 @@ function launchProjectFor(
   string calldata _metadataCid,
   JBFundingCycleData calldata _data,
   JBFundingCycleMetadata calldata _metadata,
-  JBFundAccessConstraints[] memory _fundAccessConstraints,
   JBGroupedSplits[] memory _groupedSplits,
+  JBFundAccessConstraints[] memory _fundAccessConstraints,
   IJBTerminal[] memory _terminals
 ) external returns (uint256 projectId) { ... }
 ```
@@ -153,9 +153,8 @@ function reconfigureFundingCyclesOf(
   uint256 _projectId,
   JBFundingCycleData calldata _data,
   JBFundingCycleMetadata calldata _metadata,
-  JBOverflowAllowance[] memory _overflowAllowances,
-  JBSplit[] memory _payoutSplits,
-  JBSplit[] memory _reservedTokenSplits
+  JBGroupedSplits[] memory _groupedSplits,
+  JBFundAccessConstraints[] memory _fundAccessConstraints
 )
   external
   requirePermission(projects.ownerOf(_projectId), _projectId, JBOperations.RECONFIGURE)
