@@ -13,7 +13,6 @@ Overview
 ### **Addresses**
 
 Ethereum mainnet: _Not yet deployed_\
-Rinkeby testnet: 0x92239434A7d0D17c4d8F876C7DB75E54680Bc85e
 
 ### **Inheritance**
 

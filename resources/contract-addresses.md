@@ -34,23 +34,8 @@ Prices: [`0xa9537Cc42555564206D4E57c0eb6943d56E83A30`](https://etherscan.io/addr
 
 ### Rinkeby
 
-TerminalV1: [0x9a5ebe744df7b66e8bdd41db8d6c52073556ed93](https://rinkeby.etherscan.io/address/0x9a5ebe744df7b66e8bdd41db8d6c52073556ed93)
+https://github.com/jbx-protocol/juice-contracts/tree/main/deployments/rinkeby
 
-Projects: [0x34a1d33e49907adfe05fb4e21411a06a8c4300ee](https://rinkeby.etherscan.io/address/0x34a1d33e49907adfe05fb4e21411a06a8c4300ee)
-
-ModStore: [0xa63f15ecca0fe86b48716ce53aaa8685a596e82f](https://rinkeby.etherscan.io/address/0xa63f15ecca0fe86b48716ce53aaa8685a596e82f)
-
-TerminalDirectory: [0xf835913b60b870a3a14b6c7179fedf0feba49d93](https://rinkeby.etherscan.io/address/0xf835913b60b870a3a14b6c7179fedf0feba49d93)
-
-OperatorStore: [0xc4d620e189b420249005fd38b22b1ea138cc0bee](https://rinkeby.etherscan.io/address/0xc4d620e189b420249005fd38b22b1ea138cc0bee)
-
-TokenStore: [0x61d095f86c36b05446edd5a19dead11c703be3f0](https://rinkeby.etherscan.io/address/0x61d095f86c36b05446edd5a19dead11c703be3f0)
-
-FundingCycle: [0x7bf5aa19778644b314ffc6f781c6f89cd873e71c](https://rinkeby.etherscan.io/address/0x7bf5aa19778644b314ffc6f781c6f89cd873e71c)
-
-Prices: [0x990e0d768240b651760ce07502d89b3dbe7a2ec2](https://rinkeby.etherscan.io/address/0x990e0d768240b651760ce07502d89b3dbe7a2ec2)
-
-Controller: [0xf56adc723d82218e86d5b5075d8c7b35f7b3625f](https://rinkeby.etherscan.io/address/0xf56adc723d82218e86d5b5075d8c7b35f7b3625f)
 
 ### Kovan
 

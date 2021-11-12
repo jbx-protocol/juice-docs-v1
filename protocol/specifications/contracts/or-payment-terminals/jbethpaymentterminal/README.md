@@ -13,7 +13,6 @@ description: Manages all inflows and outflows of ETH into the Juicebox ecosystem
 ### **Addresses**
 
 Ethereum mainnet: _Not yet deployed_\
-Rinkeby testnet: 0x9d5687A9A175308773Bb289159Aa61D326E3aDB5
 
 ### **Interfaces**
 
