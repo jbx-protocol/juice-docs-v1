@@ -19,10 +19,12 @@ function launchProjectFor(
 ) external returns (uint256 projectId) { ... }
 ```
 
-At any time after the project has been created, its owner can issue ERC-20 tokens for the protocol to use as its community token by calling [`JBTokenStore.issueFor(...)`](../specifications/contracts/jbtokenstore/write/issuefor.md). By default the protocol uses an internal accounting mechanism to account for projects' tokens. 
+At any time after the project has been created, its owner can issue ERC-20 tokens for the protocol to use as its community token by calling [`JBController.issueTokenFor(...)`](../specifications/contracts/jbtokenstore/write/issuetokenfor.md). By default the protocol uses an internal accounting mechanism to account for projects' tokens. 
+
+A project can instead bring their own token, so long as it adheres to the [`IJBToken`](../specifications/interfaces/ijbtoken.md) interface. They can do so by calling [`JBController.changeTokenFor(...)`](../specifications/contracts/jbtokenstore/write/changetokenfor.md) This makes it easy to use ERC-1155's or custom contracts, and to change tokens over time to acheive a more creative design.
 
 ```solidity
-function issueFor(
+function issueTokenFor(
   uint256 _projectId,
   string calldata _name,
   string calldata _symbol
@@ -31,6 +33,17 @@ function issueFor(
   override
   requirePermission(projects.ownerOf(_projectId), _projectId, JBOperations.ISSUE)
   returns (IJBToken token) { ... }
+```
+
+```solidity
+function changeTokenOf(
+  uint256 _projectId,
+  IJBToken _token,
+  address _newOwner
+)
+  external
+  nonReentrant
+  requirePermission(projects.ownerOf(_projectId), _projectId, JBOperations.CHANGE_TOKEN) { ... }
 ```
 
 Once a project has been created, it can begin accepting funds from anyone. ETH can be sent to the project by calling [`JBETHPaymentTerminal.pay(...)`](../specifications/contracts/or-payment-terminals/jbethpaymentterminal/write/pay.md).
