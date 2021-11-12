@@ -4,7 +4,7 @@ Contract: [`JBController`](../)​‌
 
 {% tabs %}
 {% tab title="Step by step" %}
-**Swap the current project's token that is minted and burned for another, and transfer ownership from the current to another address.**
+**Swap the current project's token that is minted and burned for another, and transfer ownership of the current token to another address if needed.**
 
 _Only a project owner or operator can change its token._
 
@@ -64,7 +64,7 @@ function changeTokenOf(
 ```solidity
 /**
   @notice 
-  Swap the current project's token that is minted and burned for another, and transfer ownership from the current to another address.
+  Swap the current project's token that is minted and burned for another, and transfer ownership of the current token to another address if needed.
 
   @dev
   Only a project owner or operator can change its token.
