@@ -39,7 +39,8 @@ constructor(
   IJBDirectory _directory,
   IJBSplitsStore _splitsStore,
   IJBVault _vault,
-  JBETHPaymentTerminalStore _store
+  JBETHPaymentTerminalStore _store,
+  address _owner
 ) JBOperatable(_operatorStore) {
   projects = _projects;
   directory = _directory;
@@ -50,6 +51,8 @@ constructor(
   _store.claimFor(this);
 
   store = _store;
+
+  transferOwnership(_owner);
 }
 ```
 
@@ -60,6 +63,7 @@ constructor(
   * `_splitsStore` is an [`IJBSplitsStore`](../../../interfaces/ijbsplitsstore/) contract that stores splits for each project.
   * `_vault` is an [`IJBVault`](../../../interfaces/ijbvault/) contract to store funds in.
   * `_store` is a contract that stores the terminal's data.
+  * `_owner` is the address that will own this contract.
 
 ## Events
 
