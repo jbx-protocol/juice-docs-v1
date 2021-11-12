@@ -16,7 +16,7 @@
 * [Learn](protocol/learn/README.md)
   * [Architecture](protocol/learn/overview.md)
   * [Project design](protocol/learn/project-design.md)
-  * [Glossary](protocol/learn/terminology.md)
+  * [Glossary](protocol/learn/glossary.md)
   * [Topics](protocol/learn/topics/README.md)
     * [Project](protocol/learn/topics/project.md)
     * [Funding cycle](protocol/learn/topics/funding-cycle.md)
