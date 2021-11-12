@@ -20,6 +20,8 @@
   * [Topics](protocol/learn/topics/README.md)
     * [Project](protocol/learn/topics/project.md)
     * [Funding cycle](protocol/learn/topics/funding-cycle.md)
+    * [Community tokens](protocol/learn/topics/community-tokens.md)
+    * [Splits](protocol/learn/topics/splits.md)
 * [Build](protocol/build/README.md)
   * [Getting started](protocol/build/getting-started.md)
 * [Specifications](protocol/specifications/README.md)
