@@ -61,15 +61,15 @@ function changeFor(
     _External references:_
 
     * [`transferOwnership`](../../jbtoken/write/transferownership.md)
-4.  Emit a `ChangeToken` event with the relevant parameters.
+4.  Emit a `Change` event with the relevant parameters.
 
     ```solidity
-    emit ChangeToken(_projectId, _token, _newOwner, msg.sender);
+    emit Change(_projectId, _token, _newOwner, msg.sender);
     ```
 
     _Event references:_
 
-    * [`ChangeToken`](../events/changetoken.md)
+    * [`Change`](../events/change.md)
 {% endtab %}
 
 {% tab title="Code" %}
@@ -100,7 +100,7 @@ function changeFor(
   if (_newOwner != address(0) && _currentToken != IJBToken(address(0)))
     _currentToken.transferOwnership(_newOwner);
 
-  emit ChangeToken(_projectId, _token, _newOwner, msg.sender);
+  emit Change(_projectId, _token, _newOwner, msg.sender);
 }
 ```
 {% endtab %}
