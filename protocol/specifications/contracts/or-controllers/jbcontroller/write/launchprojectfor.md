@@ -129,8 +129,8 @@ function launchProjectFor(
       If the number is 1000000001, an non-recurring funding cycle will get made.
     @dev _data.ballot The ballot contract that will be used to approve subsequent reconfigurations. Must adhere to the IFundingCycleBallot interface.
   @param _metadata A JBFundingCycleMetadata data structure specifying the controller specific params that a funding cycle can have. These properties will remain fixed for the duration of the funding cycle.
-    @dev _metadata.reservedRate A number from 0-200 (0-100%) indicating the percentage of each contribution's newly minted tokens that will be reserved for the token splits.
-    @dev _metadata.redemptionRate The rate from 0-200 (0-100%) that tunes the bonding curve according to which a project's tokens can be redeemed for overflow.
+    @dev _metadata.reservedRate A number from 0-10000 (0-100%) indicating the percentage of each contribution's newly minted tokens that will be reserved for the token splits.
+    @dev _metadata.redemptionRate The rate from 0-10000 (0-100%) that tunes the bonding curve according to which a project's tokens can be redeemed for overflow.
       The bonding curve formula is https://www.desmos.com/calculator/sp9ru6zbpk
       where x is _count, o is _currentOverflow, s is _totalSupply, and r is _redemptionRate.
     @dev _metadata.ballotRedemptionRate The redemption rate to apply when there is an active ballot.
@@ -161,14 +161,14 @@ function launchProjectFor(
   JBFundAccessConstraints[] memory _fundAccessConstraints,
   IJBTerminal[] memory _terminals
 ) external returns (uint256 projectId) {
-  // The reserved project token rate must be less than or equal to 200.
-  require(_metadata.reservedRate <= 200, '0x37: BAD_RESERVED_RATE');
+  // The reserved project token rate must be less than or equal to 10000.
+  require(_metadata.reservedRate <= 10000, '0x37: BAD_RESERVED_RATE');
 
-  // The redemption rate must be between 0 and 200.
-  require(_metadata.redemptionRate <= 200, '0x38: BAD_REDEMPTION_RATE');
+  // The redemption rate must be between 0 and 10000.
+  require(_metadata.redemptionRate <= 10000, '0x38: BAD_REDEMPTION_RATE');
 
-  // The ballot redemption rate must be less than or equal to 200.
-  require(_metadata.ballotRedemptionRate <= 200, '0x39: BAD_BALLOT_REDEMPTION_RATE');
+  // The ballot redemption rate must be less than or equal to 10000.
+  require(_metadata.ballotRedemptionRate <= 10000, '0x39: BAD_BALLOT_REDEMPTION_RATE');
 
   // Create the project for into the wallet of the message sender.
   projectId = projects.createFor(_owner, _handle, _metadataCid);
