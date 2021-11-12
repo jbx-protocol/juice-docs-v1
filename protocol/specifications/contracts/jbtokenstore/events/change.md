@@ -1,13 +1,13 @@
-# ChangeToken
+# Change
 
 Emitted from:
 
-* [`changeTokenOf`](../write/changetokenof.md)
+* [`changefor`](../write/changefor.md)
 
 # Definition
 
 ```solidity
-event ChangeToken(
+event Change(
   uint256 indexed projectId,
   IJBToken indexed token,
   address indexed owner,

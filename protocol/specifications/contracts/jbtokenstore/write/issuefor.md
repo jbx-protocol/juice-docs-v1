@@ -8,9 +8,9 @@ Interface: [`IJBTokenStore`](../../../interfaces/ijbtokenstore.md)
 {% tab title="Step by step" %}
 **Issues an owner's ERC-20 Tokens that'll be used when claiming tokens.**
 
-_Deploys an owner's Token ERC-20 token contract._
+_Deploys an project's ERC-20 token contract._
 
-_Only a project owner or operator can issue its token._
+_Only a project's current controller can issue its token._
 
 # Definition
 
@@ -19,18 +19,14 @@ function issueFor(
   uint256 _projectId,
   string calldata _name,
   string calldata _symbol
-)
-  external
-  override
-  requirePermission(projects.ownerOf(_projectId), _projectId, JBOperations.ISSUE)
-  returns (IJBToken token) { ... }
+) external override onlyController(_projectId) returns (IJBToken token) { ... }
 ```
 
 * Arguments:
   * `_projectId` is the ID of the project for which the tokens will be issued.
   * `_name` is the name to associate with the token.
   * `_symbol` is the symbol to associate with the token. This is usually short and all caps.
-* Through the [`requirePermission`](../../or-abstract/jboperatable/modifiers/requirepermission.md) modifier, the function is only accessible by the project's owner, or from an operator that has been given the `JBOperations.ISSUE` permission by the project owner for the provided `_projectId`.
+* Through the [`onlyController`](../../or-abstract/jbcontrollerutility/modifiers/onlycontroller.md) modifier, the function can only be accessed by the controller of the `_projectId`.
 * The function overrides a function definition from the `IJBTokenStore` interface.
 * The function returns the address of the token that was issued.
 
@@ -92,7 +88,7 @@ function issueFor(
   Issues an owner's ERC-20 Tokens that'll be used when claiming tokens.
 
   @dev 
-  Deploys an owner's Token ERC-20 token contract.
+  Deploys a project's ERC-20 token contract.
   
   @dev
   Only a project owner or operator can issue its token.
@@ -105,11 +101,7 @@ function issueFor(
   uint256 _projectId,
   string calldata _name,
   string calldata _symbol
-)
-  external
-  override
-  requirePermission(projects.ownerOf(_projectId), _projectId, JBOperations.ISSUE)
-  returns (IJBToken token)
+) external override onlyController(_projectId) returns (IJBToken token)
 {
   // There must be a name.
   require((bytes(_name).length > 0), '0x1f: EMPTY_NAME');

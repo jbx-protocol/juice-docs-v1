@@ -32,7 +32,7 @@ interface IJBTokenStore {
 
   event ShouldRequireClaim(uint256 indexed projectId, bool indexed flag, address caller);
 
-  event ChangeToken(
+  event Change(
     uint256 indexed projectId,
     IJBToken indexed token,
     address indexed owner,
@@ -67,7 +67,7 @@ interface IJBTokenStore {
     string calldata _symbol
   ) external returns (IJBToken token);
 
-  function changeTokenOf(
+  function changeFor(
     uint256 _projectId,
     IJBToken _token,
     address _newOwner
