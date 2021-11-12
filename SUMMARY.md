@@ -22,6 +22,7 @@
     * [Funding cycle](protocol/learn/topics/funding-cycle.md)
     * [Community tokens](protocol/learn/topics/community-tokens.md)
     * [Splits](protocol/learn/topics/splits.md)
+    * [Overflow](protocol/learn/topics/overflow.md)
 * [Build](protocol/build/README.md)
   * [Getting started](protocol/build/getting-started.md)
 * [Specifications](protocol/specifications/README.md)
