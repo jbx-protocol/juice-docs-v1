@@ -1,4 +1,4 @@
-# changeTokenFor
+# changeTokenOf
 
 Contract: [`JBController`](../)​‌
 
