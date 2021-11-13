@@ -8,21 +8,21 @@ description: A step by step guide to kickstart your project.
 The Juicebox protocol is not formally audited. All projects built on it may be vulnerable to bugs or exploits. Be smart and be curious, ask questions if you've got any.
 {% endhint %}
 
-Welcome folks!&#x20;
+Welcome folks!
 
-To create a Juicebox Project, first press the 'connect' button in the top right corner of the [homepage](http://juicebox.money) to connect your wallet to Juicebox.&#x20;
+To create a Juicebox Project, first press the 'connect' button in the top right corner of the [homepage](http://juicebox.money) to connect your wallet to Juicebox.
 
-Next, click on 'Design your Project' or scroll down the homepage. The project design wizard is divided into two parts: the left side shows you all the necessary configuration steps, and the right side previews what your project will look like once created.&#x20;
+Next, click on 'Design your Project' or scroll down the homepage. The project design wizard is divided into two parts: the left side shows you all the necessary configuration steps, and the right side previews what your project will look like once created.
 
 {% hint style="info" %}
-Consider creating a test project on the Rinkeby testnet version of Juicebox at [rinkeby.juicebox.money](http://rinkeby.juicebox.money) before creating project on Ethereum mainnet. To use the Rinkeby version of Juicebox, you'll have to change your wallet to the Rinkeby network.&#x20;
+Consider creating a test project on the Rinkeby testnet version of Juicebox at [rinkeby.juicebox.money](http://rinkeby.juicebox.money) before creating project on Ethereum mainnet. To use the Rinkeby version of Juicebox, you'll have to change your wallet to the Rinkeby network.
 {% endhint %}
 
 ## Video Tutorial
 
-This video tutorial gives an overview of setting up a Juicebox project.&#x20;
+This video tutorial gives an overview of setting up a Juicebox project.
 
-{% embed url="https://s3.us-west-2.amazonaws.com/secure.notion-static.com/948ea000-7b7d-4cb2-885f-2eb962dea83f/JB_Project_Creation_Tutorial_2021-10-22_12-36-12-1.m4v?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAT73L2G45O3KS52Y5%2F20211029%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20211029T172821Z&X-Amz-Expires=86400&X-Amz-Signature=ff7455710b4f20c6c3337e6b2a534cd9c2143b6ce7d268eb3aaebf5dc87fa44d&X-Amz-SignedHeaders=host&response-content-disposition=filename+%3D%22JB%2520Project%2520Creation%2520Tutorial%25202021-10-22%252012-36-12-1.m4v%22" %}
+{% embed url="https://s3.us-west-2.amazonaws.com/secure.notion-static.com/948ea000-7b7d-4cb2-885f-2eb962dea83f/JB_Project_Creation_Tutorial_2021-10-22_12-36-12-1.m4v?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAT73L2G45EIPT3X45%2F20211113%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20211113T211837Z&X-Amz-Expires=86400&X-Amz-Signature=edd708049a3a7fd4c4c565716f0032892ac4d9a66c9bdc796a9bd181bbbd6671&X-Amz-SignedHeaders=host&response-content-disposition=filename+%3D%22JB%2520Project%2520Creation%2520Tutorial%25202021-10-22%252012-36-12-1.m4v%22" %}
 
 ## Section 1 - Identity
 
