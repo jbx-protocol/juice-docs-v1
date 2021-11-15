@@ -20,4 +20,4 @@ Snapshot representation strategy depends on the proposal template being used. So
 
 ## Step 5 - Execution
 
-Once the Snapshot voting is ended, a **Gnosis multi-sig** executes the results of the proposal on-chain. This process should take no longer that 4** days.**
+Once the Snapshot voting is ended, a **Gnosis multi-sig** executes the results of the proposal on-chain. This process should take no longer than **4 days.**
