@@ -2,7 +2,7 @@
 
 ## Step 1 - Idea
 
-When a community member wants to present an idea, the first thing they should do is use a [proposal template](https://juiceboxdao.notion.site/juiceboxdao/Governance-f0ff06c503914500acb9bd646cc4ed65) to create a proposal and post it in the #proposals-workshop **discord** channel. A thread should then be created for community discussion.
+When a community member wants to present an idea, the first thing they should do is use a [proposal template](https://www.notion.so/juiceboxdao/9d126f9148dc42ee83317d5cd74e4db4?v=7c1a01d4fc51444e86d5de86c4d3babf) to create a proposal and post it in the #proposals-workshop **discord** channel. A thread should then be created for community discussion.
 
 ## Step 2 - Discussion
 
