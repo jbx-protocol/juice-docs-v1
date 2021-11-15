@@ -14,10 +14,10 @@ After discussion, a **"react to vote"** **poll** is made in the proposals channe
 
 ## Step 4 - Voting Off-Chain
 
-If the proposal passes all of the requirements of the temp check, then a **Snapshot Vote** is created. The Snapshot must include the full proposal content, the link to the temp check, and the link to the discussion thread. If there is at least **50% approval** from **20 or more addresses** over **2 days**, \*\*\*\*then the proposal is passed to the final step.
+If the proposal passes all of the requirements of the temp check, then a **Snapshot Vote** is created. The Snapshot must include the full proposal content, the link to the temp check, and the link to the discussion thread. If there is at least **50% approval** from **20 or more addresses** over **2 days**, then the proposal is passed to the final step.
 
 Snapshot representation strategy depends on the proposal template being used. Some types of proposals are conducted by JBX holders, others are conducted by contributors.
 
 ## Step 5 - Execution
 
-Once the Snapshot voting is ended, a **Gnosis multi-sig** executes the results of the proposal on-chain. This process should take no longer that **2 days.**
+Once the Snapshot voting is ended, a **Gnosis multi-sig** executes the results of the proposal on-chain. This process should take no longer that 4** days.**
