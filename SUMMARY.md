@@ -366,8 +366,7 @@
 
 ## Hiring
 
-* [Join the team](hiring/join-the-team/README.md)
-  * [Discord Manager & Moderator](hiring/join-the-team/discord-manager-and-moderator.md)
+* [Join the team](hiring/join-the-team.md)
 
 ## Links
 

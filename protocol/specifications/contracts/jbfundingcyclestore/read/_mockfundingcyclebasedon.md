@@ -8,7 +8,7 @@ Contract:[`JBFundingCycleStore`](../)​
 
 _Returns an empty funding cycle if there can't be a mock funding cycle based on the provided one._
 
-# Definition
+## Definition
 
 ```solidity
 function _mockFundingCycleBasedOn(JBFundingCycle memory _baseFundingCycle, bool _allowMidCycle)
@@ -24,7 +24,7 @@ function _mockFundingCycleBasedOn(JBFundingCycle memory _baseFundingCycle, bool 
 * The function does not alter state on the blockchain.
 * The function returns a mock [`JBFundingCycle`](../../../data-structures/jbfundingcycle.md) of what the next funding cycle will be.
 
-# Body
+## Body
 
 1.  A funding cycle with a `discountRate` of 1000000001 is a non-recurring funding cycle. An empty funding cycle should be returned if the base is non-recurring since there can't be subsequent cycles.
 
@@ -52,7 +52,7 @@ function _mockFundingCycleBasedOn(JBFundingCycle memory _baseFundingCycle, bool 
 
     _Internal references:_
 
-    * [`_SECONDS_IN_DAY`](../properties/_seconds\_in\_day.md)
+    * [`_SECONDS_IN_DAY`](../properties/\_seconds\_in\_day.md)
 3.  Find the correct start time for the mock funding cycle.
 
     ```solidity
@@ -96,7 +96,6 @@ function _mockFundingCycleBasedOn(JBFundingCycle memory _baseFundingCycle, bool 
     _Internal references:_
 
     * [`_deriveWeightFrom`](\_deriveweightfrom.md)
-
 {% endtab %}
 
 {% tab title="Code" %}

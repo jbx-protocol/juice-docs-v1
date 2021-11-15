@@ -10,7 +10,7 @@ Interface: `IJBFundingCycleStore`
 
 _Returns an empty funding cycle with all properties set to 0 if a queued funding cycle of the project is not found._
 
-# Definition
+## Definition
 
 ```solidity
 function queuedOf(uint256 _projectId) public view override returns (JBFundingCycle memory) { ... }
@@ -23,7 +23,7 @@ function queuedOf(uint256 _projectId) public view override returns (JBFundingCyc
 * The function overrides a function definition from the `IJBFundingCycleStore` interface.
 * The function returns a [`JBFundingCycle`](../../../data-structures/jbfundingcycle.md).
 
-# Body
+## Body
 
 1.  If there are no stored funding cycles for the provided project, there can't be a queued funding cycle so an empty funding cycle should be returned.
 
@@ -86,7 +86,6 @@ function queuedOf(uint256 _projectId) public view override returns (JBFundingCyc
     _Internal references:_
 
     * [`_getStructFor`](\_getstructfor.md)
-
 7.  If it has a discount rate of of 1000000001, there can't be a queued funding cycle since there was only a one-time configuration.
 
     ```solidity
@@ -126,18 +125,23 @@ function queuedOf(uint256 _projectId) public view override returns (JBFundingCyc
     _Internal references:_
 
     * [`_getStructFor`](\_getstructfor.md)
-11.  Return a funding cycle based on the one current referenced, which must be the last approved cycle. The mock funding cycle is not allowed to have started already, which is why a `false` flag is passed in.
+11. Return a funding cycle based on the one current referenced, which must be the last approved cycle. The mock funding cycle is not allowed to have started already, which is why a `false` flag is passed in.
 
-    ```solidity
-    // Return a mock of the next up funding cycle.
-    // Use second next because the next would be a mock of the current funding cycle, not the queued one.
-    return _mockFundingCycleBasedOn(_getStructFor(_projectId, _fundingCycleConfiguration), false);
-    ```
+````
+```solidity
+````
 
-    _Internal references:_
+````
+// Return a mock of the next up funding cycle.
+// Use second next because the next would be a mock of the current funding cycle, not the queued one.
+return _mockFundingCycleBasedOn(_getStructFor(_projectId, _fundingCycleConfiguration), false);
+```
 
-    * [`_getStructFor`](\_getstructfor.md)
-    * [`_mockFundingCycleBasedOn`](\_mockfundingcyclebasedon.md)
+_Internal references:_
+
+* [`_getStructFor`](\_getstructfor.md)
+* [`_mockFundingCycleBasedOn`](\_mockfundingcyclebasedon.md)
+````
 {% endtab %}
 
 {% tab title="Code" %}

@@ -8,8 +8,7 @@ Contract: [`JBETHPaymentTerminalStore`](../)​‌
 
 _This amount changes as the price of ETH changes in relation to the currency being used to measure the distribution limits._
 
-
-# Definition
+## Definition
 
 ```solidity
 function _totalOverflowDuring(uint256 _projectId, JBFundingCycle memory _fundingCycle)
@@ -25,7 +24,7 @@ function _totalOverflowDuring(uint256 _projectId, JBFundingCycle memory _funding
 * The function does not alter state on the blockchain.
 * The function returns the the overflow of funds.
 
-# Body
+## Body
 
 1.  Get a reference to all of the project's current terminals.
 
@@ -43,8 +42,7 @@ function _totalOverflowDuring(uint256 _projectId, JBFundingCycle memory _funding
     uint256 _ethBalanceOf;
     uint256 _ethDistributionLimitRemaining;
     ```
-
-3.  For each terminal, add its ETH balance to the `_ethBalanceOf` value. Also increment the `_ethDistributionLimitRemaining` value with the distribution limit remaining for the terminal after converting its value from the currency the limit is measured in to ETH. If the currency is 0, it is assumed that the currency is the same as the token being withdrawn so no conversion is necessary.    `
+3.  For each terminal, add its ETH balance to the `_ethBalanceOf` value. Also increment the `_ethDistributionLimitRemaining` value with the distribution limit remaining for the terminal after converting its value from the currency the limit is measured in to ETH. If the currency is 0, it is assumed that the currency is the same as the token being withdrawn so no conversion is necessary. \`
 
     ```solidity
     for (uint256 _i = 0; _i < _terminals.length; _i++) {
@@ -95,7 +93,6 @@ function _totalOverflowDuring(uint256 _projectId, JBFundingCycle memory _funding
     * [`remainingDistributionLimitOf`](../../jbethpaymentterminal/read/remainingdistributionlimitof.md)
     * [`currencyOf`](../../../or-controllers/jbcontroller/properties/currencyof.md)
     * [`priceFor`](../../../jbprices/read/pricefor.md)
-
 4.  If the current balance of the project is less than the target remaining, there is no overflow. Otherwise the difference between the project's current balance and the remaining distribution limit is the overflow.
 
     ```solidity

@@ -8,7 +8,7 @@ Interface: [`IJBSplitsStore`](../../../interfaces/ijbsplitsstore.md)
 {% tab title="Step by step" %}
 **Get all splits for the specified project ID, within the specified domain, for the specified group.**
 
-# Definition
+## Definition
 
 ```solidity
 function splitsOf(
@@ -27,7 +27,7 @@ function splitsOf(
 * The function overrides a function definition from the `IJBSplitsStore` interface.
 * The function returns an array of [`JBSplit`](../../../data-structures/jbsplit.md)s.
 
-# Body
+## Body
 
 1.  This function just reads and returns the stored `_splitsOf` the project, within the specified domain, for the specified group.
 
@@ -37,7 +37,7 @@ function splitsOf(
 
     Internal references:
 
-    * [`_splitsOf`](../properties/_splitsof.md)
+    * [`_splitsOf`](../properties/\_splitsof.md)
 {% endtab %}
 
 {% tab title="Code" %}

@@ -8,7 +8,7 @@ Contract: [`JBETHPaymentTerminalStore`](../)​‌
 
 _Only the associated payment terminal can record a redemption._
 
-# Definition
+## Definition
 
 ```solidity
 function recordRedemptionFor(
@@ -43,7 +43,7 @@ function recordRedemptionFor(
   * `claimAmount` is the amount of wei claimed.
   * `memo` is a memo that should be included in the published event.
 
-# Body
+## Body
 
 1.  Make sure the holder has at least as many tokens as is being redeemed.
 

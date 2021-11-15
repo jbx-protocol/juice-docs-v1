@@ -12,7 +12,7 @@ Interface: [`IJBDirectory`](../../../interfaces/ijbdirectory.md)
 
 _The terminal will be set as the primary for the token that its vault accepts._
 
-# Definition
+## Definition
 
 ```solidity
 function setPrimaryTerminalOf(uint256 _projectId, IJBTerminal _terminal)
@@ -28,7 +28,7 @@ function setPrimaryTerminalOf(uint256 _projectId, IJBTerminal _terminal)
 * The function overrides a function definition from the `IJBDirectory` interface.
 * The function returns nothing.
 
-# Body
+## Body
 
 1. Get a reference to the token that the provided terminal's vault accepts.
 
@@ -97,8 +97,8 @@ function setPrimaryTerminalOf(uint256 _projectId, IJBTerminal _terminal)
 {% endtab %}
 
 {% tab title="Events" %}
-| Name                                                        | Data                                                                                                                                                                                                                                                                                           |
-| ----------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Name                                                        | Data                                                                                                                                                                                                                                                   |
+| ----------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | [**`SetPrimaryTerminal`**](../events/setprimaryterminal.md) | <ul><li><code>uint256 indexed projectId</code></li><li><code>address indexed token</code></li><li><a href="../../../interfaces/ijbterminal.md"><code>IJBTerminal</code></a><code>indexed terminal</code></li><li><code>address caller</code></li></ul> |
 {% endtab %}
 

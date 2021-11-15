@@ -10,7 +10,7 @@ Interface: [`IJBTokenStore`](../../../interfaces/ijbtokenstore.md)
 
 _Only a project's current controller can change its token._
 
-# Definition
+## Definition
 
 ```solidity
 function changeFor(
@@ -28,7 +28,7 @@ function changeFor(
 * The function overrides a function definition from the `IJBTokenStore` interface.
 * The function returns nothing.
 
-# Body
+## Body
 
 1.  Get a reference to the project's current token.
 
@@ -106,8 +106,8 @@ function changeFor(
 {% endtab %}
 
 {% tab title="Events" %}
-| Name                                          | Data                                                                                                                                                                                |
-| --------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Name                                | Data                                                                                                                                                                                |
+| ----------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | [**`Change`**](../events/change.md) | <ul><li><code>uint256 indexed projectId</code></li><li><code>IJBToken indexed token</code></li><li><code>address indexed owner</code></li><li><code>address caller</code></li></ul> |
 {% endtab %}
 

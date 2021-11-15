@@ -1,10 +1,12 @@
 # Pay
 
+## Pay
+
 Emitted from:
 
-* [`pay`](../write/pay.md)
+* [`pay`](broken-reference)
 
-# Definition
+## Definition
 
 ```solidity
 event Pay(

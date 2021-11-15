@@ -10,7 +10,7 @@ _Deploys a project's ERC-20 token contract._
 
 _Only a project owner or operator can issue its token._
 
-# Definition
+## Definition
 
 ```solidity
 function issueFor(
@@ -31,7 +31,7 @@ function issueFor(
 * Through the [`requirePermission`](../../or-abstract/jboperatable/modifiers/requirepermission.md) modifier, the function is only accessible by the project's owner, or from an operator that has been given the `JBOperations.ISSUE` permission by the project owner for the provided `_projectId`.
 * The function returns the address of the token that was issued.
 
-# Body
+## Body
 
 1.  Forward the call to the token store.
 

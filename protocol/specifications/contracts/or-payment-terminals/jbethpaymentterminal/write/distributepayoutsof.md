@@ -12,7 +12,7 @@ _Payouts are sent to the preprogrammed splits, and any leftover amount is sent t
 
 _Anyone can distribute payouts on a project's behalf._
 
-# Definition
+## Definition
 
 ```solidity
 function distributePayoutsOf(
@@ -34,7 +34,7 @@ function distributePayoutsOf(
 * The resulting function overrides a function definition from the `IJBETHPaymentTerminal` interface.
 * The function returns doesn't return anything.
 
-# Body
+## Body
 
 1.  Record the withdrawal
 
@@ -91,7 +91,7 @@ function distributePayoutsOf(
 
     _Internal references:_
 
-    * [`_takeFeeFrom`](../write/_takefeefrom.md)
+    * [`_takeFeeFrom`](\_takefeefrom.md)
 5.  Distribute the withdrawal to the splits specified for the current funding cycle's configurations. The amount to distribute is the withdrawn amount minus any fees that will be withheld. Get a reference to a leftover amount if there is one.
 
     ```solidity
@@ -106,7 +106,7 @@ function distributePayoutsOf(
 
     _Internal references:_
 
-    * [`_distributeToPayoutSplitsOf`](../write/_distributetopayoutsplitsof.md)
+    * [`_distributeToPayoutSplitsOf`](\_distributetopayoutsplitsof.md)
 6.  If there is any, transfer any leftover amount to the project owner.
 
     ```solidity

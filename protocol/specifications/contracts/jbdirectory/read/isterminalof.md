@@ -4,7 +4,7 @@
 {% tab title="Step by step" %}
 **Whether or not a specified terminal is a terminal of the specified project.**
 
-# Definition
+## Definition
 
 ```solidity
 function isTerminalOf(uint256 _projectId, IJBTerminal _terminal)
@@ -22,7 +22,7 @@ function isTerminalOf(uint256 _projectId, IJBTerminal _terminal)
 * The function overrides a function definition from the `IJBDirectory` interface.
 * The function returns a flag indicating whether or not the specified terminal is a terminal of the specified project.
 
-# Body
+## Body
 
 1.  Loop through each of the project's terminals looking for the one specified. If it's found, return true.
 
@@ -33,7 +33,7 @@ function isTerminalOf(uint256 _projectId, IJBTerminal _terminal)
 
     Internal references:
 
-    * [`_terminalsOf`](../properties/_terminalsof.md)
+    * [`_terminalsOf`](../properties/\_terminalsof.md)
 2.  If a terminal is not found, return false.
 
     ```solidity

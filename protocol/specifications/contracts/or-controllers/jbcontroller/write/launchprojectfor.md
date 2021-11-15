@@ -10,7 +10,7 @@ _Each operation within this transaction can be done in sequence separately._
 
 _Anyone can deploy a project on an owner's behalf._
 
-# Definition
+## Definition
 
 ```solidity
 function launchProjectFor(
@@ -37,7 +37,7 @@ function launchProjectFor(
 * The function can be accessed externally by anyone.
 * The function returns the ID of the project that was launched.
 
-# Body
+## Body
 
 1.  Make sure the reserved rate is a valid number out of 200.
 
@@ -193,8 +193,8 @@ function launchProjectFor(
 {% endtab %}
 
 {% tab title="Events" %}
-| Name                                                            | Data                                                                                                                                                                                                                                                                            |
-| --------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Name                                                                    | Data                                                                                                                                                                                                                                                                                  |
+| ----------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | [**`SetFundAccessConstraints`**](../events/setfundaccessconstraints.md) | <ul><li><code>uint256 indexed projectId</code></li><li><code>uint256 indexed configuration</code></li><li><a href="../../../../data-structures/jboverflowallowance.md"><code>JBFundAccessConstraints</code></a><code>constraints</code></li><li><code>address caller</code></li></ul> |
 {% endtab %}
 

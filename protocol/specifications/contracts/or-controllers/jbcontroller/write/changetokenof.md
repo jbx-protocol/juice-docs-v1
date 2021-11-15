@@ -8,7 +8,7 @@ Contract: [`JBController`](../)​‌
 
 _Only a project owner or operator can change its token._
 
-# Definition
+## Definition
 
 ```solidity
 function changeTokenOf(
@@ -28,7 +28,7 @@ function changeTokenOf(
 * Through the [`requirePermission`](../../or-abstract/jboperatable/modifiers/requirepermission.md) modifier, the function is only accessible by the project's owner, or from an operator that has been given the `JBOperations.CHANGE_TOKEN` permission by the project owner for the provided `_projectId`.
 * The function doesn't return anything.
 
-# Body
+## Body
 
 1.  Get a reference to the project's current funding cycle.
 
@@ -40,7 +40,7 @@ function changeTokenOf(
     _External references:_
 
     * [`currentOf`](../../../jbfundingcyclestore/read/currentof.md)
-2.  Make sure the current funding cycle for the project allows changing tokens. 
+2.  Make sure the current funding cycle for the project allows changing tokens.
 
     ```solidity
     // The current funding cycle must not be paused.
@@ -51,8 +51,7 @@ function changeTokenOf(
 
     * [`JBFundingCycleMetadataResolver`](../../../../libraries/jbfundingcyclemetadataresolver.md)\
       `.changeTokenAllowed(...)`
-
-2.  Forward the call to the token store.
+3.  Forward the call to the token store.
 
     ```solidity
     // Change the token in the store.
@@ -95,9 +94,9 @@ function changeTokenOf(
 {% endtab %}
 
 {% tab title="Errors" %}
-| String                   | Description                                                                                                                |
-| ------------------------ | -------------------------------------------------------------------------------------------------------------------------- |
-| **`0x05: NOT_ALLOWED`** | Thrown if the project doesn't currently allow changing tokens.                                                                       |
+| String                  | Description                                                    |
+| ----------------------- | -------------------------------------------------------------- |
+| **`0x05: NOT_ALLOWED`** | Thrown if the project doesn't currently allow changing tokens. |
 {% endtab %}
 
 {% tab title="Bug bounty" %}

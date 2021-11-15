@@ -8,7 +8,7 @@ Contract: [`JBETHPaymentTerminalStore`](../)​‌
 
 _Only the associated payment terminal can record a used allowance._
 
-# Definition
+## Definition
 
 ```solidity
 function recordUsedAllowanceOf(
@@ -33,7 +33,7 @@ function recordUsedAllowanceOf(
   * `fundingCycle` is the funding cycle during which the withdrawal was made.
   * `withdrawnAmount` is the amount withdrawn.
 
-# Body
+## Body
 
 1.  Get a reference to the project's first funding cycle.
 
@@ -45,7 +45,6 @@ function recordUsedAllowanceOf(
     _External references:_
 
     * [`currentOf`](../../../jbfundingcyclestore/read/currentof.md)
-
 2.  Make the sure the provided currency matches the expected currency for the overflow allowance.
 
     ```solidity
@@ -64,7 +63,6 @@ function recordUsedAllowanceOf(
     _External references:_
 
     * [`currencyOf`](../../../or-controllers/jbcontroller/read/currencyof.md)
-
 3.  Find the amount to withdraw by converting the amount to ETH. If the currency is 0, it is assumed that the currency is the same as the token being withdrawn so no conversion is necessary.
 
     ```solidity

@@ -6,7 +6,7 @@
 
 _The zero address is returned if a terminal isn't found for the specified token._
 
-# Definition
+## Definition
 
 ```solidity
 function primaryTerminalOf(uint256 _projectId, address _token)
@@ -24,7 +24,7 @@ function primaryTerminalOf(uint256 _projectId, address _token)
 * The function overrides a function definition from the `IJBDirectory` interface.
 * The function returns the primary terminal for the project for the specified token..
 
-# Body
+## Body
 
 1.  Check to see if the project has explicitly set a primary terminal for this token. If so, return it.
 
@@ -36,7 +36,7 @@ function primaryTerminalOf(uint256 _projectId, address _token)
 
     Internal references:
 
-    * [`_primaryTerminalOf`](../properties/_primaryterminalof.md)
+    * [`_primaryTerminalOf`](../properties/\_primaryterminalof.md)
 2.  Loop through each of the project's terminals looking for one that has a vault that uses the same token as the one specified. If one is found, return it.
 
     ```solidity

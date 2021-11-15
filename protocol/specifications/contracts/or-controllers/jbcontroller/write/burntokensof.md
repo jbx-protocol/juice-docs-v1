@@ -10,7 +10,7 @@ Interface: [`IJBController`](../../../../interfaces/ijbcontroller.md)
 
 _Only a token's holder, a designated operator, or a project's terminal's delegate can burn it._
 
-# Definition
+## Definition
 
 ```solidity
 function burnTokensOf(
@@ -42,7 +42,7 @@ function burnTokensOf(
 * The function overrides a function definition from the [`IJBController`](../../../../interfaces/ijbcontroller.md) interface.
 * The function doesn't return anything.
 
-# Body
+## Body
 
 1.  Make sure there is a specified number of tokens to burn.
 
@@ -89,7 +89,7 @@ function burnTokensOf(
 
     _Internal references:_
 
-    * [`_processedTokenTrackerOf`](../properties/_processedtokentrackerof.md)
+    * [`_processedTokenTrackerOf`](../properties/\_processedtokentrackerof.md)
 5.  Burn the tokens.
 
     ```solidity

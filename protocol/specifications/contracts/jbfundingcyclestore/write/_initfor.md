@@ -6,7 +6,7 @@ Contract:[`JBFundingCycleStore`](../)​
 {% tab title="Step by step" %}
 **Initializes a funding cycle with the appropriate properties.**
 
-# Definition
+## Definition
 
 ```solidity
 function _initFor(
@@ -27,7 +27,7 @@ function _initFor(
 * The function is private to this contract.
 * The function doesn't return anything.
 
-# Body
+## Body
 
 1.  If no base funding cycle was provided, create a first funding cycle for the project. Otherwise, create a new funding cycle by calling`_updateFundingCycleBasedOn`, which will derive properties for the funding cycle that follows the specified base cycle, and store them to an ID.
 
@@ -139,8 +139,8 @@ function _initFor(
 {% endtab %}
 
 {% tab title="Events" %}
-| Name       | Data                                                                                                                                                                                                 |
-| ---------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Name       | Data                                                                                                                                                      |
+| ---------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **`Init`** | <ul><li><code>uint256 indexed fundingCycleId</code></li><li><code>uint256 indexed projectId</code></li><li><code>uint256 indexed basedOn</code></li></ul> |
 {% endtab %}
 

@@ -4,7 +4,7 @@
 {% tab title="Step by step" %}
 **Configures a funding cycle and stores information pertinent to the configuration.**
 
-# Definition
+## Definition
 
 ```solidity
 function _configure(
@@ -25,7 +25,7 @@ function _configure(
 * The function is private to this contract.
 * The function returns the funding cycle configuration that was successfully updated.
 
-# Body
+## Body
 
 1.  Configure the project's funding cycles. Pack the metadata into a `uint256`.
 
@@ -46,7 +46,6 @@ function _configure(
 
     * [`JBFundingCycleMetadataResolver`](../../../../libraries/jbfundingcyclemetadataresolver.md)\
       `.packFundingCycleMetadata(...)`
-
 2.  For each provided group splits, set the splits for the specified group if there are any.
 
     ```solidity
@@ -64,7 +63,6 @@ function _configure(
     _External references:_
 
     * [`set`](../../../jbsplitsstore/write/set.md)
-
 3.  For each fund access constraint struct in the array passed in, store the values of the distribution limit, the overflow allowance, and the currency. Emit a `SetFundAccessConstraints` event with the relevant parameters.
 
     ```solidity
@@ -107,13 +105,12 @@ function _configure(
     _Event references:_
 
     * [`SetFundAccessConstraints`](../events/setfundaccessconstraints.md)
-
 4.  Return the funding cycle's configuration.
 
     ```solidity
     return _fundingCycle.configuration;
     ``
-
+    ```
 {% endtab %}
 
 {% tab title="Only code" %}

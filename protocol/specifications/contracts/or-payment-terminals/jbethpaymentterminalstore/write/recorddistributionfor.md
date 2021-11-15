@@ -1,6 +1,6 @@
 # recordDistributionFor
 
-Contract: [`JBETHPaymentTerminalStore`](../../../jbfundingcyclestore/write/)​‌
+Contract: [`JBETHPaymentTerminalStore`](../../../or-controllers/jbcontroller/write/)​‌
 
 {% tabs %}
 {% tab title="Step by step" %}
@@ -8,7 +8,7 @@ Contract: [`JBETHPaymentTerminalStore`](../../../jbfundingcyclestore/write/)​�
 
 _Only the associated payment terminal can record a used allowance._
 
-# Definition
+## Definition
 
 ```solidity
 function recordWithdrawalFor(
@@ -32,9 +32,9 @@ function recordWithdrawalFor(
   * `fundingCycle` is the funding cycle during which the withdrawal was made.
   * `withdrawnAmount` is the amount withdrawn.
 
-# Body
+## Body
 
-1.  Get a reference to the project's current funding cycle. 
+1.  Get a reference to the project's current funding cycle.
 
     ```solidity
     // Get a reference to the project's current funding cycle.
@@ -44,7 +44,6 @@ function recordWithdrawalFor(
     _External references:_
 
     * [`currentOf`](../../../jbfundingcyclestore/read/currentof.md)
-
 2.  Make sure the current funding cycle doesn't have distributions paused.
 
     ```solidity
@@ -56,7 +55,6 @@ function recordWithdrawalFor(
 
     * [`JBFundingCycleMetadataResolver`](../../../../libraries/jbfundingcyclemetadataresolver.md)\
       `.distributionsPaused(...)`
-
 3.  Make the sure the provided currency matches the expected currency for the distribution limit.
 
     ```solidity
@@ -75,7 +73,6 @@ function recordWithdrawalFor(
     _External references:_
 
     * [`currencyOf`](../../../or-controllers/jbcontroller/read/currencyof.md)
-
 4.  Calculate the new total amount that has been distributed during this funding cycle by adding the amount being distributed to the used distribution limit.
 
     ```solidity
@@ -87,7 +84,7 @@ function recordWithdrawalFor(
     _Internal references:_
 
     * [`usedDistributionLimitOf`](../../../jbfundingcyclestore/read/useddistributionlimitof.md)
-5.  Make sure the new total amount distributed will be at most the distribution limit. 
+5.  Make sure the new total amount distributed will be at most the distribution limit.
 
     ```solidity
     // Amount must be within what is still distributable.
@@ -105,7 +102,6 @@ function recordWithdrawalFor(
     _External references:_
 
     * [`distributionLimitOf`](../../../or-controllers/jbcontroller/read/distributionlimitof.md)
-
 6.  Find the amount to distribute by converting the amount to ETH. If the currency is 0, it is assumed that the currency is the same as the token being withdrawn so no conversion is necessary.
 
     ```solidity
@@ -120,7 +116,6 @@ function recordWithdrawalFor(
 
     * [`PRBMathUD60x18`](https://github.com/hifi-finance/prb-math/blob/main/contracts/PRBMathUD60x18.sol)
       * `.div`
-
 7.  Make sure the project has access to the amount being distributed.
 
     ```solidity
@@ -131,14 +126,12 @@ function recordWithdrawalFor(
     _Internal references:_
 
     * [`balanceOf`](../../../jbfundingcyclestore/read/balanceof.md)
-
 8.  Make sure there is at least as much wei being withdrawn as expected.
 
     ```solidity
     // The amount being distributed must be at least as much as was expected.
     require(_minReturnedWei <= distributedAmount, '0x41: INADEQUATE');
     ```
-
 9.  Store the new used distributed amount.
 
     ```solidity
@@ -149,17 +142,21 @@ function recordWithdrawalFor(
     _Internal references:_
 
     * [`usedDistributionLimitOf`](../../../jbfundingcyclestore/read/useddistributionlimitof.md)
-10.  Store the decremented balance.
+10. Store the decremented balance.
 
-    ```solidity
-    // Removed the withdrawn funds from the project's balance.
-    balanceOf[_projectId] = balanceOf[_projectId] - withdrawnAmount;
-    ```
+````
+```solidity
+````
 
-    _Internal references:_
+````
+// Removed the withdrawn funds from the project's balance.
+balanceOf[_projectId] = balanceOf[_projectId] - withdrawnAmount;
+```
 
-    * [`balanceOf`](../../../jbfundingcyclestore/read/balanceof.md)
+_Internal references:_
 
+* [`balanceOf`](../../../jbfundingcyclestore/read/balanceof.md)
+````
 {% endtab %}
 
 {% tab title="Code" %}
@@ -243,12 +240,12 @@ function recordDistributionFor(
 {% endtab %}
 
 {% tab title="Errors" %}
-| String                          | Description                                                                                                       |
-| ------------------------------- | ----------------------------------------------------------------------------------------------------------------- |
-| **`0x3e: PAUSED`**              | Thrown if the project has configured its current funding cycle to pause distributions.                              |
-| **`0x3f: UNEXPECTED_CURRENCY`** | Thrown if the currency of the specified amount doesn't match the currency of the project's current funding cycle. |
-| **`0x1b: LIMIT_REACHED`**         | Thrown if there isn't enough of a distribution limit for the specified terminal to fulfill the desired distribution.              |
-| **`0x40: INSUFFICIENT_FUNDS`**  | Thrown if the project's balance isn't sufficient to fulfill the desired distribution.                               |
+| String                          | Description                                                                                                          |
+| ------------------------------- | -------------------------------------------------------------------------------------------------------------------- |
+| **`0x3e: PAUSED`**              | Thrown if the project has configured its current funding cycle to pause distributions.                               |
+| **`0x3f: UNEXPECTED_CURRENCY`** | Thrown if the currency of the specified amount doesn't match the currency of the project's current funding cycle.    |
+| **`0x1b: LIMIT_REACHED`**       | Thrown if there isn't enough of a distribution limit for the specified terminal to fulfill the desired distribution. |
+| **`0x40: INSUFFICIENT_FUNDS`**  | Thrown if the project's balance isn't sufficient to fulfill the desired distribution.                                |
 | **`0x41: INADEQUATE`**          | Thrown if the distribution amount is less than the minimum expected.                                                 |
 {% endtab %}
 

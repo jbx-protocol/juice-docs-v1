@@ -10,7 +10,7 @@ Interface: [`IJBDirectory`](../../../interfaces/ijbdirectory.md)
 
 _Only a project owner or an operator can remove one of its terminals._
 
-# Definition
+## Definition
 
 ```solidity
 function removeTerminalOf(uint256 _projectId, IJBTerminal _terminal)
@@ -26,7 +26,7 @@ function removeTerminalOf(uint256 _projectId, IJBTerminal _terminal)
 * The function overrides a function definition from the `IJBDirectory` interface.
 * The function returns nothing.
 
-# Body
+## Body
 
 1.  Get a reference to the project's terminals.
 
@@ -37,7 +37,7 @@ function removeTerminalOf(uint256 _projectId, IJBTerminal _terminal)
 
     Internal references:
 
-    * [`_terminalsOf`](../properties/_terminalsof.md)
+    * [`_terminalsOf`](../properties/\_terminalsof.md)
 2.  Delete all terminals from storage. All terminals except the one being removed will later be repupulated.
 
     ```solidity
@@ -47,7 +47,7 @@ function removeTerminalOf(uint256 _projectId, IJBTerminal _terminal)
 
     Internal references:
 
-    * [`_terminalsOf`](../properties/_terminalsof.md)
+    * [`_terminalsOf`](../properties/\_terminalsof.md)
 3.  Loop through the terminals, adding all terminals that aren't the one being removed back into storage.
 
     ```solidity
@@ -59,7 +59,7 @@ function removeTerminalOf(uint256 _projectId, IJBTerminal _terminal)
 
     Internal references:
 
-    * [`_terminalsOf`](../properties/_terminalsof.md)
+    * [`_terminalsOf`](../properties/\_terminalsof.md)
 4.  If the terminal being removed is set to be the primary terminal for its vault's token, delete it from being the primary terminal.
 
     ```solidity
@@ -70,7 +70,7 @@ function removeTerminalOf(uint256 _projectId, IJBTerminal _terminal)
 
     Internal references:
 
-    * [`_primaryTerminalOf`](../properties/_primaryterminalof.md)
+    * [`_primaryTerminalOf`](../properties/\_primaryterminalof.md)
 5.  Emit a `RemoveTerminal` event with the relevant parameters.
 
     ```solidity
@@ -120,8 +120,8 @@ function removeTerminalOf(uint256 _projectId, IJBTerminal _terminal)
 {% endtab %}
 
 {% tab title="Events" %}
-| Name                                                | Data                                                                                                                                                                                                                                                |
-| --------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Name                                                | Data                                                                                                                                                                                                        |
+| --------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | [**`RemoveTerminal`**](../events/removeterminal.md) | <ul><li><code>uint256 indexed projectId</code></li><li><a href="../../../interfaces/ijbterminal.md"><code>IJBTerminal</code></a><code>indexed terminal</code></li><li><code>address caller</code></li></ul> |
 {% endtab %}
 

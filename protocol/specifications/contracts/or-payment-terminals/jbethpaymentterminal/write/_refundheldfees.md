@@ -6,7 +6,7 @@ Contract: [`JBETHPaymentTerminal`](../)​‌
 {% tab title="Step by step" %}
 **Refund fees based on the specified amount.**
 
-# Definition
+## Definition
 
 ```solidity
 function _refundHeldFees(uint256 _projectId, uint256 _amount) private { ... }
@@ -18,7 +18,7 @@ function _refundHeldFees(uint256 _projectId, uint256 _amount) private { ... }
 * The function is private to this contract.
 * The function doesn't return anything.
 
-# Body
+## Body
 
 1.  Get a reference to any held [`JBFee`](../../../../data-structures/jbfee.md)'s for the project.
 
@@ -29,7 +29,7 @@ function _refundHeldFees(uint256 _projectId, uint256 _amount) private { ... }
 
     _Internal references:_
 
-    * [`_heldFeesOf`](../properties/_heldfeesof.md)
+    * [`_heldFeesOf`](../properties/\_heldfeesof.md)
 2.  Delete all of the project's held fees. These will be repopulated if they were not refunded.
 
     ```solidity
@@ -39,7 +39,7 @@ function _refundHeldFees(uint256 _projectId, uint256 _amount) private { ... }
 
     _Internal references:_
 
-    * [`_heldFeesOf`](../properties/_heldfeesof.md)
+    * [`_heldFeesOf`](../properties/\_heldfeesof.md)
 3.  Loop through each held fee, decrementing the `_amount` as held fees are refunded. If the entire refund amount has been refunded, add the `JBFee` back into the project's held fees so that they can be processed or refunded later. If the `_amount` left is greater than the `JBFee`'s amount, decrement the refunded amount and leave the `JBFee` out of the project's held fees. If only some of the `JBFee`'s amount is needed to cover the rest of the remaining `_amount`, set the amount to 0 after adding the `JBFee` back into the project's held fees having subtracted the remaining refund amount.
 
     ```solidity
@@ -65,7 +65,7 @@ function _refundHeldFees(uint256 _projectId, uint256 _amount) private { ... }
 
     _Internal references:_
 
-    * [`_heldFeesOf`](../properties/_heldfeesof.md)
+    * [`_heldFeesOf`](../properties/\_heldfeesof.md)
 {% endtab %}
 
 {% tab title="Code" %}

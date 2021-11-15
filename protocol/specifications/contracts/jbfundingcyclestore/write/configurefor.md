@@ -10,7 +10,7 @@ Interface: `IJBFundingCycleStore`
 
 _Only a project's current controller can configure its funding cycles._
 
-# Definition
+## Definition
 
 ```solidity
 function configureFor(
@@ -28,7 +28,7 @@ function configureFor(
 * The function overrides a function definition from the `IJBFundingCycleStore` interface.
 * Returns the [`JBFundingCycle`](../../../data-structures/jbfundingcycle.md) that was configured.
 
-# Body
+## Body
 
 1.  Make sure the `_data.duration` fits in a `uint64`. It must also be greater than 1000 seconds to prevent extractive miner behavior that is possible with timestamp based calculations within short intervals.
 
@@ -89,7 +89,7 @@ function configureFor(
 
     _Internal references:_
 
-    * [`_metadataOf`](../properties/_metadataof.md)
+    * [`_metadataOf`](../properties/\_metadataof.md)
 8.  Emit a `Configure` event with the relevant parameters.
 
     ```solidity
@@ -99,7 +99,7 @@ function configureFor(
     _Event references:_
 
     * [`Configure`](../events/configure.md)
-9. Return the [`JBFundingCycle`](../../../data-structures/jbfundingcycle.md) struct that carries the new configuration.
+9.  Return the [`JBFundingCycle`](../../../data-structures/jbfundingcycle.md) struct that carries the new configuration.
 
     ```solidity
     // Return the funding cycle for the new configuration.
@@ -108,7 +108,7 @@ function configureFor(
 
     _Internal references:_
 
-    * [`_getStructFor`](../read/_getstructfor.md)
+    * [`_getStructFor`](../read/\_getstructfor.md)
 {% endtab %}
 
 {% tab title="Code" %}

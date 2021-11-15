@@ -8,7 +8,7 @@ Interface: [`IJBTerminal`](../../../../interfaces/ijbterminal.md)
 {% tab title="Step by step" %}
 **The amount of a project's funds that can still be distributed within the preconfigured limit.**
 
-# Definition
+## Definition
 
 ```solidity
 function remainingDistributionLimitOf(
@@ -20,14 +20,14 @@ function remainingDistributionLimitOf(
 
 * Arguments:
   * `_projectId` is the ID of the project to which the remaining limit belongs.
-  * `_fundingCycleConfiguration` is the funding cycle configuration during which the limit remaining is being calculated. 
-  * `_fundingCycleNumber` is the number of the funding cycle during which the limit remaining is being calculated. 
+  * `_fundingCycleConfiguration` is the funding cycle configuration during which the limit remaining is being calculated.
+  * `_fundingCycleNumber` is the number of the funding cycle during which the limit remaining is being calculated.
 * The view function can be accessed externally by anyone.
 * The function does not alter state on the blockchain.
 * The resulting function overrides a function definition from the `IJBTerminal` interface.
 * The function returns the remaining distribution limit for this terminal.
 
-# Body
+## Body
 
 1.  Subtract the used distribution limit during the specified funding cycle from the preconfigured distribution limit.
 

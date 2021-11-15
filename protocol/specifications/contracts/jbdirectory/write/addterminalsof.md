@@ -1,4 +1,4 @@
-# addTerminalOf
+# addTerminalsOf
 
 Contract:[`JBDirectory`](../)​‌
 
@@ -10,7 +10,7 @@ Interface: [`IJBDirectory`](../../../interfaces/ijbdirectory.md)
 
 Only a project owner, an operator, or its controller can add terminals.
 
-# Definition
+## Definition
 
 ```solidity
 function addTerminalsOf(uint256 _projectId, IJBTerminal _terminal)
@@ -31,20 +31,19 @@ function addTerminalsOf(uint256 _projectId, IJBTerminal _terminal)
 * The function overrides a function definition from the `IJBDirectory` interface.
 * The function returns nothing.
 
-# Body
+## Body
 
 1.  For each terminal passed in
+
     ```solidity
     for (uint256 _i = 0; _i < _terminals.length; _i++) { ... }
     ```
-
 2.  Make sure the provided terminal isn't the zero address.
 
     ```solidity
     // Can't set the zero address.
     require(_terminal != IJBTerminal(address(0)), '0x2d: ZERO_ADDRESS');
     ```
-
 3.  If the terminal is already in the project's list of terminals, there's nothing left to do.
 
     ```solidity
@@ -55,7 +54,6 @@ function addTerminalsOf(uint256 _projectId, IJBTerminal _terminal)
     Internal references:
 
     * [`isTerminalOf`](../read/isterminalof.md)
-
 4.  Add the terminal to the project's list of terminals.
 
     ```solidity
@@ -65,8 +63,7 @@ function addTerminalsOf(uint256 _projectId, IJBTerminal _terminal)
 
     Internal references:
 
-    * [`_terminalsOf`](../properties/_terminalsof.md)
-
+    * [`_terminalsOf`](../properties/\_terminalsof.md)
 5.  Emit a `AddTerminal` event with the relevant parameters.
 
     ```solidity
@@ -123,8 +120,8 @@ function addTerminalsOf(uint256 _projectId, IJBTerminal[] calldata _terminals)
 {% endtab %}
 
 {% tab title="Events" %}
-| Name                                          | Data                                                                                                                                                                                                                                                |
-| --------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Name                                          | Data                                                                                                                                                                                                        |
+| --------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | [**`AddTerminal`**](../events/addterminal.md) | <ul><li><code>uint256 indexed projectId</code></li><li><a href="../../../interfaces/ijbterminal.md"><code>IJBTerminal</code></a><code>indexed terminal</code></li><li><code>address caller</code></li></ul> |
 {% endtab %}
 

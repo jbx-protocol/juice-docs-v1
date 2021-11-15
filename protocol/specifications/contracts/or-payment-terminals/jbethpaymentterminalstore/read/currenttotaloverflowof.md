@@ -1,4 +1,4 @@
-# currentOverflowOf
+# currentTotalOverflowOf
 
 Contract: [`JBETHPaymentTerminalStore`](../)​‌
 
@@ -6,7 +6,7 @@ Contract: [`JBETHPaymentTerminalStore`](../)​‌
 {% tab title="Step by step" %}
 **Gets the current overflowed amount for a specified project across all terminals.**
 
-# Definition
+## Definition
 
 ```solidity
 function currentOverflowOf(uint256 _projectId) external view returns (uint256) { ... }
@@ -18,7 +18,7 @@ function currentOverflowOf(uint256 _projectId) external view returns (uint256) {
 * The function does not alter state on the blockchain.
 * The function returns the current total amount of overflow that project has across all terminals.
 
-# Body
+## Body
 
 1.  Get a reference to the project's current funding cycle.
 
@@ -38,7 +38,7 @@ function currentOverflowOf(uint256 _projectId) external view returns (uint256) {
 
     _Internal references:_
 
-    * [`_totalOverflowDuring`](../../../or-payment-terminals/jbethpaymentterminalstore/read/_totaloverflowDuring.md)
+    * [`_totalOverflowDuring`](\_totaloverflowDuring.md)
 {% endtab %}
 
 {% tab title="Code" %}

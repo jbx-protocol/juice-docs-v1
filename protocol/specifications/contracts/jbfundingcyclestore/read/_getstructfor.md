@@ -6,7 +6,7 @@ Contract:[`JBFundingCycleStore`](../)​
 {% tab title="Step by step" %}
 **The currency ballot state of the project.**
 
-# Definition
+## Definition
 
 ```solidity
 function _getStructFor(uint256 _projectId, uint256 _configuration)
@@ -22,7 +22,7 @@ function _getStructFor(uint256 _projectId, uint256 _configuration)
 * The function does not alter state on the blockchain.
 * The function returns a [`JBFundingCycle`](../../../data-structures/jbfundingcycle.md) stored in the `fundingCycle` reference.
 
-# Body
+## Body
 
 1.  If the `_configuration` provided is 0, return an empty funding cycle.
 
@@ -48,7 +48,7 @@ function _getStructFor(uint256 _projectId, uint256 _configuration)
 
     _Internal references:_
 
-    * [`_packedIntrinsicPropertiesOf`](../properties/_packedintrinsicpropertiesof.md)
+    * [`_packedIntrinsicPropertiesOf`](../properties/\_packedintrinsicpropertiesof.md)
 4.  Get the stored user properties of the funding cycle. Populate the struct values by unpacking the `uint256`.
 
     ```solidity
@@ -61,7 +61,7 @@ function _getStructFor(uint256 _projectId, uint256 _configuration)
 
     _Internal references:_
 
-    * [`_packedUserPropertiesOf`](../properties/_packeduserpropertiesof.md)
+    * [`_packedUserPropertiesOf`](../properties/\_packeduserpropertiesof.md)
 5.  Populate the `metadata` property of the struct by reading from what's stored in `_metadataOf`.
 
     ```solidity
@@ -70,7 +70,7 @@ function _getStructFor(uint256 _projectId, uint256 _configuration)
 
     _Internal references:_
 
-    * [`_metadataOf`](../properties/_metadataof.md)
+    * [`_metadataOf`](../properties/\_metadataof.md)
 {% endtab %}
 
 {% tab title="Code" %}

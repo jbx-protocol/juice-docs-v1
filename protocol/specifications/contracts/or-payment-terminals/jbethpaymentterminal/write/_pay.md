@@ -6,7 +6,7 @@ Contract: [`JBETHPaymentTerminal`](../)​‌
 {% tab title="Step by step" %}
 **Contribute ETH to a project.**
 
-# Definition
+## Definition
 
 ```solidity
 function _pay(
@@ -29,9 +29,9 @@ function _pay(
   * `_memo` is a memo to pass along to the emitted event, and passed along the the funding cycle's data source and delegate.
   * `_delegateMetadata` are bytes to send along to the delegate, if one is provided.
 * The function is private to this contract.
-* The function doesn't return anything. 
+* The function doesn't return anything.
 
-# Body
+## Body
 
 1.  Make sure the provided beneficiary isn't the zero address.
 

@@ -4,7 +4,7 @@
 
 Documentation for Juicebox Protocol V1 (live on mainnet since July 2021) is available [here](broken-reference).
 
-Documentation for the forthcoming Juicebox Protocol V2 protocol is available [here.](protocol/protocol.md)
+Documentation for the forthcoming Juicebox Protocol V2 protocol is available [here.](protocol/)
 
 {% hint style="warning" %}
 The Juicebox protocol is not formally audited. All projects built on it may be vulnerable to bugs or exploits.

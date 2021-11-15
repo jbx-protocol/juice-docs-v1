@@ -6,7 +6,7 @@ Contract:[`JBFundingCycleStore`](../)​
 {% tab title="Step by step" %}
 **Efficiently stores a funding cycles provided user defined properties.**
 
-# Definition
+## Definition
 
 ```solidity
 function _packAndStoreUserPropertiesOf(
@@ -27,7 +27,7 @@ function _packAndStoreUserPropertiesOf(
 * The function is private to this contract.
 * The function doesn't return anything.
 
-# Body
+## Body
 
 1.  If all properties passed in are empty, there's no need to store anything.
 
@@ -36,7 +36,6 @@ function _packAndStoreUserPropertiesOf(
     if (_ballot == IJBFundingCycleBallot(address(0)) && _duration == 0 && _discountRate == 0)
       return;
     ```
-
 2.  Store the ballot in the first 160 bits of the packed `uint256`.
 
     ```solidity
@@ -49,7 +48,6 @@ function _packAndStoreUserPropertiesOf(
     // duration in bytes 160-223 bits.
     packed |= _duration << 160;
     ```
-
 4.  Store the `_discountRate` in the next 32 bits.
 
     ```solidity
@@ -65,7 +63,7 @@ function _packAndStoreUserPropertiesOf(
 
     _Internal references:_
 
-    * [`_packedUserPropertiesOf`](../properties/_packeduserpropertiesof.md)
+    * [`_packedUserPropertiesOf`](../properties/\_packeduserpropertiesof.md)
 {% endtab %}
 
 {% tab title="Code" %}

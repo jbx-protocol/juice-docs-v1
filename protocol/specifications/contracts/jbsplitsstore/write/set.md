@@ -12,7 +12,7 @@ _Only the owner or operator of a project, or the current controller contract of 
 
 _The new splits must include any currently set splits that are locked._
 
-# Definition
+## Definition
 
 ```solidity
 function set(
@@ -40,7 +40,7 @@ function set(
 * The function overrides a function definition from the `IJBSplitsStore` interface.
 * The function doesn't return anything.
 
-# Body
+## Body
 
 1.  Get a reference to the current splits set for the specified `_projectId`'s `_domain`, within the specified `_group`.
 
@@ -51,7 +51,7 @@ function set(
 
     _Internal references:_
 
-    * [`_splitsOf`](../properties/_splitsof.md)
+    * [`_splitsOf`](../properties/\_splitsof.md)
 2.  Loop through each `_currentSplits` to make sure the new `_splits` being set respect any current split bound by a lock constraint.
 
     ```solidity
@@ -99,7 +99,7 @@ delete _splitsOf[_projectId][_domain][_group];
 
 Internal references:
 
-* [`_splitsOf`](../properties/_splitsof.md)
+* [`_splitsOf`](../properties/\_splitsof.md)
 *   Store a local variable to keep track of all the percents from the splits.
 
     ```solidity
@@ -148,7 +148,7 @@ Internal references:
 
     Internal references:
 
-    * [`_splitsOf`](../properties/_splitsof.md)
+    * [`_splitsOf`](../properties/\_splitsof.md)
 *   For each added split, emit a `SetSplit` event with all relevant parameters.
 
     ```solidity
