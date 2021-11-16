@@ -6,7 +6,7 @@ Contract:[`JBFundingCycleStore`](../)​
 {% tab title="Step by step" %}
 **Efficiently stores a funding cycles provided user defined properties.**
 
-## Definition
+# Definition
 
 ```solidity
 function _packAndStoreUserPropertiesOf(
@@ -27,7 +27,7 @@ function _packAndStoreUserPropertiesOf(
 * The function is private to this contract.
 * The function doesn't return anything.
 
-## Body
+# Body
 
 1.  If all properties passed in are empty, there's no need to store anything.
 

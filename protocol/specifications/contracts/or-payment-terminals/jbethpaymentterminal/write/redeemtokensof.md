@@ -10,7 +10,7 @@ Interface: [`IJBETHPaymentTerminal`](../../../../interfaces/ijbethpaymenttermina
 
 _Only a token's holder or a designated operator can redeem it._
 
-## Definition
+# Definition
 
 ```solidity
 function redeemTokensOf(
@@ -42,7 +42,7 @@ function redeemTokensOf(
 * The resulting function overrides a function definition from the `IJBETHPaymentTerminal` interface.
 * The function returns the amount of ETH that the tokens were redeemed for, in wei.
 
-## Body
+# Body
 
 1.  Make sure the provided beneficiary of the claimed funds isn't the zero address.
 

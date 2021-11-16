@@ -6,7 +6,7 @@ Emitted from:
 
 * [`pay`](broken-reference)
 
-## Definition
+# Definition
 
 ```solidity
 event Pay(

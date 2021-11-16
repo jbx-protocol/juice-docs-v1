@@ -5,7 +5,7 @@ Used in:
 * [`JBSplitsStore`](../contracts/jbsplitsstore/)
   * [`set`](../contracts/jbsplitsstore/write/set.md)
 
-## Definition
+# Definition
 
 ```solidity
 struct JBSplit {

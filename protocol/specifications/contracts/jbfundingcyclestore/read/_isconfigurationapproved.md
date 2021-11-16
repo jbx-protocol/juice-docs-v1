@@ -6,7 +6,7 @@ Contract:[`JBFundingCycleStore`](../)​
 {% tab title="Step by step" %}
 **Checks to see if the funding cycle of the provided configuration is approved according to the correct ballot.**
 
-## Definition
+# Definition
 
 ```solidity
 function _isConfigurationApproved(uint256 _projectId, uint256 _configuration)
@@ -22,7 +22,7 @@ function _isConfigurationApproved(uint256 _projectId, uint256 _configuration)
 * The function does not alter state on the blockchain.
 * The function returns the approval flag.
 
-## Body
+# Body
 
 1.  Find the [`JBFundingCycle`](../../../data-structures/jbfundingcycle.md) struct for the provided ID.
 
