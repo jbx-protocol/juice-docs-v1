@@ -21,7 +21,7 @@ The first two core contracts are pretty self explanatory. They store the core Ju
 
 The next few are a little more generic. They don't know anything specific to Juicebox, and are open for use by other protocols or future Juicebox extensions.
 
-*   [`JBProjects`](../specifications/contracts/jbprojects/) manage and track ownership over projects, which are represented as ERC-721 tokens.
+*   [`JBProjects`](../specifications/contracts/jbprojects/) manages and tracks ownership over projects, which are represented as ERC-721 tokens.
 
     The protocol uses this to enforce permissions needed to access several project-oriented transactions.
 *   [`JBSplitsStore`](../specifications/contracts/jbsplitsstore/) stores information about how arbitrary distributions should be split. The information is represented as a [`JBSplit`](../../protocol/data-structures/jbsplit.md#jbsplit) data structure.
