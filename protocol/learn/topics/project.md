@@ -17,7 +17,7 @@
 
 For each project, the following functions can only be accessed by either the address that owns the project's NFT or by operator addresses explicitly allowed by the address that owns the project's NFT. Operators are only valid in the context of a particular owner – if the NFT changes hands, the operators for the project must be set again by the new owner.
 
-An address can set operators for its project through the [`JBOperatorStore.setOperator(..`](../../specifications/contracts/jboperatorstore/write/setoperator.md)`.)` transaction, using the indexes from the [`JBOperations`](../../specifications/libraries/jboperations.md) library.
+An address can set operators for its project through the [`JBOperatorStore.setOperator(..`](../../specifications/contracts/jboperatorstore/write/setoperator.md)`.)` transaction, using the indexes from the [`JBOperations`](../../specifications/libraries/jboperations.md) library. The specific permissions a particular Operator is allowed depend on the specific parameters the admin allows them. Each of the following functions can be called by the admin, and also by any operator that has been granted permission to call the function by the admin.
 
 * [`JBController.reconfigureFundingCyclesOf(...)`](../../specifications/contracts/or-controllers/jbcontroller/write/reconfigurefundingcyclesof.md)
 * [`JBController.mintTokensOf(...)`](../../specifications/contracts/or-controllers/jbcontroller/write/minttokensof.md)
