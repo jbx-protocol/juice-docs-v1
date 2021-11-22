@@ -335,10 +335,6 @@
         * [Properties](protocol/specifications/contracts/or-abstract/jboperatable/properties/README.md)
           * [operatorStore](protocol/specifications/contracts/or-abstract/jboperatable/properties/operatorstore.md)
 
-## 🗳Governance
-
-* [Proposal Process](governance/proposal-process.md)
-
 ## Protocol V1
 
 * [TicketBooth](protocol-v1/ticketbooth/README.md)

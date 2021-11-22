@@ -6,7 +6,7 @@ Contract:[`JBFundingCycleStore`](../)​
 {% tab title="Step by step" %}
 **Updates and stores intrinsic properties for a funding cycle.**
 
-# Definition
+## Definition
 
 ```solidity
 function _updateAndStoreIntrinsicPropertiesOf(
@@ -27,7 +27,7 @@ function _updateAndStoreIntrinsicPropertiesOf(
 * The function is private to this contract.
 * The function doesn't return anything.
 
-# Body
+## Body
 
 1.  Find the time that the updated funding cycle should start at.
 

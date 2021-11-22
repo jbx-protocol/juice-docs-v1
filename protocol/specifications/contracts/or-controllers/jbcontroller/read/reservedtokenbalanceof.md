@@ -8,7 +8,7 @@ Interface: [`IJBController`](../../../../interfaces/ijbcontroller.md)
 {% tab title="Step by step" %}
 **Gets the amount of reserved tokens that a project has available to distribute.**
 
-# Definition
+## Definition
 
 ```solidity
 function reservedTokenBalanceOf(uint256 _projectId, uint256 _reservedRate)
@@ -26,7 +26,7 @@ function reservedTokenBalanceOf(uint256 _projectId, uint256 _reservedRate)
 * The function overrides a function definition from the [`IJBController`](../../../../interfaces/ijbcontroller.md) interface.
 * The function returns the reserved token balance.
 
-# Body
+## Body
 
 1.  Forward the call to the internal version of the function that is also used by other operations.
 

@@ -8,7 +8,7 @@ Interface: [`IJBTerminal`](../../../../interfaces/ijbtokenstore.md)
 {% tab title="Step by step" %}
 **Receives funds belonging to the specified project.**
 
-# Definition
+## Definition
 
 ```solidity
 function addToBalanceOf(uint256 _projectId, string memory _memo) external payable override { ... }
@@ -22,7 +22,7 @@ function addToBalanceOf(uint256 _projectId, string memory _memo) external payabl
 * The resulting function overrides a function definition from the `IJBTerminal` interface.
 * The function doesn't return anything.
 
-# Body
+## Body
 
 1.  Make sure some ETH was sent along with the function call.
 

@@ -10,7 +10,7 @@ Interface: [`IJBETHPaymentTerminal`](../../../../interfaces/ijbethpaymenttermina
 
 _Only a project's owner or a designated operator can migrate it._
 
-# Definition
+## Definition
 
 ```solidity
 function migrate(uint256 _projectId, IJBTerminal _to)
@@ -28,7 +28,7 @@ function migrate(uint256 _projectId, IJBTerminal _to)
 * The resulting function overrides a function definition from the `IJBETHPaymentTerminal` interface.
 * The function doesn't return anything.
 
-# Body
+## Body
 
 1.  Make sure the token type of the terminal being migrated to matches the token type of this terminal.
 

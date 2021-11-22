@@ -8,7 +8,7 @@ Interface: [`IJBTerminal`](../../../../interfaces/ijbterminal.md)
 {% tab title="Step by step" %}
 **The amount of a project's funds that can still be distributed within the preconfigured limit.**
 
-# Definition
+## Definition
 
 ```solidity
 function remainingDistributionLimitOf(
@@ -27,7 +27,7 @@ function remainingDistributionLimitOf(
 * The resulting function overrides a function definition from the `IJBTerminal` interface.
 * The function returns the remaining distribution limit for this terminal.
 
-# Body
+## Body
 
 1.  Subtract the used distribution limit during the specified funding cycle from the preconfigured distribution limit.
 
