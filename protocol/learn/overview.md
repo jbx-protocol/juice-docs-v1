@@ -42,7 +42,7 @@ The last core contract stores info about which surface contracts each project is
 
 There are currently 3 surface contracts that manage how projects manage funds and define how all core contracts should be used together. Anyone can write new surface contracts for projects to use.
 
-* [`JBController`](../specifications/contracts/or-controllers/jbcontroller/) stitches together funding cycles and community tokens, allowing for curated control, accounting, and token management of specific projects environments.
+* [`JBController`](../specifications/contracts/or-controllers/jbcontroller/) stitches together funding cycles and community tokens, allowing for curated control, accounting, and token management.
 * [`JBETHPaymentTerminal`](../specifications/contracts/or-payment-terminals/jbethpaymentterminal/) manages all inflows and outflows of ETH into the Juicebox ecosystem.
 * [`JBETHPaymentTerminalStore`](../specifications/contracts/or-payment-terminals/jbethpaymentterminalstore/) manages balance accounting data on the `JBETHPaymentTerminal`'s behalf.
 
