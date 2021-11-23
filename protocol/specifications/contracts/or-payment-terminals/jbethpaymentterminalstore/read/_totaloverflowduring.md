@@ -8,7 +8,7 @@ Contract: [`JBETHPaymentTerminalStore`](../)​‌
 
 _This amount changes as the price of ETH changes in relation to the currency being used to measure the distribution limits._
 
-## Definition
+# Definition
 
 ```solidity
 function _totalOverflowDuring(uint256 _projectId, JBFundingCycle memory _fundingCycle)
@@ -24,7 +24,7 @@ function _totalOverflowDuring(uint256 _projectId, JBFundingCycle memory _funding
 * The function does not alter state on the blockchain.
 * The function returns the the overflow of funds.
 
-## Body
+# Body
 
 1.  Get a reference to all of the project's current terminals.
 

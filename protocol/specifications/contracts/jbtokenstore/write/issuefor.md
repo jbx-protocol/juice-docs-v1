@@ -12,7 +12,7 @@ _Deploys an project's ERC-20 token contract._
 
 _Only a project's current controller can issue its token._
 
-## Definition
+# Definition
 
 ```solidity
 function issueFor(
@@ -30,7 +30,7 @@ function issueFor(
 * The function overrides a function definition from the `IJBTokenStore` interface.
 * The function returns the address of the token that was issued.
 
-## Body
+# Body
 
 1.  Make sure a name was provided.
 

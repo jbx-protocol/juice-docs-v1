@@ -6,7 +6,7 @@ Contract: [`JBETHPaymentTerminal`](../)​‌
 {% tab title="Step by step" %}
 **Pays out splits for a project's funding cycle configuration.**
 
-## Definition
+# Definition
 
 ```solidity
 function _distributeToPayoutSplitsOf(
@@ -25,7 +25,7 @@ function _distributeToPayoutSplitsOf(
 * The function is private to this contract.
 * The function returns the leftover amount if the splits don't add up to 100%.
 
-## Body
+# Body
 
 1.  Save the passed in `_amount` as the `leftoverAmount` that will be returned. The subsequent routine will decrement the leftover amount as splits are settled.
 

@@ -6,7 +6,7 @@ Contract:[`JBFundingCycleStore`](../)​
 {% tab title="Step by step" %}
 **Efficiently stores a funding cycle's provided intrinsic properties.**
 
-## Definition
+# Definition
 
 ```solidity
 function _packAndStoreIntrinsicPropertiesOf(
@@ -29,7 +29,7 @@ function _packAndStoreIntrinsicPropertiesOf(
 * The function is private to this contract.
 * The function doesn't return anything.
 
-## Body
+# Body
 
 1.  The `_weight` property should take up the first 80 bits of the packed `uint256`.
 

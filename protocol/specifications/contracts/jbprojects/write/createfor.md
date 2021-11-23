@@ -10,7 +10,7 @@ Interface: [`IJBProjects`](../../../interfaces/ijbprojects.md)
 
 _Anyone can create a project on an owner's behalf._
 
-## Definition
+# Definition
 
 ```solidity
 function createFor(
@@ -28,7 +28,7 @@ function createFor(
 * The function overrides a function definition from the `IJBProjects` interface.
 * Returns the token ID of the newly created project.
 
-## Body
+# Body
 
 1.  Check that the provided `_handle` is not empty.
 
