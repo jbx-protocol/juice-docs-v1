@@ -10,7 +10,7 @@ description: >-
 
 ### Code
 
-{% embed url="https://github.com/jbx-protocol/juice-contracts/tree/main/contracts/v2/JBController.sol" %}
+{% embed url="https://github.com/jbx-protocol/juice-contracts-v2/blob/main/contracts/JBController.sol" %}
 
 ### **Addresses**
 

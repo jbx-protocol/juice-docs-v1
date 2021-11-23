@@ -9,7 +9,7 @@ description: >-
 
 ### Code
 
-{% embed url="https://github.com/jbx-protocol/juice-contracts/tree/main/contracts/v2/JBToken.sol" %}
+{% embed url="https://github.com/jbx-protocol/juice-contracts-v2/blob/main/contracts/JBToken.sol" %}
 
 ### **Interfaces**
 

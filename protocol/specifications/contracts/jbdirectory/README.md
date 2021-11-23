@@ -11,7 +11,7 @@ description: >-
 
 ### Code
 
-{% embed url="https://github.com/jbx-protocol/juice-contracts/tree/main/contracts/v2/JBDirectory.sol" %}
+{% embed url="https://github.com/jbx-protocol/juice-contracts-v2/blob/main/contracts/JBDirectory.sol" %}
 
 ### **Addresses**
 
