@@ -22,7 +22,7 @@ Consider creating a test project on the Rinkeby testnet version of Juicebox at [
 
 This video tutorial gives an overview of setting up a Juicebox project.
 
-{% embed url="https://s3.us-west-2.amazonaws.com/secure.notion-static.com/948ea000-7b7d-4cb2-885f-2eb962dea83f/JB_Project_Creation_Tutorial_2021-10-22_12-36-12-1.m4v?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45EIPT3X45%2F20211123%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20211123T222812Z&X-Amz-Expires=86400&X-Amz-Signature=0d49ffe474faaa506ee6884f1256b8d7551feacdd176c65ccf9473762ab7a62c&X-Amz-SignedHeaders=host&response-content-disposition=filename+%3D%22JB%2520Project%2520Creation%2520Tutorial%25202021-10-22%252012-36-12-1.m4v%22&x-id=GetObject" %}
+{% embed url="https://youtu.be/I8euJjI5x1M" %}
 
 ## Section 1 - Identity
 
