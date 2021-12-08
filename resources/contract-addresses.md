@@ -36,16 +36,23 @@ Prices: [`0xa9537Cc42555564206D4E57c0eb6943d56E83A30`](https://etherscan.io/addr
 
 https://github.com/jbx-protocol/juice-contracts/tree/main/deployments/rinkeby
 
-
 ### Kovan
 
 TerminalDirectory Kovan: [`0x71BA69044CbD951AC87124cBEdbC0334AB21F26D`](https://kovan.etherscan.io/address/0x71BA69044CbD951AC87124cBEdbC0334AB21F26D)
 
 ## Juicebox DAO
 
-### BANNY
+### $JBX
 
-Mainnet: [`0x6f5312873DF062413e75d8e59D0f213bD5e4A76C`](https://etherscan.io/address/0x6f5312873DF062413e75d8e59D0f213bD5e4A76C)
+Mainnet ERC-20 Token: [0x3abf2a4f8452ccc2cf7b4c1e4663147600646f66](https://etherscan.io/token/0x3abf2a4f8452ccc2cf7b4c1e4663147600646f66)
+
+{% hint style="info" %}
+To reduce gas fees, newly issued $JBX tokens are stored in the Juicebox [TicketBooth](../protocol-v1/ticketbooth/) contract by default ("staked"). $JBX holders can call the `unstake` function on the TicketBooth contract to mint $JBX ERC-20 tokens to their wallets. In the frontend, this is called `Claim` and can be found under the `Manage` button.
+
+The above ERC-20 contract reflects the total supply of minted ERC-20 $JBX tokens.&#x20;
+
+To ascertain the total supply of claimed (ERC-20) and unclaimed $JBX tokens, call the `totalSupplyOf()` function on the TicketBooth contract above, passing project id `1` as the argument.&#x20;
+{% endhint %}
 
 ## Juicebox Protocol V2
 
