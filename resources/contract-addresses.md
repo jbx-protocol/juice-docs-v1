@@ -34,7 +34,7 @@ Prices: [`0xa9537Cc42555564206D4E57c0eb6943d56E83A30`](https://etherscan.io/addr
 
 ### Rinkeby
 
-https://github.com/jbx-protocol/juice-contracts/tree/main/deployments/rinkeby
+[https://github.com/jbx-protocol/juice-contracts/tree/main/deployments/rinkeby](https://github.com/jbx-protocol/juice-contracts/tree/main/deployments/rinkeby)
 
 ### Kovan
 
@@ -51,7 +51,7 @@ To reduce gas fees, newly issued $JBX tokens are stored in the Juicebox [TicketB
 
 The above ERC-20 contract reflects the total supply of minted ERC-20 $JBX tokens.&#x20;
 
-To ascertain the total supply of claimed (ERC-20) and unclaimed $JBX tokens, call the `totalSupplyOf()` function on the TicketBooth contract above, passing project id `1` as the argument.&#x20;
+To ascertain the total supply of claimed (ERC-20) and unclaimed ("staked") $JBX tokens, call the `totalSupplyOf()` function on the TicketBooth contract above, passing project id `1` as the argument.&#x20;
 {% endhint %}
 
 ## Juicebox Protocol V2
