@@ -46,7 +46,7 @@ function _takeFee(
 
     _Internal references:_
 
-    * [`pay`](broken-reference/)
+    * [`pay`](pay.md)
     * [`_pay`](\_pay.md)
 {% endtab %}
 

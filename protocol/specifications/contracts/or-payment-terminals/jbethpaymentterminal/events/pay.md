@@ -4,7 +4,7 @@
 
 Emitted from:
 
-* [`pay`](broken-reference)
+* [`pay`](../write/pay.md)
 
 # Definition
 

@@ -2,7 +2,7 @@
 
 Emitted from:
 
-* [`addTerminalOf`](broken-reference)
+* [`addTerminalsOf`](../write/addterminalsof.md)
 
 Definition:
 
