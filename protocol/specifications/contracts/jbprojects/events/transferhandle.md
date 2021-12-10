@@ -4,7 +4,7 @@ Emitted from:
 
 * [`transferHandle`](../write/transferhandleof.md)
 
-# Definition
+## Definition
 
 ```solidity
 event TransferHandle(

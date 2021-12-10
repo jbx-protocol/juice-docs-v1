@@ -4,7 +4,7 @@ Emitted from:
 
 * [`changefor`](../write/changefor.md)
 
-# Definition
+## Definition
 
 ```solidity
 event Change(

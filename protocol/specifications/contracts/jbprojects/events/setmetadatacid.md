@@ -4,7 +4,7 @@ Emitted from:
 
 * [`setMetadataCidOf`](../../../../../protocol/specifications/contracts/jbprojects/write/setmetadatacidof.md)
 
-# Definition
+## Definition
 
 ```solidity
 event SetMetadataCid(uint256 indexed projectId, string uri, address caller);

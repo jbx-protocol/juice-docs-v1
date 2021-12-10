@@ -4,7 +4,7 @@ Emitted from:
 
 * [`pay`](../write/pay.md)
 
-# Definition
+## Definition
 
 ```solidity
 event Pay(

@@ -4,7 +4,7 @@ Emitted from:
 
 * [`recordRedemptionFor`](../write/recordredemptionfor.md)
 
-# Definition
+## Definition
 
 ```solidity
 event DelegateDidRedeem(IJBRedemptionDelegate indexed delegate, JBDidRedeemData data);

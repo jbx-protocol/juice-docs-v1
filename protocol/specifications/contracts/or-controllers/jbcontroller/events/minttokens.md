@@ -4,7 +4,7 @@ Emitted from:
 
 * [`mintTokensOf`](../write/minttokensof.md)
 
-# Definition
+## Definition
 
 ```solidity
 event MintTokens(

@@ -4,7 +4,7 @@ Emitted from:
 
 * [`distributeReservedTokensOf`](../write/distributereservedtokensof.md)
 
-# Definition
+## Definition
 
 ```solidity
 event DistributeReservedTokens(

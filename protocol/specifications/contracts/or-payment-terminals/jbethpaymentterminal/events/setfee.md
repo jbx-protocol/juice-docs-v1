@@ -4,7 +4,7 @@ Emitted from:
 
 * [`setFee`](../write/setfee.md)
 
-# Definition
+## Definition
 
 ```solidity
 event SetFee(uint256 fee, address caller);

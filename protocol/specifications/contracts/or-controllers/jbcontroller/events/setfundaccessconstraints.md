@@ -5,7 +5,7 @@ Emitted from:
 * [`launchProjectFor`](../write/launchprojectfor.md)
 * [`reconfigureFundingCyclesOf`](../write/reconfigurefundingcyclesof.md)
 
-# Definition
+## Definition
 
 ```solidity
 event SetFundAccessConstraints(

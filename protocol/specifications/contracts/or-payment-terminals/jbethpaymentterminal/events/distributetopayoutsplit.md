@@ -4,7 +4,7 @@ Emitted from:
 
 * [`_distributeToPayoutSplitsOf`](../write/_distributetopayoutsplitsof.md)
 
-# Definition
+## Definition
 
 ```solidity
 event DistributeToPayoutSplit(
