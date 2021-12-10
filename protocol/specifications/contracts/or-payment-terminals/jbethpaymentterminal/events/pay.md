@@ -1,7 +1,5 @@
 # Pay
 
-## Pay
-
 Emitted from:
 
 * [`pay`](../write/pay.md)
