@@ -144,19 +144,15 @@ function recordWithdrawalFor(
     * [`usedDistributionLimitOf`](../../../jbfundingcyclestore/read/useddistributionlimitof.md)
 10. Store the decremented balance.
 
-````
-```solidity
-````
+    ```solidity
+    // Removed the withdrawn funds from the project's balance.
+    balanceOf[_projectId] = balanceOf[_projectId] - withdrawnAmount;
+    ```
 
-````
-// Removed the withdrawn funds from the project's balance.
-balanceOf[_projectId] = balanceOf[_projectId] - withdrawnAmount;
-```
+    _Internal references:_
 
-_Internal references:_
+    * [`balanceOf`](../../../jbfundingcyclestore/read/balanceof.md)
 
-* [`balanceOf`](../../../jbfundingcyclestore/read/balanceof.md)
-````
 {% endtab %}
 
 {% tab title="Code" %}
