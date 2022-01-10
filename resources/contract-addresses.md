@@ -66,7 +66,7 @@ Gnosis Safe: [https://gnosis-safe.io/app/eth:0xAF28bcB48C40dBC86f52D459A6562F658
 
 Etherscan: [https://rinkeby.etherscan.io/address/0xAF28bcB48C40dBC86f52D459A6562F658fc94B1e](https://rinkeby.etherscan.io/address/0xAF28bcB48C40dBC86f52D459A6562F658fc94B1e)
 
-Gnosis: [https://gnosis-safe.io/app/rin:0xAF28bcB48C40dBC86f52D459A6562F658fc94B1e/balances](https://gnosis-safe.io/app/rin:0xAF28bcB48C40dBC86f52D459A6562F658fc94B1e/balances)
+Gnosis Safe: [https://gnosis-safe.io/app/rin:0xAF28bcB48C40dBC86f52D459A6562F658fc94B1e/balances](https://gnosis-safe.io/app/rin:0xAF28bcB48C40dBC86f52D459A6562F658fc94B1e/balances)
 
 ## Juicebox Protocol V2
 
