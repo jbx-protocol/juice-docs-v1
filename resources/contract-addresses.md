@@ -49,10 +49,24 @@ Mainnet ERC-20 Token: [0x3abf2a4f8452ccc2cf7b4c1e4663147600646f66](https://ether
 {% hint style="info" %}
 To reduce gas fees, newly issued $JBX tokens are stored in the Juicebox [TicketBooth](../protocol-v1/ticketbooth/) contract by default ("staked"). $JBX holders can call the `unstake` function on the TicketBooth contract to mint $JBX ERC-20 tokens to their wallets. In the frontend, this is called `Claim` and can be found under the `Manage` button.
 
-The above ERC-20 contract reflects the total supply of minted ERC-20 $JBX tokens.&#x20;
+The above ERC-20 contract reflects the total supply of minted ERC-20 $JBX tokens.
 
-To ascertain the total supply of claimed (ERC-20) and unclaimed ("staked") $JBX tokens, call the `totalSupplyOf()` function on the TicketBooth contract above, passing project id `1` as the argument.&#x20;
+To ascertain the total supply of claimed (ERC-20) and unclaimed ("staked") $JBX tokens, call the `totalSupplyOf()` function on the TicketBooth contract above, passing project id `1` as the argument.
 {% endhint %}
+
+### Gnosis Multisig
+
+#### Mainnet
+
+Etherscan: [https://etherscan.io/address/0xaf28bcb48c40dbc86f52d459a6562f658fc94b1e](https://etherscan.io/address/0xaf28bcb48c40dbc86f52d459a6562f658fc94b1e)
+
+Gnosis Safe: [https://gnosis-safe.io/app/eth:0xAF28bcB48C40dBC86f52D459A6562F658fc94B1e/balances](https://gnosis-safe.io/app/eth:0xAF28bcB48C40dBC86f52D459A6562F658fc94B1e/balances)
+
+#### **Rinkeby**
+
+Etherscan: [https://rinkeby.etherscan.io/address/0xAF28bcB48C40dBC86f52D459A6562F658fc94B1e](https://rinkeby.etherscan.io/address/0xAF28bcB48C40dBC86f52D459A6562F658fc94B1e)
+
+Gnosis: [https://gnosis-safe.io/app/rin:0xAF28bcB48C40dBC86f52D459A6562F658fc94B1e/balances](https://gnosis-safe.io/app/rin:0xAF28bcB48C40dBC86f52D459A6562F658fc94B1e/balances)
 
 ## Juicebox Protocol V2
 
