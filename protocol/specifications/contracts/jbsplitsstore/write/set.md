@@ -52,6 +52,7 @@ function set(
     _Internal references:_
 
     * [`_splitsOf`](../properties/\_splitsof.md)
+    * two
 2.  Loop through each `_currentSplits` to make sure the new `_splits` being set respect any current split bound by a lock constraint.
 
     ```solidity
@@ -64,38 +65,31 @@ function set(
       ```solidity
       if (block.timestamp >= _currentSplits[_i].lockedUntil) continue;
       ```
-3.  If the current split isn't locked, move on to the next one.
+    * If the current split is locked, check to make sure the new `_splits` includes it. The only property of a locked split that can have changed is its `lockedUntil` property, which can be extended.
 
-    ```solidity
-    if (block.timestamp >= _currentSplits[_i].lockedUntil) continue;
-    ```
+      ```solidity
+      // Keep a reference to whether or not the locked split being iterated on is included.
+      bool _includesLocked = false;
 
-4.  If the current split is locked, check to make sure the new `_splits` includes it. The only property of a locked split that can have changed is its `lockedUntil` property, which can be extended.
+      for (uint256 _j = 0; _j < _splits.length; _j++) {
+        // Check for sameness.
+        if (
+          _splits[_j].percent == _currentSplits[_i].percent &&
+          _splits[_j].beneficiary == _currentSplits[_i].beneficiary &&
+          _splits[_j].allocator == _currentSplits[_i].allocator &&
+          _splits[_j].projectId == _currentSplits[_i].projectId &&
+          // Allow lock extention.
+          _splits[_j].lockedUntil >= _currentSplits[_i].lockedUntil
+        ) _includesLocked = true;
+      }
+      ```
+    * Check to make sure the provided `_splits` includes any locked current splits.
 
-    ```solidity
-    // Keep a reference to whether or not the locked split being iterated on is included.
-    bool _includesLocked = false;
-
-    for (uint256 _j = 0; _j < _splits.length; _j++) {
-      // Check for sameness.
-      if (
-        _splits[_j].percent == _currentSplits[_i].percent &&
-        _splits[_j].beneficiary == _currentSplits[_i].beneficiary &&
-        _splits[_j].allocator == _currentSplits[_i].allocator &&
-        _splits[_j].projectId == _currentSplits[_i].projectId &&
-        // Allow lock extention.
-        _splits[_j].lockedUntil >= _currentSplits[_i].lockedUntil
-      ) _includesLocked = true;
-    }
-    ```
-
-5.  Check to make sure the provided `_splits` includes any locked current splits.
-
-    ```solidity
-    if (!_includesLocked) {
-      revert PREVIOUS_LOCKED_SPLITS_NOT_INCLUDED();
-    }
-    ```
+      ```solidity
+      if (!_includesLocked) {
+        revert PREVIOUS_LOCKED_SPLITS_NOT_INCLUDED();
+      }
+      ```
 
 6.  After the loop, delete the current splits from storage so we can repopulate them.
 
