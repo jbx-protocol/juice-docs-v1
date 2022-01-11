@@ -4,14 +4,14 @@ Contract: [`JBTokenStore`](../)​‌
 
 Interface: [`IJBTokenStore`](../../../interfaces/ijbtokenstore.md)
 
-**Each holder's balance of unclaimed Tokens for each project.**
+**Each holder's balance of unclaimed tokens for each project.**
 
 # Definition
 
 ```solidity
 /** 
   @notice
-  Each holder's balance of unclaimed Tokens for each project.
+  Each holder's balance of unclaimed tokens for each project.
 
   _holder The holder of balance.
   _projectId The ID of the project to which the token belongs.

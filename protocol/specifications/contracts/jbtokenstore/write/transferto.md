@@ -6,7 +6,7 @@ Interface: [`IJBTokenStore`](../../../interfaces/ijbtokenstore.md)
 
 {% tabs %}
 {% tab title="Step by step" %}
-**Allows an unclaimed token holder to transfer them to another account, without claimed them to ERC-20s.**
+**Allows an unclaimed token holder to transfer them to another account, without claiming them to ERC-20s.**
 
 _Only a token holder or an operator can transfer its unclaimed tokens_.
 
@@ -36,19 +36,25 @@ function transferTo(
 
     ```solidity
     // Can't transfer to the zero address.
-    require(_recipient != address(0), '0x26: ZERO_ADDRESS');
+    if (_recipient == address(0)) {
+      revert RECIPIENT_ZERO_ADDRESS();
+    }
     ```
 2.  Make sure the holder of the tokens isn't also the recipient.
 
     ```solidity
     // An address can't transfer to itself.
-    require(_holder != _recipient, '0x27: IDENTITY');
+    if (_holder == _recipient) {
+      revert INVALID_RECIPIENT();
+    }
     ```
 3.  Make sure there is amount to transfer.
 
     ```solidity
     // There must be an amount to transfer.
-    require(_amount > 0, '0x28: NO_OP');
+    if (_amount == 0) {
+      revert TOKEN_AMOUNT_ZERO();
+    }
     ```
 4.  Get a reference to the amount of unclaimed tokens the holder has for the project.
 
@@ -64,7 +70,9 @@ function transferTo(
 
     ```solidity
     // There must be enough unclaimed tokens to transfer.
-    require(_amount <= _unclaimedBalance, '0x29: INSUFFICIENT_FUNDS');
+    if (_amount > _unclaimedBalance) {
+      revert INSUFFICIENT_UNCLAIMED_TOKENS();
+    }
     ```
 6.  Subtract the amount from the `unclaimedBalanceOf` the holder for the project.
 
@@ -103,7 +111,7 @@ function transferTo(
 ```solidity
 /** 
   @notice 
-  Allows an unclaimed token holder to transfer them to another account, without claimed them to ERC-20s.
+  Allows an unclaimed token holder to transfer them to another account, without claiming them to ERC-20s.
 
   @dev
   Only a token holder or an operator can transfer its unclaimed tokens.
@@ -120,19 +128,27 @@ function transferTo(
   uint256 _amount
 ) external override requirePermission(_holder, _projectId, JBOperations.TRANSFER) {
   // Can't transfer to the zero address.
-  require(_recipient != address(0), '0x26: ZERO_ADDRESS');
+  if (_recipient == address(0)) {
+    revert RECIPIENT_ZERO_ADDRESS();
+  }
 
   // An address can't transfer to itself.
-  require(_holder != _recipient, '0x27: IDENTITY');
+	if (_holder == _recipient) {
+    revert INVALID_RECIPIENT();
+  }
 
   // There must be an amount to transfer.
-  require(_amount > 0, '0x28: NO_OP');
+	if (_amount == 0) {
+    revert TOKEN_AMOUNT_ZERO();
+  }
 
   // Get a reference to the amount of unclaimed tokens.
   uint256 _unclaimedBalance = unclaimedBalanceOf[_holder][_projectId];
 
   // There must be enough unclaimed tokens to transfer.
-  require(_amount <= _unclaimedBalance, '0x29: INSUFFICIENT_FUNDS');
+  if (_amount > _unclaimedBalance) {
+    revert INSUFFICIENT_UNCLAIMED_TOKENS();
+  }
 
   // Subtract from the holder.
   unclaimedBalanceOf[_holder][_projectId] = unclaimedBalanceOf[_holder][_projectId] - _amount;
@@ -150,10 +166,10 @@ function transferTo(
 {% tab title="Errors" %}
 | String                         | Description                                                  |
 | ------------------------------ | ------------------------------------------------------------ |
-| **`0x26: ZERO_ADDRESS`**       | Thrown if no recipient was speicified.                       |
-| **`0x27: IDENTITY`**           | Thrown if the holder is the same address as the recipient.   |
-| **`0x28: NO_OP`**              | Thrown if no amount was specified to transfer.               |
-| **`0x29: INSUFFICIENT_FUNDS`** | Thrown if the holder doesn't have enough tokens to transfer. |
+| **`RECIPIENT_ZERO_ADDRESS`**       | Thrown if no recipient was speicified.                       |
+| **`INVALID_RECIPIENT`**           | Thrown if the holder is the same address as the recipient.   |
+| **`TOKEN_AMOUNT_ZERO`**              | Thrown if no amount was specified to transfer.               |
+| **`INSUFFICIENT_UNCLAIMED_TOKENS`** | Thrown if the holder doesn't have enough tokens to transfer. |
 {% endtab %}
 
 {% tab title="Events" %}

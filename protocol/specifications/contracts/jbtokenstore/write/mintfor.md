@@ -36,7 +36,9 @@ function mintFor(
 
     ```solidity
     // An amount must be specified.
-    require(_amount > 0, '0x22: NO_OP');
+    if (_amount == 0) {
+      revert TOKEN_AMOUNT_ZERO();
+    }
     ```
 2.  Get a reference to the project's token.
 
@@ -112,7 +114,9 @@ function mintFor(
   bool _preferClaimedTokens
 ) external override onlyController(_projectId) {
   // An amount must be specified.
-  require(_amount > 0, '0x22: NO_OP');
+  if (_amount == 0) {
+    revert TOKEN_AMOUNT_ZERO();
+  }
 
   // Get a reference to the project's ERC20 tokens.
   IJBToken _token = tokenOf[_projectId];
@@ -138,7 +142,7 @@ function mintFor(
 {% tab title="Errors" %}
 | String            | Description                             |
 | ----------------- | --------------------------------------- |
-| **`0x22: NO_OP`** | Thrown if an amount of 0 was passed in. |
+| **`TOKEN_AMOUNT_ZERO`** | Thrown if an amount of 0 was passed in. |
 {% endtab %}
 
 {% tab title="Events" %}

@@ -36,19 +36,25 @@ function issueFor(
 
     ```solidity
     // There must be a name.
-    require((bytes(_name).length > 0), '0x1f: EMPTY_NAME');
+    if (bytes(_name).length == 0) {
+      revert EMPTY_NAME();
+    }
     ```
 2.  Make sure a symbol was provided.
 
     ```solidity
     // There must be a symbol.
-    require((bytes(_symbol).length > 0), '0x20: EMPTY_SYMBOL');
+    if (bytes(_symbol).length == 0) {
+      revert EMPTY_SYMBOL();
+    }
     ```
 3.  Make sure the project hasn't already issued a token.
 
     ```solidity
     // Only one ERC20 token can be issued.
-    require(tokenOf[_projectId] == IJBToken(address(0)), '0x21: ALREADY_ISSUED');
+    if (tokenOf[_projectId] != IJBToken(address(0))) {
+      revert TOKEN_ALREADY_ISSUED();
+    }
     ```
 
     _Internal references:_
@@ -91,7 +97,7 @@ function issueFor(
   Deploys a project's ERC-20 token contract.
   
   @dev
-  Only a project owner or operator can issue its token.
+  Only a project's current controller can issue its token.
 
   @param _projectId The ID of the project being issued tokens.
   @param _name The ERC-20's name.
@@ -104,13 +110,19 @@ function issueFor(
 ) external override onlyController(_projectId) returns (IJBToken token)
 {
   // There must be a name.
-  require((bytes(_name).length > 0), '0x1f: EMPTY_NAME');
+  if (bytes(_name).length == 0) {
+    revert EMPTY_NAME();
+  }
 
   // There must be a symbol.
-  require((bytes(_symbol).length > 0), '0x20: EMPTY_SYMBOL');
+  if (bytes(_symbol).length == 0) {
+    revert EMPTY_SYMBOL();
+  }
 
   // Only one ERC20 token can be issued.
-  require(tokenOf[_projectId] == IJBToken(address(0)), '0x21: ALREADY_ISSUED');
+  if (tokenOf[_projectId] != IJBToken(address(0))) {
+    revert TOKEN_ALREADY_ISSUED();
+  }
 
   // Deploy the token contract.
   token = new JBToken(_name, _symbol);
@@ -126,9 +138,9 @@ function issueFor(
 {% tab title="Errors" %}
 | String                     | Description                                        |
 | -------------------------- | -------------------------------------------------- |
-| **`0x1f: EMPTY_NAME`**     | Thrown if a name wasn't specified for the token.   |
-| **`0x20: EMPTY_SYMBOL`**   | Thrown if a symbol wasn't specified for the token. |
-| **`0x21: ALREADY_ISSUED`** | Thrown if the project has already issued a token.  |
+| **`EMPTY_NAME`**     | Thrown if a name wasn't specified for the token.   |
+| **`EMPTY_SYMBOL`**   | Thrown if a symbol wasn't specified for the token. |
+| **`TOKEN_ALREADY_ISSUED`** | Thrown if the project has already issued a token.  |
 {% endtab %}
 
 {% tab title="Events" %}

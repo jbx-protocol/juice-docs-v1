@@ -32,6 +32,14 @@ function burnFrom(
 
 # Body
 
+1.  There must be an amount that is getting burned.
+
+    ```solidity
+    // An amount must be specified.
+    if (_amount == 0) {
+      revert TOKEN_AMOUNT_ZERO();
+    }
+    ```
 1.  Get a reference to the project's token.
 
     ```solidity
@@ -56,19 +64,22 @@ function burnFrom(
 
     ```solidity
     // Get a reference to the number of tokens there are.
-    uint256 _claimedBalance = _token == IJBToken(address(0)) ? 0 : _token.balanceOf(_projectId, _holder);
+    uint256 _claimedBalance = _token == IJBToken(address(0))
+      ? 0
+      : _token.balanceOf(_projectId, _holder);
     ```
 4.  Make sure the holder has enough tokens to burn. This is true if either the amount to burn is less than both the holder's claimed balance and unclaimed balance, if the amount is greater than the claimed balance and there are enough unclaimed tokens to cover the difference, or if the amount is greater than the unclaimed balance and there are enough claimed tokens to cover the difference.
 
     ```solidity
     // There must be enough tokens.
     // Prevent potential overflow by not relying on addition.
-    require(
-      (_amount < _claimedBalance && _amount < _unclaimedBalance) ||
-        (_amount >= _claimedBalance && _unclaimedBalance >= _amount - _claimedBalance) ||
-        (_amount >= _unclaimedBalance && _claimedBalance >= _amount - _unclaimedBalance),
-      '0x23: INSUFFICIENT_FUNDS'
-    );
+    if (
+      (_amount >= _claimedBalance || _amount >= _unclaimedBalance) &&
+      (_amount < _claimedBalance || _unclaimedBalance < _amount - _claimedBalance) &&
+      (_amount < _unclaimedBalance || _claimedBalance < _amount - _unclaimedBalance)
+    ) {
+      revert INSUFFICIENT_FUNDS();
+    }
     ```
 5.  Find the amount of claimed tokens that should be burned. This will be 0 if the holder has no claimed balance, an amount up to the holder's claimed balance if there is a preference for burning claimed tokens, or the difference between the amount being burned and the holder's unclaimed balance otherwise.
 
@@ -144,7 +155,7 @@ function burnFrom(
   @param _holder The address that owns the tokens being burned.
   @param _projectId The ID of the project to which the burned tokens belong.
   @param _amount The amount of tokens to burn.
-  @param _preferClaimedTokens A flag indicating if there's a preference to burn tokens that have been converted to ERC-20s
+  @param _preferClaimedTokens A flag indicating if there's a preference to burn tokens that have been converted to ERC-20s.
 */
 function burnFrom(
   address _holder,
@@ -152,6 +163,11 @@ function burnFrom(
   uint256 _amount,
   bool _preferClaimedTokens
 ) external override onlyController(_projectId) {
+  // An amount must be specified.
+  if (_amount == 0) {
+    revert TOKEN_AMOUNT_ZERO();
+  }
+
   // Get a reference to the project's ERC20 tokens.
   IJBToken _token = tokenOf[_projectId];
 
@@ -159,16 +175,19 @@ function burnFrom(
   uint256 _unclaimedBalance = unclaimedBalanceOf[_holder][_projectId];
 
   // Get a reference to the number of tokens there are.
-  uint256 _claimedBalance = _token == IJBToken(address(0)) ? 0 : _token.balanceOf(_projectId, _holder);
+  uint256 _claimedBalance = _token == IJBToken(address(0))
+    ? 0
+    : _token.balanceOf(_projectId, _holder);
 
   // There must be enough tokens.
   // Prevent potential overflow by not relying on addition.
-  require(
-    (_amount < _claimedBalance && _amount < _unclaimedBalance) ||
-      (_amount >= _claimedBalance && _unclaimedBalance >= _amount - _claimedBalance) ||
-      (_amount >= _unclaimedBalance && _claimedBalance >= _amount - _unclaimedBalance),
-    '0x23: INSUFFICIENT_FUNDS'
-  );
+  if (
+    (_amount >= _claimedBalance || _amount >= _unclaimedBalance) &&
+    (_amount < _claimedBalance || _unclaimedBalance < _amount - _claimedBalance) &&
+    (_amount < _unclaimedBalance || _claimedBalance < _amount - _unclaimedBalance)
+  ) {
+    revert INSUFFICIENT_FUNDS();
+  }
 
   // The amount of tokens to burn.
   uint256 _claimedTokensToBurn;
@@ -207,7 +226,8 @@ function burnFrom(
 {% tab title="Errors" %}
 | String                         | Description                                              |
 | ------------------------------ | -------------------------------------------------------- |
-| **`0x23: INSUFFICIENT_FUNDS`** | Thrown if the holder doesn't have enough tokens to burn. |
+| **`TOKEN_AMOUNT_ZERO`** | Thrown if there are no tokens being burned. |
+| **`INSUFFICIENT_FUNDS`** | Thrown if the holder doesn't have enough tokens to burn. |
 {% endtab %}
 
 {% tab title="Events" %}

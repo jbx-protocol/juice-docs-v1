@@ -44,7 +44,9 @@ function claimFor(
 
     ```solidity
     // Tokens must have been issued.
-    require(_token != IJBToken(address(0)), '0x24: NOT_FOUND');
+    if (_token == IJBToken(address(0))) {
+      revert TOKEN_NOT_FOUND();
+    }
     ```
 3.  Get a reference to the amount of unclaimed tokens the holder has for the project.
 
@@ -60,7 +62,9 @@ function claimFor(
 
     ```solidity
     // There must be enough unlocked unclaimed tokens to claim.
-    require(_unclaimedBalance >= _amount, '0x25: INSUFFICIENT_FUNDS');
+    if (_unclaimedBalance < _amount) {
+      revert INSUFFICIENT_UNCLAIMED_TOKENS();
+    }
     ```
 5.  Subtract from the `unclaimedBalanceOf` the holder for the project.
 
@@ -125,13 +129,17 @@ function claimFor(
   IJBToken _token = tokenOf[_projectId];
 
   // Tokens must have been issued.
-  require(_token != IJBToken(address(0)), '0x24: NOT_FOUND');
+  if (_token == IJBToken(address(0))) {
+    revert TOKEN_NOT_FOUND();
+  }
 
   // Get a reference to the amount of unclaimed tokens.
   uint256 _unclaimedBalance = unclaimedBalanceOf[_holder][_projectId];
 
   // There must be enough unlocked unclaimed tokens to claim.
-  require(_unclaimedBalance >= _amount, '0x25: INSUFFICIENT_FUNDS');
+  if (_unclaimedBalance < _amount) {
+    revert INSUFFICIENT_UNCLAIMED_TOKENS();
+  }
 
   // Subtract the claim amount from the holder's balance.
   unclaimedBalanceOf[_holder][_projectId] = unclaimedBalanceOf[_holder][_projectId] - _amount;
@@ -150,8 +158,8 @@ function claimFor(
 {% tab title="Errors" %}
 | String                         | Description                                               |
 | ------------------------------ | --------------------------------------------------------- |
-| **`0x24: NOT_FOUND`**          | Thrown if the project hasn't yet issued its token.        |
-| **`0x25: INSUFFICIENT_FUNDS`** | Thrown if the holder doens't have enough tokens to claim. |
+| **`TOKEN_NOT_FOUND`**          | Thrown if the project hasn't yet issued its token.        |
+| **`INSUFFICIENT_UNCLAIMED_TOKENS`** | Thrown if the holder doens't have enough tokens to claim. |
 {% endtab %}
 
 {% tab title="Events" %}

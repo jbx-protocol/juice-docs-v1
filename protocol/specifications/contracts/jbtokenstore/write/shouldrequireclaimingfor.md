@@ -42,7 +42,9 @@ function shouldRequireClaimingFor(uint256 _projectId, bool _flag)
 
     ```solidity
     // Tokens must have been issued.
-    require(_token != IJBToken(address(0)), '0x2a: NOT_FOUND');
+    if (_token == IJBToken(address(0))) {
+      revert TOKEN_NOT_FOUND();
+    }
     ```
 3.  Store the flag for the project.
 
@@ -86,7 +88,9 @@ function shouldRequireClaimingFor(uint256 _projectId, bool _flag)
   IJBToken _token = tokenOf[_projectId];
 
   // Tokens must have been issued.
-  require(_token != IJBToken(address(0)), '0x2a: NOT_FOUND');
+  if (_token == IJBToken(address(0))) {
+    revert TOKEN_NOT_FOUND();
+  }
 
   // Store the flag.
   requireClaimFor[_projectId] = _flag;
@@ -99,7 +103,7 @@ function shouldRequireClaimingFor(uint256 _projectId, bool _flag)
 {% tab title="Errors" %}
 | String                | Description                                      |
 | --------------------- | ------------------------------------------------ |
-| **`0x2a: NOT_FOUND`** | Thrown if the project hasn't yet issued a token. |
+| **`TOKEN_NOT_FOUND`** | Thrown if the project hasn't yet issued a token. |
 {% endtab %}
 
 {% tab title="Events" %}

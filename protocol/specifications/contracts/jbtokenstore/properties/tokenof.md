@@ -4,14 +4,14 @@ Contract: [`JBTokenStore`](../)​‌
 
 Interface: [`IJBTokenStore`](../../../interfaces/ijbtokenstore.md)
 
-**Each project's ERC20 Token tokens.**
+**Each project's ERC20 tokens.**
 
 # Definition
 
 ```solidity
 /** 
   @notice
-  Each project's ERC20 Token tokens.
+  Each project's ERC20 tokens.
 
   _projectId The ID of the project to which the token belongs.
 */
