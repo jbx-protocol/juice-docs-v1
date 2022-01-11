@@ -92,80 +92,80 @@ function set(
   }
   ```
 
-3. After the loop, delete the current splits from storage so we can repopulate them.
+3.  After the loop, delete the current splits from storage so we can repopulate them.
 
-   ```solidity
-   // Delete from storage so splits can be repopulated.
-   delete _splitsOf[_projectId][_domain][_group];
-   ```
-
-  _Internal references:_
-
-  * [`_splitsOf`](../properties/\_splitsof.md)
-4. Store a local variable to keep track of all the percents from the splits.
-
-   ```solidity
-   // Add up all the percents to make sure they cumulative are under 100%.
-   uint256 _percentTotal = 0;
-   ```
-5. Loop through each newly provided `_splits` to validate
-
-   ```solidity
-   for (uint256 _i = 0; _i < _splits.length; _i++) { ... }
-   ```
-6. Check that the percent for the current split is not zero.
-
-   ```solidity
-   // The percent should be greater than 0.
-   if (_splits[_i].percent == 0) {
-     revert INVALID_SPLIT_PERCENT();
-   }
-   ```
-7. Check that the split specifies a recipient. Either an `allocator` must be specified or a `beneficiary` must be specified.
-
-   ```solidity
-   // The allocator and the beneficiary shouldn't both be the zero address.
-   if (
-     _splits[_i].allocator == IJBSplitAllocator(address(0)) &&
-     _splits[_i].beneficiary == address(0)
-   ) {
-     revert ALLOCATOR_AND_BENEFICIARY_ZERO_ADDRESS();
-   }
-   ```
-
-8. Increment the total percents that have been accumulated so far.
-
-   ```solidity
-   // Add to the total percents.
-   _percentTotal = _percentTotal + _splits[_i].percent;
-   ```
-9. Make sure the accumulated percents are under 100%. Split percents are out of 10000000.
-
-   ```solidity
-   // Validate the total does not exceed the expected value.
-   if (_percentTotal > JBConstants.SPLITS_TOTAL_PERCENT) {
-     revert INVALID_TOTAL_PERCENT();
-   }
-   ```
-10. Push the split onto the stored `_splits` value.
-
-   ```solidity
-   // Push the new split into the project's list of splits.
-   _splitsOf[_projectId][_domain][_group].push(_splits[_i]);
-   ```
+    ```solidity
+    // Delete from storage so splits can be repopulated.
+    delete _splitsOf[_projectId][_domain][_group];
+    ```
 
    _Internal references:_
 
    * [`_splitsOf`](../properties/\_splitsof.md)
-11. For each added split, emit a `SetSplit` event with all relevant parameters.
+4.  Store a local variable to keep track of all the percents from the splits.
 
-   ```solidity
-   emit SetSplit(_projectId, _domain, _group, _splits[_i], msg.sender);
-   ```
+    ```solidity
+    // Add up all the percents to make sure they cumulative are under 100%.
+    uint256 _percentTotal = 0;
+    ```
+5.  Loop through each newly provided `_splits` to validate
 
-   _Event references:_
+    ```solidity
+    for (uint256 _i = 0; _i < _splits.length; _i++) { ... }
+    ```
+6.  Check that the percent for the current split is not zero.
 
-   * [`SetSplit`](../events/setsplit.md)
+    ```solidity
+    // The percent should be greater than 0.
+    if (_splits[_i].percent == 0) {
+      revert INVALID_SPLIT_PERCENT();
+    }
+    ```
+7.  Check that the split specifies a recipient. Either an `allocator` must be specified or a `beneficiary` must be specified.
+
+    ```solidity
+    // The allocator and the beneficiary shouldn't both be the zero address.
+    if (
+      _splits[_i].allocator == IJBSplitAllocator(address(0)) &&
+      _splits[_i].beneficiary == address(0)
+    ) {
+      revert ALLOCATOR_AND_BENEFICIARY_ZERO_ADDRESS();
+    }
+    ```
+
+8.  Increment the total percents that have been accumulated so far.
+
+    ```solidity
+    // Add to the total percents.
+    _percentTotal = _percentTotal + _splits[_i].percent;
+    ```
+9.  Make sure the accumulated percents are under 100%. Split percents are out of 10000000.
+
+    ```solidity
+    // Validate the total does not exceed the expected value.
+    if (_percentTotal > JBConstants.SPLITS_TOTAL_PERCENT) {
+      revert INVALID_TOTAL_PERCENT();
+    }
+    ```
+10.  Push the split onto the stored `_splits` value.
+
+    ```solidity
+    // Push the new split into the project's list of splits.
+    _splitsOf[_projectId][_domain][_group].push(_splits[_i]);
+    ```
+
+    _Internal references:_
+
+    * [`_splitsOf`](../properties/\_splitsof.md)
+11.  For each added split, emit a `SetSplit` event with all relevant parameters.
+
+     ```solidity
+     emit SetSplit(_projectId, _domain, _group, _splits[_i], msg.sender);
+     ```
+
+     _Event references:_
+
+     * [`SetSplit`](../events/setsplit.md)
 {% endtab %}
 
 {% tab title="Code" %}
