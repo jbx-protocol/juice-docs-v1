@@ -76,9 +76,9 @@ _Only an address can set its own operators._
   Only an address can set its own operators.
 
   @param _operatorData The data that specifies the params for each operator being set.
-    @dev _operators The operators to whom permissions will be given.
-    @dev _domains Lists the domain that each operator is being given permissions to operate. A value of 0 serves as a wildcard domain. Applications can specify their own domain system.
-    @dev _permissionIndexes Lists the permission indexes to set for each operator. Indexes must be between 0-255. Applications can specify the significance of each index.
+    @dev _operatorData.perators The operators to whom permissions will be given.
+    @dev _operatorData.domains Lists the domain that each operator is being given permissions to operate. A value of 0 serves as a wildcard domain. Applications can specify their own domain system.
+    @dev _operatorData.permissionIndexes Lists the permission indexes to set for each operator. Indexes must be between 0-255. Applications can specify the significance of each index.
 */
 function setOperators(JBOperatorData[] calldata _operatorData) external override {
   for (uint256 _i = 0; _i < _operatorData.length; _i++) {
@@ -103,7 +103,7 @@ function setOperators(JBOperatorData[] calldata _operatorData) external override
 {% tab title="Errors" %}
 | String                          | Description                                                               |
 | ------------------------------- | ------------------------------------------------------------------------- |
-| **`0x02: INDEX_OUT_OF_BOUNDS`** | Thrown if the provided index is more than whats supported in a `uint256`. |
+| **`PERMISSION_INDEX_OUT_OF_BOUNDS`** | Thrown if the provided index is more than whats supported in a `uint256`. |
 {% endtab %}
 
 {% tab title="Events" %}

@@ -95,7 +95,7 @@ function setOperator(JBOperatorData calldata _operatorData) external override {
 {% tab title="Errors" %}
 | String                          | Description                                                               |
 | ------------------------------- | ------------------------------------------------------------------------- |
-| **`0x02: INDEX_OUT_OF_BOUNDS`** | Thrown if the provided index is more than whats supported in a `uint256`. |
+| **`PERMISSION_INDEX_OUT_OF_BOUNDS`** | Thrown if the provided index is more than whats supported in a `uint256`. |
 {% endtab %}
 
 {% tab title="Events" %}

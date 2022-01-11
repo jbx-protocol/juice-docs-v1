@@ -33,7 +33,9 @@ function hasPermissions(
 1.  Make sure the `_permissionIndex` is one of the 255 indexes in a `uint256`.
 
     ```solidity
-    require(_permissionIndex <= 255, '0x00: INDEX_OUT_OF_BOUNDS');
+    if (_permissionIndex > 255) {
+      revert PERMISSION_INDEX_OUT_OF_BOUNDS();
+    }
     ```
 2.  Return true if the bit is flipped on for the specified `_permissionIndex`. Otherwise return false.
 
@@ -65,7 +67,9 @@ function hasPermission(
   uint256 _domain,
   uint256 _permissionIndex
 ) external view override returns (bool) {
-  require(_permissionIndex <= 255, '0x00: INDEX_OUT_OF_BOUNDS');
+  if (_permissionIndex > 255) {
+    revert PERMISSION_INDEX_OUT_OF_BOUNDS();
+  }
   return (((permissionsOf[_operator][_account][_domain] >> _permissionIndex) & 1) == 1);
 }
 ```
@@ -74,7 +78,7 @@ function hasPermission(
 {% tab title="Errors" %}
 | String                          | Description                                                               |
 | ------------------------------- | ------------------------------------------------------------------------- |
-| **`0x00: INDEX_OUT_OF_BOUNDS`** | Thrown if the provided index is more than whats supported in a `uint256`. |
+| **`PERMISSION_INDEX_OUT_OF_BOUNDS`** | Thrown if the provided index is more than whats supported in a `uint256`. |
 {% endtab %}
 
 {% tab title="" %}
