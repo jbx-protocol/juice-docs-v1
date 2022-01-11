@@ -86,11 +86,13 @@ Check to make sure the provided `_splits` includes any locked current splits.
 
 ````
 ```solidity
-require(_includesLocked, '0x0f: SOME_LOCKED');
+if (!_includesLocked) {
+  revert PREVIOUS_LOCKED_SPLITS_NOT_INCLUDED();
+}
 ```
 ````
 
-5\. After the loop, delete the current splits from storage so we can repopulate them.
+5. After the loop, delete the current splits from storage so we can repopulate them.
 
 ```solidity
 // Delete from storage so splits can be repopulated.
@@ -115,17 +117,20 @@ Internal references:
 
     ```solidity
     // The percent should be greater than 0.
-    require(_splits[_i].percent > 0, '0x10: BAD_SPLIT_PERCENT');
+    if (_splits[_i].percent == 0) {
+      revert INVALID_SPLIT_PERCENT();
+    }
     ```
 *   Check that the split specifies a recipient. Either an `allocator` must be specified or a `beneficiary` must be specified.
 
     ```solidity
     // The allocator and the beneficiary shouldn't both be the zero address.
-    require(
-      _splits[_i].allocator != IJBSplitAllocator(address(0)) ||
-        _splits[_i].beneficiary != address(0),
-      '0x11: ZERO_ADDRESS'
-    );
+    if (
+      _splits[_i].allocator == IJBSplitAllocator(address(0)) &&
+      _splits[_i].beneficiary == address(0)
+    ) {
+      revert ALLOCATOR_AND_BENEFICIARY_ZERO_ADDRESS();
+    }
     ```
 *   Increment the total percents that have been accumulated so far.
 
@@ -136,8 +141,10 @@ Internal references:
 *   Make sure the accumulated percents are under 100%. Split percents are out of 10000000.
 
     ```solidity
-    // The total percent should be at most 10000000.
-    require(_percentTotal <= 10000000, '0x12: BAD_TOTAL_PERCENT');
+    // Validate the total does not exceed the expected value.
+    if (_percentTotal > JBConstants.SPLITS_TOTAL_PERCENT) {
+      revert INVALID_TOTAL_PERCENT();
+    }
     ```
 *   Push the split onto the stored `_splits` value.
 
@@ -214,7 +221,9 @@ function set(
         _splits[_j].lockedUntil >= _currentSplits[_i].lockedUntil
       ) _includesLocked = true;
     }
-    require(_includesLocked, '0x0f: SOME_LOCKED');
+    if (!_includesLocked) {
+      revert PREVIOUS_LOCKED_SPLITS_NOT_INCLUDED();
+    }
   }
 
   // Delete from storage so splits can be repopulated.
@@ -225,20 +234,25 @@ function set(
 
   for (uint256 _i = 0; _i < _splits.length; _i++) {
     // The percent should be greater than 0.
-    require(_splits[_i].percent > 0, '0x10: BAD_SPLIT_PERCENT');
+    if (_splits[_i].percent == 0) {
+      revert INVALID_SPLIT_PERCENT();
+    }
 
     // The allocator and the beneficiary shouldn't both be the zero address.
-    require(
-      _splits[_i].allocator != IJBSplitAllocator(address(0)) ||
-        _splits[_i].beneficiary != address(0),
-      '0x11: ZERO_ADDRESS'
-    );
+    if (
+      _splits[_i].allocator == IJBSplitAllocator(address(0)) &&
+      _splits[_i].beneficiary == address(0)
+    ) {
+      revert ALLOCATOR_AND_BENEFICIARY_ZERO_ADDRESS();
+    }
 
     // Add to the total percents.
     _percentTotal = _percentTotal + _splits[_i].percent;
 
-    // The total percent should be at most 10000000.
-    require(_percentTotal <= 10000000, '0x12: BAD_TOTAL_PERCENT');
+    // Validate the total does not exceed the expected value.
+    if (_percentTotal > JBConstants.SPLITS_TOTAL_PERCENT) {
+      revert INVALID_TOTAL_PERCENT();
+    }
 
     // Push the new split into the project's list of splits.
     _splitsOf[_projectId][_domain][_group].push(_splits[_i]);
@@ -252,10 +266,10 @@ function set(
 {% tab title="Errors" %}
 | String                        | Description                                                                   |
 | ----------------------------- | ----------------------------------------------------------------------------- |
-| **`0x0f: SOME_LOCKED`**       | Thrown if the splits that are being set override some splits that are locked. |
-| **`0x10: BAD_SPLIT_PERCENT`** | Thrown if the split has specified a percent of 0.                             |
-| **`0x11: ZERO_ADDRESS`**      | Thrown if the split doesn't specify a destination.                            |
-| **`0x12: BAD_TOTAL_PERCENT`** | Thrown if the split percents add up more than 100%.                           |
+| **`PREVIOUS_LOCKED_SPLITS_NOT_INCLUDED`**       | Thrown if the splits that are being set override some splits that are locked. |
+| **`INVALID_SPLIT_PERCENT`** | Thrown if the split has specified a percent of 0.                             |
+| **`ALLOCATOR_AND_BENEFICIARY_ZERO_ADDRESS`**      | Thrown if the split doesn't specify a destination.                            |
+| **`INVALID_TOTAL_PERCENT`** | Thrown if the split percents add up more than 100%.                           |
 {% endtab %}
 
 {% tab title="Events" %}
