@@ -99,9 +99,9 @@ function set(
     delete _splitsOf[_projectId][_domain][_group];
     ```
 
-   _Internal references:_
+    _Internal references:_
 
-   * [`_splitsOf`](../properties/\_splitsof.md)
+    * [`_splitsOf`](../properties/\_splitsof.md)
 7.  Store a local variable to keep track of all the percents from the splits.
 
     ```solidity
