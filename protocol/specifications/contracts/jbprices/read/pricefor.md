@@ -47,7 +47,9 @@ function priceFor(uint256 _currency, uint256 _base) external view override retur
 
     ```solidity
     // Feed must exist.
-    require(_feed != AggregatorV3Interface(address(0)), '0x03: NOT_FOUND');
+    if (_feed == AggregatorV3Interface(address(0))) {
+      revert PRICE_FEED_NOT_FOUND();
+    }
     ```
 4.  Get the latest price being reported by the price feed. The `latestRoundData` function returns several feed parameters, but only the `_price` is needed.
 
@@ -98,7 +100,9 @@ function priceFor(uint256 _currency, uint256 _base) external view override retur
   AggregatorV3Interface _feed = feedFor[_currency][_base];
 
   // Feed must exist.
-  require(_feed != AggregatorV3Interface(address(0)), '0x03: NOT_FOUND');
+  if (_feed == AggregatorV3Interface(address(0))) {
+    revert PRICE_FEED_NOT_FOUND();
+  }
 
   // Get the latest round information. Only need the price is needed.
   (, int256 _price, , , ) = _feed.latestRoundData();
@@ -114,14 +118,14 @@ function priceFor(uint256 _currency, uint256 _base) external view override retur
   } else {
     return uint256(_price) / 10**(_decimals - TARGET_DECIMALS);
   }
- }
+}
 ```
 {% endtab %}
 
 {% tab title="Errors" %}
 | String                | Description                                                        |
 | --------------------- | ------------------------------------------------------------------ |
-| **`0x03: NOT_FOUND`** | Thrown if a feed wasn't found for the specified currency and base. |
+| **`PRICE_FEED_NOT_FOUND`** | Thrown if a feed wasn't found for the specified currency and base. |
 {% endtab %}
 
 {% tab title="Bug bounty" %}

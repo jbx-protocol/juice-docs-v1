@@ -7,11 +7,7 @@ Emitted from:
 ## Definition
 
 ```solidity
-event AddFeed(
-    uint256 indexed currency,
-    uint256 indexed base,
-    AggregatorV3Interface feed
-);
+event AddFeed(uint256 indexed currency, uint256 indexed base, AggregatorV3Interface feed);
 ```
 
 * `currency` is the currency the feed was added for.

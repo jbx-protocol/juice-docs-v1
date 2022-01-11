@@ -34,7 +34,9 @@ function addFeedFor(
 
     ```solidity
     // There can't already be a feed for the specified currency.
-    require(feedFor[_currency][_base] == AggregatorV3Interface(address(0)), '0x04: ALREADY_EXISTS');
+    if (feedFor[_currency][_base] != AggregatorV3Interface(address(0))) {
+      revert PRICE_FEED_ALREADY_EXISTS();
+    }
     ```
 
     Internal references:
@@ -76,7 +78,9 @@ function addFeedFor(
   AggregatorV3Interface _feed
 ) external override onlyOwner {
   // There can't already be a feed for the specified currency.
-  require(feedFor[_currency][_base] == AggregatorV3Interface(address(0)), '0x04: ALREADY_EXISTS');
+  if (feedFor[_currency][_base] != AggregatorV3Interface(address(0))) {
+    revert PRICE_FEED_ALREADY_EXISTS();
+  }
 
   // Set the feed.
   feedFor[_currency][_base] = _feed;
@@ -89,7 +93,7 @@ function addFeedFor(
 {% tab title="Errors" %}
 | String                     | Description                                                            |
 | -------------------------- | ---------------------------------------------------------------------- |
-| **`0x04: ALREADY_EXISTS`** | Thrown if the specified currency already has an associated price feed. |
+| **`PRICE_FEED_ALREADY_EXISTS`** | Thrown if the specified currency already has an associated price feed. |
 {% endtab %}
 
 {% tab title="Events" %}

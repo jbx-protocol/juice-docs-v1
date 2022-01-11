@@ -16,6 +16,6 @@ Interface: [`IJBPrices`](../../../interfaces/ijbprices.md)
 uint256 public constant override TARGET_DECIMALS = 18;
 ```
 
-* This value must be hardcoded.
+* This value is hardcoded.
 * The resulting view function can be accessed externally by anyone.
 * The resulting function overrides a function definition from the `IJBPrices` interface.

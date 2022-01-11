@@ -166,7 +166,6 @@
         * [AddFeed](protocol/specifications/contracts/jbprices/events/addfeed.md)
       * [Properties](protocol/specifications/contracts/jbprices/properties/README.md)
         * [TARGET\_DECIMALS](protocol/specifications/contracts/jbprices/properties/targetdecimals.md)
-        * [feedDecimalAdjusterFor](protocol/specifications/contracts/jbprices/properties/feeddecimaladjuster.md)
         * [feedFor](protocol/specifications/contracts/jbprices/properties/feedfor.md)
       * [Read](protocol/specifications/contracts/jbprices/read/README.md)
         * [priceFor](protocol/specifications/contracts/jbprices/read/pricefor.md)

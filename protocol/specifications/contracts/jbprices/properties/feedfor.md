@@ -13,8 +13,8 @@ Interface: [`IJBPrices`](../../../interfaces/ijbprices.md)
   @notice 
   The available price feeds.
 
-  _currency he currency of the feed.
-  _base he base of the feed. 
+  _currency The currency of the feed.
+  _base The base of the feed. 
 */
 mapping(uint256 => mapping(uint256 => AggregatorV3Interface)) public override feedFor;
 ```
