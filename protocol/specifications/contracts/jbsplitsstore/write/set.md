@@ -147,17 +147,17 @@ function set(
        revert INVALID_TOTAL_PERCENT();
      }
      ```
-11.  Push the split onto the stored `_splits` value.
+13.  Push the split onto the stored `_splits` value.
 
-    ```solidity
-    // Push the new split into the project's list of splits.
-    _splitsOf[_projectId][_domain][_group].push(_splits[_i]);
-    ```
+     ```solidity
+     // Push the new split into the project's list of splits.
+     _splitsOf[_projectId][_domain][_group].push(_splits[_i]);
+     ```
 
-    _Internal references:_
+     _Internal references:_
 
-    * [`_splitsOf`](../properties/\_splitsof.md)
-12.  For each added split, emit a `SetSplit` event with all relevant parameters.
+     * [`_splitsOf`](../properties/\_splitsof.md)
+14.  For each added split, emit a `SetSplit` event with all relevant parameters.
 
      ```solidity
      emit SetSplit(_projectId, _domain, _group, _splits[_i], msg.sender);
