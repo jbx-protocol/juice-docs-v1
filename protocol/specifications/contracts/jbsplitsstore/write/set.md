@@ -59,40 +59,40 @@ function set(
     for (uint256 _i = 0; _i < _currentSplits.length; _i++) { ... }
     ```
 
-  *  If the current split isn't locked, move on to the next one.
+3.  If the current split isn't locked, move on to the next one.
 
-     ```solidity
-     if (block.timestamp >= _currentSplits[_i].lockedUntil) continue;
-     ```
+    ```solidity
+    if (block.timestamp >= _currentSplits[_i].lockedUntil) continue;
+    ```
 
-  *  If the current split is locked, check to make sure the new `_splits` includes it. The only property of a locked split that can have changed is its `lockedUntil` property, which can be extended.
+4.  If the current split is locked, check to make sure the new `_splits` includes it. The only property of a locked split that can have changed is its `lockedUntil` property, which can be extended.
 
-     ```solidity
-     // Keep a reference to whether or not the locked split being iterated on is included.
-     bool _includesLocked = false;
+    ```solidity
+    // Keep a reference to whether or not the locked split being iterated on is included.
+    bool _includesLocked = false;
 
-     for (uint256 _j = 0; _j < _splits.length; _j++) {
-       // Check for sameness.
-       if (
-         _splits[_j].percent == _currentSplits[_i].percent &&
-         _splits[_j].beneficiary == _currentSplits[_i].beneficiary &&
-         _splits[_j].allocator == _currentSplits[_i].allocator &&
-         _splits[_j].projectId == _currentSplits[_i].projectId &&
-         // Allow lock extention.
-         _splits[_j].lockedUntil >= _currentSplits[_i].lockedUntil
-       ) _includesLocked = true;
-     }
-     ```
+    for (uint256 _j = 0; _j < _splits.length; _j++) {
+      // Check for sameness.
+      if (
+        _splits[_j].percent == _currentSplits[_i].percent &&
+        _splits[_j].beneficiary == _currentSplits[_i].beneficiary &&
+        _splits[_j].allocator == _currentSplits[_i].allocator &&
+        _splits[_j].projectId == _currentSplits[_i].projectId &&
+        // Allow lock extention.
+        _splits[_j].lockedUntil >= _currentSplits[_i].lockedUntil
+      ) _includesLocked = true;
+    }
+    ```
 
-  * Check to make sure the provided `_splits` includes any locked current splits.
+5.  Check to make sure the provided `_splits` includes any locked current splits.
 
-  ```solidity
-  if (!_includesLocked) {
-    revert PREVIOUS_LOCKED_SPLITS_NOT_INCLUDED();
-  }
-  ```
+    ```solidity
+    if (!_includesLocked) {
+      revert PREVIOUS_LOCKED_SPLITS_NOT_INCLUDED();
+    }
+    ```
 
-3.  After the loop, delete the current splits from storage so we can repopulate them.
+6.  After the loop, delete the current splits from storage so we can repopulate them.
 
     ```solidity
     // Delete from storage so splits can be repopulated.
@@ -102,18 +102,18 @@ function set(
    _Internal references:_
 
    * [`_splitsOf`](../properties/\_splitsof.md)
-4.  Store a local variable to keep track of all the percents from the splits.
+7.  Store a local variable to keep track of all the percents from the splits.
 
     ```solidity
     // Add up all the percents to make sure they cumulative are under 100%.
     uint256 _percentTotal = 0;
     ```
-5.  Loop through each newly provided `_splits` to validate
+8.  Loop through each newly provided `_splits` to validate
 
     ```solidity
     for (uint256 _i = 0; _i < _splits.length; _i++) { ... }
     ```
-6.  Check that the percent for the current split is not zero.
+9.  Check that the percent for the current split is not zero.
 
     ```solidity
     // The percent should be greater than 0.
@@ -121,33 +121,33 @@ function set(
       revert INVALID_SPLIT_PERCENT();
     }
     ```
-7.  Check that the split specifies a recipient. Either an `allocator` must be specified or a `beneficiary` must be specified.
+10.  Check that the split specifies a recipient. Either an `allocator` must be specified or a `beneficiary` must be specified.
 
-    ```solidity
-    // The allocator and the beneficiary shouldn't both be the zero address.
-    if (
-      _splits[_i].allocator == IJBSplitAllocator(address(0)) &&
-      _splits[_i].beneficiary == address(0)
-    ) {
-      revert ALLOCATOR_AND_BENEFICIARY_ZERO_ADDRESS();
-    }
-    ```
+     ```solidity
+     // The allocator and the beneficiary shouldn't both be the zero address.
+     if (
+       _splits[_i].allocator == IJBSplitAllocator(address(0)) &&
+       _splits[_i].beneficiary == address(0)
+     ) {
+       revert ALLOCATOR_AND_BENEFICIARY_ZERO_ADDRESS();
+     }
+     ```
 
-8.  Increment the total percents that have been accumulated so far.
+11.  Increment the total percents that have been accumulated so far.
 
-    ```solidity
-    // Add to the total percents.
-    _percentTotal = _percentTotal + _splits[_i].percent;
-    ```
-9.  Make sure the accumulated percents are under 100%. Split percents are out of 10000000.
+     ```solidity
+     // Add to the total percents.
+     _percentTotal = _percentTotal + _splits[_i].percent;
+     ```
+12.  Make sure the accumulated percents are under 100%. Split percents are out of 10000000.
 
-    ```solidity
-    // Validate the total does not exceed the expected value.
-    if (_percentTotal > JBConstants.SPLITS_TOTAL_PERCENT) {
-      revert INVALID_TOTAL_PERCENT();
-    }
-    ```
-10.  Push the split onto the stored `_splits` value.
+     ```solidity
+     // Validate the total does not exceed the expected value.
+     if (_percentTotal > JBConstants.SPLITS_TOTAL_PERCENT) {
+       revert INVALID_TOTAL_PERCENT();
+     }
+     ```
+11.  Push the split onto the stored `_splits` value.
 
     ```solidity
     // Push the new split into the project's list of splits.
@@ -157,7 +157,7 @@ function set(
     _Internal references:_
 
     * [`_splitsOf`](../properties/\_splitsof.md)
-11.  For each added split, emit a `SetSplit` event with all relevant parameters.
+12.  For each added split, emit a `SetSplit` event with all relevant parameters.
 
      ```solidity
      emit SetSplit(_projectId, _domain, _group, _splits[_i], msg.sender);
