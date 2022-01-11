@@ -59,6 +59,11 @@ function set(
     for (uint256 _i = 0; _i < _currentSplits.length; _i++) { ... }
     ```
 
+    * If the current split isn't locked, move on to the next one.
+
+      ```solidity
+      if (block.timestamp >= _currentSplits[_i].lockedUntil) continue;
+      ```
 3.  If the current split isn't locked, move on to the next one.
 
     ```solidity
