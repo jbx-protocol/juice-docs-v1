@@ -128,7 +128,6 @@ function configureFor(
     @dev _data.discountRate A number from 0-1000000000 indicating how valuable a contribution to this funding cycle is compared to previous funding cycles.
       If it's 0, each funding cycle will have equal weight.
       If the number is 900000000, a contribution to the next funding cycle will only give you 10% of tickets given to a contribution of the same amoutn during the current funding cycle.
-      If the number is 1000000001, an non-recurring funding cycle will get made.
     @dev _data.ballot The new ballot that will be used to approve subsequent reconfigurations.
   @param _metadata Data to associate with this funding cycle configuration.
 

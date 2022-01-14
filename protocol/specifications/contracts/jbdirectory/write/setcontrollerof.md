@@ -10,9 +10,8 @@ Interface: [`IJBDirectory`](../../../interfaces/ijbdirectory.md)
 
 _A controller can be set if:_
 
-* the message sender is the project owner or an operator is changing the controller.
-* or, the controller hasn't been set yet and the message sender is the controller being set.
-* or, the current controller is setting a new controller.
+* the message sender is the project owner or an operator having the correct authorization.
+* or, an allowedlisted address is setting an allowlisted controller.
 
 # Definition
 
@@ -32,45 +31,45 @@ function setControllerOf(uint256 _projectId, IJBController _controller)
 * Arguments:
   * `_projectId` is the ID of the project to set a new controller for.
   * `_controller` is the new controller to set.
-* Through the [`requirePermissionAllowingOverride`](../../or-abstract/jboperatable/modifiers/requirepermissionallowingoverride.md) modifier, the function is only accessible by the project's owner, from an operator that has been given the `JBOperations.SET_CONTROLLER` permission by the project owner for the provided `_projectId` , from any address if the project doesn't yet have a controller set, or from the project's current controller.
+* Through the [`requirePermissionAllowingOverride`](../../or-abstract/jboperatable/modifiers/requirepermissionallowingoverride.md) modifier, the function is only accessible by the project's owner, from an operator that has been given the `JBOperations.SET_CONTROLLER` permission by the project owner for the provided `_projectId`, or from an allow-listed controller if the new controller being set is also an allow-listed controller. 
 * The function overrides a function definition from the `IJBDirectory` interface.
 * The function returns nothing.
-
+(_setControllerAllowlist[address(_controller)] && _setControllerAllowlist[msg.sender]) 
 # Body
 
-1.  Get a reference to the current controller the project is using.
+1.  Make sure the provided controller isn't the zero address.
 
     ```solidity
-    // Get a reference to the current controller being used.
-    IJBController _currentController = controllerOf[_projectId];
+    // Can't set the zero address.
+    if (_controller == IJBController(address(0))) {
+      revert SET_CONTROLLER_ZERO_ADDRESS();
+    }
     ```
 
+2.  Make sure the provided controller isn't already set.
+
+    ```solidity
+    // Can't set the controller if it's already set.
+    if (controllerOf[_projectId] == _controller) {
+      revert SET_CONTROLLER_ALREADY_SET();
+    }
+    ```
     Internal references:
 
     * [`controllerOf`](../properties/controllerof.md)
-2.  If the provided controller is already set, there's nothing to do.
-
-    ```solidity
-    // If the controller is already set, nothing to do.
-    if (_currentController == _controller) return;
-    ```
 3.  Project IDs are assigned incrementally. If the provided `_projectId` is greater than the number of projects, it must not be a valid project ID.
 
     ```solidity
     // The project must exist.
-    require(projects.count() >= _projectId, '0x2b: NOT_FOUND');
+    if (projects.count() < _projectId) {
+      revert INVALID_PROJECT_ID();
+    }
     ```
 
     Internal references:
 
     * [`projects`](../properties/projects.md)
-4.  Make sure the provided controller isn't the zero address.
-
-    ```solidity
-    // Can't set the zero address.
-    require(_controller != IJBController(address(0)), '0x2c: ZERO_ADDRESS');
-    ```
-5.  Store the provided controller as the `controllerOf` the project.
+4.  Store the provided controller as the `controllerOf` the project.
 
     ```solidity
     // Set the new controller.
@@ -80,7 +79,7 @@ function setControllerOf(uint256 _projectId, IJBController _controller)
     Internal references:
 
     * [`controllerOf`](../properties/controllerof.md)
-6.  Emit a `SetController` event with the relevant parameters.
+5.  Emit a `SetController` event with the relevant parameters.
 
     ```solidity
     emit SetController(_projectId, _controller, msg.sender);
@@ -99,9 +98,8 @@ function setControllerOf(uint256 _projectId, IJBController _controller)
 
   @dev 
   A controller can be set if:
-    - the message sender is the project owner or an operator is changing the controller.
-    - or, the controller hasn't been set yet and the message sender is the controller being set.
-    - or, the current controller is setting a new controller.
+    - the message sender is the project owner or an operator having the correct authorization.
+    - or, an allowedlisted address is setting an allowlisted controller.
 
   @param _projectId The ID of the project to set a new controller for.
   @param _controller The new controller to set.
@@ -113,21 +111,22 @@ function setControllerOf(uint256 _projectId, IJBController _controller)
     projects.ownerOf(_projectId),
     _projectId,
     JBOperations.SET_CONTROLLER,
-    (address(controllerOf[_projectId]) == address(0) && msg.sender == address(_controller)) ||
-      address(controllerOf[_projectId]) == msg.sender
-  )
+    (_setControllerAllowlist[address(_controller)] && _setControllerAllowlist[msg.sender]) 
 {
-  // Get a reference to the current controller being used.
-  IJBController _currentController = controllerOf[_projectId];
-
-  // If the controller is already set, nothing to do.
-  if (_currentController == _controller) return;
-
-  // The project must exist.
-  require(projects.count() >= _projectId, '0x2b: NOT_FOUND');
-
   // Can't set the zero address.
-  require(_controller != IJBController(address(0)), '0x2c: ZERO_ADDRESS');
+  if (_controller == IJBController(address(0))) {
+    revert SET_CONTROLLER_ZERO_ADDRESS();
+  }
+
+  // Can't set the controller if it's already set.
+  if (controllerOf[_projectId] == _controller) {
+    revert SET_CONTROLLER_ALREADY_SET();
+  }
+
+	// The project must exist.
+  if (projects.count() < _projectId) {
+    revert INVALID_PROJECT_ID();
+  }
 
   // Set the new controller.
   controllerOf[_projectId] = _controller;
@@ -140,8 +139,9 @@ function setControllerOf(uint256 _projectId, IJBController _controller)
 {% tab title="Errors" %}
 | String                   | Description                                            |
 | ------------------------ | ------------------------------------------------------ |
-| **`0x2b: NOT_FOUND`**    | Thrown if the provided project doesn't yet exist.      |
-| **`0x2c: ZERO_ADDRESS`** | Thrown if the provided controller is the zero address. |
+| **`SET_CONTROLLER_ZERO_ADDRESS`** | Thrown if the provided controller is the zero address. |
+| **`SET_CONTROLLER_ALREADY_SET`** | Thrown if the provided controller is already the set controller. |
+| **`INVALID_PROJECT_ID`**    | Thrown if the provided project doesn't yet exist.      |
 {% endtab %}
 
 {% tab title="Events" %}

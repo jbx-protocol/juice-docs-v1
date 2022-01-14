@@ -3,6 +3,7 @@
 Emitted from:
 
 * [`addTerminalsOf`](../write/addterminalsof.md)
+* [`setPrimaryTerminalOf`](../write/setprimaryterminalof.md)
 
 Definition:
 

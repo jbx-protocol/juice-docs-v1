@@ -30,35 +30,61 @@ function setPrimaryTerminalOf(uint256 _projectId, IJBTerminal _terminal)
 
 # Body
 
-1. Get a reference to the token that the provided terminal's vault accepts.
+1.  Make sure the terminal being set isn't the zero address.
 
-```solidity
-// Get a reference to the token that the terminal's vault accepts.
-address _token = _terminal.token();
-```
+    ```solidity
+    // Can't set the zero address.
+    if (_terminal == IJBTerminal(address(0))) {
+      revert SET_PRIMARY_TERMINAL_ZERO_ADDRESS();
+    }
+    ```
+2.  Get a reference to the token that the provided terminal's vault accepts.
 
-````
-```solidity
-// Store the terminal as the primary for the particular token.
-_primaryTerminalOf[_projectId][_token] = _terminal;
-```
+    ```solidity
+    // Get a reference to the token that the terminal's vault accepts.
+    address _token = _terminal.token();
+    ```
 
-Internal references:
+3.  Make sure the terminal being set isn't already the primary terminal for the token.
+   
+    ```solidity
+    // Can't set this terminal as the primary if it already is.
+    if (_terminal == _primaryTerminalOf[_projectId][_token]) {
+      revert PRIMARY_TERMINAL_ALREADY_SET();
+    }
+    ```
 
-* [`_primaryTerminalOf`](../read/primaryTerminalOf.md)
-````
+4.  Add the terminal to the list of the project's terminals if it isn't included already.
+  
+    ```solidity
+    // Add the terminal to thge project if it hasn't been already.
+    _addTerminalIfNeeded(_projectId, _terminal);
+    ```
 
-3\. Emit a `SetPrimaryTerminal` event with the relevant parameters.
+    Internal references:
 
-````
-```solidity
-emit SetPrimaryTerminal(_projectId, _token, _terminal, msg.sender);
-```
+    * [`_addTerminalIfNeeded`](./_addTerminalIfNeeded.md)
 
-_Event references:_
+5.  Store the new terminal as the primary.    
 
-* [`SetPrimaryTerminal`](../events/setprimaryterminalmd/)
-````
+    ```solidity
+    // Store the terminal as the primary for the particular token.
+    _primaryTerminalOf[_projectId][_token] = _terminal;
+    ```
+
+    Internal references:
+
+    * [`_primaryTerminalOf`](../read/primaryTerminalOf.md)
+
+3.  Emit a `SetPrimaryTerminal` event with the relevant parameters.
+
+    ```solidity
+    emit SetPrimaryTerminal(_projectId, _token, _terminal, msg.sender);
+    ```
+
+    _Event references:_
+
+    * [`SetPrimaryTerminal`](../events/setprimaryterminalmd/)
 {% endtab %}
 
 {% tab title="Code" %}
@@ -79,8 +105,21 @@ function setPrimaryTerminalOf(uint256 _projectId, IJBTerminal _terminal)
   override
   requirePermission(projects.ownerOf(_projectId), _projectId, JBOperations.SET_PRIMARY_TERMINAL)
 {
+  // Can't set the zero address.
+  if (_terminal == IJBTerminal(address(0))) {
+    revert SET_PRIMARY_TERMINAL_ZERO_ADDRESS();
+  }
+
   // Get a reference to the token that the terminal's vault accepts.
   address _token = _terminal.token();
+
+  // Can't set this terminal as the primary if it already is.
+  if (_terminal == _primaryTerminalOf[_projectId][_token]) {
+    revert PRIMARY_TERMINAL_ALREADY_SET();
+  }
+
+  // Add the terminal to thge project if it hasn't been already.
+  _addTerminalIfNeeded(_projectId, _terminal);
 
   // Store the terminal as the primary for the particular token.
   _primaryTerminalOf[_projectId][_token] = _terminal;
@@ -93,7 +132,8 @@ function setPrimaryTerminalOf(uint256 _projectId, IJBTerminal _terminal)
 {% tab title="Errors" %}
 | String                   | Description                                                 |
 | ------------------------ | ----------------------------------------------------------- |
-| **`0x2d: ZERO_ADDRESS`** | Thrown if the provided terminal to add is the zero address. |
+| **`SET_PRIMARY_TERMINAL_ZERO_ADDRESS`** | Thrown if the provided terminal to add is the zero address. |
+| **`PRIMARY_TERMINAL_ALREADY_SET`** | Thrown if the provided terminal is already the primary for the token. |
 {% endtab %}
 
 {% tab title="Events" %}
