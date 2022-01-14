@@ -49,8 +49,8 @@ constructor(IJBOperatorStore _operatorStore, IJBProjects _projects) JBOperatable
 | [**`AddTerminal`**](events/addterminal.md)               | <ul><li><code>uint256 indexed projectId</code></li><li><a href="../../interfaces/ijbterminal.md"><code>IJBTerminal</code></a><code>indexed terminal</code></li><li><code>address caller</code></li></ul>                                            |
 | [**`RemoveTerminal`**](events/removeterminal.md)         | <ul><li><code>uint256 indexed projectId</code></li><li><a href="../../interfaces/ijbterminal.md"><code>IJBTerminal</code></a><code>indexed terminal</code></li><li><code>address caller</code></li></ul>                                            |
 | [**`SetController`**](events/setcontroller.md)           | <ul><li><code>int256 indexed projectId</code></li><li><a href="../../interfaces/ijbcontroller.md"><code>IJBController</code></a><code>indexed controller</code></li><li><code>address caller</code></li></ul>                                       |
-| [**`AddToSetControllerAllowlist`**](../events/addtosetcontrollerallowlist.md) | <ul><li><code>address indexed controller</code></li><li><code>address caller</code></li></ul> |
-| [**`RemoveFromSetControllerAllowlist`**](../events/addtosetcontrollerallowlist.md) | <ul><li><code>address indexed controller</code></li><li><code>address caller</code></li></ul> |
+| [**`AddToSetControllerAllowlist`**](events/addtosetcontrollerallowlist.md) | <ul><li><code>address indexed controller</code></li><li><code>address caller</code></li></ul> |
+| [**`RemoveFromSetControllerAllowlist`**](events/addtosetcontrollerallowlist.md) | <ul><li><code>address indexed controller</code></li><li><code>address caller</code></li></ul> |
 
 ## Properties
 
