@@ -44,14 +44,15 @@ function _isApproved(uint256 _projectId, JBFundingCycle memory _fundingCycle)
   Checks to see if the provided funding cycle is approved according to the correct ballot.
 
   @param _projectId The ID of the project to which the funding cycle belongs.
-  @param _fundingCycle The ID of the funding cycle to get an approval flag for.
+  @param _fundingCycle The funding cycle to get an approval flag for.
 
   @return The approval flag.
 */
 function _isApproved(uint256 _projectId, JBFundingCycle memory _fundingCycle)
   private
   view
-  returns (bool) {
+  returns (bool) 
+{
   return
     _ballotStateOf(_projectId, _fundingCycle.configuration, _fundingCycle.basedOn) ==
     JBBallotState.Approved;

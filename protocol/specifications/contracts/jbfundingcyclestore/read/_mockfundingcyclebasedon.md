@@ -26,41 +26,25 @@ function _mockFundingCycleBasedOn(JBFundingCycle memory _baseFundingCycle, bool 
 
 # Body
 
-1.  A funding cycle with a `discountRate` of 1000000001 is a non-recurring funding cycle. An empty funding cycle should be returned if the base is non-recurring since there can't be subsequent cycles.
-
-    ```solidity
-    // Can't mock a non recurring funding cycle.
-    if (_baseFundingCycle.discountRate == 1000000001) return _getStructFor(0, 0);
-    ```
-
-    _Internal references:_
-
-    * [`_getStructFor`](\_getstructfor.md)
-2.  Save a reference to the amount of seconds since right now that the returned funding cycle could have started at. There are a few possibilities.
+1.  Save a reference to time at or after which the mock must have started. There are a few possibilities.
 
     1. If the call to the function does not `_allowMidCycle`, the start date must be now or in the future. This is also the case if the base funding cycle doesn't have a duration because the next funding cycle can start immediately.
     2. If neither of these cases apply, moving back one full duration period of the `_baseFundingCycle` will find the most recent possible start time for the mock cycle to start.
 
     ```solidity
     // The distance of the current time to the start of the next possible funding cycle.
-    // If the returned mock cycle must not yet have started, the start time of the mock must be in the future so no need to adjust backwards.
+    // If the returned mock cycle must not yet have started, the start time of the mock must be in the future.
     // If the base funding cycle doesn't have a duration, no adjustment is necessary because the next cycle can start immediately.
-    uint256 _timeFromImmediateStartMultiple = !_allowMidCycle || _baseFundingCycle.duration == 0
-      ? 0
-      : _baseFundingCycle.duration;
+    uint256 _mustStartAtOrAfter = !_allowMidCycle || _baseFundingCycle.duration == 0
+      ? block.timestamp + 1
+      : block.timestamp - _baseFundingCycle.duration + 1;
     ```
 
-    _Internal references:_
-
-    * [`_SECONDS_IN_DAY`](../properties/\_seconds\_in\_day.md)
 3.  Find the correct start time for the mock funding cycle.
 
     ```solidity
     // Derive what the start time should be.
-    uint256 _start = _deriveStartFrom(
-      _baseFundingCycle,
-      block.timestamp - _timeFromImmediateStartMultiple
-    );
+    uint256 _start = _deriveStartFrom(_baseFundingCycle, _mustStartAtOrAfter);
     ```
 
     _Internal references:_
@@ -117,21 +101,15 @@ function _mockFundingCycleBasedOn(JBFundingCycle memory _baseFundingCycle, bool 
   view
   returns (JBFundingCycle memory)
 {
-  // Can't mock a non recurring funding cycle.
-  if (_baseFundingCycle.discountRate == 1000000001) return _getStructFor(0, 0);
-    
   // The distance of the current time to the start of the next possible funding cycle.
-  // If the returned mock cycle must not yet have started, the start time of the mock must be in the future so no need to adjust backwards.
+  // If the returned mock cycle must not yet have started, the start time of the mock must be in the future.
   // If the base funding cycle doesn't have a duration, no adjustment is necessary because the next cycle can start immediately.
-  uint256 _timeFromImmediateStartMultiple = !_allowMidCycle || _baseFundingCycle.duration == 0
-    ? 0
-    : _baseFundingCycle.duration;
-    
+  uint256 _mustStartAtOrAfter = !_allowMidCycle || _baseFundingCycle.duration == 0
+    ? block.timestamp + 1
+    : block.timestamp - _baseFundingCycle.duration + 1;
+
   // Derive what the start time should be.
-  uint256 _start = _deriveStartFrom(
-    _baseFundingCycle,
-    block.timestamp - _timeFromImmediateStartMultiple
-  );
+  uint256 _start = _deriveStartFrom(_baseFundingCycle, _mustStartAtOrAfter);
 
   // Derive what the number should be.
   uint256 _number = _deriveNumberFrom(_baseFundingCycle, _start);

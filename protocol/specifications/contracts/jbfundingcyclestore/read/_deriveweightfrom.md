@@ -9,9 +9,9 @@ Contract:[`JBFundingCycleStore`](../)​
 # Definition
 
 ```solidity
-function _deriveWeightFrom(JBFundingCycle memory _baseFundingCycle, uint256 _start) 
-  private 
-  pure 
+function _deriveWeightFrom(JBFundingCycle memory _baseFundingCycle, uint256 _start)
+  private
+  pure
   returns (uint256 weight) { ... }
 ```
 
@@ -32,8 +32,8 @@ function _deriveWeightFrom(JBFundingCycle memory _baseFundingCycle, uint256 _sta
       return
         PRBMath.mulDiv(
           _baseFundingCycle.weight,
-          1000000000 - _baseFundingCycle.discountRate,
-          1000000000
+          JBConstants.MAX_DISCOUNT_RATE - _baseFundingCycle.discountRate,
+          JBConstants.MAX_DISCOUNT_RATE
         );
     ```
 
@@ -59,16 +59,23 @@ function _deriveWeightFrom(JBFundingCycle memory _baseFundingCycle, uint256 _sta
     // The difference between the start of the base funding cycle and the proposed start.
     uint256 _startDistance = _start - _baseFundingCycle.start;
     ```
-5.  Apply the `_baseFundingCycle`'s discount rate. Apply the rate as many times as there have been cycles within the `_startDistance`.
+5.  Apply the `_baseFundingCycle`'s discount rate. Apply the rate as many times as there have been cycles within the `_startDistance`. No need to keep iterating if the weight has reached 0.
 
     ```solidity
     // Apply the base funding cycle's discount rate, if necessary.
     uint256 _discountMultiple = _startDistance / _baseFundingCycle.duration;
 
-    for (uint256 i = 0; i < _discountMultiple; i++)
+    for (uint256 i = 0; i < _discountMultiple; i++) {
       // The number of times to apply the discount rate.
       // Base the new weight on the specified funding cycle's weight.
-      weight = PRBMath.mulDiv(weight, 1000000000 - _baseFundingCycle.discountRate, 1000000000);
+      weight = PRBMath.mulDiv(
+        weight,
+        JBConstants.MAX_DISCOUNT_RATE - _baseFundingCycle.discountRate,
+        JBConstants.MAX_DISCOUNT_RATE
+      );
+      // The calculation doesn't need to continue if the weight is 0.
+      if (weight == 0) break;
+    }
     ```
 
     _Libraries used:_
@@ -92,17 +99,18 @@ function _deriveWeightFrom(JBFundingCycle memory _baseFundingCycle, uint256 _sta
 
   @return weight The next weight.
 */
-function _deriveWeightFrom(
-  JBFundingCycle memory _baseFundingCycle,
-  uint256 _start
-) private pure returns (uint256 weight) {
+function _deriveWeightFrom(JBFundingCycle memory _baseFundingCycle, uint256 _start)
+  private
+  pure
+  returns (uint256 weight) 
+{
   // A subsequent cycle to one with a duration of 0 should have the next possible weight.
   if (_baseFundingCycle.duration == 0)
     return
       PRBMath.mulDiv(
         _baseFundingCycle.weight,
-        1000000000 - _baseFundingCycle.discountRate,
-        1000000000
+        JBConstants.MAX_DISCOUNT_RATE - _baseFundingCycle.discountRate,
+        JBConstants.MAX_DISCOUNT_RATE
       );
 
   // The weight should be based off the base funding cycle's weight.
@@ -117,10 +125,17 @@ function _deriveWeightFrom(
   // Apply the base funding cycle's discount rate for each cycle that has passed.
   uint256 _discountMultiple = _startDistance / _baseFundingCycle.duration;
 
-  for (uint256 i = 0; i < _discountMultiple; i++)
+  for (uint256 i = 0; i < _discountMultiple; i++) {
     // The number of times to apply the discount rate.
     // Base the new weight on the specified funding cycle's weight.
-    weight = PRBMath.mulDiv(weight, 1000000000 - _baseFundingCycle.discountRate, 1000000000);
+    weight = PRBMath.mulDiv(
+      weight,
+      JBConstants.MAX_DISCOUNT_RATE - _baseFundingCycle.discountRate,
+      JBConstants.MAX_DISCOUNT_RATE
+    );
+    // The calculation doesn't need to continue if the weight is 0.
+    if (weight == 0) break;
+  }
 }
 ```
 {% endtab %}

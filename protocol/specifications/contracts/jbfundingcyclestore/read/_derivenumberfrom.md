@@ -39,7 +39,7 @@ function _deriveNumberFrom(JBFundingCycle memory _baseFundingCycle, uint256 _sta
 3.  Return the number of base cycles that fit in the base distance.
 
     ```solidity
-    // Find the number of base cycles that fit in the base distance.
+    // Find the number of base cycles that fit in the start distance.
     return _baseFundingCycle.number + (_startDistance / _baseFundingCycle.duration);
     ```
 
@@ -55,10 +55,9 @@ function _deriveNumberFrom(JBFundingCycle memory _baseFundingCycle, uint256 _sta
   The number of the next funding cycle given the specified funding cycle.
 
   @param _baseFundingCycle The funding cycle to make the calculation with.
-  @param _latestPermanentFundingCycle The latest funding cycle in the same project as `_baseFundingCycle` to not have a limit.
   @param _start The start time to derive a number for.
 
-  @returnThe next number.
+  @return The next number.
 */
 function _deriveNumberFrom(JBFundingCycle memory _baseFundingCycle, uint256 _start) 
   private 
@@ -71,7 +70,7 @@ function _deriveNumberFrom(JBFundingCycle memory _baseFundingCycle, uint256 _sta
   // The difference between the start of the base funding cycle and the proposed start.
   uint256 _startDistance = _start - _baseFundingCycle.start;
 
-  // Find the number of base cycles that fit in the base distance.
+  // Find the number of base cycles that fit in the start distance.
   return _baseFundingCycle.number + (_startDistance / _baseFundingCycle.duration);
 }
 ```

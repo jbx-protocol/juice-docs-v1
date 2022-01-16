@@ -39,44 +39,46 @@ function queuedOf(uint256 _projectId) public view override returns (JBFundingCyc
 
     ```solidity
     // Get a reference to the configuration of the standby funding cycle.
-    uint256 _fundingCycleConfiguration = _standbyOf(_projectId);
+    uint256 _standbyFundingCycleConfiguration = _standbyOf(_projectId);
     ```
 
     _Internal references:_
 
     * [`_standbyOf`](\_getstructfor.md)
-3.  If there is, it must be the queued funding cycle for the project. Return the funding cycle structure based on this configuration.
+3.  If there is and it is approved, it must be the queued funding cycle for the project. Otherwise get a reference to the funding cycle structure based on the yet-to-be-approved standby configuration.
 
     ```solidity
-    // If it exists, return it's funding cycle.
-    if (_fundingCycleConfiguration > 0)
-      return _getStructFor(_projectId, _fundingCycleConfiguration);
+    // If it exists, return it's funding cycle if it is approved.
+    if (_standbyFundingCycleConfiguration > 0) {
+      _fundingCycle = _getStructFor(_projectId, _standbyFundingCycleConfiguration);
+      if (_isApproved(_projectId, _fundingCycle)) return _fundingCycle;
+      // Resolve the funding cycle for the for the latest configured funding cycle.
+      _fundingCycle = _getStructFor(_projectId, _fundingCycle.basedOn);
+    }
+    ```
+
+    _Internal references:_
+
+    * [`_isApproved`](\_isapproved.md)
+    * [`_getStructFor`](\_getstructfor.md)
+4.  If there is no standby funding cycle, get the last stored funding cycle for the project. If it has already started, a queued funding cycle can be constructed based on the properties of this funding cycle.
+
+    ```solidity
+    else {
+      // Resolve the funding cycle for the for the latest configured funding cycle.
+      _fundingCycle = _getStructFor(_projectId, latestConfigurationOf[_projectId]);
+      // If the latest funding cycle starts in the future, it must start in the distant future
+      // since its not in standby. In this case base the queued cycles on the base cycle.
+      if (_fundingCycle.start > block.timestamp)
+        _fundingCycle = _getStructFor(_projectId, _fundingCycle.basedOn);
+    }
     ```
 
     _Internal references:_
 
     * [`_getStructFor`](\_getstructfor.md)
-4.  Get the last stored funding cycle for the project. A queued funding cycle can be constructed based on the properties of this funding cycle.
-
-    ```solidity
-    // Get a reference to the latest stored funding cycle configuration for the project.
-    _fundingCycleConfiguration = latestConfigurationOf[_projectId];
-    ```
-
-    _Internal references:_
-
     * [`latestConfigurationOf`](../properties/latestconfigurationof.md)
-5.  Get the funding cycle struct for the latest funding cycle.
-
-    ```solidity
-    // Resolve the funding cycle for the for the latest configured funding cycle.
-    JBFundingCycle memory _fundingCycle = _getStructFor(_projectId, _fundingCycleConfiguration);
-    ```
-
-    _Internal references:_
-
-    * [`_getStructFor`](\_getstructfor.md)
-6.  If it has a duration of 0, there can't be a queued funding cycle since configurations are being made manually instead of on a schedule.
+5.  If the referenced funding cycle has a duration of 0, there can't be a queued funding cycle since configurations are being made manually instead of on a schedule.
 
     ```solidity
     // There's no queued if the current has a duration of 0.
@@ -86,17 +88,7 @@ function queuedOf(uint256 _projectId) public view override returns (JBFundingCyc
     _Internal references:_
 
     * [`_getStructFor`](\_getstructfor.md)
-7.  If it has a discount rate of of 1000000001, there can't be a queued funding cycle since there was only a one-time configuration.
-
-    ```solidity
-     // There's no queued if the current is non recurring, represented by a discount rate of 1000000001.
-    if (_fundingCycle.discountRate == 1000000001) return _getStructFor(0, 0);
-    ```
-
-    _Internal references:_
-
-    * [`_getStructFor`](\_getstructfor.md)
-8.  Otherwise if it has been approved, return a queued cycle based on it. The mock funding cycle is not allowed to have started already, which is why a `false` flag is passed in.
+6.  If the referenced funding cycle has been approved, return a queued cycle based on it. The mock funding cycle is not allowed to have started already, which is why a `false` flag is passed in.
 
     ```solidity
     // Check to see if this funding cycle's ballot is approved.
@@ -109,39 +101,22 @@ function queuedOf(uint256 _projectId) public view override returns (JBFundingCyc
 
     * [`_isApproved`](\_getstructfor.md)
     * [`_mockFundingCycleBasedOn`](\_mockfundingcyclebasedon.md)
-9.  Get a reference to the funding cycle that the current eligible cycle is based on which must be the latest approved cycle configuration.
+7.  Get a reference to the funding cycle that the current eligible cycle is based on which must be the latest approved cycle configuration.
 
     ```solidity
-    // If it hasn't been approved, set the configuration to be that of its base funding cycle, which carries the last approved configuration.
-    _fundingCycleConfiguration = _fundingCycle.basedOn;
+    // Get the funding cycle of its base funding cycle, which carries the last approved configuration.
+    _fundingCycle = _getStructFor(_projectId, _fundingCycle.basedOn);
     ```
-10. If there's not a reference to a possible funding cycle to base a queued cycle on, there must not be a queued cycle.
+8. Return a funding cycle based on the one current referenced, which must be the last approved cycle. The mock funding cycle is not allowed to have started already, which is why a `false` flag is passed in.
 
     ```solidity
-    // A funding cycle must exist.
-    if (_fundingCycleConfiguration == 0) return _getStructFor(0, 0);
+    // Return a mock of the next up funding cycle.
+    return _mockFundingCycleBasedOn(_fundingCycle, false);
     ```
 
     _Internal references:_
 
-    * [`_getStructFor`](\_getstructfor.md)
-11. Return a funding cycle based on the one current referenced, which must be the last approved cycle. The mock funding cycle is not allowed to have started already, which is why a `false` flag is passed in.
-
-````
-```solidity
-````
-
-````
-// Return a mock of the next up funding cycle.
-// Use second next because the next would be a mock of the current funding cycle, not the queued one.
-return _mockFundingCycleBasedOn(_getStructFor(_projectId, _fundingCycleConfiguration), false);
-```
-
-_Internal references:_
-
-* [`_getStructFor`](\_getstructfor.md)
-* [`_mockFundingCycleBasedOn`](\_mockfundingcyclebasedon.md)
-````
+    * [`_mockFundingCycleBasedOn`](\_mockfundingcyclebasedon.md)
 {% endtab %}
 
 {% tab title="Code" %}
@@ -157,43 +132,46 @@ _Internal references:_
 
   @return _fundingCycle The queued funding cycle.
 */
-function queuedOf(uint256 _projectId) public view override returns (JBFundingCycle memory) {
+function queuedOf(uint256 _projectId)
+  external
+  view
+  override
+  returns (JBFundingCycle memory _fundingCycle)
+{
   // The project must have funding cycles.
   if (latestConfigurationOf[_projectId] == 0) return _getStructFor(0, 0);
 
   // Get a reference to the configuration of the standby funding cycle.
-  uint256 _fundingCycleConfiguration = _standbyOf(_projectId);
+  uint256 _standbyFundingCycleConfiguration = _standbyOf(_projectId);
 
-  // If it exists, return it's funding cycle.
-  if (_fundingCycleConfiguration > 0)
-    return _getStructFor(_projectId, _fundingCycleConfiguration);
-
-  // Get a reference to the latest stored funding cycle configuration for the project.
-  _fundingCycleConfiguration = latestConfigurationOf[_projectId];
-
-  // Resolve the funding cycle for the for the latest configured funding cycle.
-  JBFundingCycle memory _fundingCycle = _getStructFor(_projectId, _fundingCycleConfiguration);
+  // If it exists, return it's funding cycle if it is approved
+  if (_standbyFundingCycleConfiguration > 0) {
+    _fundingCycle = _getStructFor(_projectId, _standbyFundingCycleConfiguration);
+    if (_isApproved(_projectId, _fundingCycle)) return _fundingCycle;
+    // Resolve the funding cycle for the for the latest configured funding cycle.
+    _fundingCycle = _getStructFor(_projectId, _fundingCycle.basedOn);
+  } else {
+    // Resolve the funding cycle for the for the latest configured funding cycle.
+    _fundingCycle = _getStructFor(_projectId, latestConfigurationOf[_projectId]);
+    // If the latest funding cycle starts in the future, it must start in the distant future
+    // since its not in standby. In this case base the queued cycles on the base cycle.
+    if (_fundingCycle.start > block.timestamp)
+      _fundingCycle = _getStructFor(_projectId, _fundingCycle.basedOn);
+  }
 
   // There's no queued if the current has a duration of 0.
   if (_fundingCycle.duration == 0) return _getStructFor(0, 0);
-
-  // There's no queued if the current is non recurring, represented by a discount rate of 1000000001.
-  if (_fundingCycle.discountRate == 1000000001) return _getStructFor(0, 0);
 
   // Check to see if this funding cycle's ballot is approved.
   // If so, return a funding cycle based on it.
   if (_isApproved(_projectId, _fundingCycle))
     return _mockFundingCycleBasedOn(_fundingCycle, false);
 
-  // If it hasn't been approved, set the configuration to be that of its base funding cycle, which carries the last approved configuration.
-  _fundingCycleConfiguration = _fundingCycle.basedOn;
-
-  // A funding cycle must exist.
-  if (_fundingCycleConfiguration == 0) return _getStructFor(0, 0);
+  // Get the funding cycle of its base funding cycle, which carries the last approved configuration.
+  _fundingCycle = _getStructFor(_projectId, _fundingCycle.basedOn);
 
   // Return a mock of the next up funding cycle.
-  // Use second next because the next would be a mock of the current funding cycle, not the queued one.
-  return _mockFundingCycleBasedOn(_getStructFor(_projectId, _fundingCycleConfiguration), false);
+  return _mockFundingCycleBasedOn(_fundingCycle, false);
 }
 ```
 {% endtab %}

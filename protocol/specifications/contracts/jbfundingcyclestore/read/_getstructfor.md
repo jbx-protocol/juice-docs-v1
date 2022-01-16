@@ -41,9 +41,9 @@ function _getStructFor(uint256 _projectId, uint256 _configuration)
     uint256 _packedIntrinsicProperties = _packedIntrinsicPropertiesOf[_projectId][_configuration];
 
     fundingCycle.weight = uint256(uint88(_packedIntrinsicProperties));
-    fundingCycle.basedOn = uint256(uint56(_packedIntrinsicProperties >> 136));
-    fundingCycle.start = uint256(uint56(_packedIntrinsicProperties >> 128));
-    fundingCycle.number = uint256(uint56(_packedIntrinsicProperties >> 176));
+    fundingCycle.basedOn = uint256(uint56(_packedIntrinsicProperties >> 88));
+    fundingCycle.start = uint256(uint56(_packedIntrinsicProperties >> 144));
+    fundingCycle.number = uint256(uint56(_packedIntrinsicProperties >> 200));
     ```
 
     _Internal references:_
@@ -55,7 +55,7 @@ function _getStructFor(uint256 _projectId, uint256 _configuration)
     uint256 _packedUserProperties = _packedUserPropertiesOf[_projectId][_configuration];
 
     fundingCycle.ballot = IJBFundingCycleBallot(address(uint160(_packedUserProperties)));
-    fundingCycle.duration = uint256(uint64(_packedUserProperties >> 208));
+    fundingCycle.duration = uint256(uint64(_packedUserProperties >> 160));
     fundingCycle.discountRate = uint256(uint32(_packedUserProperties >> 224));
     ```
 
@@ -89,7 +89,7 @@ function _getStructFor(uint256 _projectId, uint256 _configuration)
   view
   returns (JBFundingCycle memory fundingCycle)
 {
-  // Return an empty funding cycle if the ID specified is 0.
+  // Return an empty funding cycle if the configuration specified is 0.
   if (_configuration == 0) return fundingCycle;
 
   fundingCycle.configuration = _configuration;
@@ -97,14 +97,14 @@ function _getStructFor(uint256 _projectId, uint256 _configuration)
   uint256 _packedIntrinsicProperties = _packedIntrinsicPropertiesOf[_projectId][_configuration];
 
   fundingCycle.weight = uint256(uint88(_packedIntrinsicProperties));
-  fundingCycle.basedOn = uint256(uint56(_packedIntrinsicProperties >> 136));
-  fundingCycle.start = uint256(uint56(_packedIntrinsicProperties >> 128));
-  fundingCycle.number = uint256(uint56(_packedIntrinsicProperties >> 176));
+  fundingCycle.basedOn = uint256(uint56(_packedIntrinsicProperties >> 88));
+  fundingCycle.start = uint256(uint56(_packedIntrinsicProperties >> 144));
+  fundingCycle.number = uint256(uint56(_packedIntrinsicProperties >> 200));
 
   uint256 _packedUserProperties = _packedUserPropertiesOf[_projectId][_configuration];
 
   fundingCycle.ballot = IJBFundingCycleBallot(address(uint160(_packedUserProperties)));
-  fundingCycle.duration = uint256(uint64(_packedUserProperties >> 208));
+  fundingCycle.duration = uint256(uint64(_packedUserProperties >> 160));
   fundingCycle.discountRate = uint256(uint32(_packedUserProperties >> 224));
 
   fundingCycle.metadata = _metadataOf[_projectId][_configuration];

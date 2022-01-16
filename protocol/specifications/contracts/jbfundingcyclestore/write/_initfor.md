@@ -13,7 +13,7 @@ function _initFor(
   uint256 _projectId,
   JBFundingCycle memory _baseFundingCycle,
   uint256 _configuration,
-  uint256 _mustStartOnOrAfter,
+  uint256 _mustStartAtOrAfter,
   uint256 _weight
 ) private { ... }
 ```
@@ -22,14 +22,14 @@ function _initFor(
   * `_projectId` is the ID of the project to which the funding cycle being initialized belongs.
   * `_baseFundingCycle` is the funding cycle to base the initialized one on.
   * `_configuration` is the configuration of the funding cycle being initialized.
-  * `_mustStartOnOrAfter` is the time before which the initialized funding cycle can't start.
+  * `_mustStartAtOrAfter` is the time before which the initialized funding cycle can't start.
   * `_weight` is the weight to give the newly initialized funding cycle.
 * The function is private to this contract.
 * The function doesn't return anything.
 
 # Body
 
-1.  If no base funding cycle was provided, create a first funding cycle for the project. Otherwise, create a new funding cycle by calling`_updateFundingCycleBasedOn`, which will derive properties for the funding cycle that follows the specified base cycle, and store them to an ID.
+1.  If no base funding cycle was provided, create a first funding cycle for the project by storing its intrinsic properties. Otherwise, create a new funding cycle by deriving values from the specified base cycle, interpreting a weight of 0 to inherit from the discounted weight of the base funding cycle and a weight of 1 as a weight of 0.
 
     ```solidity
     // If there is no base, initialize a first cycle.
@@ -47,16 +47,29 @@ function _initFor(
         _number,
         _weight,
         _baseFundingCycle.configuration,
-        block.timestamp
+        _mustStartAtOrAfter
       );
     } else {
-      // Update the intrinsic properties of the funding cycle being initialized.
-      _updateAndStoreIntrinsicPropertiesOf(
+      // Derive the correct next start time from the base.
+      uint256 _start = _deriveStartFrom(_baseFundingCycle, _mustStartAtOrAfter);
+
+      // A weight of 1 is treated as a weight of 0.
+      // This is to allow a weight of 0 (default) to represent inheriting the discounted weight of the previous funding cycle.
+      _weight = _weight > 0
+        ? (_weight == 1 ? 0 : _weight)
+        : _deriveWeightFrom(_baseFundingCycle, _start);
+
+      // Derive the correct number.
+      uint256 _number = _deriveNumberFrom(_baseFundingCycle, _start);
+
+      // Update the intrinsic properties.
+      _packAndStoreIntrinsicPropertiesOf(
         _configuration,
         _projectId,
-        _baseFundingCycle,
-        _mustStartOnOrAfter,
-        _weight
+        _number,
+        _weight,
+        _baseFundingCycle.configuration,
+        _start
       );
     }
     ```
@@ -64,7 +77,9 @@ function _initFor(
     _Internal references:_
 
     * [`_packAndStoreIntrinsicPropertiesOf`](\_packandstoreintrinsicpropertiesof.md)
-    * [`_updateAndStoreIntrinsicPropertiesOf`](\_updateandstoreintrinsicpropertiesOf.md)
+    * [`_deriveStartFrom`](../read/\_derivestartfrom.md)
+    * [`_deriveWeightFrom`](../read/\_deriveweightfrom.md)
+    * [`_deriveNumberFrom`](../read/\_derivenumberfrom.md)
 2.  Store the initialized ID as the `latestIdOf` the project.
 
     ```solidity
@@ -95,14 +110,14 @@ function _initFor(
   @param _projectId The ID of the project to which the funding cycle being initialized belongs.
   @param _baseFundingCycle The funding cycle to base the initialized one on.
   @param _configuration The configuration of the funding cycle being initialized.
-  @param _mustStartOnOrAfter The time before which the initialized funding cycle can't start.
+  @param _mustStartAtOrAfter The time before which the initialized funding cycle can't start.
   @param _weight The weight to give the newly initialized funding cycle.
 */
 function _initFor(
   uint256 _projectId,
   JBFundingCycle memory _baseFundingCycle,
   uint256 _configuration,
-  uint256 _mustStartOnOrAfter,
+  uint256 _mustStartAtOrAfter,
   uint256 _weight
 ) private {
   // If there is no base, initialize a first cycle.
@@ -117,16 +132,29 @@ function _initFor(
       _number,
       _weight,
       _baseFundingCycle.configuration,
-      block.timestamp
+      _mustStartAtOrAfter
     );
   } else {
-    // Update the intrinsic properties of the funding cycle being initialized.
-    _updateAndStoreIntrinsicPropertiesOf(
+    // Derive the correct next start time from the base.
+    uint256 _start = _deriveStartFrom(_baseFundingCycle, _mustStartAtOrAfter);
+
+    // A weight of 1 is treated as a weight of 0.
+    // This is to allow a weight of 0 (default) to represent inheriting the discounted weight of the previous funding cycle.
+    _weight = _weight > 0
+      ? (_weight == 1 ? 0 : _weight)
+      : _deriveWeightFrom(_baseFundingCycle, _start);
+
+    // Derive the correct number.
+    uint256 _number = _deriveNumberFrom(_baseFundingCycle, _start);
+
+    // Update the intrinsic properties.
+    _packAndStoreIntrinsicPropertiesOf(
       _configuration,
       _projectId,
-      _baseFundingCycle,
-      _mustStartOnOrAfter,
-      _weight
+      _number,
+      _weight,
+      _baseFundingCycle.configuration,
+      _start
     );
   }
 

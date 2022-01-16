@@ -4,9 +4,11 @@ Contract:[`JBFundingCycleStore`](../)​
 
 {% tabs %}
 {% tab title="Step by step" %}
-**The project's stored funding cycle that hasn't yet started, if one exists.**
+**The project's stored funding cycle that hasn't yet started and should be used next, if one exists.**
 
 _A value of 0 is returned if no funding cycle was found._
+
+_Assumes the project has a latest configuration._
 
 # Definition
 
@@ -32,13 +34,7 @@ function _standbyOf(uint256 _projectId) private view returns (uint256 configurat
     _Internal references:_
 
     * [`latestConfigurationOf`](../properties/latestconfigurationof.md)
-2.  If there isn't a funding cycle for the project, there isn't a standby cycle either.
-
-    ```solidity
-    // If there isn't one, there also isn't a standby funding cycle.
-    if (configuration == 0) return 0;
-    ```
-3.  Get the struct for the latest funding cycle.
+2.  Get the struct for the latest funding cycle.
 
     ```solidity
     // Get the necessary properties for the latest funding cycle.
@@ -48,22 +44,54 @@ function _standbyOf(uint256 _projectId) private view returns (uint256 configurat
     _Internal references:_
 
     * [`_getStructFor`](\_getstructfor.md)
-4.  If the cycle has started, return 0 since there is not a stored funding cycle in standby.
+3.  If the cycle has started, return 0 since there is not a stored funding cycle in standby.
 
     ```solidity
     // There is no upcoming funding cycle if the latest funding cycle has already started.
     if (block.timestamp >= _fundingCycle.start) return 0;
     ```
+
+4.  If this is the first funding cycle, it must be queued since it doesn't require a ballot's approval. 
+
+    ```solidity
+    // If this is the first funding cycle, it is queued.
+    if (_fundingCycle.number == 1) return configuration;
+    ```
+
+5.  Get a reference to the cycle that the latest is based on.
+    
+    ```solidity
+    // Get the necessary properties for the base funding cycle.
+    JBFundingCycle memory _baseFundingCycle = _getStructFor(_projectId, _fundingCycle.basedOn);
+    ```
+
+    _Internal references:_
+
+    * [`_getStructFor`](\_getstructfor.md)
+
+6.  It's possible that the latest cycle was configured to start at or after a date in the future that comes after another iteration of the currently active funding cycle. If this is the case, there is no immediately queued funding cycle.
+    
+    ```solidity
+    // If the latest configuration doesn't start until after another base cycle, return 0.
+    if (
+      _baseFundingCycle.duration > 0 &&
+      block.timestamp < _fundingCycle.start - _baseFundingCycle.duration
+    ) return 0;
+    ```
+
 {% endtab %}
 
 {% tab title="Code" %}
 ```solidity
 /**
   @notice 
-  The project's stored funding cycle that hasn't yet started, if one exists.
+  The project's stored funding cycle that hasn't yet started and should be used next, if one exists.
 
   @dev
   A value of 0 is returned if no funding cycle was found.
+
+  @dev
+  Assumes the project has a latest configuration.
   
   @param _projectId The ID of a project to look through for a standby cycle.
 
@@ -73,14 +101,23 @@ function _standbyOf(uint256 _projectId) private view returns (uint256 configurat
   // Get a reference to the project's latest funding cycle.
   configuration = latestConfigurationOf[_projectId];
 
-  // If there isn't one, theres also no standby funding cycle.
-  if (configuration == 0) return 0;
-
   // Get the necessary properties for the latest funding cycle.
   JBFundingCycle memory _fundingCycle = _getStructFor(_projectId, configuration);
 
   // There is no upcoming funding cycle if the latest funding cycle has already started.
   if (block.timestamp >= _fundingCycle.start) return 0;
+
+  // If this is the first funding cycle, it is queued.
+  if (_fundingCycle.number == 1) return configuration;
+
+  // Get the necessary properties for the base funding cycle.
+  JBFundingCycle memory _baseFundingCycle = _getStructFor(_projectId, _fundingCycle.basedOn);
+
+  // If the latest configuration doesn't start until after another base cycle, return 0.
+  if (
+    _baseFundingCycle.duration > 0 &&
+    block.timestamp < _fundingCycle.start - _baseFundingCycle.duration
+  ) return 0;
 }
 ```
 {% endtab %}

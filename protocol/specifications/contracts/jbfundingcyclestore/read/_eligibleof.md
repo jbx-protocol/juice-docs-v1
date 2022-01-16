@@ -8,6 +8,8 @@ Contract:[`JBFundingCycleStore`](../)​
 
 _A value of 0 is returned if no funding cycle was found._
 
+_Assumes the project has a latest configuration._
+
 # Definition
 
 ```solidity
@@ -32,23 +34,17 @@ function _eligibleOf(uint256 _projectId) private view returns (uint256 configura
     _Internal references:_
 
     * [`latestConfigurationOf`](../properties/latestconfigurationof.md)
-2.  If there isn't a funding cycle for the project, there isn't an eligible cycle either.
+2.  Get the struct for the latest funding cycle.
 
     ```solidity
-    // If there isn't one, theres also no eligible funding cycle.
-    if (configuration == 0) return 0;
-    ```
-3.  Get the struct for the latest funding cycle.
-
-    ```solidity
-    // Get the necessary properties for the latest funding cycle.
+    // Get the latest funding cycle.
     JBFundingCycle memory _fundingCycle = _getStructFor(_projectId, configuration);
     ```
 
     _Internal references:_
 
     * [`_getStructFor`](\_getstructfor.md)
-4.  If the latest is expired, return an empty funding cycle since there can't be a stored eligible cycle.
+3.  If the latest is expired, return an empty funding cycle since there can't be a stored eligible cycle.
 
     ```solidity
     // If the latest is expired, return an empty funding cycle.
@@ -58,13 +54,17 @@ function _eligibleOf(uint256 _projectId) private view returns (uint256 configura
     ) return 0;
     ```
 
-    _Internal references:_
+4.  If the funding cycle has started, it must be eligible.
 
-    * [`_SECONDS_IN_DAY`](../properties/\_seconds\_in\_day.md)
+    ```solidity
+    // Return the funding cycle's configuration if it has started.
+    if (block.timestamp >= _fundingCycle.start) return _fundingCycle.configuration;
+    ```
+
 5.  Get a reference to the funding cycle that the current cycle is based on.
 
     ```solidity
-    // The base cant be expired.
+    // Get a reference to the cycle's base configuration.
     JBFundingCycle memory _baseFundingCycle = _getStructFor(_projectId, _fundingCycle.basedOn);
     ```
 
@@ -74,21 +74,17 @@ function _eligibleOf(uint256 _projectId) private view returns (uint256 configura
 6.  If the base is expired, return an empty funding cycle since there can't be a stored eligible cycle.
 
     ```solidity
-    // If the current time is past the end of the base, return 0.
+    // If the base cycle isn't eligible, the project has no eligible cycle.
     // A duration of 0 is always eligible.
     if (
       _baseFundingCycle.duration > 0 &&
       block.timestamp >= _baseFundingCycle.start + _baseFundingCycle.duration
     ) return 0;
     ```
-
-    _Internal references:_
-
-    * [`_SECONDS_IN_DAY`](../properties/\_seconds\_in\_day.md)
-7.  Return the ID that the latest funding cycle is based on.
+7.  Return the configuration that the latest funding cycle is based on.
 
     ```solidity
-    // Return the funding cycle immediately before the latest.
+    // Return the configuration that the latest funding cycle is based on.
     configuration = _fundingCycle.basedOn;
     ```
 {% endtab %}
@@ -102,6 +98,9 @@ function _eligibleOf(uint256 _projectId) private view returns (uint256 configura
   @dev
   A value of 0 is returned if no funding cycle was found.
 
+  @dev
+  Assumes the project has a latest configuration.
+
   @param _projectId The ID of the project to look through.
 
   @return configuration The configuration of the active funding cycle.
@@ -110,10 +109,7 @@ function _eligibleOf(uint256 _projectId) private view returns (uint256 configura
   // Get a reference to the project's latest funding cycle.
   configuration = latestConfigurationOf[_projectId];
 
-  // If there isn't one, theres also no eligible funding cycle.
-  if (configuration == 0) return 0;
-
-  // Get the necessary properties for the latest funding cycle.
+  // Get the latest funding cycle.
   JBFundingCycle memory _fundingCycle = _getStructFor(_projectId, configuration);
 
   // If the latest is expired, return an empty funding cycle.
@@ -122,17 +118,20 @@ function _eligibleOf(uint256 _projectId) private view returns (uint256 configura
     _fundingCycle.duration > 0 && block.timestamp >= _fundingCycle.start + _fundingCycle.duration
   ) return 0;
 
-  // The base cant be expired.
+  // Return the funding cycle's configuration if it has started.
+  if (block.timestamp >= _fundingCycle.start) return _fundingCycle.configuration;
+
+  // Get a reference to the cycle's base configuration.
   JBFundingCycle memory _baseFundingCycle = _getStructFor(_projectId, _fundingCycle.basedOn);
 
-  // If the current time is past the end of the base, return 0.
+  // If the base cycle isn't eligible, the project has no eligible cycle.
   // A duration of 0 is always eligible.
   if (
     _baseFundingCycle.duration > 0 &&
     block.timestamp >= _baseFundingCycle.start + _baseFundingCycle.duration
   ) return 0;
 
-  // Return the funding cycle immediately before the latest.
+  // Return the configuration that the latest funding cycle is based on.
   configuration = _fundingCycle.basedOn;
 }
 ```

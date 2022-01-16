@@ -33,13 +33,7 @@ function currentBallotStateOf(uint256 _projectId) external view override returns
     _Internal references:_
 
     * [`latestConfigurationOf`](../properties/latestconfigurationof.md)
-2.  Check that there is a funding cycle for the project.
-
-    ```solidity
-    // The project must have funding cycles.
-    require(_fundingCycleConfiguration > 0, '0x14: NOT_FOUND');
-    ```
-3.  Get a reference to the funding cycle for the latest funding cycle.
+2.  Get a reference to the funding cycle for the latest funding cycle.
 
     ```solidity
     // Resolve the funding cycle for the for the latest configuration.
@@ -49,13 +43,7 @@ function currentBallotStateOf(uint256 _projectId) external view override returns
     _Internal references:_
 
     * [`_getStructFor`](\_getstructfor.md)
-4.  If this is the first funding cycle for the project, it must be approved.
-
-    ```solidity
-    // If the latest funding cycle is the first, or if it has already started, it must be approved.
-    if (_fundingCycle.basedOn == 0) return JBBallotState.Approved;
-    ```
-5.  Return the `_ballotStateOf` the latest funding cycle configuration as is determined by the current configuration and the funding cycle it's based on.
+3.  Return the `_ballotStateOf` the latest funding cycle configuration as is determined by the current configuration and the funding cycle it's based on.
 
     ```solidity
     return _ballotStateOf(_projectId, _fundingCycle.configuration, _fundingCycle.basedOn);
@@ -79,25 +67,13 @@ function currentBallotStateOf(uint256 _projectId) external view override returns
 function currentBallotStateOf(uint256 _projectId) external view override returns (JBBallotState) {
   // Get a reference to the latest funding cycle configuration.
   uint256 _fundingCycleConfiguration = latestConfigurationOf[_projectId];
-  
-  // The project must have funding cycles.
-  require(_fundingCycleConfiguration > 0, '0x14: NOT_FOUND');
 
   // Resolve the funding cycle for the for the latest configuration.
   JBFundingCycle memory _fundingCycle = _getStructFor(_projectId, _fundingCycleConfiguration);
 
-  // If the latest funding cycle is the first, or if it has already started, it must be approved.
-  if (_fundingCycle.basedOn == 0) return JBBallotState.Approved;
-
   return _ballotStateOf(_projectId, _fundingCycle.configuration, _fundingCycle.basedOn);
 }
 ```
-{% endtab %}
-
-{% tab title="Errors" %}
-| String                | Description                                                  |
-| --------------------- | ------------------------------------------------------------ |
-| **`0x14: NOT_FOUND`** | Thrown if the provided project doesn't have a funding cycle. |
 {% endtab %}
 
 {% tab title="Bug bounty" %}

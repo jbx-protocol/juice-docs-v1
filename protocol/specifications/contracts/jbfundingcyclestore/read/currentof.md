@@ -78,7 +78,7 @@ function currentOf(uint256 _projectId)
 
     * [`_getStructFor`](\_getstructfor.md)
     * [`_isApproved`](\_isapproved.md)
-5.  If there's not a candidate funding cycle configuration, get a reference the latest stored funding cycle for the project. If it is not recurring, there cant be a current cycle. If it's not approved or if it hasn't yet started, get a reference to the cycle it's based on. A current funding cycle will be one derived from this reference.
+5.  If there's not a candidate funding cycle configuration, get a reference the latest stored funding cycle for the project. If it's not approved or if it hasn't yet started, get a reference to the cycle it's based on. A current funding cycle will be one derived from this reference.
 
     ```solidity
     else {
@@ -88,9 +88,6 @@ function currentOf(uint256 _projectId)
 
       // Get the funding cycle for the latest ID.
       _fundingCycle = _getStructFor(_projectId, _fundingCycleConfiguration);
-
-      // There's no current if the latest is non recurring, represented by a discount rate of 1000000001.
-      if (_fundingCycle.discountRate == 1000000001) return _getStructFor(0, 0);
 
       // If it's not approved or if it hasn't yet started, get a reference to the funding cycle that the latest is based on, which has the latest approved configuration.
       if (!_isApproved(_projectId, _fundingCycle) || block.timestamp < _fundingCycle.start)
@@ -149,7 +146,7 @@ function currentOf(uint256 _projectId)
   @return fundingCycle The current funding cycle.
 */
 function currentOf(uint256 _projectId)
-  public
+  external
   view
   override
   returns (JBFundingCycle memory fundingCycle)
@@ -182,9 +179,6 @@ function currentOf(uint256 _projectId)
 
     // Get the funding cycle for the latest ID.
     _fundingCycle = _getStructFor(_projectId, _fundingCycleConfiguration);
-
-    // There's no current if the latest is non recurring, represented by a discount rate of 1000000001.
-    if (_fundingCycle.discountRate == 1000000001) return _getStructFor(0, 0);
 
     // If it's not approved or if it hasn't yet started, get a reference to the funding cycle that the latest is based on, which has the latest approved configuration.
     if (!_isApproved(_projectId, _fundingCycle) || block.timestamp < _fundingCycle.start)
