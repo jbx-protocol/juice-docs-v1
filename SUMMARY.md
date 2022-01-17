@@ -143,7 +143,7 @@
         * [\_ballotStateOf](protocol/specifications/contracts/jbfundingcyclestore/read/\_ballotstateof.md)
       * [Write](protocol/specifications/contracts/jbfundingcyclestore/write/README.md)
         * [configureFor](protocol/specifications/contracts/jbfundingcyclestore/write/configurefor.md)
-        * [\_configureIntrinsicPropertiesOf](protocol/specifications/contracts/jbfundingcyclestore/write/\_configureintrinsicpropertiesof.md)
+        * [\_configureIntrinsicPropertiesFor](protocol/specifications/contracts/jbfundingcyclestore/write/\_configureintrinsicpropertiesfor.md)
         * [\_initFor](protocol/specifications/contracts/jbfundingcyclestore/write/\_initfor.md)
         * [\_packAndStoreIntrinsicPropertiesOf](protocol/specifications/contracts/jbfundingcyclestore/write/\_packandstoreintrinsicpropertiesof.md)
     * [JBSplitsStore](protocol/specifications/contracts/jbsplitsstore/README.md)

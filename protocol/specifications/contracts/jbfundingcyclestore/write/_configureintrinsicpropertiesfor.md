@@ -1,4 +1,4 @@
-# \_configureIntrinsicProperiesFor
+# \_configureIntrinsicPropertiesFor
 
 Contract:[`JBFundingCycleStore`](../)​
 
