@@ -69,6 +69,8 @@ interface IJBETHPaymentTerminal {
 
   function heldFeesOf(uint256 _projectId) external view returns (JBFee[] memory);
 
+  function fee() external view returns (uint256);
+
   function distributePayoutsOf(
     uint256 _projectId,
     uint256 _amount,

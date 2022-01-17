@@ -100,5 +100,6 @@ interface IJBTokenStore {
     address _holder,
     uint256 _projectId,
     uint256 _amount
-  ) externkk
+  ) external;
+}
 ```

@@ -12,10 +12,12 @@ interface IJBTerminal {
     uint256 _fundingCycleNumber
   ) external view returns (uint256);
 
+  function delegate() external view returns (address);
+
   function pay(
     uint256 _projectId,
     address _beneficiary,
-    uint256 _minReturnedTickets,
+    uint256 _minReturnedTokens,
     bool _preferClaimedTokens,
     string calldata _memo,
     bytes calldata _delegateMetadata

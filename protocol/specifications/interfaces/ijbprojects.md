@@ -12,7 +12,7 @@ interface IJBProjects is IERC721 {
 
   event SetHandle(uint256 indexed projectId, bytes32 indexed handle, address caller);
 
-  event SetMetadataCid(uint256 indexed projectId, string uri, address caller);
+  event SetUri(uint256 indexed projectId, string uri, address caller);
 
   event TransferHandle(
     uint256 indexed projectId,

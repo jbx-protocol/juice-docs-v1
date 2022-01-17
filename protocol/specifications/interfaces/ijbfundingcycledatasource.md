@@ -21,5 +21,5 @@ interface IJBFundingCycleDataSource {
       IJBRedemptionDelegate delegate,
       bytes memory delegateMetadata
     );
-}l
+}
 ```
