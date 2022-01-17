@@ -61,7 +61,7 @@ function recordWithdrawalFor(
     // Make sure the currencies match.
     require(
       _currency ==
-        directory.controllerOf(_projectId).currencyOf(
+        directory.controllerOf(_projectId).distributionLimitCurrencyOf(
           _projectId,
           fundingCycle.configuration,
           terminal
@@ -72,7 +72,7 @@ function recordWithdrawalFor(
 
     _External references:_
 
-    * [`currencyOf`](../../../or-controllers/jbcontroller/read/currencyof.md)
+    * [`distributionLimitCurrencyOf`](../../../or-controllers/jbcontroller/read/distributionLimitCurrencyof.md)
 4.  Calculate the new total amount that has been distributed during this funding cycle by adding the amount being distributed to the used distribution limit.
 
     ```solidity

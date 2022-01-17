@@ -142,7 +142,7 @@ function _distributeToReservedTokenSplitsOf(
   // Get a reference to the project's reserved token splits.
   JBSplit[] memory _splits = splitsStore.splitsOf(
     _projectId,
-    _fundingCycle.configured,
+    _fundingCycle.configuration,
     JBSplitsGroups.RESERVED_TOKENS
   );
 

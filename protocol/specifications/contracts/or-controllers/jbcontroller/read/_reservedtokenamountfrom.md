@@ -42,14 +42,17 @@ function _reservedTokenAmountFrom(
 
     ```solidity
     // If all tokens are reserved, return the full unprocessed amount.
-    if (_reservedRate == 10000) return _unprocessedTokenBalanceOf;
+    if (_reservedRate == JBConstants.MAX_RESERVED_RATE) return _unprocessedTokenBalanceOf;
     ```
 4.  The reserved token amount is the reserved percentage of the unprocessed balance.
 
     ```solidity
     return
-      PRBMath.mulDiv(_unprocessedTokenBalanceOf, 10000, 10000 - _reservedRate) -
-      _unprocessedTokenBalanceOf;
+      PRBMath.mulDiv(
+        _unprocessedTokenBalanceOf,
+        JBConstants.MAX_RESERVED_RATE,
+        JBConstants.MAX_RESERVED_RATE - _reservedRate
+      ) - _unprocessedTokenBalanceOf;
     ```
 
     _Libraries used:_
@@ -84,11 +87,14 @@ function _reservedTokenAmountFrom(
   if (_unprocessedTokenBalanceOf == 0) return 0;
 
   // If all tokens are reserved, return the full unprocessed amount.
-  if (_reservedRate == 10000) return _unprocessedTokenBalanceOf;
+  if (_reservedRate == JBConstants.MAX_RESERVED_RATE) return _unprocessedTokenBalanceOf;
 
   return
-    PRBMath.mulDiv(_unprocessedTokenBalanceOf, 10000, 10000 - _reservedRate) -
-    _unprocessedTokenBalanceOf;
+    PRBMath.mulDiv(
+      _unprocessedTokenBalanceOf,
+      JBConstants.MAX_RESERVED_RATE,
+      JBConstants.MAX_RESERVED_RATE - _reservedRate
+    ) - _unprocessedTokenBalanceOf;
 }
 ```
 {% endtab %}

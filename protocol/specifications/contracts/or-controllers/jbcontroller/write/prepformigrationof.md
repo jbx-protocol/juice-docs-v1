@@ -26,7 +26,9 @@ function prepForMigrationOf(uint256 _projectId, IJBController) external override
 
     ```solidity
     // This controller must not be the project's current controller.
-    require(directory.controllerOf(_projectId) != this, '0x34: NO_OP');
+    if (directory.controllerOf(_projectId) == this) {
+      revert CANT_MIGRATE_TO_CURRENT_CONTROLLER();
+    }
     ```
 
     _External references:_
@@ -54,7 +56,9 @@ function prepForMigrationOf(uint256 _projectId, IJBController) external override
 */
 function prepForMigrationOf(uint256 _projectId, IJBController) external override {
   // This controller must not be the project's current controller.
-  require(directory.controllerOf(_projectId) != this, '0x34: NO_OP');
+  if (directory.controllerOf(_projectId) == this) {
+    revert CANT_MIGRATE_TO_CURRENT_CONTROLLER();
+  }
 
   // Set the tracker as the total supply.
   _processedTokenTrackerOf[_projectId] = int256(tokenStore.totalSupplyOf(_projectId));
@@ -65,7 +69,7 @@ function prepForMigrationOf(uint256 _projectId, IJBController) external override
 {% tab title="Errors" %}
 | String            | Description                                                         |
 | ----------------- | ------------------------------------------------------------------- |
-| **`0x34: NO_OP`** | Thrown if the controller is the current controller for the project. |
+| **`CANT_MIGRATE_TO_CURRENT_CONTROLLER`** | Thrown if the controller is the current controller for the project. |
 {% endtab %}
 
 {% tab title="Bug bounty" %}

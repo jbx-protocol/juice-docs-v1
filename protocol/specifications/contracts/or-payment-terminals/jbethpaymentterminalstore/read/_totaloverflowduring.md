@@ -56,7 +56,7 @@ function _totalOverflowDuring(uint256 _projectId, JBFundingCycle memory _funding
       );
 
       // Get a reference to the current funding cycle's currency for this terminal.
-      uint256 _currency = directory.controllerOf(_projectId).currencyOf(
+      uint256 _currency = directory.controllerOf(_projectId).distributionLimitCurrencyOf(
         _projectId,
         _fundingCycle.configuration,
         _terminals[_i]
@@ -90,7 +90,7 @@ function _totalOverflowDuring(uint256 _projectId, JBFundingCycle memory _funding
     _External references:_
 
     * [`ethBalanceOf`](../../jbethpaymentterminal/read/ethbalanceof.md)
-    * [`remainingDistributionLimitOf`](../../jbethpaymentterminal/read/remainingdistributionlimitof.md)
+    * [`remainingDistributionLimitCurrencyOf`](../../jbethpaymentterminal/read/remainingdistributionlimitcurrencyof.md)
     * [`currencyOf`](../../../or-controllers/jbcontroller/properties/currencyof.md)
     * [`priceFor`](../../../jbprices/read/pricefor.md)
 4.  If the current balance of the project is less than the target remaining, there is no overflow. Otherwise the difference between the project's current balance and the remaining distribution limit is the overflow.
@@ -141,7 +141,7 @@ function _totalOverflowDuring(uint256 _projectId, JBFundingCycle memory _funding
     );
 
     // Get a reference to the current funding cycle's currency for this terminal.
-    uint256 _currency = directory.controllerOf(_projectId).currencyOf(
+    uint256 _currency = directory.controllerOf(_projectId).distributionLimitCurrencyOf(
       _projectId,
       _fundingCycle.configuration,
       _terminals[_i]

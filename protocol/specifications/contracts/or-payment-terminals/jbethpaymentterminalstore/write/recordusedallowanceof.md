@@ -51,7 +51,7 @@ function recordUsedAllowanceOf(
     // Make sure the currencies match.
     require(
       _currency ==
-        directory.controllerOf(_projectId).currencyOf(
+        directory.controllerOf(_projectId).overflowAllowanceCurrencyOf(
           _projectId,
           fundingCycle.configuration,
           terminal
@@ -62,7 +62,7 @@ function recordUsedAllowanceOf(
 
     _External references:_
 
-    * [`currencyOf`](../../../or-controllers/jbcontroller/read/currencyof.md)
+    * [`overflowAllowanceCurrencyOf`](../../../or-controllers/jbcontroller/read/overflowallowanceurrencyof.md)
 3.  Find the amount to withdraw by converting the amount to ETH. If the currency is 0, it is assumed that the currency is the same as the token being withdrawn so no conversion is necessary.
 
     ```solidity
@@ -163,7 +163,7 @@ function recordUsedAllowanceOf(
   // Make sure the currencies match.
   require(
     _currency ==
-      directory.controllerOf(_projectId).currencyOf(
+      directory.controllerOf(_projectId).overflowAllowanceCurrencyOf(
         _projectId,
         fundingCycle.configuration,
         terminal

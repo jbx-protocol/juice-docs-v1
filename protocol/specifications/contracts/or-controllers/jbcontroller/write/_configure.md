@@ -11,6 +11,7 @@ function _configure(
   uint256 _projectId,
   JBFundingCycleData calldata _data,
   JBFundingCycleMetadata calldata _metadata,
+  uint256 _mustStartAtOrAfter,
   JBGroupedSplits[] memory _groupedSplits,
   JBFundAccessConstraints[] memory _fundAccessConstraints
 ) private returns (uint256) { ... }
@@ -20,8 +21,9 @@ function _configure(
   * `_projectId` is the ID of the project whose funding cycles are being reconfigured.
   * `_data` is a [`JBFundingCycleData`](../../../../data-structures/jbfundingcycledata.md) data structure that defines the project's first funding cycle. These properties will remain fixed for the duration of the funding cycle.
   * `_metadata` is a [`JBFundingCycleMetadata`](../../../../data-structures/jbfundingcyclemetadata.md) data structure specifying the controller specific params that a funding cycle can have.
-  * `_fundAccessConstraints` is an array of [`JBFundAccessConstraints`](../../../../data-structures/jbfundaccessconstraints.md) data structures containing amounts that a project can distribute during each funding cycle and amounts that can be used from its own overflow on-demand for each payment terminal.
+  * `_mustStartAtOrAfter` is the time before which the configured funding cycle can't start.
   * `_groupedSplits` is an array of [`JBGroupedSplits`](../../../../data-structures/jbgroupedsplits.md) data structures containing splits to set for any number of groups.
+  * `_fundAccessConstraints` is an array of [`JBFundAccessConstraints`](../../../../data-structures/jbfundaccessconstraints.md) data structures containing amounts that a project can distribute during each funding cycle and amounts that can be used from its own overflow on-demand for each payment terminal.
 * The function is private to this contract.
 * The function returns the funding cycle configuration that was successfully updated.
 
@@ -34,7 +36,8 @@ function _configure(
     JBFundingCycle memory _fundingCycle = fundingCycleStore.configureFor(
       _projectId,
       _data,
-      JBFundingCycleMetadataResolver.packFundingCycleMetadata(_metadata)
+      JBFundingCycleMetadataResolver.packFundingCycleMetadata(_metadata),
+      _mustStartAtOrAfter
     );
     ```
 
@@ -63,7 +66,7 @@ function _configure(
     _External references:_
 
     * [`set`](../../../jbsplitsstore/write/set.md)
-3.  For each fund access constraint struct in the array passed in, store the values of the distribution limit, the overflow allowance, and the currency. Emit a `SetFundAccessConstraints` event with the relevant parameters.
+3.  For each fund access constraint struct in the array passed in, store the values of the distribution limit and overflow allowance packed with their respective currencies. Make sure the values are contained within their bit limit so that they can be packed together in one `uint256`. Emit a `SetFundAccessConstraints` event with the relevant parameters.
 
     ```solidity
     // Set overflow allowances if there are any.
@@ -71,20 +74,37 @@ function _configure(
       JBFundAccessConstraints memory _constraints = _fundAccessConstraints[_i];
 
       // Set the distribution limit if there is one.
-      if (_constraints.distributionLimit > 0)
+      if (_constraints.distributionLimit > 0) {
+        // The distribution limit should fit in a uint248.
+        require(_constraints.distributionLimit < type(uint248).max, '0x00: BAD_DISTRIBUTION_LIMIT');
+
+        // The currency of the distribution limit should fit in a uint8.
+        require(
+          _constraints.distributionLimitCurrency < type(uint8).max,
+          '0x00: BAD_DISTRIBUTION_LIMIT_CURRENCY'
+        );
+
+        _packedDistributionLimitDataOf[_projectId][_fundingCycle.configuration][
         distributionLimitOf[_projectId][_fundingCycle.configuration][
           _constraints.terminal
-        ] = _constraints.distributionLimit;
+        ] = _constraints.distributionLimit | (_constraints.distributionLimitCurrency << 248);
+      }
 
       // Set the overflow allowance if there is one.
-      if (_constraints.overflowAllowance > 0)
-        overflowAllowanceOf[_projectId][_fundingCycle.configuration][
-          _constraints.terminal
-        ] = _constraints.overflowAllowance;
+      if (_constraints.overflowAllowance > 0) {
+        // The currency of the overflow allowance should fit in a uint248.
+        require(_constraints.overflowAllowance < type(uint248).max, '0x00: BAD_OVERFLOW_ALLOWANCE');
 
-      if (_constraints.currency > 0)
-        currencyOf[_projectId][_fundingCycle.configuration][_constraints.terminal] = _constraints
-          .currency;
+        // The currency of the overflow allowance should fit in a uint8.
+        require(
+          _constraints.overflowAllowanceCurrency < type(uint8).max,
+          '0x00: BAD_OVERFLOW_ALLOWANCE_CURRENCY'
+        );
+
+        _packedOverflowAllowanceDataOf[_projectId][_fundingCycle.configuration][
+          _constraints.terminal
+        ] = _constraints.overflowAllowance | (_constraints.overflowAllowanceCurrency << 248);
+      }
 
       emit SetFundAccessConstraints(
         _fundingCycle.configuration,
@@ -151,20 +171,37 @@ function _configure(
     JBFundAccessConstraints memory _constraints = _fundAccessConstraints[_i];
 
     // Set the distribution limit if there is one.
-    if (_constraints.distributionLimit > 0)
+    if (_constraints.distributionLimit > 0) {
+      // The distribution limit should fit in a uint248.
+      require(_constraints.distributionLimit < type(uint248).max, '0x00: BAD_DISTRIBUTION_LIMIT');
+
+      // The currency of the distribution limit should fit in a uint8.
+      require(
+        _constraints.distributionLimitCurrency < type(uint8).max,
+        '0x00: BAD_DISTRIBUTION_LIMIT_CURRENCY'
+      );
+
+      _packedDistributionLimitDataOf[_projectId][_fundingCycle.configuration][
       distributionLimitOf[_projectId][_fundingCycle.configuration][
         _constraints.terminal
-      ] = _constraints.distributionLimit;
+      ] = _constraints.distributionLimit | (_constraints.distributionLimitCurrency << 248);
+    }
 
     // Set the overflow allowance if there is one.
-    if (_constraints.overflowAllowance > 0)
-      overflowAllowanceOf[_projectId][_fundingCycle.configuration][
-        _constraints.terminal
-      ] = _constraints.overflowAllowance;
+    if (_constraints.overflowAllowance > 0) {
+      // The currency of the overflow allowance should fit in a uint248.
+      require(_constraints.overflowAllowance < type(uint248).max, '0x00: BAD_OVERFLOW_ALLOWANCE');
 
-    if (_constraints.currency > 0)
-      currencyOf[_projectId][_fundingCycle.configuration][_constraints.terminal] = _constraints
-        .currency;
+      // The currency of the overflow allowance should fit in a uint8.
+      require(
+        _constraints.overflowAllowanceCurrency < type(uint8).max,
+        '0x00: BAD_OVERFLOW_ALLOWANCE_CURRENCY'
+      );
+
+      _packedOverflowAllowanceDataOf[_projectId][_fundingCycle.configuration][
+        _constraints.terminal
+      ] = _constraints.overflowAllowance | (_constraints.overflowAllowanceCurrency << 248);
+    }
 
     emit SetFundAccessConstraints(
       _fundingCycle.configuration,
@@ -175,7 +212,7 @@ function _configure(
     );
   }
 
-  return _fundingCycle.id;
+  return _fundingCycle.configuration;
 }
 ```
 {% endtab %}

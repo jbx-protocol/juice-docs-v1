@@ -47,17 +47,28 @@ function mintTokensOf(
 
 # Body
 
-1.  If the reserved rate isnt' 100%, make sure the provided beneficiary isn't the zero address.
+1.  Make sure the reserved rate is not greater than the max.
+
+    ```solidity
+    if (_reservedRate > JBConstants.MAX_RESERVED_RATE) {
+      revert INVALID_RESERVED_RATE();
+    }
+    ```
+2.  If the reserved rate isnt' 100%, make sure the provided beneficiary isn't the zero address.
 
     ```solidity
     // Can't send to the zero address.
-    require(_reservedRate == 10000 || _beneficiary != address(0), '0x2f: ZERO_ADDRESS');
+    if (_reservedRate != JBConstants.MAX_RESERVED_RATE && _beneficiary == address(0)) {
+      revert RESERVED_RATE_NOT_MAX_WHILE_BENEFICIARY_ZERO_ADDRESS();
+    }
     ```
 2.  Make sure there is a specified number of tokens to mint.
 
     ```solidity
     // There should be tokens to mint.
-    require(_tokenCount > 0, '0x30: NO_OP');
+    if (_tokenCount == 0) {
+      revert ZERO_TOKENS_TO_MINT();
+    }
     ```
 3.  Get a reference to the current funding cycle for the project.
 
@@ -73,10 +84,9 @@ function mintTokensOf(
 
     ```solidity
     // If the message sender is not a terminal delegate, the current funding cycle must not be paused.
-    require(
-      !_fundingCycle.mintPaused() || directory.isTerminalDelegateOf(_projectId, msg.sender),
-      '0x31: PAUSED'
-    );
+    if (_fundingCycle.mintPaused() && !directory.isTerminalDelegateOf(_projectId, msg.sender)) {
+      revert MINT_PAUSED_AND_NOT_TERMINAL_DELEGATE();
+    }
     ```
 
     _Libraries used:_
@@ -90,14 +100,18 @@ function mintTokensOf(
 5.  If the operation should reserve 100% of the minted tokens, the token tracker should be updated to add a difference of the specified token count instead of minting the tokens directly. This will allow a future distribution of reserved tokens to mint the token count to reserved addresses. Otherwise, mint the tokens updating the token tracker if there is no intent to reserve tokens alongside the mint.
 
     ```solidity
-    if (_reservedRate == 10000) {
+    if (_reservedRate == JBConstants.MAX_RESERVED_RATE) {
       // Subtract the total weighted amount from the tracker so the full reserved token amount can be printed later.
       _processedTokenTrackerOf[_projectId] =
         _processedTokenTrackerOf[_projectId] -
         int256(_tokenCount);
     } else {
       // The unreserved token count that will be minted for the beneficiary.
-      beneficiaryTokenCount = PRBMath.mulDiv(_tokenCount, 10000 - _reservedRate, 10000);
+      beneficiaryTokenCount = PRBMath.mulDiv(
+        _tokenCount,
+        JBConstants.MAX_RESERVED_RATE - _reservedRate,
+        JBConstants.MAX_RESERVED_RATE
+      );
 
       // Mint the tokens.
       tokenStore.mintFor(_beneficiary, _projectId, beneficiaryTokenCount, _preferClaimedTokens);
@@ -178,29 +192,40 @@ function mintTokensOf(
   )
   returns (uint256 beneficiaryTokenCount)
 {
+  if (_reservedRate > JBConstants.MAX_RESERVED_RATE) {
+    revert INVALID_RESERVED_RATE();
+  }
+
   // Can't send to the zero address.
-  require(_reservedRate == 10000 || _beneficiary != address(0), '0x2f: ZERO_ADDRESS');
+  if (_reservedRate != JBConstants.MAX_RESERVED_RATE && _beneficiary == address(0)) {
+    revert RESERVED_RATE_NOT_MAX_WHILE_BENEFICIARY_ZERO_ADDRESS();
+  }
 
   // There should be tokens to mint.
-  require(_tokenCount > 0, '0x30: NO_OP');
+  if (_tokenCount == 0) {
+    revert ZERO_TOKENS_TO_MINT();
+  }
 
   // Get a reference to the project's current funding cycle.
   JBFundingCycle memory _fundingCycle = fundingCycleStore.currentOf(_projectId);
 
   // If the message sender is not a terminal delegate, the current funding cycle must not be paused.
-  require(
-    !_fundingCycle.mintPaused() || directory.isTerminalDelegateOf(_projectId, msg.sender),
-    '0x31: PAUSED'
-  );
+  if (_fundingCycle.mintPaused() && !directory.isTerminalDelegateOf(_projectId, msg.sender)) {
+    revert MINT_PAUSED_AND_NOT_TERMINAL_DELEGATE();
+  }
 
-  if (_reservedRate == 10000) {
+  if (_reservedRate == JBConstants.MAX_RESERVED_RATE) {
     // Subtract the total weighted amount from the tracker so the full reserved token amount can be printed later.
     _processedTokenTrackerOf[_projectId] =
       _processedTokenTrackerOf[_projectId] -
       int256(_tokenCount);
   } else {
     // The unreserved token count that will be minted for the beneficiary.
-    beneficiaryTokenCount = PRBMath.mulDiv(_tokenCount, 10000 - _reservedRate, 10000);
+    beneficiaryTokenCount = PRBMath.mulDiv(
+      _tokenCount,
+      JBConstants.MAX_RESERVED_RATE - _reservedRate,
+      JBConstants.MAX_RESERVED_RATE
+    );
 
     // Mint the tokens.
     tokenStore.mintFor(_beneficiary, _projectId, beneficiaryTokenCount, _preferClaimedTokens);
@@ -220,9 +245,10 @@ function mintTokensOf(
 {% tab title="Errors" %}
 | String                   | Description                                                                                                                |
 | ------------------------ | -------------------------------------------------------------------------------------------------------------------------- |
-| **`0x2f: ZERO_ADDRESS`** | Thrown if the token beneficiary is the zero address.                                                                       |
-| **`0x30: NO_OP`**        | Thrown if no tokens are being minted.                                                                                      |
-| **`0x31: PAUSED`**       | Thrown if the request is not being made by a payment terminal, and the project's current funding cycle has paused minting. |
+| **`INVALID_RESERVED_RATE`** | Thrown if the reserved rate provided is too big.                                                                       |
+| **`RESERVED_RATE_NOT_MAX_WHILE_BENEFICIARY_ZERO_ADDRESS`** | Thrown if the token beneficiary is the zero address whle the reserved rate isn't 100%.                                                                       |
+| **`ZERO_TOKENS_TO_MINT`**        | Thrown if no tokens are being minted.                                                                                      |
+| **`MINT_PAUSED_AND_NOT_TERMINAL_DELEGATE`**       | Thrown if the request is not being made by a payment terminal, and the project's current funding cycle has paused minting. |
 {% endtab %}
 
 {% tab title="Events" %}

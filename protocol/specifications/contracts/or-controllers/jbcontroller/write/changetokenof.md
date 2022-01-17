@@ -44,7 +44,9 @@ function changeTokenOf(
 
     ```solidity
     // The current funding cycle must not be paused.
-    require(_fundingCycle.changeTokenAllowed(), '0x05: NOT_ALLOWED');
+    if (!_fundingCycle.changeTokenAllowed()) {
+      revert CHANGE_TOKEN_NOT_ALLOWED();
+    }
     ```
 
     _Libraries used:_
@@ -85,7 +87,9 @@ function changeTokenOf(
   JBFundingCycle memory _fundingCycle = fundingCycleStore.currentOf(_projectId);
 
   // The current funding cycle must not be paused.
-  require(_fundingCycle.changeTokenAllowed(), '0x05: NOT_ALLOWED');
+  if (!_fundingCycle.changeTokenAllowed()) {
+    revert CHANGE_TOKEN_NOT_ALLOWED();
+  }
 
   // Change the token in the store.
   tokenStore.changeFor(_projectId, _token, _newOwner);
@@ -96,7 +100,7 @@ function changeTokenOf(
 {% tab title="Errors" %}
 | String                  | Description                                                    |
 | ----------------------- | -------------------------------------------------------------- |
-| **`0x05: NOT_ALLOWED`** | Thrown if the project doesn't currently allow changing tokens. |
+| **`CHANGE_TOKEN_NOT_ALLOWED`** | Thrown if the project doesn't currently allow changing tokens. |
 {% endtab %}
 
 {% tab title="Bug bounty" %}

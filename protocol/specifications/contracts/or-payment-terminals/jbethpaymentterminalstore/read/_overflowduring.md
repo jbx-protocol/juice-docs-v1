@@ -46,7 +46,7 @@ function _overflowDuring(uint256 _projectId, JBFundingCycle memory _fundingCycle
 
     ```solidity
     // Get a reference to the amount still withdrawable during the funding cycle.
-    uint256 _targetRemaining = directory.controllerOf(_projectId).distributionLimitOf(
+    uint256 _targetRemaining = directory.controllerOf(_projectId).distributionLimitCurrencyOf(
       _projectId,
       _fundingCycle.configuration,
       terminal
@@ -59,7 +59,7 @@ function _overflowDuring(uint256 _projectId, JBFundingCycle memory _fundingCycle
 
     _External references:_
 
-    * [`distributionLimitOf`](../../../or-controllers/jbcontroller/properties/distributionlimitof.md)
+    * [`distributionLimitCurrencyOf`](../../../or-controllers/jbcontroller/properties/distributionlimitcurrencyof.md)
 4.  Get the currency for the distribution limit.
 
     ```solidity
@@ -123,7 +123,7 @@ returns (uint256) {
   if (_balanceOf == 0) return 0;
 
   // Get a reference to the amount still withdrawable during the funding cycle.
-  uint256 _distributionRemaining = directory.controllerOf(_projectId).distributionLimitOf(
+  uint256 _distributionRemaining = directory.controllerOf(_projectId).distributionLimitCurrencyOf(
     _projectId,
     _fundingCycle.configuration,
     terminal

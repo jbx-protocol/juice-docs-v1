@@ -48,7 +48,9 @@ function burnTokensOf(
 
     ```solidity
     // There should be tokens to burn
-    require(_tokenCount > 0, '0x32: NO_OP');
+    if (_tokenCount == 0) {
+      revert NO_BURNABLE_TOKENS();
+    }
     ```
 2.  Get a reference to the current funding cycle for the project.
 
@@ -64,10 +66,9 @@ function burnTokensOf(
 
     ```solidity
     // If the message sender is not a terminal delegate, the current funding cycle must not be paused.
-    require(
-      !_fundingCycle.burnPaused() || directory.isTerminalDelegateOf(_projectId, msg.sender),
-      '0x33: PAUSED'
-    );
+    if (_fundingCycle.burnPaused() && !directory.isTerminalDelegateOf(_projectId, msg.sender)) {
+      revert BURN_PAUSED_AND_SENDER_NOT_VALID_TERMINAL_DELEGATE();
+    }
     ```
 
     _Libraries used:_
@@ -144,16 +145,17 @@ function burnTokensOf(
   )
 {
   // There should be tokens to burn
-  require(_tokenCount > 0, '0x32: NO_OP');
+  if (_tokenCount == 0) {
+    revert NO_BURNABLE_TOKENS();
+  }
 
   // Get a reference to the project's current funding cycle.
   JBFundingCycle memory _fundingCycle = fundingCycleStore.currentOf(_projectId);
 
   // If the message sender is not a terminal delegate, the current funding cycle must not be paused.
-  require(
-    !_fundingCycle.burnPaused() || directory.isTerminalDelegateOf(_projectId, msg.sender),
-    '0x33: PAUSED'
-  );
+  if (_fundingCycle.burnPaused() && !directory.isTerminalDelegateOf(_projectId, msg.sender)) {
+    revert BURN_PAUSED_AND_SENDER_NOT_VALID_TERMINAL_DELEGATE();
+  }
 
   // Update the token tracker so that reserved tokens will still be correctly mintable.
   _processedTokenTrackerOf[_projectId] =
@@ -171,8 +173,8 @@ function burnTokensOf(
 {% tab title="Errors" %}
 | String             | Description                                                                                                                |
 | ------------------ | -------------------------------------------------------------------------------------------------------------------------- |
-| **`0x32: NO_OP`**  | Thrown if no tokens are being burned.                                                                                      |
-| **`0x33: PAUSED`** | Thrown if the request is not being made by a payment terminal, and the project's current funding cycle has paused burning. |
+| **`NO_BURNABLE_TOKENS`**  | Thrown if no tokens are being burned.                                                                                      |
+| **`BURN_PAUSED_AND_SENDER_NOT_VALID_TERMINAL_DELEGATE`** | Thrown if the request is not being made by a payment terminal, and the project's current funding cycle has paused burning. |
 {% endtab %}
 
 {% tab title="Events" %}

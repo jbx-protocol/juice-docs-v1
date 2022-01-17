@@ -30,7 +30,9 @@ function migrate(uint256 _projectId, IJBController _to)
 
     ```solidity
     // This controller must be the project's current controller.
-    require(directory.controllerOf(_projectId) == this, '0x35: NO_OP');
+    if (directory.controllerOf(_projectId) != this) {
+      revert CALLER_NOT_CURRENT_CONTROLLER();
+    }
     ```
 
     _External references:_
@@ -50,7 +52,9 @@ function migrate(uint256 _projectId, IJBController _to)
 
     ```solidity
     // Migration must be allowed
-    require(_fundingCycle.controllerMigrationAllowed(), '0x36: NOT_ALLOWED');
+    if (!_fundingCycle.controllerMigrationAllowed()) {
+      revert MIGRATION_NOT_ALLOWED();
+    }
     ```
 4.  Distribute any outstanding reserved tokens. There are reserved tokens to be distributed if the tracker does not equal the token's total supply.
 
@@ -105,6 +109,9 @@ function migrate(uint256 _projectId, IJBController _to)
   @notice
   Allows a project to migrate from this controller to another.
 
+  @dev
+  Only a project's owner or a designated operator can migrate it.
+
   @param _projectId The ID of the project that will be migrated from this controller.
   @param _to The controller to which the project is migrating.
 */
@@ -114,13 +121,17 @@ function migrate(uint256 _projectId, IJBController _to)
   nonReentrant
 {
   // This controller must be the project's current controller.
-  require(directory.controllerOf(_projectId) == this, '0x35: NO_OP');
+  if (directory.controllerOf(_projectId) != this) {
+    revert CALLER_NOT_CURRENT_CONTROLLER();
+  }
 
   // Get a reference to the project's current funding cycle.
   JBFundingCycle memory _fundingCycle = fundingCycleStore.currentOf(_projectId);
 
   // Migration must be allowed
-  require(_fundingCycle.controllerMigrationAllowed(), '0x36: NOT_ALLOWED');
+  if (!_fundingCycle.controllerMigrationAllowed()) {
+    revert MIGRATION_NOT_ALLOWED();
+  }
 
   // All reserved tokens must be minted before migrating.
   if (uint256(_processedTokenTrackerOf[_projectId]) != tokenStore.totalSupplyOf(_projectId))
@@ -140,8 +151,8 @@ function migrate(uint256 _projectId, IJBController _to)
 {% tab title="Errors" %}
 | String                  | Description                                                                         |
 | ----------------------- | ----------------------------------------------------------------------------------- |
-| **`0x35: NO_OP`**       | Thrown if the controller isn't the project's current controller.                    |
-| **`0x36: NOT_ALLOWED`** | Thrown if the project's current funding cycle doesn't allow a controller migration. |
+| **`CALLER_NOT_CURRENT_CONTROLLER`**       | Thrown if the controller isn't the project's current controller.                    |
+| **`MIGRATION_NOT_ALLOWED`** | Thrown if the project's current funding cycle doesn't allow a controller migration. |
 {% endtab %}
 
 {% tab title="Events" %}
