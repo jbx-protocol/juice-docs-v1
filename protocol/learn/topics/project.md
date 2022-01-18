@@ -34,6 +34,6 @@ An address can set operators for its project through the [`JBOperatorStore.setOp
 * [`JBTokenStore.changeTokenOf(...)`](broken-reference)
 * [`JBTokenStore.shouldRequireClaimingFor(...)`](../../specifications/contracts/jbtokenstore/write/shouldrequireclaimingfor.md)
 * [`JBDirectory.setControllerOf(...)`](../../specifications/contracts/jbdirectory/write/setcontrollerof.md)
-* [`JBDirectory.addTerminalOf(...)`](../../specifications/contracts/jbdirectory/write/addterminalof.md)
+* [`JBDirectory.addTerminalsOf(...)`](../../specifications/contracts/jbdirectory/write/addterminalsof.md)
 * [`JBDirectory.removeTerminalOf(...)`](../../specifications/contracts/jbdirectory/write/removeterminalof.md)
 * [`JBDirectory.setPrimaryTerminalOf(...)`](../../specifications/contracts/jbdirectory/write/setprimaryterminalof.md)
