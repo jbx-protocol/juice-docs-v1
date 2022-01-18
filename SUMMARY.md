@@ -10,7 +10,7 @@
 
 * [Contract Addresses](resources/contract-addresses.md)
 
-## 👾 Protocol V2 <a href="protocol" id="protocol"></a>
+## 👾 Protocol V2 <a href="#protocol" id="protocol"></a>
 
 * [README](protocol/README.md)
 * [Learn](protocol/learn/README.md)
@@ -18,6 +18,13 @@
   * [Project design](protocol/learn/project-design.md)
   * [Glossary](protocol/learn/glossary.md)
   * [Topics](protocol/learn/topics/README.md)
+    * [Operator](protocol/learn/topics/operator.md)
+    * [Delegate](protocol/learn/topics/delegate.md)
+    * [Data source](protocol/learn/topics/data-source.md)
+    * [Reserved tokens](protocol/learn/topics/reserved-tokens.md)
+    * [Redemption rate](protocol/learn/topics/redemption-rate.md)
+    * [Ballot](protocol/learn/topics/ballot.md)
+    * [Discount rate](protocol/learn/topics/discount-rate.md)
     * [Project](protocol/learn/topics/project.md)
     * [Funding cycle](protocol/learn/topics/funding-cycle.md)
     * [Community tokens](protocol/learn/topics/community-tokens.md)
@@ -207,7 +214,7 @@
         * [addTerminalsOf](protocol/specifications/contracts/jbdirectory/write/addterminalsof.md)
         * [removeTerminalOf](protocol/specifications/contracts/jbdirectory/write/removeterminalof.md)
         * [setPrimaryTerminalOf](protocol/specifications/contracts/jbdirectory/write/setprimaryterminalof.md)
-        * [_addTerminalIfNeeded](protocol/specifications/contracts/jbdirectory/write/_addterminalifneeded.md)
+        * [\_addTerminalIfNeeded](protocol/specifications/contracts/jbdirectory/write/\_addterminalifneeded.md)
         * [addToSetControllerAllowlist](protocol/specifications/contracts/jbdirectory/write/addtosetcontrollerallowlist.md)
         * [removeFromSetControllerAllowlist](protocol/specifications/contracts/jbdirectory/write/removefromsetcontrollerallowlist.md)
     * [| Controllers](protocol/specifications/contracts/or-controllers/README.md)
@@ -224,8 +231,8 @@
           * [fundingCycleStore](protocol/specifications/contracts/or-controllers/jbcontroller/properties/fundingcyclestore.md)
           * [tokenStore](protocol/specifications/contracts/or-controllers/jbcontroller/properties/tokenstore.md)
           * [splitsStore](protocol/specifications/contracts/or-controllers/jbcontroller/properties/splitsstore.md)
-          * [_packedDistributionLimitDataOf](protocol/specifications/contracts/or-controllers/jbcontroller/properties/_packeddistributionlimitdataof.md)
-          * [_packedOverflowAllowanceDataOf](protocol/specifications/contracts/or-controllers/jbcontroller/properties/_packedoverflowallowancedataof.md)
+          * [\_packedDistributionLimitDataOf](protocol/specifications/contracts/or-controllers/jbcontroller/properties/\_packeddistributionlimitdataof.md)
+          * [\_packedOverflowAllowanceDataOf](protocol/specifications/contracts/or-controllers/jbcontroller/properties/\_packedoverflowallowancedataof.md)
           * [\_processedTokenTrackerOf](protocol/specifications/contracts/or-controllers/jbcontroller/properties/\_processedtokentrackerof.md)
         * [Read](protocol/specifications/contracts/or-controllers/jbcontroller/read/README.md)
           * [overflowAllowanceOf](protocol/specifications/contracts/or-controllers/jbcontroller/read/overflowallowanceof.md)
