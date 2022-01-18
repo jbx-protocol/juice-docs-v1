@@ -13,6 +13,7 @@ function launchProjectFor(
   string calldata _metadataCid,
   JBFundingCycleData calldata _data,
   JBFundingCycleMetadata calldata _metadata,
+  uint256 _mustStartAtOrAfter,
   JBGroupedSplits[] memory _groupedSplits,
   JBFundAccessConstraints[] memory _fundAccessConstraints,
   IJBTerminal[] memory _terminals
@@ -166,6 +167,7 @@ function reconfigureFundingCyclesOf(
   uint256 _projectId,
   JBFundingCycleData calldata _data,
   JBFundingCycleMetadata calldata _metadata,
+  uint256 _mustStartAtOrAfter,
   JBGroupedSplits[] memory _groupedSplits,
   JBFundAccessConstraints[] memory _fundAccessConstraints
 )
@@ -180,7 +182,7 @@ At any point, anyone can inject funds into a project's treasury by calling [`JBE
  function addToBalanceOf(uint256 _projectId, string memory _memo) external payable override { ... }
 ```
 
-If a project has issued its ERC-20's, anyone can claim tokens that are being represented via the internal accounting mechanism into the token holders wallet as ERC-20's on their behalf by calling [`JBTokenStore.claimFor(...)`](../specifications/contracts/jbtokenstore/write/claimfor.md).
+If a project has issued its ERC-20's or is using a custom `IJBToken`, anyone can claim tokens that are being represented via the internal accounting mechanism into the token holders wallet on their behalf by calling [`JBTokenStore.claimFor(...)`](../specifications/contracts/jbtokenstore/write/claimfor.md).
 
 ```solidity
 function claimFor(

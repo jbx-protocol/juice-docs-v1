@@ -14,7 +14,7 @@ struct JBDidPayData {
   uint256 tokenCount;
   // The address to which the tokens were minted.
   address beneficiary;
-  // The memo that is being used for the payment.
+  // The memo that is being emitted alongside the payment.
   string memo;
   // Metadata to send to the delegate.
   bytes delegateMetadata;
