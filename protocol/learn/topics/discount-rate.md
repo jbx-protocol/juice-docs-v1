@@ -8,4 +8,4 @@
 
 #### What you'll want to know if you're building
 
-* _wip_
+* A discount rate can be specified in a funding cycle through the [`JBController.launchProjectFor(...)`](../../specifications/contracts/or-controllers/jbcontroller/write/launchprojectfor.md) or [`JBController.reconfigureFundingCyclesOf(...)`](../../specifications/contracts/or-controllers/jbcontroller/write/reconfigurefundingcyclesof.md) transactions.

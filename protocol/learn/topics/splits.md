@@ -8,4 +8,4 @@
 
 #### What you'll want to know if you're building
 
-_wip_
+* Splits can be set for a funding cycle configuration during the [`JBController.launchProjectFor(...)`](../../specifications/contracts/or-controllers/jbcontroller/write/launchprojectfor.md) or [`JBController.reconfigureFundingCyclesOf(...)`](../../specifications/contracts/or-controllers/jbcontroller/write/reconfigurefundingcyclesof.md) transactions, or separately using [`JBSplitStore.set(...)`](../../specifications/contracts/jbsplitsstore/write/set.md).
