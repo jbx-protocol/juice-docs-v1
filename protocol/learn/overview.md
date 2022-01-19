@@ -17,14 +17,14 @@ The Juicebox protocol is made up of 7 core contracts and 3 surface contracts.
 The first two core contracts are pretty self explanatory. They store the core Juicebox components of the protocol.
 
 * [`JBTokenStore`](../specifications/contracts/jbtokenstore/) manages token minting and burning for all projects.
-* [`JBFundingCycleStore`](../specifications/contracts/jbfundingcyclestore/) manages funding cycle configurations and scheduling. Funding cycles are represented as a [`JBFundingCycle`](../../protocol/data-structures/jbfundingcycle.md) data structure.
+* [`JBFundingCycleStore`](../specifications/contracts/jbfundingcyclestore/) manages funding cycle configurations and scheduling. Funding cycles are represented as a [`JBFundingCycle`](../data-structures/jbfundingcycle.md) data structure.
 
 The next few are a little more generic. They don't know anything specific to Juicebox, and are open for use by other protocols or future Juicebox extensions.
 
 *   [`JBProjects`](../specifications/contracts/jbprojects/) manages and tracks ownership over projects, which are represented as ERC-721 tokens.
 
     The protocol uses this to enforce permissions needed to access several project-oriented transactions.
-*   [`JBSplitsStore`](../specifications/contracts/jbsplitsstore/) stores information about how arbitrary distributions should be split. The information is represented as a [`JBSplit`](../../protocol/data-structures/jbsplit.md#jbsplit) data structure.
+*   [`JBSplitsStore`](../specifications/contracts/jbsplitsstore/) stores information about how arbitrary distributions should be split. The information is represented as a [`JBSplit`](../data-structures/jbsplit.md#jbsplit) data structure.
 
     The surface contracts currently use these to split up payout distributions and reserved token distributions.
 *   [`JBPrices`](../specifications/contracts/jbprices/) manages and normalizes price feeds of various fiat currencies.
@@ -49,3 +49,7 @@ There are currently 3 surface contracts that manage how projects manage funds an
 The `JBETHPaymentTerminal` inherits from the `IJBTerminal` interface. Projects are welcome to roll their own `IJBTerminal` to accept funds through. This can be useful to accept other tokens as payment, bypass protocol fees, or attempt some other funky design. A project can add/remove terminals from the Core [`JBDirectory`](../specifications/contracts/jbdirectory/) Contract using the [`JBDirectory.addTerminalsOf(...)`](../specifications/contracts/jbdirectory/write/addterminalsof.md) and [`JBDirectory.removeTerminalOf(...)`](../specifications/contracts/jbdirectory/write/removeterminalof.md) functions.
 
 Likewise, a project can bring their own contract to serve as its controller. A project's controller is the only contract that has direct access to manipulate its tokens and funding cycles.
+
+## Visual map
+
+{% embed url="https://www.figma.com/file/qGZbvt4kWgDJOntra7L960/JBV2" %}
