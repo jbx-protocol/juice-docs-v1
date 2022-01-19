@@ -12,4 +12,5 @@
 #### What you'll want to know if you're building
 
 * A data source contract can be specified in a funding cycle, along with flags that indicate if the funding cycle should `useDataSourceForPay` and/or `useDataSourceForRedeem`. These are set either in [`JBController.launchProjectFor(...)`](../../specifications/contracts/or-controllers/jbcontroller/write/launchprojectfor.md) or [`JBController.reconfigureFundingCyclesOf(...)`](../../specifications/contracts/or-controllers/jbcontroller/write/reconfigurefundingcyclesof.md).
+* A funding cycle's data source is called upon in [`JBETHPaymentTerminalStore.recordPaymentFrom(...)`](../../specifications/contracts/or-payment-terminals/jbethpaymentterminalstore/write/recordpaymentfrom.md) and in [`JBETHPaymentTerminalStore.recordRedemptionFor(...)`](../../specifications/contracts/or-payment-terminals/jbethpaymentterminalstore/write/recordredemptionfor.md).
 * If a data source is not specified in a funding cycle, or if flags aren't explicitly set, default Juicebox data will be used which closely mirrors Juicebox V1 dynamics.
