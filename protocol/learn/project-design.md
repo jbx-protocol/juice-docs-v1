@@ -19,17 +19,24 @@ function launchProjectFor(
 ) external returns (uint256 projectId) { ... }
 ```
 
-This transaction launches a project. It does so by:
-* Minting a project in the `JBProjects` ERC-721 contract by calling [`JBProjects.createFor(...)`](../specifications/contracts/jbprojects/write/createfor.md). 
-* Then giving the `JBController` contract that is handling the `launchProjectFor` transaction that's currently being executed authority to write to the `JBFundingCycleStore` and the `JBTokenStore` on the project's behalf by calling [`JBDirectory.setControllerOf(...)`](../specifications/contracts/jbdirectory/write/setcontrollerof.md). 
-* Then creating the project's first funding cycle using the provided `_data`, `_metadata`, and `_mustStartAtOrAfter` parameters by calling [`JBFundingCycleStore.configureFor(...)`](../specifications/contracts/jbfundingcyclestore/write/configurefor.md).
-* Then storing splits for any provided split groups by calling [`JBSplitStore.set(...)`](../specifications/contracts/jbsplitsstore/write/set.md).
-* Then storing any provided constraints on how the project will be able to access funds within any specified payment terminals by storing values in [`JBController.distributionLimitOf(...)`](../specifications/contracts/or-controllers/jbcontroller/properties/distributionlimitof.md), [`JBController.overflowAllowanceOf(...)`](../specifications/contracts/or-controllers/jbcontroller/properties/overflowallowanceof.md), and [`JBController.currencyOf(...)`](../specifications/contracts/or-controllers/jbcontroller/properties/currencyof.md).
-* Then giving the provided `_terminals` access to the `JBController` contract that is handling the `launchProjectFor` transaction that's currently being executed, and also allowing anyone or any other contract in Web3 to know that the project is currently accepting funds through them by calling [`JBDirectory.setTerminalsOf(...)`](../specifications/contracts/jbdirectory/write/setterminalsof.md). 
+This transaction launches a project. The transaction executes the following steps to launch a project:
+1. Mints a project in the `JBProjects` ERC-721 contract by calling [`JBProjects.createFor(...)`](../specifications/contracts/jbprojects/write/createfor.md).
+1. Gives the `JBController` contract that is handling the `launchProjectFor` transaction (the currently executing transaction) authority to write to the `JBFundingCycleStore` and the `JBTokenStore` on the project's behalf. It does so by calling [`JBDirectory.setControllerOf(...)`](../specifications/contracts/jbdirectory/write/setcontrollerof.md).
+1. Creates the project's first funding cycle using the provided `_data`, `_metadata`, and `_mustStartAtOrAfter` parameters. It does so by calling [`JBFundingCycleStore.configureFor(...)`](../specifications/contracts/jbfundingcyclestore/write/configurefor.md).
+1. Stores splits for any provided split groups (`_groupedSplits`) by calling [`JBSplitStore.set(...)`](../specifications/contracts/jbsplitsstore/write/set.md).
+1. Stores any provided constraints on how the project can access funds (`_fundAccessConstraints`) within any specified payment terminals (`_terminals`). It stores these constraints across [`JBController.distributionLimitOf(...)`](../specifications/contracts/or-controllers/jbcontroller/properties/distributionlimitof.md), [`JBController.overflowAllowanceOf(...)`](../specifications/contracts/or-controllers/jbcontroller/properties/overflowallowanceof.md), and [`JBController.currencyOf(...)`](../specifications/contracts/or-controllers/jbcontroller/properties/currencyof.md).
+1. Gives any provided terminals (`_terminals`) access to the `JBController` contract that is handling the `launchProjectFor` transaction (the currently executing transaction). Anyone or any other smart contract can check that the project is currently accepting funds through them by calling [`JBDirectory.terminalsOf(...)`](../specifications/contracts/jbdirectory/properties/terminalsof.md).
 
-Here are some examples, starting with the simplest version:
 
-* For `_data` send the following [`JBFundingCycleData`](../specifications/data-structures/jbfundingcycledata.md) values:
+## Example project configurations
+
+The following sections provide example parameters for the [`JBController.launchProjectFor(...)`](../specifications/contracts/or-controllers/jbcontroller/write/launchprojectfor.md) function. Use these examples to learn how each parameter affects a project's behavior.
+
+### Minimal project configuration
+
+This is the most vanilla project you can launch. It incurs the least gas costs since it stores relatively little data.
+
+* For `_data`, send the following [`JBFundingCycleData`](../specifications/data-structures/jbfundingcycledata.md) values:
 
   ```javascript
   {
@@ -40,7 +47,7 @@ Here are some examples, starting with the simplest version:
   }
   ```
 
-* For `_metadata` send the following [`JBFundingCycleMetadata`](../specifications/data-structures/jbfundingcyclemetadata.md) values:
+* For `_metadata`, send the following [`JBFundingCycleMetadata`](../specifications/data-structures/jbfundingcyclemetadata.md) values:
 
   ```javascript
   {
@@ -61,19 +68,17 @@ Here are some examples, starting with the simplest version:
     dataSource: 0x0000000000000000000000000000000000000000, 
   }
   ```
-* For `_groupedSplits` send an empty array.
-* For `_fundAccessConstraints` send an empty array.
-* For `_terminals` send an array only including the contract address of the `JBETHPaymentTerminal`.
- 
-This is the most vanilla project you can launch, which also makes it cheapest to launch gas-wise since relatively little needs to get saved into storage.
+* For `_groupedSplits`, send an empty array.
+* For `_fundAccessConstraints`, send an empty array.
+* For `_terminals`, send an array only including the contract address of the `JBETHPaymentTerminal`.
 
-Under these conditions:
+Under these conditions, your project has the following characteristics:
 * Your project can begin receiving funds through the `JBETHPaymentTerminal`.
-* 1,000,000 of your project's tokens will be minted per ETH received since the configured `_data.weight` is `1000000000000000000000000`. (The raw value sent has 18 decimal places).
-* All tokens minted as a result of recieved ETH will go to the beneficiary address specified by the payer of the ETH since the configured `_metadata.reservedRate` of 0.
-* Nothing fancy will happen outside of the default token minting behavior since the configured `_metadata.useDataSourceForPay` is `false`. 
-* None of the funds in the treasury can be distributed to the project owner since no `_fundAccessConstraints` were specified. This means all funds in the treasury are considered overflow. Since the configured `_metadata.redemptionRate` sent is 0 (which represents 100%), all outstanding tokens can be redeemed/burned to claim a proportional part of the overflow. This lets everyone who contributed funds have access to their ETH back.
-* A new funding cycle with an updated configuration can be triggered at any time by the project owner since the configured `_data.duration` of 0 and `_data.ballot` of `0x0000000000000000000000000000000000000000`. This lets the project owner capture an arbitrary amount of what's in the treasury at any given point by sending a reconfiguration with `_fundAccessConstraints` specified.
+* 1,000,000 of your project's tokens will be minted per ETH received, because the configured `_data.weight` is `1000000000000000000000000` (the raw value sent has 18 decimal places).
+* All tokens minted as a result of recieved ETH will go to the beneficiary address specified by the payer of the ETH, because the configured `_metadata.reservedRate` is 0.
+* Nothing fancy will happen outside of the default token minting behavior because the configured `_metadata.useDataSourceForPay` is `false`. 
+* None of the funds in the treasury can be distributed to the project owner because no `_fundAccessConstraints` were specified. This means all funds in the treasury are considered overflow. Because the configured `_metadata.redemptionRate` sent is 0 (which represents 100%), all outstanding tokens can be redeemed/burned to claim a proportional part of the overflow. This gives everyone who contributed funds the ability to access to their ETH.
+* A new funding cycle with an updated configuration can be triggered at any time by the project owner because the configured `_data.duration` is 0 and `_data.ballot` is `0x0000000000000000000000000000000000000000`. This lets the project owner capture an arbitrary amount of what's in the treasury at any given point by sending a reconfiguration with `_fundAccessConstraints` specified.
 
 Let's see what happens when basic `_fundAccessConstraints` are specified by sending the following [`JBFundAccessContraints`](../specifications/data-structures/jbfundaccessconstraints.md) values:
 
