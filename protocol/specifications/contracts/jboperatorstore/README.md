@@ -10,7 +10,7 @@ description: >-
 
 ### Code
 
-{% embed url="https://github.com/jbx-protocol/juice-juicehouse/blob/version/2.2/packages/hardhat/contracts/JBOperatorStore.sol" %}
+{% embed url="https://github.com/jbx-protocol/juice-contracts-v2/blob/main/contracts/JBOperatorStore.sol" %}
 
 ### **Addresses**
 

@@ -8,7 +8,7 @@ Kovan: `0x71BA69044CbD951AC87124cBEdbC0334AB21F26D`
 
 ## Contract
 
-[contracts/TerminalDirectory.sol](https://github.com/jbx-protocol/juicehouse/blob/main/packages/hardhat/contracts/TerminalDirectory.sol)
+[contracts/TerminalDirectory.sol](https://github.com/jbx-protocol/juice-contracts-v1/blob/main/contracts/TerminalDirectory.sol)
 
 ## Purpose
 

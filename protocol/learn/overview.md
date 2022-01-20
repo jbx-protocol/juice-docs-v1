@@ -17,14 +17,14 @@ The Juicebox protocol is made up of 7 core contracts and 3 surface contracts.
 The first two core contracts are pretty self explanatory. They store the core Juicebox components of the protocol.
 
 * [`JBTokenStore`](../specifications/contracts/jbtokenstore/) manages token minting and burning for all projects.
-* [`JBFundingCycleStore`](../specifications/contracts/jbfundingcyclestore/) manages funding cycle configurations and scheduling. Funding cycles are represented as a [`JBFundingCycle`](../data-structures/jbfundingcycle.md) data structure.
+* [`JBFundingCycleStore`](../specifications/contracts/jbfundingcyclestore/) manages funding cycle configurations and scheduling. Funding cycles are represented as a [`JBFundingCycle`](../specifications/data-structures/jbfundingcycle.md) data structure.
 
 The next few are a little more generic. They don't know anything specific to Juicebox, and are open for use by other protocols or future Juicebox extensions.
 
 *   [`JBProjects`](../specifications/contracts/jbprojects/) manages and tracks ownership over projects, which are represented as ERC-721 tokens.
 
     The protocol uses this to enforce permissions needed to access several project-oriented transactions.
-*   [`JBSplitsStore`](../specifications/contracts/jbsplitsstore/) stores information about how arbitrary distributions should be split. The information is represented as a [`JBSplit`](../data-structures/jbsplit.md#jbsplit) data structure.
+*   [`JBSplitsStore`](../specifications/contracts/jbsplitsstore/) stores information about how arbitrary distributions should be split. The information is represented as a [`JBSplit`](../specifications/data-structures/jbsplit.md) data structure.
 
     The surface contracts currently use these to split up payout distributions and reserved token distributions.
 *   [`JBPrices`](../specifications/contracts/jbprices/) manages and normalizes price feeds of various fiat currencies.
