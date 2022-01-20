@@ -13,7 +13,7 @@ _A controller can be set if:_
 * the message sender is the project owner or an operator having the correct authorization.
 * or, an allowedlisted address is setting an allowlisted controller.
 
-# Definition
+## Definition
 
 ```solidity
 function setControllerOf(uint256 _projectId, IJBController _controller)
@@ -31,11 +31,11 @@ function setControllerOf(uint256 _projectId, IJBController _controller)
 * Arguments:
   * `_projectId` is the ID of the project to set a new controller for.
   * `_controller` is the new controller to set.
-* Through the [`requirePermissionAllowingOverride`](../../or-abstract/jboperatable/modifiers/requirepermissionallowingoverride.md) modifier, the function is only accessible by the project's owner, from an operator that has been given the `JBOperations.SET_CONTROLLER` permission by the project owner for the provided `_projectId`, or from an allow-listed controller if the new controller being set is also an allow-listed controller. 
+* Through the [`requirePermissionAllowingOverride`](../../or-abstract/jboperatable/modifiers/requirepermissionallowingoverride.md) modifier, the function is only accessible by the project's owner, from an operator that has been given the `JBOperations.SET_CONTROLLER` permission by the project owner for the provided `_projectId`, or from an allow-listed controller if the new controller being set is also an allow-listed controller.
 * The function overrides a function definition from the `IJBDirectory` interface.
-* The function returns nothing.
-(_setControllerAllowlist[address(_controller)] && _setControllerAllowlist[msg.sender]) 
-# Body
+* The function returns nothing. (\_setControllerAllowlist\[address(\_controller)] && \_setControllerAllowlist\[msg.sender])
+
+## Body
 
 1.  Make sure the provided controller isn't the zero address.
 
@@ -45,7 +45,6 @@ function setControllerOf(uint256 _projectId, IJBController _controller)
       revert SET_CONTROLLER_ZERO_ADDRESS();
     }
     ```
-
 2.  Make sure the provided controller isn't already set.
 
     ```solidity
@@ -54,6 +53,7 @@ function setControllerOf(uint256 _projectId, IJBController _controller)
       revert SET_CONTROLLER_ALREADY_SET();
     }
     ```
+
     Internal references:
 
     * [`controllerOf`](../properties/controllerof.md)
@@ -137,11 +137,11 @@ function setControllerOf(uint256 _projectId, IJBController _controller)
 {% endtab %}
 
 {% tab title="Errors" %}
-| String                   | Description                                            |
-| ------------------------ | ------------------------------------------------------ |
-| **`SET_CONTROLLER_ZERO_ADDRESS`** | Thrown if the provided controller is the zero address. |
-| **`SET_CONTROLLER_ALREADY_SET`** | Thrown if the provided controller is already the set controller. |
-| **`INVALID_PROJECT_ID`**    | Thrown if the provided project doesn't yet exist.      |
+| String                            | Description                                                      |
+| --------------------------------- | ---------------------------------------------------------------- |
+| **`SET_CONTROLLER_ZERO_ADDRESS`** | Thrown if the provided controller is the zero address.           |
+| **`SET_CONTROLLER_ALREADY_SET`**  | Thrown if the provided controller is already the set controller. |
+| **`INVALID_PROJECT_ID`**          | Thrown if the provided project doesn't yet exist.                |
 {% endtab %}
 
 {% tab title="Events" %}

@@ -10,7 +10,7 @@ Interface: [`IJBTokenStore`](../../../interfaces/ijbtokenstore.md)
 
 _Only a token holder or an operator can transfer its unclaimed tokens_.
 
-# Definition
+## Definition
 
 ```solidity
 function transferTo(
@@ -30,7 +30,7 @@ function transferTo(
 * The function overrides a function definition from the `IJBTokenStore` interface.
 * The function returns nothing.
 
-# Body
+## Body
 
 1.  Make sure a recipient was specified.
 
@@ -164,11 +164,11 @@ function transferTo(
 {% endtab %}
 
 {% tab title="Errors" %}
-| String                         | Description                                                  |
-| ------------------------------ | ------------------------------------------------------------ |
-| **`RECIPIENT_ZERO_ADDRESS`**       | Thrown if no recipient was speicified.                       |
-| **`INVALID_RECIPIENT`**           | Thrown if the holder is the same address as the recipient.   |
-| **`TOKEN_AMOUNT_ZERO`**              | Thrown if no amount was specified to transfer.               |
+| String                              | Description                                                  |
+| ----------------------------------- | ------------------------------------------------------------ |
+| **`RECIPIENT_ZERO_ADDRESS`**        | Thrown if no recipient was speicified.                       |
+| **`INVALID_RECIPIENT`**             | Thrown if the holder is the same address as the recipient.   |
+| **`TOKEN_AMOUNT_ZERO`**             | Thrown if no amount was specified to transfer.               |
 | **`INSUFFICIENT_UNCLAIMED_TOKENS`** | Thrown if the holder doesn't have enough tokens to transfer. |
 {% endtab %}
 

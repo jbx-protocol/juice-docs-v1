@@ -1,4 +1,4 @@
-# addToSetControllerAllowList
+# addToSetControllerAllowlist
 
 Contract:[`JBDirectory`](../)​‌
 
@@ -8,13 +8,11 @@ Interface: [`IJBDirectory`](../../../interfaces/ijbdirectory.md)
 {% tab title="Step by step" %}
 **Add a controller to the list of trusted controllers.**
 
-_The owner (Juicebox multisig) can add addresses which are allowed to change a project's controller._
-_Those addresses are known and vetted controllers as well as contracts designed to launch new projects._ 
-_This is not a requirement for all controllers. However, unknown controllers may require additional transactions to perform certain operations._
+_The owner (Juicebox multisig) can add addresses which are allowed to change a project's controller._ _Those addresses are known and vetted controllers as well as contracts designed to launch new projects._ _This is not a requirement for all controllers. However, unknown controllers may require additional transactions to perform certain operations._
 
 _If you would like an address/contract allowlisted, please reach out to JuiceboxDAO._
 
-# Definition
+## Definition
 
 ```solidity
 function addToSetControllerAllowlist(address _address) external override onlyOwner { ... }
@@ -26,7 +24,7 @@ function addToSetControllerAllowlist(address _address) external override onlyOwn
 * The function overrides a function definition from the `IJBDirectory` interface.
 * The function returns nothing.
 
-# Body
+## Body
 
 1.  Make sure the controller isn't already on the allowlist.
 
@@ -39,8 +37,7 @@ function addToSetControllerAllowlist(address _address) external override onlyOwn
 
     Internal references:
 
-    * [`_setControllerAllowlist`](./properties/_setcontrollerallowlist.md)
-
+    * [`_setControllerAllowlist`](properties/\_setcontrollerallowlist.md)
 2.  Add the controller to the allowlist.
 
     ```solidity
@@ -50,7 +47,7 @@ function addToSetControllerAllowlist(address _address) external override onlyOwn
 
     Internal references:
 
-    * [`_setControllerAllowlist`](./properties/_setcontrollerallowlist.md)
+    * [`_setControllerAllowlist`](properties/\_setcontrollerallowlist.md)
 3.  Emit a `AddToSetControllerAllowlist` event with the relevant parameters.
 
     ```solidity
@@ -94,14 +91,14 @@ function addToSetControllerAllowlist(address _address) external override onlyOwn
 {% endtab %}
 
 {% tab title="Errors" %}
-| String                   | Description                                                 |
-| ------------------------ | ----------------------------------------------------------- |
+| String                                | Description                                                  |
+| ------------------------------------- | ------------------------------------------------------------ |
 | **`CONTROLLER_ALREADY_IN_ALLOWLIST`** | Thrown if a provided controller is already on the allowlist. |
 {% endtab %}
 
 {% tab title="Events" %}
-| Name                                                | Data                                                                                                                                                                                                        |
-| --------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Name                                                                          | Data                                                                                          |
+| ----------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
 | [**`AddToSetControllerAllowlist`**](../events/addtosetcontrollerallowlist.md) | <ul><li><code>address indexed controller</code></li><li><code>address caller</code></li></ul> |
 {% endtab %}
 

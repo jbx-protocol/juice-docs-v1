@@ -8,7 +8,7 @@ Interface: [`IJBController`](../../../../interfaces/ijbcontroller.md)
 {% tab title="Step by step" %}
 **The amount of token that a project can withdraw per funding cycle.**
 
-# Definition
+## Definition
 
 ```solidity
 function distributionLimitOf(
@@ -27,7 +27,7 @@ function distributionLimitOf(
 * The function overrides a function definition from the [`IJBController`](../../../../interfaces/ijbcontroller.md) interface.
 * The function returns the distribution limit.
 
-# Body
+## Body
 
 1.  Return the first 248 bits of the packed distribution limit data.
 
@@ -38,7 +38,6 @@ function distributionLimitOf(
     _Internal references:_
 
     * [`_packedDistributionLimitDataOf`](../properties/\_packeddistributionlimitdataof.md)
-
 {% endtab %}
 
 {% tab title="Code" %}

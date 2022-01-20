@@ -10,7 +10,7 @@ Interface: [`IJBDirectory`](../../../interfaces/ijbdirectory.md)
 
 _Only a project owner, an operator, or its controller can add terminals._
 
-# Definition
+## Definition
 
 ```solidity
 function addTerminalsOf(uint256 _projectId, IJBTerminal _terminal)
@@ -31,7 +31,7 @@ function addTerminalsOf(uint256 _projectId, IJBTerminal _terminal)
 * The function overrides a function definition from the `IJBDirectory` interface.
 * The function returns nothing.
 
-# Body
+## Body
 
 1.  Add each terminal if it's not the zero address and it's not already added.
 
@@ -47,7 +47,7 @@ function addTerminalsOf(uint256 _projectId, IJBTerminal _terminal)
 
     Internal references:
 
-    * [`_addTerminalIfNeeded`](./_addterminalifneeded.md)
+    * [`_addTerminalIfNeeded`](\_addterminalifneeded.md)
 {% endtab %}
 
 {% tab title="Code" %}
@@ -85,8 +85,8 @@ function addTerminalsOf(uint256 _projectId, IJBTerminal[] calldata _terminals)
 {% endtab %}
 
 {% tab title="Errors" %}
-| String                   | Description                                                 |
-| ------------------------ | ----------------------------------------------------------- |
+| String                          | Description                                               |
+| ------------------------------- | --------------------------------------------------------- |
 | **`ADD_TERMINAL_ZERO_ADDRESS`** | Thrown if a provided terminal to add is the zero address. |
 {% endtab %}
 

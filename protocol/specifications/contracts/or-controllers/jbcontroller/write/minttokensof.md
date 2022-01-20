@@ -10,7 +10,7 @@ Interface: [`IJBController`](../../../../interfaces/ijbcontroller.md)
 
 _Only a project's owner, a designated operator, or one of its terminal's delegate can mint its tokens._
 
-# Definition
+## Definition
 
 ```solidity
 function mintTokensOf(
@@ -45,7 +45,7 @@ function mintTokensOf(
 * The function overrides a function definition from the [`IJBController`](../../../../interfaces/ijbcontroller.md) interface.
 * The function doesn't return anything.
 
-# Body
+## Body
 
 1.  Make sure the reserved rate is not greater than the max.
 
@@ -62,7 +62,7 @@ function mintTokensOf(
       revert RESERVED_RATE_NOT_MAX_WHILE_BENEFICIARY_ZERO_ADDRESS();
     }
     ```
-2.  Make sure there is a specified number of tokens to mint.
+3.  Make sure there is a specified number of tokens to mint.
 
     ```solidity
     // There should be tokens to mint.
@@ -70,7 +70,7 @@ function mintTokensOf(
       revert ZERO_TOKENS_TO_MINT();
     }
     ```
-3.  Get a reference to the current funding cycle for the project.
+4.  Get a reference to the current funding cycle for the project.
 
     ```solidity
     // Get a reference to the project's current funding cycle.
@@ -80,7 +80,7 @@ function mintTokensOf(
     _External references:_
 
     * [`currentOf`](../../../jbfundingcyclestore/read/currentof.md)
-4.  Make sure the current funding cycle for the project hasn't paused minting if the request is not coming from one of the project's terminals. If the request is coming from a terminal, allow minting regardless of the pause state because it could be a sub-routine of another operation such as receiving payments.
+5.  Make sure the current funding cycle for the project hasn't paused minting if the request is not coming from one of the project's terminals. If the request is coming from a terminal, allow minting regardless of the pause state because it could be a sub-routine of another operation such as receiving payments.
 
     ```solidity
     // If the message sender is not a terminal delegate, the current funding cycle must not be paused.
@@ -97,7 +97,7 @@ function mintTokensOf(
     _External references:_
 
     * [`isTerminalDelegateOf`](../../../jbdirectory/read/isterminaldelegateof.md)
-5.  If the operation should reserve 100% of the minted tokens, the token tracker should be updated to add a difference of the specified token count instead of minting the tokens directly. This will allow a future distribution of reserved tokens to mint the token count to reserved addresses. Otherwise, mint the tokens updating the token tracker if there is no intent to reserve tokens alongside the mint.
+6.  If the operation should reserve 100% of the minted tokens, the token tracker should be updated to add a difference of the specified token count instead of minting the tokens directly. This will allow a future distribution of reserved tokens to mint the token count to reserved addresses. Otherwise, mint the tokens updating the token tracker if there is no intent to reserve tokens alongside the mint.
 
     ```solidity
     if (_reservedRate == JBConstants.MAX_RESERVED_RATE) {
@@ -136,7 +136,7 @@ function mintTokensOf(
     _External references:_
 
     * [`mintFor`](../../../jbtokenstore/write/mintFor.md)
-6.  Emit a `MintTokens` event with the relevant parameters.
+7.  Emit a `MintTokens` event with the relevant parameters.
 
     ```solidity
     emit MintTokens(
@@ -243,12 +243,12 @@ function mintTokensOf(
 {% endtab %}
 
 {% tab title="Errors" %}
-| String                   | Description                                                                                                                |
-| ------------------------ | -------------------------------------------------------------------------------------------------------------------------- |
-| **`INVALID_RESERVED_RATE`** | Thrown if the reserved rate provided is too big.                                                                       |
-| **`RESERVED_RATE_NOT_MAX_WHILE_BENEFICIARY_ZERO_ADDRESS`** | Thrown if the token beneficiary is the zero address whle the reserved rate isn't 100%.                                                                       |
-| **`ZERO_TOKENS_TO_MINT`**        | Thrown if no tokens are being minted.                                                                                      |
-| **`MINT_PAUSED_AND_NOT_TERMINAL_DELEGATE`**       | Thrown if the request is not being made by a payment terminal, and the project's current funding cycle has paused minting. |
+| String                                                     | Description                                                                                                                |
+| ---------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
+| **`INVALID_RESERVED_RATE`**                                | Thrown if the reserved rate provided is too big.                                                                           |
+| **`RESERVED_RATE_NOT_MAX_WHILE_BENEFICIARY_ZERO_ADDRESS`** | Thrown if the token beneficiary is the zero address whle the reserved rate isn't 100%.                                     |
+| **`ZERO_TOKENS_TO_MINT`**                                  | Thrown if no tokens are being minted.                                                                                      |
+| **`MINT_PAUSED_AND_NOT_TERMINAL_DELEGATE`**                | Thrown if the request is not being made by a payment terminal, and the project's current funding cycle has paused minting. |
 {% endtab %}
 
 {% tab title="Events" %}

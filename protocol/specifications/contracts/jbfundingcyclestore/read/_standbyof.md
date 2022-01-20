@@ -10,7 +10,7 @@ _A value of 0 is returned if no funding cycle was found._
 
 _Assumes the project has a latest configuration._
 
-# Definition
+## Definition
 
 ```solidity
 function _standbyOf(uint256 _projectId) private view returns (uint256 configuration) { ... }
@@ -22,7 +22,7 @@ function _standbyOf(uint256 _projectId) private view returns (uint256 configurat
 * The function does not alter state on the blockchain.
 * The function returns the configuration of the standby funding cycle if one exists, or 0 if one doesn't exist.
 
-# Body
+## Body
 
 1.  Get a reference to the latest funding cycle for the project.
 
@@ -50,16 +50,14 @@ function _standbyOf(uint256 _projectId) private view returns (uint256 configurat
     // There is no upcoming funding cycle if the latest funding cycle has already started.
     if (block.timestamp >= _fundingCycle.start) return 0;
     ```
-
-4.  If this is the first funding cycle, it must be queued since it doesn't require a ballot's approval. 
+4.  If this is the first funding cycle, it must be queued since it doesn't require a ballot's approval.
 
     ```solidity
     // If this is the first funding cycle, it is queued.
     if (_fundingCycle.number == 1) return configuration;
     ```
-
 5.  Get a reference to the cycle that the latest is based on.
-    
+
     ```solidity
     // Get the necessary properties for the base funding cycle.
     JBFundingCycle memory _baseFundingCycle = _getStructFor(_projectId, _fundingCycle.basedOn);
@@ -68,9 +66,8 @@ function _standbyOf(uint256 _projectId) private view returns (uint256 configurat
     _Internal references:_
 
     * [`_getStructFor`](\_getstructfor.md)
-
 6.  It's possible that the latest cycle was configured to start at or after a date in the future that comes after another iteration of the currently active funding cycle. If this is the case, there is no immediately queued funding cycle.
-    
+
     ```solidity
     // If the latest configuration doesn't start until after another base cycle, return 0.
     if (
@@ -78,7 +75,6 @@ function _standbyOf(uint256 _projectId) private view returns (uint256 configurat
       block.timestamp < _fundingCycle.start - _baseFundingCycle.duration
     ) return 0;
     ```
-
 {% endtab %}
 
 {% tab title="Code" %}

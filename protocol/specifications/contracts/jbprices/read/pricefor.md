@@ -8,7 +8,7 @@ Interface: `IJBPrices`
 {% tab title="Step by step" %}
 **Gets the current price of the provided currency in terms of the provided base currency.**
 
-# Definition
+## Definition
 
 ```solidity
 function priceFor(uint256 _currency, uint256 _base) external view override returns (uint256) { ... }
@@ -21,7 +21,7 @@ function priceFor(uint256 _currency, uint256 _base) external view override retur
 * The function overrides a function definition from the `IJBPrices` interface.
 * The function returns the price of the currency in terms of the base, with 18 decimals.
 
-# Body
+## Body
 
 1.  Return 1 if the `_currency` and the `_base` are the same, since they have the same price. Normalize to `targetDecimals` number of decimals.
 
@@ -123,8 +123,8 @@ function priceFor(uint256 _currency, uint256 _base) external view override retur
 {% endtab %}
 
 {% tab title="Errors" %}
-| String                | Description                                                        |
-| --------------------- | ------------------------------------------------------------------ |
+| String                     | Description                                                        |
+| -------------------------- | ------------------------------------------------------------------ |
 | **`PRICE_FEED_NOT_FOUND`** | Thrown if a feed wasn't found for the specified currency and base. |
 {% endtab %}
 

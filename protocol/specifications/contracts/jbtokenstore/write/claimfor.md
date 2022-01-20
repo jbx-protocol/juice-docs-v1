@@ -10,7 +10,7 @@ Interface: [`IJBTokenStore`](../../../interfaces/ijbtokenstore.md)
 
 _Anyone can claim tokens on behalf of a token owner._
 
-# Definition
+## Definition
 
 ```solidity
 function claimFor(
@@ -28,7 +28,7 @@ function claimFor(
 * The function overrides a function definition from the `IJBTokenStore` interface.
 * The function returns nothing.
 
-# Body
+## Body
 
 1.  Get a reference to the project's token.
 
@@ -156,9 +156,9 @@ function claimFor(
 {% endtab %}
 
 {% tab title="Errors" %}
-| String                         | Description                                               |
-| ------------------------------ | --------------------------------------------------------- |
-| **`TOKEN_NOT_FOUND`**          | Thrown if the project hasn't yet issued its token.        |
+| String                              | Description                                               |
+| ----------------------------------- | --------------------------------------------------------- |
+| **`TOKEN_NOT_FOUND`**               | Thrown if the project hasn't yet issued its token.        |
 | **`INSUFFICIENT_UNCLAIMED_TOKENS`** | Thrown if the holder doens't have enough tokens to claim. |
 {% endtab %}
 

@@ -10,7 +10,7 @@ Interface: `IJBFundingCycleStore`
 
 _Returns an empty funding cycle with all properties set to 0 if a queued funding cycle of the project is not found._
 
-# Definition
+## Definition
 
 ```solidity
 function queuedOf(uint256 _projectId) public view override returns (JBFundingCycle memory) { ... }
@@ -23,7 +23,7 @@ function queuedOf(uint256 _projectId) public view override returns (JBFundingCyc
 * The function overrides a function definition from the `IJBFundingCycleStore` interface.
 * The function returns a [`JBFundingCycle`](../../../data-structures/jbfundingcycle.md).
 
-# Body
+## Body
 
 1.  If there are no stored funding cycles for the provided project, there can't be a queued funding cycle so an empty funding cycle should be returned.
 
@@ -107,7 +107,7 @@ function queuedOf(uint256 _projectId) public view override returns (JBFundingCyc
     // Get the funding cycle of its base funding cycle, which carries the last approved configuration.
     _fundingCycle = _getStructFor(_projectId, _fundingCycle.basedOn);
     ```
-8. Return a funding cycle based on the one current referenced, which must be the last approved cycle. The mock funding cycle is not allowed to have started already, which is why a `false` flag is passed in.
+8.  Return a funding cycle based on the one current referenced, which must be the last approved cycle. The mock funding cycle is not allowed to have started already, which is why a `false` flag is passed in.
 
     ```solidity
     // Return a mock of the next up funding cycle.

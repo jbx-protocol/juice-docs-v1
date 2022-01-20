@@ -12,7 +12,7 @@ _Only the owner or operator of a project, or the current controller contract of 
 
 _The new splits must include any currently set splits that are locked._
 
-# Definition
+## Definition
 
 ```solidity
 function set(
@@ -40,7 +40,7 @@ function set(
 * The function overrides a function definition from the `IJBSplitsStore` interface.
 * The function doesn't return anything.
 
-# Body
+## Body
 
 1.  Get a reference to the current splits set for the specified `_projectId`'s `_domain`, within the specified `_group`.
 
@@ -60,37 +60,36 @@ function set(
     for (uint256 _i = 0; _i < _currentSplits.length; _i++) { ... }
     ```
 
-    * If the current split isn't locked, move on to the next one.
+    *   If the current split isn't locked, move on to the next one.
 
-      ```solidity
-      if (block.timestamp >= _currentSplits[_i].lockedUntil) continue;
-      ```
-    * If the current split is locked, check to make sure the new `_splits` includes it. The only property of a locked split that can have changed is its `lockedUntil` property, which can be extended.
+        ```solidity
+        if (block.timestamp >= _currentSplits[_i].lockedUntil) continue;
+        ```
+    *   If the current split is locked, check to make sure the new `_splits` includes it. The only property of a locked split that can have changed is its `lockedUntil` property, which can be extended.
 
-      ```solidity
-      // Keep a reference to whether or not the locked split being iterated on is included.
-      bool _includesLocked = false;
+        ```solidity
+        // Keep a reference to whether or not the locked split being iterated on is included.
+        bool _includesLocked = false;
 
-      for (uint256 _j = 0; _j < _splits.length; _j++) {
-        // Check for sameness.
-        if (
-          _splits[_j].percent == _currentSplits[_i].percent &&
-          _splits[_j].beneficiary == _currentSplits[_i].beneficiary &&
-          _splits[_j].allocator == _currentSplits[_i].allocator &&
-          _splits[_j].projectId == _currentSplits[_i].projectId &&
-          // Allow lock extention.
-          _splits[_j].lockedUntil >= _currentSplits[_i].lockedUntil
-        ) _includesLocked = true;
-      }
-      ```
-    * Check to make sure the provided `_splits` includes any locked current splits.
+        for (uint256 _j = 0; _j < _splits.length; _j++) {
+          // Check for sameness.
+          if (
+            _splits[_j].percent == _currentSplits[_i].percent &&
+            _splits[_j].beneficiary == _currentSplits[_i].beneficiary &&
+            _splits[_j].allocator == _currentSplits[_i].allocator &&
+            _splits[_j].projectId == _currentSplits[_i].projectId &&
+            // Allow lock extention.
+            _splits[_j].lockedUntil >= _currentSplits[_i].lockedUntil
+          ) _includesLocked = true;
+        }
+        ```
+    *   Check to make sure the provided `_splits` includes any locked current splits.
 
-      ```solidity
-      if (!_includesLocked) {
-        revert PREVIOUS_LOCKED_SPLITS_NOT_INCLUDED();
-      }
-      ```
-
+        ```solidity
+        if (!_includesLocked) {
+          revert PREVIOUS_LOCKED_SPLITS_NOT_INCLUDED();
+        }
+        ```
 3.  After the loop, delete the current splits from storage so we can repopulate them.
 
     ```solidity
@@ -113,60 +112,58 @@ function set(
     for (uint256 _i = 0; _i < _splits.length; _i++) { ... }
     ```
 
-    * Check that the percent for the current split is not zero.
+    *   Check that the percent for the current split is not zero.
 
-      ```solidity
-      // The percent should be greater than 0.
-      if (_splits[_i].percent == 0) {
-        revert INVALID_SPLIT_PERCENT();
-      }
-      ```
+        ```solidity
+        // The percent should be greater than 0.
+        if (_splits[_i].percent == 0) {
+          revert INVALID_SPLIT_PERCENT();
+        }
+        ```
+    *   Check that the split specifies a recipient. Either an `allocator` must be specified or a `beneficiary` must be specified.
 
-    * Check that the split specifies a recipient. Either an `allocator` must be specified or a `beneficiary` must be specified.
+        ```solidity
+        // The allocator and the beneficiary shouldn't both be the zero address.
+        if (
+          _splits[_i].allocator == IJBSplitAllocator(address(0)) &&
+          _splits[_i].beneficiary == address(0)
+        ) {
+          revert ALLOCATOR_AND_BENEFICIARY_ZERO_ADDRESS();
+        }
+        ```
+    *   Increment the total percents that have been accumulated so far.
 
-      ```solidity
-      // The allocator and the beneficiary shouldn't both be the zero address.
-      if (
-        _splits[_i].allocator == IJBSplitAllocator(address(0)) &&
-        _splits[_i].beneficiary == address(0)
-      ) {
-        revert ALLOCATOR_AND_BENEFICIARY_ZERO_ADDRESS();
-      }
-      ```
+        ```solidity
+        // Add to the total percents.
+        _percentTotal = _percentTotal + _splits[_i].percent;
+        ```
+    *   Make sure the accumulated percents are under 100%. Split percents are out of 10000000.
 
-    * Increment the total percents that have been accumulated so far.
+        ```solidity
+        // Validate the total does not exceed the expected value.
+        if (_percentTotal > JBConstants.SPLITS_TOTAL_PERCENT) {
+          revert INVALID_TOTAL_PERCENT();
+        }
+        ```
+    *   Push the split onto the stored `_splits` value.
 
-      ```solidity
-      // Add to the total percents.
-      _percentTotal = _percentTotal + _splits[_i].percent;
-      ```
-    * Make sure the accumulated percents are under 100%. Split percents are out of 10000000.
+        ```solidity
+        // Push the new split into the project's list of splits.
+        _splitsOf[_projectId][_domain][_group].push(_splits[_i]);
+        ```
 
-      ```solidity
-      // Validate the total does not exceed the expected value.
-      if (_percentTotal > JBConstants.SPLITS_TOTAL_PERCENT) {
-        revert INVALID_TOTAL_PERCENT();
-      }
-      ```
-    * Push the split onto the stored `_splits` value.
+        _Internal references:_
 
-      ```solidity
-      // Push the new split into the project's list of splits.
-      _splitsOf[_projectId][_domain][_group].push(_splits[_i]);
-      ```
+        * [`_splitsOf`](../properties/\_splitsof.md)
+    *   For each added split, emit a `SetSplit` event with all relevant parameters.
 
-      _Internal references:_
+        ```solidity
+        emit SetSplit(_projectId, _domain, _group, _splits[_i], msg.sender);
+        ```
 
-      * [`_splitsOf`](../properties/\_splitsof.md)
-    * For each added split, emit a `SetSplit` event with all relevant parameters.
+        _Event references:_
 
-      ```solidity
-      emit SetSplit(_projectId, _domain, _group, _splits[_i], msg.sender);
-      ```
-
-      _Event references:_
-
-      * [`SetSplit`](../events/setsplit.md)
+        * [`SetSplit`](../events/setsplit.md)
 {% endtab %}
 
 {% tab title="Code" %}
@@ -266,12 +263,12 @@ function set(
 {% endtab %}
 
 {% tab title="Errors" %}
-| String                        | Description                                                                   |
-| ----------------------------- | ----------------------------------------------------------------------------- |
-| **`PREVIOUS_LOCKED_SPLITS_NOT_INCLUDED`**       | Thrown if the splits that are being set override some splits that are locked. |
-| **`INVALID_SPLIT_PERCENT`** | Thrown if the split has specified a percent of 0.                             |
-| **`ALLOCATOR_AND_BENEFICIARY_ZERO_ADDRESS`**      | Thrown if the split doesn't specify a destination.                            |
-| **`INVALID_TOTAL_PERCENT`** | Thrown if the split percents add up more than 100%.                           |
+| String                                       | Description                                                                   |
+| -------------------------------------------- | ----------------------------------------------------------------------------- |
+| **`PREVIOUS_LOCKED_SPLITS_NOT_INCLUDED`**    | Thrown if the splits that are being set override some splits that are locked. |
+| **`INVALID_SPLIT_PERCENT`**                  | Thrown if the split has specified a percent of 0.                             |
+| **`ALLOCATOR_AND_BENEFICIARY_ZERO_ADDRESS`** | Thrown if the split doesn't specify a destination.                            |
+| **`INVALID_TOTAL_PERCENT`**                  | Thrown if the split percents add up more than 100%.                           |
 {% endtab %}
 
 {% tab title="Events" %}

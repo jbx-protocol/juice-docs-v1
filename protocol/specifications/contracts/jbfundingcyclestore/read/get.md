@@ -8,7 +8,7 @@ Interface: `IJBFundingCycleStore`
 {% tab title="Step by step" %}
 **Get the funding cycle with the given configuration for the specified project.**
 
-# Definition
+## Definition
 
 ```solidity
 function get(uint256 _projectId, uint256 _configuration)
@@ -26,7 +26,7 @@ function get(uint256 _projectId, uint256 _configuration)
 * The function overrides a function definition from the `IJBFundingCycleStore` interface.
 * The function returns a [`JBFundingCycle`](../../../data-structures/jbfundingcycle.md).
 
-# Body
+## Body
 
 1.  Return the struct for the provided configuration and project.
 

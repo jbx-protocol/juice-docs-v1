@@ -6,7 +6,7 @@ Contract:[`JBFundingCycleStore`](../)​
 {% tab title="Step by step" %}
 **Updates the configurable funding cycle for this project if it exists, otherwise creates one.**
 
-# Definition
+## Definition
 
 ```solidity
 function _configureIntrinsicProperiesFor(
@@ -25,7 +25,7 @@ function _configureIntrinsicProperiesFor(
 * The function is private to this contract.
 * The function returns the ID of a configurable funding cycle.
 
-# Body
+## Body
 
 1.  If the project does not yet have a funding cycle, initialize a new one with no base.
 
@@ -42,7 +42,7 @@ function _configureIntrinsicProperiesFor(
 
     * [`latestConfigurationOf`](../properties/latestconfigurationof.md)
     * [`_initFor`](\_initfor.md)
-    * [`_getStructFor`](../read/_getstructfor.md)
+    * [`_getStructFor`](../read/\_getstructfor.md)
 2.  If there's no standby funding cycle, get a reference to the project's eligible funding cycle. The configurable funding cycle will have to be initialized based on the eligible cycle.
 
     ```solidity
@@ -52,8 +52,8 @@ function _configureIntrinsicProperiesFor(
 
     _Internal references:_
 
-    * [`_eligibleOf`](../read/_eligibleof.md)
-3.  If there is no eligible funding cycle for the project, get a reference instead to the project's latest funding cycle configuration, which may have been initialized long into the past. 
+    * [`_eligibleOf`](../read/\_eligibleof.md)
+3.  If there is no eligible funding cycle for the project, get a reference instead to the project's latest funding cycle configuration, which may have been initialized long into the past.
 
     ```solidity
     // If an eligible funding cycle does not exist, get a reference to the latest funding cycle configuration for the project.
@@ -65,8 +65,8 @@ function _configureIntrinsicProperiesFor(
     _Internal references:_
 
     * [`latestConfigurationOf`](../properties/latestconfigurationof.md)
-
 4.  Resolve the funding cycle struct for the currently referenced configuration.
+
     ```solidity
     // Get a reference to the funding cycle.
     JBFundingCycle memory _fundingCycle = _getStructFor(_projectId, _currentConfiguration);
@@ -74,8 +74,8 @@ function _configureIntrinsicProperiesFor(
 
     _Internal references:_
 
-    * [`_getStructFor`](../read/_getstructfor.md)
-5.  If the configuration isn't approves, get a reference to the configuration it's based on which must be the latest approved configuration. 
+    * [`_getStructFor`](../read/\_getstructfor.md)
+5.  If the configuration isn't approves, get a reference to the configuration it's based on which must be the latest approved configuration.
 
     ```solidity
     if (!_isApproved(_projectId, _fundingCycle))
@@ -86,8 +86,8 @@ function _configureIntrinsicProperiesFor(
 
     _Internal references:_
 
-    * [`_isApproved`](../read/_isapproved.md)
-    * [`_getStructFor`](../read/_getstructfor.md)
+    * [`_isApproved`](../read/\_isapproved.md)
+    * [`_getStructFor`](../read/\_getstructfor.md)
 6.  At this point, the `_currentConfiguration` is the funding cycle configuration that the initialized one should be based on. Get a reference to the [`JBFundingCycle`](../../../data-structures/jbfundingcycle.md)for the configuration.
 
     ```solidity
@@ -97,7 +97,7 @@ function _configureIntrinsicProperiesFor(
 
     _Internal references:_
 
-    * [`_getStructFor`](../read/_getstructfor.md)
+    * [`_getStructFor`](../read/\_getstructfor.md)
 7.  Get a reference to the time after which the base funding cycle's ballot will be resolved. The funding cycle that will be initialized can start any time after the base funding cycle's ballot's duration is up.
 
     ```solidity
@@ -111,8 +111,7 @@ function _configureIntrinsicProperiesFor(
     _Internal references:_
 
     * [`duration`](../../../interfaces/ijbfundingcycleballot.md)
-
-8. Initialize a funding cycle with the correct configuration. Make sure it can only start after the base cycle's ballot has resolved.
+8.  Initialize a funding cycle with the correct configuration. Make sure it can only start after the base cycle's ballot has resolved.
 
     ```solidity
     _initFor(
@@ -127,7 +126,7 @@ function _configureIntrinsicProperiesFor(
 
     _Internal references:_
 
-    * [`_initFor`](../read/_initfor.md)
+    * [`_initFor`](../read/\_initfor.md)
 {% endtab %}
 
 {% tab title="Code" %}

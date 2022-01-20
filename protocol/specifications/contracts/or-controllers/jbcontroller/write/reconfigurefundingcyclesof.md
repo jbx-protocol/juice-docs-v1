@@ -10,7 +10,7 @@ Interface: [`IJBController`](../../../../interfaces/ijbcontroller.md)
 
 _Only a project's owner or a designated operator can configure its funding cycles._
 
-# Definition
+## Definition
 
 ```solidity
 function reconfigureFundingCyclesOf(
@@ -36,7 +36,7 @@ function reconfigureFundingCyclesOf(
 * Through the [`requirePermission`](../../../or-abstract/jboperatable/modifiers/requirepermission.md) modifier, the function is only accessible by the project's owner, or from an operator that has been given the `JBOperations.RECONFIGURE` permission by the project owner for the provided `_projectId`.
 * The function returns the configuration of the funding cycle that was successfully updated.
 
-# Body
+## Body
 
 1.  Make sure the reserved rate is a valid number out of 200.
 
@@ -128,16 +128,16 @@ function reconfigureFundingCyclesOf(
 {% endtab %}
 
 {% tab title="Errors" %}
-| String                                 | Description                                                |
-| -------------------------------------- | ---------------------------------------------------------- |
+| String                               | Description                                                |
+| ------------------------------------ | ---------------------------------------------------------- |
 | **`INVALID_RESERVED_RATE`**          | Thrown if the reserved rate is greater than 100%.          |
 | **`INVALID_REDEMPTION_RATE`**        | Thrown if the redemption rate is greater than 100%.        |
 | **`INVALID_BALLOT_REDEMPTION_RATE`** | Thrown if the ballot redemption rate is greater than 100%. |
 {% endtab %}
 
 {% tab title="Events" %}
-| Name                                                                    | Data                                                                                                                                                                                                                                                                                  |
-| ----------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Name                                                                    | Data                                                                                                                                                                                                                                                                                                                                                      |
+| ----------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | [**`SetFundAccessConstraints`**](../events/setfundaccessconstraints.md) | <ul><li><code>uint256 indexed fundingCycleConfiguration</code></li><li><code>uint256 indexed fundingCycleNumber</code></li><li><code>uint256 indexed projectId</code></li><li><a href="../../../../data-structures/jboverflowallowance.md"><code>JBFundAccessConstraints</code></a><code>constraints</code></li><li><code>address caller</code></li></ul> |
 {% endtab %}
 

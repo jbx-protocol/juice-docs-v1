@@ -10,7 +10,7 @@ Interface: `IJBFundingCycleStore`
 
 _Only a project's current controller can configure its funding cycles._
 
-# Definition
+## Definition
 
 ```solidity
 function configureFor(
@@ -30,12 +30,12 @@ function configureFor(
 * The function overrides a function definition from the `IJBFundingCycleStore` interface.
 * Returns the [`JBFundingCycle`](../../../data-structures/jbfundingcycle.md) that was configured.
 
-# Body
+## Body
 
-1.  Make sure the `_data.duration` fits in a `uint64`. 
+1.  Make sure the `_data.duration` fits in a `uint64`.
 
     ```solidity
-  	// Duration must fit in a uint64.
+    // Duration must fit in a uint64.
     if (_data.duration > type(uint64).max) {
       revert INVALID_DURATION();
     }
@@ -218,18 +218,18 @@ function configureFor(
 {% endtab %}
 
 {% tab title="Errors" %}
-| String                        | Description                                                       |
-| ----------------------------- | ----------------------------------------------------------------- |
-| **`INVALID_DURATION`**      | Thrown if the provided duration is greater than 2^64 - 1 (1.844E19) |
-| **`INVALID_DISCOUNT_RATE`** | Thrown if the provided discount rate is greater than the max expected value.         |
-| **`INVALID_WEIGHT`**        | Thrown if the provided weight is greater than 2^88 - 1 (3.09E26)   |
+| String                      | Description                                                                  |
+| --------------------------- | ---------------------------------------------------------------------------- |
+| **`INVALID_DURATION`**      | Thrown if the provided duration is greater than 2^64 - 1 (1.844E19)          |
+| **`INVALID_DISCOUNT_RATE`** | Thrown if the provided discount rate is greater than the max expected value. |
+| **`INVALID_WEIGHT`**        | Thrown if the provided weight is greater than 2^88 - 1 (3.09E26)             |
 {% endtab %}
 
 {% tab title="Events" %}
-| Name                                      | Data                                                                                                                                                                                                                                                                                                                                                         |
-| ----------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Name                                      | Data                                                                                                                                                                                                                                                                                                                                                                                                         |
+| ----------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | [**`Configure`**](../events/configure.md) | <ul><li><code>uint256 indexed fundingCycleId</code></li><li><code>uint256 indexed projectId</code></li><li><code>uint256 indexed configured</code></li><li><a href="../../../data-structures/jbfundingcycledata.md"><code>JBFundingCycleData</code></a><code>data</code></li><li><code>uint256 metadata</code></li><li><code>uint256 mustStartAtOrAfter</code></li><li><code>address caller</code></li></ul> |
-| [**`Init`**](../events/init.md)           | <ul><li><code>uint256 indexed fundingCycleId</code></li><li><code>uint256 indexed projectId</code></li><li><code>uint256 indexed basedOn</code></li></ul>                                                                                                                                                                                                    |
+| [**`Init`**](../events/init.md)           | <ul><li><code>uint256 indexed fundingCycleId</code></li><li><code>uint256 indexed projectId</code></li><li><code>uint256 indexed basedOn</code></li></ul>                                                                                                                                                                                                                                                    |
 {% endtab %}
 
 {% tab title="Bug bounty" %}

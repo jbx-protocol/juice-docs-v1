@@ -10,7 +10,7 @@ Interface: `IJBOperatorStore`
 
 _Only an address can set its own operators._
 
-# Definition
+## Definition
 
 ```solidity
 function _packedPermissions(uint256[] calldata _indexes) private pure returns (uint256 packed) {...}
@@ -21,7 +21,7 @@ function _packedPermissions(uint256[] calldata _indexes) private pure returns (u
 * The function does not modify or reference state variables outside the function.
 * The function returns the `packed` value.
 
-# Body
+## Body
 
 1.  Loop through the provided `_indexes`.
 
@@ -72,8 +72,8 @@ function _packedPermissions(uint256[] calldata _indexes) private pure returns (u
 {% endtab %}
 
 {% tab title="Errors" %}
-| String                          | Description                                                               |
-| ------------------------------- | ------------------------------------------------------------------------- |
+| String                               | Description                                                               |
+| ------------------------------------ | ------------------------------------------------------------------------- |
 | **`PERMISSION_INDEX_OUT_OF_BOUNDS`** | Thrown if the provided index is more than whats supported in a `uint256`. |
 {% endtab %}
 

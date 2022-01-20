@@ -1,4 +1,4 @@
-# addTerminalsOf
+# \_addTerminalIfNeeded
 
 Contract:[`JBDirectory`](../)​‌
 
@@ -8,7 +8,7 @@ Interface: [`IJBDirectory`](../../../interfaces/ijbdirectory.md)
 {% tab title="Step by step" %}
 **Add a terminal to a project's list of terminals if it hasn't been already.**
 
-# Definition
+## Definition
 
 ```solidity
 function _addTerminalIfNeeded(uint256 _projectId, IJBTerminal _terminal) private { ... }
@@ -20,7 +20,7 @@ function _addTerminalIfNeeded(uint256 _projectId, IJBTerminal _terminal) private
 * The function is private to this contract.
 * The function returns nothing.
 
-# Body
+## Body
 
 1.  Nothing to do if the terminal is already a terminal of the project.
 
@@ -41,8 +41,8 @@ function _addTerminalIfNeeded(uint256 _projectId, IJBTerminal _terminal) private
 
     Internal references:
 
-    * [`_terminalsOf`](../properties/_terminalsof.md)
-5.  Emit a `AddTerminal` event with the relevant parameters.
+    * [`_terminalsOf`](../properties/\_terminalsof.md)
+3.  Emit a `AddTerminal` event with the relevant parameters.
 
     ```solidity
     emit AddTerminal(_projectId, _terminal, msg.sender);
@@ -73,7 +73,6 @@ function _addTerminalIfNeeded(uint256 _projectId, IJBTerminal _terminal) private
 }
 ```
 {% endtab %}
-
 
 {% tab title="Events" %}
 | Name                                          | Data                                                                                                                                                                                                        |

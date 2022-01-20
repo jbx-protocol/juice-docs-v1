@@ -1,4 +1,4 @@
-# removeFromSetControllerAllowList
+# removeFromSetControllerAllowlist
 
 Contract:[`JBDirectory`](../)​‌
 
@@ -10,7 +10,7 @@ Interface: [`IJBDirectory`](../../../interfaces/ijbdirectory.md)
 
 _See `addToSetControllerAllowlist(...)` for context._
 
-# Definition
+## Definition
 
 ```solidity
 function removeFromSetControllerAllowlist(address _address) external override onlyOwner { ... }
@@ -22,7 +22,7 @@ function removeFromSetControllerAllowlist(address _address) external override on
 * The function overrides a function definition from the `IJBDirectory` interface.
 * The function returns nothing.
 
-# Body
+## Body
 
 1.  Make sure the controller is on the allowlist.
 
@@ -35,8 +35,7 @@ function removeFromSetControllerAllowlist(address _address) external override on
 
     Internal references:
 
-    * [`_setControllerAllowlist`](./properties/_setcontrollerallowlist.md)
-
+    * [`_setControllerAllowlist`](properties/\_setcontrollerallowlist.md)
 2.  Add the controller to the allowlist.
 
     ```solidity
@@ -46,7 +45,7 @@ function removeFromSetControllerAllowlist(address _address) external override on
 
     Internal references:
 
-    * [`_setControllerAllowlist`](./properties/_setcontrollerallowlist.md)
+    * [`_setControllerAllowlist`](properties/\_setcontrollerallowlist.md)
 3.  Emit a `RemoveFromSetControllerAllowlist` event with the relevant parameters.
 
     ```solidity
@@ -84,14 +83,14 @@ function removeFromSetControllerAllowlist(address _address) external override on
 {% endtab %}
 
 {% tab title="Errors" %}
-| String                   | Description                                                 |
-| ------------------------ | ----------------------------------------------------------- |
+| String                            | Description                                             |
+| --------------------------------- | ------------------------------------------------------- |
 | **`CONTROLLER_NOT_IN_ALLOWLIST`** | Thrown if a provided controller isn't on the allowlist. |
 {% endtab %}
 
 {% tab title="Events" %}
-| Name                                                | Data                                                                                                                                                                                                        |
-| --------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Name                                                                               | Data                                                                                          |
+| ---------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
 | [**`RemoveFromSetControllerAllowlist`**](../events/addtosetcontrollerallowlist.md) | <ul><li><code>address indexed controller</code></li><li><code>address caller</code></li></ul> |
 {% endtab %}
 

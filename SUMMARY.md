@@ -4,7 +4,14 @@
 
 ## 🌱 Getting Started
 
-* [Create a Juicebox Project](getting-started/create-a-juicebox-project.md)
+* [Creating a Juicebox Project](getting-started/create-a-juicebox-project/README.md)
+  * [Project Details](getting-started/create-a-juicebox-project/project-details.md)
+  * [Funding](getting-started/create-a-juicebox-project/funding.md)
+  * [Distribution](getting-started/create-a-juicebox-project/distribution.md)
+  * [Reserved Tokens](getting-started/create-a-juicebox-project/reserved-tokens.md)
+  * [Reconfiguration](getting-started/create-a-juicebox-project/reconfiguration.md)
+  * [Incentives](getting-started/create-a-juicebox-project/incentives.md)
+  * [Restricted Actions](getting-started/create-a-juicebox-project/restricted-actions.md)
 
 ## 📚 Resources
 

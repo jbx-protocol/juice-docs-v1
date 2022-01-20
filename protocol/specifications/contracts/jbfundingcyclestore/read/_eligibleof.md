@@ -10,7 +10,7 @@ _A value of 0 is returned if no funding cycle was found._
 
 _Assumes the project has a latest configuration._
 
-# Definition
+## Definition
 
 ```solidity
 function _eligibleOf(uint256 _projectId) private view returns (uint256 configuration) { ... } 
@@ -22,7 +22,7 @@ function _eligibleOf(uint256 _projectId) private view returns (uint256 configura
 * The function does not alter state on the blockchain.
 * The function returns the configuration of an eligible funding cycle if one exists, or 0 if one doesn't exist.
 
-# Body
+## Body
 
 1.  Get a reference to the latest funding cycle for the project.
 
@@ -53,14 +53,12 @@ function _eligibleOf(uint256 _projectId) private view returns (uint256 configura
       _fundingCycle.duration > 0 && block.timestamp >= _fundingCycle.start + _fundingCycle.duration
     ) return 0;
     ```
-
 4.  If the funding cycle has started, it must be eligible.
 
     ```solidity
     // Return the funding cycle's configuration if it has started.
     if (block.timestamp >= _fundingCycle.start) return _fundingCycle.configuration;
     ```
-
 5.  Get a reference to the funding cycle that the current cycle is based on.
 
     ```solidity

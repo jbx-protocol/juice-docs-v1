@@ -8,7 +8,7 @@ Contract:[`JBFundingCycleStore`](../)​
 
 _Returns an empty funding cycle if there can't be a mock funding cycle based on the provided one._
 
-# Definition
+## Definition
 
 ```solidity
 function _mockFundingCycleBasedOn(JBFundingCycle memory _baseFundingCycle, bool _allowMidCycle)
@@ -24,7 +24,7 @@ function _mockFundingCycleBasedOn(JBFundingCycle memory _baseFundingCycle, bool 
 * The function does not alter state on the blockchain.
 * The function returns a mock [`JBFundingCycle`](../../../data-structures/jbfundingcycle.md) of what the next funding cycle will be.
 
-# Body
+## Body
 
 1.  Save a reference to time at or after which the mock must have started. There are a few possibilities.
 
@@ -39,8 +39,7 @@ function _mockFundingCycleBasedOn(JBFundingCycle memory _baseFundingCycle, bool 
       ? block.timestamp + 1
       : block.timestamp - _baseFundingCycle.duration + 1;
     ```
-
-3.  Find the correct start time for the mock funding cycle.
+2.  Find the correct start time for the mock funding cycle.
 
     ```solidity
     // Derive what the start time should be.
@@ -50,7 +49,7 @@ function _mockFundingCycleBasedOn(JBFundingCycle memory _baseFundingCycle, bool 
     _Internal references:_
 
     * [`_deriveStartFrom`](\_derivestartfrom.md)
-4.  Find the correct number for the mock funding cycle.
+3.  Find the correct number for the mock funding cycle.
 
     ```solidity
     // Derive what the number should be.
@@ -60,7 +59,7 @@ function _mockFundingCycleBasedOn(JBFundingCycle memory _baseFundingCycle, bool 
     _Internal references:_
 
     * [`_deriveNumberFrom`](\_derivenumberfrom.md)
-5.  Return a [`JBFundingCycle`](../../../data-structures/jbfundingcycle.md) with the aggregated configuration.
+4.  Return a [`JBFundingCycle`](../../../data-structures/jbfundingcycle.md) with the aggregated configuration.
 
     ```solidity
     return

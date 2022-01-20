@@ -6,7 +6,7 @@ Contract:[`JBFundingCycleStore`](../)​
 {% tab title="Step by step" %}
 **Checks to see if the provided funding cycle is approved according to the correct ballot.**
 
-# Definition
+## Definition
 
 ```solidity
 function _isApproved(uint256 _projectId, JBFundingCycle memory _fundingCycle)
@@ -22,7 +22,7 @@ function _isApproved(uint256 _projectId, JBFundingCycle memory _fundingCycle)
 * The function does not alter state on the blockchain.
 * The function returns the approval flag.
 
-# Body
+## Body
 
 1.  Check to see if the state of the ballot for the provided funding cycle configuration is approved. The ballot that should be used is that of the funding cycle that the provided one is based on. This is because each funding cycle's ballot dictates the approval conditions of future reconfigurations.
 

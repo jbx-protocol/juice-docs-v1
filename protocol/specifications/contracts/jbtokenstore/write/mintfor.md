@@ -10,7 +10,7 @@ Interface: [`IJBTokenStore`](../../../interfaces/ijbtokenstore.md)
 
 _Only a project's current controller can mint its tokens._
 
-# Definition
+## Definition
 
 ```solidity
 function mintFor(
@@ -30,7 +30,7 @@ function mintFor(
 * The function overrides a function definition from the `IJBTokenStore` interface.
 * The function returns nothing.
 
-# Body
+## Body
 
 1.  Make sure a positive amount was specified.
 
@@ -140,8 +140,8 @@ function mintFor(
 {% endtab %}
 
 {% tab title="Errors" %}
-| String            | Description                             |
-| ----------------- | --------------------------------------- |
+| String                  | Description                             |
+| ----------------------- | --------------------------------------- |
 | **`TOKEN_AMOUNT_ZERO`** | Thrown if an amount of 0 was passed in. |
 {% endtab %}
 

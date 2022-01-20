@@ -4,7 +4,7 @@
 {% tab title="Step by step" %}
 **Gets the amount of reserved tokens currently tracked for a project given a reserved rate.**
 
-# Definition
+## Definition
 
 ```solidity
 function _reservedTokenAmountFrom(
@@ -22,7 +22,7 @@ function _reservedTokenAmountFrom(
 * The function does not alter state on the blockchain.
 * The function returns the reserved token amount.
 
-# Body
+## Body
 
 1.  Get a reference to the number of tokens that have yet to be processed. This is the difference between the total eligible tokens and the tracker. If the tracker is negative, the difference can be found by adding its absolute value to the total eligible tokens.
 

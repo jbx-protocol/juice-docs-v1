@@ -10,7 +10,7 @@ Interface: [`IJBTokenStore`](../../../interfaces/ijbtokenstore.md)
 
 _Only a project's current controller can burn its tokens._
 
-# Definition
+## Definition
 
 ```solidity
 function burnFrom(
@@ -30,7 +30,7 @@ function burnFrom(
 * The function overrides a function definition from the `IJBTokenStore` interface.
 * The function returns nothing.
 
-# Body
+## Body
 
 1.  There must be an amount that is getting burned.
 
@@ -40,7 +40,7 @@ function burnFrom(
       revert TOKEN_AMOUNT_ZERO();
     }
     ```
-1.  Get a reference to the project's token.
+2.  Get a reference to the project's token.
 
     ```solidity
     // Get a reference to the project's ERC20 tokens.
@@ -50,7 +50,7 @@ function burnFrom(
     _Internal references:_
 
     * [`tokenOf`](../properties/tokenof.md)
-2.  Get a reference to the amount of unclaimed tokens the holder has for the project.
+3.  Get a reference to the amount of unclaimed tokens the holder has for the project.
 
     ```solidity
     // Get a reference to the amount of unclaimed tokens.
@@ -60,7 +60,7 @@ function burnFrom(
     _Internal references:_
 
     * [`unclaimedBalanceOf`](../properties/unclaimedbalanceof.md)
-3.  Get a reference to the amount of the project's tokens the holder has in their wallet. If the project does not yet have tokens issued, the holder must not have a claimed balance.
+4.  Get a reference to the amount of the project's tokens the holder has in their wallet. If the project does not yet have tokens issued, the holder must not have a claimed balance.
 
     ```solidity
     // Get a reference to the number of tokens there are.
@@ -68,7 +68,7 @@ function burnFrom(
       ? 0
       : _token.balanceOf(_projectId, _holder);
     ```
-4.  Make sure the holder has enough tokens to burn. This is true if either the amount to burn is less than both the holder's claimed balance and unclaimed balance, if the amount is greater than the claimed balance and there are enough unclaimed tokens to cover the difference, or if the amount is greater than the unclaimed balance and there are enough claimed tokens to cover the difference.
+5.  Make sure the holder has enough tokens to burn. This is true if either the amount to burn is less than both the holder's claimed balance and unclaimed balance, if the amount is greater than the claimed balance and there are enough unclaimed tokens to cover the difference, or if the amount is greater than the unclaimed balance and there are enough claimed tokens to cover the difference.
 
     ```solidity
     // There must be enough tokens.
@@ -81,7 +81,7 @@ function burnFrom(
       revert INSUFFICIENT_FUNDS();
     }
     ```
-5.  Find the amount of claimed tokens that should be burned. This will be 0 if the holder has no claimed balance, an amount up to the holder's claimed balance if there is a preference for burning claimed tokens, or the difference between the amount being burned and the holder's unclaimed balance otherwise.
+6.  Find the amount of claimed tokens that should be burned. This will be 0 if the holder has no claimed balance, an amount up to the holder's claimed balance if there is a preference for burning claimed tokens, or the difference between the amount being burned and the holder's unclaimed balance otherwise.
 
     ```solidity
     // The amount of tokens to burn.
@@ -98,13 +98,13 @@ function burnFrom(
       _claimedTokensToBurn = _unclaimedBalance >= _amount ? 0 : _amount - _unclaimedBalance;
     }
     ```
-6.  The amount of unclaimed tokens to burn is necessarily the amount of tokens to burn minus the amount of claimed tokens to burn.
+7.  The amount of unclaimed tokens to burn is necessarily the amount of tokens to burn minus the amount of claimed tokens to burn.
 
     ```solidity
     // The amount of unclaimed tokens to redeem.
     uint256 _unclaimedTokensToBurn = _amount - _claimedTokensToBurn;
     ```
-7.  If there are claimed tokens to burn, burn them from the holder's wallet.
+8.  If there are claimed tokens to burn, burn them from the holder's wallet.
 
     ```solidity
     // burn the tokens.
@@ -114,7 +114,7 @@ function burnFrom(
     _External references:_
 
     * [`burn`](../../jbtoken/write/burn.md)
-8.  If there are unclaimed tokens to burn, subtract the amount from the `unclaimedBalanceOf` the holder for the project, and from the `unclaimedTotalSupplyOf` the project.
+9.  If there are unclaimed tokens to burn, subtract the amount from the `unclaimedBalanceOf` the holder for the project, and from the `unclaimedTotalSupplyOf` the project.
 
     ```solidity
     if (_unclaimedTokensToBurn > 0) {
@@ -132,7 +132,7 @@ function burnFrom(
 
     * [`unclaimedBalanceOf`](../properties/unclaimedbalanceof.md)
     * [`unclaimedTotalSupplyOf`](../properties/unclaimedtotalsupplyof.md)
-9.  Emit a `Burn` event with the relevant parameters.
+10. Emit a `Burn` event with the relevant parameters.
 
     ```solidity
     emit Burn(_holder, _projectId, _amount, _unclaimedBalance, _preferClaimedTokens, msg.sender);
@@ -224,9 +224,9 @@ function burnFrom(
 {% endtab %}
 
 {% tab title="Errors" %}
-| String                         | Description                                              |
-| ------------------------------ | -------------------------------------------------------- |
-| **`TOKEN_AMOUNT_ZERO`** | Thrown if there are no tokens being burned. |
+| String                   | Description                                              |
+| ------------------------ | -------------------------------------------------------- |
+| **`TOKEN_AMOUNT_ZERO`**  | Thrown if there are no tokens being burned.              |
 | **`INSUFFICIENT_FUNDS`** | Thrown if the holder doesn't have enough tokens to burn. |
 {% endtab %}
 

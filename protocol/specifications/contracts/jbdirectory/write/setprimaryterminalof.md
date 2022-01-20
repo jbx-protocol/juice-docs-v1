@@ -12,7 +12,7 @@ Interface: [`IJBDirectory`](../../../interfaces/ijbdirectory.md)
 
 _The terminal will be set as the primary for the token that its vault accepts._
 
-# Definition
+## Definition
 
 ```solidity
 function setPrimaryTerminalOf(uint256 _projectId, IJBTerminal _terminal)
@@ -28,7 +28,7 @@ function setPrimaryTerminalOf(uint256 _projectId, IJBTerminal _terminal)
 * The function overrides a function definition from the `IJBDirectory` interface.
 * The function returns nothing.
 
-# Body
+## Body
 
 1.  Make sure the terminal being set isn't the zero address.
 
@@ -44,18 +44,16 @@ function setPrimaryTerminalOf(uint256 _projectId, IJBTerminal _terminal)
     // Get a reference to the token that the terminal's vault accepts.
     address _token = _terminal.token();
     ```
-
 3.  Make sure the terminal being set isn't already the primary terminal for the token.
-   
+
     ```solidity
     // Can't set this terminal as the primary if it already is.
     if (_terminal == _primaryTerminalOf[_projectId][_token]) {
       revert PRIMARY_TERMINAL_ALREADY_SET();
     }
     ```
-
 4.  Add the terminal to the list of the project's terminals if it isn't included already.
-  
+
     ```solidity
     // Add the terminal to thge project if it hasn't been already.
     _addTerminalIfNeeded(_projectId, _terminal);
@@ -63,9 +61,8 @@ function setPrimaryTerminalOf(uint256 _projectId, IJBTerminal _terminal)
 
     Internal references:
 
-    * [`_addTerminalIfNeeded`](./_addTerminalIfNeeded.md)
-
-5.  Store the new terminal as the primary.    
+    * [`_addTerminalIfNeeded`](\_addTerminalIfNeeded.md)
+5.  Store the new terminal as the primary.
 
     ```solidity
     // Store the terminal as the primary for the particular token.
@@ -75,8 +72,7 @@ function setPrimaryTerminalOf(uint256 _projectId, IJBTerminal _terminal)
     Internal references:
 
     * [`_primaryTerminalOf`](../read/primaryTerminalOf.md)
-
-3.  Emit a `SetPrimaryTerminal` event with the relevant parameters.
+6.  Emit a `SetPrimaryTerminal` event with the relevant parameters.
 
     ```solidity
     emit SetPrimaryTerminal(_projectId, _token, _terminal, msg.sender);
@@ -130,10 +126,10 @@ function setPrimaryTerminalOf(uint256 _projectId, IJBTerminal _terminal)
 {% endtab %}
 
 {% tab title="Errors" %}
-| String                   | Description                                                 |
-| ------------------------ | ----------------------------------------------------------- |
-| **`SET_PRIMARY_TERMINAL_ZERO_ADDRESS`** | Thrown if the provided terminal to add is the zero address. |
-| **`PRIMARY_TERMINAL_ALREADY_SET`** | Thrown if the provided terminal is already the primary for the token. |
+| String                                  | Description                                                           |
+| --------------------------------------- | --------------------------------------------------------------------- |
+| **`SET_PRIMARY_TERMINAL_ZERO_ADDRESS`** | Thrown if the provided terminal to add is the zero address.           |
+| **`PRIMARY_TERMINAL_ALREADY_SET`**      | Thrown if the provided terminal is already the primary for the token. |
 {% endtab %}
 
 {% tab title="Events" %}

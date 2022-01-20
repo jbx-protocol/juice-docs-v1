@@ -10,7 +10,7 @@ Interface: `IJBOperatorStore`
 
 _Only an address can set its own operators._
 
-# Definition
+## Definition
 
 ```solidity
  function setOperators(JBOperatorData[] calldata _operatorData) external override { ... }
@@ -21,7 +21,7 @@ _Only an address can set its own operators._
 * The function overrides a function definition from the `IJBOperatorStore` interface.
 * The function doesn't return anything.
 
-# Body
+## Body
 
 1.  Loop through the provided `_operatorData`.
 
@@ -101,8 +101,8 @@ function setOperators(JBOperatorData[] calldata _operatorData) external override
 {% endtab %}
 
 {% tab title="Errors" %}
-| String                          | Description                                                               |
-| ------------------------------- | ------------------------------------------------------------------------- |
+| String                               | Description                                                               |
+| ------------------------------------ | ------------------------------------------------------------------------- |
 | **`PERMISSION_INDEX_OUT_OF_BOUNDS`** | Thrown if the provided index is more than whats supported in a `uint256`. |
 {% endtab %}
 
