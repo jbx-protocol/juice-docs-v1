@@ -2,14 +2,6 @@
 
 ```solidity
 interface IJBSplitAllocator {
-  event Allocate(
-    uint256 indexed projectId,
-    uint256 indexed forProjectId,
-    address indexed beneficiary,
-    uint256 amount,
-    address caller
-  );
-
   function allocate(
     uint256 _amount,
     uint256 _group,
