@@ -16,4 +16,4 @@ Reach out to contributors of the DAO on Discord to call attention to something t
 
 Progress:
 
-All contracts are fully documented. In the coming week there will be several more deep dive tutorials written about how you can use `IJBFundingCycleDataSource` , `IJBPayDelegate`, `IJBRedemptionDelegate` and `IJBFundingCycleBallot `to pull off creative custom treasury strategies, and posts explaining how to forward funds from your own smart contracts into Juicebox projects.
+All contracts are fully documented. In the coming week there will be several more deep dive tutorials written about how you can use `IJBFundingCycleDataSource` , `IJBPayDelegate`, `IJBRedemptionDelegate`, `IJBSplitAllocator`, and `IJBFundingCycleBallot `to pull off creative custom treasury strategies, and posts explaining how to forward funds from your own smart contracts into Juicebox projects.
