@@ -1,5 +1,5 @@
 ---
-description: Manages balance accounting data on the JBETHPaymentTerminal's behalf.
+description: This contract manages all bookkeeping for inflows and outflows of funds for a terminal.
 ---
 
 # JBETHPaymentTerminalStore
