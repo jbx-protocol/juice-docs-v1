@@ -21,7 +21,7 @@
 
 * [README](protocol/README.md)
 * [Learn](protocol/learn/README.md)
-  * [Architecture](protocol/learn/overview.md)
+  * [Architecture](protocol/learn/architecture.md)
   * [Project design](protocol/learn/project-design.md)
   * [Glossary](protocol/learn/glossary.md)
   * [Topics](protocol/learn/topics/README.md)
