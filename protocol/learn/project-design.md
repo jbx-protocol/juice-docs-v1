@@ -8,8 +8,7 @@ In order to understand what Juicebox can do for your project, all you have to do
 ```solidity
 function launchProjectFor(
   address _owner,
-  bytes32 _handle,
-  string calldata _metadataCid,
+  JBProjectMetadata calldata _projectMetadata,
   JBFundingCycleData calldata _data,
   JBFundingCycleMetadata calldata _metadata,
   uint256 _mustStartAtOrAfter,
@@ -17,6 +16,7 @@ function launchProjectFor(
   JBFundAccessConstraints[] memory _fundAccessConstraints,
   IJBTerminal[] memory _terminals
 ) external returns (uint256 projectId) { ... }
+ { ... }
 ```
 
 This transaction launches a project. It does so by:

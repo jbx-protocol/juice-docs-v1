@@ -15,8 +15,7 @@ _Anyone can deploy a project on an owner's behalf._
 ```solidity
 function launchProjectFor(
   address _owner,
-  bytes32 _handle,
-  string calldata _metadataCid,
+  JBProjectMetadata calldata _projectMetadata,
   JBFundingCycleData calldata _data,
   JBFundingCycleMetadata calldata _metadata,
   uint256 _mustStartAtOrAfter,
@@ -28,8 +27,7 @@ function launchProjectFor(
 
 * Arguments:
   * `_owner` is the address to set as the owner of the project. The project ERC-721 will be owned by this address.
-  * `_handle` is the project's unique handle. This can be updated any time by the owner of the project.
-  * `_metadataCid` is a link to associate with the project. This can be updated any time by the owner of the project.
+  * `_projectMetadata` is a link to associate with the project within a particular domain. This can be updated any time by the owner of the project.  
   * `_data` is a [`JBFundingCycleData`](../../../../data-structures/jbfundingcycledata.md) data structure that defines the project's first funding cycle. These properties will remain fixed for the duration of the funding cycle.
   * `_metadata` is a [`JBFundingCycleMetadata`](../../../../data-structures/jbfundingcyclemetadata.md) data structure specifying the controller specific params that a funding cycle can have. These properties will remain fixed for the duration of the funding cycle.
   * `_mustStartAtOrAfter` is the time before which the configured funding cycle can't start.
@@ -41,48 +39,27 @@ function launchProjectFor(
 
 ## Body
 
-1.  Make sure the reserved rate is a valid number out of the max value.
+1.  Create the project. This will mint an ERC-721 in the `_owners` wallet representing ownership over the project.
 
     ```solidity
-    if (_metadata.reservedRate > JBConstants.MAX_RESERVED_RATE) {
-      revert INVALID_RESERVED_RATE();
-    }
-    ```
-2.  Make sure the redemption rate is a valid number out of the max value.
-
-    ```solidity
-    if (_metadata.redemptionRate > JBConstants.MAX_REDEMPTION_RATE) {
-      revert INVALID_REDEMPTION_RATE();
-    }
-    ```
-3.  Make sure the ballot redemption rate is less than the max value.
-
-    ```solidity
-    if (_metadata.ballotRedemptionRate > JBConstants.MAX_BALLOT_REDEMPTION_RATE) {
-      revert INVALID_BALLOT_REDEMPTION_RATE();
-    }
-    ```
-4.  Create the project. This will mint an ERC-721 in the `_owners` wallet representing ownership over the project.
-
-    ```solidity
-    // Create the project for into the wallet of the message sender.
-    projectId = projects.createFor(_owner, _handle, _metadataCid);
+    // Mint the project into the wallet of the message sender.
+    projectId = projects.createFor(_owner, _projectMetadata);
     ```
 
     _External references:_
 
     * [`createFor`](../../../jbprojects/write/createfor.md)
-5.  Set this controller as the controller of the project.
+2.  Set this controller as the controller of the project.
 
     ```solidity
-    // Set the this contract as the project's controller in the directory.
+    // Set this contract as the project's controller in the directory.
     directory.setControllerOf(projectId, this);
     ```
 
     _External references:_
 
     * [`setControllerOf`](../../../jbdirectory/write/setcontrollerof.md)
-6.  Configure the project's funding cycle, fund access constraints, and splits.
+3.  Configure the project's funding cycle, fund access constraints, and splits.
 
     ```solidity
     _configure(
@@ -98,7 +75,7 @@ function launchProjectFor(
     _Internal references:_
 
     * [`_configure`](\_configure.md)
-7.  If terminals were provided, add them to the list of terminals the project can accept funds through.
+4.  If terminals were provided, add them to the list of terminals the project can accept funds through.
 
     ```solidity
     // Add the provided terminals to the list of terminals.
@@ -123,8 +100,7 @@ function launchProjectFor(
   Anyone can deploy a project on an owner's behalf.
 
   @param _owner The address to set as the owner of the project. The project ERC-721 will be owned by this address.
-  @param _handle The project's unique handle. This can be updated any time by the owner of the project.
-  @param _metadataCid A link to associate with the project. This can be updated any time by the owner of the project.
+  @param _projectMetadata A link to associate with the project within a particular domain. This can be updated any time by the owner of the project.
   @param _data A JBFundingCycleData data structure that defines the project's first funding cycle. These properties will remain fixed for the duration of the funding cycle.
   @param _metadata A JBFundingCycleMetadata data structure specifying the controller specific params that a funding cycle can have. These properties will remain fixed for the duration of the funding cycle.
   @param _mustStartAtOrAfter The time before which the configured funding cycle can't start.
@@ -136,8 +112,7 @@ function launchProjectFor(
 */
 function launchProjectFor(
   address _owner,
-  bytes32 _handle,
-  string calldata _metadataCid,
+  JBProjectMetadata calldata _projectMetadata,
   JBFundingCycleData calldata _data,
   JBFundingCycleMetadata calldata _metadata,
   uint256 _mustStartAtOrAfter,
@@ -145,22 +120,10 @@ function launchProjectFor(
   JBFundAccessConstraints[] memory _fundAccessConstraints,
   IJBTerminal[] memory _terminals
 ) external returns (uint256 projectId) {
-  if (_metadata.reservedRate > JBConstants.MAX_RESERVED_RATE) {
-    revert INVALID_RESERVED_RATE();
-  }
+  // Mint the project into the wallet of the message sender.
+  projectId = projects.createFor(_owner, _projectMetadata);
 
-  if (_metadata.redemptionRate > JBConstants.MAX_REDEMPTION_RATE) {
-    revert INVALID_REDEMPTION_RATE();
-  }
-
-  if (_metadata.ballotRedemptionRate > JBConstants.MAX_BALLOT_REDEMPTION_RATE) {
-    revert INVALID_BALLOT_REDEMPTION_RATE();
-  }
-
-  // Create the project for into the wallet of the message sender.
-  projectId = projects.createFor(_owner, _handle, _metadataCid);
-
-  // Set the this contract as the project's controller in the directory.
+  // Set this contract as the project's controller in the directory.
   directory.setControllerOf(projectId, this);
 
   _configure(

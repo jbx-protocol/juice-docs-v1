@@ -29,6 +29,27 @@ function _configure(
 
 ## Body
 
+1.  Make sure the reserved rate is a valid number out of the max value.
+
+    ```solidity
+    if (_metadata.reservedRate > JBConstants.MAX_RESERVED_RATE) {
+      revert INVALID_RESERVED_RATE();
+    }
+    ```
+2.  Make sure the redemption rate is a valid number out of the max value.
+
+    ```solidity
+    if (_metadata.redemptionRate > JBConstants.MAX_REDEMPTION_RATE) {
+      revert INVALID_REDEMPTION_RATE();
+    }
+    ```
+3.  Make sure the ballot redemption rate is less than the max value.
+
+    ```solidity
+    if (_metadata.ballotRedemptionRate > JBConstants.MAX_BALLOT_REDEMPTION_RATE) {
+      revert INVALID_BALLOT_REDEMPTION_RATE();
+    }
+    ```
 1.  Configure the project's funding cycles. Pack the metadata into a `uint256`.
 
     ```solidity

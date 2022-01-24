@@ -9,8 +9,7 @@ The first transaction to call when getting started is [`JBController.launchProje
 ```solidity
 function launchProjectFor(
   address _owner,
-  bytes32 _handle,
-  string calldata _metadataCid,
+  JBProjectMetadata calldata _projectMetadata,
   JBFundingCycleData calldata _data,
   JBFundingCycleMetadata calldata _metadata,
   uint256 _mustStartAtOrAfter,
