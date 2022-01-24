@@ -62,8 +62,12 @@ function _distributeToPayoutSplitsOf(
 5.  Get a reference to the payout amount that should be sent to the current split. This amount is the total amount multiplied by the percentage of the split, which is a number out of 10000000.
 
     ```solidity
-    // The amount to send towards mods. Mods percents are out of 10000000.
-    uint256 _payoutAmount = PRBMath.mulDiv(_amount, _split.percent, 10000000);
+    // The amount to send towards mods.
+    uint256 _payoutAmount = PRBMath.mulDiv(
+      _amount,
+      _split.percent,
+      JBConstants.SPLITS_TOTAL_PERCENT
+    );
     ```
 
     _Libraries used:_
@@ -91,17 +95,20 @@ function _distributeToPayoutSplitsOf(
         IJBTerminal _terminal = directory.primaryTerminalOf(_split.projectId, token);
 
         // The project must have a terminal to send funds to.
-        require(_terminal != IJBTerminal(address(0)), '0x4d: BAD_SPLIT');
+        if (_terminal == IJBTerminal(address(0))) {
+          revert TERMINAL_IN_SPLIT_ZERO_ADDRESS();
+        }
 
         // Save gas if this contract is being used as the terminal.
         if (_terminal == this) {
           _pay(
             _payoutAmount,
+            address(this),
             _split.projectId,
             _split.beneficiary,
             0,
             _split.preferClaimed,
-            _memo,
+            '',
             bytes('')
           );
         } else {
@@ -110,7 +117,7 @@ function _distributeToPayoutSplitsOf(
             _split.beneficiary,
             0,
             _split.preferClaimed,
-            _memo,
+            '',
             bytes('')
           );
         }
@@ -169,14 +176,13 @@ function _distributeToPayoutSplitsOf(
   @param _projectId The ID of the project for which payout splits are being distributed.
   @param _fundingCycle The funding cycle during which the distribution is being made.
   @param _amount The total amount being distributed.
-  @param _memo A memo to pass along to the emitted events.
 
   @return leftoverAmount If the leftover amount if the splits don't add up to 100%.
 */
 function _distributeToPayoutSplitsOf(
+  uint256 _projectId,
   JBFundingCycle memory _fundingCycle,
-  uint256 _amount,
-  string memory _memo
+  uint256 _amount
 ) private returns (uint256 leftoverAmount) {
   // Set the leftover amount to the initial amount.
   leftoverAmount = _amount;
@@ -193,8 +199,12 @@ function _distributeToPayoutSplitsOf(
     // Get a reference to the mod being iterated on.
     JBSplit memory _split = _splits[_i];
 
-    // The amount to send towards mods. Mods percents are out of 10000000.
-    uint256 _payoutAmount = PRBMath.mulDiv(_amount, _split.percent, 10000000);
+    // The amount to send towards mods.
+    uint256 _payoutAmount = PRBMath.mulDiv(
+      _amount,
+      _split.percent,
+      JBConstants.SPLITS_TOTAL_PERCENT
+    );
 
     if (_payoutAmount > 0) {
       // Transfer ETH to the mod.
@@ -214,17 +224,20 @@ function _distributeToPayoutSplitsOf(
         IJBTerminal _terminal = directory.primaryTerminalOf(_split.projectId, token);
 
         // The project must have a terminal to send funds to.
-        require(_terminal != IJBTerminal(address(0)), '0x4d: BAD_SPLIT');
+        if (_terminal == IJBTerminal(address(0))) {
+          revert TERMINAL_IN_SPLIT_ZERO_ADDRESS();
+        }
 
         // Save gas if this contract is being used as the terminal.
         if (_terminal == this) {
           _pay(
             _payoutAmount,
+            address(this),
             _split.projectId,
             _split.beneficiary,
             0,
             _split.preferClaimed,
-            _memo,
+            '',
             bytes('')
           );
         } else {
@@ -233,7 +246,7 @@ function _distributeToPayoutSplitsOf(
             _split.beneficiary,
             0,
             _split.preferClaimed,
-            _memo,
+            '',
             bytes('')
           );
         }

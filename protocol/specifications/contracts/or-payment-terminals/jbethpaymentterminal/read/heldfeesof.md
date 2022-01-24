@@ -15,7 +15,7 @@ function heldFeesOf(uint256 _projectId) external view override returns (JBFee[] 
 ```
 
 * Arguments:
-  * `_projectId` is the ID of the project to which the held fees belongs.
+  * `_projectId` is the ID of the project for which fees are being held.
 * The view function can be accessed externally by anyone.
 * The function does not alter state on the blockchain.
 * The resulting function overrides a function definition from the `IJBETHPaymentTerminal` interface.

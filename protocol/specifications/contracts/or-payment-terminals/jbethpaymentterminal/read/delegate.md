@@ -37,7 +37,7 @@ function delegate() external view override returns (address) { ... }
 ```solidity
 /** 
   @notice
-  An address that serves as this terminal's delegate when making requests to juicebox ecosystem contracts.
+  An address that serves as this terminal's delegate when making requests to ecosystem contracts.
 
   @return The delegate address.
 */

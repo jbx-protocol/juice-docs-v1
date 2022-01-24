@@ -48,7 +48,9 @@ function redeemTokensOf(
 
     ```solidity
     // Can't send claimed funds to the zero address.
-    require(_beneficiary != address(0), '0x4c: ZERO_ADDRESS');
+    if (_beneficiary == address(0)) {
+      revert REDEEM_TO_ZERO_ADDRESS();
+    }
     ```
 2.  Define a reference to the project's funding cycle during which the redemption is being made.
 
@@ -136,7 +138,9 @@ function redeemTokensOf(
   returns (uint256 claimAmount)
 {
   // Can't send claimed funds to the zero address.
-  require(_beneficiary != address(0), '0x4c: ZERO_ADDRESS');
+  if (_beneficiary == address(0)) {
+    revert REDEEM_TO_ZERO_ADDRESS();
+  }
 
   // Keep a reference to the funding cycles during which the redemption is being made.
   JBFundingCycle memory _fundingCycle;
@@ -170,6 +174,11 @@ function redeemTokensOf(
 ```
 {% endtab %}
 
+{% tab title="Errors" %}
+| String              | Description                                    |
+| ------------------- | ---------------------------------------------- |
+| **`REDEEM_TO_ZERO_ADDRESS`** | Thrown if the zero address was sent as the beneficiary. |
+{% endtab %}
 {% tab title="Events" %}
 | Name                                           | Data                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
 | ---------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |

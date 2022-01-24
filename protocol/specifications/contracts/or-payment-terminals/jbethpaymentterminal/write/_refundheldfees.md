@@ -51,12 +51,7 @@ function _refundHeldFees(uint256 _projectId, uint256 _amount) private { ... }
         _amount = _amount - _heldFees[_i].amount;
       } else {
         _heldFeesOf[_projectId].push(
-          JBFee(
-            _heldFees[_i].amount - _amount,
-            _heldFees[_i].fee,
-            _heldFees[_i].beneficiary,
-            _heldFees[_i].memo
-          )
+          JBFee(_heldFees[_i].amount - _amount, _heldFees[_i].fee, _heldFees[_i].beneficiary)
         );
         _amount = 0;
       }
@@ -92,12 +87,7 @@ function _refundHeldFees(uint256 _projectId, uint256 _amount) private {
       _amount = _amount - _heldFees[_i].amount;
     } else {
       _heldFeesOf[_projectId].push(
-        JBFee(
-          _heldFees[_i].amount - _amount,
-          _heldFees[_i].fee,
-          _heldFees[_i].beneficiary,
-          _heldFees[_i].memo
-        )
+        JBFee(_heldFees[_i].amount - _amount, _heldFees[_i].fee, _heldFees[_i].beneficiary)
       );
       _amount = 0;
     }

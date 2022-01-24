@@ -9,17 +9,12 @@ Contract: [`JBETHPaymentTerminal`](../)​‌
 ## Definition
 
 ```solidity
-function _takeFee(
-  uint256 _amount,
-  address _beneficiary,
-  string memory _memo
-) private { ... }
+function _takeFee(uint256 _amount, address _beneficiary) private { ... }
 ```
 
 * Arguments:
   * `_amount` is the fee amount.
   * `_beneficiary` is the address to print the platforms tokens for.
-  * `_memo` is a memo to pass along to the emitted event.
 * The function is private to this contract.
 * The function doesn't return anything.
 
@@ -39,9 +34,9 @@ function _takeFee(
 
     ```solidity
     // When processing the admin fee, save gas if the admin is using this contract as its terminal.
-    _terminal == this // Use the local pay call.
-      ? _pay(_amount, 1, _beneficiary, 0, false, _memo, bytes('')) // Use the external pay call of the correct terminal.
-      : _terminal.pay{value: _amount}(1, _beneficiary, 0, false, _memo, bytes(''));
+    _terminal == this
+      ? _pay(_amount, address(this), 1, _beneficiary, 0, false, '', bytes('')) // Use the local pay call.
+      : _terminal.pay{value: _amount}(1, _beneficiary, 0, false, '', bytes('')); // Use the external pay call of the correct terminal.
     ```
 
     _Internal references:_
@@ -52,26 +47,21 @@ function _takeFee(
 
 {% tab title="Code" %}
 ```solidity
-/** 
-  @notice 
+/**
+  @notice
   Take a fee of the specified amount.
 
   @param _amount The fee amount.
   @param _beneficiary The address to print the platforms tokens for.
-  @param _memo A memo to pass along to the emitted event.
 */
-function _takeFee(
-  uint256 _amount,
-  address _beneficiary,
-  string memory _memo
-) private {
-  // Get the terminal for the JuiceboxDAO project.
+function _takeFee(uint256 _amount, address _beneficiary) private {
+  // Get the terminal for the protocol project.
   IJBTerminal _terminal = directory.primaryTerminalOf(1, token);
 
   // When processing the admin fee, save gas if the admin is using this contract as its terminal.
-  _terminal == this // Use the local pay call.
-    ? _pay(_amount, 1, _beneficiary, 0, false, _memo, bytes('')) // Use the external pay call of the correct terminal.
-    : _terminal.pay{value: _amount}(1, _beneficiary, 0, false, _memo, bytes(''));
+  _terminal == this
+    ? _pay(_amount, address(this), 1, _beneficiary, 0, false, '', bytes('')) // Use the local pay call.
+    : _terminal.pay{value: _amount}(1, _beneficiary, 0, false, '', bytes('')); // Use the external pay call of the correct terminal.
 }
 ```
 {% endtab %}

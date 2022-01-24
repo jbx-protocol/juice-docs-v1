@@ -11,6 +11,7 @@ Contract: [`JBETHPaymentTerminal`](../)​‌
 ```solidity
 function _pay(
   uint256 _amount,
+  address _payer,
   uint256 _projectId,
   address _beneficiary,
   uint256 _minReturnedTokens,
@@ -22,6 +23,7 @@ function _pay(
 
 * Arguments:
   * `_amount` is the amount being paid.
+  * `_payer` is the address from which the payment is originating.
   * `_projectId` is the ID of the project being paid.
   * `_beneficiary` is the address to mint tokens for and pass along to the funding cycle's data source and delegate.
   * `_minReturnedTokens` is the minimum number of tokens expected in return.
@@ -37,7 +39,9 @@ function _pay(
 
     ```solidity
     // Cant send tokens to the zero address.
-    require(_beneficiary != address(0), '0x4e: ZERO_ADDRESS');
+    if (_beneficiary == address(0)) {
+      revert PAY_TO_ZERO_ADDRESS();
+    }
     ```
 2.  Create definitions for the funding cycle, weight, and token count. These will be later populated and used by the rest of the routine.
 
@@ -51,10 +55,10 @@ function _pay(
     ```solidity
     // Record the payment.
     (_fundingCycle, _weight, _tokenCount, _memo) = store.recordPaymentFrom(
-      msg.sender,
+      _payer,
       _amount,
       _projectId,
-      (_preferClaimedTokens ? 1 : 0) | uint160(_beneficiary),
+      (_preferClaimedTokens ? 1 : 0) | (uint256(uint160(_beneficiary)) << 1),
       _minReturnedTokens,
       _memo,
       _delegateMetadata
@@ -94,6 +98,7 @@ function _pay(
 */
 function _pay(
   uint256 _amount,
+  address _payer,
   uint256 _projectId,
   address _beneficiary,
   uint256 _minReturnedTokens,
@@ -102,7 +107,9 @@ function _pay(
   bytes memory _delegateMetadata
 ) private {
   // Cant send tokens to the zero address.
-  require(_beneficiary != address(0), '0x4e: ZERO_ADDRESS');
+  if (_beneficiary == address(0)) {
+    revert PAY_TO_ZERO_ADDRESS();
+  }
 
   JBFundingCycle memory _fundingCycle;
   uint256 _weight;
@@ -110,10 +117,10 @@ function _pay(
 
   // Record the payment.
   (_fundingCycle, _weight, _tokenCount, _memo) = store.recordPaymentFrom(
-    msg.sender,
+    _payer,
     _amount,
     _projectId,
-    (_preferClaimedTokens ? 1 : 0) | uint160(_beneficiary),
+    (_preferClaimedTokens ? 1 : 0) | (uint256(uint160(_beneficiary)) << 1),
     _minReturnedTokens,
     _memo,
     _delegateMetadata
@@ -137,7 +144,7 @@ function _pay(
 {% tab title="Errors" %}
 | String                   | Description                                            |
 | ------------------------ | ------------------------------------------------------ |
-| **`0x4e: ZERO_ADDRESS`** | Thrown if the provided benificary is the zero address. |
+| **`PAY_TO_ZERO_ADDRESS`** | Thrown if the provided benificary is the zero address. |
 {% endtab %}
 
 {% tab title="Events" %}

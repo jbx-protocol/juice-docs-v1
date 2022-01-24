@@ -1,86 +1,67 @@
-# setFee
+# setFeeGauge
 
 Contract: [`JBETHPaymentTerminal`](../)​‌
 
 {% tabs %}
 {% tab title="Step by step" %}
-**Allows the fee to be updated for subsequent funding cycle configurations.**
+**Allows the fee gauge to be updated.**
 
-_Only the owner of this contract can change the fee._
+_Only the owner of this contract can change the fee gauge._
 
 ## Definition
 
 ```solidity
-function setFee(uint256 _fee) external onlyOwner { ... }
+function setFeeGauge(IJBFeeGauge _feeGauge) external onlyOwner { ... }
 ```
 
 * Arguments:
-  * `_fee` is the new fee.
+  * `_feeGauge` is the new fee gauge.
 * Through the `onlyOwner` modifier, the function can only be accessed by the owner of this contract.
 * The function doesn't return anything.
 
 ## Body
 
-1.  Make sure the proposed fee is less than the max fee of 5%.
+1.  Store the new fee gauge.
 
     ```solidity
-    // The max fee is 5%.
-    if (_fee > _MAX_FEE) {
-      revert FEE_TOO_HIGH();
-    }
+    // Store the new fee gauge.
+    feeGauge = _feeGauge;
     ```
-2.  Store the new fee.
+2.  Emit a `SetFeeGauge` event with the relevant parameters.
 
     ```solidity
-    // Store the new fee.
-    fee = _fee;
-    ```
-3.  Emit a `SetFee` event with the relevant parameters.
-
-    ```solidity
-    emit SetFee(_fee, msg.sender);
+    emit SetFeeGauge(_feeGauge, msg.sender);
     ```
 
     _Event references:_
 
-    * [`SetFee`](../events/setfee.md)
+    * [`SetFeeGauge`](../events/setfeegauge.md)
 {% endtab %}
 
 {% tab title="Code" %}
 ```solidity
-/** 
+/**
   @notice
-  Allows the fee to be updated for subsequent funding cycle configurations.
+  Allows the fee gauge to be updated.
 
   @dev
-  Only the owner of this contract can change the fee.
+  Only the owner of this contract can change the fee gauge.
 
-  @param _fee The new fee.
+  @param _feeGauge The new fee gauge.
 */
-function setFee(uint256 _fee) external onlyOwner {
-  // The max fee is 5%.
-  if (_fee > _MAX_FEE) {
-    revert FEE_TOO_HIGH();
-  }
+function setFeeGauge(IJBFeeGauge _feeGauge) external onlyOwner {
+  // Store the new fee gauge.
+  feeGauge = _feeGauge;
 
-  // Store the new fee.
-  fee = _fee;
-
-  emit SetFee(_fee, msg.sender);
+  emit SetFeeGauge(_feeGauge, msg.sender);
 }
 ```
-{% endtab %}
-
-{% tab title="Errors" %}
-| String              | Description                                    |
-| ------------------- | ---------------------------------------------- |
-| **`FEE_TOO_HIGH`** | Thrown if the proposed fee is greater than 5%. |
 {% endtab %}
 
 {% tab title="Events" %}
 | Name                                | Data                                                                           |
 | ----------------------------------- | ------------------------------------------------------------------------------ |
-| [**`SetFee`**](../events/setfee.md) | <ul><li><code>uint256 fee</code></li><li><code>address caller</code></li></ul> |
+| [**`SetFeeGauge`**](../events/setfeegauge.md) | <ul><li><a href="../../../../interfaces/ijbfeegauge.md"><code>IJBFeeGauge</code></a><code>feeGauge</code></li><li><code>address caller</code></li></ul> |
 {% endtab %}
 
 {% tab title="Bug bounty" %}

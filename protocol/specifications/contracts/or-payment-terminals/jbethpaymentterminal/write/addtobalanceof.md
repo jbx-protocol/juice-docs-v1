@@ -28,7 +28,9 @@ function addToBalanceOf(uint256 _projectId, string memory _memo) external payabl
 
     ```solidity
     // Amount must be greater than 0.
-    require(msg.value > 0, '0x4c: NO_OP');
+    if (msg.value == 0) {
+      revert ZERO_VALUE_SENT();
+    }
     ```
 2.  Record the added balance.
 
@@ -72,7 +74,9 @@ function addToBalanceOf(uint256 _projectId, string memory _memo) external payabl
 */
 function addToBalanceOf(uint256 _projectId, string memory _memo) external payable override {
   // Amount must be greater than 0.
-  require(msg.value > 0, '0x4c: NO_OP');
+  if (msg.value == 0) {
+    revert ZERO_VALUE_SENT();
+  }
 
   // Record the added funds.
   store.recordAddedBalanceFor(_projectId, msg.value);
@@ -88,7 +92,7 @@ function addToBalanceOf(uint256 _projectId, string memory _memo) external payabl
 {% tab title="Errors" %}
 | String            | Description                             |
 | ----------------- | --------------------------------------- |
-| **`0x4c: NO_OP`** | Thrown if the transaction had no value. |
+| **`ZERO_VALUE_SENT`** | Thrown if the transaction had no value. |
 {% endtab %}
 
 {% tab title="Events" %}

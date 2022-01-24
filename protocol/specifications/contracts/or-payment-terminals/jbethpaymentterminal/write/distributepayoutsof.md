@@ -8,7 +8,7 @@ Interface: [`IJBETHPaymentTerminal`](../../../../interfaces/ijbethpaymenttermina
 {% tab title="Step by step" %}
 **Distributes payouts for a project according to the constraints of its current funding cycle.**
 
-_Payouts are sent to the preprogrammed splits, and any leftover amount is sent to the project owner._
+_Payouts are sent to the preprogrammed splits._
 
 _Anyone can distribute payouts on a project's behalf._
 
@@ -62,17 +62,8 @@ function distributePayoutsOf(
     _External references:_
 
     * [`ownerOf`](https://github.com/OpenZeppelin/openzeppelin-contracts/blob/46ce0cfa3323a2787864f884b3c12960bc53b233/contracts/token/ERC721/ERC721.sol#L70)
-3.  Get a reference to the project's handle, which will be included in the emitted event.
 
-    ```solidity
-    // Get a reference to the handle of the project paying the fee and sending payouts.
-    bytes32 _handle = projects.handleOf(_projectId);
-    ```
-
-    _External references:_
-
-    * [`handleOf`](../../../jbprojects/properties/handleof.md)
-4.  If the funding cycle during which the distribtion is being made has a fee, and if its project isn't the JuiceboxDAO project with an ID of 1, take a fee from the withdrawal into the JuiceboxDAO project.
+3.  If the funding cycle during which the distribtion is being made has a fee, and if its project isn't the JuiceboxDAO project with an ID of 1, take a fee from the withdrawal into the JuiceboxDAO project.
 
     ```solidity
     // Take a fee from the _distributedAmount, if needed.
@@ -80,41 +71,35 @@ function distributePayoutsOf(
     // The platform project's ID is 1.
     uint256 _feeAmount = fee == 0 || _projectId == 1
       ? 0
-      : _takeFeeFrom(
-        _projectId,
-        _fundingCycle,
-        _distributedAmount,
-        _projectOwner,
-        string(bytes.concat('Fee from @', _handle))
-      );
+      : _takeFeeFrom(_projectId, _fundingCycle, _distributedAmount, _projectOwner);
     ```
 
     _Internal references:_
 
     * [`_takeFeeFrom`](\_takefeefrom.md)
-5.  Distribute the withdrawal to the splits specified for the current funding cycle's configurations. The amount to distribute is the withdrawn amount minus any fees that will be withheld. Get a reference to a leftover amount if there is one.
+4.  Distribute the withdrawal to the splits specified for the current funding cycle's configurations. The amount to distribute is the withdrawn amount minus any fees that will be withheld. Get a reference to a leftover amount if there is one.
 
     ```solidity
     // Payout to splits and get a reference to the leftover transfer amount after all mods have been paid.
     // The net transfer amount is the withdrawn amount minus the fee.
     uint256 _leftoverDistributionAmount = _distributeToPayoutSplitsOf(
+      _projectId,
       _fundingCycle,
-      _distributedAmount - _feeAmount,
-      string(bytes.concat('Payout from @', _handle))
+      _distributedAmount - _feeAmount
     );
     ```
 
     _Internal references:_
 
     * [`_distributeToPayoutSplitsOf`](\_distributetopayoutsplitsof.md)
-6.  If there is any, transfer any leftover amount to the project owner.
+5.  If there is any, transfer any leftover amount to the project owner.
 
     ```solidity
     // Transfer any remaining balance to the project owner.
     if (_leftoverDistributionAmount > 0)
       Address.sendValue(_projectOwner, _leftoverDistributionAmount);
     ```
-7.  Emit a `DistributePayouts` event with the relevant parameters.
+6.  Emit a `DistributePayouts` event with the relevant parameters.
 
     ```solidity
     emit DistributePayouts(
@@ -143,7 +128,7 @@ function distributePayoutsOf(
   Distributes payouts for a project according to the constraints of its current funding cycle.
 
   @dev
-  Payouts are sent to the preprogrammed splits, and any leftover amount is sent to the project owner.
+  Payouts are sent to the preprogrammed splits.
 
   @dev
   Anyone can distribute payouts on a project's behalf.
@@ -180,20 +165,14 @@ function distributePayoutsOf(
   // The platform project's ID is 1.
   uint256 _feeAmount = fee == 0 || _projectId == 1
     ? 0
-    : _takeFeeFrom(
-      _projectId,
-      _fundingCycle,
-      _distributedAmount,
-      _projectOwner,
-      string(bytes.concat('Fee from @', _handle))
-    );
+    : _takeFeeFrom(_projectId, _fundingCycle, _distributedAmount, _projectOwner);
 
   // Payout to splits and get a reference to the leftover transfer amount after all mods have been paid.
   // The net transfer amount is the withdrawn amount minus the fee.
   uint256 _leftoverDistributionAmount = _distributeToPayoutSplitsOf(
+    _projectId,
     _fundingCycle,
-    _distributedAmount - _feeAmount,
-    string(bytes.concat('Payout from @', _handle))
+    _distributedAmount - _feeAmount
   );
 
   // Transfer any remaining balance to the project owner.

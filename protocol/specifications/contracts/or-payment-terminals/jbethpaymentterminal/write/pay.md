@@ -20,7 +20,7 @@ function pay(
   bool _preferClaimedTokens,
   string calldata _memo,
   bytes calldata _delegateMetadata
-) external payable override returns (uint256 fundingCycleId) { ... }
+) external payable override returns { ... }
 ```
 
 * Arguments:
@@ -33,22 +33,24 @@ function pay(
 * The function can be accessed externally by anyone.
 * The function accepts ETH.
 * The resulting function overrides a function definition from the `IJBTerminal` interface.
-* The function returns the id of the funding cycle that the payment was made during.
+* The function doesn't return anything.
 
 ## Body
 
 1.  Forward the call to the internal version of the function that is also used by other operations.
 
     ```solidity
-    return _pay(
-      msg.value,
-      _projectId,
-      _beneficiary,
-      _minReturnedTokens,
-      _preferClaimedTokens,
-      _memo,
-      _delegateMetadata
-    );
+    return
+      _pay(
+        msg.value,
+        msg.sender,
+        _projectId,
+        _beneficiary,
+        _minReturnedTokens,
+        _preferClaimedTokens,
+        _memo,
+        _delegateMetadata
+      );
     ```
 
     _Internal references:_
@@ -71,8 +73,6 @@ function pay(
   @param _preferClaimedTokens A flag indicating whether the request prefers to issue tokens unstaked rather than staked.
   @param _memo A memo to pass along to the emitted event, and passed along the the funding cycle's data source and delegate.
   @param _delegateMetadata Bytes to send along to the delegate, if one is provided.
-
-  @return The id of the funding cycle that the payment was made during.
 */
 function pay(
   uint256 _projectId,
@@ -81,16 +81,18 @@ function pay(
   bool _preferClaimedTokens,
   string calldata _memo,
   bytes calldata _delegateMetadata
-) external payable override returns (uint256) {
-  return _pay(
-    msg.value,
-    _projectId,
-    _beneficiary,
-    _minReturnedTokens,
-    _preferClaimedTokens,
-    _memo,
-    _delegateMetadata
-  );
+) external payable override returns {
+  return
+    _pay(
+      msg.value,
+      msg.sender,
+      _projectId,
+      _beneficiary,
+      _minReturnedTokens,
+      _preferClaimedTokens,
+      _memo,
+      _delegateMetadata
+    );
 }
 ```
 {% endtab %}

@@ -34,7 +34,9 @@ function migrate(uint256 _projectId, IJBTerminal _to)
 
     ```solidity
     // The terminal being migrated to must accept the same token as this terminal.
-    require(token == _to.token(), '0x4d: INCOMPATIBLE');
+    if (token != _to.token()) {
+      revert TERMINAL_TOKENS_INCOMPATIBLE();
+    }
     ```
 
     _Internal references:_
@@ -91,7 +93,9 @@ function migrate(uint256 _projectId, IJBTerminal _to)
   requirePermission(projects.ownerOf(_projectId), _projectId, JBOperations.MIGRATE_TERMINAL)
 {
   // The terminal being migrated to must accept the same token as this terminal.
-  require(token == _to.token(), '0x4d: INCOMPATIBLE');
+  if (token != _to.token()) {
+    revert TERMINAL_TOKENS_INCOMPATIBLE();
+  }
 
   // Record the migration in the store.
   uint256 _balance = store.recordMigration(_projectId);
@@ -108,7 +112,7 @@ function migrate(uint256 _projectId, IJBTerminal _to)
 {% tab title="Errors" %}
 | String                   | Description                                                                           |
 | ------------------------ | ------------------------------------------------------------------------------------- |
-| **`0x4d: INCOMPATIBLE`** | Thrown if the terminal being migrated to doesn't use the same token as this terminal. |
+| **`TERMINAL_TOKENS_INCOMPATIBLE`** | Thrown if the terminal being migrated to doesn't use the same token as this terminal. |
 {% endtab %}
 
 {% tab title="Events" %}

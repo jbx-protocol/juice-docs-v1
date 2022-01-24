@@ -13,8 +13,7 @@ function _takeFeeFrom(
   uint256 _projectId,
   JBFundingCycle memory _fundingCycle,
   uint256 _amount,
-  address _beneficiary,
-  string memory _memo
+  address _beneficiary
 ) private returns (uint256 feeAmount) { ... }
 ```
 
@@ -23,17 +22,43 @@ function _takeFeeFrom(
   * `_fundingCycle` is the [`JBFundingCycle`](../../../../data-structures/jbfundingcycle.md) during which the fee is being taken.
   * `_amount` is the amount to take a fee from.
   * `_beneficiary` is the address to print the platforms tokens for.
-  * `_memo` is a memo to pass along to the emitted event.
 * The function is private to this contract.
 * The function returns the amount of the fee taken.
 
 ## Body
 
-1.  Calculate the fee amount from the provided amount using the funding cycle's fee percent, which is out of 200. The fee's percentage should be of the `_amount` without the fee, not of the total `_amount`.
+1.  Check for a fee discount from the currently set fee gauge if there is one. Otherwise there is no discount.
+
+    ```solidity
+    // Get the fee discount.
+    uint256 _feeDiscount = feeGauge == IJBFeeGauge(address(0))
+      ? 0
+      : feeGauge.currentDiscountFor(_projectId);
+    ```
+
+2.  If the discount returned is out of bounds, override with no discount.
+
+    ```solidity
+    // Set the discounted fee if its valid.
+    if (_feeDiscount > JBConstants.MAX_FEE_DISCOUNT) _feeDiscount = 0;
+    ```
+
+3.  Calculate what the discounted fee is.
+
+    ```solidity
+    // Calculate the discounted fee.
+    uint256 _discountedFee = fee - PRBMath.mulDiv(fee, _feeDiscount, JBConstants.MAX_FEE_DISCOUNT);
+    ```
+
+    _Libraries used:_
+
+    * [`PRBMath`](https://github.com/hifi-finance/prb-math/blob/main/contracts/PRBMath.sol)
+      * `.mulDiv`
+4.  Calculate the fee amount from the provided amount using. The fee's percentage should be of the `_amount` without the fee, not of the total `_amount`.
 
     ```solidity
     // The amount of ETH from the _amount to pay as a fee.
-    feeAmount = _amount - PRBMath.mulDiv(_amount, 200, _fundingCycle.fee + 200);
+    feeAmount = _amount - PRBMath.mulDiv(_amount, 200, _discountedFee + 200);
     ```
 
     _Libraries used:_
@@ -50,8 +75,8 @@ function _takeFeeFrom(
 
     ```solidity
     _fundingCycle.shouldHoldFees()
-      ? _heldFeesOf[_projectId].push(JBFee(_amount, uint8(fee), _beneficiary, _memo)) // Take the fee.
-      : _takeFee(feeAmount, _beneficiary, _memo);
+      ? _heldFeesOf[_projectId].push(JBFee(_amount, uint8(fee), _beneficiary))
+      : _takeFee(feeAmount, _beneficiary); // Take the fee.
     ```
 
     _Internal references:_
@@ -62,15 +87,14 @@ function _takeFeeFrom(
 
 {% tab title="Code" %}
 ```solidity
-/** 
-  @notice 
+/**
+  @notice
   Takes a fee into the platform's project, which has an id of 1.
-  
+
   @param _projectId The ID of the project having fees taken from.
-  @param _fundingCycle The funding cycle during which the fee is being taken. 
+  @param _fundingCycle The funding cycle during which the fee is being taken.
   @param _amount The amount to take a fee from.
   @param _beneficiary The address to print the platforms tokens for.
-  @param _memo A memo to pass along to the emitted event.
 
   @return feeAmount The amount of the fee taken.
 */
@@ -78,18 +102,28 @@ function _takeFeeFrom(
   uint256 _projectId,
   JBFundingCycle memory _fundingCycle,
   uint256 _amount,
-  address _beneficiary,
-  string memory _memo
+  address _beneficiary
 ) private returns (uint256 feeAmount) {
+  // Get the fee discount.
+  uint256 _feeDiscount = feeGauge == IJBFeeGauge(address(0))
+    ? 0
+    : feeGauge.currentDiscountFor(_projectId);
+
+  // Set the discounted fee if its valid.
+  if (_feeDiscount > JBConstants.MAX_FEE_DISCOUNT) _feeDiscount = 0;
+
+  // Calculate the discounted fee.
+  uint256 _discountedFee = fee - PRBMath.mulDiv(fee, _feeDiscount, JBConstants.MAX_FEE_DISCOUNT);
+
   // The amount of ETH from the _amount to pay as a fee.
-  feeAmount = _amount - PRBMath.mulDiv(_amount, 200, fee + 200);
+  feeAmount = _amount - PRBMath.mulDiv(_amount, 200, _discountedFee + 200);
 
   // Nothing to do if there's no fee to take.
   if (feeAmount == 0) return 0;
 
   _fundingCycle.shouldHoldFees()
-    ? _heldFeesOf[_projectId].push(JBFee(_amount, uint8(fee), _beneficiary, _memo)) // Take the fee.
-    : _takeFee(feeAmount, _beneficiary, _memo);
+    ? _heldFeesOf[_projectId].push(JBFee(_amount, uint8(fee), _beneficiary))
+    : _takeFee(feeAmount, _beneficiary); // Take the fee.
 }
 ```
 {% endtab %}
