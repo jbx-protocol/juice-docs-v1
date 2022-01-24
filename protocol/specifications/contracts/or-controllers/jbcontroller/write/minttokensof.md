@@ -59,7 +59,7 @@ function mintTokensOf(
     ```solidity
     // Can't send to the zero address.
     if (_reservedRate != JBConstants.MAX_RESERVED_RATE && _beneficiary == address(0)) {
-      revert RESERVED_RATE_NOT_MAX_WHILE_BENEFICIARY_ZERO_ADDRESS();
+      revert INVALID_RESERVED_RATE_AND_BENEFICIARY_ZERO_ADDRESS();
     }
     ```
 3.  Make sure there is a specified number of tokens to mint.
@@ -139,15 +139,7 @@ function mintTokensOf(
 7.  Emit a `MintTokens` event with the relevant parameters.
 
     ```solidity
-    emit MintTokens(
-      _beneficiary,
-      _projectId,
-      _tokenCount,
-      _memo,
-      _shouldReserveTokens,
-      _reservedRate,
-      msg.sender
-    );
+    emit MintTokens(_beneficiary, _projectId, _tokenCount, _memo, _reservedRate, msg.sender);
     ```
 
     _Event references:_
@@ -198,7 +190,7 @@ function mintTokensOf(
 
   // Can't send to the zero address.
   if (_reservedRate != JBConstants.MAX_RESERVED_RATE && _beneficiary == address(0)) {
-    revert RESERVED_RATE_NOT_MAX_WHILE_BENEFICIARY_ZERO_ADDRESS();
+    revert INVALID_RESERVED_RATE_AND_BENEFICIARY_ZERO_ADDRESS();
   }
 
   // There should be tokens to mint.
@@ -246,7 +238,7 @@ function mintTokensOf(
 | String                                                     | Description                                                                                                                |
 | ---------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
 | **`INVALID_RESERVED_RATE`**                                | Thrown if the reserved rate provided is too big.                                                                           |
-| **`RESERVED_RATE_NOT_MAX_WHILE_BENEFICIARY_ZERO_ADDRESS`** | Thrown if the token beneficiary is the zero address whle the reserved rate isn't 100%.                                     |
+| **`INVALID_RESERVED_RATE_AND_BENEFICIARY_ZERO_ADDRESS`** | Thrown if the token beneficiary is the zero address whle the reserved rate isn't 100%.                                     |
 | **`ZERO_TOKENS_TO_MINT`**                                  | Thrown if no tokens are being minted.                                                                                      |
 | **`MINT_PAUSED_AND_NOT_TERMINAL_DELEGATE`**                | Thrown if the request is not being made by a payment terminal, and the project's current funding cycle has paused minting. |
 {% endtab %}
@@ -254,7 +246,7 @@ function mintTokensOf(
 {% tab title="Events" %}
 | Name                                        | Data                                                                                                                                                                                                                                                                                                                   |
 | ------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [**`MintTokens`**](../events/minttokens.md) | <p>&#x3C;</p><ul><li><code>address indexed beneficiary</code></li><li><code>uint256 indexed projectId</code></li><li><code>uint256 count</code></li><li><code>string memo</code></li><li><code>bool shouldReserveTokens</code></li><li><code>uint256 reservedRate</code></li><li><code>address caller</code></li></ul> |
+| [**`MintTokens`**](events/minttokens.md)                                         | <ul><li><code>address indexed beneficiary</code></li><li><code>uint256 indexed projectId</code></li><li><code>uint256 count</code></li><li><code>string memo</code></li><li><code>uint256 reservedRate</code></li><li><code>address caller</code></li></ul>                 |
 {% endtab %}
 
 {% tab title="Bug bounty" %}
