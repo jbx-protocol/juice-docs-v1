@@ -250,6 +250,7 @@
           * [\_reservedTokenAmountFrom](protocol/specifications/contracts/or-controllers/jbcontroller/read/\_reservedtokenamountfrom.md)
         * [Write](protocol/specifications/contracts/or-controllers/jbcontroller/write/README.md)
           * [launchProjectFor](protocol/specifications/contracts/or-controllers/jbcontroller/write/launchprojectfor.md)
+          * [launchFundingCyclesFor](protocol/specifications/contracts/or-controllers/jbcontroller/write/launchfundingcyclesfor.md)
           * [reconfigureFundingCyclesOf](protocol/specifications/contracts/or-controllers/jbcontroller/write/reconfigurefundingcyclesof.md)
           * [issueTokenFor](protocol/specifications/contracts/or-controllers/jbcontroller/write/issuetokenfor.md)
           * [changeTokenOf](protocol/specifications/contracts/or-controllers/jbcontroller/write/changetokenof.md)

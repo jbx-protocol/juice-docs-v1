@@ -6,83 +6,63 @@ Interface: [`IJBController`](../../../../interfaces/ijbcontroller.md)
 
 {% tabs %}
 {% tab title="Step by step" %}
-**Configures the properties of the current funding cycle if the project hasn't distributed tokens yet, or sets the properties of the proposed funding cycle that will take effect once the current one expires if it is approved by the current funding cycle's ballot.**
+**Creates a funding cycle for an already existing project ERC-721.**
 
-_Only a project's owner or a designated operator can configure its funding cycles._
+_Only a project owner or operator can launch its funding cycles._
 
 ## Definition
 
 ```solidity
-function reconfigureFundingCyclesOf(
+function launchFundingCycleFor(
   uint256 _projectId,
   JBFundingCycleData calldata _data,
   JBFundingCycleMetadata calldata _metadata,
   uint256 _mustStartAtOrAfter,
   JBGroupedSplits[] memory _groupedSplits,
-  JBFundAccessConstraints[] memory _fundAccessConstraints
+  JBFundAccessConstraints[] memory _fundAccessConstraints,
+  IJBTerminal[] memory _terminals
 )
   external
   requirePermission(projects.ownerOf(_projectId), _projectId, JBOperations.RECONFIGURE)
-  returns (uint256) { ... }
+  returns (uint256 configuration) { ... }
 ```
 
 * Arguments:
-  * `_projectId` is the ID of the project whose funding cycles are being reconfigured.
+  * `_projectId` is the ID of the project to launch funding cycles for.
   * `_data` is a [`JBFundingCycleData`](../../../../data-structures/jbfundingcycledata.md) data structure that defines the project's funding cycle that will be queued. These properties will remain fixed for the duration of the funding cycle.
   * `_metadata` is a [`JBFundingCycleMetadata`](../../../../data-structures/jbfundingcyclemetadata.md) data structure specifying the controller specific params that a funding cycle can have. These properties will remain fixed for the duration of the funding cycle.
   * `_mustStartAtOrAfter` is the time before which the configured funding cycle can't start.
   * `_groupedSplits` is an array of [`JBGroupedSplits`](../../../../data-structures/jbgroupedsplits.md) data structures containing splits to set for any number of groups.
   * `_fundAccessConstraints` is an array of [`JBFundAccessConstraints`](../../../../data-structures/jbfundaccessconstraints.md) data structures containing amounts that a project can distribute during each funding cycle and amounts that can be used from its own overflow on-demand for each payment terminal. The `distributionLimit` applies for each funding cycle, and the `overflowAllowance` applies for the entirety of the configuration.
+  * `_terminals` is an array of [`IJBTerminal`](../../../../interfaces/ijbterminal.md) payment terminals to add for the project.
 * Through the [`requirePermission`](../../../or-abstract/jboperatable/modifiers/requirepermission.md) modifier, the function is only accessible by the project's owner, or from an operator that has been given the `JBOperations.RECONFIGURE` permission by the project owner for the provided `_projectId`.
 * The function returns the configuration of the funding cycle that was successfully updated.
 
 ## Body
 
-1.  Configure the project's funding cycle, fund access constraints, and splits.
+1. Make sure there's isn't already a funding cycle configuration for the project.
+
+   ```solidity
+    // If there is a previous configuration, reconfigureFundingCyclesOf should be called instead
+    if (fundingCycleStore.latestConfigurationOf(_projectId) != 0) {
+      revert FUNDING_CYCLE_ALREADY_LAUNCHED();
+    }
+   ```
+2.  Set this controller as the controller of the project.
 
     ```solidity
-    return _configure(_projectId, _data, _metadata, _groupedSplits, _fundAccessConstraints);
+    // Set this contract as the project's controller in the directory.
+    directory.setControllerOf(projectId, this);
     ```
 
-    _Internal references:_
+    _External references:_
 
-    * [`_configure`](\_configure.md)
-{% endtab %}
+    * [`setControllerOf`](../../../jbdirectory/write/setcontrollerof.md)
 
-{% tab title="Code" %}
-```solidity
-/**
-  @notice
-  Configures the properties of the current funding cycle if the project hasn't distributed tokens yet, or
-  sets the properties of the proposed funding cycle that will take effect once the current one expires
-  if it is approved by the current funding cycle's ballot.
+3.  Configure the project's funding cycle, fund access constraints, and splits.
 
-  @dev
-  Only a project's owner or a designated operator can configure its funding cycles.
-
-  @param _projectId The ID of the project whose funding cycles are being reconfigured.
-  @param _data A JBFundingCycleData data structure that defines the project's funding cycle that will be queued. These properties will remain fixed for the duration of the funding cycle.
-  @param _metadata A JBFundingCycleMetadata data structure specifying the controller specific params that a funding cycle can have. These properties will remain fixed for the duration of the funding cycle.
-  @param _mustStartAtOrAfter The time before which the configured funding cycle can't start.
-  @param _groupedSplits An array of splits to set for any number of group.
-  @param _fundAccessConstraints An array containing amounts, in wei (18 decimals), that a project can use from its own overflow on-demand for each payment terminal.
-
-  @return The configuration of the funding cycle that was successfully reconfigured.
-*/
-function reconfigureFundingCyclesOf(
-  uint256 _projectId,
-  JBFundingCycleData calldata _data,
-  JBFundingCycleMetadata calldata _metadata,
-  uint256 _mustStartAtOrAfter,
-  JBGroupedSplits[] memory _groupedSplits,
-  JBFundAccessConstraints[] memory _fundAccessConstraints
-)
-  external
-  requirePermission(projects.ownerOf(_projectId), _projectId, JBOperations.RECONFIGURE)
-  returns (uint256)
-{
-  return
-    _configure(
+    ```solidity
+    configuration = _configure(
       _projectId,
       _data,
       _metadata,
@@ -90,6 +70,75 @@ function reconfigureFundingCyclesOf(
       _groupedSplits,
       _fundAccessConstraints
     );
+    ```
+
+    _Internal references:_
+
+    * [`_configure`](\_configure.md)
+
+4.  If terminals were provided, add them to the list of terminals the project can accept funds through.
+
+    ```solidity
+    // Add the provided terminals to the list of terminals.
+    if (_terminals.length > 0) directory.addTerminalsOf(projectId, _terminals);
+    ```
+
+    _External references:_
+
+    * [`addTerminalsOf`](../../../jbdirectory/write/addterminalsof.md)
+{% endtab %}
+
+{% tab title="Code" %}
+```solidity
+/**
+  @notice
+  Creates a funding cycle for an already existing project ERC-721.
+
+  @dev
+  Only a project owner or operator can launch its funding cycles.
+
+  @param _projectId The ID of the project to launch funding cycles for.
+  @param _data A JBFundingCycleData data structure that defines the project's first funding cycle. These properties will remain fixed for the duration of the funding cycle.
+  @param _metadata A JBFundingCycleMetadata data structure specifying the controller specific params that a funding cycle can have. These properties will remain fixed for the duration of the funding cycle.
+  @param _mustStartAtOrAfter The time before which the configured funding cycle can't start.
+  @param _groupedSplits An array of splits to set for any number of group.
+  @param _fundAccessConstraints An array containing amounts, in wei (18 decimals), that a project can use from its own overflow on-demand for each payment terminal.
+  @param _terminals Payment terminals to add for the project.
+
+  @return configuration The configuration of the funding cycle that was successfully created.
+*/
+function launchFundingCycleFor(
+  uint256 _projectId,
+  JBFundingCycleData calldata _data,
+  JBFundingCycleMetadata calldata _metadata,
+  uint256 _mustStartAtOrAfter,
+  JBGroupedSplits[] memory _groupedSplits,
+  JBFundAccessConstraints[] memory _fundAccessConstraints,
+  IJBTerminal[] memory _terminals
+)
+  external
+  requirePermission(projects.ownerOf(_projectId), _projectId, JBOperations.RECONFIGURE)
+  returns (uint256 configuration)
+{
+  // If there is a previous configuration, reconfigureFundingCyclesOf should be called instead
+  if (fundingCycleStore.latestConfigurationOf(_projectId) != 0) {
+    revert FUNDING_CYCLE_ALREADY_LAUNCHED();
+  }
+
+  // Set this contract as the project's controller in the directory.
+  directory.setControllerOf(_projectId, this);
+
+  configuration = _configure(
+    _projectId,
+    _data,
+    _metadata,
+    _mustStartAtOrAfter,
+    _groupedSplits,
+    _fundAccessConstraints
+  );
+
+  // Add the provided terminals to the list of terminals.
+  if (_terminals.length > 0) directory.addTerminalsOf(_projectId, _terminals);
 }
 ```
 {% endtab %}
