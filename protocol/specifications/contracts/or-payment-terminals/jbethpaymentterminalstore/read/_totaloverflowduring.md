@@ -42,7 +42,7 @@ function _totalOverflowDuring(uint256 _projectId, JBFundingCycle memory _funding
     uint256 _ethBalanceOf;
     uint256 _ethDistributionLimitRemaining;
     ```
-3.  For each terminal, add its ETH balance to the `_ethBalanceOf` value. Also increment the `_ethDistributionLimitRemaining` value with the distribution limit remaining for the terminal after converting its value from the currency the limit is measured in to ETH. If the currency is 0, it is assumed that the currency is the same as the token being withdrawn so no conversion is necessary. \`
+3.  For each terminal, add its ETH balance to the `_ethBalanceOf` value. Also increment the `_ethDistributionLimitRemaining` value with the distribution limit remaining for the terminal after converting its value from the currency the limit is measured in to ETH. If the currency is 0, it is assumed that the currency is the same as the token being withdrawn so no conversion is necessary.
 
     ```solidity
     for (uint256 _i = 0; _i < _terminals.length; _i++) {
@@ -66,9 +66,7 @@ function _totalOverflowDuring(uint256 _projectId, JBFundingCycle memory _funding
       _ethDistributionLimitRemaining =
         _ethDistributionLimitRemaining +
         (
-          _distributionRemaining == 0
-            ? 0 // Get the current price of ETH. // A currency of 0 should be interpreted as whatever the currency being withdrawn is.
-            : _currency == 0
+          _distributionRemaining == 0 ? 0 : (_currency == JBCurrencies.ETH)
             ? _distributionRemaining
             : PRBMathUD60x18.div(
               _distributionRemaining,
@@ -93,12 +91,12 @@ function _totalOverflowDuring(uint256 _projectId, JBFundingCycle memory _funding
     * [`remainingDistributionLimitCurrencyOf`](../../jbethpaymentterminal/read/remainingdistributionlimitcurrencyof.md)
     * [`currencyOf`](../../../or-controllers/jbcontroller/properties/currencyof.md)
     * [`priceFor`](../../../jbprices/read/pricefor.md)
-4.  If the current balance of the project is less than the target remaining, there is no overflow. Otherwise the difference between the project's current balance and the remaining distribution limit is the overflow.
+4.  If the current balance of the project is at most the target remaining, there is no overflow. Otherwise the difference between the project's current balance and the remaining distribution limit is the overflow.
 
     ```solidity
     // Overflow is the balance of this project minus the amount that can still be distributed.
     return
-      _ethBalanceOf < _ethDistributionLimitRemaining
+      _ethBalanceOf <= _ethDistributionLimitRemaining
         ? 0
         : _ethBalanceOf - _ethDistributionLimitRemaining;
     ```
@@ -151,9 +149,7 @@ function _totalOverflowDuring(uint256 _projectId, JBFundingCycle memory _funding
     _ethDistributionLimitRemaining =
       _ethDistributionLimitRemaining +
       (
-        _distributionRemaining == 0
-          ? 0 // Get the current price of ETH. // A currency of 0 should be interpreted as whatever the currency being withdrawn is.
-          : _currency == 0
+        _distributionRemaining == 0 ? 0 : (_currency == JBCurrencies.ETH)
           ? _distributionRemaining
           : PRBMathUD60x18.div(
             _distributionRemaining,
@@ -164,7 +160,7 @@ function _totalOverflowDuring(uint256 _projectId, JBFundingCycle memory _funding
 
   // Overflow is the balance of this project minus the amount that can still be distributed.
   return
-    _ethBalanceOf < _ethDistributionLimitRemaining
+    _ethBalanceOf <= _ethDistributionLimitRemaining
       ? 0
       : _ethBalanceOf - _ethDistributionLimitRemaining;
 }

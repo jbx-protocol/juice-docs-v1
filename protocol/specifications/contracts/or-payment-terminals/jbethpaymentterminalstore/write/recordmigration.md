@@ -38,7 +38,9 @@ function recordAddedBalanceFor(uint256 _projectId, uint256 _amount)
 
     ```solidity
     // Migration must be allowed
-    require(_fundingCycle.terminalMigrationAllowed(), '0x4a: NOT_ALLOWED');
+    if (!_fundingCycle.terminalMigrationAllowed()) {
+      revert PAYMENT_TERMINAL_MIGRATION_NOT_ALLOWED();
+    }
     ```
 
     _Libraries used:_
@@ -86,7 +88,9 @@ function recordMigration(uint256 _projectId)
   JBFundingCycle memory _fundingCycle = fundingCycleStore.currentOf(_projectId);
 
   // Migration must be allowed
-  require(_fundingCycle.terminalMigrationAllowed(), '0x4a: NOT_ALLOWED');
+  if (!_fundingCycle.terminalMigrationAllowed()) {
+    revert PAYMENT_TERMINAL_MIGRATION_NOT_ALLOWED();
+  }
 
   // Return the current balance.
   balance = balanceOf[_projectId];

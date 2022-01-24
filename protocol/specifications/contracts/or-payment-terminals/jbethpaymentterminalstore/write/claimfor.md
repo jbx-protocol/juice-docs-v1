@@ -21,7 +21,9 @@ function claimFor(IJBTerminal _terminal) external { ... }
 
     ```solidity
     // This store can only be claimed once.
-    require(terminal == IJBTerminal(address(0)), '0x4b: ALREADY_CLAIMED');
+    if (terminal != IJBTerminal(address(0))) {
+      revert STORE_ALREADY_CLAIMED();
+    }
     ```
 
     _Internal references:_
@@ -41,14 +43,15 @@ function claimFor(IJBTerminal _terminal) external { ... }
 
 {% tab title="Code" %}
 ```solidity
-/** 
+/**
   @notice
   Allows this store to be claimed by an address so that it recognized the address as its terminal.
 */
 function claimFor(IJBTerminal _terminal) external {
   // This store can only be claimed once.
-  require(terminal == IJBTerminal(address(0)), '0x4b: ALREADY_CLAIMED');
-
+  if (terminal != IJBTerminal(address(0))) {
+    revert STORE_ALREADY_CLAIMED();
+  }
   // Set the terminal.
   terminal = _terminal;
 }
@@ -58,7 +61,7 @@ function claimFor(IJBTerminal _terminal) external {
 {% tab title="Errors" %}
 | String                      | Description                                      |
 | --------------------------- | ------------------------------------------------ |
-| **`0x4b: ALREADY_CLAIMED`** | Thrown if the contract has already been claimed. |
+| **`STORE_ALREADY_CLAIMED`** | Thrown if the contract has already been claimed. |
 {% endtab %}
 
 {% tab title="Bug bounty" %}

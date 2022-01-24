@@ -23,14 +23,14 @@ function recordWithdrawalFor(
 ```
 
 * Arguments:
-  * `_projectId` The ID of the project that is having funds withdrawn.
-  * `_amount` The amount being withdrawn. Send as wei (18 decimals).
-  * `_currency` The expected currency of the `_amount` being tapped. This must match the project's current funding cycle's currency.
-  * `_minReturnedWei` The minimum number of wei that should be withdrawn.
+  * `_projectId` is the ID of the project that is having funds withdrawn.
+  * `_amount` is the amount being distributed as a fixed point number.
+  * `_currency` is the expected currency of the `_amount` being tapped. This must match the project's current funding cycle's currency.
+  * `_minReturnedWei` is the minimum number of wei that should be withdrawn.
 * Through the [`onlyAssociatedPaymentTerminal`](../modifiers/onlyassociatedpaymentterminal.md) modifier, the function is only accessible by the terminal that claimed this store.
 * The function returns:
   * `fundingCycle` is the funding cycle during which the withdrawal was made.
-  * `withdrawnAmount` is the amount withdrawn.
+  * `distributedAmount` is the amount distribution in wei.
 
 ## Body
 
@@ -48,7 +48,9 @@ function recordWithdrawalFor(
 
     ```solidity
     // The funding cycle must not be configured to have distributions paused.
-    require(!fundingCycle.distributionsPaused(), '0x3e: PAUSED');
+    if (fundingCycle.distributionsPaused()) {
+      revert FUNDING_CYCLE_DISTRIBUTION_PAUSED();
+    }
     ```
 
     _Libraries used:_
@@ -59,15 +61,16 @@ function recordWithdrawalFor(
 
     ```solidity
     // Make sure the currencies match.
-    require(
-      _currency ==
-        directory.controllerOf(_projectId).distributionLimitCurrencyOf(
-          _projectId,
-          fundingCycle.configuration,
-          terminal
-        ),
-      '0x3f: UNEXPECTED_CURRENCY'
-    );
+    if (
+      _currency !=
+      directory.controllerOf(_projectId).distributionLimitCurrencyOf(
+        _projectId,
+        fundingCycle.configuration,
+        terminal
+      )
+    ) {
+      revert CURRENCY_MISMATCH();
+    }
     ```
 
     _External references:_
@@ -88,26 +91,26 @@ function recordWithdrawalFor(
 
     ```solidity
     // Amount must be within what is still distributable.
-    require(
-      _newUsedDistributionLimitOf <=
-        directory.controllerOf(_projectId).distributionLimitOf(
-          _projectId,
-          fundingCycle.configuration,
-          terminal
-        ),
-      '0x1b: INSUFFICIENT_FUNDS'
-    );
+    if (
+      _newUsedDistributionLimitOf >
+      directory.controllerOf(_projectId).distributionLimitOf(
+        _projectId,
+        fundingCycle.configuration,
+        terminal
+      )
+    ) {
+      revert DISTRIBUTION_AMOUNT_LIMIT_REACHED();
+    }
     ```
 
     _External references:_
 
     * [`distributionLimitOf`](../../../or-controllers/jbcontroller/read/distributionlimitof.md)
-6.  Find the amount to distribute by converting the amount to ETH. If the currency is 0, it is assumed that the currency is the same as the token being withdrawn so no conversion is necessary.
+6.  Find the amount to distribute by converting the amount to ETH. If the currency is ETH, no conversion is necessary.
 
     ```solidity
     // Convert the amount to wei.
-    // A currency of 0 should be interpreted as whatever the currency being distributed is.
-    distributedAmount = _currency == 0
+    distributedAmount = (_currency == JBCurrencies.ETH)
       ? _amount
       : PRBMathUD60x18.div(_amount, prices.priceFor(_currency, JBCurrencies.ETH));
     ```
@@ -120,7 +123,9 @@ function recordWithdrawalFor(
 
     ```solidity
     // The amount being distributed must be available.
-    require(distributedAmount <= balanceOf[_projectId], '0x40: INSUFFICIENT_FUNDS');
+    if (distributedAmount > balanceOf[_projectId]) {
+      revert INADEQUATE_PAYMENT_TERMINAL_STORE_BALANCE();
+    }
     ```
 
     _Internal references:_
@@ -130,7 +135,9 @@ function recordWithdrawalFor(
 
     ```solidity
     // The amount being distributed must be at least as much as was expected.
-    require(_minReturnedWei <= distributedAmount, '0x41: INADEQUATE');
+    if (_minReturnedWei > distributedAmount) {
+      revert INADEQUATE_WITHDRAW_AMOUNT();
+    }
     ```
 9.  Store the new used distributed amount.
 
@@ -144,19 +151,14 @@ function recordWithdrawalFor(
     * [`usedDistributionLimitOf`](../../../jbfundingcyclestore/read/useddistributionlimitof.md)
 10. Store the decremented balance.
 
-````
-```solidity
-````
+    ```solidity
+    // Removed the distributed funds from the project's ETH balance.
+    balanceOf[_projectId] = balanceOf[_projectId] - distributedAmount;
+    ```
 
-````
-// Removed the withdrawn funds from the project's balance.
-balanceOf[_projectId] = balanceOf[_projectId] - withdrawnAmount;
-```
+    _Internal references:_
 
-_Internal references:_
-
-* [`balanceOf`](../../../jbfundingcyclestore/read/balanceof.md)
-````
+    * [`balanceOf`](../../../jbfundingcyclestore/read/balanceof.md)
 {% endtab %}
 
 {% tab title="Code" %}
@@ -169,12 +171,12 @@ _Internal references:_
   Only the associated payment terminal can record a distribution.
 
   @param _projectId The ID of the project that is having funds distributed.
-  @param _amount The amount being distributed. Send as wei (18 decimals).
+  @param _amount The amount being distributed as a fixed point number.
   @param _currency The expected currency of the `_amount` being tapped. This must match the project's current funding cycle's currency.
   @param _minReturnedWei The minimum number of wei that should be distributed.
 
-  @return fundingCycle The funding cycle during which the distribution was made.
-  @return amountDistribution The amount distributed.
+  @return fundingCycle The funding cycle during which the withdrawal was made.
+  @return distributedAmount The amount distribution in wei.
 */
 function recordDistributionFor(
   uint256 _projectId,
@@ -190,50 +192,57 @@ function recordDistributionFor(
   fundingCycle = fundingCycleStore.currentOf(_projectId);
 
   // The funding cycle must not be configured to have distributions paused.
-  require(!fundingCycle.distributionsPaused(), '0x3e: PAUSED');
+  if (fundingCycle.distributionsPaused()) {
+    revert FUNDING_CYCLE_DISTRIBUTION_PAUSED();
+  }
 
   // Make sure the currencies match.
-  require(
-    _currency ==
-      directory.controllerOf(_projectId).currencyOf(
-        _projectId,
-        fundingCycle.configuration,
-        terminal
-      ),
-    '0x3f: UNEXPECTED_CURRENCY'
-  );
+  if (
+    _currency !=
+    directory.controllerOf(_projectId).distributionLimitCurrencyOf(
+      _projectId,
+      fundingCycle.configuration,
+      terminal
+    )
+  ) {
+    revert CURRENCY_MISMATCH();
+  }
 
   // The new total amount that has been distributed during this funding cycle.
   uint256 _newUsedDistributionLimitOf = usedDistributionLimitOf[_projectId][fundingCycle.number] +
     _amount;
 
   // Amount must be within what is still distributable.
-  require(
-    _newUsedDistributionLimitOf <=
-      directory.controllerOf(_projectId).distributionLimitOf(
-        _projectId,
-        fundingCycle.configuration,
-        terminal
-      ),
-    '0x1b: LIMIT_REACHED'
-  );
+  if (
+    _newUsedDistributionLimitOf >
+    directory.controllerOf(_projectId).distributionLimitOf(
+      _projectId,
+      fundingCycle.configuration,
+      terminal
+    )
+  ) {
+    revert DISTRIBUTION_AMOUNT_LIMIT_REACHED();
+  }
 
   // Convert the amount to wei.
-  // A currency of 0 should be interpreted as whatever the currency being distributed is.
-  distributedAmount = _currency == 0
+  distributedAmount = (_currency == JBCurrencies.ETH)
     ? _amount
     : PRBMathUD60x18.div(_amount, prices.priceFor(_currency, JBCurrencies.ETH));
 
   // The amount being distributed must be available.
-  require(distributedAmount <= balanceOf[_projectId], '0x40: INSUFFICIENT_FUNDS');
+  if (distributedAmount > balanceOf[_projectId]) {
+    revert INADEQUATE_PAYMENT_TERMINAL_STORE_BALANCE();
+  }
 
   // The amount being distributed must be at least as much as was expected.
-  require(_minReturnedWei <= distributedAmount, '0x41: INADEQUATE');
+  if (_minReturnedWei > distributedAmount) {
+    revert INADEQUATE_WITHDRAW_AMOUNT();
+  }
 
   // Store the new amount.
   usedDistributionLimitOf[_projectId][fundingCycle.number] = _newUsedDistributionLimitOf;
 
-  // Removed the distributed funds from the project's balance.
+  // Removed the distributed funds from the project's ETH balance.
   balanceOf[_projectId] = balanceOf[_projectId] - distributedAmount;
 }
 ```
@@ -242,11 +251,11 @@ function recordDistributionFor(
 {% tab title="Errors" %}
 | String                          | Description                                                                                                          |
 | ------------------------------- | -------------------------------------------------------------------------------------------------------------------- |
-| **`0x3e: PAUSED`**              | Thrown if the project has configured its current funding cycle to pause distributions.                               |
-| **`0x3f: UNEXPECTED_CURRENCY`** | Thrown if the currency of the specified amount doesn't match the currency of the project's current funding cycle.    |
-| **`0x1b: LIMIT_REACHED`**       | Thrown if there isn't enough of a distribution limit for the specified terminal to fulfill the desired distribution. |
-| **`0x40: INSUFFICIENT_FUNDS`**  | Thrown if the project's balance isn't sufficient to fulfill the desired distribution.                                |
-| **`0x41: INADEQUATE`**          | Thrown if the distribution amount is less than the minimum expected.                                                 |
+| **`FUNDING_CYCLE_DISTRIBUTION_PAUSED`**              | Thrown if the project has configured its current funding cycle to pause distributions.                               |
+| **`CURRENCY_MISMATCH`** | Thrown if the currency of the specified amount doesn't match the currency of the project's current funding cycle.    |
+| **`DISTRIBUTION_AMOUNT_LIMIT_REACHED`**       | Thrown if there isn't enough of a distribution limit for the specified terminal to fulfill the desired distribution. |
+| **`INADEQUATE_PAYMENT_TERMINAL_STORE_BALANCE`**  | Thrown if the project's balance isn't sufficient to fulfill the desired distribution.                                |
+| **`INADEQUATE_WITHDRAW_AMOUNT`**          | Thrown if the distribution amount is less than the minimum expected.                                                 |
 {% endtab %}
 
 {% tab title="Bug bounty" %}

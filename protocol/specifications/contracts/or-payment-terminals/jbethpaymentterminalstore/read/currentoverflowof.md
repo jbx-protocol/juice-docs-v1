@@ -4,7 +4,7 @@ Contract: [`JBETHPaymentTerminalStore`](../)​‌
 
 {% tabs %}
 {% tab title="Step by step" %}
-**Gets the current overflowed amount in this terminal for a specified project.**
+**Gets the current overflowed amount (in the terminal's currency) in this terminal for a specified project.**
 
 ## Definition
 
@@ -45,7 +45,7 @@ function currentOverflowOf(uint256 _projectId) external view returns (uint256) {
 ```solidity
 /**
   @notice
-  Gets the current overflowed amount for a specified project.
+  Gets the current overflowed amount (in the terminal's currency) in this terminal for a specified project.
 
   @param _projectId The ID of the project to get overflow for.
 
@@ -55,7 +55,7 @@ function currentOverflowOf(uint256 _projectId) external view returns (uint256) {
   // Get a reference to the project's current funding cycle.
   JBFundingCycle memory _fundingCycle = fundingCycleStore.currentOf(_projectId);
 
-  return _overflowFrom(_projectId, _fundingCycle);
+  return _overflowDuring(_projectId, _fundingCycle);
 }
 ```
 {% endtab %}

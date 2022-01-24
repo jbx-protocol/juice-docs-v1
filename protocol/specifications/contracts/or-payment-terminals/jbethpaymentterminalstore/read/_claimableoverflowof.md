@@ -86,7 +86,7 @@ function _claimableOverflowOf(
 6.  If the calculation is being made to find the claimable amount for all of a project's tokens, return the entire current overflow.
 
     ```solidity
-    // If the amount being redeemed is the the total supply, return the rest of the overflow.
+    // If the amount being redeemed is the total supply, return the rest of the overflow.
     if (_tokenCount == _totalSupply) return _currentOverflow;
     ```
 7.  Get a reference to the redemption rate that should be used in the redemption bonding curve formula. If the current funding cycle has an active ballot, use its ballot redemption rate, otherwise use the standard redemption rate. This lets project's configure different bonding curves depending on the state of pending reconfigurations. This rate is out of 10000.
@@ -129,14 +129,19 @@ function _claimableOverflowOf(
 
     ```solidity
     // These conditions are all part of the same curve. Edge conditions are separated because fewer operation are necessary.
-    if (_redemptionRate == 10000) return _base;
+    if (_redemptionRate == JBConstants.MAX_REDEMPTION_RATE) return _base;
     return
       PRBMath.mulDiv(
         _base,
-        _redemptionRate + PRBMath.mulDiv(_tokenCount, 10000 - _redemptionRate, _totalSupply),
-        10000
+        _redemptionRate +
+          PRBMath.mulDiv(
+            _tokenCount,
+            JBConstants.MAX_REDEMPTION_RATE - _redemptionRate,
+            _totalSupply
+          ),
+        JBConstants.MAX_REDEMPTION_RATE
       );
-    ```
+      ```
 
     _Libraries used:_
 
@@ -176,7 +181,7 @@ function _claimableOverflowOf(
   // If there are reserved tokens, add them to the total supply.
   if (_reservedTokenAmount > 0) _totalSupply = _totalSupply + _reservedTokenAmount;
 
-  // If the amount being redeemed is the the total supply, return the rest of the overflow.
+  // If the amount being redeemed is the total supply, return the rest of the overflow.
   if (_tokenCount == _totalSupply) return _currentOverflow;
 
   // Use the ballot redemption rate if the queued cycle is pending approval according to the previous funding cycle's ballot.
@@ -192,12 +197,17 @@ function _claimableOverflowOf(
   uint256 _base = PRBMath.mulDiv(_currentOverflow, _tokenCount, _totalSupply);
 
   // These conditions are all part of the same curve. Edge conditions are separated because fewer operation are necessary.
-  if (_redemptionRate == 10000) return _base;
+  if (_redemptionRate == JBConstants.MAX_REDEMPTION_RATE) return _base;
   return
     PRBMath.mulDiv(
       _base,
-      _redemptionRate + PRBMath.mulDiv(_tokenCount, 10000 - _redemptionRate, _totalSupply),
-      10000
+      _redemptionRate +
+        PRBMath.mulDiv(
+          _tokenCount,
+          JBConstants.MAX_REDEMPTION_RATE - _redemptionRate,
+          _totalSupply
+        ),
+      JBConstants.MAX_REDEMPTION_RATE
     );
 }
 ```

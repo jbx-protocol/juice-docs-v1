@@ -34,7 +34,7 @@ function recordPaymentFrom(
 
 * Arguments:
   * `_payer` is the original address that sent the payment to the terminal.
-  * `_amount` is the amount that is being paid.
+  * `_amount` is the amount that is being paid in wei.
   * `_projectId` is the ID of the project being paid.
   *   `_preferClaimedTokensAndBeneficiary` Two properties are included in this packed uint256:
 
@@ -68,13 +68,17 @@ function recordPaymentFrom(
 
     ```solidity
     // The project must have a funding cycle configured.
-    require(fundingCycle.number > 0, '0x3a: NOT_FOUND');
+    if (fundingCycle.number == 0) {
+      revert INVALID_FUNDING_CYCLE();
+    }
     ```
 3.  Make sure the project's funding cycle isn't configured to pause payments.
 
     ```solidity
     // Must not be paused.
-    require(!fundingCycle.payPaused(), '0x3b: PAUSED');
+    if (fundingCycle.payPaused()) {
+      revert FUNDING_CYCLE_PAYMENT_PAUSED();
+    }
     ```
 4.  Create a variable where a pay delegate will be saved if there is one. This pay delegate will later have it's method called if it exists.
 
@@ -91,6 +95,7 @@ function recordPaymentFrom(
         JBPayParamsData(
           _payer,
           _amount,
+          _projectId,
           fundingCycle.weight,
           fundingCycle.reservedRate(),
           address(uint160(_preferClaimedTokensAndBeneficiary >> 1)),
@@ -121,11 +126,10 @@ function recordPaymentFrom(
     _Libraries used:_
 
     * [`PRBMathUD60x18`](https://github.com/hifi-finance/prb-math/blob/main/contracts/PRBMathUD60x18.sol)
-      * `.mul`
-7.  Increment the project's balance by the amount of the payment received.
+      * `.mul` 7.  Increment the project's balance by the amount of the payment received.
 
     ```solidity
-    // Add the amount to the balance of the project.
+    // Add the amount to the ETH balance of the project if needed.
     if (_amount > 0) balanceOf[_projectId] = balanceOf[_projectId] + _amount;
     ```
 
@@ -140,8 +144,8 @@ function recordPaymentFrom(
         _projectId,
         _weightedAmount,
         address(uint160(_preferClaimedTokensAndBeneficiary >> 1)),
-        'ETH received',
-        (_preferClaimedTokensAndBeneficiary & 1) == 0,
+        '',
+        (_preferClaimedTokensAndBeneficiary & 1) == 1,
         fundingCycle.reservedRate()
       );
     ```
@@ -157,8 +161,10 @@ function recordPaymentFrom(
 9.  Make sure there were at least as many tokens minted as expected.
 
     ```solidity
-    // The token count must be greater than or equal to the minimum expected.
-    require(tokenCount >= _minReturnedTokens, '0x3c: INADEQUATE');
+    // The token count for the beneficiary must be greater than or equal to the minimum expected.
+    if (tokenCount < _minReturnedTokens) {
+      revert INADEQUATE_TOKEN_COUNT();
+    }
     ```
 10. If a pay delegate was provided by the data source, call its `didPay` function with a [`JBDidPayData`](../../../../data-structures/jbdidpaydata.md) payload including contextual information. When finished, emit a `DelegateDidPay` event with the relevant parameters.
 
@@ -198,7 +204,7 @@ function recordPaymentFrom(
   Only the associated payment terminal can record a payment.
 
   @param _payer The original address that sent the payment to the terminal.
-  @param _amount The amount that is being paid.
+  @param _amount The amount that is being paid in wei.
   @param _projectId The ID of the project being paid.
   @param _preferClaimedTokensAndBeneficiary Two properties are included in this packed uint256:
     The first bit contains the flag indicating whether the request prefers to issue tokens claimed as ERC-20s.
@@ -236,10 +242,14 @@ function recordPaymentFrom(
   fundingCycle = fundingCycleStore.currentOf(_projectId);
 
   // The project must have a funding cycle configured.
-  require(fundingCycle.number > 0, '0x3a: NOT_FOUND');
+  if (fundingCycle.number == 0) {
+    revert INVALID_FUNDING_CYCLE();
+  }
 
   // Must not be paused.
-  require(!fundingCycle.payPaused(), '0x3b: PAUSED');
+  if (fundingCycle.payPaused()) {
+    revert FUNDING_CYCLE_PAYMENT_PAUSED();
+  }
 
   // Save a reference to the delegate to use.
   IJBPayDelegate _delegate;
@@ -250,6 +260,7 @@ function recordPaymentFrom(
       JBPayParamsData(
         _payer,
         _amount,
+        _projectId,
         fundingCycle.weight,
         fundingCycle.reservedRate(),
         address(uint160(_preferClaimedTokensAndBeneficiary >> 1)),
@@ -266,7 +277,7 @@ function recordPaymentFrom(
   // Multiply the amount by the weight to determine the amount of tokens to mint.
   uint256 _weightedAmount = PRBMathUD60x18.mul(_amount, weight);
 
-  // Add the amount to the balance of the project.
+  // Add the amount to the ETH balance of the project if needed.
   if (_amount > 0) balanceOf[_projectId] = balanceOf[_projectId] + _amount;
 
   if (_weightedAmount > 0)
@@ -274,13 +285,15 @@ function recordPaymentFrom(
       _projectId,
       _weightedAmount,
       address(uint160(_preferClaimedTokensAndBeneficiary >> 1)),
-      'ETH received',
-      (_preferClaimedTokensAndBeneficiary & 1) == 0,
+      '',
+      (_preferClaimedTokensAndBeneficiary & 1) == 1,
       fundingCycle.reservedRate()
     );
 
-  // The token count must be greater than or equal to the minimum expected.
-  require(tokenCount >= _minReturnedTokens, '0x3c: INADEQUATE');
+  // The token count for the beneficiary must be greater than or equal to the minimum expected.
+  if (tokenCount < _minReturnedTokens) {
+    revert INADEQUATE_TOKEN_COUNT();
+  }
 
   // If a delegate was returned by the data source, issue a callback to it.
   if (_delegate != IJBPayDelegate(address(0))) {
@@ -304,9 +317,9 @@ function recordPaymentFrom(
 {% tab title="Errors" %}
 | String                 | Description                                                                                    |
 | ---------------------- | ---------------------------------------------------------------------------------------------- |
-| **`0x3a: NOT_FOUND`**  | Thrown if the project doesn't have a funding cycle.                                            |
-| **`0x3b: PAUSED`**     | Thrown if the project has configured its current funding cycle to pause payments.              |
-| **`0x3c: INADEQUATE`** | Thrown if the quantity of tokens minted for the beneficiary is less than the minimum expected. |
+| **`INVALID_FUNDING_CYCLE`**  | Thrown if the project doesn't have a funding cycle.                                            |
+| **`FUNDING_CYCLE_PAYMENT_PAUSED`**     | Thrown if the project has configured its current funding cycle to pause payments.              |
+| **`INADEQUATE_TOKEN_COUNT`** | Thrown if the quantity of tokens minted for the beneficiary is less than the minimum expected. |
 {% endtab %}
 
 {% tab title="Events" %}

@@ -315,7 +315,6 @@
           * [directory](protocol/specifications/contracts/or-payment-terminals/jbethpaymentterminalstore/properties/directory.md)
           * [fundingCycleStore](protocol/specifications/contracts/or-payment-terminals/jbethpaymentterminalstore/properties/fundingcyclestore.md)
           * [tokenStore](protocol/specifications/contracts/or-payment-terminals/jbethpaymentterminalstore/properties/tokenstore.md)
-          * [splitStore](protocol/specifications/contracts/or-payment-terminals/jbethpaymentterminalstore/properties/splitstore.md)
           * [prices](protocol/specifications/contracts/or-payment-terminals/jbethpaymentterminalstore/properties/prices.md)
           * [terminal](protocol/specifications/contracts/or-payment-terminals/jbethpaymentterminalstore/properties/terminal.md)
           * [balanceOf](protocol/specifications/contracts/or-payment-terminals/jbethpaymentterminalstore/properties/balanceof.md)

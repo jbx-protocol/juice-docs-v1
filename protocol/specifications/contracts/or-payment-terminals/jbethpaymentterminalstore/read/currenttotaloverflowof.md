@@ -4,7 +4,7 @@ Contract: [`JBETHPaymentTerminalStore`](../)​‌
 
 {% tabs %}
 {% tab title="Step by step" %}
-**Gets the current overflowed amount for a specified project across all terminals.**
+**Gets the current overflowed amount (in the terminal's currency) for a specified project across all terminals.**
 
 ## Definition
 
@@ -45,7 +45,7 @@ function currentOverflowOf(uint256 _projectId) external view returns (uint256) {
 ```solidity
 /**
   @notice
-  Gets the current overflowed amount for a specified project across all terminals.
+  Gets the current overflowed amount (in the terminal's currency) for a specified project across all terminals.
 
   @param _projectId The ID of the project to get total overflow for.
 

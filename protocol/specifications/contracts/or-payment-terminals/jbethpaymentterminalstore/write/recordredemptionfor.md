@@ -32,7 +32,7 @@ function recordRedemptionFor(
 * Arguments:
   * `_holder` is thhe account that is having its tokens redeemed.
   * `_projectId` is the ID of the project to which the tokens being redeemed belong.
-  * `_tokenCount` is the number of tokens being redeemed.
+  * `_tokenCount` is the number of tokens to redeem.
   * `_minReturnedWei` is the minimum amount of wei expected in return.
   * `_beneficiary` is the address that will benefit from the claimed amount.
   * `_memo` is a memo to pass along to the emitted event.
@@ -91,6 +91,7 @@ function recordRedemptionFor(
         JBRedeemParamsData(
           _holder,
           _tokenCount,
+          _projectId,
           fundingCycle.redemptionRate(),
           fundingCycle.ballotRedemptionRate(),
           _beneficiary,
@@ -185,7 +186,7 @@ function recordRedemptionFor(
 
   @param _holder The account that is having its tokens redeemed.
   @param _projectId The ID of the project to which the tokens being redeemed belong.
-  @param _tokenCount The number of tokens being redeemed.
+  @param _tokenCount The number of tokens to redeem.
   @param _minReturnedWei The minimum amount of wei expected in return.
   @param _beneficiary The address that will benefit from the claimed amount.
   @param _memo A memo to pass along to the emitted event.
@@ -230,6 +231,7 @@ function recordRedemptionFor(
       JBRedeemParamsData(
         _holder,
         _tokenCount,
+        _projectId,
         fundingCycle.redemptionRate(),
         fundingCycle.ballotRedemptionRate(),
         _beneficiary,

@@ -69,7 +69,7 @@ function recordAddedBalanceFor(uint256 _projectId, uint256 _amount)
   // Get a reference to the project's current funding cycle.
   fundingCycle = fundingCycleStore.currentOf(_projectId);
 
-  // Set the balance.
+  // Increment the balance.
   balanceOf[_projectId] = balanceOf[_projectId] + _amount;
 }
 ```

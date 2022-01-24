@@ -29,12 +29,16 @@ function claimableOverflowOf(uint256 _projectId, uint256 _tokenCount)
 1.  Forward the call to the internal version of the function that is also used by other operations.
 
     ```solidity
-    return _claimableOverflowOf(fundingCycleStore.currentOf(_projectId), _tokenCount);
+    return _claimableOverflowOf(_projectId, fundingCycleStore.currentOf(_projectId), _tokenCount);
     ```
 
     _Internal references:_
 
     * [`_claimableOverflowOf`](\_claimableoverflowof.md)
+
+    _External references:_
+
+    * [`currentOf`](../../../jbfundingcyclestore/read/currentof.md)
 {% endtab %}
 
 {% tab title="Code" %}
@@ -55,7 +59,7 @@ function claimableOverflowOf(uint256 _projectId, uint256 _tokenCount)
   view
   returns (uint256)
 {
-  return _claimableOverflowOf(fundingCycleStore.currentOf(_projectId), _tokenCount);
+  return _claimableOverflowOf(_projectId, fundingCycleStore.currentOf(_projectId), _tokenCount);
 }
 ```
 {% endtab %}
