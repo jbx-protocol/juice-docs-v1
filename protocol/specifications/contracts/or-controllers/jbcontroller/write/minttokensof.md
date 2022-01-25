@@ -54,6 +54,11 @@ function mintTokensOf(
       revert INVALID_RESERVED_RATE();
     }
     ```
+
+    _Libraries used:_
+
+    * [`JBConstants`](../../../../libraries/jbconstants.md)
+      * `.MAX_RESERVED_RATE`
 2.  If the reserved rate isnt' 100%, make sure the provided beneficiary isn't the zero address.
 
     ```solidity
@@ -62,6 +67,11 @@ function mintTokensOf(
       revert INVALID_RESERVED_RATE_AND_BENEFICIARY_ZERO_ADDRESS();
     }
     ```
+
+    _Libraries used:_
+
+    * [`JBConstants`](../../../../libraries/jbconstants.md)
+      * `.MAX_RESERVED_RATE`
 3.  Make sure there is a specified number of tokens to mint.
 
     ```solidity
@@ -128,6 +138,8 @@ function mintTokensOf(
 
     * [`PRBMath`](https://github.com/hifi-finance/prb-math/blob/main/contracts/PRBMath.sol)
       * `.mulDiv`
+    * [`JBConstants`](../../../../libraries/jbconstants.md)
+      * `.MAX_RESERVED_RATE`
 
     _Internal references:_
 

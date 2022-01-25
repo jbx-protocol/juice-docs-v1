@@ -43,6 +43,10 @@ function _takeFeeFrom(
     if (_feeDiscount > JBConstants.MAX_FEE_DISCOUNT) _feeDiscount = 0;
     ```
 
+    _Libraries used:_
+
+    * [`JBConstants`](../../../../libraries/jbconstants.md)
+      * `.MAX_FEE_DISCOUNT`
 3.  Calculate what the discounted fee is.
 
     ```solidity
@@ -54,6 +58,8 @@ function _takeFeeFrom(
 
     * [`PRBMath`](https://github.com/hifi-finance/prb-math/blob/main/contracts/PRBMath.sol)
       * `.mulDiv`
+    * [`JBConstants`](../../../../libraries/jbconstants.md)
+      * `.MAX_FEE_DISCOUNT`
 4.  Calculate the fee amount from the provided amount using. The fee's percentage should be of the `_amount` without the fee, not of the total `_amount`.
 
     ```solidity

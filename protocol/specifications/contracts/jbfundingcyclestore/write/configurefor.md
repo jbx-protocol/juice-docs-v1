@@ -48,6 +48,11 @@ function configureFor(
       revert INVALID_DISCOUNT_RATE();
     }
     ```
+
+    _Libraries used:_
+
+    * [`JBConstants`](../../../libraries/jbconstants.md)
+      * `.MAX_DISCOUNT_RATE`
 3.  Make sure the `_data.weight` fits in a `uint80`.
 
     ```solidity

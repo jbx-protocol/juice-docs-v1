@@ -147,6 +147,8 @@ function _claimableOverflowOf(
 
     * [`PRBMath`](https://github.com/hifi-finance/prb-math/blob/main/contracts/PRBMath.sol)
       * `.mulDiv`
+    * [`JBConstants`](../../../../libraries/jbconstants.md)
+      * `.MAX_REDEMPTION_RATE`
 {% endtab %}
 
 {% tab title="Code" %}

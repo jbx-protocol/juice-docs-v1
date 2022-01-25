@@ -38,9 +38,11 @@ function _deriveWeightFrom(JBFundingCycle memory _baseFundingCycle, uint256 _sta
     ```
 
     _Libraries used:_
-
+    
     * [`PRBMath`](https://github.com/hifi-finance/prb-math/blob/main/contracts/PRBMath.sol)
       * `.mulDiv`
+    * [`JBConstants`](../../../libraries/jbconstants.md)
+      * `.MAX_DISCOUNT_RATE`
 2.  The calculations that follow will progressively apply discount rates to the `_baseFundingCycle`'s weight to arrive at the correct weight to return.
 
     ```solidity
@@ -82,7 +84,8 @@ function _deriveWeightFrom(JBFundingCycle memory _baseFundingCycle, uint256 _sta
 
     * [`PRBMath`](https://github.com/hifi-finance/prb-math/blob/main/contracts/PRBMath.sol)
       * `.mulDiv`
-
+    * [`JBConstants`](../../../libraries/jbconstants.md)
+      * `.MAX_DISCOUNT_RATE`
     _Internal references:_
 
     * [`_SECONDS_IN_DAY`](../properties/\_seconds\_in\_day.md)

@@ -74,6 +74,8 @@ function _distributeToPayoutSplitsOf(
 
     * [`PRBMath`](https://github.com/hifi-finance/prb-math/blob/main/contracts/PRBMath.sol)
       * `.mulDiv`
+    * [`JBConstants`](../../../../libraries/jbconstants.md)
+      * `.SPLITS_TOTAL_PERCENT`
 6.  If there's at least some funds to send to the payout, determine where they should go. If the split has an `allocator` set, send the funds to its `allocate` function, passing along any relevant params. Otherwise if a `projectId` is specified in the split, send the payout to that project and use the split's `beneficiary` as the address that should receive the project's tokens in return. Otherwise, send the funds directly to the `beneficiary` address from the split. Decrement the `leftoverAmount` once the split is settled.
 
     ```solidity
@@ -133,7 +135,7 @@ function _distributeToPayoutSplitsOf(
 
     _Internal references:_
 
-    * [`pay`](broken-reference/)
+    * [`pay`](pay.md)
     * [`_pay`](\_pay.md)
 
     _External references:_

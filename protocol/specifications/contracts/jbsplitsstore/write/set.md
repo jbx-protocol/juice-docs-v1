@@ -154,6 +154,11 @@ function set(
           revert INVALID_TOTAL_PERCENT();
         }
         ```
+
+        _Libraries used:_
+
+        * [`JBConstants`](../../../libraries/jbconstants.md)
+          * `.SPLITS_TOTAL_PERCENT`
     *   Pack common split properties into `_packedSplitParts1Of`.
 
         ```solidity

@@ -44,6 +44,11 @@ function _reservedTokenAmountFrom(
     // If all tokens are reserved, return the full unprocessed amount.
     if (_reservedRate == JBConstants.MAX_RESERVED_RATE) return _unprocessedTokenBalanceOf;
     ```
+
+    _Libraries used:_
+
+    * [`JBConstants`](../../../../libraries/jbconstants.md)
+      * `.MAX_RESERVED_RATE`
 4.  The reserved token amount is the reserved percentage of the unprocessed balance.
 
     ```solidity
@@ -59,6 +64,8 @@ function _reservedTokenAmountFrom(
 
     * [`PRBMath`](https://github.com/hifi-finance/prb-math/blob/main/contracts/PRBMath.sol)
       * `.mulDiv`
+    * [`JBConstants`](../../../../libraries/jbconstants.md)
+      * `.MAX_RESERVED_RATE`
 {% endtab %}
 
 {% tab title="Only code" %}

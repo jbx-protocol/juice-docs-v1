@@ -36,6 +36,11 @@ function _configure(
       revert INVALID_RESERVED_RATE();
     }
     ```
+
+    _Libraries used:_
+
+    * [`JBConstants`](../../../../libraries/jbconstants.md)
+      * `.MAX_RESERVED_RATE`
 2.  Make sure the redemption rate is a valid number out of the max value.
 
     ```solidity
@@ -43,13 +48,23 @@ function _configure(
       revert INVALID_REDEMPTION_RATE();
     }
     ```
+
+    _Libraries used:_
+
+    * [`JBConstants`](../../../../libraries/jbconstants.md)
+      * `.MAX_REDEMPTION_RATE`
 3.  Make sure the ballot redemption rate is less than the max value.
 
     ```solidity
-    if (_metadata.ballotRedemptionRate > JBConstants.MAX_BALLOT_REDEMPTION_RATE) {
+    if (_metadata.ballotRedemptionRate > JBConstants.MAX_REDEMPTION_RATE) {
       revert INVALID_BALLOT_REDEMPTION_RATE();
     }
     ```
+
+    _Libraries used:_
+
+    * [`JBConstants`](../../../../libraries/jbconstants.md)
+      * `.MAX_REDEMPTION_RATE`
 4.  Configure the project's funding cycles. Pack the metadata into a `uint256`.
 
     ```solidity
@@ -171,7 +186,7 @@ function _configure(
     revert INVALID_REDEMPTION_RATE();
   }
 
-  if (_metadata.ballotRedemptionRate > JBConstants.MAX_BALLOT_REDEMPTION_RATE) {
+  if (_metadata.ballotRedemptionRate > JBConstants.MAX_REDEMPTION_RATE) {
     revert INVALID_BALLOT_REDEMPTION_RATE();
   }
 

@@ -19,6 +19,8 @@ An address can set operators for its project through the [`JBOperatorStore.setOp
 
 * [`JBController.reconfigureFundingCyclesOf(...)`](../../specifications/contracts/or-controllers/jbcontroller/write/reconfigurefundingcyclesof.md)
 * [`JBController.mintTokensOf(...)`](../../specifications/contracts/or-controllers/jbcontroller/write/minttokensof.md)
+* [`JBController.issueTokenFor(...)`](../../specifications/contracts/or-controllers/jbcontroller/write/issuetokenfor.md)
+* [`JBController.changeTokenOf(...)`](../../specifications/contracts/or-controllers/jbcontroller/write/changetokenof.md)
 * [`JBController.migrate(...)`](../../specifications/contracts/or-payment-terminals/jbethpaymentterminal/write/migrate.md)
 * [`JBETHPaymentTerminal.useAllowanceOf(...)`](../../specifications/contracts/or-payment-terminals/jbethpaymentterminal/write/useallowanceof.md)
 * [`JBETHPaymentTerminal.migrate(...)`](../../specifications/contracts/or-payment-terminals/jbethpaymentterminal/write/migrate.md)
@@ -26,8 +28,6 @@ An address can set operators for its project through the [`JBOperatorStore.setOp
 * [`JBProjects.setHandleOf(...)`](../../specifications/contracts/jbprojects/write/sethandleof.md)
 * [`JBProjects.setMetadataOf(...)`](../../specifications/contracts/jbprojects/write/setmetadataof.md)
 * [`JBSplitsStore.set(...)`](../../specifications/contracts/jbsplitsstore/write/set.md)
-* [`JBTokenStore.issueFor(...)`](../../specifications/contracts/jbtokenstore/write/issuefor.md)
-* [`JBTokenStore.changeTokenOf(...)`](broken-reference/)
 * [`JBTokenStore.shouldRequireClaimingFor(...)`](../../specifications/contracts/jbtokenstore/write/shouldrequireclaimingfor.md)
 * [`JBDirectory.setControllerOf(...)`](../../specifications/contracts/jbdirectory/write/setcontrollerof.md)
 * [`JBDirectory.addTerminalsOf(...)`](../../specifications/contracts/jbdirectory/write/addterminalsof.md)

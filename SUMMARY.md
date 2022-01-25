@@ -50,6 +50,7 @@
     * [JBOperatorData](protocol/specifications/data-structures/jboperatordata.md)
     * [JBFundAccessConstraints](protocol/specifications/data-structures/jbfundaccessconstraints.md)
     * [JBPayParamsData](protocol/specifications/data-structures/jbpayparamsdata.md)
+    * [JBProjectMetadata](protocol/specifications/data-structures/jbprojectmetadata.md)
     * [JBRedeemParamsData](protocol/specifications/data-structures/jbredeemparamsdata.md)
     * [JBSplit](protocol/specifications/data-structures/jbsplit.md)
     * [JBGroupedSplits](protocol/specifications/data-structures/jbgroupedsplits.md)
