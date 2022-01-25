@@ -16,6 +16,9 @@
 ## 📚 Resources
 
 * [Contract Addresses](resources/contract-addresses.md)
+* [Understanding Funding Cycles](resources/understanding-funding-cycles.md)
+* [Understanding Overflow](resources/understanding-overflow.md)
+* [Understanding Tokens](resources/understanding-tokens.md)
 
 ## 👾 Protocol V2 <a href="#protocol" id="protocol"></a>
 
@@ -232,7 +235,7 @@
           * [fundingCycleStore](protocol/specifications/contracts/or-controllers/jbcontroller/properties/fundingcyclestore.md)
           * [tokenStore](protocol/specifications/contracts/or-controllers/jbcontroller/properties/tokenstore.md)
           * [splitsStore](protocol/specifications/contracts/or-controllers/jbcontroller/properties/splitsstore.md)
-          * [directory](protocol/specifications/contracts/or-abstract/jbterminalutility/properties/directory.md)
+          * [directory](protocol/specifications/contracts/or-controllers/jbcontroller/properties/directory.md)
           * [\_packedDistributionLimitDataOf](protocol/specifications/contracts/or-controllers/jbcontroller/properties/\_packeddistributionlimitdataof.md)
           * [\_packedOverflowAllowanceDataOf](protocol/specifications/contracts/or-controllers/jbcontroller/properties/\_packedoverflowallowancedataof.md)
           * [\_processedTokenTrackerOf](protocol/specifications/contracts/or-controllers/jbcontroller/properties/\_processedtokentrackerof.md)
@@ -279,7 +282,7 @@
           * [fee](protocol/specifications/contracts/or-payment-terminals/jbethpaymentterminal/properties/fee.md)
           * [feeGuage](protocol/specifications/contracts/or-payment-terminals/jbethpaymentterminal/properties/feegauge.md)
           * [\_heldFeesOf](protocol/specifications/contracts/or-payment-terminals/jbethpaymentterminal/properties/\_heldfeesof.md)
-          * [\_MAX_FEE](protocol/specifications/contracts/or-payment-terminals/jbethpaymentterminal/properties/\maxfee.md)
+          * [\_MAX\_FEE](protocol/specifications/contracts/or-payment-terminals/jbethpaymentterminal/properties/\_max\_fee.md)
         * [Read](protocol/specifications/contracts/or-payment-terminals/jbethpaymentterminal/read/README.md)
           * [ethBalanceOf](protocol/specifications/contracts/or-payment-terminals/jbethpaymentterminal/read/ethbalanceof.md)
           * [remainingDistributionLimitOf](protocol/specifications/contracts/or-payment-terminals/jbethpaymentterminal/read/remainingdistributionlimitof.md)
