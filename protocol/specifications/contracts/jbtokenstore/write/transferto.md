@@ -133,12 +133,12 @@ function transferTo(
   }
 
   // An address can't transfer to itself.
-	if (_holder == _recipient) {
+  if (_holder == _recipient) {
     revert INVALID_RECIPIENT();
   }
 
   // There must be an amount to transfer.
-	if (_amount == 0) {
+  if (_amount == 0) {
     revert TOKEN_AMOUNT_ZERO();
   }
 

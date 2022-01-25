@@ -10,6 +10,8 @@ Interface: [`IJBTokenStore`](../../../interfaces/ijbtokenstore.md)
 
 _Only a project's current controller can change its token._
 
+_This JBTokenStore contract must have access to all IJBToken interface functions._
+
 ## Definition
 
 ```solidity
@@ -80,6 +82,9 @@ function changeFor(
 
   @dev
   Only a project's current controller can change its token.
+
+  @dev
+  This JBTokenStore contract must have access to all IJBToken interface functions.
 
   @param _projectId The ID of the project to which the changed token belongs.
   @param _token The new token.
