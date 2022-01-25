@@ -140,7 +140,7 @@ function setControllerOf(uint256 _projectId, IJBController _controller)
 | String                            | Description                                                      |
 | --------------------------------- | ---------------------------------------------------------------- |
 | **`SET_CONTROLLER_ZERO_ADDRESS`** | Thrown if the provided controller is the zero address.           |
-| **`SET_CONTROLLER_ALREADY_SET`**  | Thrown if the provided controller is already the set controller. |
+| **`CONTROLLER_ALREADY_SET`**      | Thrown if the provided controller is already the set controller. |
 | **`INVALID_PROJECT_ID`**          | Thrown if the provided project doesn't yet exist.                |
 {% endtab %}
 
