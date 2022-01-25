@@ -81,6 +81,7 @@
     * [IJBControllerUtility](protocol/specifications/interfaces/ijbcontrollerutility.md)
     * [IJBTokenStore](protocol/specifications/interfaces/ijbtokenstore.md)
     * [IJBFeeGauge](protocol/specifications/interfaces/ijbfeegauge.md)
+    * [IJBTokenUriResolver](protocol/specifications/interfaces/ijbtokenuriresolver.md)
   * [Contracts](protocol/specifications/contracts/README.md)
     * [JBProjects](protocol/specifications/contracts/jbprojects/README.md)
       * [Events](protocol/specifications/contracts/jbprojects/events/README.md)
