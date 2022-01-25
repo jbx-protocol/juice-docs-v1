@@ -44,6 +44,11 @@ function _distributeToPayoutSplitsOf(
     );
     ```
 
+    _Libraries used:_
+
+    * [`JBSplitsGroups`](../../../../libraries/jbsplitsgroups.md)
+      * `.ETH_PAYOUT`
+
     _External references:_
 
     * [`splitsOf`](../../../jbsplitsstore/read/splitsof.md)
@@ -132,6 +137,11 @@ function _distributeToPayoutSplitsOf(
       leftoverAmount = leftoverAmount - _payoutAmount;
     }
     ```
+
+    _Libraries used:_
+
+    * [`JBSplitsGroups`](../../../../libraries/jbsplitsgroups.md)
+      * `.ETH_PAYOUT`
 
     _Internal references:_
 

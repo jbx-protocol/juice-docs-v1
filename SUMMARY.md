@@ -60,7 +60,7 @@
     * [JBCurrencies](protocol/specifications/libraries/jbcurrencies.md)
     * [JBFundingCycleMetadataResolver](protocol/specifications/libraries/jbfundingcyclemetadataresolver.md)
     * [JBOperations](protocol/specifications/libraries/jboperations.md)
-    * [JBSplitsGroup](protocol/specifications/libraries/jbsplitsgroup.md)
+    * [JBSplitsGroups](protocol/specifications/libraries/jbsplitsgroups.md)
   * [Interfaces](protocol/specifications/interfaces/README.md)
     * [IJBController](protocol/specifications/interfaces/ijbcontroller.md)
     * [IJBDirectory](protocol/specifications/interfaces/ijbdirectory.md)

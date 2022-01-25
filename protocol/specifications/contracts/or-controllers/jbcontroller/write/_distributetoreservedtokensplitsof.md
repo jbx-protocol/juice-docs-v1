@@ -39,6 +39,11 @@ function _distributeToReservedTokenSplitsOf(
     );
     ```
 
+    _Libraries used:_
+
+    * [`JBSplitsGroups`](../../../../libraries/jbsplitsgroups.md)
+      * `.RESERVED_TOKENS`
+
     _External references:_
 
     * [`splitsOf`](../../../jbsplitsstore/read/splitsof.md)
@@ -103,6 +108,11 @@ function _distributeToReservedTokenSplitsOf(
       leftoverAmount = leftoverAmount - _tokenCount;
     }
     ```
+
+    _Libraries used:_
+
+    * [`JBSplitsGroups`](../../../../libraries/jbsplitsgroups.md)
+      * `.RESERVED_TOKENS`
 
     _External references:_
 
