@@ -111,7 +111,7 @@ function setControllerOf(uint256 _projectId, IJBController _controller)
     projects.ownerOf(_projectId),
     _projectId,
     JBOperations.SET_CONTROLLER,
-    (_setControllerAllowlist[address(_controller)] && _setControllerAllowlist[msg.sender]) 
+    (isAllowedToSetController[address(_controller)] && isAllowedToSetController[msg.sender]) 
 {
   // Can't set the zero address.
   if (_controller == IJBController(address(0))) {
@@ -123,7 +123,7 @@ function setControllerOf(uint256 _projectId, IJBController _controller)
     revert SET_CONTROLLER_ALREADY_SET();
   }
 
-	// The project must exist.
+  // The project must exist.
   if (projects.count() < _projectId) {
     revert INVALID_PROJECT_ID();
   }

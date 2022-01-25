@@ -30,24 +30,24 @@ function addToSetControllerAllowlist(address _address) external override onlyOwn
 
     ```solidity
     // Check that the address is not already in the allowlist.
-    if (_setControllerAllowlist[_address]) {
+    if (isAllowedToSetController[_address]) {
       revert CONTROLLER_ALREADY_IN_ALLOWLIST();
     }
     ```
 
     Internal references:
 
-    * [`_setControllerAllowlist`](properties/\_setcontrollerallowlist.md)
+    * [`isAllowedToSetController`](properties/\isallowedtosetcontroller.md)
 2.  Add the controller to the allowlist.
 
     ```solidity
     // Add the address to the allowlist.
-    _setControllerAllowlist[_address] = true;
+    isAllowedToSetController[_address] = true;
     ```
 
     Internal references:
 
-    * [`_setControllerAllowlist`](properties/\_setcontrollerallowlist.md)
+    * [`isAllowedToSetController`](properties/\isallowedtosetcontroller.md)
 3.  Emit a `AddToSetControllerAllowlist` event with the relevant parameters.
 
     ```solidity
@@ -78,12 +78,12 @@ function addToSetControllerAllowlist(address _address) external override onlyOwn
 */
 function addToSetControllerAllowlist(address _address) external override onlyOwner {
   // Check that the address is not already in the allowlist.
-  if (_setControllerAllowlist[_address]) {
+  if (isAllowedToSetController[_address]) {
     revert CONTROLLER_ALREADY_IN_ALLOWLIST();
   }
 
   // Add the address to the allowlist.
-  _setControllerAllowlist[_address] = true;
+  isAllowedToSetController[_address] = true;
 
   emit AddToSetControllerAllowlist(_address, msg.sender);
 }

@@ -49,20 +49,16 @@ function primaryTerminalOf(uint256 _projectId, address _token)
 
     Internal references:
 
-```solidity
-// Return the first terminal which accepts the specified token.
-for (uint256 _i; _i < _terminalsOf[_projectId].length; _i++) {
-  IJBTerminal _terminal = _terminalsOf[_projectId][_i];
-  if (_terminal.token() == _token) return _terminal;
-}
-```
+    * [`_terminalsOf`](../properties/\_terminalsof.md)
 
-````
-```solidity
-// Not found.
-return IJBTerminal(address(0));
-```
-````
+
+3.  Return an empty Terminal if not found.
+
+    ```solidity
+    // Not found.
+    return IJBTerminal(address(0));
+    ```
+
 {% endtab %}
 
 {% tab title="Code" %}

@@ -28,24 +28,24 @@ function removeFromSetControllerAllowlist(address _address) external override on
 
     ```solidity
     // Check that the address is in the allowlist.
-    if (!_setControllerAllowlist[_address]) {
+    if (!isAllowedToSetController[_address]) {
       revert CONTROLLER_NOT_IN_ALLOWLIST();
     }
     ```
 
     Internal references:
 
-    * [`_setControllerAllowlist`](properties/\_setcontrollerallowlist.md)
+    * [`isAllowedToSetController`](properties/\isallowedtosetcontroller.md)
 2.  Add the controller to the allowlist.
 
     ```solidity
     // Remove the address from the allowlist.
-    delete _setControllerAllowlist[_address];
+    delete isAllowedToSetController[_address];
     ```
 
     Internal references:
 
-    * [`_setControllerAllowlist`](properties/\_setcontrollerallowlist.md)
+    * [`isAllowedToSetController`](properties/\isallowedtosetcontroller.md)
 3.  Emit a `RemoveFromSetControllerAllowlist` event with the relevant parameters.
 
     ```solidity
@@ -70,12 +70,12 @@ function removeFromSetControllerAllowlist(address _address) external override on
 */
 function removeFromSetControllerAllowlist(address _address) external override onlyOwner {
   // Check that the address is in the allowlist.
-  if (!_setControllerAllowlist[_address]) {
+  if (!isAllowedToSetController[_address]) {
     revert CONTROLLER_NOT_IN_ALLOWLIST();
   }
 
   // Remove the address from the allowlist.
-  delete _setControllerAllowlist[_address];
+  delete isAllowedToSetController[_address];
 
   emit RemoveFromSetControllerAllowlist(_address, msg.sender);
 }
