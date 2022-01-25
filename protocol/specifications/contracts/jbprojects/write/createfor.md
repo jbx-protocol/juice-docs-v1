@@ -114,7 +114,7 @@ function createFor(address _owner, JBProjectMetadata calldata _metadata)
 {% tab title="Events" %}
 | Name                                | Data                                                                                                                                                                                                                |
 | ----------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [**`Create`**](../events/create.md) | <ul><li><code>uint256 indexed projectId</code></li><li><code>address indexed owner</code></li><li><a href="../../structs/jbprojectmetadata"><code>JBProjectMetadata</code></a><code>uri</code></li><li><code>address caller</code></li></ul> |
+| [**`Create`**](../events/create.md) | <ul><li><code>uint256 indexed projectId</code></li><li><code>address indexed owner</code></li><li><a href="../../data-structures/jbprojectmetadata"><code>JBProjectMetadata</code></a><code>uri</code></li><li><code>address caller</code></li></ul> |
 {% endtab %}
 
 {% tab title="Bug bounty" %}

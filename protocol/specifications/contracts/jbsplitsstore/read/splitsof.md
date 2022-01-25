@@ -29,15 +29,15 @@ function splitsOf(
 
 ## Body
 
-1.  This function just reads and returns the stored `_splitsOf` the project, within the specified domain, for the specified group.
+1.  This function just reads and returns the splits of the project, within the specified domain, for the specified group.
 
     ```solidity
-    return _splitsOf[_projectId][_domain][_group];
+    return _getStructsFor(_projectId, _domain, _group);
     ```
 
     Internal references:
 
-    * [`_splitsOf`](../properties/\_splitsof.md)
+    * [`_getStructsFor`](../properties/\_getstructsfor.md)
 {% endtab %}
 
 {% tab title="Code" %}
@@ -57,7 +57,7 @@ function splitsOf(
   uint256 _domain,
   uint256 _group
 ) external view override returns (JBSplit[] memory) {
-  return _splitsOf[_projectId][_domain][_group];
+  return _getStructsFor(_projectId, _domain, _group);
 }
 ```
 {% endtab %}

@@ -46,12 +46,12 @@ function set(
 
     ```solidity
     // Get a reference to the project's current splits.
-    JBSplit[] memory _currentSplits = _splitsOf[_projectId][_domain][_group];
+    JBSplit[] memory _currentSplits = _getStructsFor(_projectId, _domain, _group);;
     ```
 
     _Internal references:_
 
-    * [`_splitsOf`](../properties/\_splitsof.md)
+    * [`_getStructsFor`](../read/\_getstructsfor.md)
     * two
 2.  Loop through each `_currentSplits` to make sure the new `_splits` being set respect any current split bound by a lock constraint.
 
@@ -120,6 +120,15 @@ function set(
           revert INVALID_SPLIT_PERCENT();
         }
         ```
+
+    *   Check that the projectId for the current split is within the max value that can be packed.
+
+        ```solidity
+        // ProjectId should be within a uint56
+        if (_splits[_i].projectId > type(uint56).max) {
+          revert INVALID_PROJECT_ID();
+        }
+        ```
     *   Check that the split specifies a recipient. Either an `allocator` must be specified or a `beneficiary` must be specified.
 
         ```solidity
@@ -145,16 +154,41 @@ function set(
           revert INVALID_TOTAL_PERCENT();
         }
         ```
-    *   Push the split onto the stored `_splits` value.
+    *   Pack common split properties into `_packedSplitParts1Of`.
 
         ```solidity
-        // Push the new split into the project's list of splits.
-        _splitsOf[_projectId][_domain][_group].push(_splits[_i]);
+        uint256 _packedSplitParts1 = _splits[_i].preferClaimed ? 1 : 0;
+        _packedSplitParts1 |= _splits[_i].percent << 1;
+        _packedSplitParts1 |= _splits[_i].projectId << 33;
+        _packedSplitParts1 |= uint256(uint160(address(_splits[_i].beneficiary))) << 89;
+        // Store the first spit part.
+        _packedSplitParts1Of[_projectId][_domain][_group][_i] = _packedSplitParts1;
         ```
 
         _Internal references:_
 
-        * [`_splitsOf`](../properties/\_splitsof.md)
+        * [`_packedSplitParts1Of`](../properties/\_packedsplitparts1of.md)
+    *   Pack less common split properties into `_packedSplitParts2Of` if needed. Otherwise delete any content in storage at the index being iterated on.
+
+        ```solidity
+        // If there's data to store in the second packed split part, pack and store.
+        if (_splits[_i].lockedUntil > 0 || _splits[_i].allocator != IJBSplitAllocator(address(0))) {
+          // Locked until should be within a uint48
+          if (_splits[_i].lockedUntil > type(uint48).max) {
+            revert INVALID_LOCKED_UNTIL();
+          }
+          uint256 _packedSplitParts2 = uint48(_splits[_i].lockedUntil);
+          _packedSplitParts2 |= uint256(uint160(address(_splits[_i].allocator))) << 48;
+          _packedSplitParts2Of[_projectId][_domain][_group][_i] = _packedSplitParts2;
+          // Otherwise if there's a value stored in the indexed position, delete it.
+        } else if (_packedSplitParts2Of[_projectId][_domain][_group][_i] > 0) {
+          delete _packedSplitParts2Of[_projectId][_domain][_group][_i];
+        }
+        ```
+
+        _Internal references:_
+
+        * [`_packedSplitParts2Of`](../properties/\_packedsplitparts2of.md)
     *   For each added split, emit a `SetSplit` event with all relevant parameters.
 
         ```solidity
@@ -164,6 +198,18 @@ function set(
         _Event references:_
 
         * [`SetSplit`](../events/setsplit.md)
+
+4.  Store the new array length.
+
+    ```solidity
+    // Set the new length of the splits.
+    _splitCountOf[_projectId][_domain][_group] = _splits.length;
+    ```
+
+    _Internal references:_
+
+    * [`_splitCountOf`](../properties/\_splitcountof.md)
+  
 {% endtab %}
 
 {% tab title="Code" %}
@@ -199,7 +245,7 @@ function set(
   )
 {
   // Get a reference to the project's current splits.
-  JBSplit[] memory _currentSplits = _splitsOf[_projectId][_domain][_group];
+  JBSplit[] memory _currentSplits = _getStructsFor(_projectId, _domain, _group);
 
   // Check to see if all locked splits are included.
   for (uint256 _i = 0; _i < _currentSplits.length; _i++) {
@@ -220,13 +266,11 @@ function set(
         _splits[_j].lockedUntil >= _currentSplits[_i].lockedUntil
       ) _includesLocked = true;
     }
+
     if (!_includesLocked) {
       revert PREVIOUS_LOCKED_SPLITS_NOT_INCLUDED();
     }
   }
-
-  // Delete from storage so splits can be repopulated.
-  delete _splitsOf[_projectId][_domain][_group];
 
   // Add up all the percents to make sure they cumulative are under 100%.
   uint256 _percentTotal = 0;
@@ -235,6 +279,10 @@ function set(
     // The percent should be greater than 0.
     if (_splits[_i].percent == 0) {
       revert INVALID_SPLIT_PERCENT();
+    }
+    // ProjectId should be within a uint56
+    if (_splits[_i].projectId > type(uint56).max) {
+      revert INVALID_PROJECT_ID();
     }
 
     // The allocator and the beneficiary shouldn't both be the zero address.
@@ -253,11 +301,33 @@ function set(
       revert INVALID_TOTAL_PERCENT();
     }
 
-    // Push the new split into the project's list of splits.
-    _splitsOf[_projectId][_domain][_group].push(_splits[_i]);
+    uint256 _packedSplitParts1 = _splits[_i].preferClaimed ? 1 : 0;
+    _packedSplitParts1 |= _splits[_i].percent << 1;
+    _packedSplitParts1 |= _splits[_i].projectId << 33;
+    _packedSplitParts1 |= uint256(uint160(address(_splits[_i].beneficiary))) << 89;
+
+    // Store the first spit part.
+    _packedSplitParts1Of[_projectId][_domain][_group][_i] = _packedSplitParts1;
+
+    // If there's data to store in the second packed split part, pack and store.
+    if (_splits[_i].lockedUntil > 0 || _splits[_i].allocator != IJBSplitAllocator(address(0))) {
+      // Locked until should be within a uint48
+      if (_splits[_i].lockedUntil > type(uint48).max) {
+        revert INVALID_LOCKED_UNTIL();
+      }
+      uint256 _packedSplitParts2 = uint48(_splits[_i].lockedUntil);
+      _packedSplitParts2 |= uint256(uint160(address(_splits[_i].allocator))) << 48;
+      _packedSplitParts2Of[_projectId][_domain][_group][_i] = _packedSplitParts2;
+      // Otherwise if there's a value stored in the indexed position, delete it.
+    } else if (_packedSplitParts2Of[_projectId][_domain][_group][_i] > 0) {
+      delete _packedSplitParts2Of[_projectId][_domain][_group][_i];
+    }
 
     emit SetSplit(_projectId, _domain, _group, _splits[_i], msg.sender);
   }
+
+  // Set the new length of the splits.
+  _splitCountOf[_projectId][_domain][_group] = _splits.length;
 }
 ```
 {% endtab %}
@@ -266,9 +336,11 @@ function set(
 | String                                       | Description                                                                   |
 | -------------------------------------------- | ----------------------------------------------------------------------------- |
 | **`PREVIOUS_LOCKED_SPLITS_NOT_INCLUDED`**    | Thrown if the splits that are being set override some splits that are locked. |
+| **`INVALID_PROJECT_ID`**                     | Thrown if the split has a project ID that wont fit in its packed storage slot.|
 | **`INVALID_SPLIT_PERCENT`**                  | Thrown if the split has specified a percent of 0.                             |
 | **`ALLOCATOR_AND_BENEFICIARY_ZERO_ADDRESS`** | Thrown if the split doesn't specify a destination.                            |
 | **`INVALID_TOTAL_PERCENT`**                  | Thrown if the split percents add up more than 100%.                           |
+| **`INVALID_LOCKED_UNTIL`**                   | Thrown if the split has a lockedUntil that wont fit in its packed storage slot.|              |
 {% endtab %}
 
 {% tab title="Events" %}

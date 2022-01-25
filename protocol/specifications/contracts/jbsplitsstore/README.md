@@ -43,7 +43,7 @@ constructor(
 
 | Name                                 | Data                                                                                                                                                                                                                 |
 | ------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [**`SetSplit`**](events/setsplit.md) | <ul><li><code>uint256 indexed projectId</code></li><li><code>uint256 indexed domain</code></li><li><code>uint256 indexed group</code></li><li><code>Split split</code></li><li><code>address caller</code></li></ul> |
+| [**`SetSplit`**](events/setsplit.md) | <ul><li><code>uint256 indexed projectId</code></li><li><code>uint256 indexed domain</code></li><li><code>uint256 indexed group</code></li><li><a href="../../data-structures/jbsplit.md"><code>JBSplit</code></a><code>split</code></li><li><code>address caller</code></li></ul> |
 
 ## Properties
 
@@ -62,4 +62,4 @@ constructor(
 
 | Function                  | Definition                                                                                                                                                                                                                                                                                                                                                                      |
 | ------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [**`set`**](write/set.md) | <p><strong>Traits</strong></p><ul><li><code>requirePermissionAllowingOverride</code></li></ul><p><strong>Params</strong></p><ul><li><code>uint256 _projectId</code></li><li><code>uint256 _configuration</code></li><li><code>uint256 _group</code></li><li><a href="../../../../protocol/data-structures/jbsplit.md"><code>JBSplit</code></a><code>[] _splits</code></li></ul> |
+| [**`set`**](write/set.md) | <p><strong>Traits</strong></p><ul><li><code>requirePermissionAllowingOverride</code></li></ul><p><strong>Params</strong></p><ul><li><code>uint256 _projectId</code></li><li><code>uint256 _configuration</code></li><li><code>uint256 _group</code></li><li><a href="../../data-structures/jbsplit.md"><code>JBSplit</code></a><code>[] _splits</code></li></ul> |

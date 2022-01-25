@@ -60,7 +60,7 @@ function setTokenUriResolver(IJBTokenUriResolver _newResolver) external override
 {% tab title="Events" %}
 | Name                                                | Data                                                                                                                         |
 | --------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------- |
-| [**`SetTokenUriResolver`**](../events/settokenuriresolver.md) | <ul><li><a href="../../../interfaces/ijbtokenuriresolver"><code>IJBTokenUriResolver</code></a><code>resolver</code></li><li><a href="../../../structs/jbprojectmetadata"><code>JBProjectMetadata</code></a><code>metadata</code></code></li><li><code>address caller</code></li></ul> |
+| [**`SetTokenUriResolver`**](../events/settokenuriresolver.md) | <ul><li><a href="../../../interfaces/ijbtokenuriresolver"><code>IJBTokenUriResolver</code></a><code>resolver</code></li><li><a href="../../../data-structures/jbprojectmetadata"><code>JBProjectMetadata</code></a><code>metadata</code></code></li><li><code>address caller</code></li></ul> |
 {% endtab %}
 
 {% tab title="Bug bounty" %}
