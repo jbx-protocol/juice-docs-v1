@@ -7,7 +7,6 @@ description: What's in the V2 protocol
 * <mark style="color:orange;">**Deploy an NFT that represents ownership over your project**</mark> \
   Whichever address owns this NFT has administrative privileges to configure treasury parameters within the Juicebox ecosystem. It can also be used by other Web3 ecosystems to extend functionality to projects.
 
-<!---->
 
 * <mark style="color:orange;">**Configure funding cycles for your project**</mark> \
   Funding cycles define contractual constraints according to which your project will operate. \
@@ -78,8 +77,12 @@ description: What's in the V2 protocol
   \
   This can be used to automatically allow for more favorable redemption rates during times of potential change.
 
+<!---->
+
 * <mark style="color:orange;">**Pause payments, pause distributions, pause redemptions, pause mint, pause burn**</mark> \
   Projects can pause various bits of its treasury's functionality on a per-funding cycle basis. These functions are unpaused by default.
+
+<!---->
 
 * <mark style="color:orange;">**Allow changing tokens, allow terminal migrations, allow controller migrations**</mark> \
   Projects can allow various bits of treasury functionality on a per-funding cycle basis. These functions are disabled by default.
