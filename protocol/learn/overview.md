@@ -5,7 +5,7 @@ description: What's in the V2 protocol
 # Overview
 
 * <mark style="color:orange;">**Deploy an NFT that represents ownership over your project**</mark> \
-  Whichever address owns this NFT has administrative privileges to configure treasury parameters within the Juicebox ecosystem. It can also be used by other Web3 ecosystems to extend functionality to projects. \
+  Whichever address owns this NFT has administrative privileges to configure treasury parameters within the Juicebox ecosystem. It can also be used by other Web3 ecosystems to extend functionality to projects.
 
 * <mark style="color:orange;">**Configure funding cycles for your project**</mark> \
   Funding cycles define contractual constraints according to which your project will operate. \
@@ -89,45 +89,43 @@ description: What's in the V2 protocol
   \
   This allows a project to withdraw funds and later add them back into their Juicebox treasury without incurring fees. \
   \
-  This applies to funds distributions from the distribution limit and from its overflow allowance. \
+  This applies to funds distributions from the distribution limit and from its overflow allowance.
 
 * <mark style="color:orange;">**Data source**</mark> \
   The address of a contract that adheres to [`IJBFundingCycleDataSource`](../specifications/interfaces/ijbfundingcycledatasource.md), which can be used to extend or override what happens when your treasury is receiving funds, and what happens when someone tries to redeem from your treasury.
-
-\
 
 
 </details>
 
 * <mark style="color:orange;">**Mint tokens**</mark> \
   By default, a project starts with 0 tokens and mints them when its treasury receives contributions. \
-  A project can mint and distribute more of its own tokens on demand if it its current funding cycle isn't configured to pause minting. \
+  A project can mint and distribute more of its own tokens on demand if it its current funding cycle isn't configured to pause minting.
 
 * <mark style="color:orange;">**Burn tokens**</mark> \
-  Anyone can burn a project's tokens, if the project's current funding cycle isn't configured to paused burning. \
+  Anyone can burn a project's tokens, if the project's current funding cycle isn't configured to paused burning.
 
 * <mark style="color:orange;">**Bring-your-own token**</mark> \
   A project can bring its own token, as long as it adheres to `IJBToken`. \
   \
   This allows a project to use ERC-721's, ERC-1155's, or any other custom contract that'll be called upon when the protocol asks to mint or burn tokens. \
   \
-  A project can change its token during any of its funding cycles that are explicitly configured to allow it. \
+  A project can change its token during any of its funding cycles that are explicitly configured to allow it.
 
 * <mark style="color:orange;">**Splits**</mark> \
   A project can pre-program token distributions to splits. The destination of a split can be an Ethereum address, the project ID of another project's Juicebox treasury (the split will allow you to configure the beneficiary of that project's tokens that get minted in response to the distribution), or to the `allocate` function of any contract that adheres to [`IJBSplitAllocator`](../specifications/interfaces/ijbsplitallocator.md). \
   \
-  ETH splits to Allocators get sent directly to the `allocate` function. Distribution of other assets to Allocator contracts (ERC-20's, ERC-721's, ERC-1155's, etc) will trigger the `allocate` function after a successful transfer. \
+  ETH splits to Allocators get sent directly to the `allocate` function. Distribution of other assets to Allocator contracts (ERC-20's, ERC-721's, ERC-1155's, etc) will trigger the `allocate` function after a successful transfer.
 
 * <mark style="color:orange;">**Custom treasury strategies**</mark> \
-  Funding cycles can be configured to use an [`IJBFundingCycleDataSource`](../specifications/interfaces/ijbfundingcycledatasource.md), [`IJBPayDelegate`](../specifications/interfaces/ijbpaydelegate.md), and [`IJBRedemptionDelegate`](../specifications/interfaces/ijbredemptiondelegate.md) to extend or override the default Juicebox protocol's behavior that defines what happens when an address tries to make a payment to your project's treasury, and what happens when someone tries to redeem your tokens during any particular funding cycle. \
+  Funding cycles can be configured to use an [`IJBFundingCycleDataSource`](../specifications/interfaces/ijbfundingcycledatasource.md), [`IJBPayDelegate`](../specifications/interfaces/ijbpaydelegate.md), and [`IJBRedemptionDelegate`](../specifications/interfaces/ijbredemptiondelegate.md) to extend or override the default Juicebox protocol's behavior that defines what happens when an address tries to make a payment to your project's treasury, and what happens when someone tries to redeem your tokens during any particular funding cycle.
 
 * <mark style="color:orange;">**Accept multiple tokens**</mark> \
   A project can specify any number of payment terminal contracts where it can receive funds denominated in various tokens. This allows projects to create distinct rules for accepting ETH, any ERC-20, or any asset in general. \
   \
-  Anyone can roll their own contract that adheres to `IJBTerminal` for projects to use, and a project can migrate funds between terminals that use the same token as it wishes. \
+  Anyone can roll their own contract that adheres to `IJBTerminal` for projects to use, and a project can migrate funds between terminals that use the same token as it wishes.
 
 * <mark style="color:orange;">**Forkability and migratability.**</mark> \
-  A project can migrate its treasury's controller to any other contract that adheres to `IJBController`. This allows a project to evolve to updated or custom operating rules over time as it wishes. \
+  A project can migrate its treasury's controller to any other contract that adheres to `IJBController`. This allows a project to evolve to updated or custom operating rules over time as it wishes.
 
 * <mark style="color:orange;">**Operators**</mark> \
   A project owner can specify addresses that are allowed to operate certain administrative treasury transactions on its behalf.
