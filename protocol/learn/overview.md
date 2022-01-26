@@ -7,6 +7,8 @@ description: What's in the V2 protocol
 * <mark style="color:orange;">**Deploy an NFT that represents ownership over your project**</mark> \
   Whichever address owns this NFT has administrative privileges to configure treasury parameters within the Juicebox ecosystem. It can also be used by other Web3 ecosystems to extend functionality to projects.
 
+<!---->
+
 * <mark style="color:orange;">**Configure funding cycles for your project**</mark> \
   Funding cycles define contractual constraints according to which your project will operate. \
   The following properties can be configured into a funding cycle:
@@ -74,10 +76,10 @@ description: What's in the V2 protocol
 * <mark style="color:orange;">**Ballot redemption rate**</mark> \
   A project can specify a custom redemption rate that takes effect only when a proposed reconfiguration is waiting to take effect. \
   \
-  This can be used to automatically allow for more favorable redemption rates during times of potential change. \
+  This can be used to automatically allow for more favorable redemption rates during times of potential change.
 
 * <mark style="color:orange;">**Pause payments, pause distributions, pause redemptions, pause mint, pause burn**</mark> \
-  Projects can pause various bits of its treasury's functionality on a per-funding cycle basis. These functions are unpaused by default. \
+  Projects can pause various bits of its treasury's functionality on a per-funding cycle basis. These functions are unpaused by default.
 
 * <mark style="color:orange;">**Allow changing tokens, allow terminal migrations, allow controller migrations**</mark> \
   Projects can allow various bits of treasury functionality on a per-funding cycle basis. These functions are disabled by default.
@@ -90,6 +92,8 @@ description: What's in the V2 protocol
   This allows a project to withdraw funds and later add them back into their Juicebox treasury without incurring fees. \
   \
   This applies to funds distributions from the distribution limit and from its overflow allowance.
+
+<!---->
 
 * <mark style="color:orange;">**Data source**</mark> \
   The address of a contract that adheres to [`IJBFundingCycleDataSource`](../specifications/interfaces/ijbfundingcycledatasource.md), which can be used to extend or override what happens when your treasury is receiving funds, and what happens when someone tries to redeem from your treasury.
