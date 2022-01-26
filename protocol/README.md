@@ -14,6 +14,4 @@ Looking for an outline of the protocol's API, or a deep dive on each line of cod
 
 Reach out to contributors of the DAO on Discord to call attention to something that could be made more clear. You can also submit PR's directly to the documentation repo [here](https://github.com/jbx-protocol/juice-docs).
 
-Progress:
-
 All contracts are fully documented. In the coming week there will be several more deep dive tutorials written about how you can use `IJBFundingCycleDataSource` , `IJBPayDelegate`, `IJBRedemptionDelegate`, `IJBSplitAllocator`, and `IJBFundingCycleBallot `to pull off creative custom treasury strategies, and posts explaining how to forward funds from your own smart contracts into Juicebox projects.
