@@ -97,11 +97,9 @@ function _distributeToReservedTokenSplitsOf(
       if (_split.allocator != IJBSplitAllocator(address(0)))
         _split.allocator.allocate(
           _tokenCount,
-          JBSplitsGroups.RESERVED_TOKENS,
           _projectId,
-          _split.projectId,
-          _split.beneficiary,
-          _split.preferClaimed
+          JBSplitsGroups.RESERVED_TOKENS,
+          _split
         );
 
       // Subtract from the amount to be sent to the beneficiary.
@@ -192,11 +190,9 @@ function _distributeToReservedTokenSplitsOf(
       if (_split.allocator != IJBSplitAllocator(address(0)))
         _split.allocator.allocate(
           _tokenCount,
-          JBSplitsGroups.RESERVED_TOKENS,
           _projectId,
-          _split.projectId,
-          _split.beneficiary,
-          _split.preferClaimed
+          JBSplitsGroups.RESERVED_TOKENS,
+          _split
         );
 
       // Subtract from the amount to be sent to the beneficiary.
