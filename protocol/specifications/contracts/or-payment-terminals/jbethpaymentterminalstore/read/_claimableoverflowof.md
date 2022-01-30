@@ -8,7 +8,7 @@ Contract: [`JBETHPaymentTerminalStore`](../)​‌
 
 _If the project has an active funding cycle reconfiguration ballot, the project's ballot redemption rate is used._
 
-## Definition
+### Definition
 
 ```solidity
 function _claimableOverflowOf(
@@ -26,7 +26,7 @@ function _claimableOverflowOf(
 * The function does not alter state on the blockchain.
 * The function returns the amount of overflowed ETH that can be claimed.
 
-## Body
+### Body
 
 1.  Get a reference to the current overflow given the provided funding cycle. If the funding cycle specifies that the local balance should be used for redemptions, get the overflow taking only the local balance and distribution limit into account. Otherwise get the overflow taking the balances and distribution limits of all of the project's terminals into account.
 
@@ -141,7 +141,7 @@ function _claimableOverflowOf(
           ),
         JBConstants.MAX_REDEMPTION_RATE
       );
-      ```
+    ```
 
     _Libraries used:_
 

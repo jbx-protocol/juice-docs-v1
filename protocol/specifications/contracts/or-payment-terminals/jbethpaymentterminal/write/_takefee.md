@@ -6,7 +6,7 @@ Contract: [`JBETHPaymentTerminal`](../)​‌
 {% tab title="Step by step" %}
 **Take a fee of the specified amount.**
 
-## Definition
+### Definition
 
 ```solidity
 function _takeFee(uint256 _amount, address _beneficiary) private { ... }
@@ -18,7 +18,7 @@ function _takeFee(uint256 _amount, address _beneficiary) private { ... }
 * The function is private to this contract.
 * The function doesn't return anything.
 
-## Body
+### Body
 
 1.  Get a reference to the protocol project's primary ETH terminal. The project's project has an ID of 1.
 

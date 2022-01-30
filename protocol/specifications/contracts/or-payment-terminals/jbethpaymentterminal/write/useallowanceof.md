@@ -10,7 +10,7 @@ Interface: [`IJBETHPaymentTerminal`](../../../../interfaces/ijbethpaymenttermina
 
 _Only a token's holder or a designated operator can redeem it._
 
-## Definition
+### Definition
 
 ```solidity
 function useAllowanceOf(
@@ -35,7 +35,7 @@ function useAllowanceOf(
 * The resulting function overrides a function definition from the `IJBETHPaymentTerminal` interface.
 * The function doesn't return anything.
 
-## Body
+### Body
 
 1.  Record the use of the allowed funds.
 

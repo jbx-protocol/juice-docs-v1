@@ -6,7 +6,7 @@ Contract:[`JBFundingCycleStore`](../)​
 {% tab title="Step by step" %}
 **The accumulated weight change since the specified funding cycle.**
 
-## Definition
+### Definition
 
 ```solidity
 function _deriveWeightFrom(JBFundingCycle memory _baseFundingCycle, uint256 _start)
@@ -22,7 +22,7 @@ function _deriveWeightFrom(JBFundingCycle memory _baseFundingCycle, uint256 _sta
 * The function does not alter state on the blockchain.
 * The function returns a weight with 18 decimal places.
 
-## Body
+### Body
 
 1.  If the base funding cycle has no duration, the derived weight should be calculated from it no matter how much time has passed since it was active. The `discountRate` property in a [`JBFundingCycle`](../../../data-structures/jbfundingcycle.md)is out of 10000. Discount rates represent a number between 0-100%, with 0.01% fidelity, so the calculation must be made out of 10000.
 
@@ -38,7 +38,7 @@ function _deriveWeightFrom(JBFundingCycle memory _baseFundingCycle, uint256 _sta
     ```
 
     _Libraries used:_
-    
+
     * [`PRBMath`](https://github.com/hifi-finance/prb-math/blob/main/contracts/PRBMath.sol)
       * `.mulDiv`
     * [`JBConstants`](../../../libraries/jbconstants.md)
@@ -85,9 +85,7 @@ function _deriveWeightFrom(JBFundingCycle memory _baseFundingCycle, uint256 _sta
     * [`PRBMath`](https://github.com/hifi-finance/prb-math/blob/main/contracts/PRBMath.sol)
       * `.mulDiv`
     * [`JBConstants`](../../../libraries/jbconstants.md)
-      * `.MAX_DISCOUNT_RATE`
-    _Internal references:_
-
+      * `.MAX_DISCOUNT_RATE` _Internal references:_
     * [`_SECONDS_IN_DAY`](../properties/\_seconds\_in\_day.md)
 {% endtab %}
 

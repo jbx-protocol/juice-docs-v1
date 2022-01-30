@@ -10,7 +10,7 @@ _Mint's the project's tokens according to values provided by a configured data s
 
 _Only the associated payment terminal can record a payment._
 
-## Definition
+### Definition
 
 ```solidity
 function recordPaymentFrom(
@@ -52,7 +52,7 @@ function recordPaymentFrom(
   * `tokenCount` is the number of tokens that were minted.
   * `memo` is a memo that should be passed along to the emitted event.
 
-## Body
+### Body
 
 1.  Get a reference to the project's current funding cycle that should be returned.
 
@@ -126,7 +126,7 @@ function recordPaymentFrom(
     _Libraries used:_
 
     * [`PRBMathUD60x18`](https://github.com/hifi-finance/prb-math/blob/main/contracts/PRBMathUD60x18.sol)
-      * `.mul` 7.  Increment the project's balance by the amount of the payment received.
+      * `.mul` 7. Increment the project's balance by the amount of the payment received.
 
     ```solidity
     // Add the amount to the ETH balance of the project if needed.
@@ -136,7 +136,7 @@ function recordPaymentFrom(
     _Internal references:_
 
     * [`balanceOf`](../properties/balanceof.md)
-8.  If a there is a weighted amount, mint tokens accordingly. Unpack the `_preferClaimedTokensAndBeneficiary` value into its parts to pass along.
+7.  If a there is a weighted amount, mint tokens accordingly. Unpack the `_preferClaimedTokensAndBeneficiary` value into its parts to pass along.
 
     ```solidity
     if (_weightedAmount > 0)
@@ -158,7 +158,7 @@ function recordPaymentFrom(
     _External references:_
 
     * [`mintTokensOf`](../../../or-controllers/jbcontroller/write/minttokensof.md)
-9.  Make sure there were at least as many tokens minted as expected.
+8.  Make sure there were at least as many tokens minted as expected.
 
     ```solidity
     // The token count for the beneficiary must be greater than or equal to the minimum expected.
@@ -166,7 +166,7 @@ function recordPaymentFrom(
       revert INADEQUATE_TOKEN_COUNT();
     }
     ```
-10. If a pay delegate was provided by the data source, call its `didPay` function with a [`JBDidPayData`](../../../../data-structures/jbdidpaydata.md) payload including contextual information. When finished, emit a `DelegateDidPay` event with the relevant parameters.
+9.  If a pay delegate was provided by the data source, call its `didPay` function with a [`JBDidPayData`](../../../../data-structures/jbdidpaydata.md) payload including contextual information. When finished, emit a `DelegateDidPay` event with the relevant parameters.
 
     ```solidity
     // If a delegate was returned by the data source, issue a callback to it.
@@ -315,11 +315,11 @@ function recordPaymentFrom(
 {% endtab %}
 
 {% tab title="Errors" %}
-| String                 | Description                                                                                    |
-| ---------------------- | ---------------------------------------------------------------------------------------------- |
-| **`INVALID_FUNDING_CYCLE`**  | Thrown if the project doesn't have a funding cycle.                                            |
-| **`FUNDING_CYCLE_PAYMENT_PAUSED`**     | Thrown if the project has configured its current funding cycle to pause payments.              |
-| **`INADEQUATE_TOKEN_COUNT`** | Thrown if the quantity of tokens minted for the beneficiary is less than the minimum expected. |
+| String                             | Description                                                                                    |
+| ---------------------------------- | ---------------------------------------------------------------------------------------------- |
+| **`INVALID_FUNDING_CYCLE`**        | Thrown if the project doesn't have a funding cycle.                                            |
+| **`FUNDING_CYCLE_PAYMENT_PAUSED`** | Thrown if the project has configured its current funding cycle to pause payments.              |
+| **`INADEQUATE_TOKEN_COUNT`**       | Thrown if the quantity of tokens minted for the beneficiary is less than the minimum expected. |
 {% endtab %}
 
 {% tab title="Events" %}

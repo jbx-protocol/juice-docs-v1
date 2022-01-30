@@ -4,7 +4,7 @@
 {% tab title="Step by step" %}
 **Configures a funding cycle and stores information pertinent to the configuration.**
 
-## Definition
+### Definition
 
 ```solidity
 function _configure(
@@ -27,7 +27,7 @@ function _configure(
 * The function is private to this contract.
 * The function returns the funding cycle configuration that was successfully updated.
 
-## Body
+### Body
 
 1.  Make sure the reserved rate is a valid number out of the max value.
 
@@ -85,7 +85,7 @@ function _configure(
 
     * [`JBFundingCycleMetadataResolver`](../../../../libraries/jbfundingcyclemetadataresolver.md)\
       `.packFundingCycleMetadata(...)`
-2.  For each provided group splits, set the splits for the specified group if there are any.
+5.  For each provided group splits, set the splits for the specified group if there are any.
 
     ```solidity
     for (uint256 _i; _i < _groupedSplits.length; _i++)
@@ -102,7 +102,7 @@ function _configure(
     _External references:_
 
     * [`set`](../../../jbsplitsstore/write/set.md)
-3.  For each fund access constraint struct in the array passed in, store the values of the distribution limit and overflow allowance packed with their respective currencies. Make sure the values are contained within their bit limit so that they can be packed together in one `uint256`. Emit a `SetFundAccessConstraints` event with the relevant parameters.
+6.  For each fund access constraint struct in the array passed in, store the values of the distribution limit and overflow allowance packed with their respective currencies. Make sure the values are contained within their bit limit so that they can be packed together in one `uint256`. Emit a `SetFundAccessConstraints` event with the relevant parameters.
 
     ```solidity
     // Set distribution limits if there are any.
@@ -147,13 +147,13 @@ function _configure(
 
     _Internal references:_
 
-    * [`_packedDistributionLimitDataOf`](../properties/_packeddistributionlimitdataof.md)
-    * [`_packedOverflowAllowanceDataOf`](../properties/_packedoverflowallowancedataof.md)
+    * [`_packedDistributionLimitDataOf`](../properties/\_packeddistributionlimitdataof.md)
+    * [`_packedOverflowAllowanceDataOf`](../properties/\_packedoverflowallowancedataof.md)
 
     _Event references:_
 
     * [`SetFundAccessConstraints`](../events/setfundaccessconstraints.md)
-4.  Return the funding cycle's configuration.
+7.  Return the funding cycle's configuration.
 
     ```solidity
     return _fundingCycle.configuration;
@@ -261,8 +261,8 @@ function _configure(
 {% endtab %}
 
 {% tab title="Events" %}
-| Name                                                                    | Data                                                                                                                                                                                                                                                                                                                                                      |
-| ----------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Name                                                                    | Data                                                                                                                                                                                                                                                                                                                                                          |
+| ----------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | [**`SetFundAccessConstraints`**](../events/setfundaccessconstraints.md) | <ul><li><code>uint256 indexed fundingCycleConfiguration</code></li><li><code>uint256 indexed fundingCycleNumber</code></li><li><code>uint256 indexed projectId</code></li><li><a href="../../../../data-structures/jbfundaccessconstraints.md"><code>JBFundAccessConstraints</code></a><code>constraints</code></li><li><code>address caller</code></li></ul> |
 {% endtab %}
 

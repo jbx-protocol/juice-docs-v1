@@ -10,7 +10,7 @@ Interface: [`IJBController`](../../../../interfaces/ijbcontroller.md)
 
 _Only a project's owner, a designated operator, or one of its terminal's delegate can mint its tokens._
 
-## Definition
+### Definition
 
 ```solidity
 function mintTokensOf(
@@ -45,7 +45,7 @@ function mintTokensOf(
 * The function overrides a function definition from the [`IJBController`](../../../../interfaces/ijbcontroller.md) interface.
 * The function doesn't return anything.
 
-## Body
+### Body
 
 1.  Make sure the reserved rate is not greater than the max.
 
@@ -247,18 +247,18 @@ function mintTokensOf(
 {% endtab %}
 
 {% tab title="Errors" %}
-| String                                                     | Description                                                                                                                |
-| ---------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
-| **`INVALID_RESERVED_RATE`**                                | Thrown if the reserved rate provided is too big.                                                                           |
+| String                                                   | Description                                                                                                                |
+| -------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
+| **`INVALID_RESERVED_RATE`**                              | Thrown if the reserved rate provided is too big.                                                                           |
 | **`INVALID_RESERVED_RATE_AND_BENEFICIARY_ZERO_ADDRESS`** | Thrown if the token beneficiary is the zero address whle the reserved rate isn't 100%.                                     |
-| **`ZERO_TOKENS_TO_MINT`**                                  | Thrown if no tokens are being minted.                                                                                      |
-| **`MINT_PAUSED_AND_NOT_TERMINAL_DELEGATE`**                | Thrown if the request is not being made by a payment terminal, and the project's current funding cycle has paused minting. |
+| **`ZERO_TOKENS_TO_MINT`**                                | Thrown if no tokens are being minted.                                                                                      |
+| **`MINT_PAUSED_AND_NOT_TERMINAL_DELEGATE`**              | Thrown if the request is not being made by a payment terminal, and the project's current funding cycle has paused minting. |
 {% endtab %}
 
 {% tab title="Events" %}
-| Name                                        | Data                                                                                                                                                                                                                                                                                                                   |
-| ------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [**`MintTokens`**](events/minttokens.md)                                         | <ul><li><code>address indexed beneficiary</code></li><li><code>uint256 indexed projectId</code></li><li><code>uint256 count</code></li><li><code>string memo</code></li><li><code>uint256 reservedRate</code></li><li><code>address caller</code></li></ul>                 |
+| Name                                     | Data                                                                                                                                                                                                                                                        |
+| ---------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [**`MintTokens`**](events/minttokens.md) | <ul><li><code>address indexed beneficiary</code></li><li><code>uint256 indexed projectId</code></li><li><code>uint256 count</code></li><li><code>string memo</code></li><li><code>uint256 reservedRate</code></li><li><code>address caller</code></li></ul> |
 {% endtab %}
 
 {% tab title="Bug bounty" %}

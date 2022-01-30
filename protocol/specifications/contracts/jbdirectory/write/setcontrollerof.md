@@ -13,7 +13,7 @@ _A controller can be set if:_
 * the message sender is the project owner or an operator having the correct authorization.
 * or, an allowedlisted address is setting an allowlisted controller.
 
-## Definition
+### Definition
 
 ```solidity
 function setControllerOf(uint256 _projectId, IJBController _controller)
@@ -35,7 +35,7 @@ function setControllerOf(uint256 _projectId, IJBController _controller)
 * The function overrides a function definition from the `IJBDirectory` interface.
 * The function returns nothing. (\_setControllerAllowlist\[address(\_controller)] && \_setControllerAllowlist\[msg.sender])
 
-## Body
+### Body
 
 1.  Make sure the provided controller isn't the zero address.
 

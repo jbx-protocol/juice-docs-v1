@@ -1,6 +1,6 @@
 # recordDistributionFor
 
-Contract: [`JBETHPaymentTerminalStore`](../../../jbdirectory/write/)​‌
+Contract: [`JBETHPaymentTerminalStore`](../../../jbprices/write/)​‌
 
 {% tabs %}
 {% tab title="Step by step" %}
@@ -8,7 +8,7 @@ Contract: [`JBETHPaymentTerminalStore`](../../../jbdirectory/write/)​‌
 
 _Only the associated payment terminal can record a used allowance._
 
-## Definition
+### Definition
 
 ```solidity
 function recordWithdrawalFor(
@@ -32,7 +32,7 @@ function recordWithdrawalFor(
   * `fundingCycle` is the funding cycle during which the withdrawal was made.
   * `distributedAmount` is the amount distribution in wei.
 
-## Body
+### Body
 
 1.  Get a reference to the project's current funding cycle.
 
@@ -249,13 +249,13 @@ function recordDistributionFor(
 {% endtab %}
 
 {% tab title="Errors" %}
-| String                          | Description                                                                                                          |
-| ------------------------------- | -------------------------------------------------------------------------------------------------------------------- |
-| **`FUNDING_CYCLE_DISTRIBUTION_PAUSED`**              | Thrown if the project has configured its current funding cycle to pause distributions.                               |
-| **`CURRENCY_MISMATCH`** | Thrown if the currency of the specified amount doesn't match the currency of the project's current funding cycle.    |
-| **`DISTRIBUTION_AMOUNT_LIMIT_REACHED`**       | Thrown if there isn't enough of a distribution limit for the specified terminal to fulfill the desired distribution. |
-| **`INADEQUATE_PAYMENT_TERMINAL_STORE_BALANCE`**  | Thrown if the project's balance isn't sufficient to fulfill the desired distribution.                                |
-| **`INADEQUATE_WITHDRAW_AMOUNT`**          | Thrown if the distribution amount is less than the minimum expected.                                                 |
+| String                                          | Description                                                                                                          |
+| ----------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- |
+| **`FUNDING_CYCLE_DISTRIBUTION_PAUSED`**         | Thrown if the project has configured its current funding cycle to pause distributions.                               |
+| **`CURRENCY_MISMATCH`**                         | Thrown if the currency of the specified amount doesn't match the currency of the project's current funding cycle.    |
+| **`DISTRIBUTION_AMOUNT_LIMIT_REACHED`**         | Thrown if there isn't enough of a distribution limit for the specified terminal to fulfill the desired distribution. |
+| **`INADEQUATE_PAYMENT_TERMINAL_STORE_BALANCE`** | Thrown if the project's balance isn't sufficient to fulfill the desired distribution.                                |
+| **`INADEQUATE_WITHDRAW_AMOUNT`**                | Thrown if the distribution amount is less than the minimum expected.                                                 |
 {% endtab %}
 
 {% tab title="Bug bounty" %}

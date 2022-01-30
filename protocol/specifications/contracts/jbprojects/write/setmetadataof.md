@@ -1,4 +1,4 @@
-# setMetadataCidOf
+# setMetadataOf
 
 Contract: [`JBProjects`](../)
 
@@ -10,7 +10,7 @@ Interface: [`IJBProjects`](../../../interfaces/ijbprojects.md)
 
 _Only a project's owner or operator can set its metadata._
 
-## Definition
+### Definition
 
 ```solidity
 function setMetadataOf(uint256 _projectId, JBProjectMetadata calldata _metadata)
@@ -26,7 +26,7 @@ function setMetadataOf(uint256 _projectId, JBProjectMetadata calldata _metadata)
 * The function overrides a function definition from the `IJBProjects` interface.
 * The function doesn't return anything.
 
-## Body
+### Body
 
 1.  Store the new `_metadata.content` as the `metadataContentOf` the project for the `_metadata.domain`.
 
@@ -75,9 +75,9 @@ function setMetadataOf(uint256 _projectId, JBProjectMetadata calldata _metadata)
 {% endtab %}
 
 {% tab title="Events" %}
-| Name                                                | Data                                                                                                                         |
-| --------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------- |
-| [**`SetMetadata`**](../events/setmetadatacid.md) | <ul><li><code>uint256 indexed projectId</code></li><li><a><code>JBProjectMetadata</code></a><code>metadata</code></code></li><li><code>address caller</code></li></ul> |
+| Name                                             | Data                                                                                                                                        |
+| ------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------- |
+| [**`SetMetadata`**](../events/setmetadatacid.md) | <ul><li><code>uint256 indexed projectId</code></li><li><code>JBProjectMetadatametadata</code></li><li><code>address caller</code></li></ul> |
 {% endtab %}
 
 {% tab title="Bug bounty" %}

@@ -12,7 +12,7 @@ _Only the owner or operator of a project, or the current controller contract of 
 
 _The new splits must include any currently set splits that are locked._
 
-## Definition
+### Definition
 
 ```solidity
 function set(
@@ -40,7 +40,7 @@ function set(
 * The function overrides a function definition from the `IJBSplitsStore` interface.
 * The function doesn't return anything.
 
-## Body
+### Body
 
 1.  Get a reference to the current splits set for the specified `_projectId`'s `_domain`, within the specified `_group`.
 
@@ -120,7 +120,6 @@ function set(
           revert INVALID_SPLIT_PERCENT();
         }
         ```
-
     *   Check that the projectId for the current split is within the max value that can be packed.
 
         ```solidity
@@ -203,8 +202,7 @@ function set(
         _Event references:_
 
         * [`SetSplit`](../events/setsplit.md)
-
-4.  Store the new array length.
+6.  Store the new array length.
 
     ```solidity
     // Set the new length of the splits.
@@ -214,7 +212,6 @@ function set(
     _Internal references:_
 
     * [`_splitCountOf`](../properties/\_splitcountof.md)
-  
 {% endtab %}
 
 {% tab title="Code" %}
@@ -338,14 +335,14 @@ function set(
 {% endtab %}
 
 {% tab title="Errors" %}
-| String                                       | Description                                                                   |
-| -------------------------------------------- | ----------------------------------------------------------------------------- |
-| **`PREVIOUS_LOCKED_SPLITS_NOT_INCLUDED`**    | Thrown if the splits that are being set override some splits that are locked. |
-| **`INVALID_PROJECT_ID`**                     | Thrown if the split has a project ID that wont fit in its packed storage slot.|
-| **`INVALID_SPLIT_PERCENT`**                  | Thrown if the split has specified a percent of 0.                             |
-| **`ALLOCATOR_AND_BENEFICIARY_ZERO_ADDRESS`** | Thrown if the split doesn't specify a destination.                            |
-| **`INVALID_TOTAL_PERCENT`**                  | Thrown if the split percents add up more than 100%.                           |
-| **`INVALID_LOCKED_UNTIL`**                   | Thrown if the split has a lockedUntil that wont fit in its packed storage slot.|              |
+| String                                       | Description                                                                     |
+| -------------------------------------------- | ------------------------------------------------------------------------------- |
+| **`PREVIOUS_LOCKED_SPLITS_NOT_INCLUDED`**    | Thrown if the splits that are being set override some splits that are locked.   |
+| **`INVALID_PROJECT_ID`**                     | Thrown if the split has a project ID that wont fit in its packed storage slot.  |
+| **`INVALID_SPLIT_PERCENT`**                  | Thrown if the split has specified a percent of 0.                               |
+| **`ALLOCATOR_AND_BENEFICIARY_ZERO_ADDRESS`** | Thrown if the split doesn't specify a destination.                              |
+| **`INVALID_TOTAL_PERCENT`**                  | Thrown if the split percents add up more than 100%.                             |
+| **`INVALID_LOCKED_UNTIL`**                   | Thrown if the split has a lockedUntil that wont fit in its packed storage slot. |
 {% endtab %}
 
 {% tab title="Events" %}

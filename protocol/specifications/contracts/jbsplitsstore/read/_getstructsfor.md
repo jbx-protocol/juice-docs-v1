@@ -6,7 +6,7 @@ Contract: [`JBSplitsStore`](../)​‌
 {% tab title="Step by step" %}
 **Unpack splits' packed stored values into easy-to-work-with spit structs.**
 
-## Definition
+### Definition
 
 ```solidity
 function _getStructsFor(
@@ -24,7 +24,7 @@ function _getStructsFor(
 * The function does not alter state on the blockchain.
 * The function returns an array of [`JBSplit`](../../../data-structures/jbsplit.md)s.
 
-## Body
+### Body
 
 1.  Get a reference to the expected number of splits for the specified `_domain` and `_group`.
 
@@ -36,14 +36,12 @@ function _getStructsFor(
     Internal references:
 
     * [`_splitCountOf`](../properties/\_splitcountof.md)
-
 2.  Inititalize an array with length equal to the number of splits expected.
 
     ```solidity
     // Initialize an array to be returned that has the set length.
     JBSplit[] memory _splits = new JBSplit[](_splitCount);
     ```
-
 3.  For each index, parse out the packed split parts into [`JBSplit`](../../../data-structures/jbsplit.md) structs and add to the array. The packed splits are stored in two different `uint256` slots, the second of which contains info that is populated far less frequently.
 
     ```solidity
@@ -77,7 +75,6 @@ function _getStructsFor(
 
     * [`_packedSplitParts1Of`](../properties/\_packedsplitparts1of.md)
     * [`_packedSplitParts2Of`](../properties/\_packedsplitparts2of.md)
-
 4.  Return the array of splits.
 
     ```solidity

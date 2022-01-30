@@ -12,7 +12,7 @@ _Payouts are sent to the preprogrammed splits._
 
 _Anyone can distribute payouts on a project's behalf._
 
-## Definition
+### Definition
 
 ```solidity
 function distributePayoutsOf(
@@ -34,7 +34,7 @@ function distributePayoutsOf(
 * The resulting function overrides a function definition from the `IJBETHPaymentTerminal` interface.
 * The function returns doesn't return anything.
 
-## Body
+### Body
 
 1.  Record the withdrawal
 
@@ -62,7 +62,6 @@ function distributePayoutsOf(
     _External references:_
 
     * [`ownerOf`](https://github.com/OpenZeppelin/openzeppelin-contracts/blob/46ce0cfa3323a2787864f884b3c12960bc53b233/contracts/token/ERC721/ERC721.sol#L70)
-
 3.  If the funding cycle during which the distribtion is being made has a fee, and if its project isn't the JuiceboxDAO project with an ID of 1, take a fee from the withdrawal into the JuiceboxDAO project.
 
     ```solidity

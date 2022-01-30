@@ -10,7 +10,7 @@ Interface: `IJBFundingCycleStore`
 
 _Only a project's current controller can configure its funding cycles._
 
-## Definition
+### Definition
 
 ```solidity
 function configureFor(
@@ -30,7 +30,7 @@ function configureFor(
 * The function overrides a function definition from the `IJBFundingCycleStore` interface.
 * Returns the [`JBFundingCycle`](../../../data-structures/jbfundingcycle.md) that was configured.
 
-## Body
+### Body
 
 1.  Make sure the `_data.duration` fits in a `uint64`.
 

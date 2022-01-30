@@ -8,7 +8,7 @@ Contract: [`JBETHPaymentTerminalStore`](../)​‌
 
 _Only the associated payment terminal can record a used allowance._
 
-## Definition
+### Definition
 
 ```solidity
 function recordUsedAllowanceOf(
@@ -33,7 +33,7 @@ function recordUsedAllowanceOf(
   * `fundingCycle` is the funding cycle during which the withdrawal was made.
   * `withdrawnAmount` is the amount withdrawn in wei.
 
-## Body
+### Body
 
 1.  Get a reference to the project's first funding cycle.
 
@@ -64,7 +64,6 @@ function recordUsedAllowanceOf(
     _External references:_
 
     * [`overflowAllowanceCurrencyOf`](../../../or-controllers/jbcontroller/read/overflowallowanceurrencyof.md)
-
 3.  Get a reference to the new used overflow allowance.
 
     ```solidity
@@ -77,9 +76,8 @@ function recordUsedAllowanceOf(
     _Internal references:_
 
     * [`usedOverflowAllowanceOf`](../properties/usedoverflowallowanceof.md)
-
 4.  Make sure there's enough allowance left to accomodate the new used amount.
-    
+
     ```solidity
     // There must be sufficient allowance available.
     if (
@@ -98,8 +96,7 @@ function recordUsedAllowanceOf(
 
     * [`controllerOf`](../../../jbdirectory/properties/controllerof.md)
     * [`overflowAllowanceOf`](../../../or-controllers/jbcontroller/read/overflowallowanceof.md)
-
-3.  Find the amount to withdraw by converting the amount to ETH. If the currency is ETH, no conversion is necessary.
+5.  Find the amount to withdraw by converting the amount to ETH. If the currency is ETH, no conversion is necessary.
 
     ```solidity
     // Convert the amount to wei.
@@ -112,7 +109,7 @@ function recordUsedAllowanceOf(
 
     * [`PRBMathUD60x18`](https://github.com/hifi-finance/prb-math/blob/main/contracts/PRBMathUD60x18.sol)
       * `.div`
-4.  Make sure the project has enough of a balance to use the desired amount.
+6.  Make sure the project has enough of a balance to use the desired amount.
 
     ```solidity
     // The amount being withdrawn must be available.
@@ -124,8 +121,7 @@ function recordUsedAllowanceOf(
     _Internal references:_
 
     * [`balanceOf`](../properties/balanceof.md)
-
-5.  Make sure the there is at least as much wei being returned as expected. 
+7.  Make sure the there is at least as much wei being returned as expected.
 
     ```solidity
     // The amount being withdrawn must be at least as much as was expected.
@@ -133,8 +129,7 @@ function recordUsedAllowanceOf(
       revert INADEQUATE_WITHDRAW_AMOUNT();
     }
     ```
-
-6.  Store the incremented value that tracks how much of a project's allowance was used during the current funding cycle configuration.
+8.  Store the incremented value that tracks how much of a project's allowance was used during the current funding cycle configuration.
 
     ```solidity
     // Store the incremented value.
@@ -144,8 +139,7 @@ function recordUsedAllowanceOf(
     _Internal references:_
 
     * [`usedOverflowAllowanceOf`](../properties/usedoverflowallowanceof.md)
-
-8.  Store the decremented balance.
+9.  Store the decremented balance.
 
     ```solidity
     // Update the project's ETH balance.
@@ -241,12 +235,12 @@ function recordUsedAllowanceOf(
 {% endtab %}
 
 {% tab title="Errors" %}
-| String                          | Description                                                                                                       |
-| ------------------------------- | ----------------------------------------------------------------------------------------------------------------- |
-| **`CURRENCY_MISMATCH`** | Thrown if the currency of the specified amount doesn't match the currency of the project's current funding cycle. |
-| **`INADEQUATE_CONTROLLER_ALLOWANCE`**         | Thrown if there isn't enough allowance for the specified terminal to fulfill the desired withdrawal.              |
-| **`INADEQUATE_PAYMENT_TERMINAL_STORE_BALANCE`**  | Thrown if the project's balance isn't sufficient to fulfill the desired withdrawal.                               |
-| **`INADEQUATE_WITHDRAW_AMOUNT`**          | Thrown if the withdrawn amount is less than the minimum expected.                                                 |
+| String                                          | Description                                                                                                       |
+| ----------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- |
+| **`CURRENCY_MISMATCH`**                         | Thrown if the currency of the specified amount doesn't match the currency of the project's current funding cycle. |
+| **`INADEQUATE_CONTROLLER_ALLOWANCE`**           | Thrown if there isn't enough allowance for the specified terminal to fulfill the desired withdrawal.              |
+| **`INADEQUATE_PAYMENT_TERMINAL_STORE_BALANCE`** | Thrown if the project's balance isn't sufficient to fulfill the desired withdrawal.                               |
+| **`INADEQUATE_WITHDRAW_AMOUNT`**                | Thrown if the withdrawn amount is less than the minimum expected.                                                 |
 {% endtab %}
 
 {% tab title="Bug bounty" %}

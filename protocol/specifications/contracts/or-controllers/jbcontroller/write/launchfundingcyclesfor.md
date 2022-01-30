@@ -10,7 +10,7 @@ Interface: [`IJBController`](../../../../interfaces/ijbcontroller.md)
 
 _Only a project owner or operator can launch its funding cycles._
 
-## Definition
+### Definition
 
 ```solidity
 function launchFundingCycleFor(
@@ -38,16 +38,16 @@ function launchFundingCycleFor(
 * Through the [`requirePermission`](../../../or-abstract/jboperatable/modifiers/requirepermission.md) modifier, the function is only accessible by the project's owner, or from an operator that has been given the `JBOperations.RECONFIGURE` permission by the project owner for the provided `_projectId`.
 * The function returns the configuration of the funding cycle that was successfully updated.
 
-## Body
+### Body
 
-1. Make sure there's isn't already a funding cycle configuration for the project.
+1.  Make sure there's isn't already a funding cycle configuration for the project.
 
-   ```solidity
-    // If there is a previous configuration, reconfigureFundingCyclesOf should be called instead
-    if (fundingCycleStore.latestConfigurationOf(_projectId) != 0) {
-      revert FUNDING_CYCLE_ALREADY_LAUNCHED();
-    }
-   ```
+    ```solidity
+     // If there is a previous configuration, reconfigureFundingCyclesOf should be called instead
+     if (fundingCycleStore.latestConfigurationOf(_projectId) != 0) {
+       revert FUNDING_CYCLE_ALREADY_LAUNCHED();
+     }
+    ```
 2.  Set this controller as the controller of the project.
 
     ```solidity
@@ -58,7 +58,6 @@ function launchFundingCycleFor(
     _External references:_
 
     * [`setControllerOf`](../../../jbdirectory/write/setcontrollerof.md)
-
 3.  Configure the project's funding cycle, fund access constraints, and splits.
 
     ```solidity
@@ -75,7 +74,6 @@ function launchFundingCycleFor(
     _Internal references:_
 
     * [`_configure`](\_configure.md)
-
 4.  If terminals were provided, add them to the list of terminals the project can accept funds through.
 
     ```solidity
@@ -152,8 +150,8 @@ function launchFundingCycleFor(
 {% endtab %}
 
 {% tab title="Events" %}
-| Name                                                                    | Data                                                                                                                                                                                                                                                                                                                                                      |
-| ----------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Name                                                                    | Data                                                                                                                                                                                                                                                                                                                                                          |
+| ----------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | [**`SetFundAccessConstraints`**](../events/setfundaccessconstraints.md) | <ul><li><code>uint256 indexed fundingCycleConfiguration</code></li><li><code>uint256 indexed fundingCycleNumber</code></li><li><code>uint256 indexed projectId</code></li><li><a href="../../../../data-structures/jbfundaccessconstraints.md"><code>JBFundAccessConstraints</code></a><code>constraints</code></li><li><code>address caller</code></li></ul> |
 {% endtab %}
 

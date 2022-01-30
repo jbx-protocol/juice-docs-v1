@@ -6,7 +6,7 @@ Contract: [`JBETHPaymentTerminal`](../)​‌
 {% tab title="Step by step" %}
 **Takes a fee into the platform's project, which has an id of 1.**
 
-## Definition
+### Definition
 
 ```solidity
 function _takeFeeFrom(
@@ -25,7 +25,7 @@ function _takeFeeFrom(
 * The function is private to this contract.
 * The function returns the amount of the fee taken.
 
-## Body
+### Body
 
 1.  Check for a fee discount from the currently set fee gauge if there is one. Otherwise there is no discount.
 
@@ -35,7 +35,6 @@ function _takeFeeFrom(
       ? 0
       : feeGauge.currentDiscountFor(_projectId);
     ```
-
 2.  If the discount returned is out of bounds, override with no discount.
 
     ```solidity
@@ -71,13 +70,13 @@ function _takeFeeFrom(
 
     * [`PRBMath`](https://github.com/hifi-finance/prb-math/blob/main/contracts/PRBMath.sol)
       * `.mulDiv`
-2.  If there's no fee amount, there's no need to take the fee.
+5.  If there's no fee amount, there's no need to take the fee.
 
     ```solidity
     // Nothing to do if there's no fee to take.
     if (feeAmount == 0) return 0;
     ```
-3.  If the funding cycle is configured to hold fees, add a [`JBFee`](../../../../data-structures/jbfee.md) data structure to the project's stored held fees to be either processed or refunded later. Otherwise, take the fee.
+6.  If the funding cycle is configured to hold fees, add a [`JBFee`](../../../../data-structures/jbfee.md) data structure to the project's stored held fees to be either processed or refunded later. Otherwise, take the fee.
 
     ```solidity
     _fundingCycle.shouldHoldFees()

@@ -1,8 +1,8 @@
-# SetMetadataCid
+# SetMetadata
 
 Emitted from:
 
-* [`setMetadataCidOf`](../../../../../protocol/specifications/contracts/jbprojects/write/setmetadatacidof.md)
+* [`setMetadataCidOf`](broken-reference)
 
 ## Definition
 

@@ -10,7 +10,7 @@ _Each operation within this transaction can be done in sequence separately._
 
 _Anyone can deploy a project on an owner's behalf._
 
-## Definition
+### Definition
 
 ```solidity
 function launchProjectFor(
@@ -27,7 +27,7 @@ function launchProjectFor(
 
 * Arguments:
   * `_owner` is the address to set as the owner of the project. The project ERC-721 will be owned by this address.
-  * `_projectMetadata` is a link to associate with the project within a particular domain. This can be updated any time by the owner of the project.  
+  * `_projectMetadata` is a link to associate with the project within a particular domain. This can be updated any time by the owner of the project.
   * `_data` is a [`JBFundingCycleData`](../../../../data-structures/jbfundingcycledata.md) data structure that defines the project's first funding cycle. These properties will remain fixed for the duration of the funding cycle.
   * `_metadata` is a [`JBFundingCycleMetadata`](../../../../data-structures/jbfundingcyclemetadata.md) data structure specifying the controller specific params that a funding cycle can have. These properties will remain fixed for the duration of the funding cycle.
   * `_mustStartAtOrAfter` is the time before which the configured funding cycle can't start.
@@ -37,7 +37,7 @@ function launchProjectFor(
 * The function can be accessed externally by anyone.
 * The function returns the ID of the project that was launched.
 
-## Body
+### Body
 
 1.  Create the project. This will mint an ERC-721 in the `_owners` wallet representing ownership over the project.
 
@@ -150,8 +150,8 @@ function launchProjectFor(
 {% endtab %}
 
 {% tab title="Events" %}
-| Name                                                                    | Data                                                                                                                                                                                                                                                                                                                                                      |
-| ----------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Name                                                                    | Data                                                                                                                                                                                                                                                                                                                                                          |
+| ----------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | [**`SetFundAccessConstraints`**](../events/setfundaccessconstraints.md) | <ul><li><code>uint256 indexed fundingCycleConfiguration</code></li><li><code>uint256 indexed fundingCycleNumber</code></li><li><code>uint256 indexed projectId</code></li><li><a href="../../../../data-structures/jbfundaccessconstraints.md"><code>JBFundAccessConstraints</code></a><code>constraints</code></li><li><code>address caller</code></li></ul> |
 {% endtab %}
 
