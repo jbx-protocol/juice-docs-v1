@@ -111,7 +111,9 @@ description: What's in the V2 protocol
   \
   This allows a project to use ERC-721's, ERC-1155's, or any other custom contract that'll be called upon when the protocol asks to mint or burn tokens.\
   \
-  A project can change its token during any of its funding cycles that are explicitly configured to allow it.
+  A project can change its token during any of its funding cycles that are explicitly configured to allow it.\
+  \
+  By default, the protocol provides a transaction for projects to deploy ERC-20 tokens, which can be used in on-chain voting governor contracts. 
 * <mark style="color:orange;">**Splits**</mark>\
   A project can pre-program token distributions to splits. The destination of a split can be an Ethereum address, the project ID of another project's Juicebox treasury (the split will allow you to configure the beneficiary of that project's tokens that get minted in response to the distribution), or to the `allocate` function of any contract that adheres to [`IJBSplitAllocator`](../specifications/interfaces/ijbsplitallocator.md).\
   \
