@@ -123,6 +123,6 @@ description: What's in the V2 protocol
   \
   Anyone can roll their own contract that adheres to `IJBTerminal` for projects to use, and a project can migrate funds between terminals that use the same token as it wishes.
 * <mark style="color:orange;">**Forkability and migratability.**</mark>\
-  A project can migrate its treasury's controller to any other contract that adheres to `IJBController`. This allows a project to evolve to updated or custom operating rules over time as it wishes.
+  A project can migrate its treasury's controller to any other contract that adheres to `IJBController`. This allows a project to evolve into updated or custom operating rules over time as it wishes.
 * <mark style="color:orange;">**Operators**</mark>\
   A project owner can specify addresses that are allowed to operate certain administrative treasury transactions on its behalf.
