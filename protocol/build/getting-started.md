@@ -19,6 +19,24 @@ function launchProjectFor(
 ) external returns (uint256 projectId) { ... }
 ```
 
+<details>
+
+<summary>View project info</summary>
+
+Launching a project will mint a new NFT in the [`JBProjects`](../specifications/contracts/jbprojects/) contract. The owner can be found using [`JBProjects.ownerOf(...)`](https://docs.openzeppelin.com/contracts/3.x/api/token/erc721#IERC721-ownerOf-uint256-).
+
+```solidity
+function ownerOf(uint256 _projectId) external returns (address owner) { ... }
+```
+
+The project's metadata can be found using [`JBProjects.metadataContentOf(...)`](../specifications/contracts/jbprojects/properties/metadatacontentof.md).
+
+```solidity
+function metadataContentOf(uint256 _projectId, uint256 _domain) external returns (string memory metadataContent) { ... }
+```
+
+</details>
+
 Once a project has been created, it can begin accepting funds from anyone. ETH can be sent to the project by calling [`JBETHPaymentTerminal.pay(...)`](../specifications/contracts/or-payment-terminals/jbethpaymentterminal/write/pay.md).
 
 ```solidity
@@ -154,7 +172,7 @@ At any point, anyone can inject funds into a project's treasury by calling [`JBE
  function addToBalanceOf(uint256 _projectId, string memory _memo) external payable override { ... }
 ```
 
-At any time after the project has been created, its owner can issue ERC-20 tokens for the protocol to use as its community token by calling [`JBController.issueTokenFor(...)`](../specifications/contracts/jbtokenstore/write/issuetokenfor.md). By default the protocol uses an internal accounting mechanism to account for projects' tokens. 
+At any time after the project has been created, its owner can issue ERC-20 tokens for the protocol to use as its community token by calling [`JBController.issueTokenFor(...)`](../specifications/contracts/jbtokenstore/write/issuetokenfor.md). By default the protocol uses an internal accounting mechanism to account for projects' tokens.
 
 A project can instead bring their own token, so long as it adheres to the [`IJBToken`](../specifications/interfaces/ijbtoken.md) interface. They can do so by calling [`JBController.changeTokenFor(...)`](../specifications/contracts/jbtokenstore/write/changetokenfor.md) This makes it easy to use ERC-1155's or custom contracts, and to change tokens over time to acheive a more creative design.
 
