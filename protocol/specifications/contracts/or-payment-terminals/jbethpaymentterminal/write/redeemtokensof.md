@@ -26,7 +26,7 @@ function redeemTokensOf(
   override
   nonReentrant
   requirePermission(_holder, _projectId, JBOperations.REDEEM)
-  returns (uint256 claimAmount) { ... }
+  returns (uint256 reclaimAmount) { ... }
 ```
 
 * Arguments:
@@ -62,7 +62,7 @@ function redeemTokensOf(
 
     ```solidity
     // Record the redemption.
-    (_fundingCycle, claimAmount, _memo) = store.recordRedemptionFor(
+    (_fundingCycle, reclaimAmount, _memo) = store.recordRedemptionFor(
       _holder,
       _projectId,
       _tokenCount,
@@ -80,7 +80,7 @@ function redeemTokensOf(
 
     ```solidity
     // Send the claimed funds to the beneficiary.
-    if (claimAmount > 0) Address.sendValue(_beneficiary, claimAmount);
+    if (reclaimAmount > 0) Address.sendValue(_beneficiary, reclaimAmount);
     ```
 5.  Emit a `RedeemTokens` event with the relevant parameters.
 
@@ -92,7 +92,7 @@ function redeemTokensOf(
       _holder,
       _beneficiary,
       _tokenCount,
-      claimAmount,
+      reclaimAmount,
       _memo,
       msg.sender
     );
@@ -120,7 +120,7 @@ function redeemTokensOf(
   @param _memo A memo to pass along to the emitted event.
   @param _delegateMetadata Bytes to send along to the delegate, if one is provided.
 
-  @return claimAmount The amount of ETH that the tokens were redeemed for, in wei.
+  @return reclaimAmount The amount of ETH that the tokens were redeemed for, in wei.
 */
 function redeemTokensOf(
   address _holder,
@@ -135,7 +135,7 @@ function redeemTokensOf(
   override
   nonReentrant
   requirePermission(_holder, _projectId, JBOperations.REDEEM)
-  returns (uint256 claimAmount)
+  returns (uint256 reclaimAmount)
 {
   // Can't send claimed funds to the zero address.
   if (_beneficiary == address(0)) {
@@ -146,7 +146,7 @@ function redeemTokensOf(
   JBFundingCycle memory _fundingCycle;
 
   // Record the redemption.
-  (_fundingCycle, claimAmount, _memo) = store.recordRedemptionFor(
+  (_fundingCycle, reclaimAmount, _memo) = store.recordRedemptionFor(
     _holder,
     _projectId,
     _tokenCount,
@@ -157,7 +157,7 @@ function redeemTokensOf(
   );
 
   // Send the claimed funds to the beneficiary.
-  if (claimAmount > 0) Address.sendValue(_beneficiary, claimAmount);
+  if (reclaimAmount > 0) Address.sendValue(_beneficiary, reclaimAmount);
 
   emit RedeemTokens(
     _fundingCycle.configuration,
@@ -166,7 +166,7 @@ function redeemTokensOf(
     _holder,
     _beneficiary,
     _tokenCount,
-    claimAmount,
+    reclaimAmount,
     _memo,
     msg.sender
   );

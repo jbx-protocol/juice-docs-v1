@@ -120,15 +120,6 @@ function distributionLimitCurrencyOf(
 ) external view override returns (uint256) { ... }
 ```
 
-Any used distribution limit can be found in the respective terminal store contracts. For example, in the [`JBETHPaymentTerminalStore`](../specifications/contracts/or-payment-terminals/jbethpaymentterminalstore), the used distribution limit during a funding cycle can be found using [`JBETHPaymentTerminalStore.usedDistributionLimitOf(...)`](../specifications/contracts/or-payment-terminals/jbethpaymentterminalstore/properties/useddistributionlimitof.md).
-
-```solidity
-function usedDistributionLimitOf(
-  uint256 _projectId,
-  uint256 _number
-) external view override returns (uint256) { ... }
-```
-
 It's overflow allowance from any payment terminal during any funding cycle configuration can be found using [`JBController.overflowAllowanceOf(...)`](../specifications/contracts/or-controllers/jbcontroller/read/overflowallowanceof.md). The currency being used for this overflow allowance can be found using [`JBController.overflowAllowanceCurrencyOf(...)`](../specifications/contracts/or-controllers/jbcontroller/read/overflowallowancecurrencyof.md).
 
 ```solidity
@@ -144,15 +135,6 @@ function overflowAllowanceCurrencyOf(
   uint256 _projectId,
   uint256 _configuration,
   IJBTerminal _terminal
-) external view override returns (uint256) { ... }
-```
-
-Any used overflow allowance can also be found in the respective terminal store contracts. For example, in the [`JBETHPaymentTerminalStore`](../specifications/contracts/or-payment-terminals/jbethpaymentterminalstore), the used overflow allowance during a funding cycle can be found using [`JBETHPaymentTerminalStore.usedOverflowAllowanceOf(...)`](../specifications/contracts/or-payment-terminals/jbethpaymentterminalstore/properties/usedoverflowallowanceof.md).
-
-```solidity
-function usedOverflowAllowanceOf(
-  uint256 _projectId,
-  uint256 _configuration
 ) external view override returns (uint256) { ... }
 ```
 
@@ -198,6 +180,36 @@ function pay(
  ) external payable override { ... }
 ```
 
+<details>
+
+<summary>View treasury balance</summary>
+
+A project's treasury balance can be found in the respective terminal store contracts. For example, in the [`JBETHPaymentTerminalStore`](../specifications/contracts/or-payment-terminals/jbethpaymentterminalstore), the balance can be found using [`JBETHPaymentTerminalStore.balanceOf(...)`](../specifications/contracts/or-payment-terminals/jbethpaymentterminalstore/properties/balanceof.md).
+
+```solidity
+function balanceOf(uint256 _projectId) external view override returns (uint256) { ... }
+```
+
+</details>
+
+<details>
+
+<summary>View project token distribution</summary>
+
+Each holder's balance of a project's token can be found in the [`JBTokenStore`](../specifications/contracts/jbtokenstore) contract. The balance can be found using [`JBTokenStore.balanceOf(...)`](../specifications/contracts/jbtokenstore/read/balanceof.md).
+
+```solidity
+function balanceOf(address _holder, uint256 _projectId) external view returns (uint256 _result)
+```
+
+The project token's total supply can also be found in the [`JBTokenStore`](../specifications/contracts/jbtokenstore) contract using [`JBTokenStore.totalSupplyOf(...)`](../specifications/contracts/jbtokenstore/read/totalsupplyof.md)
+
+```solidity
+function totalSupplyOf(uint256 _projectId) external view returns (uint256)
+```
+
+</details>
+
 At any point, anyone can distribute a project's funds up to its current funding cycle's distribution limit to its preprogrammed payout splits by calling [`JBETHPaymentTerminal.distributePayoutsOf(...)`](../specifications/contracts/or-payment-terminals/jbethpaymentterminal/write/distributepayoutsof.md).
 
 ```solidity
@@ -209,6 +221,21 @@ function distributePayoutsOf(
   string memory _memo
 ) external override nonReentrant returns (uint256) { ... }
 ```
+
+<details>
+
+<summary>View used distribution limit</summary>
+
+Any used distribution limit can be found in the respective terminal store contracts. For example, in the [`JBETHPaymentTerminalStore`](../specifications/contracts/or-payment-terminals/jbethpaymentterminalstore), the used distribution limit during a funding cycle can be found using [`JBETHPaymentTerminalStore.usedDistributionLimitOf(...)`](../specifications/contracts/or-payment-terminals/jbethpaymentterminalstore/properties/useddistributionlimitof.md).
+
+```solidity
+function usedDistributionLimitOf(
+  uint256 _projectId,
+  uint256 _number
+) external view override returns (uint256) { ... }
+```
+
+</details>
 
 A project's owner can also distribute additional funds from its treasury's overflow up until its preconfigured allowance.
 
@@ -226,6 +253,21 @@ function useAllowanceOf(
   requirePermission(projects.ownerOf(_projectId), _projectId, JBOperations.USE_ALLOWANCE)
   returns (uint256) { ... }
 ```
+
+<details>
+
+<summary>View used overflow allowance</summary>
+
+Any used overflow allowance can also be found in the respective terminal store contracts. For example, in the [`JBETHPaymentTerminalStore`](../specifications/contracts/or-payment-terminals/jbethpaymentterminalstore), the used overflow allowance during a funding cycle can be found using [`JBETHPaymentTerminalStore.usedOverflowAllowanceOf(...)`](../specifications/contracts/or-payment-terminals/jbethpaymentterminalstore/properties/usedoverflowallowanceof.md).
+
+```solidity
+function usedOverflowAllowanceOf(
+  uint256 _projectId,
+  uint256 _configuration
+) external view override returns (uint256) { ... }
+```
+
+</details>
 
 A project's owner can mint more of its token by calling [`JBController.mintTokensOf(...)`](../specifications/contracts/jbtokenstore/write/mintfor.md). Anyone can burn their tokens by calling [`JBController.burnFrom(...)`](../specifications/contracts/jbtokenstore/write/burnfrom.md).
 
@@ -295,7 +337,7 @@ function redeemTokensOf(
   override
   nonReentrant
   requirePermission(_holder, _projectId, JBOperations.REDEEM)
-  returns (uint256 claimAmount) { ... }
+  returns (uint256 reclaimAmount) { ... }
 ```
 
 A project's owner can reconfigure its project's funding cycle at any time by calling [`JBController.reconfigureFundingCyclesOf(...)`](../specifications/contracts/or-controllers/jbcontroller/write/reconfigurefundingcyclesof.md). If the project is in the middle of a funding cycle, the update will be queued to take effect next cycle. If the current funding cycle has an attached ballot contract, the reconfiguration must be approved by it before taking effect.

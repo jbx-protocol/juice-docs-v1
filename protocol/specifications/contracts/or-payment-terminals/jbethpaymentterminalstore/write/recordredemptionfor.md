@@ -24,7 +24,7 @@ function recordRedemptionFor(
   onlyAssociatedPaymentTerminal
   returns (
     JBFundingCycle memory fundingCycle,
-    uint256 claimAmount,
+    uint256 reclaimAmount,
     string memory memo
   ) { ... }
 ```
@@ -40,7 +40,7 @@ function recordRedemptionFor(
 * Through the [`onlyAssociatedPaymentTerminal`](../modifiers/onlyassociatedpaymentterminal.md) modifier, the function is only accessible by the terminal that claimed this store.
 * The function returns:
   * `fundingCycle` is the funding cycle during which the redemption was made.
-  * `claimAmount` is the amount of wei claimed.
+  * `reclaimAmount` is the amount of wei reclaimed.
   * `memo` is a memo that should be included in the published event.
 
 ### Body
@@ -91,7 +91,7 @@ function recordRedemptionFor(
     ```solidity
     // If the funding cycle has configured a data source, use it to derive a claim amount and memo.
     if (fundingCycle.useDataSourceForRedeem()) {
-      (claimAmount, memo, _delegate, _delegateMetadata) = fundingCycle.dataSource().redeemParams(
+      (reclaimAmount, memo, _delegate, _delegateMetadata) = fundingCycle.dataSource().redeemParams(
         JBRedeemParamsData(
           _holder,
           _tokenCount,
@@ -104,7 +104,7 @@ function recordRedemptionFor(
         )
       );
     } else {
-      claimAmount = _claimableOverflowOf(_projectId, fundingCycle, _tokenCount);
+      reclaimAmount = _claimableOverflowOf(_projectId, fundingCycle, _tokenCount);
       memo = _memo;
     }
     ```
@@ -120,7 +120,7 @@ function recordRedemptionFor(
 
     ```solidity
     // The amount being claimed must be within the project's balance.
-    if (claimAmount > balanceOf[_projectId]) {
+    if (reclaimAmount > balanceOf[_projectId]) {
       revert INADEQUATE_PAYMENT_TERMINAL_STORE_BALANCE();
     }
     ```
@@ -128,7 +128,7 @@ function recordRedemptionFor(
 
     ```solidity
     // The amount being claimed must be at least as much as was expected.
-    if (claimAmount < _minReturnedWei) {
+    if (reclaimAmount < _minReturnedWei) {
       revert INADEQUATE_CLAIM_AMOUNT();
     }
     ```
@@ -147,7 +147,7 @@ function recordRedemptionFor(
 
     ```solidity
     // Remove the redeemed funds from the project's balance.
-    if (claimAmount > 0) balanceOf[_projectId] = balanceOf[_projectId] - claimAmount;
+    if (reclaimAmount > 0) balanceOf[_projectId] = balanceOf[_projectId] - reclaimAmount;
     ```
 
     _Internal references:_
@@ -162,7 +162,7 @@ function recordRedemptionFor(
         _holder,
         _projectId,
         _tokenCount,
-        claimAmount,
+        reclaimAmount,
         _beneficiary,
         memo,
         _delegateMetadata
@@ -195,7 +195,7 @@ function recordRedemptionFor(
   @param _delegateMetadata Bytes to send along to the delegate, if one is used.
 
   @return fundingCycle The funding cycle during which the redemption was made.
-  @return claimAmount The amount of wei claimed.
+  @return reclaimAmount The amount of wei reclaimed.
   @return memo A memo that should be passed along to the emitted event.
 */
 function recordRedemptionFor(
@@ -211,7 +211,7 @@ function recordRedemptionFor(
   onlyAssociatedPaymentTerminal
   returns (
     JBFundingCycle memory fundingCycle,
-    uint256 claimAmount,
+    uint256 reclaimAmount,
     string memory memo
   )
 {
@@ -233,7 +233,7 @@ function recordRedemptionFor(
 
   // If the funding cycle has configured a data source, use it to derive a claim amount and memo.
   if (fundingCycle.useDataSourceForRedeem()) {
-    (claimAmount, memo, _delegate, _delegateMetadata) = fundingCycle.dataSource().redeemParams(
+    (reclaimAmount, memo, _delegate, _delegateMetadata) = fundingCycle.dataSource().redeemParams(
       JBRedeemParamsData(
         _holder,
         _tokenCount,
@@ -246,17 +246,17 @@ function recordRedemptionFor(
       )
     );
   } else {
-    claimAmount = _claimableOverflowOf(_projectId, fundingCycle, _tokenCount);
+    reclaimAmount = _claimableOverflowOf(_projectId, fundingCycle, _tokenCount);
     memo = _memo;
   }
 
   // The amount being claimed must be within the project's balance.
-  if (claimAmount > balanceOf[_projectId]) {
+  if (reclaimAmount > balanceOf[_projectId]) {
     revert INADEQUATE_PAYMENT_TERMINAL_STORE_BALANCE();
   }
 
   // The amount being claimed must be at least as much as was expected.
-  if (claimAmount < _minReturnedWei) {
+  if (reclaimAmount < _minReturnedWei) {
     revert INADEQUATE_CLAIM_AMOUNT();
   }
 
@@ -265,7 +265,7 @@ function recordRedemptionFor(
     directory.controllerOf(_projectId).burnTokensOf(_holder, _projectId, _tokenCount, '', false);
 
   // Remove the redeemed funds from the project's balance.
-  if (claimAmount > 0) balanceOf[_projectId] = balanceOf[_projectId] - claimAmount;
+  if (reclaimAmount > 0) balanceOf[_projectId] = balanceOf[_projectId] - reclaimAmount;
 
   // If a delegate was returned by the data source, issue a callback to it.
   if (_delegate != IJBRedemptionDelegate(address(0))) {
@@ -273,7 +273,7 @@ function recordRedemptionFor(
       _holder,
       _projectId,
       _tokenCount,
-      claimAmount,
+      reclaimAmount,
       _beneficiary,
       memo,
       _delegateMetadata
