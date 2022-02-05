@@ -152,7 +152,7 @@ function pay(
   bool _preferClaimedTokens,
   string calldata _memo,
   bytes calldata _delegateMetadata
- ) external payable override returns (uint256 fundingCycleId) { ... }
+ ) external payable override { ... }
 ```
 
 At any point, anyone can distribute a project's funds up to its current funding cycle's distribution limit to its preprogrammed payout splits by calling [`JBETHPaymentTerminal.distributePayoutsOf(...)`](../specifications/contracts/or-payment-terminals/jbethpaymentterminal/write/distributepayoutsof.md).

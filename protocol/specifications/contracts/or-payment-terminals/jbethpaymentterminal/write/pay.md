@@ -20,7 +20,7 @@ function pay(
   bool _preferClaimedTokens,
   string calldata _memo,
   bytes calldata _delegateMetadata
-) external payable override returns { ... }
+) external payable override { ... }
 ```
 
 * Arguments:
@@ -81,7 +81,7 @@ function pay(
   bool _preferClaimedTokens,
   string calldata _memo,
   bytes calldata _delegateMetadata
-) external payable override returns {
+) external payable override {
   return
     _pay(
       msg.value,
