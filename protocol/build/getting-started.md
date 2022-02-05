@@ -32,7 +32,46 @@ function ownerOf(uint256 _projectId) external returns (address owner) { ... }
 The project's metadata can be found using [`JBProjects.metadataContentOf(...)`](../specifications/contracts/jbprojects/properties/metadatacontentof.md).
 
 ```solidity
-function metadataContentOf(uint256 _projectId, uint256 _domain) external returns (string memory metadataContent) { ... }
+function metadataContentOf(uint256 _projectId, uint256 _domain)
+  external
+  view
+  returns (string memory) { ... }
+```
+
+</details>
+
+<details>
+
+<summary>View funding cycles</summary>
+
+Funding cycle data can be found in the [`JBFundingCycleStore`](../specifications/contracts/jbfundingcyclestore/) contract. A funding cycle configuration can be found using [`JBFundingCycleStore.get(...)`](../specifications/contracts/jbfundingcyclestore/read/get.md). `_configuration` is the block timestamp when the funding cycle was configured.
+
+```solidity
+function get(uint256 _projectId, uint256 _configuration)
+  external
+  view
+  override
+  returns (JBFundingCycle memory fundingCycle) { ... }
+```
+
+The project's current funding cycle can be found using [`JBFundingCycleStore.currentOf(...)`](../specifications/contracts/jbfundingcyclestore/read/currentof.md).
+
+```solidity
+function currentOf(uint256 _projectId)
+  public
+  view
+  override
+  returns (JBFundingCycle memory fundingCycle) { ... }
+```
+
+The project's queued funding cycle can be found using [`JBFundingCycleStore.queuedOf(...)`](../specifications/contracts/jbfundingcyclestore/read/queuedof.md). By default, the queued cycle is a copy of the current one that starts immediately afterwards, using a discounted weight. If the project has proposed a reconfiguration, the queued cycle will reflect the changes once they are approved by the current cycle's ballot. The project has no queued cycle if the current cycle has no duration.
+
+```solidity
+function queuedOf(uint256 _projectId)
+  external
+  view
+  override
+  returns (JBFundingCycle memory fundingCycle) { ... }
 ```
 
 </details>
