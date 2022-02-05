@@ -377,6 +377,18 @@ function reconfigureFundingCyclesOf(
   returns (uint256) { ... }
 ```
 
+<details>
+
+<summary>View reconfiguration ballot status</summary>
+
+Reconfigurations are subject to the approval of the ballot contract included in the current funding cycle. The current ballot state can be found using [`JBFundingCycleStore.ballotStateOf(...)`](../specifications/contracts/jbfundingcyclestore/read/currentballotstateof.md).
+
+```solidity
+function currentBallotStateOf(uint256 _projectId) external view override returns (JBBallotState) { ... } 
+```
+
+</details>
+
 At any point, anyone can inject funds into a project's treasury by calling [`JBETHPaymentTerminal.addToBalanceOf(...)`](../specifications/contracts/or-payment-terminals/jbethpaymentterminal/write/addtobalanceof.md).
 
 ```solidity
