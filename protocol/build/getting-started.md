@@ -64,7 +64,13 @@ function currentOf(uint256 _projectId)
   returns (JBFundingCycle memory fundingCycle) { ... }
 ```
 
-The project's queued funding cycle can be found using [`JBFundingCycleStore.queuedOf(...)`](../specifications/contracts/jbfundingcyclestore/read/queuedof.md). By default, the queued cycle is a copy of the current one that starts immediately afterwards, using a discounted weight. If the project has proposed a reconfiguration, the queued cycle will reflect the changes once they are approved by the current cycle's ballot. The project has no queued cycle if the current cycle has no duration.
+The project's queued funding cycle can be found using [`JBFundingCycleStore.queuedOf(...)`](../specifications/contracts/jbfundingcyclestore/read/queuedof.md). \
+\
+By default, the queued cycle is a copy of the current one that starts immediately afterwards, using a discounted weight. \
+\
+If the project has proposed a reconfiguration, the queued cycle will reflect the changes once they are approved by the current cycle's ballot. Reconfigurations during a funding cycle with no ballot are automatically queued.\
+\
+The project has no queued cycle if the current cycle has no duration.
 
 ```solidity
 function queuedOf(uint256 _projectId)
