@@ -84,6 +84,22 @@ function queuedOf(uint256 _projectId)
 
 <details>
 
+<summary>View splits</summary>
+
+A project's splits data can be found in the [`JBSplitStore`](../specifications/contracts/jbsplitsstore) contract. A group of splits belonging to any particular domain during any particular funding cycle configuration can be found using  [`JBSplitStore.splitsOf(...)`](../specifications/contracts/jbsplitsstore/read/splitsof.md).
+
+```solidity
+function splitsOf(
+  uint256 _projectId,
+  uint256 _domain,
+  uint256 _group
+) external view override returns (JBSplit[] memory) { ... }
+```
+
+</details>
+
+<details>
+
 <summary>View fund access constraints</summary>
 
 A project's fund access conatraints can found in the [`JBController`](../specifications/contracts/or-controllers/jbcontroller/) contract used to launch the project. It's distribution limit of any payment terminal during any funding cycle configuration can be found using [`JBController.distributionLimitOf(...)`](../specifications/contracts/or-controllers/jbcontroller/read/distributionlimitof.md). The currency being used for this distribution limit can be found using [`JBController.distributionLimitCurrencyOf(...)`](../specifications/contracts/or-controllers/jbcontroller/read/distributionlimitcurrencyof.md).
@@ -140,6 +156,33 @@ function usedOverflowAllowanceOf(
 ) external view override returns (uint256) { ... }
 ```
 
+</details>
+
+<details>
+
+<summary>View terminals and controller</summary>
+
+The [`JBDirectory`](../specifications/contracts/jbdirectory) contract stores addresses of payment terminals where a project is currently accepting funds through. A projects currently set terminals can be found using [`JBDirectory.terminalsOf(...)`](../specifications/contracts/jbdirectory/read/terminalsof.md).
+
+```solidity
+function terminalsOf(uint256 _projectId) external view override returns (IJBTerminal[] memory) { ... }
+```
+
+If a project has multiple terminals for the same token, the primary terminal that it wishes to accept funds through of that token type can be found using [`JBDirectory.primaryTerminalOf(...)`](../specifications/contracts/jbdirectory/read/primaryterminalof.md).
+
+```solidity
+function primaryTerminalOf(uint256 _projectId, address _token)
+  public
+  view
+  override
+  returns (IJBTerminal) { ... }
+```
+
+The [`JBDirectory`](../specifications/contracts/jbdirectory) contract also stores the address of the controller that is managing a project's funding cycles and tokens. A projects current terminal can be found using [`JBDirectory.controllerOf(...)`](../specifications/contracts/jbdirectory/properties/controllerof.md).
+
+```solidity
+function controllerOf(uint256 _projectId) external view override returns (IJBController) { ... }
+```
 </details>
 
 Once a project has been created, it can begin accepting funds from anyone. ETH can be sent to the project by calling [`JBETHPaymentTerminal.pay(...)`](../specifications/contracts/or-payment-terminals/jbethpaymentterminal/write/pay.md).
