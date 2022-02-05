@@ -190,6 +190,18 @@ A project's treasury balance can be found in the respective terminal store contr
 function balanceOf(uint256 _projectId) external view override returns (uint256) { ... }
 ```
 
+The project's current overflow can also be found in the respective terminal store contracts. For example, in the [`JBETHPaymentTerminalStore`](../specifications/contracts/or-payment-terminals/jbethpaymentterminalstore), the terminal's overflow can be found using [`JBETHPaymentTerminalStore.currentOverflowOf(...)`](../specifications/contracts/or-payment-terminals/jbethpaymentterminalstore/read/currentoverflowof.md).
+
+```solidity
+function currentOverflowOf(uint256 _projectId) external view returns (uint256) { ... }
+```
+
+A terminal store can also resolve the total amount of overflow in all of a project's terminals. For example, in the [`JBETHPaymentTerminalStore`](../specifications/contracts/or-payment-terminals/jbethpaymentterminalstore), the project's overall overflow can be found using [`JBETHPaymentTerminalStore.currentTotalOverflowOf(...)`](../specifications/contracts/or-payment-terminals/jbethpaymentterminalstore/read/currenttotaloverflowof.md).
+
+```solidity
+function currentTotalOverflowOf(uint256 _projectId) external view returns (uint256) { ... }
+```
+
 </details>
 
 <details>
@@ -206,6 +218,21 @@ The project token's total supply can also be found in the [`JBTokenStore`](../sp
 
 ```solidity
 function totalSupplyOf(uint256 _projectId) external view returns (uint256)
+```
+
+</details>
+
+<details>
+
+<summary>View reserved token balance</summary>
+
+A project's undistributed reserved token balance can be found in the project's current controller. For example in the [`JBController`](../specifications/contracts/or-controllers/jbcontroller/), the used can be found using [`JBController.reservedTokenBalanceOf(...)`](../specifications/contracts/or-controllers/jbcontroller/read/reservedtokenbalanceof.md).
+
+```solidity
+function reservedTokenBalanceOf(uint256 _projectId, uint256 _reservedRate)
+  external
+  view
+  returns (uint256) { ... }
 ```
 
 </details>
@@ -235,23 +262,17 @@ function usedDistributionLimitOf(
 ) external view override returns (uint256) { ... }
 ```
 
+The remaining allowed distribution a project can make from a terminal during a funding cycle can be found using [`JBETHPaymentTerminal.remainingDistributionLimitOf(...)`](../specifications/contracts/or-payment-terminals/jbethpaymentterminal/read/remainingdistributionlimitof.md).
 </details>
 
 A project's owner can also distribute additional funds from its treasury's overflow up until its preconfigured allowance.
 
 ```solidity
-function useAllowanceOf(
-  uint256 _projectId,
-  uint256 _amount,
-  uint256 _currency,
-  uint256 _minReturnedWei,
-  address payable _beneficiary
-)
-  external
-  override
-  nonReentrant
-  requirePermission(projects.ownerOf(_projectId), _projectId, JBOperations.USE_ALLOWANCE)
-  returns (uint256) { ... }
+function remainingDistributionLimitOf(
+    uint256 _projectId,
+    uint256 _fundingCycleConfiguration,
+    uint256 _fundingCycleNumber
+  ) external view override returns (uint256) { ... }
 ```
 
 <details>
@@ -378,6 +399,18 @@ function issueTokenFor(
   returns (IJBToken token) { ... }
 ```
 
+<details>
+
+<summary>View the project's token</summary>
+
+The current token being used by the project can be found in the [`JBTokensStore`](../specifications/contracts/jbtokenstore/) contract using [`JBTokenStore.tokenOf(...)`](../specifications/contracts/jbtokenstore/properties/tokenof.md); 
+
+```solidity
+function tokenOf(uint256 _projectId) external view override returns (IJBToken) { ... }
+```
+
+</details>
+
 ```solidity
 function changeTokenOf(
   uint256 _projectId,
@@ -398,3 +431,21 @@ function claimFor(
     uint256 _amount
   ) external { ... }
 ```
+
+<details>
+
+<summary>View a holder's uncliamed project token balance</summary>
+
+The unclaimed balance for each project token holder can be found in the [`JBTokensStore`](../specifications/contracts/jbtokenstore/) contract using [`JBTokenStore.unclaimedBalanceOf(...)`](../specifications/contracts/jbtokenstore/properties/unclaimedbalanceof.md).
+
+```solidity
+function unclaimedBalanceOf(address _holder, uint256 _projectId) external view override returns (uint256) { ... }
+```
+
+A project's total supply of unclaimed tokens can be found using [`JBTokenStore.unclaimedTotalSupplyOf(...)`](../specifications/contracts/jbtokenstore/properties/unclaimedtotalsupplyof.md)
+
+```solidity
+function unclaimedTotalSupplyOf(uint256 _projectId) external view override returns (uint256) { ... }
+```
+
+</details>
