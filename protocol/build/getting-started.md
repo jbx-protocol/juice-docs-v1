@@ -181,7 +181,6 @@ function changeTokenOf(
   requirePermission(projects.ownerOf(_projectId), _projectId, JBOperations.CHANGE_TOKEN) { ... }
 ```
 
-
 If a project has issued its ERC-20's or is using a custom `IJBToken`, anyone can claim tokens that are being represented via the internal accounting mechanism into the token holders wallet on their behalf by calling [`JBTokenStore.claimFor(...)`](../specifications/contracts/jbtokenstore/write/claimfor.md).
 
 ```solidity
