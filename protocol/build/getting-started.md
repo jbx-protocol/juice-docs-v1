@@ -411,18 +411,6 @@ function issueTokenFor(
   returns (IJBToken token) { ... }
 ```
 
-<details>
-
-<summary>View the project's token</summary>
-
-The current token being used by the project can be found in the [`JBTokensStore`](../specifications/contracts/jbtokenstore/) contract using [`JBTokenStore.tokenOf(...)`](../specifications/contracts/jbtokenstore/properties/tokenof.md); 
-
-```solidity
-function tokenOf(uint256 _projectId) external view override returns (IJBToken) { ... }
-```
-
-</details>
-
 ```solidity
 function changeTokenOf(
   uint256 _projectId,
@@ -433,6 +421,18 @@ function changeTokenOf(
   nonReentrant
   requirePermission(projects.ownerOf(_projectId), _projectId, JBOperations.CHANGE_TOKEN) { ... }
 ```
+
+<details>
+
+<summary>View the project's token</summary>
+
+The current token being used by the project can be found in the [`JBTokensStore`](../specifications/contracts/jbtokenstore/) contract using [`JBTokenStore.tokenOf(...)`](../specifications/contracts/jbtokenstore/properties/tokenof.md). This will return a zero address if the project hasn't yet issued tokens or changed into a custom token.
+
+```solidity
+function tokenOf(uint256 _projectId) external view override returns (IJBToken) { ... }
+```
+
+</details>
 
 If a project has issued its ERC-20's or is using a custom `IJBToken`, anyone can claim tokens that are being represented via the internal accounting mechanism into the token holders wallet on their behalf by calling [`JBTokenStore.claimFor(...)`](../specifications/contracts/jbtokenstore/write/claimfor.md).
 
