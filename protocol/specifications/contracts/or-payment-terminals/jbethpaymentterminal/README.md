@@ -98,7 +98,7 @@ constructor(
 | [**`ethBalanceOf`**](read/ethbalanceof.md) | <p><strong>Params</strong></p><ul><li><code>uint256 _projectId</code></li></ul><p><strong>Returns</strong></p><ul><li><code>uint256ethBalance</code></li></ul>                                                                        |
 | [**`remainingDistributionLimitOf`**](read/remainingdistributionlimitof.md) | <p><strong>Params</strong></p><ul><li><code>uint256 _projectId</code></li><li><code>uint256 _fundingCycleConfiguration</code></li><li><code>uint256 _fundingCycleNumber</code></li></ul><p><strong>Returns</strong></p><ul><li><code>uint256ethBalance</code></li></ul>                                                                        |
 | [**`heldFeesOf`**](read/heldfeesof.md)     | <p><strong>Params</strong></p><ul><li><code>uint256 _projectId</code></li></ul><p><strong>Returns</strong></p><ul><li><a href="../../../data-structures/jbfee.md"><code>JBFee</code></a><code>[] fees</code></li></ul> |
-| [**`delegate`**](read/delegate.md)         | <p><strong>Returns</strong></p><ul><li><code>address claimableOverflow</code></li></ul>                                                                                                                                               |
+| [**`delegate`**](read/delegate.md)         | <p><strong>Returns</strong></p><ul><li><code>address reclaimableOverflow</code></li></ul>                                                                                                                                               |
 
 ## Write
 

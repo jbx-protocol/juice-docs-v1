@@ -1,17 +1,17 @@
-# \_claimableOverflowOf
+# \_reclaimableOverflowOf
 
 Contract: [`JBETHPaymentTerminalStore`](../)​‌
 
 {% tabs %}
 {% tab title="Step by step" %}
-**The amount of overflowed ETH that can be claimed by the specified number of tokens.**
+**The amount of overflowed ETH that can be reclaimed by the specified number of tokens.**
 
 _If the project has an active funding cycle reconfiguration ballot, the project's ballot redemption rate is used._
 
 ### Definition
 
 ```solidity
-function _claimableOverflowOf(
+function _reclaimableOverflowOf(
   uint256 _projectId,
   JBFundingCycle memory _fundingCycle,
   uint256 _tokenCount
@@ -20,11 +20,11 @@ function _claimableOverflowOf(
 
 * Arguments:
   * `_projectId` is the ID of the project to get a claimable amount for.
-  * `_fundingCycle` is the funding cycle during which the claimable amount applies.
+  * `_fundingCycle` is the funding cycle during which the reclaimable amount applies.
   * `_tokenCount` is the number of tokens to make the calculation with.
 * The view function is private to this contract.
 * The function does not alter state on the blockchain.
-* The function returns the amount of overflowed ETH that can be claimed.
+* The function returns the amount of overflowed ETH that can be reclaimed.
 
 ### Body
 
@@ -155,9 +155,9 @@ function _claimableOverflowOf(
 ```solidity
 /**
   @notice
-  See docs for `claimableOverflowOf`
+  See docs for `reclaimableOverflowOf`
 */
-function _claimableOverflowOf(
+function _reclaimableOverflowOf(
   uint256 _projectId,
   JBFundingCycle memory _fundingCycle,
   uint256 _tokenCount

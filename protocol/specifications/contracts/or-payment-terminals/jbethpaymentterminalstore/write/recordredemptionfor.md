@@ -104,7 +104,7 @@ function recordRedemptionFor(
         )
       );
     } else {
-      reclaimAmount = _claimableOverflowOf(_projectId, fundingCycle, _tokenCount);
+      reclaimAmount = _reclaimableOverflowOf(_projectId, fundingCycle, _tokenCount);
       memo = _memo;
     }
     ```
@@ -246,7 +246,7 @@ function recordRedemptionFor(
       )
     );
   } else {
-    reclaimAmount = _claimableOverflowOf(_projectId, fundingCycle, _tokenCount);
+    reclaimAmount = _reclaimableOverflowOf(_projectId, fundingCycle, _tokenCount);
     memo = _memo;
   }
 
