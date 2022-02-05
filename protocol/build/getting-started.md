@@ -86,7 +86,7 @@ function queuedOf(uint256 _projectId)
 
 <summary>View fund access constraints</summary>
 
-A project's fund access conatraints can found in the [`JBController`](../specifications/contracts/or-controller/jbcontroller/) contract used to launch the project. It's distribution limit of any payment terminal during any funding cycle configuration can be found using [`JBController.distributionLimitOf(...)`](../specifications/contracts/or-controllers/jbcontroller/read/distributionlimitof.md). The currency being used for this distribution limit can be found using [`JBController.distributionLimitCurrencyOf(...)`](../specifications/contracts/or-controllers/jbcontroller/read/distributionlimitcurrencyof.md).
+A project's fund access conatraints can found in the [`JBController`](../specifications/contracts/or-controllers/jbcontroller/) contract used to launch the project. It's distribution limit of any payment terminal during any funding cycle configuration can be found using [`JBController.distributionLimitOf(...)`](../specifications/contracts/or-controllers/jbcontroller/read/distributionlimitof.md). The currency being used for this distribution limit can be found using [`JBController.distributionLimitCurrencyOf(...)`](../specifications/contracts/or-controllers/jbcontroller/read/distributionlimitcurrencyof.md).
 
 ```solidity
 function distributionLimitOf(
