@@ -44,7 +44,7 @@ function metadataContentOf(uint256 _projectId, uint256 _domain)
 
 <summary>View funding cycles</summary>
 
-Funding cycle data can be found in the [`JBFundingCycleStore`](../specifications/contracts/jbfundingcyclestore/) contract. A funding cycle configuration can be found using [`JBFundingCycleStore.get(...)`](../specifications/contracts/jbfundingcyclestore/read/get.md). `_configuration` is the block timestamp when the funding cycle was configured.
+Funding cycle data can be found in the [`JBFundingCycleStore`](../specifications/contracts/jbfundingcyclestore/) contract. A funding cycle configuration can be found using [`JBFundingCycleStore.get(...)`](../specifications/contracts/jbfundingcyclestore/read/get.md), where `_configuration` is the block timestamp when the funding cycle was configured.
 
 ```solidity
 function get(uint256 _projectId, uint256 _configuration)
@@ -78,6 +78,64 @@ function queuedOf(uint256 _projectId)
   view
   override
   returns (JBFundingCycle memory fundingCycle) { ... }
+```
+
+</details>
+
+<summary>View fund access constraints</summary>
+
+A project's fund access conatraints can found in the [`JBController`](../specifications/contracts/or-controller/jbcontroller/) contract used to launch the project. It's distribution limit of any payment terminal during any funding cycle configuration can be found using [`JBController.distributionLimitOf(...)`](../specifications/contracts/or-controllers/jbcontroller/read/distributionlimitof.md). The currency being used for this distribution limit can be found using [`JBController.distributionLimitCurrencyOf(...)`](../specifications/contracts/or-controllers/jbcontroller/read/distributionlimitcurrencyof.md).
+
+```solidity
+function distributionLimitOf(
+  uint256 _projectId,
+  uint256 _configuration,
+  IJBTerminal _terminal
+) external view override returns (uint256) { ... }
+```
+
+```solidity
+function distributionLimitCurrencyOf(
+  uint256 _projectId,
+  uint256 _configuration,
+  IJBTerminal _terminal
+) external view override returns (uint256) { ... }
+```
+
+Any used distribution limit can be found in the respective terminal store contracts. For example, in the [`JBETHPaymentTerminalStore`](../specifications/contracts/or-payment-terminals/jbethpaymentterminalstore), the used distribution limit during a funding cycle can be found using [`JBETHPaymentTerminalStore.usedDistributionLimitOf(...)`](../specifications/contracts/or-payment-terminals/jbethpaymentterminalstore/properties/useddistributionlimitof.md).
+
+```solidity
+function usedDistributionLimitOf(
+  uint256 _projectId,
+  uint256 _number
+) external view override returns (uint256) { ... }
+```
+
+It's overflow allowance from any payment terminal during any funding cycle configuration can be found using [`JBController.overflowAllowanceOf(...)`](../specifications/contracts/or-controllers/jbcontroller/read/overflowallowanceof.md). The currency being used for this overflow allowance can be found using [`JBController.overflowAllowanceCurrencyOf(...)`](../specifications/contracts/or-controllers/jbcontroller/read/overflowallowancecurrencyof.md).
+
+```solidity
+function overflowAllowanceOf(
+  uint256 _projectId,
+  uint256 _configuration,
+  IJBTerminal _terminal
+) external view override returns (uint256) { ... }
+```
+
+```solidity
+function overflowAllowanceCurrencyOf(
+  uint256 _projectId,
+  uint256 _configuration,
+  IJBTerminal _terminal
+) external view override returns (uint256) { ... }
+```
+
+Any used overflow allowance can also be found in the respective terminal store contracts. For example, in the [`JBETHPaymentTerminalStore`](../specifications/contracts/or-payment-terminals/jbethpaymentterminalstore), the used overflow allowance during a funding cycle can be found using [`JBETHPaymentTerminalStore.usedOverflowAllowanceOf(...)`](../specifications/contracts/or-payment-terminals/jbethpaymentterminalstore/properties/usedoverflowallowanceof.md).
+
+```solidity
+function usedOverflowAllowanceOf(
+  uint256 _projectId,
+  uint256 _configuration
+) external view override returns (uint256) { ... }
 ```
 
 </details>
