@@ -263,9 +263,6 @@ function usedDistributionLimitOf(
 ```
 
 The remaining allowed distribution a project can make from a terminal during a funding cycle can be found using [`JBETHPaymentTerminal.remainingDistributionLimitOf(...)`](../specifications/contracts/or-payment-terminals/jbethpaymentterminal/read/remainingdistributionlimitof.md).
-</details>
-
-A project's owner can also distribute additional funds from its treasury's overflow up until its preconfigured allowance.
 
 ```solidity
 function remainingDistributionLimitOf(
@@ -274,7 +271,23 @@ function remainingDistributionLimitOf(
     uint256 _fundingCycleNumber
   ) external view override returns (uint256) { ... }
 ```
+</details>
 
+A project's owner can also distribute additional funds from its treasury's overflow up until its preconfigured allowance.
+
+```solidity
+function useAllowanceOf(
+  uint256 _projectId,
+  uint256 _amount,
+  uint256 _currency,
+  uint256 _minReturnedWei,
+  address payable _beneficiary
+)
+  external
+  override
+  nonReentrant
+  requirePermission(projects.ownerOf(_projectId), _projectId, JBOperations.USE_ALLOWANCE) { ... }
+```
 <details>
 
 <summary>View used overflow allowance</summary>
