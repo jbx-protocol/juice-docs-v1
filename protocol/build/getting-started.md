@@ -446,7 +446,7 @@ function claimFor(
 
 <details>
 
-<summary>View a holder's uncliamed project token balance</summary>
+<summary>View a holder's unclaimed project token balance</summary>
 
 The unclaimed balance for each project token holder can be found in the [`JBTokensStore`](../specifications/contracts/jbtokenstore/) contract using [`JBTokenStore.unclaimedBalanceOf(...)`](../specifications/contracts/jbtokenstore/properties/unclaimedbalanceof.md).
 
