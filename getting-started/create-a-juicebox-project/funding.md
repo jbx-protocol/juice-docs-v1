@@ -10,5 +10,5 @@ Not having funding cycles allows a project owner to withdraw funds from a projec
 * _Funding cycle target_ is a per-cycle target amount. This is the amount that can be withdrawn from the Juicebox each funding cycle.
 
 {% hint style="info" %}
-Once the _Funding cycle target_ is met, any additional funds raised are considered **overflow**. If _Allow minting tokens_ is enabled (see [restricted-actions.md](restricted-actions.md "mention")), people who fund your project recieve tokens which they can use to claim a portion of the overflow.
+Once the _Funding cycle target_ is met, any additional funds raised are considered **overflow**. If _Allow minting tokens_ is enabled (see [restricted-actions.md](restricted-actions.md "mention")), people who fund your project receive tokens which they can use to claim a portion of the overflow.
 {% endhint %}
