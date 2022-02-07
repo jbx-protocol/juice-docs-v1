@@ -258,7 +258,7 @@ Any used distribution limit can be found in the respective terminal store contra
 ```solidity
 function usedDistributionLimitOf(
   uint256 _projectId,
-  uint256 _number
+  uint256 _fundingCycleNumber
 ) external view override returns (uint256) { ... }
 ```
 
