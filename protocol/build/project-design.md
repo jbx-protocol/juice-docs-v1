@@ -50,34 +50,35 @@ Here are some examples, starting with the simplest version:
       reservedRate: 0,
       redemptionRate: 0,
       ballotRedemptionRate: 0,
-      pausePay: 0, 
-      pauseDistributions: 0, 
-      pauseRedeem: 0, 
-      pauseMint: 0, 
-      pauseBurn: 0, 
-      allowTerminalMigration: 0, 
-      allowControllerMigration: 0, 
-      holdFees: 0, 
-      useLocalBalanceForRedemptions: 0,
-      useDataSourceForPay: 0, 
-      useDataSourceForRedeem: 0, 
+      pausePay: false, 
+      pauseDistributions: false, 
+      pauseRedeem: false, 
+      pauseMint: false, 
+      pauseBurn: false, 
+      allowTerminalMigration: false, 
+      allowControllerMigration: false, 
+      holdFees: false, 
+      useLocalBalanceForRedemptions: false,
+      useDataSourceForPay: false, 
+      useDataSourceForRedeem: false, 
       dataSource: 0x0000000000000000000000000000000000000000, 
     }
     ```
 * For `_groupedSplits` send an empty array.
 * For `_fundAccessConstraints` send an empty array.
-* For `_terminals` send an array only including the contract address of the `JBETHPaymentTerminal`.
+* For `_terminals` send an array only including the contract address of the [`JBETHPaymentTerminal`](../specifications/contracts/or-payment-terminals/jbethpaymentterminal/).
 
 This is the most vanilla project you can launch, which also makes it cheapest to launch gas-wise since relatively little needs to get saved into storage.
 
 Under these conditions:
 
-* Your project can begin receiving funds through the `JBETHPaymentTerminal`.
+* Your project can begin receiving funds through the [`JBETHPaymentTerminal`](../specifications/contracts/or-payment-terminals/jbethpaymentterminal/).
 * 1,000,000 of your project's tokens will be minted per ETH received since the configured `_data.weight` is `1000000000000000000000000`. (The raw value sent has 18 decimal places).
-* All tokens minted as a result of recieved ETH will go to the beneficiary address specified by the payer of the ETH since the configured `_metadata.reservedRate` of 0.
+* All tokens minted as a result of received ETH will go to the beneficiary address specified by the payer of the ETH since the configured `_metadata.reservedRate` of 0.
 * Nothing fancy will happen outside of the default token minting behavior since the configured `_metadata.useDataSourceForPay` is `false`.
+* Nothing fancy will happen outside of the default token redemption behavior since the configured `_metadata.useDataSourceForRedeem` is `false`.
 * None of the funds in the treasury can be distributed to the project owner since no `_fundAccessConstraints` were specified. This means all funds in the treasury are considered overflow. Since the configured `_metadata.redemptionRate` sent is 0 (which represents 100%), all outstanding tokens can be redeemed/burned to claim a proportional part of the overflow. This lets everyone who contributed funds have access to their ETH back.
-* A new funding cycle with an updated configuration can be triggered at any time by the project owner since the configured `_data.duration` of 0 and `_data.ballot` of `0x0000000000000000000000000000000000000000`. This lets the project owner capture an arbitrary amount of what's in the treasury at any given point by sending a reconfiguration with `_fundAccessConstraints` specified.
+* A new funding cycle with an updated configuration can be triggered at any time by the project owner since the configured `_data.duration` of 0 and `_data.ballot` of `0x0000000000000000000000000000000000000000`. This lets the project owner capture an arbitrary amount of what's in the treasury at any given point by sending a reconfiguration transaction with `_fundAccessConstraints` specified.
 
 Let's see what happens when basic `_fundAccessConstraints` are specified by sending the following [`JBFundAccessContraints`](../specifications/data-structures/jbfundaccessconstraints.md) values:
 
@@ -87,11 +88,32 @@ Let's see what happens when basic `_fundAccessConstraints` are specified by send
     terminal: <address of JBETHPaymentTerminal>,
     distributionLimit: 4200000000000000000,
     overflowAllowance: 0,
-    distributionLimitCurrency: 0,
+    distributionLimitCurrency: 1,
     overflowAllowanceCurrency: 0
   }
 ]
 ```
 
-_wip_\
-_to be continued_
+* During each funding cycle with this configuration, the project can receive up to 4.2 ETH worth of tokens from the [`JBETHPaymentTerminal`](../specifications/contracts/or-payment-terminals/jbethpaymentterminal/). This is because the configured `distributionLimitCurrency` is 1 ([which represents ETH](../specifications/libraries/jbcurrencies.md)) and the `distributionLimit` is `4200000000000000000`. (The raw value sent has 18 decimal places).
+* Anyone on the internet can call the [`JBETHPaymentTerminal.distributePayoutsOf(...)`](../specifications/contracts/or-payment-terminals/jbethpaymentterminal/write/distributepayoutsof.md) transaction to send up to 4.2 ETH per funding cycle to the preconfigured splits. Since no splits were specified, all distributed funds go to the project owner.
+* With each new funding cycle, another 4.2 ETH can be distributed.&#x20;
+* The project cannot distribute any funds in excess of the distribution limit wince there is no `overflowAllowance`.
+
+Let's see what happens when using an overflow allowance instead:
+
+```solidity
+[
+  {
+    terminal: <address of JBETHPaymentTerminal>,
+    distributionLimit: 0,
+    overflowAllowance: 6900000000000000000,
+    distributionLimitCurrency: 0,
+    overflowAllowanceCurrency: 1
+  }
+]
+```
+
+* Until a new reconfiguration transaction is sent, the project owner can send up to 6.9 ETH worth of tokens from the [`JBETHPaymentTerminal`](../specifications/contracts/or-payment-terminals/jbethpaymentterminal/) to any address it chooses. This is because the configured `overflowAllowanceCurrency` is 1 ([which represents ETH](../specifications/libraries/jbcurrencies.md)) and the `overflowAllowance` is `6900000000000000000`. (The raw value sent has 18 decimal places).
+* Meanwhile, all of the project's funds in the [`JBETHPaymentTerminal`](../specifications/contracts/or-payment-terminals/jbethpaymentterminal/) are considered overflow since there is no distribution limit.
+* Rolled-over funding cycles within the same configuration do not refresh the allowance.
+* An overflow allowance is a free allowance the project can to use without additional pre-programmed stipulations.&#x20;
