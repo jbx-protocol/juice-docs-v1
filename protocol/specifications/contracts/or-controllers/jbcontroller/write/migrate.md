@@ -8,7 +8,7 @@ Contract: [`JBController`](../)​‌
 
 _Only a project's owner or a designated operator can migrate it._
 
-## Definition
+### Definition
 
 ```solidity
 function migrate(uint256 _projectId, IJBController _to)
@@ -24,7 +24,7 @@ function migrate(uint256 _projectId, IJBController _to)
 * The function cannot be accessed recursively or while other `nonReentrant` functions in this contract are in progress.
 * The function doesn't return anything.
 
-## Body
+### Body
 
 1.  Make sure this controller is the project's current controller. Migrating away from a controller that isn't the project's current one wouldn't do anything.
 

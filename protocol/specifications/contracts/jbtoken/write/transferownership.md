@@ -10,7 +10,7 @@ Interface: [`IJBToken`](../../../interfaces/ijbtoken.md)
 
 _Only the owner of this contract can transfer it._
 
-## Definition
+### Definition
 
 ```solidity
 function transferOwnership(address _newOwner)
@@ -26,7 +26,7 @@ function transferOwnership(address _newOwner)
 * The function overrides a function definition from the `IJBToken` interface.
 * The function returns nothing.
 
-## Body
+### Body
 
 1.  Forward the call to the inherited version from `Ownable`.
 

@@ -8,7 +8,7 @@ Interface: [`IJBController`](../../../../interfaces/ijbcontroller.md)
 {% tab title="Step by step" %}
 **The amount of overflow that a project is allowed to tap into on-demand throughout configuration.**
 
-## Definition
+### Definition
 
 ```solidity
 function overflowAllowanceOf(
@@ -27,7 +27,7 @@ function overflowAllowanceOf(
 * The function overrides a function definition from the [`IJBController`](../../../../interfaces/ijbcontroller.md) interface.
 * The function returns the overflow allowance.
 
-## Body
+### Body
 
 1.  Return the first 248 bits of the packed overflow allowance data.
 

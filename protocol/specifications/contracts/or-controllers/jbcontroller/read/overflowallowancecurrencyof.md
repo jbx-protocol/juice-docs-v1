@@ -8,7 +8,7 @@ Interface: [`IJBController`](../../../../interfaces/ijbcontroller.md)
 {% tab title="Step by step" %}
 **The currency of the amount of overflow that a project is allowed to tap into.**
 
-## Definition
+### Definition
 
 ```solidity
 function overflowAllowanceCurrencyOf(
@@ -27,7 +27,7 @@ function overflowAllowanceCurrencyOf(
 * The function overrides a function definition from the [`IJBController`](../../../../interfaces/ijbcontroller.md) interface.
 * The function returns the overflow allowance currency.
 
-## Body
+### Body
 
 1.  Return the last 8 bits of the packed overflow allowance data.
 

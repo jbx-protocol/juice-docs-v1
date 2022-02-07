@@ -4,7 +4,7 @@
 {% tab title="Step by step" %}
 **Configures a funding cycle and stores information pertinent to the configuration.**
 
-### Definition
+#### Definition
 
 ```solidity
 function _configure(
@@ -27,7 +27,7 @@ function _configure(
 * The function is private to this contract.
 * The function returns the funding cycle configuration that was successfully updated.
 
-### Body
+#### Body
 
 1.  Make sure the reserved rate is a valid number out of the max value.
 

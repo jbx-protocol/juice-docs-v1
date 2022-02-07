@@ -10,7 +10,7 @@ Interface: [`IJBDirectory`](../../../interfaces/ijbdirectory.md)
 
 _See `addToSetControllerAllowlist(...)` for context._
 
-### Definition
+#### Definition
 
 ```solidity
 function removeFromSetControllerAllowlist(address _address) external override onlyOwner { ... }
@@ -22,7 +22,7 @@ function removeFromSetControllerAllowlist(address _address) external override on
 * The function overrides a function definition from the `IJBDirectory` interface.
 * The function returns nothing.
 
-### Body
+#### Body
 
 1.  Make sure the controller is on the allowlist.
 

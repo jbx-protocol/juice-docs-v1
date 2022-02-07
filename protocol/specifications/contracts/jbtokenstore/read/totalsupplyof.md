@@ -8,7 +8,7 @@ Interface: [`IJBTokenStore`](../../../interfaces/ijbtokenstore.md)
 {% tab title="Step by step" %}
 **The total supply of tokens for each project, including claimed and unclaimed tokens.**
 
-## Definition
+### Definition
 
 ```solidity
 function totalSupplyOf(uint256 _projectId) external view override returns (uint256 supply) { ... }
@@ -20,7 +20,7 @@ function totalSupplyOf(uint256 _projectId) external view override returns (uint2
 * The function overrides a function definition from the `IJBTokenStore` interface.
 * The function returns the total supply.
 
-## Body
+### Body
 
 1.  Get a reference to the unclaimed total supply of the project.
 

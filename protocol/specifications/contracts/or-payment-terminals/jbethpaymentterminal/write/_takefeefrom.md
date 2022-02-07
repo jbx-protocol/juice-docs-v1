@@ -6,7 +6,7 @@ Contract: [`JBETHPaymentTerminal`](../)​‌
 {% tab title="Step by step" %}
 **Takes a fee into the platform's project, which has an id of 1.**
 
-### Definition
+#### Definition
 
 ```solidity
 function _takeFeeFrom(
@@ -25,7 +25,7 @@ function _takeFeeFrom(
 * The function is private to this contract.
 * The function returns the amount of the fee taken.
 
-### Body
+#### Body
 
 1.  Check for a fee discount from the currently set fee gauge if there is one. Otherwise there is no discount.
 

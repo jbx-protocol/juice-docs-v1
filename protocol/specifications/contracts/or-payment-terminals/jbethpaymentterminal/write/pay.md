@@ -10,7 +10,7 @@ Interface: [`IJBTerminal`](../../../../interfaces/ijbterminal.md)
 
 _The msg.value is the amount of the contribution in wei._
 
-### Definition
+#### Definition
 
 ```solidity
 function pay(
@@ -35,7 +35,7 @@ function pay(
 * The resulting function overrides a function definition from the `IJBTerminal` interface.
 * The function doesn't return anything.
 
-### Body
+#### Body
 
 1.  Forward the call to the internal version of the function that is also used by other operations.
 

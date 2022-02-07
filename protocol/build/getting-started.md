@@ -4,7 +4,7 @@ description: How to begin interacting with the protocol.
 
 # Getting started
 
-The first transaction to call when getting started is [`JBController.launchProjectFor(...)`](../specifications/contracts/or-controllers/jbcontroller/write/launchprojectfor.md).
+The first transaction to call when getting started is [`JBController.launchProjectFor(...)`](../specifications/contracts/or-controllers/jbcontroller/write/launchprojectfor.md).&#x20;
 
 ```solidity
 function launchProjectFor(
@@ -18,6 +18,8 @@ function launchProjectFor(
   IJBTerminal[] memory _terminals
 ) external returns (uint256 projectId) { ... }
 ```
+
+Check out the [Project design](project-design.md) page for more info on how to build projects to various specifications.
 
 <details>
 
@@ -64,9 +66,9 @@ function currentOf(uint256 _projectId)
   returns (JBFundingCycle memory fundingCycle) { ... }
 ```
 
-The project's queued funding cycle can be found using [`JBFundingCycleStore.queuedOf(...)`](../specifications/contracts/jbfundingcyclestore/read/queuedof.md). \
+The project's queued funding cycle can be found using [`JBFundingCycleStore.queuedOf(...)`](../specifications/contracts/jbfundingcyclestore/read/queuedof.md).\
 \
-By default, the queued cycle is a copy of the current one that starts immediately afterwards, using a discounted weight. \
+By default, the queued cycle is a copy of the current one that starts immediately afterwards, using a discounted weight.\
 \
 If the project has proposed a reconfiguration, the queued cycle will reflect the changes once they are approved by the current cycle's ballot. Reconfigurations during a funding cycle with no ballot are automatically queued.\
 \
@@ -86,7 +88,7 @@ function queuedOf(uint256 _projectId)
 
 <summary>View splits</summary>
 
-A project's splits data can be found in the [`JBSplitStore`](../specifications/contracts/jbsplitsstore) contract. A group of splits belonging to any particular domain during any particular funding cycle configuration can be found using  [`JBSplitStore.splitsOf(...)`](../specifications/contracts/jbsplitsstore/read/splitsof.md).
+A project's splits data can be found in the [`JBSplitStore`](../specifications/contracts/jbsplitsstore/) contract. A group of splits belonging to any particular domain during any particular funding cycle configuration can be found using [`JBSplitStore.splitsOf(...)`](../specifications/contracts/jbsplitsstore/read/splitsof.md).
 
 ```solidity
 function splitsOf(
@@ -144,7 +146,7 @@ function overflowAllowanceCurrencyOf(
 
 <summary>View terminals and controller</summary>
 
-The [`JBDirectory`](../specifications/contracts/jbdirectory) contract stores addresses of payment terminals where a project is currently accepting funds through. A projects currently set terminals can be found using [`JBDirectory.terminalsOf(...)`](../specifications/contracts/jbdirectory/read/terminalsof.md).
+The [`JBDirectory`](../specifications/contracts/jbdirectory/) contract stores addresses of payment terminals where a project is currently accepting funds through. A projects currently set terminals can be found using [`JBDirectory.terminalsOf(...)`](../specifications/contracts/jbdirectory/read/terminalsof.md).
 
 ```solidity
 function terminalsOf(uint256 _projectId) external view override returns (IJBTerminal[] memory) { ... }
@@ -160,11 +162,12 @@ function primaryTerminalOf(uint256 _projectId, address _token)
   returns (IJBTerminal) { ... }
 ```
 
-The [`JBDirectory`](../specifications/contracts/jbdirectory) contract also stores the address of the controller that is managing a project's funding cycles and tokens. A projects current terminal can be found using [`JBDirectory.controllerOf(...)`](../specifications/contracts/jbdirectory/properties/controllerof.md).
+The [`JBDirectory`](../specifications/contracts/jbdirectory/) contract also stores the address of the controller that is managing a project's funding cycles and tokens. A projects current terminal can be found using [`JBDirectory.controllerOf(...)`](../specifications/contracts/jbdirectory/properties/controllerof.md).
 
 ```solidity
 function controllerOf(uint256 _projectId) external view override returns (IJBController) { ... }
 ```
+
 </details>
 
 Once a project has been created, it can begin accepting funds from anyone. ETH can be sent to the project by calling [`JBETHPaymentTerminal.pay(...)`](../specifications/contracts/or-payment-terminals/jbethpaymentterminal/write/pay.md).
@@ -184,19 +187,19 @@ function pay(
 
 <summary>View treasury balance</summary>
 
-A project's treasury balance can be found in the respective terminal store contracts. For example, in the [`JBETHPaymentTerminalStore`](../specifications/contracts/or-payment-terminals/jbethpaymentterminalstore), the balance can be found using [`JBETHPaymentTerminalStore.balanceOf(...)`](../specifications/contracts/or-payment-terminals/jbethpaymentterminalstore/properties/balanceof.md).
+A project's treasury balance can be found in the respective terminal store contracts. For example, in the [`JBETHPaymentTerminalStore`](../specifications/contracts/or-payment-terminals/jbethpaymentterminalstore/), the balance can be found using [`JBETHPaymentTerminalStore.balanceOf(...)`](../specifications/contracts/or-payment-terminals/jbethpaymentterminalstore/properties/balanceof.md).
 
 ```solidity
 function balanceOf(uint256 _projectId) external view override returns (uint256) { ... }
 ```
 
-The project's current overflow can also be found in the respective terminal store contracts. For example, in the [`JBETHPaymentTerminalStore`](../specifications/contracts/or-payment-terminals/jbethpaymentterminalstore), the terminal's overflow can be found using [`JBETHPaymentTerminalStore.currentOverflowOf(...)`](../specifications/contracts/or-payment-terminals/jbethpaymentterminalstore/read/currentoverflowof.md).
+The project's current overflow can also be found in the respective terminal store contracts. For example, in the [`JBETHPaymentTerminalStore`](../specifications/contracts/or-payment-terminals/jbethpaymentterminalstore/), the terminal's overflow can be found using [`JBETHPaymentTerminalStore.currentOverflowOf(...)`](../specifications/contracts/or-payment-terminals/jbethpaymentterminalstore/read/currentoverflowof.md).
 
 ```solidity
 function currentOverflowOf(uint256 _projectId) external view returns (uint256) { ... }
 ```
 
-A terminal store can also resolve the total amount of overflow in all of a project's terminals. For example, in the [`JBETHPaymentTerminalStore`](../specifications/contracts/or-payment-terminals/jbethpaymentterminalstore), the project's overall overflow can be found using [`JBETHPaymentTerminalStore.currentTotalOverflowOf(...)`](../specifications/contracts/or-payment-terminals/jbethpaymentterminalstore/read/currenttotaloverflowof.md).
+A terminal store can also resolve the total amount of overflow in all of a project's terminals. For example, in the [`JBETHPaymentTerminalStore`](../specifications/contracts/or-payment-terminals/jbethpaymentterminalstore/), the project's overall overflow can be found using [`JBETHPaymentTerminalStore.currentTotalOverflowOf(...)`](../specifications/contracts/or-payment-terminals/jbethpaymentterminalstore/read/currenttotaloverflowof.md).
 
 ```solidity
 function currentTotalOverflowOf(uint256 _projectId) external view returns (uint256) { ... }
@@ -208,13 +211,13 @@ function currentTotalOverflowOf(uint256 _projectId) external view returns (uint2
 
 <summary>View project token distribution</summary>
 
-Each holder's balance of a project's token can be found in the [`JBTokenStore`](../specifications/contracts/jbtokenstore) contract. The balance can be found using [`JBTokenStore.balanceOf(...)`](../specifications/contracts/jbtokenstore/read/balanceof.md).
+Each holder's balance of a project's token can be found in the [`JBTokenStore`](../specifications/contracts/jbtokenstore/) contract. The balance can be found using [`JBTokenStore.balanceOf(...)`](../specifications/contracts/jbtokenstore/read/balanceof.md).
 
 ```solidity
 function balanceOf(address _holder, uint256 _projectId) external view returns (uint256 _result)
 ```
 
-The project token's total supply can also be found in the [`JBTokenStore`](../specifications/contracts/jbtokenstore) contract using [`JBTokenStore.totalSupplyOf(...)`](../specifications/contracts/jbtokenstore/read/totalsupplyof.md)
+The project token's total supply can also be found in the [`JBTokenStore`](../specifications/contracts/jbtokenstore/) contract using [`JBTokenStore.totalSupplyOf(...)`](../specifications/contracts/jbtokenstore/read/totalsupplyof.md)
 
 ```solidity
 function totalSupplyOf(uint256 _projectId) external view returns (uint256)
@@ -253,7 +256,7 @@ function distributePayoutsOf(
 
 <summary>View used distribution limit</summary>
 
-Any used distribution limit can be found in the respective terminal store contracts. For example, in the [`JBETHPaymentTerminalStore`](../specifications/contracts/or-payment-terminals/jbethpaymentterminalstore), the used distribution limit during a funding cycle can be found using [`JBETHPaymentTerminalStore.usedDistributionLimitOf(...)`](../specifications/contracts/or-payment-terminals/jbethpaymentterminalstore/properties/useddistributionlimitof.md).
+Any used distribution limit can be found in the respective terminal store contracts. For example, in the [`JBETHPaymentTerminalStore`](../specifications/contracts/or-payment-terminals/jbethpaymentterminalstore/), the used distribution limit during a funding cycle can be found using [`JBETHPaymentTerminalStore.usedDistributionLimitOf(...)`](../specifications/contracts/or-payment-terminals/jbethpaymentterminalstore/properties/useddistributionlimitof.md).
 
 ```solidity
 function usedDistributionLimitOf(
@@ -271,6 +274,7 @@ function remainingDistributionLimitOf(
     uint256 _fundingCycleNumber
   ) external view override returns (uint256) { ... }
 ```
+
 </details>
 
 A project's owner can also distribute additional funds from its treasury's overflow up until its preconfigured allowance.
@@ -288,11 +292,12 @@ function useAllowanceOf(
   nonReentrant
   requirePermission(projects.ownerOf(_projectId), _projectId, JBOperations.USE_ALLOWANCE) { ... }
 ```
+
 <details>
 
 <summary>View used overflow allowance</summary>
 
-Any used overflow allowance can also be found in the respective terminal store contracts. For example, in the [`JBETHPaymentTerminalStore`](../specifications/contracts/or-payment-terminals/jbethpaymentterminalstore), the used overflow allowance during a funding cycle can be found using [`JBETHPaymentTerminalStore.usedOverflowAllowanceOf(...)`](../specifications/contracts/or-payment-terminals/jbethpaymentterminalstore/properties/usedoverflowallowanceof.md).
+Any used overflow allowance can also be found in the respective terminal store contracts. For example, in the [`JBETHPaymentTerminalStore`](../specifications/contracts/or-payment-terminals/jbethpaymentterminalstore/), the used overflow allowance during a funding cycle can be found using [`JBETHPaymentTerminalStore.usedOverflowAllowanceOf(...)`](../specifications/contracts/or-payment-terminals/jbethpaymentterminalstore/properties/usedoverflowallowanceof.md).
 
 ```solidity
 function usedOverflowAllowanceOf(

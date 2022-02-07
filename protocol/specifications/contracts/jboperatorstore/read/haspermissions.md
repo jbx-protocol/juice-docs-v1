@@ -8,7 +8,7 @@ Interface: `IJBOperatorStore`
 {% tab title="Step by step" %}
 **Whether or not an operator has the permission to take certain actions pertaining to the specified domain.**
 
-## Definition
+### Definition
 
 ```solidity
 function hasPermissions(
@@ -28,7 +28,7 @@ function hasPermissions(
 * The function overrides a function definition from the `IJBOperatorStore` interface.
 * The function return a flag indicating whether or not the operator has the permissions.
 
-## Body
+### Body
 
 1.  Loop through the provided `_permissionIndexes`.
 

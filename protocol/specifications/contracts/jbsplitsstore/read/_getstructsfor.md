@@ -6,7 +6,7 @@ Contract: [`JBSplitsStore`](../)​‌
 {% tab title="Step by step" %}
 **Unpack splits' packed stored values into easy-to-work-with spit structs.**
 
-### Definition
+#### Definition
 
 ```solidity
 function _getStructsFor(
@@ -24,7 +24,7 @@ function _getStructsFor(
 * The function does not alter state on the blockchain.
 * The function returns an array of [`JBSplit`](../../../data-structures/jbsplit.md)s.
 
-### Body
+#### Body
 
 1.  Get a reference to the expected number of splits for the specified `_domain` and `_group`.
 

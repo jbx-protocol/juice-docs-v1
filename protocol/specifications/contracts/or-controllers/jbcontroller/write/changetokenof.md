@@ -8,7 +8,7 @@ Contract: [`JBController`](../)​‌
 
 _Only a project owner or operator can change its token._
 
-## Definition
+### Definition
 
 ```solidity
 function changeTokenOf(
@@ -28,7 +28,7 @@ function changeTokenOf(
 * Through the [`requirePermission`](../../or-abstract/jboperatable/modifiers/requirepermission.md) modifier, the function is only accessible by the project's owner, or from an operator that has been given the `JBOperations.CHANGE_TOKEN` permission by the project owner for the provided `_projectId`.
 * The function doesn't return anything.
 
-## Body
+### Body
 
 1.  Get a reference to the project's current funding cycle.
 

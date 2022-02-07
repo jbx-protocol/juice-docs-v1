@@ -8,7 +8,7 @@ Interface: [`IJBController`](../../../../interfaces/ijbcontroller.md)
 {% tab title="Step by step" %}
 **The currency of the amount of that a project can withdraw per funding cycle.**
 
-## Definition
+### Definition
 
 ```solidity
 function distributionLimitCurrencyOf(
@@ -27,7 +27,7 @@ function distributionLimitCurrencyOf(
 * The function overrides a function definition from the [`IJBController`](../../../../interfaces/ijbcontroller.md) interface.
 * The function returns the distribution limit currency.
 
-## Body
+### Body
 
 1.  Return the last 8 bits of the packed distribution limit data.
 

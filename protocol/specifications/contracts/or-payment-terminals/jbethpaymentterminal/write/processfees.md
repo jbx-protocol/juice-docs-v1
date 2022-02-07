@@ -8,7 +8,7 @@ Contract: [`JBETHPaymentTerminal`](../)​‌
 
 _Only a project owner, an operator, or the contract's owner can process held fees._
 
-### Definition
+#### Definition
 
 ```solidity
 function processFees(uint256 _projectId)
@@ -29,7 +29,7 @@ function processFees(uint256 _projectId)
 * The resulting function overrides a function definition from the `IJBETHPaymentTerminal` interface.
 * The function doesn't return anything.
 
-### Body
+#### Body
 
 1.  Get a reference to all held fees for the project.
 

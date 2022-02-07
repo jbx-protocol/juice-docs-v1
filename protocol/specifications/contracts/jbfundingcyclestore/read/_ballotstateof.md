@@ -6,7 +6,7 @@ Contract:[`JBFundingCycleStore`](../)​
 {% tab title="Step by step" %}
 **A funding cycle configuration's current status.**
 
-## Definition
+### Definition
 
 ```solidity
 function _ballotStateOf(
@@ -24,7 +24,7 @@ function _ballotStateOf(
 * The function does not alter state on the blockchain.
 * The function returns the [`JBBallotState`](../../../enums/jbballotstate.md).
 
-## Body
+### Body
 
 1.  If there is no ballot, the ballot state is implicitly approved.
 

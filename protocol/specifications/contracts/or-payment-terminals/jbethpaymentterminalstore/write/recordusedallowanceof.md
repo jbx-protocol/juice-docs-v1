@@ -8,7 +8,7 @@ Contract: [`JBETHPaymentTerminalStore`](../)​‌
 
 _Only the associated payment terminal can record a used allowance._
 
-### Definition
+#### Definition
 
 ```solidity
 function recordUsedAllowanceOf(
@@ -33,7 +33,7 @@ function recordUsedAllowanceOf(
   * `fundingCycle` is the funding cycle during which the withdrawal was made.
   * `withdrawnAmount` is the amount withdrawn in wei.
 
-### Body
+#### Body
 
 1.  Get a reference to the project's first funding cycle.
 

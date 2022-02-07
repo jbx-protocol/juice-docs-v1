@@ -6,7 +6,7 @@ Contract: [`JBETHPaymentTerminal`](../)​‌
 {% tab title="Step by step" %}
 **Contribute ETH to a project.**
 
-### Definition
+#### Definition
 
 ```solidity
 function _pay(
@@ -33,7 +33,7 @@ function _pay(
 * The function is private to this contract.
 * The function doesn't return anything.
 
-### Body
+#### Body
 
 1.  Make sure the provided beneficiary isn't the zero address.
 

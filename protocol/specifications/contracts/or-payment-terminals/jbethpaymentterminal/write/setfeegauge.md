@@ -8,7 +8,7 @@ Contract: [`JBETHPaymentTerminal`](../)​‌
 
 _Only the owner of this contract can change the fee gauge._
 
-### Definition
+#### Definition
 
 ```solidity
 function setFeeGauge(IJBFeeGauge _feeGauge) external onlyOwner { ... }
@@ -19,7 +19,7 @@ function setFeeGauge(IJBFeeGauge _feeGauge) external onlyOwner { ... }
 * Through the `onlyOwner` modifier, the function can only be accessed by the owner of this contract.
 * The function doesn't return anything.
 
-### Body
+#### Body
 
 1.  Store the new fee gauge.
 

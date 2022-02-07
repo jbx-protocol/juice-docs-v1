@@ -6,7 +6,7 @@ Contract:[`JBFundingCycleStore`](../)​
 {% tab title="Step by step" %}
 **Initializes a funding cycle with the appropriate properties.**
 
-## Definition
+### Definition
 
 ```solidity
 function _initFor(
@@ -27,7 +27,7 @@ function _initFor(
 * The function is private to this contract.
 * The function doesn't return anything.
 
-## Body
+### Body
 
 1.  If no base funding cycle was provided, create a first funding cycle for the project by storing its intrinsic properties. Otherwise, create a new funding cycle by deriving values from the specified base cycle, interpreting a weight of 0 to inherit from the discounted weight of the base funding cycle and a weight of 1 as a weight of 0.
 

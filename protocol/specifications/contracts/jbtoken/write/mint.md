@@ -10,7 +10,7 @@ Interface: [`IJBToken`](../../../interfaces/ijbtoken.md)
 
 _Only the owner of this contract cant mint more of it._
 
-## Definition
+### Definition
 
 ```solidity
 function mint(
@@ -27,7 +27,7 @@ function mint(
 * The function overrides a function definition from the `IJBToken` interface.
 * The function returns nothing.
 
-## Body
+### Body
 
 1.  Forward the call to the internal version of the function.
 

@@ -10,7 +10,7 @@ Interface: [`IJBController`](../../../../interfaces/ijbcontroller.md)
 
 _Only a project's owner or a designated operator can configure its funding cycles._
 
-### Definition
+#### Definition
 
 ```solidity
 function reconfigureFundingCyclesOf(
@@ -36,7 +36,7 @@ function reconfigureFundingCyclesOf(
 * Through the [`requirePermission`](../../../or-abstract/jboperatable/modifiers/requirepermission.md) modifier, the function is only accessible by the project's owner, or from an operator that has been given the `JBOperations.RECONFIGURE` permission by the project owner for the provided `_projectId`.
 * The function returns the configuration of the funding cycle that was successfully updated.
 
-### Body
+#### Body
 
 1.  Configure the project's funding cycle, fund access constraints, and splits.
 

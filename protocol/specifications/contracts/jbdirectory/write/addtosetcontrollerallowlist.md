@@ -12,7 +12,7 @@ _The owner (Juicebox multisig) can add addresses which are allowed to change a p
 
 _If you would like an address/contract allowlisted, please reach out to JuiceboxDAO._
 
-### Definition
+#### Definition
 
 ```solidity
 function addToSetControllerAllowlist(address _address) external override onlyOwner { ... }
@@ -24,7 +24,7 @@ function addToSetControllerAllowlist(address _address) external override onlyOwn
 * The function overrides a function definition from the `IJBDirectory` interface.
 * The function returns nothing.
 
-### Body
+#### Body
 
 1.  Make sure the controller isn't already on the allowlist.
 

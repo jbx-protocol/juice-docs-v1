@@ -8,7 +8,7 @@ Interface: [`IJBTokenStore`](../../../interfaces/ijbtokenstore.md)
 {% tab title="Step by step" %}
 **The total balance of token a holder has for a specified project, including claimed and unclaimed tokens.**
 
-## Definition
+### Definition
 
 ```solidity
 function balanceOf(address _holder, uint256 _projectId)
@@ -25,7 +25,7 @@ function balanceOf(address _holder, uint256 _projectId)
 * The function overrides a function definition from the `IJBTokenStore` interface.
 * The function returns the project token balance of the holder.
 
-## Body
+### Body
 
 1.  Get a reference to the holder's unclaimed balance for the project.
 

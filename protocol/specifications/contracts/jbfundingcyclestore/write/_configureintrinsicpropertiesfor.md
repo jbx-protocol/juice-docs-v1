@@ -6,7 +6,7 @@ Contract:[`JBFundingCycleStore`](../)​
 {% tab title="Step by step" %}
 **Updates the configurable funding cycle for this project if it exists, otherwise creates one.**
 
-## Definition
+### Definition
 
 ```solidity
 function _configureIntrinsicProperiesFor(
@@ -25,7 +25,7 @@ function _configureIntrinsicProperiesFor(
 * The function is private to this contract.
 * The function returns the ID of a configurable funding cycle.
 
-## Body
+### Body
 
 1.  If the project does not yet have a funding cycle, initialize a new one with no base.
 

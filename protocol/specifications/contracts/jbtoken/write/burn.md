@@ -10,7 +10,7 @@ Interface: [`IJBToken`](../../../interfaces/ijbtoken.md)
 
 _Only the owner of this contract cant burn some of its supply._
 
-## Definition
+### Definition
 
 ```solidity
 function burn(
@@ -27,7 +27,7 @@ function burn(
 * The function overrides a function definition from the `IJBToken` interface.
 * The function returns nothing.
 
-## Body
+### Body
 
 1.  Forward the call to the internal version of the function.
 
