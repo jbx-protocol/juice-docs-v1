@@ -94,7 +94,7 @@ Let's see what happens when basic `_fundAccessConstraints` are specified by send
 ]
 ```
 
-* During each funding cycle with this configuration, the project can receive up to 4.2 ETH worth of tokens from the [`JBETHPaymentTerminal`](../specifications/contracts/or-payment-terminals/jbethpaymentterminal/). This is because the configured `distributionLimitCurrency` is 1 ([which represents ETH](../specifications/libraries/jbcurrencies.md)) and the `distributionLimit` is `4200000000000000000`. (The raw value sent has 18 decimal places).
+* During each funding cycle with this configuration, the project can receive up to 4.2 ETH worth of tokens from the [`JBETHPaymentTerminal`](../specifications/contracts/or-payment-terminals/jbethpaymentterminal/), since the configured `distributionLimitCurrency` is 1 ([which represents ETH](../specifications/libraries/jbcurrencies.md)) and the `distributionLimit` is `4200000000000000000`. (The raw value sent has 18 decimal places).
 * Anyone on the internet can call the [`JBETHPaymentTerminal.distributePayoutsOf(...)`](../specifications/contracts/or-payment-terminals/jbethpaymentterminal/write/distributepayoutsof.md) transaction to send up to 4.2 ETH per funding cycle to the preconfigured splits. Since no splits were specified, all distributed funds go to the project owner.
 * With each new funding cycle, another 4.2 ETH can be distributed.&#x20;
 * The project cannot distribute any funds in excess of the distribution limit wince there is no `overflowAllowance`.
@@ -113,7 +113,7 @@ Let's see what happens when using an overflow allowance instead:
 ]
 ```
 
-* Until a new reconfiguration transaction is sent, the project owner can send up to 6.9 ETH worth of tokens from the [`JBETHPaymentTerminal`](../specifications/contracts/or-payment-terminals/jbethpaymentterminal/) to any address it chooses. This is because the configured `overflowAllowanceCurrency` is 1 ([which represents ETH](../specifications/libraries/jbcurrencies.md)) and the `overflowAllowance` is `6900000000000000000`. (The raw value sent has 18 decimal places).
+* Until a new reconfiguration transaction is sent, the project owner can send up to 6.9 ETH worth of tokens from the [`JBETHPaymentTerminal`](../specifications/contracts/or-payment-terminals/jbethpaymentterminal/) to any address it chooses since the configured `overflowAllowanceCurrency` is 1 ([which represents ETH](../specifications/libraries/jbcurrencies.md)) and the `overflowAllowance` is `6900000000000000000`. (The raw value sent has 18 decimal places).
 * Meanwhile, all of the project's funds in the [`JBETHPaymentTerminal`](../specifications/contracts/or-payment-terminals/jbethpaymentterminal/) are considered overflow since there is no distribution limit.
 * Rolled-over funding cycles within the same configuration do not refresh the allowance.
 * An overflow allowance is a free allowance the project can to use without additional pre-programmed stipulations.&#x20;
