@@ -147,11 +147,19 @@ If you wish to automatically split treasury payouts or reserved token distributi
      allocator: 0x0000000000000000000000000000000000000000
    },
    {
+     preferClaimed: true,
+     percent: 60000000, // 6%, out of 1000000000
+     projectId: 421,
+     beneficiary: 0x0123456789012345678901234567890123456789,
+     lockedUntil: 0,
+     allocator: 0x0000000000000000000000000000000000000000
+   },
+   {
      preferClaimed: false,
      percent: 70000000, // 7%, out of 1000000000
      projectId: 0,
      beneficiary: 0x0000000000000000000000000000000000000000,
-     lockedUntil: 0,
+     lockedUntil: 1644543173,
      allocator: 0x6969696969696969696969696969696969696969
    }
   ]
@@ -162,7 +170,9 @@ If you wish to automatically split treasury payouts or reserved token distributi
 * There are 3 splits in this group.
   * The first will send 5% of the total directly to address `0x0123456789012345678901234567890123456789`.
   * The second will send 6% to the Juicebox treasury of project with ID 420. This project's tokens will be sent to address `0x0123456789012345678901234567890123456789.`
-  * The third will send 7% to the `allocate` function in contract with address `0x6969696969696969696969696969696969696969` which must adhere to [`IJBSplitAllocator`](../specifications/interfaces/ijbsplitallocator.md). This function will also receive all contextual information regarding the spit for it to do custom things with.
-  * All the remaining funds (100% - 5% - 6% - 7% = 82%) will be sent to the project owner's address.
+  * The third will send 6% to the Juicebox treasury of project with ID 421. This project's tokens will be sent to address `0x0123456789012345678901234567890123456789.`, and they will be automatically claimed as ERC-20's in the beneficiary's wallet if the project has issued them due to the `preferClaimed` flag being `true`.
+  * The third will send 7% to the `allocate` function in contract with address `0x6969696969696969696969696969696969696969` which must adhere to [`IJBSplitAllocator`](../specifications/interfaces/ijbsplitallocator.md). This function will also receive all contextual information regarding the spit for it to do custom things with. This split will not be editable or removable from the group during this funding cycle configuration while the `lockedUntil` date has yet to passsed.
+  * All the remaining funds (100% - 5% - 6% - 6% - 7% = 76%) will be sent to the project owner's address.
 * Since the configured split group is 1 ([which represents ETH payouts](../specifications/libraries/jbsplitsgroups.md)), the protocol will use this group of splits when distributing funds from the ETH terminal.
 * This splits will only apply to the funding cycle currently being configured. Splits will have to be set again for future configurations.
+* The same group split behavior applies to reserved tokens, although those routed to a `projectId` will be sent to the project's owner, and those routed to an allocator will be sent to the contract before having the contract's `allocate` function called.
