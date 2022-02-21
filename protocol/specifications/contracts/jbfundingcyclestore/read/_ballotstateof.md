@@ -51,7 +51,7 @@ function _ballotStateOf(
       return JBBallotState.Approved;
     else if (_ballotFundingCycle.ballot.duration() >= block.timestamp - _configuration)
       return JBBallotState.Active;
-    else return _ballotFundingCycle.ballot.stateOf(_configuration);
+    else return _ballotFundingCycle.ballot.stateOf(_projectId, _configuration);
     ```
 {% endtab %}
 
@@ -88,7 +88,7 @@ function _ballotStateOf(
     return JBBallotState.Approved;
   else if (_ballotFundingCycle.ballot.duration() >= block.timestamp - _configuration)
     return JBBallotState.Active;
-  else return _ballotFundingCycle.ballot.stateOf(_configuration);
+  else return _ballotFundingCycle.ballot.stateOf(_projectId, _configuration);
 }
 ```
 {% endtab %}
