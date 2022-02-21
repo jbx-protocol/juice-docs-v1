@@ -6,12 +6,12 @@ Contract: [`JBETHPaymentTerminalStore`](../../../jbdirectory/write/)​‌
 {% tab title="Step by step" %}
 **Records newly distributed funds for a project.**
 
-_Only the associated payment terminal can record a used allowance._
+_Only the associated payment terminal can record a distribution._
 
 #### Definition
 
 ```solidity
-function recordWithdrawalFor(
+function recordDistributionFor(
   uint256 _projectId,
   uint256 _amount,
   uint256 _currency,
@@ -19,14 +19,14 @@ function recordWithdrawalFor(
 )
   external
   onlyAssociatedPaymentTerminal
-  returns (JBFundingCycle memory fundingCycle, uint256 withdrawnAmount) { ... }
+  returns (JBFundingCycle memory fundingCycle, uint256 distributedAmount) { ... }
 ```
 
 * Arguments:
-  * `_projectId` is the ID of the project that is having funds withdrawn.
+  * `_projectId` is the ID of the project that is having funds distributed.
   * `_amount` is the amount being distributed as a fixed point number.
   * `_currency` is the expected currency of the `_amount` being tapped. This must match the project's current funding cycle's currency.
-  * `_minReturnedWei` is the minimum number of wei that should be withdrawn.
+  * `_minReturnedWei` is the minimum number of wei that should be distributed.
 * Through the [`onlyAssociatedPaymentTerminal`](../modifiers/onlyassociatedpaymentterminal.md) modifier, the function is only accessible by the terminal that claimed this store.
 * The function returns:
   * `fundingCycle` is the funding cycle during which the withdrawal was made.
@@ -57,7 +57,42 @@ function recordWithdrawalFor(
 
     * [`JBFundingCycleMetadataResolver`](../../../../libraries/jbfundingcyclemetadataresolver.md)\
       `.distributionsPaused(...)`
-3.  Make the sure the provided currency matches the expected currency for the distribution limit.
+
+3.  Calculate the new total amount that has been distributed during this funding cycle by adding the amount being distributed to the used distribution limit.
+
+    ```solidity
+    // The new total amount that has been distributed during this funding cycle.
+    uint256 _newUsedDistributionLimitOf = usedDistributionLimitOf[_projectId][fundingCycle.number] +
+      _amount;
+    ```
+
+    _Internal references:_
+
+    * [`usedDistributionLimitOf`](../../../jbfundingcyclestore/read/useddistributionlimitof.md)
+
+4.  Get a reference to the currrent distribution limit of the project during the current funding cycle.
+
+    ```solidity
+    // Amount must be within what is still distributable.
+    uint256 _distributionLimitOf = directory.controllerOf(_projectId).distributionLimitOf(
+        _projectId,
+        fundingCycle.configuration,
+        terminal
+      );
+    ```
+
+    _External references:_
+
+    * [`distributionLimitOf`](../../../or-controllers/jbcontroller/read/distributionlimitof.md)
+
+5.  Make sure the new total amount distributed will be at most the distribution limit.
+
+    ```solidity
+    if (_newUsedDistributionLimitOf > _distributionLimitOf || _distributionLimitOf == 0) {
+      revert DISTRIBUTION_AMOUNT_LIMIT_REACHED();
+    }
+    ```
+6.  Make the sure the provided currency matches the expected currency for the distribution limit.
 
     ```solidity
     // Make sure the currencies match.
@@ -76,37 +111,7 @@ function recordWithdrawalFor(
     _External references:_
 
     * [`distributionLimitCurrencyOf`](../../../or-controllers/jbcontroller/read/distributionLimitCurrencyof.md)
-4.  Calculate the new total amount that has been distributed during this funding cycle by adding the amount being distributed to the used distribution limit.
-
-    ```solidity
-    // The new total amount that has been distributed during this funding cycle.
-    uint256 _newUsedDistributionLimitOf = usedDistributionLimitOf[_projectId][fundingCycle.number] +
-      _amount;
-    ```
-
-    _Internal references:_
-
-    * [`usedDistributionLimitOf`](../../../jbfundingcyclestore/read/useddistributionlimitof.md)
-5.  Make sure the new total amount distributed will be at most the distribution limit.
-
-    ```solidity
-    // Amount must be within what is still distributable.
-    if (
-      _newUsedDistributionLimitOf >
-      directory.controllerOf(_projectId).distributionLimitOf(
-        _projectId,
-        fundingCycle.configuration,
-        terminal
-      )
-    ) {
-      revert DISTRIBUTION_AMOUNT_LIMIT_REACHED();
-    }
-    ```
-
-    _External references:_
-
-    * [`distributionLimitOf`](../../../or-controllers/jbcontroller/read/distributionlimitof.md)
-6.  Find the amount to distribute by converting the amount to ETH. If the currency is ETH, no conversion is necessary.
+7.  Find the amount to distribute by converting the amount to ETH. If the currency is ETH, no conversion is necessary.
 
     ```solidity
     // Convert the amount to wei.
@@ -119,7 +124,7 @@ function recordWithdrawalFor(
 
     * [`PRBMathUD60x18`](https://github.com/hifi-finance/prb-math/blob/main/contracts/PRBMathUD60x18.sol)
       * `.div`
-7.  Make sure the project has access to the amount being distributed.
+8.  Make sure the project has access to the amount being distributed.
 
     ```solidity
     // The amount being distributed must be available.
@@ -131,7 +136,7 @@ function recordWithdrawalFor(
     _Internal references:_
 
     * [`balanceOf`](../../../jbfundingcyclestore/read/balanceof.md)
-8.  Make sure there is at least as much wei being withdrawn as expected.
+9.  Make sure there is at least as much wei being withdrawn as expected.
 
     ```solidity
     // The amount being distributed must be at least as much as was expected.
@@ -139,7 +144,7 @@ function recordWithdrawalFor(
       revert INADEQUATE_WITHDRAW_AMOUNT();
     }
     ```
-9.  Store the new used distributed amount.
+10.  Store the new used distributed amount.
 
     ```solidity
     // Store the new amount.
@@ -149,7 +154,7 @@ function recordWithdrawalFor(
     _Internal references:_
 
     * [`usedDistributionLimitOf`](../../../jbfundingcyclestore/read/useddistributionlimitof.md)
-10. Store the decremented balance.
+11. Store the decremented balance.
 
     ```solidity
     // Removed the distributed funds from the project's ETH balance.
@@ -196,6 +201,21 @@ function recordDistributionFor(
     revert FUNDING_CYCLE_DISTRIBUTION_PAUSED();
   }
 
+  // The new total amount that has been distributed during this funding cycle.
+  uint256 _newUsedDistributionLimitOf = usedDistributionLimitOf[_projectId][fundingCycle.number] +
+    _amount;
+
+  // Amount must be within what is still distributable.
+  uint256 _distributionLimitOf = directory.controllerOf(_projectId).distributionLimitOf(
+      _projectId,
+      fundingCycle.configuration,
+      terminal
+    );
+
+  if (_newUsedDistributionLimitOf > _distributionLimitOf || _distributionLimitOf == 0) {
+    revert DISTRIBUTION_AMOUNT_LIMIT_REACHED();
+  }
+
   // Make sure the currencies match.
   if (
     _currency !=
@@ -206,22 +226,6 @@ function recordDistributionFor(
     )
   ) {
     revert CURRENCY_MISMATCH();
-  }
-
-  // The new total amount that has been distributed during this funding cycle.
-  uint256 _newUsedDistributionLimitOf = usedDistributionLimitOf[_projectId][fundingCycle.number] +
-    _amount;
-
-  // Amount must be within what is still distributable.
-  if (
-    _newUsedDistributionLimitOf >
-    directory.controllerOf(_projectId).distributionLimitOf(
-      _projectId,
-      fundingCycle.configuration,
-      terminal
-    )
-  ) {
-    revert DISTRIBUTION_AMOUNT_LIMIT_REACHED();
   }
 
   // Convert the amount to wei.
