@@ -186,7 +186,7 @@ function recordUsedAllowanceOf(
     _Internal references:_
 
     * [`usedOverflowAllowanceOf`](../properties/usedoverflowallowanceof.md)
-10.  Store the decremented balance.
+10. Store the decremented balance.
 
     ```solidity
     // Update the project's ETH balance.

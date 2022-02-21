@@ -144,7 +144,7 @@ function recordDistributionFor(
       revert INADEQUATE_WITHDRAW_AMOUNT();
     }
     ```
-10.  Store the new used distributed amount.
+10. Store the new used distributed amount.
 
     ```solidity
     // Store the new amount.
