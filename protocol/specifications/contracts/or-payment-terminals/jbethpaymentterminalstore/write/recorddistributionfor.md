@@ -124,6 +124,8 @@ function recordDistributionFor(
 
     * [`PRBMathUD60x18`](https://github.com/hifi-finance/prb-math/blob/main/contracts/PRBMathUD60x18.sol)
       * `.div`
+    * [`JBCurrencies`](../../../../libraries/jbcurrencies.md)
+      * `.ETH`
 8.  Make sure the project has access to the amount being distributed.
 
     ```solidity

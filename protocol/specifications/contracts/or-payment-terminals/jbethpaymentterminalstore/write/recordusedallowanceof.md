@@ -112,6 +112,8 @@ function recordUsedAllowanceOf(
 
     * [`PRBMathUD60x18`](https://github.com/hifi-finance/prb-math/blob/main/contracts/PRBMathUD60x18.sol)
       * `.div`
+    * [`JBCurrencies`](../../../../libraries/jbcurrencies.md)
+      * `.ETH`
 
 6.  Get a reference to the current distribution limit of the project during the current funding cycle configuration.
 
@@ -157,6 +159,11 @@ function recordUsedAllowanceOf(
       }
     }
     ```
+
+    _Libraries used:_
+
+    * [`JBCurrencies`](../../../../libraries/jbcurrencies.md)
+      * `.ETH`
 
     _Internal references:_
 

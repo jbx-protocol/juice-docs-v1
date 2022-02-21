@@ -85,6 +85,11 @@ function _overflowDuring(uint256 _projectId, JBFundingCycle memory _fundingCycle
       : PRBMathUD60x18.div(_distributionRemaining, prices.priceFor(_currency, JBCurrencies.ETH));
     ```
 
+    _Libraries used:_
+
+    * [`JBCurrencies`](../../../../libraries/jbcurrencies.md)
+      * `.ETH`
+
     _External references:_
 
     * [`priceFor`](../../../jbprices/read/pricefor.md)
