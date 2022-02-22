@@ -71,7 +71,7 @@ function configureFor(
 
     ```solidity
     // Set up a reconfiguration by configuring intrinsic properties.
-    _configureIntrinsicProperiesFor(
+    _configureIntrinsicpropertiesFor(
       _projectId,
       _configuration,
       _data.weight,
@@ -82,7 +82,7 @@ function configureFor(
 
     _Internal references:_
 
-    * [`_configureIntrinsicProperiesFor`](\_configureintrinsicproperiesfor.md)
+    * [`_configureIntrinsicpropertiesFor`](\_configureintrinsicpropertiesfor.md)
 6.  Store all of the user configuration properties provided. These properties can all be packed into one `uint256` storage slot. No need to store if the resulting stored value would be 0 since the storage slot defaults to 0.
 
     ```solidity
@@ -185,7 +185,7 @@ function configureFor(
   uint256 _configuration = block.timestamp;
 
   // Set up a reconfiguration by configuring intrinsic properties.
-  _configureIntrinsicProperiesFor(
+  _configureIntrinsicpropertiesFor(
     _projectId,
     _configuration,
     _data.weight,

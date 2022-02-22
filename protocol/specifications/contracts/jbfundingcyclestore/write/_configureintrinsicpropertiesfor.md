@@ -9,7 +9,7 @@ Contract:[`JBFundingCycleStore`](../)​
 ### Definition
 
 ```solidity
-function _configureIntrinsicProperiesFor(
+function _configureIntrinsicpropertiesFor(
   uint256 _projectId,
   uint256 _configuration,
   uint256 _weight,
@@ -140,7 +140,7 @@ function _configureIntrinsicProperiesFor(
   @param _weight The weight to store in the configured funding cycle.
   @param _mustStartAtOrAfter The time before which the initialized funding cycle can't start.
 */
-function _configureIntrinsicProperiesFor(
+function _configureIntrinsicpropertiesFor(
   uint256 _projectId,
   uint256 _configuration,
   uint256 _weight,
