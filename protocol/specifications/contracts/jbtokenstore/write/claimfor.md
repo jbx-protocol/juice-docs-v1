@@ -6,7 +6,7 @@ Interface: [`IJBTokenStore`](../../../interfaces/ijbtokenstore.md)
 
 {% tabs %}
 {% tab title="Step by step" %}
-**Claims internal tokens by minting and distributing ERC20 tokens.**
+**Claims internally accounted for tokens into a holder's wallet.**
 
 _Anyone can claim tokens on behalf of a token owner._
 
@@ -21,19 +21,19 @@ function claimFor(
 ```
 
 * Arguments:
-  * `_holder` is the owner of the tokens to claim.
+  * `_holder` is the owner of the tokens being claimed.
   * `_projectId` is the ID of the project whose tokens are being claimed.
   * `_amount` is the amount of tokens to claim.
 * The function can be accessed externally by anyone.
-* The function overrides a function definition from the `IJBTokenStore` interface.
-* The function returns nothing.
+* The function overrides a function definition from the [`IJBTokenStore`](../../../interfaces/ijbtokenstore.md) interface.
+* The function does't return anything.
 
 ### Body
 
-1.  Get a reference to the project's token.
+1.  Get a reference to the project's current token.
 
     ```solidity
-    // Get a reference to the project's ERC20 tokens.
+    // Get a reference to the project's current token.
     IJBToken _token = tokenOf[_projectId];
     ```
 
@@ -43,15 +43,13 @@ function claimFor(
 2.  Make sure the project has a token. If it doesn't, there's nowhere to claim tokens onto.
 
     ```solidity
-    // Tokens must have been issued.
-    if (_token == IJBToken(address(0))) {
-      revert TOKEN_NOT_FOUND();
-    }
+    // The project must have a token contract attached.
+    if (_token == IJBToken(address(0))) revert TOKEN_NOT_FOUND();
     ```
-3.  Get a reference to the amount of unclaimed tokens the holder has for the project.
+3.  Get a reference to the amount of unclaimed project tokens the holder has.
 
     ```solidity
-    // Get a reference to the amount of unclaimed tokens.
+    // Get a reference to the amount of unclaimed project tokens the holder has.
     uint256 _unclaimedBalance = unclaimedBalanceOf[_holder][_projectId];
     ```
 
@@ -62,34 +60,32 @@ function claimFor(
 
     ```solidity
     // There must be enough unlocked unclaimed tokens to claim.
-    if (_unclaimedBalance < _amount) {
-      revert INSUFFICIENT_UNCLAIMED_TOKENS();
-    }
+    if (_unclaimedBalance < _amount) revert INSUFFICIENT_UNCLAIMED_TOKENS();
     ```
-5.  Subtract from the `unclaimedBalanceOf` the holder for the project.
+5.  Subtract from the unclaimed project token balance of the holder.
 
     ```solidity
-    // Subtract the claim amount from the holder's balance.
+    // Subtract the claim amount from the holder's unclaimed project token balance.
     unclaimedBalanceOf[_holder][_projectId] = unclaimedBalanceOf[_holder][_projectId] - _amount;
     ```
 
     _Internal references:_
 
     * [`unclaimedBalanceOf`](../properties/unclaimedbalanceof.md)
-6.  Subtract from the `unclaimedTotalSupplyOf` the project.
+6.  Subtract from the unclaimed token total supply of the project.
 
     ```solidity
-    // Subtract the claim amount from the project's total supply.
+    // Subtract the claim amount from the project's unclaimed total supply.
     unclaimedTotalSupplyOf[_projectId] = unclaimedTotalSupplyOf[_projectId] - _amount;
     ```
 
     _Internal references:_
 
     * [`unclaimedTotalSupplyOf`](../properties/unclaimedtotalsupplyof.md)
-7.  Mint the tokens to the holders wallet.
+7.  Mint the tokens to the holder's wallet.
 
     ```solidity
-    // Mint the equivalent amount of ERC20s.
+    // Mint the equivalent amount of the project's token for the holder.
     _token.mint(_projectId, _holder, _amount);
     ```
 
@@ -99,7 +95,7 @@ function claimFor(
 8.  Emit a `Claim` event with the relevant parameters.
 
     ```solidity
-    emit Claim(_holder, _projectId, _amount, msg.sender);
+    emit Claim(_holder, _projectId, _unclaimedBalance, _amount, msg.sender);
     ```
 
     _Event references:_
@@ -110,13 +106,13 @@ function claimFor(
 {% tab title="Code" %}
 ```solidity
 /**
-  @notice 
-  Claims internal tokens by minting and distributing ERC20 tokens.
+  @notice
+  Claims internally accounted for tokens into a holder's wallet.
 
   @dev
   Anyone can claim tokens on behalf of a token owner.
 
-  @param _holder The owner of the tokens to claim.
+  @param _holder The owner of the tokens being claimed.
   @param _projectId The ID of the project whose tokens are being claimed.
   @param _amount The amount of tokens to claim.
 */
@@ -125,32 +121,28 @@ function claimFor(
   uint256 _projectId,
   uint256 _amount
 ) external override {
-  // Get a reference to the project's ERC20 tokens.
+  // Get a reference to the project's current token.
   IJBToken _token = tokenOf[_projectId];
 
-  // Tokens must have been issued.
-  if (_token == IJBToken(address(0))) {
-    revert TOKEN_NOT_FOUND();
-  }
+  // The project must have a token contract attached.
+  if (_token == IJBToken(address(0))) revert TOKEN_NOT_FOUND();
 
-  // Get a reference to the amount of unclaimed tokens.
+  // Get a reference to the amount of unclaimed project tokens the holder has.
   uint256 _unclaimedBalance = unclaimedBalanceOf[_holder][_projectId];
 
   // There must be enough unlocked unclaimed tokens to claim.
-  if (_unclaimedBalance < _amount) {
-    revert INSUFFICIENT_UNCLAIMED_TOKENS();
-  }
+  if (_unclaimedBalance < _amount) revert INSUFFICIENT_UNCLAIMED_TOKENS();
 
-  // Subtract the claim amount from the holder's balance.
+  // Subtract the claim amount from the holder's unclaimed project token balance.
   unclaimedBalanceOf[_holder][_projectId] = unclaimedBalanceOf[_holder][_projectId] - _amount;
 
-  // Subtract the claim amount from the project's total supply.
+  // Subtract the claim amount from the project's unclaimed total supply.
   unclaimedTotalSupplyOf[_projectId] = unclaimedTotalSupplyOf[_projectId] - _amount;
 
-  // Mint the equivalent amount of ERC20s.
+  // Mint the equivalent amount of the project's token for the holder.
   _token.mint(_projectId, _holder, _amount);
 
-  emit Claim(_holder, _projectId, _amount, msg.sender);
+  emit Claim(_holder, _projectId, _unclaimedBalance, _amount, msg.sender);
 }
 ```
 {% endtab %}
@@ -158,14 +150,14 @@ function claimFor(
 {% tab title="Errors" %}
 | String                              | Description                                               |
 | ----------------------------------- | --------------------------------------------------------- |
-| **`TOKEN_NOT_FOUND`**               | Thrown if the project hasn't yet issued its token.        |
+| **`TOKEN_NOT_FOUND`**               | Thrown if the project doesn't have a token contract attached.        |
 | **`INSUFFICIENT_UNCLAIMED_TOKENS`** | Thrown if the holder doens't have enough tokens to claim. |
 {% endtab %}
 
 {% tab title="Events" %}
 | Name                              | Data                                                                                                                                                                         |
 | --------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [**`Claim`**](../events/claim.md) | <ul><li><code>address indexed holder</code></li><li><code>uint256 indexed projectId</code></li><li><code>uint256 amount</code></li><li><code>address caller</code></li></ul> |
+| [**`Claim`**](events/claim.md)                           | <ul><li><code>address indexed holder</code></li><li><code>uint256 indexed projectId</code></li><li><code>uint256 initialUnclaimedBalance</code></li><li><code>uint256 amount</code></li><li><code>address caller</code></li></ul>                                                                                                  |
 {% endtab %}
 
 {% tab title="Bug bounty" %}

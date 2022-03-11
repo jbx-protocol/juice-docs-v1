@@ -6,9 +6,9 @@ Interface: [`IJBTokenStore`](../../../interfaces/ijbtokenstore.md)
 
 {% tabs %}
 {% tab title="Step by step" %}
-**Issues an owner's ERC-20 Tokens that'll be used when claiming tokens.**
+**Issues an project's ERC-20 tokens that'll be used when claiming tokens.**
 
-_Deploys an project's ERC-20 token contract._
+_Deploys a project's ERC-20 token contract._
 
 _Only a project's current controller can issue its token._
 
@@ -23,12 +23,12 @@ function issueFor(
 ```
 
 * Arguments:
-  * `_projectId` is the ID of the project for which the tokens will be issued.
-  * `_name` is the name to associate with the token.
-  * `_symbol` is the symbol to associate with the token. This is usually short and all caps.
+  * `_projectId` is the ID of the project being issued tokens.
+  * `_name` is the ERC-20's name.
+  * `_symbol` is the ERC-20's symbol.
 * Through the [`onlyController`](../../or-abstract/jbcontrollerutility/modifiers/onlycontroller.md) modifier, the function can only be accessed by the controller of the `_projectId`.
-* The function overrides a function definition from the `IJBTokenStore` interface.
-* The function returns the address of the token that was issued.
+* The function overrides a function definition from the [`IJBTokenStore`](../../../interfaces/ijbtokenstore.md) interface.
+* The function returns the token that was issued.
 
 ### Body
 
@@ -36,25 +36,19 @@ function issueFor(
 
     ```solidity
     // There must be a name.
-    if (bytes(_name).length == 0) {
-      revert EMPTY_NAME();
-    }
+    if (bytes(_name).length == 0) revert EMPTY_NAME();
     ```
 2.  Make sure a symbol was provided.
 
     ```solidity
     // There must be a symbol.
-    if (bytes(_symbol).length == 0) {
-      revert EMPTY_SYMBOL();
-    }
+    if (bytes(_symbol).length == 0) revert EMPTY_SYMBOL();
     ```
-3.  Make sure the project hasn't already issued a token.
+3.  Make sure the project doesn't already have a token.
 
     ```solidity
-    // Only one ERC20 token can be issued.
-    if (tokenOf[_projectId] != IJBToken(address(0))) {
-      revert TOKEN_ALREADY_ISSUED();
-    }
+    // The project shouldn't already have a token.
+    if (tokenOf[_projectId] != IJBToken(address(0))) revert PROJECT_ALREADY_HAS_TOKEN();
     ```
 
     _Internal references:_
@@ -66,7 +60,7 @@ function issueFor(
     // Deploy the token contract.
     token = new JBToken(_name, _symbol);
     ```
-5.  Store the newly created token as the `tokenOf` the project.
+5.  Store the newly deployed token contract as the token of the project.
 
     ```solidity
     // Store the token contract.
@@ -90,39 +84,34 @@ function issueFor(
 {% tab title="Code" %}
 ```solidity
 /**
-  @notice 
-  Issues an owner's ERC-20 Tokens that'll be used when claiming tokens.
+  @notice
+  Issues an project's ERC-20 tokens that'll be used when claiming tokens.
 
-  @dev 
+  @dev
   Deploys a project's ERC-20 token contract.
-  
+
   @dev
   Only a project's current controller can issue its token.
 
   @param _projectId The ID of the project being issued tokens.
   @param _name The ERC-20's name.
   @param _symbol The ERC-20's symbol.
+
+  @return token The token that was issued.
 */
 function issueFor(
   uint256 _projectId,
   string calldata _name,
   string calldata _symbol
-) external override onlyController(_projectId) returns (IJBToken token)
-{
+) external override onlyController(_projectId) returns (IJBToken token) {
   // There must be a name.
-  if (bytes(_name).length == 0) {
-    revert EMPTY_NAME();
-  }
+  if (bytes(_name).length == 0) revert EMPTY_NAME();
 
   // There must be a symbol.
-  if (bytes(_symbol).length == 0) {
-    revert EMPTY_SYMBOL();
-  }
+  if (bytes(_symbol).length == 0) revert EMPTY_SYMBOL();
 
-  // Only one ERC20 token can be issued.
-  if (tokenOf[_projectId] != IJBToken(address(0))) {
-    revert TOKEN_ALREADY_ISSUED();
-  }
+  // The project shouldn't already have a token.
+  if (tokenOf[_projectId] != IJBToken(address(0))) revert PROJECT_ALREADY_HAS_TOKEN();
 
   // Deploy the token contract.
   token = new JBToken(_name, _symbol);
@@ -140,13 +129,13 @@ function issueFor(
 | -------------------------- | -------------------------------------------------- |
 | **`EMPTY_NAME`**           | Thrown if a name wasn't specified for the token.   |
 | **`EMPTY_SYMBOL`**         | Thrown if a symbol wasn't specified for the token. |
-| **`TOKEN_ALREADY_ISSUED`** | Thrown if the project has already issued a token.  |
+| **`PROJECT_ALREADY_HAS_TOKEN`** | Thrown if the project already has a token.  |
 {% endtab %}
 
 {% tab title="Events" %}
 | Name                              | Data                                                                                                                                                                                                         |
 | --------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| [**`Issue`**](../events/issue.md) | <ul><li><code>uint256 indexed projectId</code></li><li><code>IJBToken indexed token</code></li><li><code>string name</code></li><li><code>string symbol</code></li><li><code>address caller</code></li></ul> |
+| [**`Issue`**](../events/issue.md)                           | <ul><li><code>uint256 indexed projectId</code></li><li><code>[`IJBToken`](../../../interfaces/ijbtoken.md)indexed token</code></li><li><code>string name</code></li><li><code>string symbol</code></li><li><code>address caller</code></li></ul>                                                                  |
 {% endtab %}
 
 {% tab title="Bug bounty" %}

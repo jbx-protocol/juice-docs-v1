@@ -6,9 +6,9 @@ Interface: [`IJBTokenStore`](../../../interfaces/ijbtokenstore.md)
 
 {% tabs %}
 {% tab title="Step by step" %}
-**Allows an unclaimed token holder to transfer them to another account, without claimed them to ERC-20s.**
+**Allows a project to force all future mints of its tokens to be claimed into the holder's wallet, or revoke the flag if it's already set.**
 
-_Only a token holder or an operator can transfer its unclaimed tokens_.
+_Only a token holder or an operator can require claimed token._
 
 ### Definition
 
@@ -22,16 +22,16 @@ function shouldRequireClaimingFor(uint256 _projectId, bool _flag)
 * Arguments:
   * `_projectId` is the ID of the project being affected.
   * `_flag` is a flag indicating whether or not claiming should be required.
-* Through the [`requirePermission`](../../or-abstract/jboperatable/modifiers/requirepermission.md) modifier, the function is only accessible by the project's owner, or from an operator that has been given the `JBOperations.REQUIRE_CLAIM`permission by the project owner for the provided `_projectId`.
-* The function overrides a function definition from the `IJBTokenStore` interface.
-* The function returns nothing.
+* Through the [`requirePermission`](../../or-abstract/jboperatable/modifiers/requirepermission.md) modifier, the function is only accessible by the project's owner, or from an operator that has been given the `JBOperations.REQUIRE_CLAIM` permission by the project owner for the provided `_projectId`.
+* The function overrides a function definition from the [`IJBTokenStore`](../../../interfaces/ijbtokenstore.md) interface.
+* The function doesn't return anything.
 
 ### Body
 
-1.  Get a reference to the project's token.
+1.  Get a reference to the project's current token.
 
     ```solidity
-    // Get a reference to the project's ERC20 tokens.
+    // Get a reference to the project's current token.
     IJBToken _token = tokenOf[_projectId];
     ```
 
@@ -41,10 +41,8 @@ function shouldRequireClaimingFor(uint256 _projectId, bool _flag)
 2.  Make sure the project has a token. If it doesn't, there's nowhere to claim tokens onto.
 
     ```solidity
-    // Tokens must have been issued.
-    if (_token == IJBToken(address(0))) {
-      revert TOKEN_NOT_FOUND();
-    }
+    // The project must have a token contract attached.
+    if (_token == IJBToken(address(0))) revert TOKEN_NOT_FOUND();
     ```
 3.  Store the flag for the project.
 
@@ -69,12 +67,12 @@ function shouldRequireClaimingFor(uint256 _projectId, bool _flag)
 
 {% tab title="Code" %}
 ```solidity
-/** 
-  @notice 
-  Allows a project to force all future mints to be claimed into the holder's wallet, or revoke the flag if it's already set.
+/**
+  @notice
+  Allows a project to force all future mints of its tokens to be claimed into the holder's wallet, or revoke the flag if it's already set.
 
   @dev
-  Only a token holder or an operator can transfer its unclaimed tokens.
+  Only a token holder or an operator can require claimed token.
 
   @param _projectId The ID of the project being affected.
   @param _flag A flag indicating whether or not claiming should be required.
@@ -84,13 +82,11 @@ function shouldRequireClaimingFor(uint256 _projectId, bool _flag)
   override
   requirePermission(projects.ownerOf(_projectId), _projectId, JBOperations.REQUIRE_CLAIM)
 {
-  // Get a reference to the project's ERC20 tokens.
+  // Get a reference to the project's current token.
   IJBToken _token = tokenOf[_projectId];
 
-  // Tokens must have been issued.
-  if (_token == IJBToken(address(0))) {
-    revert TOKEN_NOT_FOUND();
-  }
+  // The project must have a token contract attached.
+  if (_token == IJBToken(address(0))) revert TOKEN_NOT_FOUND();
 
   // Store the flag.
   requireClaimFor[_projectId] = _flag;
@@ -103,13 +99,13 @@ function shouldRequireClaimingFor(uint256 _projectId, bool _flag)
 {% tab title="Errors" %}
 | String                | Description                                      |
 | --------------------- | ------------------------------------------------ |
-| **`TOKEN_NOT_FOUND`** | Thrown if the project hasn't yet issued a token. |
+| **`TOKEN_NOT_FOUND`** | Thrown if the project doesn't have a token contract attached. |
 {% endtab %}
 
 {% tab title="Events" %}
 | Name                                                        | Data                                                                                                                                |
 | ----------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------- |
-| [**`ShouldRequireClaim`**](../events/shouldrequireclaim.md) | <ul><li><code>uint256 indexed projectId</code></li><li><code>bool indexed flag</code></li><li><code>address caller</code></li></ul> |
+| [**`ShouldRequireClaim`**](events/shouldrequireclaim.md) | <ul><li><code>uint256 indexed projectId</code></li><li><code>bool indexed flag</code></li><li><code>address caller</code></li></ul>                                                                                                                                           |
 {% endtab %}
 
 {% tab title="Bug bounty" %}

@@ -11,56 +11,68 @@ Interface: [`IJBTokenStore`](../../../interfaces/ijbtokenstore.md)
 ### Definition
 
 ```solidity
-function totalSupplyOf(uint256 _projectId) external view override returns (uint256 supply) { ... }
+function totalSupplyOf(uint256 _projectId) external view override returns (uint256 totalSupply) { ... }
 ```
 
-* `_projectId` is the ID of the project to get a total token supply of.
+* `_projectId` is the ID of the project to get the total token supply of.
 * The view function can be accessed externally by anyone.
-* The function does not alter state on the blockchain.
-* The function overrides a function definition from the `IJBTokenStore` interface.
-* The function returns the total supply.
+* The view function does not alter state on the blockchain.
+* The function overrides a function definition from the [`IJBTokenStore`](../../../interfaces/ijbtokenstore.md) interface.
+* The function returns the total supply of the project's tokens.
 
 ### Body
 
-1.  Get a reference to the unclaimed total supply of the project.
+1.  Get a reference to the total supply of the project's unclaimed tokens.
 
     ```solidity
-    // Get a reference to the unclaimed total supply of the project.
-    supply = unclaimedTotalSupplyOf[_projectId];
+    // Get a reference to the total supply of the project's unclaimed tokens. Assign it to the return value.
+    totalSupply = unclaimedTotalSupplyOf[_projectId];
     ```
-2.  Get a reference to the project's tokens.
+
+    _Internal references:_
+
+    * [`unclaimedTotalSupplyOf`](../properties/unclaimedtotalsupplyof.md)
+2.  Get a reference to the project's current token.
 
     ```solidity
-    // Get a reference to the project's token.
+    // Get a reference to the project's current token.
     IJBToken _token = tokenOf[_projectId];
     ```
-3.  If the project has issued a token, add it's total supply to the total.
+
+    _Internal references:_
+
+    * [`tokenOf`](../properties/tokenof.md)
+3.  If the project has a current token, add it's total supply to the total.
 
     ```solidity
-    // If the project has issued a token, add it's total supply to the total.
-    if (_token != IJBToken(address(0))) supply = supply + _token.totalSupply(_projectId);
+    // If the project has a current token, add it's total supply to the total.
+    if (_token != IJBToken(address(0))) totalSupply = totalSupply + _token.totalSupply(_projectId);
     ```
+
+    _External references:_
+
+    * [`totalSupply`](../../jbtoken/read/totalsuppy.md)
 {% endtab %}
 
 {% tab title="Code" %}
 ```solidity
-/** 
-  @notice 
+/**
+  @notice
   The total supply of tokens for each project, including claimed and unclaimed tokens.
 
   @param _projectId The ID of the project to get the total token supply of.
 
-  @return supply The total supply.
+  @return totalSupply The total supply of the project's tokens.
 */
-function totalSupplyOf(uint256 _projectId) external view override returns (uint256 supply) {
-  // Get a reference to the unclaimed total supply of the project.
-  supply = unclaimedTotalSupplyOf[_projectId];
+function totalSupplyOf(uint256 _projectId) external view override returns (uint256 totalSupply) {
+  // Get a reference to the total supply of the project's unclaimed tokens.
+  totalSupply = unclaimedTotalSupplyOf[_projectId];
 
-  // Get a reference to the project's token.
+  // Get a reference to the project's current token.
   IJBToken _token = tokenOf[_projectId];
 
-  // If the project has issued a token, add it's total supply to the total.
-  if (_token != IJBToken(address(0))) supply = supply + _token.totalSupply(_projectId);
+  // If the project has a current token, add it's total supply to the total.
+  if (_token != IJBToken(address(0))) totalSupply = totalSupply + _token.totalSupply(_projectId);
 }
 ```
 {% endtab %}
