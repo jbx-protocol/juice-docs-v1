@@ -18,7 +18,7 @@ function balanceOf(address _holder, uint256 _projectId)
   returns (uint256 balance) { ... }
 ```
 * Arguments:
-  * `_holder` is the token holder to get a balance is being queried.
+  * `_holder` is the token holder to get a balance for.
   * `_projectId` is the project to get the `_holder`s balance of.
 * The view function can be accessed externally by anyone.
 * The view function does not alter state on the blockchain.

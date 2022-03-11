@@ -1,4 +1,4 @@
-# mint
+# transferFrom
 
 Contract: [`JBToken`](../)​‌
 
@@ -6,25 +6,26 @@ Interface: [`IJBToken`](../../../interfaces/ijbtoken.md)
 
 {% tabs %}
 {% tab title="Step by step" %}
-**Mints more of the token.**
+**Transfer tokens between accounts.**
 
-_Only the owner of this contract cant mint more of it._
+_Only the owner of this contract cant burn some of its supply._
 
 ### Definition
 
 ```solidity
-function mint(
+function transferFrom(
   uint256,
-  address _account,
+  address _from,
+  address _to,
   uint256 _amount
-) external override onlyOwner { ... }
+) external override { ... }
 ```
 
 * Arguments:
   * The `_projectId` parameter is ignored.
-  * `_account` is the account to mint the tokens for.
-  * `_amount` is the amount of tokens to mint, as a fixed point number with 18 decimals.
-* Through the [`onlyOwner`](https://docs.openzeppelin.com/contracts/4.x/api/access#Ownable) modifier, this function can only be accessed by the address that owns this contract.
+  * `_from` is the originating address.
+  * `_to` is the destination address.
+  * `_amount` is the amount of the transfer, as a fixed point number with 18 decimals.
 * The function overrides a function definition from the [`IJBToken`](../../../interfaces/ijbtoken.md) interface.
 * The function doesn't return anything.
 
@@ -33,32 +34,31 @@ function mint(
 1.  Forward the call to the ERC20 implementation.
 
     ```solidity
-    return _mint(_account, _amount);
+    transferFrom(_from, _to, _amount);
     ```
 
     _Inherited references:_
 
-    * [`_mint`](https://docs.openzeppelin.com/contracts/4.x/api/token/erc20#ERC20-\_mint-address-uint256-)
+    * [`transferFrom`](https://docs.openzeppelin.com/contracts/2.x/api/token/erc20#IERC20-transferFrom-address-address-uint256-)
 {% endtab %}
 
 {% tab title="Code" %}
 ```solidity
 /** 
   @notice
-  Mints more of the token.
+  Transfer tokens between accounts.
 
-  @dev
-  Only the owner of this contract cant mint more of it.
-
-  @param _account The account to mint the tokens for.
-  @param _amount The amount of tokens to mint, as a fixed point number with 18 decimals.
+  @param _from The originating address.
+  @param _to The destination address.
+  @param _amount The amount of the transfer, as a fixed point number with 18 decimals.
 */
-function mint(
+function transferFrom(
   uint256,
-  address _account,
+  address _from,
+  address _to,
   uint256 _amount
-) external override onlyOwner {
-  return _mint(_account, _amount);
+) external override {
+  transferFrom(_from, _to, _amount);
 }
 ```
 {% endtab %}

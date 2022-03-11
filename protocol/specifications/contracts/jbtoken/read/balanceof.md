@@ -1,4 +1,4 @@
-# mint
+# balanceOf
 
 Contract: [`JBToken`](../)​‌
 
@@ -6,59 +6,47 @@ Interface: [`IJBToken`](../../../interfaces/ijbtoken.md)
 
 {% tabs %}
 {% tab title="Step by step" %}
-**Mints more of the token.**
-
-_Only the owner of this contract cant mint more of it._
+**An account's balance of this ERC20.**
 
 ### Definition
 
 ```solidity
-function mint(
-  uint256,
-  address _account,
-  uint256 _amount
-) external override onlyOwner { ... }
+function balanceOf(address _account, uint256) external view override returns (uint256) { ... }
 ```
 
 * Arguments:
+  * `_account` is the account to get a balance of.
   * The `_projectId` parameter is ignored.
-  * `_account` is the account to mint the tokens for.
-  * `_amount` is the amount of tokens to mint, as a fixed point number with 18 decimals.
-* Through the [`onlyOwner`](https://docs.openzeppelin.com/contracts/4.x/api/access#Ownable) modifier, this function can only be accessed by the address that owns this contract.
+* The view function can be accessed externally by anyone.
+* The view function does not alter state on the blockchain.
 * The function overrides a function definition from the [`IJBToken`](../../../interfaces/ijbtoken.md) interface.
-* The function doesn't return anything.
+* The function returns the balance of the `_account` of this ERC20, as a fixed point number with 18 decimals.
 
 ### Body
 
 1.  Forward the call to the ERC20 implementation.
 
     ```solidity
-    return _mint(_account, _amount);
+    return super.balanceOf(_account);
     ```
 
     _Inherited references:_
 
-    * [`_mint`](https://docs.openzeppelin.com/contracts/4.x/api/token/erc20#ERC20-\_mint-address-uint256-)
+    * [`balanceOf`](https://docs.openzeppelin.com/contracts/2.x/api/token/erc20#IERC20-balanceOf-address-)
 {% endtab %}
 
 {% tab title="Code" %}
 ```solidity
 /** 
   @notice
-  Mints more of the token.
+  An account's balance of this ERC20.
 
-  @dev
-  Only the owner of this contract cant mint more of it.
+  @param _account The account to get a balance of.
 
-  @param _account The account to mint the tokens for.
-  @param _amount The amount of tokens to mint, as a fixed point number with 18 decimals.
+  @return The balance of the `_account` of this ERC20, as a fixed point number with 18 decimals.
 */
-function mint(
-  uint256,
-  address _account,
-  uint256 _amount
-) external override onlyOwner {
-  return _mint(_account, _amount);
+function balanceOf(address _account, uint256) external view override returns (uint256) {
+  return super.balanceOf(_account);
 }
 ```
 {% endtab %}

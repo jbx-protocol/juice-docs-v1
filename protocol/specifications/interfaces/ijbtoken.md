@@ -4,7 +4,7 @@
 interface IJBToken {
   function totalSupply(uint256 _projectId) external view returns (uint256);
 
-  function balanceOf(uint256 _projectId, address _account) external view returns (uint256);
+  function balanceOf(address _account, uint256 _projectId) external view returns (uint256);
 
   function mint(
     uint256 _projectId,
@@ -18,6 +18,13 @@ interface IJBToken {
     uint256 _amount
   ) external;
 
-  function transferOwnership(address newOwner) external;
+  function transferFrom(
+    uint256 _projectId,
+    address _from,
+    address _to,
+    uint256 _amount
+  ) external;
+
+  function transferOwnership(address _newOwner) external;
 }
 ```
