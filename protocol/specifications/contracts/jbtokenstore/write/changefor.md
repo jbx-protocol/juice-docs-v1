@@ -24,7 +24,7 @@ function changeFor(
 
 * Arguments:
   * `_projectId` is the ID of the project to which the changed token belongs.
-  * `_token` is the new token. Send an empty address to remove the project's current token without adding a new one.
+  * `_token` is the new token. Send an empty address to remove the project's current token without adding a new one, if claiming tokens isn't currency required by the project
   * `_newOwner` is an address to transfer the current token's ownership to. This is optional, but it cannot be done later.
 * Through the [`onlyController`](../../or-abstract/jbcontrollerutility/modifiers/onlycontroller.md) modifier, the function can only be accessed by the controller of the `_projectId`.
 * The function overrides a function definition from the [`IJBTokenStore`](../../../interfaces/ijbtokenstore.md) interface.
@@ -32,7 +32,18 @@ function changeFor(
 
 #### Body
 
-1.  Get a reference to the project's current token.
+1.  Make sure claiming isn't required if removing the token.
+
+    ```solidity
+    // Can't remove the project's token if the project requires claiming tokens.
+    if (_token == IJBToken(address(0)) && requireClaimFor[_projectId])
+      revert CANT_REMOVE_TOKEN_IF_ITS_REQUIRED();
+    ```
+
+    _Internal references:_
+
+    * [`requireClaimFor`](../properties/requireclaimfor.md)
+2.  Get a reference to the project's current token.
 
     ```solidity
     // Get a reference to the current token for the project.
@@ -42,7 +53,7 @@ function changeFor(
     _Internal references:_
 
     * [`tokenOf`](../properties/tokenof.md)
-2.  Store the provided token as the token of the project.
+3.  Store the provided token as the token of the project.
 
     ```solidity
     // Store the new token.
@@ -52,7 +63,7 @@ function changeFor(
     _Internal references:_
 
     * [`tokenOf`](../properties/tokenof.md)
-3.  If there's a current token and a new owner address was provided, transfer the ownership of the current token from this contract to the new owner.
+4.  If there's a current token and a new owner address was provided, transfer the ownership of the current token from this contract to the new owner.
 
     ```solidity
     // If there's a current token and a new owner was provided, transfer ownership of the old token to the new owner.
@@ -63,7 +74,7 @@ function changeFor(
     _External references:_
 
     * [`transferOwnership`](../../jbtoken/write/transferownership.md)
-4.  Emit a `Change` event with the relevant parameters.
+5.  Emit a `Change` event with the relevant parameters.
 
     ```solidity
     emit Change(_projectId, _token, oldToken, _newOwner, msg.sender);
@@ -87,7 +98,7 @@ function changeFor(
   This contract must have access to all of the token's `IJBToken` interface functions.
 
   @param _projectId The ID of the project to which the changed token belongs.
-  @param _token The new token. Send an empty address to remove the project's current token without adding a new one.
+  @param _token The new token. Send an empty address to remove the project's current token without adding a new one, if claiming tokens isn't currency required by the project.
   @param _newOwner An address to transfer the current token's ownership to. This is optional, but it cannot be done later.
 
   @return oldToken The token that was removed as the project's token.
@@ -97,6 +108,10 @@ function changeFor(
   IJBToken _token,
   address _newOwner
 ) external override onlyController(_projectId) returns (IJBToken oldToken) {
+  // Can't remove the project's token if the project requires claiming tokens.
+  if (_token == IJBToken(address(0)) && requireClaimFor[_projectId])
+    revert CANT_REMOVE_TOKEN_IF_ITS_REQUIRED();
+
   // Get a reference to the current token for the project.
   oldToken = tokenOf[_projectId];
 
@@ -110,6 +125,12 @@ function changeFor(
   emit Change(_projectId, _token, oldToken, _newOwner, msg.sender);
 }
 ```
+{% endtab %}
+
+{% tab title="Errors" %}
+| String                              | Description                                               |
+| ----------------------------------- | --------------------------------------------------------- |
+| **`CANT_REMOVE_TOKEN_IF_ITS_REQUIRED`**    | Thrown if the token is being removed but claiming is required.        |
 {% endtab %}
 
 {% tab title="Events" %}
