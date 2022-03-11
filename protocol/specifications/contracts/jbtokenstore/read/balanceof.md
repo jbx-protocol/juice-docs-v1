@@ -17,9 +17,9 @@ function balanceOf(address _holder, uint256 _projectId)
   override
   returns (uint256 balance) { ... }
 ```
-
-* `_holder` is the token holder to get a balance is being queried.
-* `_projectId` is the project to get the `_holder`s balance of.
+* Arguments:
+  * `_holder` is the token holder to get a balance is being queried.
+  * `_projectId` is the project to get the `_holder`s balance of.
 * The view function can be accessed externally by anyone.
 * The view function does not alter state on the blockchain.
 * The function overrides a function definition from the [`IJBTokenStore`](../../../interfaces/ijbtokenstore.md) interface.
