@@ -26,7 +26,7 @@ Ethereum mainnet: _Not yet deployed_\
 | Contract                                                         | Description                                                                                                                                                                        |
 | ---------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | [**`JBControllerUtility`**](../or-abstract/jbcontrollerutility/) | Includes convenience functionality for checking if the message sender is the current controller of the project whose data is being manipulated.                                      |
-| [**`JBOperatable`**](../or-abstract/jboperatable/)               | <p>Includes convenience functionality for checking a message sender's permissions before executing certain transactions.</p><p><a href="../or-abstract/jboperatable/">more</a></p> |
+| [**`JBOperatable`**](../or-abstract/jboperatable/)               | Includes convenience functionality for checking a message sender's permissions before executing certain transactions. |
 
 ## Constructor
 
