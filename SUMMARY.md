@@ -131,7 +131,7 @@
         * [mintFor](protocol/specifications/contracts/jbtokenstore/write/mintfor.md)
         * [burnFrom](protocol/specifications/contracts/jbtokenstore/write/burnfrom.md)
         * [claimFor](protocol/specifications/contracts/jbtokenstore/write/claimfor.md)
-        * [transferTo](protocol/specifications/contracts/jbtokenstore/write/transferto.md)
+        * [transferFrom](protocol/specifications/contracts/jbtokenstore/write/transferfrom.md)
         * [shouldRequireClaimingFor](protocol/specifications/contracts/jbtokenstore/write/shouldrequireclaimingfor.md)
     * [JBFundingCycleStore](protocol/specifications/contracts/jbfundingcyclestore/README.md)
       * [Events](protocol/specifications/contracts/jbfundingcyclestore/events/README.md)

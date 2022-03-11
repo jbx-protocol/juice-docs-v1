@@ -1,4 +1,4 @@
-# transferTo
+# transferFrom
 
 Contract: [`JBTokenStore`](../)​‌
 
