@@ -94,7 +94,7 @@ function setUri(uint256 _projectId, string calldata _uri)
 
   @param _projectId The ID of the project to transfer the handle from.
   @param _to The address that can now reallocate the handle.
-  @param _newHandle The new unique handle for the project that will replace the transfered one.
+  @param _newHandle The new unique handle for the project that will replace the transferred one.
 */
 function transferHandle(
     uint256 _projectId,
@@ -110,13 +110,13 @@ function transferHandle(
 ```javascript
 /**
   @notice 
-  Allows an address to claim and handle that has been transfered to them and apply it to a project of theirs.
+  Allows an address to claim and handle that has been transferred to them and apply it to a project of theirs.
 
   @dev 
   Only a project's owner or operator can claim a handle onto it.
 
   @param _handle The handle being claimed.
-  @param _for The address that the handle has been transfered to.
+  @param _for The address that the handle has been transferred to.
   @param _projectId The ID of the project to use the claimed handle.
 */
 function claimHandle(
