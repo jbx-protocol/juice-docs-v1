@@ -58,6 +58,11 @@ constructor(IJBOperatorStore _operatorStore)
 | [**`metadataContentOf`**](properties/metadatacontentof.md) | <p><strong>Params</strong></p><ul><li><code>uint256 _projectId</code></li><li><code>uint256 _domain</code></li></ul><p><strong>Returns</strong></p><ul><li><code>string content</code></li></ul>                    |
 | [**`tokenUriResolver`**](properties/tokenuriresolver.md) | <p><strong>Returns</strong></p><ul><li><code>[`IJBTokenUriResolver`](../../interfaces/ijbtokenuriresolver.md)tokenUriResolver</code></li></ul>                    |
 
+## Read
+
+| Function                                                                                                     | Definition                                                                                                                                                                                                                                                                                                                      |
+| ------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [**`tokenURI`**](read/tokenuri.md) | <p><strong>Params</strong></p><ul><li><code>uint256 _projectId</code></li></ul>                                                                                                                          |
 ## Write
 
 | Function                                                                                                     | Definition                                                                                                                                                                                                                                                                                                                      |
