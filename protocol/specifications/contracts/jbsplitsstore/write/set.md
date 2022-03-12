@@ -36,24 +36,24 @@ function set(
   * `_domain` is an identifier within which the splits should be considered active.
   * `_group` is an identifier between of splits being set. All splits within this `_group` must add up to within 100%.
   * `_splits` are the [`JBSplit`](../../../data-structures/jbsplit.md)s to set.
-* Through the [`requirePermissionAllowingOverride`](../../or-abstract/jboperatable/modifiers/requirepermissionallowingoverride.md) modifier, the function is only accessible by the project's owner, from an operator that has been given the `JBOperations.SET_SPLITS` permission by the project owner for the provided `_projectId` , or from the current controller of the `_projectId` of the specified.
-* The function overrides a function definition from the `IJBSplitsStore` interface.
+* Through the [`requirePermissionAllowingOverride`](../../or-abstract/jboperatable/modifiers/requirepermissionallowingoverride.md) modifier, the function is only accessible by the project's owner, from an operator that has been given the [`JBOperations.SET_SPLITS`](../../../libraries/jboperations.md) permission by the project owner for the provided `_projectId` , or from the current controller of the `_projectId` of the specified.
+* The function overrides a function definition from the [`IJBSplitsStore`](../../../interfaces/ijbsplitsstore.md) interface.
 * The function doesn't return anything.
 
 #### Body
 
-1.  Get a reference to the current splits set for the specified `_projectId`'s `_domain`, within the specified `_group`.
+1.  Get a reference to the current splits set for the specified project's domain, within the specified group.
 
     ```solidity
     // Get a reference to the project's current splits.
-    JBSplit[] memory _currentSplits = _getStructsFor(_projectId, _domain, _group);;
+    JBSplit[] memory _currentSplits = _getStructsFor(_projectId, _domain, _group);
     ```
 
     _Internal references:_
 
     * [`_getStructsFor`](../read/\_getstructsfor.md)
     * two
-2.  Loop through each `_currentSplits` to make sure the new `_splits` being set respect any current split bound by a lock constraint.
+2.  Loop through each current split to make sure the new splits being set respect any current split bound by a lock constraint.
 
     ```solidity
     // Check to see if all locked splits are included.
@@ -63,9 +63,10 @@ function set(
     *   If the current split isn't locked, move on to the next one.
 
         ```solidity
+        // If not locked, continue.
         if (block.timestamp >= _currentSplits[_i].lockedUntil) continue;
         ```
-    *   If the current split is locked, check to make sure the new `_splits` includes it. The only property of a locked split that can have changed is its `lockedUntil` property, which can be extended.
+    *   If the current split is locked, check to make sure the new splits includes it. The only property of a locked split that can have changed is its locked deadline, which can be extended.
 
         ```solidity
         // Keep a reference to whether or not the locked split being iterated on is included.
@@ -83,30 +84,18 @@ function set(
           ) _includesLocked = true;
         }
         ```
-    *   Check to make sure the provided `_splits` includes any locked current splits.
+    *   Check to make sure the provided splits includes any locked current splits.
 
         ```solidity
-        if (!_includesLocked) {
-          revert PREVIOUS_LOCKED_SPLITS_NOT_INCLUDED();
-        }
+        if (!_includesLocked) revert PREVIOUS_LOCKED_SPLITS_NOT_INCLUDED();
         ```
-3.  After the loop, delete the current splits from storage so we can repopulate them.
-
-    ```solidity
-    // Delete from storage so splits can be repopulated.
-    delete _splitsOf[_projectId][_domain][_group];
-    ```
-
-    _Internal references:_
-
-    * [`_splitsOf`](../properties/\_splitsof.md)
 4.  Store a local variable to keep track of all the percents from the splits.
 
     ```solidity
     // Add up all the percents to make sure they cumulative are under 100%.
     uint256 _percentTotal = 0;
     ```
-5.  Loop through each newly provided `_splits` to validate
+5.  Loop through each newly provided splits to validate the provided properties.
 
     ```solidity
     for (uint256 _i = 0; _i < _splits.length; _i++) { ... }
@@ -116,28 +105,13 @@ function set(
 
         ```solidity
         // The percent should be greater than 0.
-        if (_splits[_i].percent == 0) {
-          revert INVALID_SPLIT_PERCENT();
-        }
+        if (_splits[_i].percent == 0) revert INVALID_SPLIT_PERCENT();
         ```
     *   Check that the projectId for the current split is within the max value that can be packed.
 
         ```solidity
         // ProjectId should be within a uint56
-        if (_splits[_i].projectId > type(uint56).max) {
-          revert INVALID_PROJECT_ID();
-        }
-        ```
-    *   Check that the split specifies a recipient. Either an `allocator` must be specified or a `beneficiary` must be specified.
-
-        ```solidity
-        // The allocator and the beneficiary shouldn't both be the zero address.
-        if (
-          _splits[_i].allocator == IJBSplitAllocator(address(0)) &&
-          _splits[_i].beneficiary == address(0)
-        ) {
-          revert ALLOCATOR_AND_BENEFICIARY_ZERO_ADDRESS();
-        }
+        if (_splits[_i].projectId > type(uint56).max) revert INVALID_PROJECT_ID();
         ```
     *   Increment the total percents that have been accumulated so far.
 
@@ -145,49 +119,55 @@ function set(
         // Add to the total percents.
         _percentTotal = _percentTotal + _splits[_i].percent;
         ```
-    *   Make sure the accumulated percents are under 100%. Split percents are out of 10000000.
+    *   Make sure the accumulated percents are under 100%.
 
         ```solidity
         // Validate the total does not exceed the expected value.
-        if (_percentTotal > JBConstants.SPLITS_TOTAL_PERCENT) {
-          revert INVALID_TOTAL_PERCENT();
-        }
+        if (_percentTotal > JBConstants.SPLITS_TOTAL_PERCENT) revert INVALID_TOTAL_PERCENT();
         ```
 
         _Libraries used:_
 
         * [`JBConstants`](../../../libraries/jbconstants.md)
           * `.SPLITS_TOTAL_PERCENT`
-    *   Pack common split properties into `_packedSplitParts1Of`.
+    *   Pack common split properties into a storage slot.
 
         ```solidity
+        // Prefer claimed in bit 0.
         uint256 _packedSplitParts1 = _splits[_i].preferClaimed ? 1 : 0;
+        // Percent in bits 1-32.
         _packedSplitParts1 |= _splits[_i].percent << 1;
+        // ProjectId in bits 33-88.
         _packedSplitParts1 |= _splits[_i].projectId << 33;
+        // Beneficiary in bits 89-248.
         _packedSplitParts1 |= uint256(uint160(address(_splits[_i].beneficiary))) << 89;
-        // Store the first spit part.
+
+        // Store the first split part.
         _packedSplitParts1Of[_projectId][_domain][_group][_i] = _packedSplitParts1;
         ```
 
         _Internal references:_
 
         * [`_packedSplitParts1Of`](../properties/\_packedsplitparts1of.md)
-    *   Pack less common split properties into `_packedSplitParts2Of` if needed. Otherwise delete any content in storage at the index being iterated on.
+    *   Pack less common split properties into another storage slot if needed. Otherwise, delete any content in storage at the index being iterated on.
 
         ```solidity
         // If there's data to store in the second packed split part, pack and store.
         if (_splits[_i].lockedUntil > 0 || _splits[_i].allocator != IJBSplitAllocator(address(0))) {
           // Locked until should be within a uint48
-          if (_splits[_i].lockedUntil > type(uint48).max) {
-            revert INVALID_LOCKED_UNTIL();
-          }
+          if (_splits[_i].lockedUntil > type(uint48).max) revert INVALID_LOCKED_UNTIL();
+
+          // Locked until in bits 0-47.
           uint256 _packedSplitParts2 = uint48(_splits[_i].lockedUntil);
+          // Locked until in bits 48-207.
           _packedSplitParts2 |= uint256(uint160(address(_splits[_i].allocator))) << 48;
+
+          // Store the second split part.
           _packedSplitParts2Of[_projectId][_domain][_group][_i] = _packedSplitParts2;
+
           // Otherwise if there's a value stored in the indexed position, delete it.
-        } else if (_packedSplitParts2Of[_projectId][_domain][_group][_i] > 0) {
+        } else if (_packedSplitParts2Of[_projectId][_domain][_group][_i] > 0)
           delete _packedSplitParts2Of[_projectId][_domain][_group][_i];
-        }
         ```
 
         _Internal references:_
@@ -269,9 +249,7 @@ function set(
       ) _includesLocked = true;
     }
 
-    if (!_includesLocked) {
-      revert PREVIOUS_LOCKED_SPLITS_NOT_INCLUDED();
-    }
+    if (!_includesLocked) revert PREVIOUS_LOCKED_SPLITS_NOT_INCLUDED();
   }
 
   // Add up all the percents to make sure they cumulative are under 100%.
@@ -279,51 +257,45 @@ function set(
 
   for (uint256 _i = 0; _i < _splits.length; _i++) {
     // The percent should be greater than 0.
-    if (_splits[_i].percent == 0) {
-      revert INVALID_SPLIT_PERCENT();
-    }
-    // ProjectId should be within a uint56
-    if (_splits[_i].projectId > type(uint56).max) {
-      revert INVALID_PROJECT_ID();
-    }
+    if (_splits[_i].percent == 0) revert INVALID_SPLIT_PERCENT();
 
-    // The allocator and the beneficiary shouldn't both be the zero address.
-    if (
-      _splits[_i].allocator == IJBSplitAllocator(address(0)) &&
-      _splits[_i].beneficiary == address(0)
-    ) {
-      revert ALLOCATOR_AND_BENEFICIARY_ZERO_ADDRESS();
-    }
+    // ProjectId should be within a uint56
+    if (_splits[_i].projectId > type(uint56).max) revert INVALID_PROJECT_ID();
 
     // Add to the total percents.
     _percentTotal = _percentTotal + _splits[_i].percent;
 
     // Validate the total does not exceed the expected value.
-    if (_percentTotal > JBConstants.SPLITS_TOTAL_PERCENT) {
-      revert INVALID_TOTAL_PERCENT();
-    }
+    if (_percentTotal > JBConstants.SPLITS_TOTAL_PERCENT) revert INVALID_TOTAL_PERCENT();
 
+    // Prefer claimed in bit 0.
     uint256 _packedSplitParts1 = _splits[_i].preferClaimed ? 1 : 0;
+    // Percent in bits 1-32.
     _packedSplitParts1 |= _splits[_i].percent << 1;
+    // ProjectId in bits 33-88.
     _packedSplitParts1 |= _splits[_i].projectId << 33;
+    // Beneficiary in bits 89-248.
     _packedSplitParts1 |= uint256(uint160(address(_splits[_i].beneficiary))) << 89;
 
-    // Store the first spit part.
+    // Store the first split part.
     _packedSplitParts1Of[_projectId][_domain][_group][_i] = _packedSplitParts1;
 
     // If there's data to store in the second packed split part, pack and store.
     if (_splits[_i].lockedUntil > 0 || _splits[_i].allocator != IJBSplitAllocator(address(0))) {
       // Locked until should be within a uint48
-      if (_splits[_i].lockedUntil > type(uint48).max) {
-        revert INVALID_LOCKED_UNTIL();
-      }
+      if (_splits[_i].lockedUntil > type(uint48).max) revert INVALID_LOCKED_UNTIL();
+
+      // Locked until in bits 0-47.
       uint256 _packedSplitParts2 = uint48(_splits[_i].lockedUntil);
+      // Locked until in bits 48-207.
       _packedSplitParts2 |= uint256(uint160(address(_splits[_i].allocator))) << 48;
+
+      // Store the second split part.
       _packedSplitParts2Of[_projectId][_domain][_group][_i] = _packedSplitParts2;
+
       // Otherwise if there's a value stored in the indexed position, delete it.
-    } else if (_packedSplitParts2Of[_projectId][_domain][_group][_i] > 0) {
+    } else if (_packedSplitParts2Of[_projectId][_domain][_group][_i] > 0)
       delete _packedSplitParts2Of[_projectId][_domain][_group][_i];
-    }
 
     emit SetSplit(_projectId, _domain, _group, _splits[_i], msg.sender);
   }
@@ -340,7 +312,6 @@ function set(
 | **`PREVIOUS_LOCKED_SPLITS_NOT_INCLUDED`**    | Thrown if the splits that are being set override some splits that are locked.   |
 | **`INVALID_PROJECT_ID`**                     | Thrown if the split has a project ID that wont fit in its packed storage slot.  |
 | **`INVALID_SPLIT_PERCENT`**                  | Thrown if the split has specified a percent of 0.                               |
-| **`ALLOCATOR_AND_BENEFICIARY_ZERO_ADDRESS`** | Thrown if the split doesn't specify a destination.                              |
 | **`INVALID_TOTAL_PERCENT`**                  | Thrown if the split percents add up more than 100%.                             |
 | **`INVALID_LOCKED_UNTIL`**                   | Thrown if the split has a lockedUntil that wont fit in its packed storage slot. |
 {% endtab %}
@@ -348,7 +319,7 @@ function set(
 {% tab title="Events" %}
 | Name                                    | Data                                                                                                                                                                                                                 |
 | --------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [**`SetSplit`**](../events/setsplit.md) | <ul><li><code>uint256 indexed projectId</code></li><li><code>uint256 indexed domain</code></li><li><code>uint256 indexed group</code></li><li><code>Split split</code></li><li><code>address caller</code></li></ul> |
+| [**`SetSplit`**](../events/setsplit.md) | <ul><li><code>uint256 indexed projectId</code></li><li><code>uint256 indexed domain</code></li><li><code>uint256 indexed group</code></li><li><code>[`JBSplit`](../../data-structures/jbsplit.md)split</code></li><li><code>address caller</code></li></ul> |
 {% endtab %}
 
 {% tab title="Bug bounty" %}

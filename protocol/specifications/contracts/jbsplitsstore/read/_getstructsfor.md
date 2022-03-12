@@ -4,7 +4,7 @@ Contract: [`JBSplitsStore`](../)​‌
 
 {% tabs %}
 {% tab title="Step by step" %}
-**Unpack splits' packed stored values into easy-to-work-with spit structs.**
+**Unpack splits' packed stored values into easy-to-work-with split structs.**
 
 #### Definition
 
@@ -26,7 +26,7 @@ function _getStructsFor(
 
 #### Body
 
-1.  Get a reference to the expected number of splits for the specified `_domain` and `_group`.
+1.  Get a reference to the expected number of splits for the specified domain and group.
 
     ```solidity
     // Get a reference to the number of splits that need to be added to the returned array.
@@ -42,7 +42,7 @@ function _getStructsFor(
     // Initialize an array to be returned that has the set length.
     JBSplit[] memory _splits = new JBSplit[](_splitCount);
     ```
-3.  For each index, parse out the packed split parts into [`JBSplit`](../../../data-structures/jbsplit.md) structs and add to the array. The packed splits are stored in two different `uint256` slots, the second of which contains info that is populated far less frequently.
+3.  For each index, parse out the packed split parts into [`JBSplit`](../../../data-structures/jbsplit.md) structs and add to the array. The packed splits are stored in two different `uint256` slots, the second of which contains info that is populated way less frequently.
 
     ```solidity
     // Loop through each split and unpack the values into structs.
@@ -52,9 +52,13 @@ function _getStructsFor(
 
       JBSplit memory _split;
 
+      // Prefer claimed in bit 0.
       _split.preferClaimed = (_packedSplitPart1 & 1) == 1;
+      // Percent in bits 1-32.
       _split.percent = uint256(uint32(_packedSplitPart1 >> 1));
+      // ProjectId in bits 33-88.
       _split.projectId = uint256(uint56(_packedSplitPart1 >> 33));
+      // Beneficiary in bits 89-248.
       _split.beneficiary = payable(address(uint160(_packedSplitPart1 >> 89)));
 
       // Get a reference to the second packed data.
@@ -62,7 +66,9 @@ function _getStructsFor(
 
       // If there's anything in it, unpack.
       if (_packedSplitPart2 > 0) {
+        // Locked until in bits 0-47.
         _split.lockedUntil = uint256(uint48(_packedSplitPart2));
+        // Locked until in bits 48-207.
         _split.allocator = IJBSplitAllocator(address(uint160(_packedSplitPart2 >> 48)));
       }
 
@@ -86,7 +92,7 @@ function _getStructsFor(
 ```solidity
 /**
   @notice 
-  Unpack splits' packed stored values into easy-to-work-with spit structs.
+  Unpack splits' packed stored values into easy-to-work-with split structs.
 
   @param _projectId The ID of the project to which the split belongs.
   @param _domain The identifier within which the returned splits should be considered active.
@@ -112,9 +118,13 @@ function _getStructsFor(
 
     JBSplit memory _split;
 
+    // Prefer claimed in bit 0.
     _split.preferClaimed = (_packedSplitPart1 & 1) == 1;
+    // Percent in bits 1-32.
     _split.percent = uint256(uint32(_packedSplitPart1 >> 1));
+    // ProjectId in bits 33-88.
     _split.projectId = uint256(uint56(_packedSplitPart1 >> 33));
+    // Beneficiary in bits 89-248.
     _split.beneficiary = payable(address(uint160(_packedSplitPart1 >> 89)));
 
     // Get a reference to the second packed data.
@@ -122,7 +132,9 @@ function _getStructsFor(
 
     // If there's anything in it, unpack.
     if (_packedSplitPart2 > 0) {
+      // Locked until in bits 0-47.
       _split.lockedUntil = uint256(uint48(_packedSplitPart2));
+      // Locked until in bits 48-207.
       _split.allocator = IJBSplitAllocator(address(uint160(_packedSplitPart2 >> 48)));
     }
 
