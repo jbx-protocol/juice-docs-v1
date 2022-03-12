@@ -16,7 +16,7 @@ _Anyone can create a project on an owner's behalf._
 function createFor(address _owner, JBProjectMetadata calldata _metadata)
   external
   override
-  returns (uint256) { ... }
+  returns (uint256 projectId) { ... }
 ```
 
 * Arguments:
@@ -24,25 +24,25 @@ function createFor(address _owner, JBProjectMetadata calldata _metadata)
   * `_metadata` is a struct containing metadata content about the project, and domain within which the metadata applies.
 * The function can be accessed externally by anyone.
 * The function overrides a function definition from the [`IJBProjects`](../../../interfaces/ijbprojects.md) interface.
-* The function returns the token ID of the newly created project, which served as the project's ID.
+* The function returns the token ID of the newly created project.
 
 #### Body
 
-1.  Increment the count to include the new project being created.
+1.  Increment the count. Set it as the project's ID which is the returned value.
 
     ```solidity
     // Increment the count, which will be used as the ID.
-    count++;
+    projectId = ++count;
     ```
 
     _Internal references:_
 
     * [`count`](../properties/count.md)
-2.  Mint a new NFT token belonging to the owner using the count as the token ID.
+2.  Mint a new NFT token belonging to the owner using the projectId as the tokenId.
 
     ```solidity
     // Mint the project.
-    _safeMint(_owner, count);
+    _safeMint(projectId, count);
     ```
 
     _Internal references:_
@@ -53,7 +53,7 @@ function createFor(address _owner, JBProjectMetadata calldata _metadata)
     ```solidity
     // Set the metadata if one was provided.
     if (bytes(_metadata.content).length > 0)
-      metadataContentOf[count][_metadata.domain] = _metadata.content;
+      metadataContentOf[projectId][_metadata.domain] = _metadata.content;
     ```
 
     _Internal references:_
@@ -62,17 +62,12 @@ function createFor(address _owner, JBProjectMetadata calldata _metadata)
 4.  Emit a `Create` event with all relevant parameters.
 
     ```
-    emit Create(count, _owner, _metadata, msg.sender);
+    emit Create(projectId, _owner, _metadata, msg.sender);
     ```
 
     _Event references:_
 
     * [`Create`](../events/create.md)
-5.  Return the newly created project's token ID.
-
-    ```solidity
-    return count;
-    ```
 {% endtab %}
 
 {% tab title="Code" %}
@@ -87,26 +82,24 @@ function createFor(address _owner, JBProjectMetadata calldata _metadata)
   @param _owner The address that will be the owner of the project.
   @param _metadata A struct containing metadata content about the project, and domain within which the metadata applies.
 
-  @return The token ID of the newly created project, which served as the project's ID.
+  @return projectId The token ID of the newly created project.
 */
 function createFor(address _owner, JBProjectMetadata calldata _metadata)
   external
   override
-  returns (uint256)
+  returns (uint256 projectId)
 {
   // Increment the count, which will be used as the ID.
-  count++;
+  projectId = ++count;
 
   // Mint the project.
-  _safeMint(_owner, count);
+  _safeMint(_owner, projectId);
 
   // Set the metadata if one was provided.
   if (bytes(_metadata.content).length > 0)
-    metadataContentOf[count][_metadata.domain] = _metadata.content;
+    metadataContentOf[projectId][_metadata.domain] = _metadata.content;
 
-  emit Create(count, _owner, _metadata, msg.sender);
-
-  return count;
+  emit Create(projectId, _owner, _metadata, msg.sender);
 }
 ```
 {% endtab %}
