@@ -6,7 +6,7 @@ Interface: [`IJBProjects`](../../../interfaces/ijbprojects.md)
 
 {% tabs %}
 {% tab title="Step by step" %}
-**Set the address of the IJBTokenUriResolver used to retrieve the tokenURI of projects.**
+**Sets the address of the resolver used to retrieve the tokenURI of projects.**
 
 #### Definition
 
@@ -16,15 +16,16 @@ function setTokenUriResolver(IJBTokenUriResolver _newResolver) external override
 
 * Arguments:
   * `_newResolver` is the address of the new resolver.
-* Through the `onlyOwner` modifier, this function can only be accessed by the address that owns this contract.
-* The function overrides a function definition from the `IJBProjects` interface.
+* Through the [`onlyOwner`](https://docs.openzeppelin.com/contracts/4.x/api/access#Ownable) modifier, this function can only be accessed by the address that owns this contract.
+* The function overrides a function definition from the [`IJBProjects`](../../../interfaces/ijbprojects.md) interface.
 * The function doesn't return anything.
 
 #### Body
 
-1.  Store the new `_metadata.content` as the `metadataContentOf` the project for the `_metadata.domain`.
+1.  Store the new resolver.
 
     ```solidity
+    // Store the new resolver.
     tokenUriResolver = _newResolver;
     ```
 
@@ -46,12 +47,14 @@ function setTokenUriResolver(IJBTokenUriResolver _newResolver) external override
 ```solidity
 /**
   @notice 
-  Set the address of the IJBTokenUriResolver used to retrieve the tokenURI of projects.
+  Sets the address of the resolver used to retrieve the tokenURI of projects.
 
   @param _newResolver The address of the new resolver.
 */
 function setTokenUriResolver(IJBTokenUriResolver _newResolver) external override onlyOwner {
+  // Store the new resolver.
   tokenUriResolver = _newResolver;
+
   emit SetTokenUriResolver(_newResolver, msg.sender);
 }
 ```
@@ -60,7 +63,7 @@ function setTokenUriResolver(IJBTokenUriResolver _newResolver) external override
 {% tab title="Events" %}
 | Name                                                          | Data                                                                                                                                                                                                                                                                                     |
 | ------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [**`SetTokenUriResolver`**](../events/settokenuriresolver.md) | <ul><li><a href="../../../interfaces/ijbtokenuriresolver/"><code>IJBTokenUriResolver</code></a><code>resolver</code></li><li><a href="../../../data-structures/jbprojectmetadata/"><code>JBProjectMetadata</code></a><code>metadata</code></li><li><code>address caller</code></li></ul> |
+| [**`SetTokenUriResolver`**](../events/settokenuriresolver.md) | <ul><li><code>[`IJBTokenUriResolver`](../../interfaces/ijbtokenuriresolver.md)resolver</code></li><li><code>address caller</code></li></ul>                                                                                                         |
 {% endtab %}
 
 {% tab title="Bug bounty" %}

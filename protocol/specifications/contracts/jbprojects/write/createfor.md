@@ -21,10 +21,10 @@ function createFor(address _owner, JBProjectMetadata calldata _metadata)
 
 * Arguments:
   * `_owner` is the address that will be the owner of the project.
-  * `_metadata` is a struct containing metadata content about the project, and domain within which the metadata applies. An empty string is acceptable if no metadata is being provided.
+  * `_metadata` is a struct containing metadata content about the project, and domain within which the metadata applies.
 * The function can be accessed externally by anyone.
-* The function overrides a function definition from the `IJBProjects` interface.
-* Returns the token ID of the newly created project.
+* The function overrides a function definition from the [`IJBProjects`](../../../interfaces/ijbprojects.md) interface.
+* The function returns the token ID of the newly created project, which served as the project's ID.
 
 #### Body
 
@@ -38,7 +38,7 @@ function createFor(address _owner, JBProjectMetadata calldata _metadata)
     _Internal references:_
 
     * [`count`](../properties/count.md)
-2.  Mint a new NFT token belonging to the `_owner` using the `count` as the token ID.
+2.  Mint a new NFT token belonging to the owner using the count as the token ID.
 
     ```solidity
     // Mint the project.
@@ -48,7 +48,7 @@ function createFor(address _owner, JBProjectMetadata calldata _metadata)
     _Internal references:_
 
     * [`_safeMint`](https://docs.openzeppelin.com/contracts/2.x/api/token/erc721#ERC721-\_safeMint-address-uint256-bytes-)
-3.  If metadata was provided (meaning it's content is not an empty string), store it as the `content` for newly created project under the provided `domain`.
+3.  If metadata was provided (meaning it's content is not an empty string), store it for newly created project under the provided domain.
 
     ```solidity
     // Set the metadata if one was provided.
@@ -85,9 +85,9 @@ function createFor(address _owner, JBProjectMetadata calldata _metadata)
   Anyone can create a project on an owner's behalf.
 
   @param _owner The address that will be the owner of the project.
-  @param _metadata A struct containing metadata content about the project, and domain within which the metadata applies. An empty string is acceptable if no metadata is being provided.
+  @param _metadata A struct containing metadata content about the project, and domain within which the metadata applies.
 
-  @return The token ID of the newly created project
+  @return The token ID of the newly created project, which served as the project's ID.
 */
 function createFor(address _owner, JBProjectMetadata calldata _metadata)
   external
@@ -114,8 +114,7 @@ function createFor(address _owner, JBProjectMetadata calldata _metadata)
 {% tab title="Events" %}
 | Name                                | Data                                                                                                                                                                                                                                                  |
 | ----------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [**`Create`**](../events/create.md) | <ul><li><code>uint256 indexed projectId</code></li><li><code>address indexed owner</code></li><li><a href="../../data-structures/jbprojectmetadata/"><code>JBProjectMetadata</code></a><code>uri</code></li><li><code>address caller</code></li></ul> |
-{% endtab %}
+| [**`Create`**](../events/create.md)                                                                          | <ul><li><code>uint256 indexed projectId</code></li><li><code>address indexed owner</code></li><li><code>[`JBProjectMetadata`](../../data-structures/jbprojectmetadata.md)metadata</code></li><li><code>address caller</code></li></ul>                  |{% endtab %}
 
 {% tab title="Bug bounty" %}
 | Category          | Description                                                                                                                            | Reward |

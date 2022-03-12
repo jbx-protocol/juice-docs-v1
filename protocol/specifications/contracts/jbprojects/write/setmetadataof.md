@@ -10,6 +10,8 @@ Interface: [`IJBProjects`](../../../interfaces/ijbprojects.md)
 
 _Only a project's owner or operator can set its metadata._
 
+_Applications can use the domain namespace as they wish._
+
 #### Definition
 
 ```solidity
@@ -21,17 +23,17 @@ function setMetadataOf(uint256 _projectId, JBProjectMetadata calldata _metadata)
 
 * Arguments:
   * `_projectId` is the ID of the project who's metadata is being changed.
-  * `_metadata` is the struct containing metadata content, and domain within which the metadata applies. An empty string is acceptable if no metadata is being provided.
-* Through the [`requirePermission`](../../or-abstract/jboperatable/modifiers/requirepermission.md) modifier, the function is only accessible by the project's owner, or from an operator that has been given the `JBOperations.SET_METADATA` permission by the project owner for the provided `_projectId`.
-* The function overrides a function definition from the `IJBProjects` interface.
+  * `_metadata` is the struct containing metadata content, and domain within which the metadata applies.
+* Through the [`requirePermission`](../../or-abstract/jboperatable/modifiers/requirepermission.md) modifier, the function is only accessible by the project's owner, or from an operator that has been given the [`JBOperations.SET_METADATA`](../../../libraries/jboperations.md) permission by the project owner for the provided `_projectId`.
+* The function overrides a function definition from the [`IJBProjects`](../../../interfaces/ijbprojects.md) interface.
 * The function doesn't return anything.
 
 #### Body
 
-1.  Store the new `_metadata.content` as the `metadataContentOf` the project for the `_metadata.domain`.
+1.  Store the project's new metadata content within the specified domain.
 
     ```solidity
-    // Set the new uri within the specified domain.
+    // Set the project's new metadata content within the specified domain.
     metadataContentOf[_projectId][_metadata.domain] = _metadata.content;
     ```
 
@@ -58,15 +60,18 @@ function setMetadataOf(uint256 _projectId, JBProjectMetadata calldata _metadata)
   @dev 
   Only a project's owner or operator can set its metadata.
 
+  @dev 
+  Applications can use the domain namespace as they wish.
+
   @param _projectId The ID of the project who's metadata is being changed.
-  @param _metadata A struct containing metadata content, and domain within which the metadata applies. An empty string is acceptable if no metadata is being provided.
+  @param _metadata A struct containing metadata content, and domain within which the metadata applies. 
 */
 function setMetadataOf(uint256 _projectId, JBProjectMetadata calldata _metadata)
   external
   override
   requirePermission(ownerOf(_projectId), _projectId, JBOperations.SET_METADATA)
 {
-  // Set the new uri within the specified domain.
+  // Set the project's new metadata content within the specified domain.
   metadataContentOf[_projectId][_metadata.domain] = _metadata.content;
 
   emit SetMetadata(_projectId, _metadata, msg.sender);
@@ -77,7 +82,7 @@ function setMetadataOf(uint256 _projectId, JBProjectMetadata calldata _metadata)
 {% tab title="Events" %}
 | Name                                             | Data                                                                                                                                        |
 | ------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------- |
-| [**`SetMetadata`**](../events/setmetadatacid.md) | <ul><li><code>uint256 indexed projectId</code></li><li><code>JBProjectMetadatametadata</code></li><li><code>address caller</code></li></ul> |
+| [**`SetMetadata`**](../events/setmetadata.md) | <ul><li><code>uint256 indexed projectId</code></li><li><code>[`JBProjectMetadata`](../../data-structures/jbprojectmetadata.md)metadata</code></li><li><code>address caller</code></li></ul>                                                                                                         |
 {% endtab %}
 
 {% tab title="Bug bounty" %}

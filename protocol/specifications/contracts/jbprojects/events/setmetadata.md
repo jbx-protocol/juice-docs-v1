@@ -2,7 +2,7 @@
 
 Emitted from:
 
-* [`setMetadataCidOf`](broken-reference)
+* [`setMetadataOf`](../write/setmetadataof.md)
 
 ## Definition
 
