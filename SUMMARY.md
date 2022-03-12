@@ -103,6 +103,8 @@
         * [count](protocol/specifications/contracts/jbprojects/properties/count.md)
         * [metadataContentOf](protocol/specifications/contracts/jbprojects/properties/metadatacontentof.md)
         * [tokenUriResolver](protocol/specifications/contracts/jbprojects/properties/tokenuriresolver.md)
+      * [Read](protocol/specifications/contracts/jbprojects/read/README.md)
+        * [tokenURI](protocol/specifications/contracts/jbprojects/read/tokenuri.md)
       * [Write](protocol/specifications/contracts/jbprojects/write/README.md)
         * [createFor](protocol/specifications/contracts/jbprojects/write/createfor.md)
         * [setMetadataOf](protocol/specifications/contracts/jbprojects/write/setmetadataof.md)
