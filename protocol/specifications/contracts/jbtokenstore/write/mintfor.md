@@ -56,10 +56,10 @@ function mintFor(
 3.  If claimed tokens should be minted, mint the project's token into the holders wallet. Otherwise increment the holder's balance or the unclaimed tokens for the project, and the total supply of unclaimed tokens for the project.
 
     ```solidity
-    if (_shouldClaimTokens) {
+    if (_shouldClaimTokens) 
       // If tokens should be claimed, mint tokens into the holder's wallet.
       _token.mint(_projectId, _holder, _amount);
-    } else {
+    else {
       // Otherwise, add the tokens to the unclaimed balance and total supply.
       unclaimedBalanceOf[_holder][_projectId] = unclaimedBalanceOf[_holder][_projectId] + _amount;
       unclaimedTotalSupplyOf[_projectId] = unclaimedTotalSupplyOf[_projectId] + _amount;
@@ -112,10 +112,10 @@ function mintFor(
   bool _shouldClaimTokens = (requireClaimFor[_projectId] || _preferClaimedTokens) &&
     _token != IJBToken(address(0));
 
-  if (_shouldClaimTokens) {
+  if (_shouldClaimTokens) 
     // If tokens should be claimed, mint tokens into the holder's wallet.
     _token.mint(_projectId, _holder, _amount);
-  } else {
+  else {
     // Otherwise, add the tokens to the unclaimed balance and total supply.
     unclaimedBalanceOf[_holder][_projectId] = unclaimedBalanceOf[_holder][_projectId] + _amount;
     unclaimedTotalSupplyOf[_projectId] = unclaimedTotalSupplyOf[_projectId] + _amount;
