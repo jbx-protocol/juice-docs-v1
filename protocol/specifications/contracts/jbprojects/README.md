@@ -26,7 +26,7 @@ Ethereum mainnet: _Not yet deployed_
 | Contract                                                                     | Description                                                                                                           |
 | ---------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- |
 | [**`JBOperatable`**](../or-abstract/jboperatable/)                           | Includes convenience functionality for checking a message sender's permissions before executing certain transactions. |
-| [**`ERC721Votes`**](https://github.com/OpenZeppelin/openzeppelin-contracts/issues/2873) | A checkpointable standard definition for non-fungible tokens (NFTs)                                                                  |
+| [**`ERC721Votes`**](https://github.com/OpenZeppelin/openzeppelin-contracts/issues/2873) | A checkpointable standard definition for non-fungible tokens (NFTs).                                                                  |
 | [**`Ownable`**](https://docs.openzeppelin.com/contracts/4.x/api/access#Ownable) | Includes convenience functionality for specifying an address that owns the contract, with modifiers that only allow access by the owner. |
 
 ## Constructor
