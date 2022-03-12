@@ -1,6 +1,6 @@
 ---
 description: >-
-  Stores project ownership and identifying information.
+  Stores project ownership and metadata.
 ---
 
 # JBProjects
@@ -13,7 +13,7 @@ description: >-
 
 ### **Addresses**
 
-Ethereum mainnet: _Not yet deployed_\
+Ethereum mainnet: _Not yet deployed_
 
 ### **Interfaces**
 
@@ -25,8 +25,9 @@ Ethereum mainnet: _Not yet deployed_\
 
 | Contract                                                                     | Description                                                                                                           |
 | ---------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- |
-| [**`ERC721Votes`**](https://github.com/OpenZeppelin/openzeppelin-contracts/issues/2873) | A checkpointable standard definition for non-fungible tokens (NFTs)                                                                  |
 | [**`JBOperatable`**](../or-abstract/jboperatable/)                           | Includes convenience functionality for checking a message sender's permissions before executing certain transactions. |
+| [**`ERC721Votes`**](https://github.com/OpenZeppelin/openzeppelin-contracts/issues/2873) | A checkpointable standard definition for non-fungible tokens (NFTs)                                                                  |
+| [**`Ownable`**](https://docs.openzeppelin.com/contracts/4.x/api/access#Ownable) | Includes convenience functionality for specifying an address that owns the contract, with modifiers that only allow access by the owner. |
 
 ## Constructor
 
@@ -47,7 +48,7 @@ constructor(IJBOperatorStore _operatorStore)
 | --------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | [**`Create`**](events/create.md)                                                                          | <ul><li><code>uint256 indexed projectId</code></li><li><code>address indexed owner</code></li><li><a href="../../../data-structures/jbprojectmetadata.md"><code>JBProjectMetadata</code></a><code>metadata</code></li><li><code>address caller</code></li></ul>                  |
 | [**`SetMetadata`**](events/setmetadata.md) | <ul><li><code>uint256 indexed projectId</code></li><li><a href="../../../data-structures/jbprojectmetadata.md"><code>JBProjectMetadata<code><a><code>metadata</code></li><li><code>address caller</code></li></ul>                                                                                                         |
-| [**`SetTokenUriResolver`**](events/settokenuriresolver.md) | <ul><li><a href="../../interfaces/ijbtokenuriresolver.md"><code>IJBTokenUriResolver<code></a><code>metadata</code></li><li><code>address caller</code></li></ul>                                                                                                         |
+| [**`SetTokenUriResolver`**](events/settokenuriresolver.md) | <ul><li><a href="../../interfaces/ijbtokenuriresolver.md"><code>IJBTokenUriResolver<code></a><code>resolver</code></li><li><code>address caller</code></li></ul>                                                                                                         |
 
 ## Properties
 
@@ -55,12 +56,12 @@ constructor(IJBOperatorStore _operatorStore)
 | ----------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | [**`count`**](properties/count.md)                                                                          | <p><strong>Returns</strong></p><ul><li><code>uint256 count</code></li></ul>                                                                                                |
 | [**`metadataContentOf`**](properties/metadatacontentof.md) | <p><strong>Params</strong></p><ul><li><code>uint256 _projectId</code></li><li><code>uint256 _domain</code</li></ul><p><strong>Returns</strong></p><ul><li><code>string content</code></li></ul>                    |
-| [**`tokenUriResolver`**](properties/tokenuriresolver.md) | <p><strong>Returns</strong></p><ul><li><a href="../../interfaces/ijbtokenuriresolver.md"><code>IJBTokenUriResolver</code></a><code>tokenUriResolver</code></li></ul>                    |
+| [**`tokenUriResolver`**](properties/tokenuriresolver.md) | <p><strong>Returns</strong></p><ul><li><code>[`IJBTokenUriResolver`](../../interfaces/ijbtokenuriresolver.md)tokenUriResolver</code></li></ul>                    |
 
 ## Write
 
 | Function                                                                                                     | Definition                                                                                                                                                                                                                                                                                                                      |
 | ------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [**`createFor`**](write/createfor.md)                                                                        | <p><strong>Params</strong></p><ul><li><code>address _owner</code></li><li><code>bytes32 _handle</code></li><li><a href="../../../data-structures/jbprojectmetadata.md"><code>JBProjectMetadata</code></a><code>_metadata</code></li><li><code>IJBTerminal _terminal</code></li></ul><p><strong>Returns</strong></p><ul><li><code>uint256 projectId</code></li></ul>                                             |
-| [**`setMetadataOf`**](write/setmetadataof.md) | <p><strong>Traits</strong></p><ul><li><code>requirePermission</code></li></ul><p><strong>Params</strong></p><ul><li><code>uint256 _projectId</code></li><li><a href="../../../data-structures/jbprojectmetadata.md"><code>JBProjectMetadata</code></a><code>_metadata</code></li></ul>                                                                                                                          |
-| [**`setTokenUriResolver`**](write/settokenuriresolver.md) | <p><strong>Traits</strong></p><ul><li><code>requirePermission</code></li></ul><p><strong>Params</strong></p><ul><li><a href="../../interfaces/ijbtokenuriresolver.md"><code>IJBTokenUriResolver</code></a><code>_newResolver</code></li></ul>                                                                                                                          |
+| [**`createFor`**](write/createfor.md)                                                                        | <p><strong>Params</strong></p><ul><li><code>address _owner</code></li><li><code>[`JBProjectMetadata`](../../../data-structures/jbprojectmetadata.md)_metadata</code></li></ul><p><strong>Returns</strong></p><ul><li><code>uint256 projectId</code></li></ul>                                             |
+| [**`setMetadataOf`**](write/setmetadataof.md) | <p><strong>Traits</strong></p><ul><li><code>[`requirePermission`](../or-abstract/jboperatable/modifiers/requirepermission.md)</code></li></ul><p><strong>Params</strong></p><ul><li><code>uint256 _projectId</code></li><li><code>[`JBProjectMetadata`](../../../data-structures/jbprojectmetadata.md)_metadata</code></li></ul>                                                                                                                          |
+| [**`setTokenUriResolver`**](write/settokenuriresolver.md) | <p><strong>Traits</strong></p><ul><li><code>[`requirePermission`](../or-abstract/jboperatable/modifiers/requirepermission.md)</code></li></ul><p><strong>Params</strong></p><ul><li><code>[`IJBTokenUriResolver`](../../interfaces/ijbtokenuriresolver.md)_newResolver</code></li></ul>                                                                                                                          |
