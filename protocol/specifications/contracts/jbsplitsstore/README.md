@@ -1,8 +1,6 @@
 ---
 description: >-
-  Stores information about how arbitrary distributions should be split. The
-  information is represented as a JBSplit data structure. The protocol uses
-  these to split up payout distributions and reserved
+  Stores splits for each project.
 ---
 
 # JBSplitsStore
@@ -15,12 +13,18 @@ description: >-
 
 ### **Addresses**
 
-Ethereum mainnet: _Not yet deployed_\
+Ethereum mainnet: _Not yet deployed_
 
 ### **Interfaces**
 
+| Name                                                 | Description                                                                                                                              |
+| ---------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- |
+| [**`IJBSplitsStore`**](../../interfaces/ijbsplitsstore.md) |General interface for the methods in this contract that interact with the blockchain's state according to the Juicebox protocol's rules. |
 ### **Inheritance**
 
+| Contract                                                                     | Description                                                                                                           |
+| ---------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- |
+| [**`JBOperatable`**](../or-abstract/jboperatable/)                           | Includes convenience functionality for checking a message sender's permissions before executing certain transactions. |
 ## Constructor
 
 ```solidity
@@ -43,7 +47,7 @@ constructor(
 
 | Name                                 | Data                                                                                                                                                                                                                 |
 | ------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [**`SetSplit`**](events/setsplit.md) | <ul><li><code>uint256 indexed projectId</code></li><li><code>uint256 indexed domain</code></li><li><code>uint256 indexed group</code></li><li><a href="../../data-structures/jbsplit.md"><code>JBSplit</code></a><code>split</code></li><li><code>address caller</code></li></ul> |
+| [**`SetSplit`**](events/setsplit.md) | <ul><li><code>uint256 indexed projectId</code></li><li><code>uint256 indexed domain</code></li><li><code>uint256 indexed group</code></li><li><code>[`JBSplit`](../../data-structures/jbsplit.md)split</code></li><li><code>address caller</code></li></ul> |
 
 ## Properties
 
@@ -56,10 +60,10 @@ constructor(
 
 | Function                           | Definition                                                                                                                                                                                                                                                                                         |
 | ---------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [**`splitsOf`**](read/splitsof.md) | <p><strong>Params</strong></p><ul><li><code>uint256 _projectId</code></li><li><code>uint256 _domain</code></li><li><code>uint256 _group</code></li></ul><p><strong>Returns</strong></p><ul><li><a href="../../data-structures/jbsplit.md"><code>JBSplit</code></a><code>[] splits</code></li></ul> |
+| [**`splitsOf`**](read/splitsof.md) | <p><strong>Params</strong></p><ul><li><code>uint256 _projectId</code></li><li><code>uint256 _domain</code></li><li><code>uint256 _group</code></li></ul><p><strong>Returns</strong></p><ul><li><code>[`JBSplit`](../../data-structures/jbsplit.md)[] splits</code></li></ul> |
 
 ## Write
 
 | Function                  | Definition                                                                                                                                                                                                                                                                                                                                                                      |
 | ------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [**`set`**](write/set.md) | <p><strong>Traits</strong></p><ul><li><code>requirePermissionAllowingOverride</code></li></ul><p><strong>Params</strong></p><ul><li><code>uint256 _projectId</code></li><li><code>uint256 _configuration</code></li><li><code>uint256 _group</code></li><li><a href="../../data-structures/jbsplit.md"><code>JBSplit</code></a><code>[] _splits</code></li></ul> |
+| [**`set`**](write/set.md) | <p><strong>Traits</strong></p><ul><li><code>requirePermissionAllowingOverride</code></li></ul><p><strong>Params</strong></p><ul><li><code>uint256 _projectId</code></li><li><code>uint256 _domain</code></li><li><code>uint256 _group</code></li><li><code>[`JBSplit`](../../data-structures/jbsplit.md)[] _splits</code></li></ul> |
