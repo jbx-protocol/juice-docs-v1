@@ -6,7 +6,7 @@ interface IJBPrices {
 
   function TARGET_DECIMALS() external returns (uint256);
 
-  function feedFor(uint256 _currency, uint256 _base) external returns (AggregatorV3Interface);
+  function feedFor(uint256 _currency, uint256 _base) external view returns (AggregatorV3Interface);
 
   function priceFor(uint256 _currency, uint256 _base) external view returns (uint256);
 
