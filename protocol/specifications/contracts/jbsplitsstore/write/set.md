@@ -107,7 +107,7 @@ function set(
        // The percent should be greater than 0.
        if (_splits[_i].percent == 0) revert INVALID_SPLIT_PERCENT();
        ```
-    2.  Check that the projectId for the current split is within the max value that can be packed.
+    2.  Check that the ID of the project for the current split is within the max value that can be packed.
 
        ```solidity
        // ProjectId should be within a uint56
