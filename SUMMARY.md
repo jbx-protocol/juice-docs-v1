@@ -82,6 +82,7 @@
     * [IJBOperatorStore](protocol/specifications/interfaces/ijboperatorstore.md)
     * [IJBPayDelegate](protocol/specifications/interfaces/ijbpaydelegate.md)
     * [IJBPrices](protocol/specifications/interfaces/ijbprices.md)
+    * [IJBPriceFeed](protocol/specifications/interfaces/ijbpricefeed.md)
     * [IJBProjects](protocol/specifications/interfaces/ijbprojects.md)
     * [IJBRedemptionDelegate](protocol/specifications/interfaces/ijbredemptiondelegate.md)
     * [IJBSplitAllocator](protocol/specifications/interfaces/ijbsplitallocator.md)
