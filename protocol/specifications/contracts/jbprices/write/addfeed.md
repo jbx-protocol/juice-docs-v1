@@ -6,7 +6,7 @@ Interface: [`IJBPrices`](../../../interfaces/ijbprices.md)
 
 {% tabs %}
 {% tab title="Step by step" %}
-**Add an ETH price feed for a currency.**
+**Add a price feed for a currency in terms of the provided base currency.**
 
 _Current feeds can't be modified._
 
@@ -23,29 +23,27 @@ function addFeedFor(
 * Arguments:
   * `_currency` is the currency that the price feed is for.
   * `_base` is the currency that the price feed is based on.
-  * `_feed` is the Chainlink price feed being added. Must adhere to [AggregatorV3Interface](https://github.com/smartcontractkit/chainlink/blob/develop/contracts/src/v0.8/interfaces/AggregatorV3Interface.sol).
+  * `_feed` is the [`IJBPriceFeed`](../../../interfaces/ijbpricefeed.md) contract being added.
 * Through the `onlyOwner` modifier, this function can only be accessed by the address that owns this contract.
-* The function overrides a function definition from the `IJBPrices` interface.
+* The function overrides a function definition from the [`IJBPrices`](../../../interfaces/ijbprices.md) interface.
 * The function doesn't return anything.
 
 ### Body
 
-1.  Make sure there isn't already a price feed set for the `_currency` `_base` pair.
+1.  Make sure there isn't already a price feed set for the currency base pair.
 
     ```solidity
     // There can't already be a feed for the specified currency.
-    if (feedFor[_currency][_base] != AggregatorV3Interface(address(0))) {
-      revert PRICE_FEED_ALREADY_EXISTS();
-    }
+    if (feedFor[_currency][_base] != IJBPriceFeed(address(0))) revert PRICE_FEED_ALREADY_EXISTS();
     ```
 
     Internal references:
 
     * [`feedFor`](../properties/feedfor.md)
-2.  Store the provided feed for the `_currency` `_base` pair.
+2.  Store the provided feed for the currency base pair.
 
     ```solidity
-    // Set the feed.
+    // Store the feed.
     feedFor[_currency][_base] = _feed;
     ```
 3.  Emit an `AddFeed` event with the relevant parameters.
@@ -75,14 +73,12 @@ function addFeedFor(
 function addFeedFor(
   uint256 _currency,
   uint256 _base,
-  AggregatorV3Interface _feed
+  IJBPriceFeed _feed
 ) external override onlyOwner {
   // There can't already be a feed for the specified currency.
-  if (feedFor[_currency][_base] != AggregatorV3Interface(address(0))) {
-    revert PRICE_FEED_ALREADY_EXISTS();
-  }
+  if (feedFor[_currency][_base] != IJBPriceFeed(address(0))) revert PRICE_FEED_ALREADY_EXISTS();
 
-  // Set the feed.
+  // Store the feed.
   feedFor[_currency][_base] = _feed;
 
   emit AddFeed(_currency, _base, _feed);
@@ -99,7 +95,7 @@ function addFeedFor(
 {% tab title="Events" %}
 | Name                                  | Data                                                                                                                                                                                                                                                                                           |
 | ------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [**`AddFeed`**](../events/addfeed.md) | <ul><li><code>uint256 indexed currency</code></li><li><code>uint256 indexed base</code></li><li><a href="https://github.com/smartcontractkit/chainlink/blob/develop/contracts/src/v0.8/interfaces/AggregatorV3Interface.sol"><code>AggregatorV3Interface</code></a><code>feed</code></li></ul> |
+| [**`AddFeed`**](../events/addfeed.md) | <ul><li><code>uint256 indexed currency</code></li><li><code>uint256 indexed base</code></li><li><code>[`IJBPriceFeed`](../../interfaces/ijbpricefeed.md)feed</code></li></ul> |
 {% endtab %}
 
 {% tab title="Bug bounty" %}
