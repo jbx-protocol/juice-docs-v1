@@ -44,5 +44,5 @@ Ethereum mainnet: _Not yet deployed_\
 
 | Function                                    | Definition                                                                                |
 | ------------------------------------------- | ----------------------------------------------------------------------------------------- |
-| [**`setOperator`**](events/setoperator.md)  | <p><strong>Params</strong></p><ul><li><code>OperatorData _operatorData</code></li></ul>   |
-| [**`setOperators`**](write/setoperators.md) | <p><strong>Params</strong></p><ul><li><code>OperatorData[] _operatorData</code></li></ul> |
+| [**`setOperator`**](events/setoperator.md)  | <p><strong>Params</strong></p><ul><li><code>[`JBOperatorData`](../../data-structures/jboperatordata.md)_operatorData</code></li></ul>   |
+| [**`setOperators`**](write/setoperators.md) | <p><strong>Params</strong></p><ul><li><code>[`JBOperatorData`](../../data-structures/jboperatordata.md)[] _operatorData</code></li></ul> |
