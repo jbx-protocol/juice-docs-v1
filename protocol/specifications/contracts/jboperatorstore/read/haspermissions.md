@@ -2,7 +2,7 @@
 
 Contract:[`JBOperatorStore`](../)​‌
 
-Interface: `IJBOperatorStore`
+Interface: [`IJBOperatorStore`](../../../interfaces/ijboperatorstore.md)
 
 {% tabs %}
 {% tab title="Step by step" %}
@@ -24,9 +24,9 @@ function hasPermissions(
 * `_domain` is the domain that the operator has been given permissions to operate.
 * `_permissionIndexes` is an array of permission indexes to check for.
 * The view function can be accessed externally by anyone.
-* The function does not alter state on the blockchain.
-* The function overrides a function definition from the `IJBOperatorStore` interface.
-* The function return a flag indicating whether or not the operator has the permissions.
+* The view function does not alter state on the blockchain.
+* The function overrides a function definition from the [`IJBOperatorStore`](../../../interfaces/ijboperatorstore.md) interface.
+* The function returns a flag indicating whether the operator has all specified permissions.
 
 ### Body
 
@@ -43,11 +43,9 @@ function hasPermissions(
 3.  Make sure the `_permissionIndex` is one of the 255 indexes in a `uint256`.
 
     ```solidity
-    if (_permissionIndex > 255) {
-      revert PERMISSION_INDEX_OUT_OF_BOUNDS();
-    }
+    if (_permissionIndex > 255) revert PERMISSION_INDEX_OUT_OF_BOUNDS();
     ```
-4.  If the bit at the specified permission index of the `permissionsOf` the `_operator` for the specified `_account` and within the specified `_domain` is off, return `false` because all provided permissions are not on.
+4.  If the bit at the specified permission index of the packed permissions of the operator for the specified account and within the specified domain is off, return `false` because all provided permissions are not on.
 
     ```solidity
     if (((permissionsOf[_operator][_account][_domain] >> _permissionIndex) & 1) == 0)
@@ -75,7 +73,7 @@ function hasPermissions(
   @param _domain The domain that the operator has been given permissions to operate.
   @param _permissionIndexes An array of permission indexes to check for.
 
-  @return Whether the operator has all specified permissions.
+  @return A flag indicating whether the operator has all specified permissions.
 */
 function hasPermissions(
   address _operator,
@@ -86,9 +84,7 @@ function hasPermissions(
   for (uint256 _i = 0; _i < _permissionIndexes.length; _i++) {
     uint256 _permissionIndex = _permissionIndexes[_i];
 
-    if (_permissionIndex > 255) {
-      revert PERMISSION_INDEX_OUT_OF_BOUNDS();
-    }
+    if (_permissionIndex > 255) revert PERMISSION_INDEX_OUT_OF_BOUNDS();
 
     if (((permissionsOf[_operator][_account][_domain] >> _permissionIndex) & 1) == 0)
       return false;

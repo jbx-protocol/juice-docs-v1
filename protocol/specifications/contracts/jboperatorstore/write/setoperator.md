@@ -2,7 +2,7 @@
 
 Contract:[`JBOperatorStore`](../)​‌
 
-Interface: `IJBOperatorStore`
+Interface: [`IJBOperatorStore`](../../../interfaces/ijboperatorstore.md)
 
 {% tabs %}
 {% tab title="Step by step" %}
@@ -16,9 +16,9 @@ _Only an address can set its own operators._
  function setOperator(JBOperatorData calldata _operatorData) external override { ... }
 ```
 
-* `_operatorData` are the [JBOperatorData](../../../data-structures/jboperatordata.md) that specifies the params for the operator being set.
+* `_operatorData` is the [JBOperatorData](../../../data-structures/jboperatordata.md) that specifies the params for the operator being set.
 * The function can be accessed externally by anyone.
-* The function overrides a function definition from the `IJBOperatorStore` interface.
+* The function overrides a function definition from the [`IJBOperatorStore`](../../../interfaces/ijboperatorstore.md) interface.
 * The function doesn't return anything.
 
 ### Body
@@ -30,49 +30,46 @@ _Only an address can set its own operators._
     uint256 _packed = _packedPermissions(_operatorData.permissionIndexes);
     ```
 
-    Internal references:
+    _Internal references:_
 
-    * [`_packedPermissions`](\_packedpermissions.md)
-2. Store the packed permissions as the `permissionsOf` the provided `_operator`, on behalf of the `msg.sender`, specifically for the provided `_domain`.
+    * [`_packedPermissions`](../read/\_packedpermissions.md)
+2.  Store the packed permissions as the permissions of the provided operator, on behalf of the `msg.sender`, specifically for the provided domain.
 
-```solidity
-// Store the new value.
-permissionsOf[_operatorData.operator][msg.sender][_operatorData.domain] = _packed;
-```
+     ```solidity
+     // Store the new value.
+     permissionsOf[_operatorData.operator][msg.sender][_operatorData.domain] = _packed;
+     ```
 
-_Internal references:_
+     _Internal references:_
 
-* [`permissionsOf`](../properties/permissionsof.md)
-*   Emit a `SetOperator` event with the relevant parameters.
+     * [`permissionsOf`](../properties/permissionsof.md)
+3.  Emit a `SetOperator` event with the relevant parameters.
 
-    ```solidity
-    emit SetOperator(
-      _operatorData.operator,
-      msg.sender,
-      _operatorData.domain,
-      _operatorData.permissionIndexes,
-      _packed
-    );
-    ```
+     ```solidity
+     emit SetOperator(
+       _operatorData.operator,
+       msg.sender,
+       _operatorData.domain,
+       _operatorData.permissionIndexes,
+       _packed
+     );
+     ```
 
-    _Event references:_
+     _Event references:_
 
-    * [`SetOperator`](../events/setoperator.md)
+     * [`SetOperator`](../events/setoperator.md)
 {% endtab %}
 
 {% tab title="Code" %}
 ```solidity
 /**
   @notice
-  Sets permissions for an operators.
+  Sets permissions for an operator.
 
   @dev
   Only an address can set its own operators.
 
   @param _operatorData The data that specifies the params for the operator being set.
-    @dev _operatorData.operators The operators to whom permissions will be given.
-    @dev _operatorData.domains Lists the domain that each operator is being given permissions to operate. A value of 0 serves as a wildcard domain. Applications can specify their own domain system.
-    @dev _operatorData.permissionIndexes Lists the permission indexes to set for each operator. Indexes must be between 0-255. Applications can specify the significance of each index.
 */
 function setOperator(JBOperatorData calldata _operatorData) external override {
   // Pack the indexes into a uint256.
@@ -90,12 +87,6 @@ function setOperator(JBOperatorData calldata _operatorData) external override {
   );
 }
 ```
-{% endtab %}
-
-{% tab title="Errors" %}
-| String                               | Description                                                               |
-| ------------------------------------ | ------------------------------------------------------------------------- |
-| **`PERMISSION_INDEX_OUT_OF_BOUNDS`** | Thrown if the provided index is more than whats supported in a `uint256`. |
 {% endtab %}
 
 {% tab title="Events" %}

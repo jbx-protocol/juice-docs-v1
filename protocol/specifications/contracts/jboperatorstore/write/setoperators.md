@@ -2,7 +2,7 @@
 
 Contract:[`JBOperatorStore`](../)​‌
 
-Interface: `IJBOperatorStore`
+Interface: [`IJBOperatorStore`](../../../interfaces/ijboperatorstore.md)
 
 {% tabs %}
 {% tab title="Step by step" %}
@@ -13,17 +13,17 @@ _Only an address can set its own operators._
 ### Definition
 
 ```solidity
- function setOperators(JBOperatorData[] calldata _operatorData) external override { ... }
+function setOperators(JBOperatorData[] calldata _operatorData) external override { ... }
 ```
 
-* `_operatorData` are the [JBOperatorData](../../../data-structures/jboperatordata.md) that specifies the params for each operator being set.
+* `_operatorData` are the [JBOperatorData](../../../data-structures/jboperatordata.md) that specify the params for each operator being set.
 * The function can be accessed externally by anyone.
-* The function overrides a function definition from the `IJBOperatorStore` interface.
+* The function overrides a function definition from the [`IJBOperatorStore`](../../../interfaces/ijboperatorstore.md) interface.
 * The function doesn't return anything.
 
 ### Body
 
-1.  Loop through the provided `_operatorData`.
+1.  Loop through the provided operator data.
 
     ```solidity
     for (uint256 _i = 0; _i < _operatorData.length; _i++) { ... }
@@ -38,8 +38,8 @@ _Only an address can set its own operators._
 
         Internal references:
 
-        * [`_packedPermissions`](\_packedpermissions.md)
-    2.  Store the packed permissions as the `permissionsOf` the provided `_operator`, on behalf of the `msg.sender`, specifically for the provided `_domain`.
+        * [`_packedPermissions`](../read/_packedpermissions.md)
+    2.  Store the packed permissions as the permissions of the provided operator, on behalf of the `msg.sender`, specifically for the provided domain.
 
         ```solidity
         // Store the new value.
@@ -75,10 +75,7 @@ _Only an address can set its own operators._
   @dev
   Only an address can set its own operators.
 
-  @param _operatorData The data that specifies the params for each operator being set.
-    @dev _operatorData.perators The operators to whom permissions will be given.
-    @dev _operatorData.domains Lists the domain that each operator is being given permissions to operate. A value of 0 serves as a wildcard domain. Applications can specify their own domain system.
-    @dev _operatorData.permissionIndexes Lists the permission indexes to set for each operator. Indexes must be between 0-255. Applications can specify the significance of each index.
+  @param _operatorData The data that specify the params for each operator being set.
 */
 function setOperators(JBOperatorData[] calldata _operatorData) external override {
   for (uint256 _i = 0; _i < _operatorData.length; _i++) {
@@ -98,12 +95,6 @@ function setOperators(JBOperatorData[] calldata _operatorData) external override
   }
 }
 ```
-{% endtab %}
-
-{% tab title="Errors" %}
-| String                               | Description                                                               |
-| ------------------------------------ | ------------------------------------------------------------------------- |
-| **`PERMISSION_INDEX_OUT_OF_BOUNDS`** | Thrown if the provided index is more than whats supported in a `uint256`. |
 {% endtab %}
 
 {% tab title="Events" %}
