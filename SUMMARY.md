@@ -206,6 +206,7 @@
       * [Write](protocol/specifications/contracts/jbtoken/write/README.md)
         * [mint](protocol/specifications/contracts/jbtoken/write/mint.md)
         * [burn](protocol/specifications/contracts/jbtoken/write/burn.md)
+        * [approve](protocol/specifications/contracts/jbtoken/write/approve.md)
         * [transfer](protocol/specifications/contracts/jbtoken/write/transfer.md)
         * [transferFrom](protocol/specifications/contracts/jbtoken/write/transferfrom.md)
         * [transferOwnership](protocol/specifications/contracts/jbtoken/write/transferownership.md)
