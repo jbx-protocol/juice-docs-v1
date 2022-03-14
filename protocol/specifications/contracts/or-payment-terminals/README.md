@@ -1,2 +1,2 @@
-# | Payment Terminals
+# | Payment terminals
 

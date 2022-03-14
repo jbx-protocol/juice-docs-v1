@@ -2,7 +2,7 @@
 
 Contract:[`JBPrices`](../)​‌
 
-Interface: `IJBPrices`
+Interface: [`IJBPrices`](../../../interfaces/ijbprices.md)
 
 {% tabs %}
 {% tab title="Step by step" %}
@@ -25,7 +25,7 @@ function priceFor(
 * The view function can be accessed externally by anyone.
 * The view function does not alter state on the blockchain.
 * The function overrides a function definition from the [`IJBPrices`](../../../interfaces/ijbprices.md) interface.
-* The function returns the price of the currency in terms of the base, with the specified number of decimals.
+* The function returns the price of the currency in terms of the base, as a fixed point number with the specified number of decimals.
 
 ### Body
 
@@ -69,7 +69,7 @@ function priceFor(
   @param _base The currency to base the price on.
   @param _decimals The number of decimals the returned fixed point price should include.
   
-  @return The price of the currency in terms of the base, with the specified number of decimals.
+  @return The price of the currency in terms of the base, as a fixed point number with the specified number of decimals.
 */
 function priceFor(
   uint256 _currency,
