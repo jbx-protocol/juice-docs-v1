@@ -9,7 +9,7 @@ Contract:[`JBFundingCycleStore`](../)​
 ### Definition
 
 ```solidity
-function _configureIntrinsicpropertiesFor(
+function _configureIntrinsicPropertiesFor(
   uint256 _projectId,
   uint256 _configuration,
   uint256 _weight,
@@ -19,23 +19,22 @@ function _configureIntrinsicpropertiesFor(
 
 * Arguments:
   * `_projectId` is the ID of the project to find a configurable funding cycle for.
-  * `_configuration` is the time at which the configuration is occurring.
+  * `_configuration` is the time at which the funding cycle was configured.
   * `_weight` is the weight to store in the configured funding cycle.
   * `_mustStartAtOrAfter` is the time before which the initialized funding cycle can't start.
 * The function is private to this contract.
-* The function returns the ID of a configurable funding cycle.
+* The function doesn't return anything.
 
 ### Body
 
-1.  If the project does not yet have a funding cycle, initialize a new one with no base.
+1.  If the project does not yet have a funding cycle, initialize a new one.
 
     ```solidity
     // If there's not yet a funding cycle for the project, initialize one.
-    if (latestConfigurationOf[_projectId] == 0) {
+    if (latestConfigurationOf[_projectId] == 0)
       // Use an empty funding cycle as the base.
-      _initFor(_projectId, _getStructFor(0, 0), _configuration, _mustStartAtOrAfter, _weight);
-      return;
-    }
+      return
+        _initFor(_projectId, _getStructFor(0, 0), _configuration, _mustStartAtOrAfter, _weight);
     ```
 
     _Internal references:_
@@ -75,12 +74,12 @@ function _configureIntrinsicpropertiesFor(
     _Internal references:_
 
     * [`_getStructFor`](../read/\_getstructfor.md)
-5.  If the configuration isn't approves, get a reference to the configuration it's based on which must be the latest approved configuration.
+5.  If the configuration isn't approved, get a reference to the configuration it's based on which must be the latest approved configuration.
 
     ```solidity
     if (!_isApproved(_projectId, _fundingCycle))
-      // If it hasn't been approved, set the ID to be the based funding cycle,
-      // which carries the last approved configuration.
+      // If it hasn't been approved, set the ID to be the funding cycle it's based on,
+      // which carries the latest approved configuration.
       _currentConfiguration = _getStructFor(_projectId, _currentConfiguration).basedOn;
     ```
 
@@ -88,7 +87,7 @@ function _configureIntrinsicpropertiesFor(
 
     * [`_isApproved`](../read/\_isapproved.md)
     * [`_getStructFor`](../read/\_getstructfor.md)
-6.  At this point, the `_currentConfiguration` is the funding cycle configuration that the initialized one should be based on. Get a reference to the [`JBFundingCycle`](../../../data-structures/jbfundingcycle.md)for the configuration.
+6.  At this point, the current configuration being referenced is the funding cycle configuration that the initialized one should be based on. Get a reference to the [`JBFundingCycle`](../../../data-structures/jbfundingcycle.md) for the configuration.
 
     ```solidity
     // Determine the funding cycle to use as the base.
@@ -136,22 +135,21 @@ function _configureIntrinsicpropertiesFor(
   Updates the configurable funding cycle for this project if it exists, otherwise creates one.
 
   @param _projectId The ID of the project to find a configurable funding cycle for.
-  @param _configuration The time at which the configuration is occurring.
+  @param _configuration The time at which the funding cycle was configured.
   @param _weight The weight to store in the configured funding cycle.
   @param _mustStartAtOrAfter The time before which the initialized funding cycle can't start.
 */
-function _configureIntrinsicpropertiesFor(
+function _configureIntrinsicPropertiesFor(
   uint256 _projectId,
   uint256 _configuration,
   uint256 _weight,
   uint256 _mustStartAtOrAfter
 ) private {
   // If there's not yet a funding cycle for the project, initialize one.
-  if (latestConfigurationOf[_projectId] == 0) {
+  if (latestConfigurationOf[_projectId] == 0)
     // Use an empty funding cycle as the base.
-    _initFor(_projectId, _getStructFor(0, 0), _configuration, _mustStartAtOrAfter, _weight);
-    return;
-  }
+    return
+      _initFor(_projectId, _getStructFor(0, 0), _configuration, _mustStartAtOrAfter, _weight);
 
   // Get the active funding cycle's configuration.
   uint256 _currentConfiguration = _eligibleOf(_projectId);
@@ -165,8 +163,8 @@ function _configureIntrinsicpropertiesFor(
   JBFundingCycle memory _fundingCycle = _getStructFor(_projectId, _currentConfiguration);
 
   if (!_isApproved(_projectId, _fundingCycle))
-    // If it hasn't been approved, set the ID to be the based funding cycle,
-    // which carries the last approved configuration.
+    // If it hasn't been approved, set the ID to be the funding cycle it's based on,
+    // which carries the latest approved configuration.
     _currentConfiguration = _getStructFor(_projectId, _currentConfiguration).basedOn;
 
   // Determine the funding cycle to use as the base.

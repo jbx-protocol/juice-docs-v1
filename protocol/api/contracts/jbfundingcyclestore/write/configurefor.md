@@ -2,7 +2,7 @@
 
 Contract:[`JBFundingCycleStore`](../)​‌
 
-Interface: `IJBFundingCycleStore`
+Interface: [`IJBFundingCycleStore`](../../../interfaces/ijbfundingcyclestore.md)
 
 {% tabs %}
 {% tab title="Step by step" %}
@@ -23,30 +23,26 @@ function configureFor(
 
 * Arguments:
   * `_projectId` is the ID of the project being configured.
-  * `_data` is the [`JBFundingCycleData`](../../../data-structures/jbfundingcycledata.md)for the configuration.
-  * `_metadata` is data to associate with this funding cycle configuration.
-  * `_mustStartAtOrAfter` is the time before which the initialized funding cycle can't start.
+  * `_data` is the [`JBFundingCycleData`](../../../data-structures/jbfundingcycledata.md) for the configuration.
+  * `_metadata` is arbitrary extra data to associate with this funding cycle configuration that's not used within.
+  * `_mustStartAtOrAfter` is the time before which the initialized funding cycle cannot start.
 * Through the [`onlyController`](../../or-abstract/jbcontrollerutility/modifiers/onlycontroller.md) modifier, the function can only be accessed by the controller of the `_projectId`.
-* The function overrides a function definition from the `IJBFundingCycleStore` interface.
-* Returns the [`JBFundingCycle`](../../../data-structures/jbfundingcycle.md) that was configured.
+* The function overrides a function definition from the [`IJBFundingCycleStore`](../../../interfaces/ijbfundingcyclestore.md) interface.
+* Returns the [`JBFundingCycle`](../../../data-structures/jbfundingcycle.md) that the configuration will take effect during..
 
 #### Body
 
-1.  Make sure the `_data.duration` fits in a `uint64`.
+1.  Make sure the duration fits in a `uint64`.
 
     ```solidity
     // Duration must fit in a uint64.
-    if (_data.duration > type(uint64).max) {
-      revert INVALID_DURATION();
-    }
+    if (_data.duration > type(uint64).max) revert INVALID_DURATION();
     ```
 2.  Make sure the `_data.discountRate` is less than the expected maximum value.
 
     ```solidity
-    // Discount rate token must be less than or equal to 100%.
-    if (_data.discountRate > JBConstants.MAX_DISCOUNT_RATE) {
-      revert INVALID_DISCOUNT_RATE();
-    }
+    // Discount rate must be less than or equal to 100%.
+    if (_data.discountRate > JBConstants.MAX_DISCOUNT_RATE) revert INVALID_DISCOUNT_RATE();
     ```
 
     _Libraries used:_
@@ -57,9 +53,7 @@ function configureFor(
 
     ```solidity
     // Weight must fit into a uint88.
-    if (_data.weight > type(uint88).max) {
-      revert INVALID_WEIGHT();
-    }
+    if (_data.weight > type(uint88).max) revert INVALID_WEIGHT();
     ```
 4.  Get a reference to the time at which the configuration is occurring.
 
@@ -71,7 +65,7 @@ function configureFor(
 
     ```solidity
     // Set up a reconfiguration by configuring intrinsic properties.
-    _configureIntrinsicpropertiesFor(
+    _configureIntrinsicPropertiesFor(
       _projectId,
       _configuration,
       _data.weight,
@@ -95,10 +89,13 @@ function configureFor(
     ) {
       // ballot in bits 0-159 bytes.
       uint256 packed = uint160(address(_data.ballot));
+
       // duration in bits 160-223 bytes.
       packed |= _data.duration << 160;
+
       // discountRate in bits 224-255 bytes.
       packed |= _data.discountRate << 224;
+
       // Set in storage.
       _packedUserPropertiesOf[_projectId][_configuration] = packed;
     }
@@ -107,7 +104,7 @@ function configureFor(
     _Internal references:_
 
     * [`_packAndStoreUserPropertiesOf`](\_packandstoreuserpropertiesof.md)
-7.  Store the provided `_metadata` for the configuration. No need to store if the value is 0 since the storage slot defaults to 0.
+7.  Store the provided metadata for the configuration. No need to store if the value is 0 since the storage slot defaults to 0.
 
     ```solidity
     // Set the metadata if needed.
@@ -148,15 +145,9 @@ function configureFor(
   Only a project's current controller can configure its funding cycles.
 
   @param _projectId The ID of the project being configured.
-  @param _data The funding cycle configuration.
-    @dev _data.duration The duration of the funding cycle. Measured in days. 
-      Set to 0 for no expiry and to be able to reconfigure anytime.
-    @dev _data.discountRate A number from 0-1000000000 indicating how valuable a contribution to this funding cycle is compared to previous funding cycles.
-      If it's 0, each funding cycle will have equal weight.
-      If the number is 900000000, a contribution to the next funding cycle will only give you 10% of tickets given to a contribution of the same amoutn during the current funding cycle.
-    @dev _data.ballot The new ballot that will be used to approve subsequent reconfigurations.
-  @param _metadata Data to associate with this funding cycle configuration.
-  @param _mustStartAtOrAfter The time before which the initialized funding cycle can't start.
+  @param _data The funding cycle configuration data.
+  @param _metadata Arbitrary extra data to associate with this funding cycle configuration that's not used within.
+  @param _mustStartAtOrAfter The time before which the initialized funding cycle cannot start.
 
   @return The funding cycle that the configuration will take effect during.
 */
@@ -167,25 +158,19 @@ function configureFor(
   uint256 _mustStartAtOrAfter
 ) external override onlyController(_projectId) returns (JBFundingCycle memory) {
   // Duration must fit in a uint64.
-  if (_data.duration > type(uint64).max) {
-    revert INVALID_DURATION();
-  }
+  if (_data.duration > type(uint64).max) revert INVALID_DURATION();
 
-  // Discount rate token must be less than or equal to 100%.
-  if (_data.discountRate > JBConstants.MAX_DISCOUNT_RATE) {
-    revert INVALID_DISCOUNT_RATE();
-  }
+  // Discount rate must be less than or equal to 100%.
+  if (_data.discountRate > JBConstants.MAX_DISCOUNT_RATE) revert INVALID_DISCOUNT_RATE();
 
   // Weight must fit into a uint88.
-  if (_data.weight > type(uint88).max) {
-    revert INVALID_WEIGHT();
-  }
+  if (_data.weight > type(uint88).max) revert INVALID_WEIGHT();
 
   // The configuration timestamp is now.
   uint256 _configuration = block.timestamp;
 
   // Set up a reconfiguration by configuring intrinsic properties.
-  _configureIntrinsicpropertiesFor(
+  _configureIntrinsicPropertiesFor(
     _projectId,
     _configuration,
     _data.weight,
@@ -202,8 +187,10 @@ function configureFor(
   ) {
     // ballot in bits 0-159 bytes.
     uint256 packed = uint160(address(_data.ballot));
+
     // duration in bits 160-223 bytes.
     packed |= _data.duration << 160;
+
     // discountRate in bits 224-255 bytes.
     packed |= _data.discountRate << 224;
 
@@ -233,8 +220,7 @@ function configureFor(
 {% tab title="Events" %}
 | Name                                      | Data                                                                                                                                                                                                                                                                                                                                                                                                         |
 | ----------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| [**`Configure`**](../events/configure.md) | <ul><li><code>uint256 indexed fundingCycleId</code></li><li><code>uint256 indexed projectId</code></li><li><code>uint256 indexed configured</code></li><li><a href="../../../data-structures/jbfundingcycledata.md"><code>JBFundingCycleData</code></a><code>data</code></li><li><code>uint256 metadata</code></li><li><code>uint256 mustStartAtOrAfter</code></li><li><code>address caller</code></li></ul> |
-| [**`Init`**](../events/init.md)           | <ul><li><code>uint256 indexed fundingCycleId</code></li><li><code>uint256 indexed projectId</code></li><li><code>uint256 indexed basedOn</code></li></ul>                                                                                                                                                                                                                                                    |
+| [**`Configure`**](../events/configure.md) | <ul><li><code>uint256 indexed configuration</code></li><li><code>uint256 indexed projectId</code></li><code>[`JBFundingCycleData`](../../data-structures/jbfundingcycledata.md)data</code></li><li><code>uint256 metadata</code></li><li><code>uint256 mustStartAtOrAfter</code></li><li><code>address caller</code></li></ul> |
 {% endtab %}
 
 {% tab title="Bug bounty" %}
