@@ -17,6 +17,7 @@ Contract: [`JBFundingCycleStore`](../)​‌
 mapping(uint256 => mapping(uint256 => uint256)) private _packedIntrinsicPropertiesOf;
 ```
 
-* `_projectId` is the ID of the project to get instrinsic properties of.
-* `_configuration` is the funding cycle configuration to get properties of.
+* Arguments:
+  * `_projectId` is the ID of the project to get instrinsic properties of.
+  * `_configuration` is the funding cycle configuration to get properties of.
 * The resulting view function is private to this contract.

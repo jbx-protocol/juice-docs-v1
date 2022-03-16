@@ -22,9 +22,9 @@ function get(uint256 _projectId, uint256 _configuration)
   * `_projectId` is the ID of the project to which the funding cycle belongs.
   * `_configuration` is the configuration of the funding cycle to get.
 * The view function can be accessed externally by anyone.
-* The function does not alter state on the blockchain.
-* The function overrides a function definition from the `IJBFundingCycleStore` interface.
-* The function returns a [`JBFundingCycle`](../../../data-structures/jbfundingcycle.md).
+* The view function does not alter state on the blockchain.
+* The function overrides a function definition from the [`IJBFundingCycleStore`](../../../interfaces/ijbfundingcyclestore.md) interface.
+* The function returns the [`JBFundingCycle`](../../../data-structures/jbfundingcycle.md).
 
 ### Body
 

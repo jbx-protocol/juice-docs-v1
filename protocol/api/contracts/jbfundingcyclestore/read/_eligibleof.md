@@ -17,9 +17,9 @@ function _eligibleOf(uint256 _projectId) private view returns (uint256 configura
 ```
 
 * Arguments:
-  * `_projectId` is the ID of a project to look through for an eligible cycle.
+  * `_projectId` is the ID of the project to look through.
 * The view function is private to this contract.
-* The function does not alter state on the blockchain.
+* The view function does not alter state on the blockchain.
 * The function returns the configuration of an eligible funding cycle if one exists, or 0 if one doesn't exist.
 
 ### Body
@@ -48,7 +48,7 @@ function _eligibleOf(uint256 _projectId) private view returns (uint256 configura
 
     ```solidity
     // If the latest is expired, return an empty funding cycle.
-    // A duration of 0 can not be expired.
+    // A duration of 0 cannot be expired.
     if (
       _fundingCycle.duration > 0 && block.timestamp >= _fundingCycle.start + _fundingCycle.duration
     ) return 0;
@@ -101,7 +101,7 @@ function _eligibleOf(uint256 _projectId) private view returns (uint256 configura
 
   @param _projectId The ID of the project to look through.
 
-  @return configuration The configuration of the active funding cycle.
+  @return configuration The configuration of an eligible funding cycle if one exists, or 0 if one doesn't exist.
 */
 function _eligibleOf(uint256 _projectId) private view returns (uint256 configuration) {
   // Get a reference to the project's latest funding cycle.

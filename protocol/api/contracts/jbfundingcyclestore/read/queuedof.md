@@ -8,7 +8,7 @@ Interface: `IJBFundingCycleStore`
 {% tab title="Step by step" %}
 **The funding cycle that's next up for the specified project.**
 
-_Returns an empty funding cycle with all properties set to 0 if a queued funding cycle of the project is not found._
+_If a queued funding cycle of the project is not found, returns an empty funding cycle with all properties set to 0._
 
 ### Definition
 
@@ -23,8 +23,8 @@ function queuedOf(uint256 _projectId)
 * Arguments:
   * `_projectId` is the ID of the project to get the queued funding cycle of.
 * The view function can be accessed externally by anyone, and internally by the contract.
-* The function does not alter state on the blockchain.
-* The function overrides a function definition from the `IJBFundingCycleStore` interface.
+* The view function does not alter state on the blockchain.
+* The function overrides a function definition from the [`IJBFundingCycleStore`](../../../interfaces/) interface.
 * The function returns a [`JBFundingCycle`](../../../data-structures/jbfundingcycle.md).
 
 ### Body
@@ -32,7 +32,7 @@ function queuedOf(uint256 _projectId)
 1.  If there are no stored funding cycles for the provided project, there can't be a queued funding cycle so an empty funding cycle should be returned.
 
     ```solidity
-    // The project must have funding cycles.
+    // If the project does not have a funding cycle, return an empty struct.
     if (latestConfigurationOf[_projectId] == 0) return _getStructFor(0, 0);
     ```
 
@@ -49,14 +49,16 @@ function queuedOf(uint256 _projectId)
     _Internal references:_
 
     * [`_standbyOf`](\_getstructfor.md)
-3.  If there is and it is approved, it must be the queued funding cycle for the project. Otherwise get a reference to the funding cycle structure based on the yet-to-be-approved standby configuration.
+3.  If there is a stanby cycle and it is approved, it must be the queued funding cycle for the project. Otherwise get a reference to the funding cycle structure based on the yet-to-be-approved standby configuration.
 
     ```solidity
-    // If it exists, return it's funding cycle if it is approved.
+    // If it exists, return it's funding cycle if it is approved
     if (_standbyFundingCycleConfiguration > 0) {
       fundingCycle = _getStructFor(_projectId, _standbyFundingCycleConfiguration);
+
       if (_isApproved(_projectId, fundingCycle)) return fundingCycle;
-      // Resolve the funding cycle for the for the latest configured funding cycle.
+
+      // Resolve the funding cycle for the latest configured funding cycle.
       fundingCycle = _getStructFor(_projectId, fundingCycle.basedOn);
     }
     ```
@@ -69,8 +71,9 @@ function queuedOf(uint256 _projectId)
 
     ```solidity
     else {
-      // Resolve the funding cycle for the for the latest configured funding cycle.
+      // Resolve the funding cycle for the latest configured funding cycle.
       fundingCycle = _getStructFor(_projectId, latestConfigurationOf[_projectId]);
+      
       // If the latest funding cycle starts in the future, it must start in the distant future
       // since its not in standby. In this case base the queued cycles on the base cycle.
       if (fundingCycle.start > block.timestamp)
@@ -82,7 +85,7 @@ function queuedOf(uint256 _projectId)
 
     * [`_getStructFor`](\_getstructfor.md)
     * [`latestConfigurationOf`](../properties/latestconfigurationof.md)
-5.  If the referenced funding cycle has a duration of 0, there can't be a queued funding cycle since configurations are being made manually instead of on a schedule.
+5.  If the referenced funding cycle has a duration of 0, there can't be a queued funding cycle since configurations with no duration are being made manually instead of on a schedule.
 
     ```solidity
     // There's no queued if the current has a duration of 0.
@@ -129,11 +132,11 @@ function queuedOf(uint256 _projectId)
   The funding cycle that's next up for the specified project.
 
   @dev
-  Returns an empty funding cycle with all properties set to 0 if a queued funding cycle of the project is not found.
+  If a queued funding cycle of the project is not found, returns an empty funding cycle with all properties set to 0.
 
   @param _projectId The ID of the project to get the queued funding cycle of.
 
-  @return fundingCycle The queued funding cycle.
+  @return fundingCycle The project's queued funding cycle.
 */
 function queuedOf(uint256 _projectId)
   external
@@ -141,7 +144,7 @@ function queuedOf(uint256 _projectId)
   override
   returns (JBFundingCycle memory fundingCycle)
 {
-  // The project must have funding cycles.
+  // If the project does not have a funding cycle, return an empty struct.
   if (latestConfigurationOf[_projectId] == 0) return _getStructFor(0, 0);
 
   // Get a reference to the configuration of the standby funding cycle.
@@ -150,12 +153,15 @@ function queuedOf(uint256 _projectId)
   // If it exists, return it's funding cycle if it is approved
   if (_standbyFundingCycleConfiguration > 0) {
     fundingCycle = _getStructFor(_projectId, _standbyFundingCycleConfiguration);
+
     if (_isApproved(_projectId, fundingCycle)) return fundingCycle;
-    // Resolve the funding cycle for the for the latest configured funding cycle.
+
+    // Resolve the funding cycle for the latest configured funding cycle.
     fundingCycle = _getStructFor(_projectId, fundingCycle.basedOn);
   } else {
-    // Resolve the funding cycle for the for the latest configured funding cycle.
+    // Resolve the funding cycle for the latest configured funding cycle.
     fundingCycle = _getStructFor(_projectId, latestConfigurationOf[_projectId]);
+
     // If the latest funding cycle starts in the future, it must start in the distant future
     // since its not in standby. In this case base the queued cycles on the base cycle.
     if (fundingCycle.start > block.timestamp)

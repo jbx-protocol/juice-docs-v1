@@ -2,19 +2,19 @@
 
 Contract:[`JBFundingCycleStore`](../)​‌
 
-Interface: `IJBFundingCycleStore`
+Interface: [`IJBFundingCycleStore`](../../../interfaces/ijbfundingcyclestore.md)
 
 {% tabs %}
 {% tab title="Step by step" %}
 **The funding cycle that is currently active for the specified project.**
 
-_Returns an empty funding cycle with all properties set to 0 if a current funding cycle of the project is not found._
+_If a current funding cycle of the project is not found, returns an empty funding cycle with all properties set to 0._
 
 ### Definition
 
 ```solidity
 function currentOf(uint256 _projectId)
-  public
+  external
   view
   override
   returns (JBFundingCycle memory fundingCycle) { ... }
@@ -23,16 +23,16 @@ function currentOf(uint256 _projectId)
 * Arguments:
   * `_projectId` is the ID of the project to get the current funding cycle of.
 * The view function can be accessed externally by anyone, and internally by the contract.
-* The function does not alter state on the blockchain.
-* The function overrides a function definition from the `IJBFundingCycleStore` interface.
-* The function returns a [`JBFundingCycle`](../../../data-structures/jbfundingcycle.md).
+* The view function does not alter state on the blockchain.
+* The function overrides a function definition from the [`IJBFundingCycleStore`](../../../interfaces/ijbfundingcyclestore.md) interface.
+* The function returns the project's current [`JBFundingCycle`](../../../data-structures/jbfundingcycle.md).
 
 ### Body
 
 1.  If there are no stored funding cycles for the provided project, there can't be an active funding cycle so an empty funding cycle should be returned.
 
     ```solidity
-    // The project must have funding cycles.
+    // If the project does not have a funding cycle, return an empty struct.
     if (latestConfigurationOf[_projectId] == 0) return _getStructFor(0, 0);
     ```
 
@@ -40,7 +40,7 @@ function currentOf(uint256 _projectId)
 
     * [`latestConfigurationOf`](../properties/latestconfigurationof.md)
     * [`_getStructFor`](\_getstructfor.md)
-2.  Get a reference to an eligible funding cycle if there is one. This eligible cycle might not yet be approved.
+2.  Get a reference to the configuration of an eligible funding cycle if there is one. This eligible cycle might not yet be approved.
 
     ```solidity
     // Get a reference to the configuration of the eligible funding cycle.
@@ -56,7 +56,7 @@ function currentOf(uint256 _projectId)
     // Keep a reference to the eligible funding cycle.
     JBFundingCycle memory _fundingCycle;
     ```
-4.  If there's a candidate funding cycle configuration, check to see if it is approved. If so, return the funding cycle as the `currentOf` the project. Otherwise, get a reference to the funding cycle that the candidate is based on. A current funding cycle will be one derived from this reference.
+4.  If there's a candidate funding cycle configuration, check to see if it is approved. If so, return the funding cycle as the current funding cycle of the project. Otherwise, get a reference to the funding cycle that the candidate is based on. A current funding cycle will be one derived from this reference.
 
     ```solidity
     // If a standby funding cycle exists...
@@ -71,7 +71,7 @@ function currentOf(uint256 _projectId)
       // If it hasn't been approved, set the funding cycle configuration to be the configuration of the funding cycle that it's based on,
       // which carries the last approved configuration.
       _fundingCycleConfiguration = _fundingCycle.basedOn;
-    }
+    } 
     ```
 
     _Internal references:_
@@ -103,7 +103,7 @@ function currentOf(uint256 _projectId)
 6.  If the current referenced configuration is 0, there must not be a current cycle so return an empty one.
 
     ```solidity
-    // The funding cycle cant be 0.
+    // If there is not funding cycle to base the current one on, there can't be a current one. 
     if (_fundingCycleConfiguration == 0) return _getStructFor(0, 0);
     ```
 
@@ -139,11 +139,11 @@ function currentOf(uint256 _projectId)
   The funding cycle that is currently active for the specified project.
 
   @dev
-  Returns an empty funding cycle with all properties set to 0 if a current funding cycle of the project is not found.
-
+  If a current funding cycle of the project is not found, returns an empty funding cycle with all properties set to 0.
+  
   @param _projectId The ID of the project to get the current funding cycle of.
 
-  @return fundingCycle The current funding cycle.
+  @return fundingCycle The project's current funding cycle.
 */
 function currentOf(uint256 _projectId)
   external
@@ -151,7 +151,7 @@ function currentOf(uint256 _projectId)
   override
   returns (JBFundingCycle memory fundingCycle)
 {
-  // The project must have funding cycles.
+  // If the project does not have a funding cycle, return an empty struct.
   if (latestConfigurationOf[_projectId] == 0) return _getStructFor(0, 0);
 
   // Get a reference to the configuration of the eligible funding cycle.
@@ -185,7 +185,7 @@ function currentOf(uint256 _projectId)
       _fundingCycleConfiguration = _fundingCycle.basedOn;
   }
 
-  // The funding cycle cant be 0.
+  // If there is not funding cycle to base the current one on, there can't be a current one. 
   if (_fundingCycleConfiguration == 0) return _getStructFor(0, 0);
 
   // The funding cycle to base a current one on.

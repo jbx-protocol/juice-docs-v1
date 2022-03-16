@@ -19,7 +19,7 @@ function _standbyOf(uint256 _projectId) private view returns (uint256 configurat
 * Arguments:
   * `_projectId` is the ID of a project to look through for a standby cycle.
 * The view function is private to this contract.
-* The function does not alter state on the blockchain.
+* The view function does not alter state on the blockchain.
 * The function returns the configuration of the standby funding cycle if one exists, or 0 if one doesn't exist.
 
 ### Body
@@ -91,7 +91,7 @@ function _standbyOf(uint256 _projectId) private view returns (uint256 configurat
   
   @param _projectId The ID of a project to look through for a standby cycle.
 
-  @return configuration The configuration of the standby funding cycle.
+  @return configuration The configuration of the standby funding cycle if one exists, or 0 if one doesn't exist.
 */
 function _standbyOf(uint256 _projectId) private view returns (uint256 configuration) {
   // Get a reference to the project's latest funding cycle.

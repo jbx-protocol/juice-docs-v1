@@ -2,11 +2,11 @@
 
 Contract:[`JBFundingCycleStore`](../)​‌
 
-Interface: `IJBFundingCycleStore`
+Interface: [`IJBFundingCycleStore`](../../../interfaces/ijbfundingcyclestore.md)
 
 {% tabs %}
 {% tab title="Step by step" %}
-**The currency ballot state of the project.**
+**The current ballot state of the project.**
 
 ### Definition
 
@@ -17,13 +17,13 @@ function currentBallotStateOf(uint256 _projectId) external view override returns
 * Arguments:
   * `_projectId` is the ID of the project to check the ballot state of.
 * The view function can be accessed externally by anyone.
-* The function does not alter state on the blockchain.
-* The function overrides a function definition from the `IJBFundingCycleStore` interface.
-* The function returns a [`JBBallotState`](../../../enums/jbballotstate.md).
+* The view function does not alter state on the blockchain.
+* The function overrides a function definition from the [`IJBFundingCycleStore`](../../../interfaces/ijbfundingcyclestore.md) interface.
+* The function returns the project's current [`JBBallotState`](../../../enums/jbballotstate.md).
 
 ### Body
 
-1.  Get a reference to the latest funding cycle for the `_projectId`.
+1.  Get a reference to the latest funding cycle for the project.
 
     ```solidity
     // Get a reference to the latest funding cycle configuration.
@@ -33,7 +33,7 @@ function currentBallotStateOf(uint256 _projectId) external view override returns
     _Internal references:_
 
     * [`latestConfigurationOf`](../properties/latestconfigurationof.md)
-2.  Get a reference to the funding cycle for the latest funding cycle.
+2.  Get a reference to the funding cycle for the latest configuration.
 
     ```solidity
     // Resolve the funding cycle for the for the latest configuration.
@@ -43,7 +43,7 @@ function currentBallotStateOf(uint256 _projectId) external view override returns
     _Internal references:_
 
     * [`_getStructFor`](\_getstructfor.md)
-3.  Return the `_ballotStateOf` the latest funding cycle configuration as is determined by the current configuration and the funding cycle it's based on.
+3.  Return the ballot state of the latest funding cycle configuration as is determined by the current configuration and the funding cycle it's based on.
 
     ```solidity
     return _ballotStateOf(_projectId, _fundingCycle.configuration, _fundingCycle.basedOn);
@@ -62,7 +62,7 @@ function currentBallotStateOf(uint256 _projectId) external view override returns
 
   @param _projectId The ID of the project to check the ballot state of.
 
-  @return The current ballot's state.
+  @return The project's current ballot's state.
 */
 function currentBallotStateOf(uint256 _projectId) external view override returns (JBBallotState) {
   // Get a reference to the latest funding cycle configuration.

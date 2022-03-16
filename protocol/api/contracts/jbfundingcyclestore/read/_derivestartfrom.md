@@ -16,11 +16,11 @@ function _deriveStartFrom(JBFundingCycle memory _baseFundingCycle, uint256 _must
 ```
 
 * Arguments:
-  * `_baseFundingCycle` is The [`JBFundingCycle`](../../../data-structures/jbfundingcycle.md) to make the calculation for.
+  * `_baseFundingCycle` is The [`JBFundingCycle`](../../../data-structures/jbfundingcycle.md) to base the calculation on.
   * `_mustStartAtOrAfter` is a date that the derived start must be on or come after.
 * The view function is private to this contract.
-* The function does not alter state on the blockchain.
-* The function returns a timestamp in seconds.
+* The view function does not alter state on the blockchain.
+* The function returns the next start time.
 
 ### Body
 
@@ -30,22 +30,22 @@ function _deriveStartFrom(JBFundingCycle memory _baseFundingCycle, uint256 _must
     // A subsequent cycle to one with a duration of 0 should start as soon as possible.
     if (_baseFundingCycle.duration == 0) return _mustStartAtOrAfter;
     ```
-2.  Get a reference to the start time of the cycle immediately following the base cycle. This is the base cycles start time plus the base cycle's duration.
+2.  Get a reference to the start time of the cycle immediately following the base cycle. This is the base cycle's start time plus the base cycle's duration.
 
     ```solidity
     // The time when the funding cycle immediately after the specified funding cycle starts.
     uint256 _nextImmediateStart = _baseFundingCycle.start + _baseFundingCycle.duration;
     ```
-3.  If the `_nextImmediateStart` is allowed, it should be used. Otherwise we'll have to calculate a value depending on how much time has passed since the `_nextImmediateStart`.
+3.  If the next immediate start is allowed, it should be used. Otherwise, calculate a value depending on how much time has passed since the next immediate start.
 
     ```solidity
     // If the next immediate start is now or in the future, return it.
     if (_nextImmediateStart >= _mustStartAtOrAfter) return _nextImmediateStart;
     ```
-4.  Save a reference to the amount of seconds since the `_mustStartAtOrAfter` time that results in a start time that might satisfy the specified constraints.
+4.  Save a reference to the amount of seconds since the time when the funding cycle must start on or after, which results in a start time that might satisfy the specified constraints.
 
     ```solidity
-    // The amount of seconds since the `_mustStartAtOrAfter` time that results in a start time that might satisfy the specified constraints.
+    // The amount of seconds since the `_mustStartAtOrAfter` time which results in a start time that might satisfy the specified constraints.
     uint256 _timeFromImmediateStartMultiple = (_mustStartAtOrAfter - _nextImmediateStart) %
       _baseFundingCycle.duration;
     ```
@@ -55,7 +55,7 @@ function _deriveStartFrom(JBFundingCycle memory _baseFundingCycle, uint256 _must
     // A reference to the first possible start timestamp.
     start = _mustStartAtOrAfter - _timeFromImmediateStartMultiple;
     ```
-6.  It's possible that the `start` time doesn't satisfy the specified constraints. If so, add increments of the funding cycle's duration as necessary to satisfy the threshold.
+6.  It's possible that the start time doesn't satisfy the specified constraints. If so, add increments of the funding cycle's duration as necessary to satisfy the threshold.
 
     ```solidity
     // Add increments of duration as necessary to satisfy the threshold.
@@ -69,7 +69,7 @@ function _deriveStartFrom(JBFundingCycle memory _baseFundingCycle, uint256 _must
   @notice 
   The date that is the nearest multiple of the specified funding cycle's duration from its end.
 
-  @param _baseFundingCycle The funding cycle to make the calculation for.
+  @param _baseFundingCycle The funding cycle to base the calculation on.
   @param _mustStartAtOrAfter A date that the derived start must be on or come after.
 
   @return start The next start time.
@@ -77,7 +77,7 @@ function _deriveStartFrom(JBFundingCycle memory _baseFundingCycle, uint256 _must
 function _deriveStartFrom(JBFundingCycle memory _baseFundingCycle, uint256 _mustStartAtOrAfter)
   private
   pure
-  returns (uint256 start) 
+  returns (uint256 start)
 {
   // A subsequent cycle to one with a duration of 0 should start as soon as possible.
   if (_baseFundingCycle.duration == 0) return _mustStartAtOrAfter;
@@ -88,10 +88,10 @@ function _deriveStartFrom(JBFundingCycle memory _baseFundingCycle, uint256 _must
   // If the next immediate start is now or in the future, return it.
   if (_nextImmediateStart >= _mustStartAtOrAfter) return _nextImmediateStart;
 
-  // The amount of seconds since the `_mustStartAtOrAfter` time that results in a start time that might satisfy the specified constraints.
+  // The amount of seconds since the `_mustStartAtOrAfter` time which results in a start time that might satisfy the specified constraints.
   uint256 _timeFromImmediateStartMultiple = (_mustStartAtOrAfter - _nextImmediateStart) %
     _baseFundingCycle.duration;
-  
+
   // A reference to the first possible start timestamp.
   start = _mustStartAtOrAfter - _timeFromImmediateStartMultiple;
 

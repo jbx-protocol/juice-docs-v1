@@ -4,7 +4,7 @@ Contract:[`JBFundingCycleStore`](../)​
 
 {% tabs %}
 {% tab title="Step by step" %}
-**A view of the funding cycle that would be created based on the provided one if the project doesn't approve a reconfiguration ahead of it starting.**
+**A view of the funding cycle that would be created based on the provided one if the project doesn't make a reconfiguration.**
 
 _Returns an empty funding cycle if there can't be a mock funding cycle based on the provided one._
 
@@ -21,18 +21,18 @@ function _mockFundingCycleBasedOn(JBFundingCycle memory _baseFundingCycle, bool 
   * `_baseFundingCycle` is the [`JBFundingCycle`](../../../data-structures/jbfundingcycle.md) that the resulting funding cycle should follow.
   * `_allowMidCycle` is a flag indicating if the mocked funding cycle is allowed to already be mid cycle.
 * The view function is private to this contract.
-* The function does not alter state on the blockchain.
+* The view function does not alter state on the blockchain.
 * The function returns a mock [`JBFundingCycle`](../../../data-structures/jbfundingcycle.md) of what the next funding cycle will be.
 
 ### Body
 
 1.  Save a reference to time at or after which the mock must have started. There are a few possibilities.
 
-    1. If the call to the function does not `_allowMidCycle`, the start date must be now or in the future. This is also the case if the base funding cycle doesn't have a duration because the next funding cycle can start immediately.
-    2. If neither of these cases apply, moving back one full duration period of the `_baseFundingCycle` will find the most recent possible start time for the mock cycle to start.
+    1. If the call to the function does not allow mid cycle, the start date must be now or in the future. This is also the case if the base funding cycle doesn't have a duration because the next funding cycle can start immediately.
+    2. If neither of these cases apply, moving back one full duration period of the base funding cycle will find the most recent possible start time for the mock cycle to start.
 
     ```solidity
-    // The distance of the current time to the start of the next possible funding cycle.
+    // Get the distance of the current time to the start of the next possible funding cycle.
     // If the returned mock cycle must not yet have started, the start time of the mock must be in the future.
     // If the base funding cycle doesn't have a duration, no adjustment is necessary because the next cycle can start immediately.
     uint256 _mustStartAtOrAfter = !_allowMidCycle || _baseFundingCycle.duration == 0
@@ -86,10 +86,10 @@ function _mockFundingCycleBasedOn(JBFundingCycle memory _baseFundingCycle, bool 
 /** 
   @notice 
   A view of the funding cycle that would be created based on the provided one if the project doesn't make a reconfiguration.
- 
+
   @dev
   Returns an empty funding cycle if there can't be a mock funding cycle based on the provided one.
-  
+
   @param _baseFundingCycle The funding cycle that the resulting funding cycle should follow.
   @param _allowMidCycle A flag indicating if the mocked funding cycle is allowed to already be mid cycle.
 
@@ -100,7 +100,7 @@ function _mockFundingCycleBasedOn(JBFundingCycle memory _baseFundingCycle, bool 
   view
   returns (JBFundingCycle memory)
 {
-  // The distance of the current time to the start of the next possible funding cycle.
+  // Get the distance of the current time to the start of the next possible funding cycle.
   // If the returned mock cycle must not yet have started, the start time of the mock must be in the future.
   // If the base funding cycle doesn't have a duration, no adjustment is necessary because the next cycle can start immediately.
   uint256 _mustStartAtOrAfter = !_allowMidCycle || _baseFundingCycle.duration == 0

@@ -16,15 +16,15 @@ function _isApproved(uint256 _projectId, JBFundingCycle memory _fundingCycle)
 ```
 
 * Arguments:
-  * `_projectId` is the ID of the project to which the funding cycle belongs.
+  * `_projectId` is the ID of the project to which the funding cycle belongs. 
   * `_fundingCycle` is the [`JBFundingCycle`](../../../data-structures/jbfundingcycle.md) to get an approval flag for.
 * The view function is private to this contract.
-* The function does not alter state on the blockchain.
+* The view function does not alter state on the blockchain.
 * The function returns the approval flag.
 
 ### Body
 
-1.  Check to see if the state of the ballot for the provided funding cycle configuration is approved. The ballot that should be used is that of the funding cycle that the provided one is based on. This is because each funding cycle's ballot dictates the approval conditions of future reconfigurations.
+1.  Check to see if the state of the ballot for the provided funding cycle configuration is approved. The ballot that should be used is that of the funding cycle that the provided one is based on. This is because each funding cycle's ballot dictates the approval conditions of the next proposed reconfiguration.
 
     ```solidity
     return
@@ -43,20 +43,20 @@ function _isApproved(uint256 _projectId, JBFundingCycle memory _fundingCycle)
   @notice 
   Checks to see if the provided funding cycle is approved according to the correct ballot.
 
-  @param _projectId The ID of the project to which the funding cycle belongs.
+  @param _projectId The ID of the project to which the funding cycle belongs. 
   @param _fundingCycle The funding cycle to get an approval flag for.
 
   @return The approval flag.
 */
-function _isApproved(uint256 _projectId, JBFundingCycle memory _fundingCycle)
-  private
-  view
-  returns (bool) 
-{
-  return
-    _ballotStateOf(_projectId, _fundingCycle.configuration, _fundingCycle.basedOn) ==
-    JBBallotState.Approved;
-}
+  function _isApproved(uint256 _projectId, JBFundingCycle memory _fundingCycle)
+    private
+    view
+    returns (bool)
+  {
+    return
+      _ballotStateOf(_projectId, _fundingCycle.configuration, _fundingCycle.basedOn) ==
+      JBBallotState.Approved;
+  }
 ```
 {% endtab %}
 

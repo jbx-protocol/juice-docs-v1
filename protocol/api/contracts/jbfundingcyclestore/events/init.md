@@ -7,11 +7,7 @@ Emitted from:
 ## Definition
 
 ```solidity
-event Init(
-  uint256 indexed configuration,
-  uint256 indexed projectId,
-  uint256 indexed basedOn
-);
+event Init(uint256 indexed configuration, uint256 indexed projectId, uint256 indexed basedOn);
 ```
 
 * `configuration` is the funding cycle configuration that was initialized.
