@@ -46,9 +46,9 @@ constructor(IJBOperatorStore _operatorStore, IJBProjects _projects) JBOperatable
 | -------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | [**`SetController`**](events/setcontroller.md)           | <ul><li><code>int256 indexed projectId</code></li><li><code>[`IJBController`](../../interfaces/ijbcontroller.md)indexed controller</code></li><li><code>address caller</code></li></ul>                                       |
 | [**`AddTerminal`**](events/addterminal.md)               | <ul><li><code>uint256 indexed projectId</code></li><li><code>[`IJBTerminal`](../../interfaces/ijbterminal.md)indexed terminal</code></li><li><code>address caller</code></li></ul>                                            |
-| [**`SetTerminals`**](events/removeterminal.md)         | <ul><li><code>uint256 indexed projectId</code></li><li><code>[`IJBTerminal`](../../interfaces/ijbterminal.md)[] indexed terminals</code></li><li><code>address caller</code></li></ul>                                            |
+| [**`SetTerminals`**](events/setterminals.md)         | <ul><li><code>uint256 indexed projectId</code></li><li><code>[`IJBTerminal`](../../interfaces/ijbterminal.md)[] indexed terminals</code></li><li><code>address caller</code></li></ul>                                            |
 | [**`SetPrimaryTerminal`**](events/setprimaryterminal.md) | <ul><li><code>uint256 indexed projectId</code></li><li><code>address indexed token</code></li><li><code>[`IJBTerminal`](../../interfaces/ijbterminal.md)indexed terminal</code></li><li><code>address caller</code></li></ul> |
-| [**`SetIsAllowedToSetFirstController`**](events/addtosetcontrollerallowlist.md) | <ul><li><code>address indexed addr</code></li><li><code>bool indexed flag</code></li><li><code>address caller</code></li></ul> |
+| [**`SetIsAllowedToSetFirstController`**](events/setisallowedtosetfirstcontroller.md) | <ul><li><code>address indexed addr</code></li><li><code>bool indexed flag</code></li><li><code>address caller</code></li></ul> |
 
 ## Properties
 

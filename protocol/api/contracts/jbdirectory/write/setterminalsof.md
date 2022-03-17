@@ -127,6 +127,13 @@ function setTerminalsOf(uint256 _projectId, IJBPaymentTerminal[] calldata _termi
 | **`ADD_TERMINAL_ZERO_ADDRESS`** | Thrown if a provided terminal to add is the zero address. |
 {% endtab %}
 
+{% tab title="Events" %}
+| Name                                                                          | Data                                                                                          |
+| ----------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
+| [**`SetTerminals`**](events/setterminals.md)         | <ul><li><code>uint256 indexed projectId</code></li><li><code>[`IJBTerminal`](../../interfaces/ijbterminal.md)[] indexed terminals</code></li><li><code>address caller</code></li></ul>                                            |
+{% endtab %}
+
+
 {% tab title="Bug bounty" %}
 | Category          | Description                                                                                                                            | Reward |
 | ----------------- | -------------------------------------------------------------------------------------------------------------------------------------- | ------ |

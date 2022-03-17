@@ -85,7 +85,7 @@ function setIsAllowedToSetFirstController(address _address, bool _flag)
 {% tab title="Events" %}
 | Name                                                                          | Data                                                                                          |
 | ----------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
-| [**`SetIsAllowedToSetFirstController`**](../events/addtosetcontrollerallowlist.md) | <ul><li><code>address indexed addr</code></li><li><code>bool indexed flag</code></li><li><code>address caller</code></li></ul> |
+| [**`SetIsAllowedToSetFirstController`**](../events/setisallowedtosetfirstcontroller.md) | <ul><li><code>address indexed addr</code></li><li><code>bool indexed flag</code></li><li><code>address caller</code></li></ul> |
 {% endtab %}
 
 {% tab title="Bug bounty" %}
