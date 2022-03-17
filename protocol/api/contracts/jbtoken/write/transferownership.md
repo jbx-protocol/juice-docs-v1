@@ -22,7 +22,7 @@ function transferOwnership(address _newOwner)
 
 * Arguments:
   * `_newOwner` is the new owner.
-* Through the [`onlyOwner`](https://docs.openzeppelin.com/contracts/4.x/api/access#Ownable) modifier, this function can only be accessed by the address that owns this contract.
+* Through the [`onlyOwner`](https://docs.openzeppelin.com/contracts/4.x/api/access#Ownable-onlyOwner--) modifier, this function can only be accessed by the address that owns this contract.
 * The function overrides a function definition from the [`IJBToken`](../../../interfaces/ijbtoken.md) interface.
 * The function returns nothing.
 

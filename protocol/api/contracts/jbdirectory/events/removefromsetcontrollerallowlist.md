@@ -7,8 +7,8 @@ Emitted from:
 Definition:
 
 ```solidity
-event RemoveFromSetControllerAllowlist(address indexed controller, address caller);
+event RemoveFromSetControllerAllowlist(address indexed removedAddress, address caller);
 ```
 
-* `controller` is the addres of the controller that was removed.
+* `removedAddress` is the address of the contract that is no longer allowed to set projects' controllers.
 * `caller` is the address that issued the transaction within which the event was emitted.

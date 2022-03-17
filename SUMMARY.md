@@ -228,7 +228,6 @@
       * [Read](protocol/api/contracts/jbdirectory/read/README.md)
         * [terminalsOf](protocol/api/contracts/jbdirectory/read/terminalsof.md)
         * [isTerminalOf](protocol/api/contracts/jbdirectory/read/isterminalof.md)
-        * [isTerminalDelegateOf](protocol/api/contracts/jbdirectory/read/isterminaldelegateof.md)
         * [primaryTerminalOf](protocol/api/contracts/jbdirectory/read/primaryterminalof.md)
       * [Write](protocol/api/contracts/jbdirectory/write/README.md)
         * [setControllerOf](protocol/api/contracts/jbdirectory/write/setcontrollerof.md)

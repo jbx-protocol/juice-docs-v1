@@ -2,8 +2,7 @@
 
 Emitted from:
 
-* [`addTerminalsOf`](../write/addterminalsof.md)
-* [`setPrimaryTerminalOf`](../write/setprimaryterminalof.md)
+* [`_addTerminalIfNeeded`](../write/_addterminalifneeded.md)
 
 Definition:
 

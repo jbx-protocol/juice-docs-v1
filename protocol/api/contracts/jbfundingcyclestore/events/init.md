@@ -2,7 +2,7 @@
 
 Emitted from:
 
-* [`configureFor`](../write/configurefor.md)
+* [`_initFor`](../write/_initfor.md)
 
 ## Definition
 

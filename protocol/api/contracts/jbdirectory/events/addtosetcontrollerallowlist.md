@@ -7,8 +7,8 @@ Emitted from:
 Definition:
 
 ```solidity
-event AddToSetControllerAllowlist(address indexed controller, address caller);
+event AddToSetControllerAllowlist(address indexed allowedAddress, address caller);
 ```
 
-* `controller` is the addres of the controller that was added.
+* `allowedAddress` is the address of the contract that is now allowed to set projects' controllers. 
 * `caller` is the address that issued the transaction within which the event was emitted.

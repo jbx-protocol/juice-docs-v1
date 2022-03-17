@@ -16,7 +16,7 @@ function setTokenUriResolver(IJBTokenUriResolver _newResolver) external override
 
 * Arguments:
   * `_newResolver` is the address of the new resolver.
-* Through the [`onlyOwner`](https://docs.openzeppelin.com/contracts/4.x/api/access#Ownable) modifier, this function can only be accessed by the address that owns this contract.
+* Through the [`onlyOwner`](https://docs.openzeppelin.com/contracts/4.x/api/access#Ownable-onlyOwner--) modifier, this function can only be accessed by the address that owns this contract.
 * The function overrides a function definition from the [`IJBProjects`](../../../interfaces/ijbprojects.md) interface.
 * The function doesn't return anything.
 

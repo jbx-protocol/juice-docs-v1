@@ -7,7 +7,12 @@ Emitted from:
 Definition:
 
 ```solidity
-event SetPrimaryTerminal( uint256 indexed projectId, address indexed token, IJBTerminal indexed terminal, address caller );
+event SetPrimaryTerminal(
+  uint256 indexed projectId,
+  address indexed token,
+  IJBPaymentTerminal indexed terminal,
+  address caller
+);
 ```
 
 * `projectId` is the ID of the project that set a primary terminal.

@@ -24,7 +24,7 @@ function mint(
   * The `_projectId` parameter is ignored.
   * `_account` is the account to mint the tokens for.
   * `_amount` is the amount of tokens to mint, as a fixed point number with 18 decimals.
-* Through the [`onlyOwner`](https://docs.openzeppelin.com/contracts/4.x/api/access#Ownable) modifier, this function can only be accessed by the address that owns this contract.
+* Through the [`onlyOwner`](https://docs.openzeppelin.com/contracts/4.x/api/access#Ownable-onlyOwner--) modifier, this function can only be accessed by the address that owns this contract.
 * The function overrides a function definition from the [`IJBToken`](../../../interfaces/ijbtoken.md) interface.
 * The function doesn't return anything.
 
