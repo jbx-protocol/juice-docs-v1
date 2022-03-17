@@ -10,7 +10,7 @@ Looking for general guides on how the protocol works? See the [Learn](learn/over
 
 Looking for a user flow and how to launch a project? See the [Build](build/getting-started.md) section.
 
-Looking for an outline of the protocol's API, or a deep dive on each line of code? Click around in the [Specifications](specifications/contracts/) section. There are bug bounties posted for each documented function.
+Looking for an outline of the protocol's API, or a deep dive on each line of code? Click around in the [API](api/contracts/) section. There are bug bounties posted for each documented function.
 
 Reach out to contributors of the DAO on Discord to call attention to something that could be made more clear. You can also submit PR's directly to the documentation repo [here](https://github.com/jbx-protocol/juice-docs).
 
