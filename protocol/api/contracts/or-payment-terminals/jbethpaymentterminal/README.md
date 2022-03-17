@@ -27,7 +27,7 @@ Ethereum mainnet: _Not yet deployed_\
 | --------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- |
 | [**`JBOperatable`**](../../or-abstract/jboperatable/)                             | Includes convenience functionality for checking a message sender's permissions before executing certain transactions.                    |
 | [**`Ownable`**](https://docs.openzeppelin.com/contracts/2.x/api/ownership)        | Includes convenience functionality for specifying an address that owns the contract, with modifiers that only allow access by the owner. |
-| [**`ReentrancyGuard`**](https://docs.openzeppelin.com/contracts/4.x/api/security) | Includes convenience functionality for preventing access to certain functions while certain other functions are being executed.          |
+| [**`ReentrancyGuard`**](https://docs.openzeppelin.com/contracts/4.x/api/security#ReentrancyGuard) | Includes convenience functionality for preventing access to certain functions while certain other functions are being executed.          |
 
 ## Constructor
 
