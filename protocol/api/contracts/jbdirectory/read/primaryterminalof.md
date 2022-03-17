@@ -4,6 +4,8 @@
 {% tab title="Step by step" %}
 **The primary terminal that is managing funds for a project for a specified token.**
 
+_Contracts should send tokens of the specified type to a project's primary terminal._
+
 _The zero address is returned if a terminal isn't found for the specified token._
 
 #### Definition
@@ -13,16 +15,16 @@ function primaryTerminalOf(uint256 _projectId, address _token)
   public
   view
   override
-  returns (IJBTerminal) { ... }
+  returns (IJBPaymentTerminal) { ... }
 ```
 
 * Arguments:
   * `_projectId` is the ID of the project to get a terminal for.
   * `_token` is the token the terminal accepts.
 * The view function can be accessed externally by anyone.
-* The function does not alter state on the blockchain.
-* The function overrides a function definition from the `IJBDirectory` interface.
-* The function returns the primary terminal for the project for the specified token..
+* The view function does not alter state on the blockchain.
+* The function overrides a function definition from the [`IJBDirectory`](../../../interfaces/ijbdirectory.md) interface.
+* The function returns the primary terminal for the project for the specified token.
 
 #### Body
 
@@ -30,27 +32,27 @@ function primaryTerminalOf(uint256 _projectId, address _token)
 
     ```solidity
     // If a primary terminal for the token was specifically set, return it.
-    if (_primaryTerminalOf[_projectId][_token] != IJBTerminal(address(0)))
+    if (_primaryTerminalOf[_projectId][_token] != IJBPaymentTerminal(address(0)))
       return _primaryTerminalOf[_projectId][_token];
     ```
 
     Internal references:
 
     * [`_primaryTerminalOf`](../properties/\_primaryterminalof.md)
-2.  Loop through each of the project's terminals looking for one that has a vault that uses the same token as the one specified. If one is found, return it.
+2.  Loop through each of the project's terminals looking for one that uses the same token as the one specified. If one is found, return it.
 
     ```solidity
     // Return the first terminal which accepts the specified token.
     for (uint256 _i; _i < _terminalsOf[_projectId].length; _i++) {
-      IJBTerminal _terminal = _terminalsOf[_projectId][_i];
-      if (_terminal.vault().token() == _token) return _terminal;
+      IJBPaymentTerminal _terminal = _terminalsOf[_projectId][_i];
+      if (_terminal.token() == _token) return _terminal;
     }
     ```
 
     Internal references:
 
     * [`_terminalsOf`](../properties/\_terminalsof.md)
-3.  Return an empty Terminal if not found.
+3.  Return an empty terminal if not found.
 
     ```solidity
     // Not found.
@@ -65,6 +67,9 @@ function primaryTerminalOf(uint256 _projectId, address _token)
   The primary terminal that is managing funds for a project for a specified token.
 
   @dev
+  Contracts should send tokens of the specified type to a project's primary terminal.
+
+  @dev
   The zero address is returned if a terminal isn't found for the specified token.
 
   @param _projectId The ID of the project to get a terminal for.
@@ -76,20 +81,20 @@ function primaryTerminalOf(uint256 _projectId, address _token)
   public
   view
   override
-  returns (IJBTerminal)
+  returns (IJBPaymentTerminal)
 {
   // If a primary terminal for the token was specifically set, return it.
-  if (_primaryTerminalOf[_projectId][_token] != IJBTerminal(address(0)))
+  if (_primaryTerminalOf[_projectId][_token] != IJBPaymentTerminal(address(0)))
     return _primaryTerminalOf[_projectId][_token];
 
   // Return the first terminal which accepts the specified token.
   for (uint256 _i; _i < _terminalsOf[_projectId].length; _i++) {
-    IJBTerminal _terminal = _terminalsOf[_projectId][_i];
+    IJBPaymentTerminal _terminal = _terminalsOf[_projectId][_i];
     if (_terminal.token() == _token) return _terminal;
   }
 
   // Not found.
-  return IJBTerminal(address(0));
+  return IJBPaymentTerminal(address(0));
 }
 ```
 {% endtab %}

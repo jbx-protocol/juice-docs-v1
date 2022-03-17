@@ -11,7 +11,7 @@ Interface: [`IJBDirectory`](../../../interfaces/ijbdirectory.md)
 _A controller can be set if:_
 
 * the message sender is the project owner or an operator having the correct authorization.
-* or, an allowedlisted address is setting an allowlisted controller.
+* or, an allowedlisted address is setting a controller for a project that doesn't already have a controller.
 
 #### Definition
 
@@ -23,53 +23,35 @@ function setControllerOf(uint256 _projectId, IJBController _controller)
     projects.ownerOf(_projectId),
     _projectId,
     JBOperations.SET_CONTROLLER,
-    (address(controllerOf[_projectId]) == address(0) && msg.sender == address(_controller)) ||
-      address(controllerOf[_projectId]) == msg.sender
+    (isAllowedToSetFirstController[msg.sender] &&
+      controllerOf[_projectId] == IJBController(address(0)))
   ) { ... }
 ```
 
 * Arguments:
   * `_projectId` is the ID of the project to set a new controller for.
   * `_controller` is the new controller to set.
-* Through the [`requirePermissionAllowingOverride`](../../or-abstract/jboperatable/modifiers/requirepermissionallowingoverride.md) modifier, the function is only accessible by the project's owner, from an operator that has been given the `JBOperations.SET_CONTROLLER` permission by the project owner for the provided `_projectId`, or from an allow-listed controller if the new controller being set is also an allow-listed controller.
-* The function overrides a function definition from the `IJBDirectory` interface.
-* The function returns nothing. (\_setControllerAllowlist\[address(\_controller)] && \_setControllerAllowlist\[msg.sender])
+* Through the [`requirePermissionAllowingOverride`](../../or-abstract/jboperatable/modifiers/requirepermissionallowingoverride.md) modifier, the function is only accessible by the project's owner, from an operator that has been given the `JBOperations.SET_CONTROLLER` permission by the project owner for the provided `_projectId`, or from an allow-listed controller if the project doesn't already have a controller set.
+* The function overrides a function definition from the [`IJBDirectory`](../../../interfaces/ijbdirectory.md) interface.
+* The function doesn't return anything
 
 #### Body
 
-1.  Make sure the provided controller isn't the zero address.
-
-    ```solidity
-    // Can't set the zero address.
-    if (_controller == IJBController(address(0))) {
-      revert SET_CONTROLLER_ZERO_ADDRESS();
-    }
-    ```
-2.  Make sure the provided controller isn't already set.
-
-    ```solidity
-    // Can't set the controller if it's already set.
-    if (controllerOf[_projectId] == _controller) {
-      revert SET_CONTROLLER_ALREADY_SET();
-    }
-    ```
-
-    Internal references:
-
-    * [`controllerOf`](../properties/controllerof.md)
-3.  Project IDs are assigned incrementally. If the provided `_projectId` is greater than the number of projects, it must not be a valid project ID.
+1.  Project IDs are assigned incrementally. If the provided project ID is greater than the number of projects, it must not be a valid project ID.
 
     ```solidity
     // The project must exist.
-    if (projects.count() < _projectId) {
-      revert INVALID_PROJECT_ID();
-    }
+    if (projects.count() < _projectId) revert INVALID_PROJECT_ID_IN_DIRECTORY();
     ```
 
-    Internal references:
+    _Internal references:_
 
     * [`projects`](../properties/projects.md)
-4.  Store the provided controller as the `controllerOf` the project.
+
+    _External references:_
+
+    * [`count`](../../jbprojects/properties/count.md)
+3.  Store the provided controller as the controller of the project.
 
     ```solidity
     // Set the new controller.
@@ -98,8 +80,8 @@ function setControllerOf(uint256 _projectId, IJBController _controller)
 
   @dev 
   A controller can be set if:
-    - the message sender is the project owner or an operator having the correct authorization.
-    - or, an allowedlisted address is setting an allowlisted controller.
+  - the message sender is the project owner or an operator having the correct authorization.
+  - or, an allowedlisted address is setting a controller for a project that doesn't already have a controller.
 
   @param _projectId The ID of the project to set a new controller for.
   @param _controller The new controller to set.
@@ -111,22 +93,12 @@ function setControllerOf(uint256 _projectId, IJBController _controller)
     projects.ownerOf(_projectId),
     _projectId,
     JBOperations.SET_CONTROLLER,
-    (isAllowedToSetController[address(_controller)] && isAllowedToSetController[msg.sender]) 
+    (isAllowedToSetFirstController[msg.sender] &&
+      controllerOf[_projectId] == IJBController(address(0)))
+  )
 {
-  // Can't set the zero address.
-  if (_controller == IJBController(address(0))) {
-    revert SET_CONTROLLER_ZERO_ADDRESS();
-  }
-
-  // Can't set the controller if it's already set.
-  if (controllerOf[_projectId] == _controller) {
-    revert SET_CONTROLLER_ALREADY_SET();
-  }
-
   // The project must exist.
-  if (projects.count() < _projectId) {
-    revert INVALID_PROJECT_ID();
-  }
+  if (projects.count() < _projectId) revert INVALID_PROJECT_ID_IN_DIRECTORY();
 
   // Set the new controller.
   controllerOf[_projectId] = _controller;
@@ -139,15 +111,13 @@ function setControllerOf(uint256 _projectId, IJBController _controller)
 {% tab title="Errors" %}
 | String                            | Description                                                      |
 | --------------------------------- | ---------------------------------------------------------------- |
-| **`SET_CONTROLLER_ZERO_ADDRESS`** | Thrown if the provided controller is the zero address.           |
-| **`CONTROLLER_ALREADY_SET`**      | Thrown if the provided controller is already the set controller. |
 | **`INVALID_PROJECT_ID`**          | Thrown if the provided project doesn't yet exist.                |
 {% endtab %}
 
 {% tab title="Events" %}
 | Name                                              | Data                                                                                                                                                                                                             |
 | ------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [**`SetController`**](../events/setcontroller.md) | <ul><li><code>int256 indexed projectId</code></li><li><a href="../../../interfaces/ijbcontroller.md"><code>IJBController</code></a><code>indexed controller</code></li><li><code>address caller</code></li></ul> |
+| [**`SetController`**](../events/setcontroller.md)           | <ul><li><code>int256 indexed projectId</code></li><li><code>[`IJBController`](../../interfaces/ijbcontroller.md)indexed controller</code></li><li><code>address caller</code></li></ul>                                       |
 {% endtab %}
 
 {% tab title="Bug bounty" %}

@@ -10,12 +10,12 @@ Interface: [`IJBDirectory`](../../../interfaces/ijbdirectory.md)
 
 **This is useful in case a project has several terminals connected for a particular token.**
 
-_The terminal will be set as the primary for the token that its vault accepts._
+_The terminal will be set as the primary terminal where ecosystem contracts should route tokens._
 
 ### Definition
 
 ```solidity
-function setPrimaryTerminalOf(uint256 _projectId, IJBTerminal _terminal)
+function setPrimaryTerminalOf(uint256 _projectId, IJBPaymentTerminal _terminal)
   external
   override
   requirePermission(projects.ownerOf(_projectId), _projectId, JBOperations.SET_PRIMARY_TERMINAL) { ... }
@@ -25,44 +25,32 @@ function setPrimaryTerminalOf(uint256 _projectId, IJBTerminal _terminal)
   * `_projectId` is the ID of the project for which a primary token is being set.
   * `_terminal` is the terminal to make primary.
 * Through the [`requirePermission`](../../or-abstract/jboperatable/modifiers/requirepermission.md) modifier, the function is only accessible by the project's owner, or from an operator that has been given the `JBOperations.SET_PRIMARY_TERMINAL`permission by the project owner for the provided `_projectId`.
-* The function overrides a function definition from the `IJBDirectory` interface.
-* The function returns nothing.
+* The function overrides a function definition from the [`IJBDirectory`](../../../interfaces/ijbdirectory.md) interface.
+* The function doesn't return anything.
 
 ### Body
 
-1.  Make sure the terminal being set isn't the zero address.
+1.  Get a reference to the token that the provided terminal's vault accepts.
 
     ```solidity
-    // Can't set the zero address.
-    if (_terminal == IJBTerminal(address(0))) {
-      revert SET_PRIMARY_TERMINAL_ZERO_ADDRESS();
-    }
-    ```
-2.  Get a reference to the token that the provided terminal's vault accepts.
-
-    ```solidity
-    // Get a reference to the token that the terminal's vault accepts.
+    // Get a reference to the token that the terminal accepts.
     address _token = _terminal.token();
     ```
-3.  Make sure the terminal being set isn't already the primary terminal for the token.
+
+    _External references:_
+
+    * [`token`](../../or-payment-terminals/jbethpaymentterminal/properties/token.md)
+2.  Add the terminal to the list of the project's terminals if it isn't included already.
 
     ```solidity
-    // Can't set this terminal as the primary if it already is.
-    if (_terminal == _primaryTerminalOf[_projectId][_token]) {
-      revert PRIMARY_TERMINAL_ALREADY_SET();
-    }
-    ```
-4.  Add the terminal to the list of the project's terminals if it isn't included already.
-
-    ```solidity
-    // Add the terminal to thge project if it hasn't been already.
+    // Add the terminal to the project if it hasn't been already.
     _addTerminalIfNeeded(_projectId, _terminal);
     ```
 
     Internal references:
 
     * [`_addTerminalIfNeeded`](\_addTerminalIfNeeded.md)
-5.  Store the new terminal as the primary.
+3.  Store the new terminal as the primary.
 
     ```solidity
     // Store the terminal as the primary for the particular token.
@@ -72,7 +60,7 @@ function setPrimaryTerminalOf(uint256 _projectId, IJBTerminal _terminal)
     Internal references:
 
     * [`_primaryTerminalOf`](../read/primaryTerminalOf.md)
-6.  Emit a `SetPrimaryTerminal` event with the relevant parameters.
+4.  Emit a `SetPrimaryTerminal` event with the relevant parameters.
 
     ```solidity
     emit SetPrimaryTerminal(_projectId, _token, _terminal, msg.sender);
@@ -91,30 +79,20 @@ function setPrimaryTerminalOf(uint256 _projectId, IJBTerminal _terminal)
   This is useful in case a project has several terminals connected for a particular token.
 
   @dev
-  The terminal will be set as the primary for the token that its vault accepts. 
+  The terminal will be set as the primary terminal where ecosystem contracts should route tokens.
 
   @param _projectId The ID of the project for which a primary token is being set.
   @param _terminal The terminal to make primary.
 */
-function setPrimaryTerminalOf(uint256 _projectId, IJBTerminal _terminal)
+function setPrimaryTerminalOf(uint256 _projectId, IJBPaymentTerminal _terminal)
   external
   override
   requirePermission(projects.ownerOf(_projectId), _projectId, JBOperations.SET_PRIMARY_TERMINAL)
 {
-  // Can't set the zero address.
-  if (_terminal == IJBTerminal(address(0))) {
-    revert SET_PRIMARY_TERMINAL_ZERO_ADDRESS();
-  }
-
-  // Get a reference to the token that the terminal's vault accepts.
+  // Get a reference to the token that the terminal accepts.
   address _token = _terminal.token();
 
-  // Can't set this terminal as the primary if it already is.
-  if (_terminal == _primaryTerminalOf[_projectId][_token]) {
-    revert PRIMARY_TERMINAL_ALREADY_SET();
-  }
-
-  // Add the terminal to thge project if it hasn't been already.
+  // Add the terminal to the project if it hasn't been already.
   _addTerminalIfNeeded(_projectId, _terminal);
 
   // Store the terminal as the primary for the particular token.
@@ -125,17 +103,10 @@ function setPrimaryTerminalOf(uint256 _projectId, IJBTerminal _terminal)
 ```
 {% endtab %}
 
-{% tab title="Errors" %}
-| String                                  | Description                                                           |
-| --------------------------------------- | --------------------------------------------------------------------- |
-| **`SET_PRIMARY_TERMINAL_ZERO_ADDRESS`** | Thrown if the provided terminal to add is the zero address.           |
-| **`PRIMARY_TERMINAL_ALREADY_SET`**      | Thrown if the provided terminal is already the primary for the token. |
-{% endtab %}
-
 {% tab title="Events" %}
 | Name                                                        | Data                                                                                                                                                                                                                                                   |
 | ----------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| [**`SetPrimaryTerminal`**](../events/setprimaryterminal.md) | <ul><li><code>uint256 indexed projectId</code></li><li><code>address indexed token</code></li><li><a href="../../../interfaces/ijbterminal.md"><code>IJBTerminal</code></a><code>indexed terminal</code></li><li><code>address caller</code></li></ul> |
+| [**`SetPrimaryTerminal`**](events/setprimaryterminal.md) | <ul><li><code>uint256 indexed projectId</code></li><li><code>address indexed token</code></li><li><code>[`IJBTerminal`](../../interfaces/ijbterminal.md)indexed terminal</code></li><li><code>address caller</code></li></ul> |
 {% endtab %}
 
 {% tab title="Bug bounty" %}

@@ -11,14 +11,14 @@ Interface: [`IJBDirectory`](../../../interfaces/ijbdirectory.md)
 ### Definition
 
 ```solidity
-function _addTerminalIfNeeded(uint256 _projectId, IJBTerminal _terminal) private { ... }
+function _addTerminalIfNeeded(uint256 _projectId, IJBPaymentTerminal _terminal) private { ... }
 ```
 
 * Arguments:
   * `_projectId` is the ID of the project having a terminal added.
   * `_terminal` is the terminal to add.
 * The function is private to this contract.
-* The function returns nothing.
+* The function doesn't return anything.
 
 ### Body
 
@@ -62,11 +62,11 @@ function _addTerminalIfNeeded(uint256 _projectId, IJBTerminal _terminal) private
   @param _projectId The ID of the project having a terminal added.
   @param _terminal The terminal to add.
 */
-function _addTerminalIfNeeded(uint256 _projectId, IJBTerminal _terminal) private {
+function _addTerminalIfNeeded(uint256 _projectId, IJBPaymentTerminal _terminal) private {
   // Check that the terminal has not already been added.
   if (isTerminalOf(_projectId, _terminal)) return;
 
-  // Set the new terminal.
+  // Add the new terminal.
   _terminalsOf[_projectId].push(_terminal);
 
   emit AddTerminal(_projectId, _terminal, msg.sender);

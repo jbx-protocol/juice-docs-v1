@@ -2,7 +2,7 @@
 
 Contract: [`JBDirectory`](../)‌
 
-**The Projects contract which mints ERC-721's that represent project ownership and transfers.**
+**The project's primary terminal for a token.**
 
 # Definition
 
@@ -14,7 +14,7 @@ Contract: [`JBDirectory`](../)‌
   _projectId The ID of the project to get the primary terminal of.
   _token The token to get the project's primary terminal of.
 */
-mapping(uint256 => mapping(address => IJBTerminal)) private _primaryTerminalOf;
+mapping(uint256 => mapping(address => IJBPaymentTerminal)) private _primaryTerminalOf;
 ```
 
 * `_projectId` is the ID of the project to get the primary terminal of.

@@ -13,7 +13,7 @@ Contract: [`JBDirectory`](../)‌
 
   _projectId The ID of the project to get terminals of.
 */
-mapping(uint256 => IJBTerminal[]) private _terminalsOf;
+mapping(uint256 => IJBPaymentTerminal[]) private _terminalsOf;
 ```
 
 * `_projectId` is the ID of the project to get terminals of.
