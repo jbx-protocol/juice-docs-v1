@@ -53,7 +53,17 @@ function setTerminalsOf(uint256 _projectId, IJBPaymentTerminal[] calldata _termi
     Internal references:
 
     * [`_terminalsOf`](../properties/_termialsof.md)
-3.  If any of the project's primary terminals are being removed, also remove their status as a primary terminal.
+
+3.  Make sure the same terminal isn't being set multiple times.
+    ```solidity
+    // Make sure duplicates we're added.
+    if (_terminals.length > 0)
+      for (uint256 _i; _i < _terminals.length; _i++)
+        for (uint256 _j = _i + 1; _j < _terminals.length; _j++)
+          if (_terminals[_i] == _terminals[_j]) revert DUPLICATE_TERMINALS();
+    ```
+
+4.  If any of the project's primary terminals are being removed, also remove their status as a primary terminal.
 
     ```solidity
     // If one of the old terminals was set as a primary terminal but is not included in the new terminals, remove it from being a primary terminal.
@@ -68,7 +78,7 @@ function setTerminalsOf(uint256 _projectId, IJBPaymentTerminal[] calldata _termi
 
     * [`_primaryTerminalOf`](../properties/_primaryterminalof.md)
     * [`_contains`](../read/_contains.md)
-4.  Emit a `SetTerminals` event with the relevant parameters.
+5.  Emit a `SetTerminals` event with the relevant parameters.
 
     ```solidity
     emit SetTerminals(_projectId, _terminals, msg.sender);
@@ -107,6 +117,12 @@ function setTerminalsOf(uint256 _projectId, IJBPaymentTerminal[] calldata _termi
   // Delete the stored terminals for the project.
   _terminalsOf[_projectId] = _terminals;
 
+  // Make sure duplicates we're added.
+  if (_terminals.length > 0)
+    for (uint256 _i; _i < _terminals.length; _i++)
+      for (uint256 _j = _i + 1; _j < _terminals.length; _j++)
+        if (_terminals[_i] == _terminals[_j]) revert DUPLICATE_TERMINALS();
+
   // If one of the old terminals was set as a primary terminal but is not included in the new terminals, remove it from being a primary terminal.
   for (uint256 _i; _i < _oldTerminals.length; _i++)
     if (
@@ -123,6 +139,7 @@ function setTerminalsOf(uint256 _projectId, IJBPaymentTerminal[] calldata _termi
 | String                          | Description                                               |
 | ------------------------------- | --------------------------------------------------------- |
 | **`ADD_TERMINAL_ZERO_ADDRESS`** | Thrown if a provided terminal to add is the zero address. |
+| **`DUPLICATE_TERMINALS`** | Thrown if the same terminal is being set multiple times. |
 {% endtab %}
 
 {% tab title="Events" %}
