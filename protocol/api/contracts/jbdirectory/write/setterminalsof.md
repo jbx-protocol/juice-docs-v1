@@ -56,8 +56,8 @@ function setTerminalsOf(uint256 _projectId, IJBPaymentTerminal[] calldata _termi
 
 3.  Make sure the same terminal isn't being set multiple times.
     ```solidity
-    // Make sure duplicates we're added.
-    if (_terminals.length > 0)
+    // Make sure duplicates were not added.
+    if (_terminals.length > 1)
       for (uint256 _i; _i < _terminals.length; _i++)
         for (uint256 _j = _i + 1; _j < _terminals.length; _j++)
           if (_terminals[_i] == _terminals[_j]) revert DUPLICATE_TERMINALS();
@@ -117,8 +117,8 @@ function setTerminalsOf(uint256 _projectId, IJBPaymentTerminal[] calldata _termi
   // Delete the stored terminals for the project.
   _terminalsOf[_projectId] = _terminals;
 
-  // Make sure duplicates we're added.
-  if (_terminals.length > 0)
+  // Make sure duplicates were not added.
+  if (_terminals.length > 1)
     for (uint256 _i; _i < _terminals.length; _i++)
       for (uint256 _j = _i + 1; _j < _terminals.length; _j++)
         if (_terminals[_i] == _terminals[_j]) revert DUPLICATE_TERMINALS();
