@@ -8,7 +8,7 @@ Interface: [`IJBTokenStore`](../../../interfaces/ijbtokenstore.md)
 {% tab title="Step by step" %}
 **Claims internally accounted for tokens into a holder's wallet.**
 
-_Only a token holder or an operator can claim its unclaimed tokens._
+_Only a token holder, the owner of the token's project, or an operator specified by the token holder can claim its unclaimed tokens._
 
 ### Definition
 
@@ -17,14 +17,22 @@ function claimFor(
   address _holder,
   uint256 _projectId,
   uint256 _amount
-) external override requirePermission(_holder, _projectId, JBOperations.CLAIM) { ... }
+)
+  external
+  override
+  requirePermissionAllowingOverride(
+    _holder,
+    _projectId,
+    JBOperations.CLAIM,
+    msg.sender == projects.ownerOf(_projectId)
+  ) { ... }
 ```
 
 * Arguments:
   * `_holder` is the owner of the tokens being claimed.
   * `_projectId` is the ID of the project whose tokens are being claimed.
   * `_amount` is the amount of tokens to claim.
-* Through the [`requirePermission`](../../or-abstract/jboperatable/modifiers/requirepermission.md) modifier, the function is only accessible by the token holder, or from an operator that has been given the [`JBOperations.CLAIM`](../../../libraries/jboperations.md) permission by the token holder. 
+* Through the [`requirePermissionAllowingOverride`](../../or-abstract/jboperatable/modifiers/requirepermission.md) modifier, the function is only accessible by the token holder, the owner of the token's prject, or from an operator that has been given the [`JBOperations.CLAIM`](../../../libraries/jboperations.md) permission by the token holder. 
 * The function overrides a function definition from the [`IJBTokenStore`](../../../interfaces/ijbtokenstore.md) interface.
 * The function does't return anything.
 
@@ -110,7 +118,7 @@ function claimFor(
   Claims internally accounted for tokens into a holder's wallet.
 
   @dev
-  Only a token holder or an operator can claim its unclaimed tokens.
+  Only a token holder, the owner of the token's project, or an operator specified by the token holder can claim its unclaimed tokens.
 
   @param _holder The owner of the tokens being claimed.
   @param _projectId The ID of the project whose tokens are being claimed.
@@ -120,7 +128,15 @@ function claimFor(
   address _holder,
   uint256 _projectId,
   uint256 _amount
-) external override requirePermission(_holder, _projectId, JBOperations.CLAIM) {
+)
+  external
+  override
+  requirePermissionAllowingOverride(
+    _holder,
+    _projectId,
+    JBOperations.CLAIM,
+    msg.sender == projects.ownerOf(_projectId)
+  ) {
   // Get a reference to the project's current token.
   IJBToken _token = tokenOf[_projectId];
 
