@@ -59,8 +59,8 @@ function setTerminalsOf(uint256 _projectId, IJBPaymentTerminal[] calldata _termi
     // If one of the old terminals was set as a primary terminal but is not included in the new terminals, remove it from being a primary terminal.
     for (uint256 _i; _i < _oldTerminals.length; _i++)
       if (
-        _primaryTerminalOf[_projectId][_terminals[_i].token()] == _oldTerminals[_i] &&
-        !_contains(_terminals, _terminals[_i])
+        _primaryTerminalOf[_projectId][_oldTerminals[_i].token()] == _oldTerminals[_i] &&
+        !_contains(_terminals, _oldTerminals[_i])
       ) delete _primaryTerminalOf[_projectId][_oldTerminals[_i].token()];
     ```
 
@@ -110,8 +110,8 @@ function setTerminalsOf(uint256 _projectId, IJBPaymentTerminal[] calldata _termi
   // If one of the old terminals was set as a primary terminal but is not included in the new terminals, remove it from being a primary terminal.
   for (uint256 _i; _i < _oldTerminals.length; _i++)
     if (
-      _primaryTerminalOf[_projectId][_terminals[_i].token()] == _oldTerminals[_i] &&
-      !_contains(_terminals, _terminals[_i])
+      _primaryTerminalOf[_projectId][_oldTerminals[_i].token()] == _oldTerminals[_i] &&
+      !_contains(_terminals, _oldTerminals[_i])
     ) delete _primaryTerminalOf[_projectId][_oldTerminals[_i].token()];
 
   emit SetTerminals(_projectId, _terminals, msg.sender);
