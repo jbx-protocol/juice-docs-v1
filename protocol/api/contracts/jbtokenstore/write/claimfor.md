@@ -8,7 +8,7 @@ Interface: [`IJBTokenStore`](../../../interfaces/ijbtokenstore.md)
 {% tab title="Step by step" %}
 **Claims internally accounted for tokens into a holder's wallet.**
 
-_Anyone can claim tokens on behalf of a token owner._
+_Only a token holder or an operator can claim its unclaimed tokens._
 
 ### Definition
 
@@ -17,14 +17,14 @@ function claimFor(
   address _holder,
   uint256 _projectId,
   uint256 _amount
-) external override { ... }
+) external override requirePermission(_holder, _projectId, JBOperations.CLAIM) { ... }
 ```
 
 * Arguments:
   * `_holder` is the owner of the tokens being claimed.
   * `_projectId` is the ID of the project whose tokens are being claimed.
   * `_amount` is the amount of tokens to claim.
-* The function can be accessed externally by anyone.
+* Through the [`requirePermission`](../../or-abstract/jboperatable/modifiers/requirepermission.md) modifier, the function is only accessible by the token holder, or from an operator that has been given the [`JBOperations.CLAIM`](../../../libraries/jboperations.md) permission by the token holder. 
 * The function overrides a function definition from the [`IJBTokenStore`](../../../interfaces/ijbtokenstore.md) interface.
 * The function does't return anything.
 
@@ -110,7 +110,7 @@ function claimFor(
   Claims internally accounted for tokens into a holder's wallet.
 
   @dev
-  Anyone can claim tokens on behalf of a token owner.
+  Only a token holder or an operator can claim its unclaimed tokens.
 
   @param _holder The owner of the tokens being claimed.
   @param _projectId The ID of the project whose tokens are being claimed.
@@ -120,7 +120,7 @@ function claimFor(
   address _holder,
   uint256 _projectId,
   uint256 _amount
-) external override {
+) external override requirePermission(_holder, _projectId, JBOperations.CLAIM) {
   // Get a reference to the project's current token.
   IJBToken _token = tokenOf[_projectId];
 

@@ -26,7 +26,7 @@ function transferFrom(
   * `_projectId` is the ID of the project whose tokens are being transferred.
   * `_recipient` is thhe recipient of the tokens.
   * `_amount` is the amount of tokens to transfer.
-* Through the [`requirePermission`](../../or-abstract/jboperatable/modifiers/requirepermission.md) modifier, the function is only accessible by the project's owner, or from an operator that has been given the [`JBOperations.TRANSFER`](../../../libraries/jboperations.md) permission by the project owner for the provided `_projectId`.
+* Through the [`requirePermission`](../../or-abstract/jboperatable/modifiers/requirepermission.md) modifier, the function is only accessible by the token holder, or from an operator that has been given the [`JBOperations.TRANSFER`](../../../libraries/jboperations.md) permission by the token holder. 
 * The function overrides a function definition from the [`IJBTokenStore`](../../../interfaces/ijbtokenstore.md) interface.
 * The function doesn't return anything.
 
