@@ -44,7 +44,7 @@ function remainingDistributionLimitOf(
     _External references:_
 
     * [`distributionLimitOf`](../../../or-controllers/jbcontroller/properties/distributionlimitof.md)
-    * [`usedDistributionLimitOf`](../../jbethpaymentterminalstore/properties/useddistributionlimitof.md)
+    * [`usedDistributionLimitOf`](../../jbpaymentterminalstore/properties/useddistributionlimitof.md)
 {% endtab %}
 
 {% tab title="Code" %}

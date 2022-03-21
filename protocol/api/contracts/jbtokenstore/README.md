@@ -19,7 +19,7 @@ Ethereum mainnet: _Not yet deployed_
 
 | Name                                                     | Description                                                                                                                              |
 | -------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- |
-| [**`IJBTokenStore`**](../../interfaces/ijbtokenstore.md) | General interface for the methods in this contract that interact with the blockchain's state according to the Juicebox protocol's rules. |
+| [**`IJBTokenStore`**](../../interfaces/ijbtokenstore.md) | General interface for the methods in this contract that interact with the blockchain's state according to the protocol's rules. |
 
 ### **Inheritance**
 

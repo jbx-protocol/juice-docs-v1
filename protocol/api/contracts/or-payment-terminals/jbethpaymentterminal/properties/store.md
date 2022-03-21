@@ -13,7 +13,7 @@ Interface: [`IJBETHPaymentTerminal`](../../../../interfaces/ijbethpaymenttermina
   @notice 
   The contract that stores and manages the terminal's data.
 */
-JBETHPaymentTerminalStore public immutable store;
+JBPaymentTerminalStore public immutable store;
 ```
 
 * The value cannot be changed.

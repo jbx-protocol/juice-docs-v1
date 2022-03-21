@@ -75,7 +75,7 @@ function redeemTokensOf(
 
     _External references:_
 
-    * [`recordRedemptionFor`](../../jbethpaymentterminalstore/write/recordredemptionfor.md)
+    * [`recordRedemptionFor`](../../jbpaymentterminalstore/write/recordredemptionfor.md)
 4.  If an amount is being claimed, send the funds to the beneficiary.
 
     ```solidity

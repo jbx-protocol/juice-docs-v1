@@ -20,7 +20,7 @@ struct JBFundingCycle {
   // If no changes are proposed, a funding cycle rolls over to another one with the same properties but new `start` timestamp and a discounted `weight`.
   uint256 duration;
   // An unsigned 60.18-decimal fixed-point number that contracts can use to base arbitrary calculations on.
-  // For example, the `JBETHPaymentTerminalStore` uses this to determine how many tokens it should mint when a payment is received.
+  // For example, the `JBPaymentTerminalStore` uses this to determine how many tokens it should mint when a payment is received.
   uint256 weight;
   // A number from 0-1000000000 indicating by how much the `weight` of the subsequent funding cycle should be reduced, if the project owner hasn't configured the subsequent funding cycle with an explicit `weight`.
   // If it's 0, each funding cycle will have equal weight.

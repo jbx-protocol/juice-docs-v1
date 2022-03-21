@@ -1,6 +1,6 @@
 # distributePayoutsOf
 
-Contract: [`JBETHPaymentTerminalStore`](../)​‌
+Contract: [`JBPaymentTerminalStore`](../)​‌
 
 Interface: [`IJBETHPaymentTerminal`](../../../../interfaces/ijbethpaymentterminal.md)
 
@@ -50,7 +50,7 @@ function distributePayoutsOf(
 
     _External references:_
 
-    * [`recordDistributionFor`](../../jbethpaymentterminalstore/write/recorddistributionfor.md)
+    * [`recordDistributionFor`](../../jbpaymentterminalstore/write/recorddistributionfor.md)
 2.  Get a reference to the project's owner. The owner will be allocated any funds leftover once splits are settled.
 
     ```solidity

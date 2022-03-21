@@ -32,7 +32,7 @@ function ethBalanceOf(uint256 _projectId) external view override returns (uint25
 
     _External references:_
 
-    * [`balanceOf`](../../jbethpaymentterminalstore/properties/balanceof.md)
+    * [`balanceOf`](../../jbpaymentterminalstore/properties/balanceof.md)
 {% endtab %}
 
 {% tab title="Code" %}

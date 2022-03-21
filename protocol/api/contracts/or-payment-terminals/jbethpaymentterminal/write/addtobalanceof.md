@@ -41,7 +41,7 @@ function addToBalanceOf(uint256 _projectId, string memory _memo) external payabl
 
     _External references:_
 
-    * [`recordAddedBalanceFor`](../../jbethpaymentterminalstore/write/recordaddedbalancefor.md)
+    * [`recordAddedBalanceFor`](../../jbpaymentterminalstore/write/recordaddedbalancefor.md)
 3.  Refund any held fees. This is useful to allow a project to withdraw funds from the protocol and subsequently add them back without paying eventually having to pay double fees.
 
     ```solidity

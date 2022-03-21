@@ -11,5 +11,5 @@
 #### What you'll want to know if you're building
 
 * A delegate contract can be specified by your funding cycle's [`dataSource`](data-source.md).
-* The [`IJBPayDelegate`](../../api/interfaces/ijbpaydelegate.md)'s `didPay` hook is triggered in [`JBETHPaymentTerminalStore.recordPaymentFrom(...)`](../../api/contracts/or-payment-terminals/jbethpaymentterminalstore/write/recordpaymentfrom.md), and the [`IJBRedemptionDelegate`](../../api/interfaces/ijbredemptiondelegate.md)'s `didRedeem` hook is triggered in [`JBETHPaymentTerminalStore.recordRedemptionFor(...)`](../../api/contracts/or-payment-terminals/jbethpaymentterminalstore/write/recordredemptionfor.md).
+* The [`IJBPayDelegate`](../../api/interfaces/ijbpaydelegate.md)'s `didPay` hook is triggered in [`JBPaymentTerminalStore.recordPaymentFrom(...)`](../../api/contracts/jbpaymentterminalstore/write/recordpaymentfrom.md), and the [`IJBRedemptionDelegate`](../../api/interfaces/ijbredemptiondelegate.md)'s `didRedeem` hook is triggered in [`JBPaymentTerminalStore.recordRedemptionFor(...)`](../../api/contracts/jbpaymentterminalstore/write/recordredemptionfor.md).
 * The redemption delegate hook is called before funds are dispersed.&#x20;

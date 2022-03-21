@@ -1,6 +1,6 @@
 # recordDistributionFor
 
-Contract: [`JBETHPaymentTerminalStore`](../../../jbdirectory/write/)​‌
+Contract: [`JBPaymentTerminalStore`](../../../jbdirectory/write/)​‌
 
 {% tabs %}
 {% tab title="Step by step" %}

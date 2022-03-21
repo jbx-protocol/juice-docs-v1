@@ -1,6 +1,6 @@
 # \_totalOverflowDuring
 
-Contract: [`JBETHPaymentTerminalStore`](../)​‌
+Contract: [`JBPaymentTerminalStore`](../)​‌
 
 {% tabs %}
 {% tab title="Step by step" %}

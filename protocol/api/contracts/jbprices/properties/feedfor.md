@@ -19,7 +19,8 @@ Interface: [`IJBPrices`](../../../interfaces/ijbprices.md)
 mapping(uint256 => mapping(uint256 => IJBPriceFeed)) public override feedFor;
 ```
 
-* `uint256` is the currency of the feed.
-* `uint256` is the currency the feed is based on.  
+* Arguments:
+  * `uint256` is the currency of the feed.
+  * `uint256` is the currency the feed is based on.  
 * The resulting view function can be accessed externally by anyone.
 * The resulting function overrides a function definition from the [`IJBPrices`](../../../interfaces/ijbprices.md) interface.

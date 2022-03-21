@@ -51,7 +51,7 @@ function useAllowanceOf(
 
     _External references:_
 
-    * [`recordUsedAllowanceOf`](../../jbethpaymentterminalstore/write/recordusedallowanceof.md)
+    * [`recordUsedAllowanceOf`](../../jbpaymentterminalstore/write/recordusedallowanceof.md)
 2.  Get a reference to the project's owner to which the tokens generated from paying platform fees will be sent.
 
     ```solidity

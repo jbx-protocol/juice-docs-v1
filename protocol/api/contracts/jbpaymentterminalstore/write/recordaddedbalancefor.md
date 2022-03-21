@@ -1,6 +1,6 @@
 # recordAddedBalanceFor
 
-Contract: [`JBETHPaymentTerminalStore`](../)​‌
+Contract: [`JBPaymentTerminalStore`](../)​‌
 
 {% tabs %}
 {% tab title="Step by step" %}

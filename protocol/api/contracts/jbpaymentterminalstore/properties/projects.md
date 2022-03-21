@@ -1,6 +1,8 @@
 # projects
 
-Contract: [`JBETHPaymentTerminalStore`](../)​‌
+Contract: [`JBPaymentTerminalStore`](../)​‌
+
+Interface: [`JBPaymentTerminalStore`](../../../interfaces/ijbpaymentterminalstore.md)
 
 **The Projects contract which mints ERC-721's that represent project ownership and transfers.**
 
@@ -11,8 +13,9 @@ Contract: [`JBETHPaymentTerminalStore`](../)​‌
   @notice 
   The Projects contract which mints ERC-721's that represent project ownership and transfers.
 */ 
-IJBProjects public immutable projects;
+IJBProjects public immutable override projects;
 ```
 
 * The value cannot be changed.
 * The resulting view function can be accessed externally by anyone.
+* The resulting function overrides a function definition from the [`JBPaymentTerminalStore`](../../../interfaces/ijbpaymentterminalstore.md) interface.

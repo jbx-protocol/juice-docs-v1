@@ -67,7 +67,7 @@ function _pay(
 
     _External references:_
 
-    * [`recordPaymentFrom`](../../jbethpaymentterminalstore/write/recordpaymentfrom.md)
+    * [`recordPaymentFrom`](../../jbpaymentterminalstore/write/recordpaymentfrom.md)
 4.  Emit a `Pay` event for the split being iterated on with the relevant parameters.
 
     ```solidity

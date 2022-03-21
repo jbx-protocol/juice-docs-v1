@@ -51,7 +51,7 @@ function migrate(uint256 _projectId, IJBPaymentTerminal _to)
 
     _External references:_
 
-    * [`recordMigration`](../../jbethpaymentterminalstore/write/recordmigration.md)
+    * [`recordMigration`](../../jbpaymentterminalstore/write/recordmigration.md)
 3.  If there's a balance to migrate, move the funds over to the new terminal.
 
     ```solidity

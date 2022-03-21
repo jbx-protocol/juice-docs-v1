@@ -18,7 +18,7 @@ Ethereum mainnet: _Not yet deployed_\
 
 | Name                                                                                       | Description                                                                                                                                      |
 | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------ |
-| [**`IJBETHPaymentTerminal`**](../../../interfaces/ijbethpaymentterminal.md) | General interface for the methods in this contract that send and receive funds according to the Juicebox protocol's rules.                       |
+| [**`IJBETHPaymentTerminal`**](../../../interfaces/ijbethpaymentterminal.md) | General interface for the methods in this contract that send and receive funds according to the protocol's rules.                       |
 | [**`IJBPaymentTerminal`**](../../../interfaces/ijbpaymentterminal.md)                     | Allows projects to migrate to this contract from other IJBTerminals (like TerminalV1), and to facilitate a project's future migration decisions. |
 
 ### **Inheritance**
@@ -38,7 +38,7 @@ constructor(
   IJBDirectory _directory,
   IJBSplitsStore _splitsStore,
   IJBVault _vault,
-  JBETHPaymentTerminalStore _store,
+  JBPaymentTerminalStore _store,
   address _owner
 ) JBOperatable(_operatorStore) {
   projects = _projects;
@@ -86,7 +86,7 @@ constructor(
 | [**`projects`**](properties/projects.md)                                  | <p><strong>Traits</strong></p><ul><li><code>immutable</code></li></ul><p><strong>Returns</strong></p><ul><li><a href="../../../interfaces/ijbprojects.md"><code>IJBProjects</code></a><code>projects</code></li></ul>                                     |
 | [**`directory`**](properties/directory.md)                                | <p><strong>Traits</strong></p><ul><li><code>immutable</code></li></ul><p><strong>Returns</strong></p><ul><li><a href="../../../interfaces/ijbdirectory.md"><code>IJBDirectory</code></a><code>directory</code></li></ul>                                  |
 | [**`splitStore`**](properties/splitstore.md) | <p><strong>Traits</strong></p><ul><li><code>immutable</code></li></ul><p><strong>Returns</strong></p><ul><li><a href="../../../interfaces/ijbsplitsstore.md"><code>IJBSplitsStore</code></a><code>splitsStore</code></li></ul>                            |
-| [**`store`**](properties/store.md)                                        | <p><strong>Traits</strong></p><ul><li><code>immutable</code></li></ul><p><strong>Returns</strong></p><ul><li><a href="../jbethpaymenterminalstore/"><code>JBETHPaymentTerminalStore</code></a><code>store</code></li></ul> |
+| [**`store`**](properties/store.md)                                        | <p><strong>Traits</strong></p><ul><li><code>immutable</code></li></ul><p><strong>Returns</strong></p><ul><li><a href="../jbethpaymenterminalstore/"><code>JBPaymentTerminalStore</code></a><code>store</code></li></ul> |
 | [**`token`**](properties/token.md)                                        | <p><strong>Traits</strong></p><ul><li><code>immutable</code></li></ul><p><strong>Returns</strong></p><ul><li><code>address token</code></li></ul> |
 | [**`fee`**](properties/fee.md)                                        | <p><strong>Returns</strong></p><ul><li><code>uint256 store</code></li></ul> |
 | [**`feeGauge`**](properties/feegauge.md)                                        | <p><strong>Returns</strong></p><ul><li><a href="../../../interfaces/ijbfeegauge.md"><code>IJBFeeGauge</code><code>feeGauge</code></li></ul> |
