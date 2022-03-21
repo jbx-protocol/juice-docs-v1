@@ -24,7 +24,7 @@ function setPrimaryTerminalOf(uint256 _projectId, IJBPaymentTerminal _terminal)
 * Arguments:
   * `_projectId` is the ID of the project for which a primary token is being set.
   * `_terminal` is the terminal to make primary.
-* Through the [`requirePermission`](../../or-abstract/jboperatable/modifiers/requirepermission.md) modifier, the function is only accessible by the project's owner, or from an operator that has been given the `JBOperations.SET_PRIMARY_TERMINAL`permission by the project owner for the provided `_projectId`.
+* Through the [`requirePermission`](../../or-abstract/jboperatable/modifiers/requirepermission.md) modifier, the function is only accessible by the project's owner, or from an operator that has been given the [`JBOperations.SET_PRIMARY_TERMINAL`](../../../libraries/jboperations.md) permission by the project owner for the provided `_projectId`.
 * The function overrides a function definition from the [`IJBDirectory`](../../../interfaces/ijbdirectory.md) interface.
 * The function doesn't return anything.
 

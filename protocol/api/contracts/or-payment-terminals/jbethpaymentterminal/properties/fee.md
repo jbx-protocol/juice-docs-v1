@@ -1,8 +1,8 @@
 # fee
 
-Contract: [`JBController`](../)​‌
+Contract: [`JBETHPaymentTerminal`](../)​‌
 
-Interface: [`IJBController`](../../../../interfaces/ijbcontroller.md)
+Interface: [`IJBETHPaymentTerminal`](../../../../interfaces/ijbethpaymentterminal.md)
 
 **The platform fee percent.**
 
@@ -22,4 +22,4 @@ uint256 public fee = 10;
 ```
 
 * The resulting view function can be accessed externally by anyone.
-* The resulting function overrides a function definition from the `IJBController` interface.
+* The resulting function overrides a function definition from the [`IJBETHPaymentTerminal`](../../../../interfaces/ijbethpaymentterminal.md) interface.

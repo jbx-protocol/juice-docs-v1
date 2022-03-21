@@ -27,7 +27,7 @@ function setTerminalsOf(uint256 _projectId, IJBPaymentTerminal[] calldata _termi
 * Arguments:
   * `_projectId` is the ID of the project having terminals set.
   * `_terminals` is the terminals to set.
-* Through the [`requirePermissionAllowingOverride`](../../or-abstract/jboperatable/modifiers/requirepermissionallowingoverride.md) modifier, the function is only accessible by the project's owner, from an operator that has been given the `JBOperations.SET_TERMINALS` permission by the project owner for the provided `_projectId`, or by the project's controller.
+* Through the [`requirePermissionAllowingOverride`](../../or-abstract/jboperatable/modifiers/requirepermissionallowingoverride.md) modifier, the function is only accessible by the project's owner, from an operator that has been given the [`JBOperations.SET_TERMINALS`](../../../libraries/jboperations.md) permission by the project owner for the provided `_projectId`, or by the project's controller.
 * The function overrides a function definition from the [`IJBDirectory`](../../../interfaces/ijbdirectory.md) interface.
 * The function doesn't return anything.
 
