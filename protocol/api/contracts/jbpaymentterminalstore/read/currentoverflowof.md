@@ -4,19 +4,26 @@ Contract: [`JBPaymentTerminalStore`](../)​‌
 
 {% tabs %}
 {% tab title="Step by step" %}
-**Gets the current overflowed amount (in the terminal's currency) in this terminal for a specified project.**
+**Gets the current overflowed amount in a terminal for a specified project.**
+
+_The current overflow is represented as a fixed point number with the same amount of decimals as the specified terminal._
 
 #### Definition
 
 ```solidity
-function currentOverflowOf(uint256 _projectId) external view returns (uint256) { ... }
+function currentOverflowOf(IJBPaymentTerminal _terminal, uint256 _projectId)
+  external
+  view
+  override
+  returns (uint256) { ... }
 ```
 
 * Arguments:
+  * `_terminal` is the terminal for which the overflow is being calculated.
   * `_projectId` is the ID of the project to get overflow for.
 * The view function can be accessed externally by anyone.
-* The function does not alter state on the blockchain.
-* The function returns the current amount of overflow that project has.
+* The view function does not alter state on the blockchain.
+* The function returns the current amount of overflow that project has in the specified terminal.
 
 #### Body
 
@@ -30,10 +37,11 @@ function currentOverflowOf(uint256 _projectId) external view returns (uint256) {
     _External references:_
 
     * [`currentOf`](../../../jbfundingcyclestore/read/currentOf.md)
-2.  Return the overflow given the state of the current funding cycle.
+2.  Forward the call to the internal version of the function that is also used by other operations.
 
     ```solidity
-    return _overflowDuring(_projectId, _fundingCycle);
+    // Return the overflow during the project's current funding cycle.
+    return _overflowDuring(_terminal, _projectId, _fundingCycle, _terminal.currency());
     ```
 
     _Internal references:_
@@ -45,17 +53,27 @@ function currentOverflowOf(uint256 _projectId) external view returns (uint256) {
 ```solidity
 /**
   @notice
-  Gets the current overflowed amount (in the terminal's currency) in this terminal for a specified project.
+  Gets the current overflowed amount in a terminal for a specified project.
 
+  @dev
+  The current overflow is represented as a fixed point number with the same amount of decimals as the specified terminal.
+
+  @param _terminal The terminal for which the overflow is being calculated.
   @param _projectId The ID of the project to get overflow for.
 
-  @return The current amount of overflow that project has in this terminal.
+  @return The current amount of overflow that project has in the specified terminal.
 */
-function currentOverflowOf(uint256 _projectId) external view returns (uint256) {
+function currentOverflowOf(IJBPaymentTerminal _terminal, uint256 _projectId)
+  external
+  view
+  override
+  returns (uint256)
+{
   // Get a reference to the project's current funding cycle.
   JBFundingCycle memory _fundingCycle = fundingCycleStore.currentOf(_projectId);
 
-  return _overflowDuring(_projectId, _fundingCycle);
+  // Return the overflow during the project's current funding cycle.
+  return _overflowDuring(_terminal, _projectId, _fundingCycle, _terminal.currency());
 }
 ```
 {% endtab %}

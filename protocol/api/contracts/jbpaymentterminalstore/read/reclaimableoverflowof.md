@@ -4,32 +4,45 @@ Contract: [`JBPaymentTerminalStore`](../)​‌
 
 {% tabs %}
 {% tab title="Step by step" %}
-**The amount of overflowed ETH that can be reclaimed by the specified number of tokens.**
+**The amount of overflowed tokens from a terminal that can be reclaimed by the specified number of tokens.**
 
 _If the project has an active funding cycle reconfiguration ballot, the project's ballot redemption rate is used._
+
+_The reclaimable overflow is returned in terms of the specified terminal's currency._
+
+_The reclaimable overflow is represented as a fixed point number with the same amount of decimals as the specified terminal._
 
 #### Definition
 
 ```solidity
-function reclaimableOverflowOf(uint256 _projectId, uint256 _tokenCount)
-  external
-  view
-  returns (uint256) { ... }
+function reclaimableOverflowOf(
+  IJBPaymentTerminal _terminal,
+  uint256 _projectId,
+  uint256 _tokenCount
+) external view override returns (uint256) { ... }
 ```
 
 * Arguments:
-  * `_projectId` is the ID of the project to get a reclaimable amount for.
-  * `_tokenCount` is the number of tokens to make the calculation with.
+  * `_terminal` is the terminal for which the overflow is being calculated.
+  * `_projectId` is the ID of the project to get the reclaimable overflow amount for.
+  * `_tokenCount` is the number of tokens to make the calculation with, as a fixed point number with 18 decimals.
 * The view function can be accessed externally by anyone.
-* The function does not alter state on the blockchain.
-* The function returns the amount of overflowed ETH that can be reclaimed.
+* The view function does not alter state on the blockchain.
+* The function returns the amount of overflowed tokens that can be reclaimed.
 
 #### Body
 
 1.  Forward the call to the internal version of the function that is also used by other operations.
 
     ```solidity
-    return _reclaimableOverflowOf(_projectId, fundingCycleStore.currentOf(_projectId), _tokenCount);
+    _reclaimableOverflowOf(
+      _terminal,
+      _projectId,
+      fundingCycleStore.currentOf(_projectId),
+      _tokenCount,
+      _terminal.decimals(),
+      _terminal.currency()
+    );
     ```
 
     _Internal references:_
@@ -39,27 +52,45 @@ function reclaimableOverflowOf(uint256 _projectId, uint256 _tokenCount)
     _External references:_
 
     * [`currentOf`](../../../jbfundingcyclestore/read/currentof.md)
+    * [`decimals`](../../../TODO)
+    * [`currency`](../../../TODO)
 {% endtab %}
 
 {% tab title="Code" %}
 ```solidity
 /**
   @notice
-  The amount of overflowed ETH that can be reclaimed by the specified number of tokens.
+  The amount of overflowed tokens from a terminal that can be reclaimed by the specified number of tokens.
 
-  @dev If the project has an active funding cycle reconfiguration ballot, the project's ballot redemption rate is used.
+  @dev 
+  If the project has an active funding cycle reconfiguration ballot, the project's ballot redemption rate is used.
 
-  @param _projectId The ID of the project to get a reclaimable amount for.
-  @param _tokenCount The number of tokens to make the calculation with. 
+  @dev
+  The reclaimable overflow is returned in terms of the specified terminal's currency.
 
-  @return The amount of overflowed ETH that can be reclaimed.
+  @dev
+  The reclaimable overflow is represented as a fixed point number with the same amount of decimals as the specified terminal.
+
+  @param _terminal The terminal for which the overflow is being calculated.
+  @param _projectId The ID of the project to get the reclaimable overflow amount for.
+  @param _tokenCount The number of tokens to make the calculation with, as a fixed point number with 18 decimals.
+
+  @return The amount of overflowed tokens that can be reclaimed.
 */
-function reclaimableOverflowOf(uint256 _projectId, uint256 _tokenCount)
-  external
-  view
-  returns (uint256)
-{
-  return _reclaimableOverflowOf(_projectId, fundingCycleStore.currentOf(_projectId), _tokenCount);
+function reclaimableOverflowOf(
+  IJBPaymentTerminal _terminal,
+  uint256 _projectId,
+  uint256 _tokenCount
+) external view override returns (uint256) {
+  return
+    _reclaimableOverflowOf(
+      _terminal,
+      _projectId,
+      fundingCycleStore.currentOf(_projectId),
+      _tokenCount,
+      _terminal.decimals(),
+      _terminal.currency()
+    );
 }
 ```
 {% endtab %}

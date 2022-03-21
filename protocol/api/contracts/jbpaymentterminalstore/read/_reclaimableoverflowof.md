@@ -4,7 +4,7 @@ Contract: [`JBPaymentTerminalStore`](../)​‌
 
 {% tabs %}
 {% tab title="Step by step" %}
-**The amount of overflowed ETH that can be reclaimed by the specified number of tokens.**
+**The amount of overflowed tokens from a terminal that can be reclaimed by the specified number of tokens.**
 
 _If the project has an active funding cycle reconfiguration ballot, the project's ballot redemption rate is used._
 
@@ -12,36 +12,42 @@ _If the project has an active funding cycle reconfiguration ballot, the project'
 
 ```solidity
 function _reclaimableOverflowOf(
+  IJBPaymentTerminal _terminal,
   uint256 _projectId,
   JBFundingCycle memory _fundingCycle,
-  uint256 _tokenCount
+  uint256 _tokenCount,
+  uint256 _balanceDecimals,
+  uint256 _balanceCurrency
 ) private view returns (uint256) { ... }
 ```
 
 * Arguments:
-  * `_projectId` is the ID of the project to get a claimable amount for.
-  * `_fundingCycle` is the funding cycle during which the reclaimable amount applies.
-  * `_tokenCount` is the number of tokens to make the calculation with.
+  * `_terminal` is the terminal for which the overflow is being calculated.
+  * `_projectId` is the ID of the project to get the reclaimable overflow amount for.
+  * `_fundingCycle` is the funding cycle during which reclaimable overflow is being calculated.
+  * `_tokenCount` is the number of tokens to make the calculation with, as a fixed point number with 18 decimals.
+  * `_balanceDecimals` is the expected number of decimals that are included in the stored balance.
+  * `_balanceCurrency` is the expected currency that the stored balance is measured in.
 * The view function is private to this contract.
-* The function does not alter state on the blockchain.
-* The function returns the amount of overflowed ETH that can be reclaimed.
+* The view function does not alter state on the blockchain.
+* The function returns the amount of overflowed tokens that can be reclaimed.
 
 #### Body
 
-1.  Get a reference to the current overflow given the provided funding cycle. If the funding cycle specifies that the local balance should be used for redemptions, get the overflow taking only the local balance and distribution limit into account. Otherwise get the overflow taking the balances and distribution limits of all of the project's terminals into account.
+1.  Get a reference to the current overflow given the provided funding cycle. If the funding cycle specifies that the local balance should be used for redemptions, get the overflow taking only the local balance and distribution limit into account. Otherwise, get the overflow taking the balances and distribution limits of all of the project's terminals into account.
 
     ```solidity
     // Get the amount of current overflow.
     // Use the local overflow if the funding cycle specifies that it should be used. Otherwise use the project's total overflow across all of its terminals.
     uint256 _currentOverflow = _fundingCycle.shouldUseLocalBalanceForRedemptions()
-      ? _overflowDuring(_projectId, _fundingCycle)
-      : _totalOverflowDuring(_projectId, _fundingCycle);
+      ? _overflowDuring(_terminal, _projectId, _fundingCycle, _balanceCurrency)
+      : _currentTotalOverflowOf(_projectId, _balanceDecimals, _balanceCurrency);
     ```
 
     _Internal references:_
 
     * [`_overflowDuring`](\_overflowduring.md)
-    * [`_totalOverflowDuring`](\_totaloverflowduring.md)
+    * [`_currentTotalOverflowOf`](\_currenttotaloverflowof.md)
 2.  If there is no overflow, there's also no claimable overflow.
 
     ```solidity
@@ -89,7 +95,7 @@ function _reclaimableOverflowOf(
     // If the amount being redeemed is the total supply, return the rest of the overflow.
     if (_tokenCount == _totalSupply) return _currentOverflow;
     ```
-7.  Get a reference to the redemption rate that should be used in the redemption bonding curve formula. If the current funding cycle has an active ballot, use its ballot redemption rate, otherwise use the standard redemption rate. This lets project's configure different bonding curves depending on the state of pending reconfigurations. This rate is out of 10000.
+7.  Get a reference to the redemption rate that should be used in the redemption bonding curve formula. If the current funding cycle has an active ballot, use its ballot redemption rate, otherwise use the standard redemption rate. This lets projects configure different bonding curves depending on the state of pending reconfigurations. 
 
     ```solidity
     // Use the ballot redemption rate if the queued cycle is pending approval according to the previous funding cycle's ballot.
@@ -130,6 +136,7 @@ function _reclaimableOverflowOf(
     ```solidity
     // These conditions are all part of the same curve. Edge conditions are separated because fewer operation are necessary.
     if (_redemptionRate == JBConstants.MAX_REDEMPTION_RATE) return _base;
+    
     return
       PRBMath.mulDiv(
         _base,
@@ -155,18 +162,33 @@ function _reclaimableOverflowOf(
 ```solidity
 /**
   @notice
-  See docs for `reclaimableOverflowOf`
+  The amount of overflowed tokens from a terminal that can be reclaimed by the specified number of tokens.
+
+  @dev 
+  If the project has an active funding cycle reconfiguration ballot, the project's ballot redemption rate is used.
+
+  @param _terminal The terminal for which the overflow is being calculated.
+  @param _projectId The ID of the project to get the reclaimable overflow amount for.
+  @param _fundingCycle The funding cycle during which reclaimable overflow is being calculated.
+  @param _tokenCount The number of tokens to make the calculation with, as a fixed point number with 18 decimals.
+  @param _balanceDecimals The expected number of decimals that are included in the stored balance.
+  @param _balanceCurrency The expected currency that the stored balance is measured in.
+
+  @return The amount of overflowed tokens that can be reclaimed.
 */
 function _reclaimableOverflowOf(
+  IJBPaymentTerminal _terminal,
   uint256 _projectId,
   JBFundingCycle memory _fundingCycle,
-  uint256 _tokenCount
+  uint256 _tokenCount,
+  uint256 _balanceDecimals,
+  uint256 _balanceCurrency
 ) private view returns (uint256) {
   // Get the amount of current overflow.
   // Use the local overflow if the funding cycle specifies that it should be used. Otherwise use the project's total overflow across all of its terminals.
   uint256 _currentOverflow = _fundingCycle.shouldUseLocalBalanceForRedemptions()
-    ? _overflowDuring(_projectId, _fundingCycle)
-    : _totalOverflowDuring(_projectId, _fundingCycle);
+    ? _overflowDuring(_terminal, _projectId, _fundingCycle, _balanceCurrency)
+    : _currentTotalOverflowOf(_projectId, _balanceDecimals, _balanceCurrency);
 
   // If there is no overflow, nothing is claimable.
   if (_currentOverflow == 0) return 0;
@@ -191,7 +213,7 @@ function _reclaimableOverflowOf(
     JBBallotState.Active
     ? _fundingCycle.ballotRedemptionRate()
     : _fundingCycle.redemptionRate();
-  
+
   // If the redemption rate is 0, nothing is claimable.
   if (_redemptionRate == 0) return 0;
 
@@ -200,6 +222,7 @@ function _reclaimableOverflowOf(
 
   // These conditions are all part of the same curve. Edge conditions are separated because fewer operation are necessary.
   if (_redemptionRate == JBConstants.MAX_REDEMPTION_RATE) return _base;
+
   return
     PRBMath.mulDiv(
       _base,

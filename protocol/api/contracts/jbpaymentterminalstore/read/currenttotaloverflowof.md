@@ -4,58 +4,57 @@ Contract: [`JBPaymentTerminalStore`](../)​‌
 
 {% tabs %}
 {% tab title="Step by step" %}
-**Gets the current overflowed amount (in the terminal's currency) for a specified project across all terminals.**
+**Gets the current overflowed amount for a specified project across all terminals.**
 
 #### Definition
 
 ```solidity
-function currentOverflowOf(uint256 _projectId) external view returns (uint256) { ... }
+function currentTotalOverflowOf(
+  uint256 _projectId,
+  uint256 _decimals,
+  uint256 _currency
+) external view override returns (uint256)  { ... }
 ```
 
 * Arguments:
   * `_projectId` is the ID of the project to get total overflow for.
+  * `_decimals` is the number of decimals that the fixed point overflow should include.
+  * `_currency` is the currency that the total overflow should be in terms of.
 * The view function can be accessed externally by anyone.
-* The function does not alter state on the blockchain.
+* The view function does not alter state on the blockchain.
 * The function returns the current total amount of overflow that project has across all terminals.
 
 #### Body
 
-1.  Get a reference to the project's current funding cycle.
+1.  Forward the call to the internal version of the function that is also used by other operations.
 
     ```solidity
-    // Get a reference to the project's current funding cycle.
-    JBFundingCycle memory _fundingCycle = fundingCycleStore.currentOf(_projectId);
-    ```
-
-    _External references:_
-
-    * [`currentOf`](../../../jbfundingcyclestore/read/currentOf.md)
-2.  Return the total overflow given the state of the current funding cycle.
-
-    ```solidity
-    return _totalOverflowDuring(_projectId, _fundingCycle);
+    return _currentTotalOverflowOf(_projectId, _decimals, _currency);
     ```
 
     _Internal references:_
 
-    * [`_totalOverflowDuring`](\_totaloverflowDuring.md)
+    * [`_currentTotalOverflowOf`](\_currenttotaloverflowof.md)
 {% endtab %}
 
 {% tab title="Code" %}
 ```solidity
 /**
   @notice
-  Gets the current overflowed amount (in the terminal's currency) for a specified project across all terminals.
+  Gets the current overflowed amount for a specified project across all terminals.
 
   @param _projectId The ID of the project to get total overflow for.
+  @param _decimals The number of decimals that the fixed point overflow should include.
+  @param _currency The currency that the total overflow should be in terms of.
 
   @return The current total amount of overflow that project has across all terminals.
 */
-function currentTotalOverflowOf(uint256 _projectId) external view returns (uint256) {
-  // Get a reference to the project's current funding cycle.
-  JBFundingCycle memory _fundingCycle = fundingCycleStore.currentOf(_projectId);
-
-  return _totalOverflowDuring(_projectId, _fundingCycle);
+function currentTotalOverflowOf(
+  uint256 _projectId,
+  uint256 _decimals,
+  uint256 _currency
+) external view override returns (uint256) {
+  return _currentTotalOverflowOf(_projectId, _decimals, _currency);
 }
 ```
 {% endtab %}
