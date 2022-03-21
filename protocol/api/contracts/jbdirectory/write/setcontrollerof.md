@@ -25,10 +25,8 @@ function setControllerOf(uint256 _projectId, IJBController _controller)
     _projectId,
     JBOperations.SET_CONTROLLER,
     (msg.sender == address(controllerOf[_projectId]) ||
-      (
-        (isAllowedToSetFirstController[msg.sender] &&
-          controllerOf[_projectId] == IJBController(address(0)))
-      ))
+      (isAllowedToSetFirstController[msg.sender] &&
+        controllerOf[_projectId] == IJBController(address(0))))
   ) { ... }
 ```
 
@@ -99,10 +97,8 @@ function setControllerOf(uint256 _projectId, IJBController _controller)
     _projectId,
     JBOperations.SET_CONTROLLER,
     (msg.sender == address(controllerOf[_projectId]) ||
-      (
-        (isAllowedToSetFirstController[msg.sender] &&
-          controllerOf[_projectId] == IJBController(address(0)))
-      ))
+      (isAllowedToSetFirstController[msg.sender] &&
+        controllerOf[_projectId] == IJBController(address(0))))
   )
 {
   // The project must exist.
