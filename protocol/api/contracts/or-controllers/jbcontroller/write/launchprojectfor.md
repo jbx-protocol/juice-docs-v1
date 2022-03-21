@@ -21,25 +21,28 @@ function launchProjectFor(
   uint256 _mustStartAtOrAfter,
   JBGroupedSplits[] memory _groupedSplits,
   JBFundAccessConstraints[] memory _fundAccessConstraints,
-  IJBTerminal[] memory _terminals
-) external returns (uint256 projectId) { ... }
+  IJBPaymentTerminal[] memory _terminals,
+  string calldata _memo
+) external override returns (uint256 projectId) { ... }
 ```
 
 * Arguments:
   * `_owner` is the address to set as the owner of the project. The project ERC-721 will be owned by this address.
-  * `_projectMetadata` is a link to associate with the project within a particular domain. This can be updated any time by the owner of the project.
+  * `_projectMetadata` is a [`JBProjectMetadata`](../../../../data-structures/jbprojectmetadata.md) data structure to associate with the project within a particular domain. This can be updated any time by the owner of the project.
   * `_data` is a [`JBFundingCycleData`](../../../../data-structures/jbfundingcycledata.md) data structure that defines the project's first funding cycle. These properties will remain fixed for the duration of the funding cycle.
   * `_metadata` is a [`JBFundingCycleMetadata`](../../../../data-structures/jbfundingcyclemetadata.md) data structure specifying the controller specific params that a funding cycle can have. These properties will remain fixed for the duration of the funding cycle.
-  * `_mustStartAtOrAfter` is the time before which the configured funding cycle can't start.
+  * `_mustStartAtOrAfter` is the time before which the configured funding cycle cannot start.
   * `_groupedSplits` is an array of [`JBGroupedSplits`](../../../../data-structures/jbgroupedsplits.md) data structures containing splits to set for any number of groups. The core protocol makes use of groups defined in [`JBSplitsGroups`](../../../../libraries/jbsplitsgroups.md).
-  * `_fundAccessConstraints` is an array of [`JBFundAccessConstraints`](../../../../data-structures/jbfundaccessconstraints.md) data structures containing amounts that a project can distribute during each funding cycle and amounts that can be used from its own overflow on-demand for each payment terminal. The `distributionLimit` applies for each funding cycle, and the `overflowAllowance` applies for the entirety of the configuration.
+  * `_fundAccessConstraints` is an array of [`JBFundAccessConstraints`](../../../../data-structures/jbfundaccessconstraints.md) data structures containing amounts that a project can use from its treasury for each payment terminal. Amounts are fixed point numbers using the same number of decimals as the accompanying terminal. The `distributionLimit` applies for each funding cycle, and the `overflowAllowance` applies for the entirety of the configuration.
   * `_terminals` is an array of [`IJBTerminal`](../../../../interfaces/ijbterminal.md) payment terminals to add for the project.
+  * `_memo` is a memo to pass along to the emitted event.
 * The function can be accessed externally by anyone.
+* The function overrides a function definition from the [`IJBController`](../../../../interfaces/ijbcontroller.md) interface.
 * The function returns the ID of the project that was launched.
 
 #### Body
 
-1.  Create the project. This will mint an ERC-721 in the `_owners` wallet representing ownership over the project.
+1.  Create the project. This will mint an ERC-721 in the owner's wallet representing ownership over the project.
 
     ```solidity
     // Mint the project into the wallet of the message sender.
@@ -59,10 +62,11 @@ function launchProjectFor(
     _External references:_
 
     * [`setControllerOf`](../../../jbdirectory/write/setcontrollerof.md)
-3.  Configure the project's funding cycle, fund access constraints, and splits.
+3.  Configure the project's funding cycle, fund access constraints, and splits. Get a reference to the resulting funding cycle's configuration.
 
     ```solidity
-    _configure(
+    // Configure the first funding cycle.
+    uint256 _configuration = _configure(
       projectId,
       _data,
       _metadata,
@@ -79,12 +83,21 @@ function launchProjectFor(
 
     ```solidity
     // Add the provided terminals to the list of terminals.
-    if (_terminals.length > 0) directory.addTerminalsOf(projectId, _terminals);
+    if (_terminals.length > 0) directory.setTerminalsOf(projectId, _terminals);
     ```
 
     _External references:_
 
     * [`addTerminalsOf`](../../../jbdirectory/write/addterminalsof.md)
+5.  Emit a `LaunchProject` event with the relevant parameters.
+
+    ```solidity
+    emit LaunchProject(_configuration, projectId, _memo, msg.sender);
+    ```
+
+    _Event references:_
+
+    * [`LaunchProject`](../events/launchproject.md)
 {% endtab %}
 
 {% tab title="Code" %}
@@ -100,13 +113,14 @@ function launchProjectFor(
   Anyone can deploy a project on an owner's behalf.
 
   @param _owner The address to set as the owner of the project. The project ERC-721 will be owned by this address.
-  @param _projectMetadata A link to associate with the project within a particular domain. This can be updated any time by the owner of the project.
-  @param _data A JBFundingCycleData data structure that defines the project's first funding cycle. These properties will remain fixed for the duration of the funding cycle.
-  @param _metadata A JBFundingCycleMetadata data structure specifying the controller specific params that a funding cycle can have. These properties will remain fixed for the duration of the funding cycle.
+  @param _projectMetadata Metadata to associate with the project within a particular domain. This can be updated any time by the owner of the project.
+  @param _data Data that defines the project's first funding cycle. These properties will remain fixed for the duration of the funding cycle.
+  @param _metadata Metadata specifying the controller specific params that a funding cycle can have. These properties will remain fixed for the duration of the funding cycle.
   @param _mustStartAtOrAfter The time before which the configured funding cycle can't start.
-  @param _groupedSplits An array of splits to set for any number of group. The core protocol makes use of groups defined in `JBSplitsGroups`.
-  @param _fundAccessConstraints An array containing amounts, in wei (18 decimals), that a project can use from its own overflow on-demand for each payment terminal.
+  @param _groupedSplits An array of splits to set for any number of groups.
+  @param _fundAccessConstraints An array containing amounts that a project can use from its treasury for each payment terminal. Amounts are fixed point numbers using the same number of decimals as the accompanying terminal.
   @param _terminals Payment terminals to add for the project.
+  @param _memo A memo to pass along to the emitted event.
 
   @return projectId The ID of the project.
 */
@@ -118,15 +132,17 @@ function launchProjectFor(
   uint256 _mustStartAtOrAfter,
   JBGroupedSplits[] memory _groupedSplits,
   JBFundAccessConstraints[] memory _fundAccessConstraints,
-  IJBTerminal[] memory _terminals
-) external returns (uint256 projectId) {
+  IJBPaymentTerminal[] memory _terminals,
+  string calldata _memo
+) external override returns (uint256 projectId) {
   // Mint the project into the wallet of the message sender.
   projectId = projects.createFor(_owner, _projectMetadata);
 
   // Set this contract as the project's controller in the directory.
   directory.setControllerOf(projectId, this);
 
-  _configure(
+  // Configure the first funding cycle.
+  uint256 _configuration = _configure(
     projectId,
     _data,
     _metadata,
@@ -136,23 +152,18 @@ function launchProjectFor(
   );
 
   // Add the provided terminals to the list of terminals.
-  if (_terminals.length > 0) directory.addTerminalsOf(projectId, _terminals);
+  if (_terminals.length > 0) directory.setTerminalsOf(projectId, _terminals);
+
+  emit LaunchProject(_configuration, projectId, _memo, msg.sender);
 }
 ```
 {% endtab %}
 
-{% tab title="Errors" %}
-| String                               | Description                                                |
-| ------------------------------------ | ---------------------------------------------------------- |
-| **`INVALID_RESERVED_RATE`**          | Thrown if the reserved rate is greater than 100%.          |
-| **`INVALID_REDEMPTION_RATE`**        | Thrown if the redemption rate is greater than 100%.        |
-| **`INVALID_BALLOT_REDEMPTION_RATE`** | Thrown if the ballot redemption rate is greater than 100%. |
-{% endtab %}
 
 {% tab title="Events" %}
 | Name                                                                    | Data                                                                                                                                                                                                                                                                                                                                                          |
 | ----------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [**`SetFundAccessConstraints`**](../events/setfundaccessconstraints.md) | <ul><li><code>uint256 indexed fundingCycleConfiguration</code></li><li><code>uint256 indexed fundingCycleNumber</code></li><li><code>uint256 indexed projectId</code></li><li><a href="../../../../data-structures/jbfundaccessconstraints.md"><code>JBFundAccessConstraints</code></a><code>constraints</code></li><li><code>address caller</code></li></ul> |
+| [**`LaunchProject`**](../events/launchproject.md)                                         | <ul><li><code>uint256 configuration</code></li><li><code>uint256 projectId</code></li><li><code>string memo</code></li><li><code>string memo</code></li><li><code>address caller</code></li></ul>                 |
 {% endtab %}
 
 {% tab title="Bug bounty" %}

@@ -12,27 +12,24 @@ _Only a project's owner or a designated operator can migrate it._
 
 ```solidity
 function migrate(uint256 _projectId, IJBController _to)
-    external
-    requirePermission(projects.ownerOf(_projectId), _projectId, JBOperations.MIGRATE_CONTROLLER)
-    nonReentrant { ... }
+  external
+  override
+  requirePermission(projects.ownerOf(_projectId), _projectId, JBOperations.MIGRATE_CONTROLLER) { ... }
 ```
 
 * Arguments:
-  * `_projectId` is the ID of the project that will be migrated from this controller..
+  * `_projectId` is the ID of the project that will be migrated from this controller.
   * `_to` is the controller to which the project is migrating.
-* Through the [`requirePermission`](../../../or-abstract/jboperatable/modifiers/requirepermission.md) modifier, the function is only accessible by the project's owner, or from an operator that has been given the `JBOperations.MIGRATE_CONTROLLER` permission by the project owner for the provided `_projectId`.
-* The function cannot be accessed recursively or while other `nonReentrant` functions in this contract are in progress.
+* Through the [`requirePermission`](../../../or-abstract/jboperatable/modifiers/requirepermission.md) modifier, the function is only accessible by the project's owner, or from an operator that has been given the [`JBOperations.MIGRATE_CONTROLLER`](../../../../libraries/jboperations.md) permission by the project owner for the provided `_projectId`.
 * The function doesn't return anything.
 
 ### Body
 
-1.  Make sure this controller is the project's current controller. Migrating away from a controller that isn't the project's current one wouldn't do anything.
+1.  Make sure this controller is the project's current controller. 
 
     ```solidity
     // This controller must be the project's current controller.
-    if (directory.controllerOf(_projectId) != this) {
-      revert CALLER_NOT_CURRENT_CONTROLLER();
-    }
+    if (directory.controllerOf(_projectId) != this) revert NOT_CURRENT_CONTROLLER();
     ```
 
     _External references:_
@@ -52,10 +49,13 @@ function migrate(uint256 _projectId, IJBController _to)
 
     ```solidity
     // Migration must be allowed
-    if (!_fundingCycle.controllerMigrationAllowed()) {
-      revert MIGRATION_NOT_ALLOWED();
-    }
+    if (!_fundingCycle.controllerMigrationAllowed()) revert MIGRATION_NOT_ALLOWED();
     ```
+
+    _Libraries used:_
+
+    * [`JBFundingCycleMetadataResolver`](../../../../libraries/jbfundingcyclemetadataresolver.md)\
+      `.controllerMigrationAllowed(...)`
 4.  Distribute any outstanding reserved tokens. There are reserved tokens to be distributed if the tracker does not equal the token's total supply.
 
     ```solidity
@@ -79,7 +79,7 @@ function migrate(uint256 _projectId, IJBController _to)
     _to.prepForMigrationOf(_projectId, this);
     ```
 
-    _Internal references:_
+    _External references:_
 
     * [`prepForMigrationOf`](prepformigrationof.md)
 6.  Set the new controller of the project.
@@ -105,7 +105,7 @@ function migrate(uint256 _projectId, IJBController _to)
 
 {% tab title="Code" %}
 ```solidity
-/** 
+/**
   @notice
   Allows a project to migrate from this controller to another.
 
@@ -117,21 +117,17 @@ function migrate(uint256 _projectId, IJBController _to)
 */
 function migrate(uint256 _projectId, IJBController _to)
   external
+  override
   requirePermission(projects.ownerOf(_projectId), _projectId, JBOperations.MIGRATE_CONTROLLER)
-  nonReentrant
 {
   // This controller must be the project's current controller.
-  if (directory.controllerOf(_projectId) != this) {
-    revert CALLER_NOT_CURRENT_CONTROLLER();
-  }
+  if (directory.controllerOf(_projectId) != this) revert NOT_CURRENT_CONTROLLER();
 
   // Get a reference to the project's current funding cycle.
   JBFundingCycle memory _fundingCycle = fundingCycleStore.currentOf(_projectId);
 
   // Migration must be allowed
-  if (!_fundingCycle.controllerMigrationAllowed()) {
-    revert MIGRATION_NOT_ALLOWED();
-  }
+  if (!_fundingCycle.controllerMigrationAllowed()) revert MIGRATION_NOT_ALLOWED();
 
   // All reserved tokens must be minted before migrating.
   if (uint256(_processedTokenTrackerOf[_projectId]) != tokenStore.totalSupplyOf(_projectId))
@@ -151,16 +147,14 @@ function migrate(uint256 _projectId, IJBController _to)
 {% tab title="Errors" %}
 | String                              | Description                                                                         |
 | ----------------------------------- | ----------------------------------------------------------------------------------- |
-| **`CALLER_NOT_CURRENT_CONTROLLER`** | Thrown if the controller isn't the project's current controller.                    |
+| **`NOT_CURRENT_CONTROLLER`** | Thrown if the controller isn't the project's current controller.                    |
 | **`MIGRATION_NOT_ALLOWED`**         | Thrown if the project's current funding cycle doesn't allow a controller migration. |
 {% endtab %}
 
 {% tab title="Events" %}
 | Name                                                                                | Data                                                                                                                                                                                                                                                                                                                      |
 | ----------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [**`Migrate`**](../events/migrate.md)                                               | <ul><li><code>uint256 projectId</code></li><li><a href="../../../../interfaces/ijbcontroller.md"><code>IJBController</code></a><code>to</code></li><li><code>address caller</code></li></ul>                                                                                                                              |
-| [**`DistributeReservedTokens`**](../events/distributereservedtokens.md)             | <ul><li><code>uint256 indexed fundingCycleId</code></li><li><code>uint256 indexed projectId</code></li><li><code>address indexed beneficiary</code></li><li><code>uint256 count</code></li><li><code>uint256 projectOwnerTokenCount</code></li><li><code>string memo</code></li><li><code>address caller</code></li></ul> |
-| [**`DistributeToReservedTokenSplit`**](../events/distributetoreservedtokensplit.md) | <ul><li><code>uint256 indexed fundingCycleId</code></li><li><code>uint256 indexed projectId</code></li><li><a href="../../../../data-structures/jbsplit.md"><code>JBSplit</code></a><code>split</code></li><li><code>uint256 tokenCount</code></li><li><code>address caller</code></li></ul>                              |
+| [**`Migrate`**](../events/migrate.md)                                               | <ul><li><code>uint256 projectId</code></li><li><code>[`IJBController`](../../../../interfaces/ijbcontroller.md)to</code></li><li><code>address caller</code></li></ul>                                                                                                                  |
 {% endtab %}
 
 {% tab title="Bug bounty" %}

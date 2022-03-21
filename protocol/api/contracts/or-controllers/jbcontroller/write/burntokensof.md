@@ -8,7 +8,7 @@ Interface: [`IJBController`](../../../../interfaces/ijbcontroller.md)
 {% tab title="Step by step" %}
 **Burns a token holder's supply.**
 
-_Only a token's holder, a designated operator, or a project's terminal's delegate can burn it._
+_Only a token's holder, a designated operator, or a project's terminal can burn it._
 
 ### Definition
 
@@ -36,9 +36,8 @@ function burnTokensOf(
   * `_projectId` is the ID of the project to which the tokens being burned belong.
   * `_tokenCount` is the number of tokens to burn.
   * `_memo` is a memo to pass along to the emitted event.
-  * `_preferClaimedTokens` is a flag indicating whether ERC20's should be burned first if they have been issued.
-* Through the [`requirePermissionAllowingOverride`](../../../or-abstract/jboperatable/modifiers/requirepermissionallowingoverride.md) modifier, the function is only accessible by the project's owner, from an operator that has been given the `JBOperations.BURN` permission by the project owner for the provided `_projectId`, or from one of the project's terminal's delegates..
-* The function cannot be accessed recursively or while other `nonReentrant` functions in this contract are in progress.
+  * `_preferClaimedTokens` is flag indicating whether a project's attached token contract should be burned first if they have been issued.
+* Through the [`requirePermissionAllowingOverride`](../../../or-abstract/jboperatable/modifiers/requirepermissionallowingoverride.md) modifier, the function is only accessible by the project's owner, from an operator that has been given the [`JBOperations.BURN`](../../../../libraries/jboperations.md) permission by the project owner for the provided `_projectId`, or from one of the project's terminal's delegates.
 * The function overrides a function definition from the [`IJBController`](../../../../interfaces/ijbcontroller.md) interface.
 * The function doesn't return anything.
 
@@ -48,9 +47,7 @@ function burnTokensOf(
 
     ```solidity
     // There should be tokens to burn
-    if (_tokenCount == 0) {
-      revert NO_BURNABLE_TOKENS();
-    }
+    if (_tokenCount == 0) revert NO_BURNABLE_TOKENS();
     ```
 2.  Get a reference to the current funding cycle for the project.
 
@@ -65,10 +62,11 @@ function burnTokensOf(
 3.  Make sure the current funding cycle for the project hasn't paused burning if the request is not coming from one of the project's terminals. If the request is coming from a terminal, allow burning regardless of the pause state because it could be a sub-routine of another operation such as redemption.
 
     ```solidity
-    // If the message sender is not a terminal delegate, the current funding cycle must not be paused.
-    if (_fundingCycle.burnPaused() && !directory.isTerminalDelegateOf(_projectId, msg.sender)) {
-      revert BURN_PAUSED_AND_SENDER_NOT_VALID_TERMINAL_DELEGATE();
-    }
+    // If the message sender is not a terminal, the current funding cycle must not be paused.
+    if (
+      _fundingCycle.burnPaused() &&
+      !directory.isTerminalOf(_projectId, IJBPaymentTerminal(msg.sender))
+    ) revert BURN_PAUSED_AND_SENDER_NOT_VALID_TERMINAL_DELEGATE();
     ```
 
     _Libraries used:_
@@ -78,7 +76,7 @@ function burnTokensOf(
 
     _External references:_
 
-    * [`isTerminalDelegateOf`](../../../jbdirectory/read/isterminaldelegateof.md)
+    * [`isTerminalOf`](../../../jbdirectory/read/isterminalof.md)
 4.  Update the token tracker so that the correct amount of reserved tokens are still mintable after the burn.
 
     ```solidity
@@ -119,13 +117,13 @@ function burnTokensOf(
   Burns a token holder's supply.
 
   @dev
-  Only a token's holder, a designated operator, or a project's terminal's delegate can burn it.
+  Only a token's holder, a designated operator, or a project's terminal can burn it.
 
   @param _holder The account that is having its tokens burned.
   @param _projectId The ID of the project to which the tokens being burned belong.
   @param _tokenCount The number of tokens to burn.
   @param _memo A memo to pass along to the emitted event.
-  @param _preferClaimedTokens A flag indicating whether ERC20's should be burned first if they have been issued.
+  @param _preferClaimedTokens A flag indicating whether a project's attached token contract should be burned first if they have been issued.
 */
 function burnTokensOf(
   address _holder,
@@ -136,26 +134,24 @@ function burnTokensOf(
 )
   external
   override
-  nonReentrant
   requirePermissionAllowingOverride(
     _holder,
     _projectId,
     JBOperations.BURN,
-    directory.isTerminalDelegateOf(_projectId, msg.sender)
+    directory.isTerminalOf(_projectId, IJBPaymentTerminal(msg.sender))
   )
 {
   // There should be tokens to burn
-  if (_tokenCount == 0) {
-    revert NO_BURNABLE_TOKENS();
-  }
+  if (_tokenCount == 0) revert NO_BURNABLE_TOKENS();
 
   // Get a reference to the project's current funding cycle.
   JBFundingCycle memory _fundingCycle = fundingCycleStore.currentOf(_projectId);
 
-  // If the message sender is not a terminal delegate, the current funding cycle must not be paused.
-  if (_fundingCycle.burnPaused() && !directory.isTerminalDelegateOf(_projectId, msg.sender)) {
-    revert BURN_PAUSED_AND_SENDER_NOT_VALID_TERMINAL_DELEGATE();
-  }
+  // If the message sender is not a terminal, the current funding cycle must not be paused.
+  if (
+    _fundingCycle.burnPaused() &&
+    !directory.isTerminalOf(_projectId, IJBPaymentTerminal(msg.sender))
+  ) revert BURN_PAUSED_AND_SENDER_NOT_VALID_TERMINAL_DELEGATE();
 
   // Update the token tracker so that reserved tokens will still be correctly mintable.
   _processedTokenTrackerOf[_projectId] =
@@ -180,7 +176,7 @@ function burnTokensOf(
 {% tab title="Events" %}
 | Name                                        | Data                                                                                                                                                                                                                                                       |
 | ------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [**`BurnTokens`**](../events/burntokens.md) | <p>ul></p><ul><li><code>address indexed holder</code></li></ul><ul><li><code>uint256 indexed projectId</code></li></ul><ul><li><code>uint256 count</code></li></ul><ul><li><code>string memo</code></li></ul><ul><li><code>address caller</code></li></ul> |
+| [**`BurnTokens`**](../events/burntokens.md)                                         | <ul><li><code>address indexed holder</code></li><li><code>uint256 indexed projectId</code></li><li><code>uint256 tokenCount</code></li><li><code>string memo</code></li><li><code>address caller</code></li></ul>                                                                                                              |
 {% endtab %}
 
 {% tab title="Bug bounty" %}

@@ -2,13 +2,15 @@
 
 Contract: [`JBController`](../)​‌
 
+Interface: [`IJBController`](../../../../interfaces/ijbcontroller.md)
+
 {% tabs %}
 {% tab title="Step by step" %}
-**Issues an owner's ERC-20 Tokens that'll be used when claiming tokens.**
+**Issues an owner's ERC20 JBTokens that'll be used when claiming tokens.**
 
-_Deploys a project's ERC-20 token contract._
+_Deploys a project's ERC20 JBToken contract._
 
-_Only a project owner or operator can issue its token._
+_Only a project's owner or operator can issue its token._
 
 ### Definition
 
@@ -25,10 +27,11 @@ function issueFor(
 ```
 
 * Arguments:
-  * `_projectId` is the ID of the project for which the tokens will be issued.
-  * `_name` is the name to associate with the token.
-  * `_symbol` is the symbol to associate with the token. This is usually short and all caps.
-* Through the [`requirePermission`](../../or-abstract/jboperatable/modifiers/requirepermission.md) modifier, the function is only accessible by the project's owner, or from an operator that has been given the `JBOperations.ISSUE` permission by the project owner for the provided `_projectId`.
+  * `_projectId` is the ID of the project being issued tokens.
+  * `_name` is the ERC20's name.
+  * `_symbol` is the ERC20's symbol.
+* Through the [`requirePermission`](../../or-abstract/jboperatable/modifiers/requirepermission.md) modifier, the function is only accessible by the project's owner, or from an operator that has been given the [`JBOperations.ISSUE`](../../../../libraries/jboperations.md) permission by the project owner for the provided `_projectId`.
+* The function overrides a function definition from the [`IJBController`](../../../../interfaces/ijbcontroller.md) interface.
 * The function returns the address of the token that was issued.
 
 ### Body
@@ -44,18 +47,18 @@ function issueFor(
 {% tab title="Code" %}
 ```solidity
 /**
-  @notice 
-  Issues an owner's ERC-20 Tokens that'll be used when claiming tokens.
-
-  @dev 
-  Deploys a project's ERC-20 token contract.
+  @notice
+  Issues an owner's ERC20 JBTokens that'll be used when claiming tokens.
 
   @dev
-  Only a project owner or operator can issue its token.
+  Deploys a project's ERC20 JBToken contract.
+
+  @dev
+  Only a project's owner or operator can issue its token.
 
   @param _projectId The ID of the project being issued tokens.
-  @param _name The ERC-20's name.
-  @param _symbol The ERC-20's symbol.
+  @param _name The ERC20's name.
+  @param _symbol The ERC20's symbol.
 */
 function issueTokenFor(
   uint256 _projectId,
@@ -63,6 +66,7 @@ function issueTokenFor(
   string calldata _symbol
 )
   external
+  override
   requirePermission(projects.ownerOf(_projectId), _projectId, JBOperations.ISSUE)
   returns (IJBToken token)
 {

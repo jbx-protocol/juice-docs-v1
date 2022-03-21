@@ -2,11 +2,13 @@
 
 Contract: [`JBController`](../)​‌
 
+Interface: [`IJBController`](../../../../interfaces/ijbcontroller.md)
+
 {% tabs %}
 {% tab title="Step by step" %}
 **Swap the current project's token that is minted and burned for another, and transfer ownership of the current token to another address if needed.**
 
-_Only a project owner or operator can change its token._
+_Only a project's owner or operator can change its token._
 
 ### Definition
 
@@ -17,7 +19,7 @@ function changeTokenOf(
   address _newOwner
 )
   external
-  nonReentrant
+  override
   requirePermission(projects.ownerOf(_projectId), _projectId, JBOperations.CHANGE_TOKEN) { ... }
 ```
 
@@ -25,7 +27,8 @@ function changeTokenOf(
   * `_projectId` is the ID of the project to which the changed token belongs.
   * `_token` is the new token, which must adhere to the [`IJBToken`](../../../interfaces/ijbtoken.md) specification.
   * `_newOwner` is an address to transfer the current token's ownership to. This is optional, but it cannot be done later.
-* Through the [`requirePermission`](../../or-abstract/jboperatable/modifiers/requirepermission.md) modifier, the function is only accessible by the project's owner, or from an operator that has been given the `JBOperations.CHANGE_TOKEN` permission by the project owner for the provided `_projectId`.
+* Through the [`requirePermission`](../../or-abstract/jboperatable/modifiers/requirepermission.md) modifier, the function is only accessible by the project's owner, or from an operator that has been given the [`JBOperations.CHANGE_TOKEN`](../../../../libraries/jboperations.md) permission by the project owner for the provided `_projectId`.
+* The function overrides a function definition from the [`IJBController`](../../../../interfaces/ijbcontroller.md) interface.
 * The function doesn't return anything.
 
 ### Body
@@ -44,9 +47,7 @@ function changeTokenOf(
 
     ```solidity
     // The current funding cycle must not be paused.
-    if (!_fundingCycle.changeTokenAllowed()) {
-      revert CHANGE_TOKEN_NOT_ALLOWED();
-    }
+    if (!_fundingCycle.changeTokenAllowed()) revert CHANGE_TOKEN_NOT_ALLOWED();
     ```
 
     _Libraries used:_
@@ -64,11 +65,11 @@ function changeTokenOf(
 {% tab title="Code" %}
 ```solidity
 /**
-  @notice 
+  @notice
   Swap the current project's token that is minted and burned for another, and transfer ownership of the current token to another address if needed.
 
   @dev
-  Only a project owner or operator can change its token.
+  Only a project's owner or operator can change its token.
 
   @param _projectId The ID of the project to which the changed token belongs.
   @param _token The new token.
@@ -80,16 +81,14 @@ function changeTokenOf(
   address _newOwner
 )
   external
-  nonReentrant
+  override
   requirePermission(projects.ownerOf(_projectId), _projectId, JBOperations.CHANGE_TOKEN)
 {
   // Get a reference to the project's current funding cycle.
   JBFundingCycle memory _fundingCycle = fundingCycleStore.currentOf(_projectId);
 
   // The current funding cycle must not be paused.
-  if (!_fundingCycle.changeTokenAllowed()) {
-    revert CHANGE_TOKEN_NOT_ALLOWED();
-  }
+  if (!_fundingCycle.changeTokenAllowed()) revert CHANGE_TOKEN_NOT_ALLOWED();
 
   // Change the token in the store.
   tokenStore.changeFor(_projectId, _token, _newOwner);

@@ -9,7 +9,7 @@
 ```solidity
 function _distributeReservedTokensOf(uint256 _projectId, string memory _memo)
   private
-  returns (uint256 count) { ... }
+  returns (uint256 tokenCount) { ... }
 ```
 
 * Arguments:
@@ -44,7 +44,7 @@ function _distributeReservedTokensOf(uint256 _projectId, string memory _memo)
 
     ```solidity
     // Get a reference to the number of tokens that need to be minted.
-    count = _reservedTokenAmountFrom(
+    tokenCount = _reservedTokenAmountFrom(
       _processedTokenTrackerOf[_projectId],
       _fundingCycle.reservedRate(),
       _totalTokens
@@ -63,7 +63,7 @@ function _distributeReservedTokensOf(uint256 _projectId, string memory _memo)
 
     ```solidity
     // Set the tracker to be the new total supply.
-    _processedTokenTrackerOf[_projectId] = int256(_totalTokens + count);
+    _processedTokenTrackerOf[_projectId] = int256(_totalTokens + tokenCount);
     ```
 
     _Internal references:_
@@ -83,9 +83,9 @@ function _distributeReservedTokensOf(uint256 _projectId, string memory _memo)
 
     ```solidity
     // Distribute tokens to splits and get a reference to the leftover amount to mint after all splits have gotten their share.
-    uint256 _leftoverTokenCount = count == 0
+    uint256 _leftoverTokenCount = tokenCount == 0
       ? 0
-      : _distributeToReservedTokenSplitsOf(_projectId, _fundingCycle, count);
+      : _distributeToReservedTokenSplitsOf(_projectId, _fundingCycle, tokenCount);
     ```
 
     _Internal references:_
@@ -109,7 +109,7 @@ function _distributeReservedTokensOf(uint256 _projectId, string memory _memo)
       _fundingCycle.number,
       _projectId,
       _owner,
-      count,
+      tokenCount,
       _leftoverTokenCount,
       _memo,
       msg.sender
@@ -124,12 +124,17 @@ function _distributeReservedTokensOf(uint256 _projectId, string memory _memo)
 {% tab title="Code" %}
 ```solidity
 /**
-  @notice 
-  See docs for `distributeReservedTokens`
+  @notice
+  Distributes all outstanding reserved tokens for a project.
+
+  @param _projectId The ID of the project to which the reserved tokens belong.
+  @param _memo A memo to pass along to the emitted event.
+
+  @return The amount of minted reserved tokens.
 */
 function _distributeReservedTokensOf(uint256 _projectId, string memory _memo)
   private
-  returns (uint256 count)
+  returns (uint256 tokenCount)
 {
   // Get the current funding cycle to read the reserved rate from.
   JBFundingCycle memory _fundingCycle = fundingCycleStore.currentOf(_projectId);
@@ -138,22 +143,22 @@ function _distributeReservedTokensOf(uint256 _projectId, string memory _memo)
   uint256 _totalTokens = tokenStore.totalSupplyOf(_projectId);
 
   // Get a reference to the number of tokens that need to be minted.
-  count = _reservedTokenAmountFrom(
+  tokenCount = _reservedTokenAmountFrom(
     _processedTokenTrackerOf[_projectId],
     _fundingCycle.reservedRate(),
     _totalTokens
   );
 
   // Set the tracker to be the new total supply.
-  _processedTokenTrackerOf[_projectId] = int256(_totalTokens + count);
+  _processedTokenTrackerOf[_projectId] = int256(_totalTokens + tokenCount);
 
   // Get a reference to the project owner.
   address _owner = projects.ownerOf(_projectId);
 
   // Distribute tokens to splits and get a reference to the leftover amount to mint after all splits have gotten their share.
-  uint256 _leftoverTokenCount = count == 0
+  uint256 _leftoverTokenCount = tokenCount == 0
     ? 0
-    : _distributeToReservedTokenSplitsOf(_projectId, _fundingCycle, count);
+    : _distributeToReservedTokenSplitsOf(_projectId, _fundingCycle, tokenCount);
 
   // Mint any leftover tokens to the project owner.
   if (_leftoverTokenCount > 0) tokenStore.mintFor(_owner, _projectId, _leftoverTokenCount, false);
@@ -163,13 +168,19 @@ function _distributeReservedTokensOf(uint256 _projectId, string memory _memo)
     _fundingCycle.number,
     _projectId,
     _owner,
-    count,
+    tokenCount,
     _leftoverTokenCount,
     _memo,
     msg.sender
   );
 }
 ```
+{% endtab %}
+
+{% tab title="Events" %}
+| Name                                        | Data                                                                                                                                                                                                                                                       |
+| ------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [**`DistributeReservedTokens`**](../events/distributereservedtokens.md)             | <ul><li><code>uint256 indexed fundingCycleConfiguration</code></li><li><code>uint256 indexed fundingCycleNumber</code></li><li><code>uint256 indexed projectId</code></li><li><code>address beneficiary</code></li><li><code>uint256 tokenCount</code></li><li><code>uint256 beneficiaryTokenCount</code></li><li><code>string memo</code></li><li><code>address caller</code></li></ul> |
 {% endtab %}
 
 {% tab title="Bug bounty" %}

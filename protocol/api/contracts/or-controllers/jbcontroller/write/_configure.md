@@ -19,11 +19,11 @@ function _configure(
 
 * Arguments:
   * `_projectId` is the ID of the project whose funding cycles are being reconfigured.
-  * `_data` is a [`JBFundingCycleData`](../../../../data-structures/jbfundingcycledata.md) data structure that defines the project's first funding cycle. These properties will remain fixed for the duration of the funding cycle.
-  * `_metadata` is a [`JBFundingCycleMetadata`](../../../../data-structures/jbfundingcyclemetadata.md) data structure specifying the controller specific params that a funding cycle can have.
-  * `_mustStartAtOrAfter` is the time before which the configured funding cycle can't start.
-  * `_groupedSplits` is an array of [`JBGroupedSplits`](../../../../data-structures/jbgroupedsplits.md) data structures containing splits to set for any number of groups.
-  * `_fundAccessConstraints` is an array of [`JBFundAccessConstraints`](../../../../data-structures/jbfundaccessconstraints.md) data structures containing amounts that a project can distribute during each funding cycle and amounts that can be used from its own overflow on-demand for each payment terminal.
+  * `_data` is a [`JBFundingCycleData`](../../../../data-structures/jbfundingcycledata.md) data structure that defines the funding cycle. These properties will remain fixed for the duration of the funding cycle.
+  * `_metadata` is a [`JBFundingCycleMetadata`](../../../../data-structures/jbfundingcyclemetadata.md) data structure specifying the controller specific params that a funding cycle can have. These properties will remain fixed for the duration of the funding cycle.
+  * `_mustStartAtOrAfter` is the time before which the configured funding cycle cannot start.
+  * `_groupedSplits` is an array of [`JBGroupedSplits`](../../../../data-structures/jbgroupedsplits.md) data structures containing splits to set for any number of groups. The core protocol makes use of groups defined in [`JBSplitsGroups`](../../../../libraries/jbsplitsgroups.md).
+  * `_fundAccessConstraints` is an array of [`JBFundAccessConstraints`](../../../../data-structures/jbfundaccessconstraints.md) data structures containing amounts that a project can use from its treasury for each payment terminal. Amounts are fixed point numbers using the same number of decimals as the accompanying terminal. The `distributionLimit` applies for each funding cycle, and the `overflowAllowance` applies for the entirety of the configuration.
 * The function is private to this contract.
 * The function returns the funding cycle configuration that was successfully updated.
 
@@ -32,39 +32,38 @@ function _configure(
 1.  Make sure the reserved rate is a valid number out of the max value.
 
     ```solidity
-    if (_metadata.reservedRate > JBConstants.MAX_RESERVED_RATE) {
-      revert INVALID_RESERVED_RATE();
-    }
+    // Make sure the provided reserved rate is valid.
+    if (_metadata.reservedRate > JBConstants.MAX_RESERVED_RATE) revert INVALID_RESERVED_RATE();
     ```
 
     _Libraries used:_
 
     * [`JBConstants`](../../../../libraries/jbconstants.md)
-      * `.MAX_RESERVED_RATE`
+      * `.MAX_RESERVED_RATE(...)`
 2.  Make sure the redemption rate is a valid number out of the max value.
 
     ```solidity
-    if (_metadata.redemptionRate > JBConstants.MAX_REDEMPTION_RATE) {
+    // Make sure the provided redemption rate is valid.
+    if (_metadata.redemptionRate > JBConstants.MAX_REDEMPTION_RATE)
       revert INVALID_REDEMPTION_RATE();
-    }
     ```
 
     _Libraries used:_
 
     * [`JBConstants`](../../../../libraries/jbconstants.md)
-      * `.MAX_REDEMPTION_RATE`
+      * `.MAX_REDEMPTION_RATE(...)`
 3.  Make sure the ballot redemption rate is less than the max value.
 
     ```solidity
-    if (_metadata.ballotRedemptionRate > JBConstants.MAX_REDEMPTION_RATE) {
+    // Make sure the provided ballot redemption rate is valid.
+    if (_metadata.ballotRedemptionRate > JBConstants.MAX_REDEMPTION_RATE)
       revert INVALID_BALLOT_REDEMPTION_RATE();
-    }
     ```
 
     _Libraries used:_
 
     * [`JBConstants`](../../../../libraries/jbconstants.md)
-      * `.MAX_REDEMPTION_RATE`
+      * `.MAX_REDEMPTION_RATE(...)`
 4.  Configure the project's funding cycles. Pack the metadata into a `uint256`.
 
     ```solidity
@@ -89,7 +88,7 @@ function _configure(
 
     ```solidity
     for (uint256 _i; _i < _groupedSplits.length; _i++)
-      // Set payout splits if there are any.
+      // Set splits for the current group being iterated on if there are any.
       if (_groupedSplits[_i].splits.length > 0)
         splitsStore.set(
           _projectId,
@@ -109,31 +108,31 @@ function _configure(
     for (uint256 _i; _i < _fundAccessConstraints.length; _i++) {
       JBFundAccessConstraints memory _constraints = _fundAccessConstraints[_i];
 
-      // If distribution limit values are too large then revert.
-      if (_constraints.distributionLimit > type(uint248).max) revert BAD_DISTRIBUTION_LIMIT();
+      // If distribution limit value is larger than 248 bits, revert.
+      if (_constraints.distributionLimit > type(uint248).max) revert INVALID_DISTRIBUTION_LIMIT();
 
+      // If distribution limit currency value is larger than 8 bits, revert.
       if (_constraints.distributionLimitCurrency > type(uint8).max)
-        revert BAD_DISTRIBUTION_LIMIT_CURRENCY();
+        revert INVALID_DISTRIBUTION_LIMIT_CURRENCY();
 
-      // If overflow allowance values are too large then revert.
-      if (_constraints.overflowAllowance > type(uint248).max) revert BAD_OVERFLOW_ALLOWANCE();
+      // If overflow allowance value is larger than 248 bits, revert.
+      if (_constraints.overflowAllowance > type(uint248).max) revert INVALID_OVERFLOW_ALLOWANCE();
 
+      // If overflow allowance currency value is larger than 8 bits, revert.
       if (_constraints.overflowAllowanceCurrency > type(uint8).max)
-        revert BAD_OVERFLOW_ALLOWANCE_CURRENCY();
+        revert INVALID_OVERFLOW_ALLOWANCE_CURRENCY();
 
       // Set the distribution limit if there is one.
-      if (_constraints.distributionLimit > 0) {
+      if (_constraints.distributionLimit > 0)
         _packedDistributionLimitDataOf[_projectId][_fundingCycle.configuration][
           _constraints.terminal
         ] = _constraints.distributionLimit | (_constraints.distributionLimitCurrency << 248);
-      }
 
       // Set the overflow allowance if there is one.
-      if (_constraints.overflowAllowance > 0) {
+      if (_constraints.overflowAllowance > 0)
         _packedOverflowAllowanceDataOf[_projectId][_fundingCycle.configuration][
           _constraints.terminal
         ] = _constraints.overflowAllowance | (_constraints.overflowAllowanceCurrency << 248);
-      }
 
       emit SetFundAccessConstraints(
         _fundingCycle.configuration,
@@ -143,6 +142,7 @@ function _configure(
         msg.sender
       );
     }
+
     ```
 
     _Internal references:_
@@ -157,7 +157,6 @@ function _configure(
 
     ```solidity
     return _fundingCycle.configuration;
-    ``
     ```
 {% endtab %}
 
@@ -167,8 +166,14 @@ function _configure(
   @notice
   Configures a funding cycle and stores information pertinent to the configuration.
 
-  @dev
-  See the docs for `launchProjectFor` and `reconfigureFundingCyclesOf`.
+  @param _projectId The ID of the project whose funding cycles are being reconfigured.
+  @param _data Data that defines the funding cycle. These properties will remain fixed for the duration of the funding cycle.
+  @param _metadata Metadata specifying the controller specific params that a funding cycle can have. These properties will remain fixed for the duration of the funding cycle.
+  @param _mustStartAtOrAfter The time before which the configured funding cycle cannot start.
+  @param _groupedSplits An array of splits to set for any number of groups. 
+  @param _fundAccessConstraints An array containing amounts that a project can use from its treasury for each payment terminal. Amounts are fixed point numbers using the same number of decimals as the accompanying terminal.
+  
+  @return configuration The configuration of the funding cycle that was successfully reconfigured.
 */
 function _configure(
   uint256 _projectId,
@@ -178,17 +183,16 @@ function _configure(
   JBGroupedSplits[] memory _groupedSplits,
   JBFundAccessConstraints[] memory _fundAccessConstraints
 ) private returns (uint256) {
-  if (_metadata.reservedRate > JBConstants.MAX_RESERVED_RATE) {
-    revert INVALID_RESERVED_RATE();
-  }
+  // Make sure the provided reserved rate is valid.
+  if (_metadata.reservedRate > JBConstants.MAX_RESERVED_RATE) revert INVALID_RESERVED_RATE();
 
-  if (_metadata.redemptionRate > JBConstants.MAX_REDEMPTION_RATE) {
+  // Make sure the provided redemption rate is valid.
+  if (_metadata.redemptionRate > JBConstants.MAX_REDEMPTION_RATE)
     revert INVALID_REDEMPTION_RATE();
-  }
 
-  if (_metadata.ballotRedemptionRate > JBConstants.MAX_REDEMPTION_RATE) {
+  // Make sure the provided ballot redemption rate is valid.
+  if (_metadata.ballotRedemptionRate > JBConstants.MAX_REDEMPTION_RATE)
     revert INVALID_BALLOT_REDEMPTION_RATE();
-  }
 
   // Configure the funding cycle's properties.
   JBFundingCycle memory _fundingCycle = fundingCycleStore.configureFor(
@@ -212,31 +216,31 @@ function _configure(
   for (uint256 _i; _i < _fundAccessConstraints.length; _i++) {
     JBFundAccessConstraints memory _constraints = _fundAccessConstraints[_i];
 
-    // If distribution limit values are too large then revert.
-    if (_constraints.distributionLimit > type(uint248).max) revert BAD_DISTRIBUTION_LIMIT();
+    // If distribution limit value is larger than 248 bits, revert.
+    if (_constraints.distributionLimit > type(uint248).max) revert INVALID_DISTRIBUTION_LIMIT();
 
+    // If distribution limit currency value is larger than 8 bits, revert.
     if (_constraints.distributionLimitCurrency > type(uint8).max)
-      revert BAD_DISTRIBUTION_LIMIT_CURRENCY();
+      revert INVALID_DISTRIBUTION_LIMIT_CURRENCY();
 
-    // If overflow allowance values are too large then revert.
-    if (_constraints.overflowAllowance > type(uint248).max) revert BAD_OVERFLOW_ALLOWANCE();
+    // If overflow allowance value is larger than 248 bits, revert.
+    if (_constraints.overflowAllowance > type(uint248).max) revert INVALID_OVERFLOW_ALLOWANCE();
 
+    // If overflow allowance currency value is larger than 8 bits, revert.
     if (_constraints.overflowAllowanceCurrency > type(uint8).max)
-      revert BAD_OVERFLOW_ALLOWANCE_CURRENCY();
+      revert INVALID_OVERFLOW_ALLOWANCE_CURRENCY();
 
     // Set the distribution limit if there is one.
-    if (_constraints.distributionLimit > 0) {
+    if (_constraints.distributionLimit > 0)
       _packedDistributionLimitDataOf[_projectId][_fundingCycle.configuration][
         _constraints.terminal
       ] = _constraints.distributionLimit | (_constraints.distributionLimitCurrency << 248);
-    }
 
     // Set the overflow allowance if there is one.
-    if (_constraints.overflowAllowance > 0) {
+    if (_constraints.overflowAllowance > 0)
       _packedOverflowAllowanceDataOf[_projectId][_fundingCycle.configuration][
         _constraints.terminal
       ] = _constraints.overflowAllowance | (_constraints.overflowAllowanceCurrency << 248);
-    }
 
     emit SetFundAccessConstraints(
       _fundingCycle.configuration,
@@ -258,12 +262,16 @@ function _configure(
 | **`INVALID_RESERVED_RATE`**          | Thrown if the reserved rate is greater than 100%.          |
 | **`INVALID_REDEMPTION_RATE`**        | Thrown if the redemption rate is greater than 100%.        |
 | **`INVALID_BALLOT_REDEMPTION_RATE`** | Thrown if the ballot redemption rate is greater than 100%. |
+| **`INVALID_DISTRIBUTION_LIMIT`** | Thrown if the distribution limit is greater than 248 bits. |
+| **`INVALID_DISTRIBUTION_LIMIT_CURRENCY`** | Thrown if the distribution limit currency is greater than 8 bits. |
+| **`INVALID_OVERFLOW_ALLOWANCE`** | Thrown if the overflow allowance is greater than 248 bits. |
+| **`INVALID_OVERFLOW_ALLOWANCE_CURRENCY`** | Thrown if the overflow allowance currency is greater than 8 bits. |
 {% endtab %}
 
 {% tab title="Events" %}
 | Name                                                                    | Data                                                                                                                                                                                                                                                                                                                                                          |
 | ----------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [**`SetFundAccessConstraints`**](../events/setfundaccessconstraints.md) | <ul><li><code>uint256 indexed fundingCycleConfiguration</code></li><li><code>uint256 indexed fundingCycleNumber</code></li><li><code>uint256 indexed projectId</code></li><li><a href="../../../../data-structures/jbfundaccessconstraints.md"><code>JBFundAccessConstraints</code></a><code>constraints</code></li><li><code>address caller</code></li></ul> |
+| [**`SetFundAccessConstraints`**](../events/setfundaccessconstraints.md) | <ul><li><code>uint256 indexed fundingCycleConfiguration</code></li><li><code>uint256 indexed fundingCycleNumber</code></li><li><code>uint256 indexed projectId</code></li><li><code>[`JBFundAccessConstraints`](../../../../data-structures/jbfundaccessconstraints.md)constraints</code></li><li><code>address caller</code></li></ul> |
 {% endtab %}
 
 {% tab title="Bug bounty" %}
