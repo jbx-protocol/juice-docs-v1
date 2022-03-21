@@ -2,7 +2,7 @@
 
 Contract: [`JBETHPaymentTerminal`](../)​‌
 
-Interface: [`IJBTerminal`](../../../../interfaces/ijbterminal.md)
+Interface: [`IJBPaymentTerminal`](../../../../interfaces/ijbpaymentterminal.md)
 
 {% tabs %}
 {% tab title="Step by step" %}
@@ -24,7 +24,7 @@ function remainingDistributionLimitOf(
   * `_fundingCycleNumber` is the number of the funding cycle during which the limit remaining is being calculated.
 * The view function can be accessed externally by anyone.
 * The function does not alter state on the blockchain.
-* The resulting function overrides a function definition from the `IJBTerminal` interface.
+* The resulting function overrides a function definition from the `IJBPaymentTerminal` interface.
 * The function returns the remaining distribution limit for this terminal.
 
 ### Body

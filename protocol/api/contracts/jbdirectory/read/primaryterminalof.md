@@ -56,7 +56,7 @@ function primaryTerminalOf(uint256 _projectId, address _token)
 
     ```solidity
     // Not found.
-    return IJBTerminal(address(0));
+    return IJBPaymentTerminal(address(0));
     ```
 {% endtab %}
 

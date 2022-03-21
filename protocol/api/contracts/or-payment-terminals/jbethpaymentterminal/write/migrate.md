@@ -13,7 +13,7 @@ _Only a project's owner or a designated operator can migrate it._
 #### Definition
 
 ```solidity
-function migrate(uint256 _projectId, IJBTerminal _to)
+function migrate(uint256 _projectId, IJBPaymentTerminal _to)
   external
   override
   nonReentrant
@@ -86,7 +86,7 @@ function migrate(uint256 _projectId, IJBTerminal _to)
   @param _projectId The ID of the project being migrated.
   @param _to The terminal contract that will gain the project's funds.
 */
-function migrate(uint256 _projectId, IJBTerminal _to)
+function migrate(uint256 _projectId, IJBPaymentTerminal _to)
   external
   override
   nonReentrant
@@ -118,7 +118,7 @@ function migrate(uint256 _projectId, IJBTerminal _to)
 {% tab title="Events" %}
 | Name                                       | Data                                                                                                                                                                                                                                               |
 | ------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [**`Migrate`**](../events/addtobalance.md) | <ul><li><code>uint256 indexed projectId</code></li><li><a href="../../../../interfaces/ijbterminal.md"><code>IJBTerminal</code></a><code>indexed terminal</code></li><li><code>uint256 amount</code></li><li><code>address caller</code></li></ul> |
+| [**`Migrate`**](../events/addtobalance.md) | <ul><li><code>uint256 indexed projectId</code></li><li><a href="../../../../interfaces/ijbpaymentterminal.md"><code>IJBPaymentTerminal</code></a><code>indexed terminal</code></li><li><code>uint256 amount</code></li><li><code>address caller</code></li></ul> |
 {% endtab %}
 
 {% tab title="Bug bounty" %}

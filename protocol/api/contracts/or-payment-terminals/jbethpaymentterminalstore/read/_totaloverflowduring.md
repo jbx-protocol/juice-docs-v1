@@ -29,7 +29,7 @@ function _totalOverflowDuring(uint256 _projectId, JBFundingCycle memory _funding
 1.  Get a reference to all of the project's current terminals.
 
     ```solidity
-    IJBTerminal[] memory _terminals = directory.terminalsOf(_projectId);
+    IJBPaymentTerminal[] memory _terminals = directory.terminalsOf(_projectId);
     ```
 
     _Internal references:_
@@ -122,7 +122,7 @@ function _totalOverflowDuring(uint256 _projectId, JBFundingCycle memory _funding
   returns (uint256)
 {
   // Get a reference to the project's terminals.
-  IJBTerminal[] memory _terminals = directory.terminalsOf(_projectId);
+  IJBPaymentTerminal[] memory _terminals = directory.terminalsOf(_projectId);
 
   // Keep a reference to the current eth balance of the project across all terminals, and the current eth distribution limit across all terminals.
   uint256 _ethBalanceOf;

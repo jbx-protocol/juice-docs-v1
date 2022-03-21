@@ -7,7 +7,7 @@
 * A data source contract can be used to provide custom data to the [`pay`](../../api/contracts/or-payment-terminals/jbethpaymentterminal/write/pay.md) transaction and/or the [`redeemTokensOf`](../../api/contracts/or-payment-terminals/jbethpaymentterminal/write/redeemtokensof.md) transaction.
 * A data source is passed contextual information from the transactions, from which it can derive custom data for the protocol to use to affect subsequent behaviors in the pay and redeem transactions. Contextual information from the pay transaction is passed to the data source in the form of [`JBPayParamsData`](../../api/data-structures/jbpayparamsdata.md) , and contextual information from the redeem transaction is passed to the data source in the form of [`JBRedeemParamsData`](../../api/data-structures/jbredeemparamsdata.md).
 * A data source is responsible for specifying any [delegate](delegate.md) hooks that should be triggered after the core functionality of a [`pay`](../../api/contracts/or-payment-terminals/jbethpaymentterminal/write/pay.md) or [`redeemTokensOf`](../../api/contracts/or-payment-terminals/jbethpaymentterminal/write/redeemtokensof.md) transaction executes successfully.
-* Each [`IJBTerminal`](../../api/interfaces/ijbterminal.md) fork can leverage data sources in unique ways.
+* Each [`IJBPaymentTerminal`](../../api/interfaces/ijbpaymentterminal.md) fork can leverage data sources in unique ways.
 
 #### What you'll want to know if you're building
 

@@ -7,7 +7,7 @@ Emitted from:
 Definition:
 
 ```solidity
-event AddTerminal(uint256 indexed projectId, IJBTerminal indexed terminal, address caller);
+event AddTerminal(uint256 indexed projectId, IJBPaymentTerminal indexed terminal, address caller);
 ```
 
 * `projectId` is the ID of the project that added a terminal.

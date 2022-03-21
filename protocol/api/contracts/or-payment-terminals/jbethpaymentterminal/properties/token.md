@@ -2,7 +2,7 @@
 
 Contract: [`JBETHPaymentTerminal`](../)​‌
 
-Interface: [`IJBTerminal`](../../../../interfaces/ijbterminal.md)
+Interface: [`IJBPaymentTerminal`](../../../../interfaces/ijbpaymentterminal.md)
 
 **The token that this terminal accepts.**
 # Definition
@@ -17,4 +17,4 @@ address public immutable override token = JBTokens.ETH;
 
 * The value cannot be changed.
 * The resulting view function can be accessed externally by anyone.
-* The resulting function overrides a function definition from the `IJBTerminal` interface.
+* The resulting function overrides a function definition from the `IJBPaymentTerminal` interface.

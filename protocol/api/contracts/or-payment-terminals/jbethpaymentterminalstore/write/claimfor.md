@@ -9,7 +9,7 @@ Contract: [`JBETHPaymentTerminalStore`](../)​‌
 #### Definition
 
 ```solidity
-function claimFor(IJBTerminal _terminal) external { ... }
+function claimFor(IJBPaymentTerminal _terminal) external { ... }
 ```
 
 * The function can be accessed externally by anyone.
@@ -21,7 +21,7 @@ function claimFor(IJBTerminal _terminal) external { ... }
 
     ```solidity
     // This store can only be claimed once.
-    if (terminal != IJBTerminal(address(0))) {
+    if (terminal != IJBPaymentTerminal(address(0))) {
       revert STORE_ALREADY_CLAIMED();
     }
     ```
@@ -47,9 +47,9 @@ function claimFor(IJBTerminal _terminal) external { ... }
   @notice
   Allows this store to be claimed by an address so that it recognized the address as its terminal.
 */
-function claimFor(IJBTerminal _terminal) external {
+function claimFor(IJBPaymentTerminal _terminal) external {
   // This store can only be claimed once.
-  if (terminal != IJBTerminal(address(0))) {
+  if (terminal != IJBPaymentTerminal(address(0))) {
     revert STORE_ALREADY_CLAIMED();
   }
   // Set the terminal.

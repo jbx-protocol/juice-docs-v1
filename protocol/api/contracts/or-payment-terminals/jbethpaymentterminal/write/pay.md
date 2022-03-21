@@ -2,7 +2,7 @@
 
 Contract: [`JBETHPaymentTerminal`](../)​‌
 
-Interface: [`IJBTerminal`](../../../../interfaces/ijbterminal.md)
+Interface: [`IJBPaymentTerminal`](../../../../interfaces/ijbpaymentterminal.md)
 
 {% tabs %}
 {% tab title="Step by step" %}
@@ -32,7 +32,7 @@ function pay(
   * `_delegateMetadata` are bytes to send along to the delegate, if one is provided.
 * The function can be accessed externally by anyone.
 * The function accepts ETH.
-* The resulting function overrides a function definition from the `IJBTerminal` interface.
+* The resulting function overrides a function definition from the `IJBPaymentTerminal` interface.
 * The function doesn't return anything.
 
 #### Body

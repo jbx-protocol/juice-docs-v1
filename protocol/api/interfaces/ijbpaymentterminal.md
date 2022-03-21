@@ -1,7 +1,7 @@
-# IJBTerminal
+# IJBPaymentTerminal
 
 ```solidity
-interface IJBTerminal {
+interface IJBPaymentTerminal {
   function token() external view returns (address);
 
   function ethBalanceOf(uint256 _projectId) external view returns (uint256);

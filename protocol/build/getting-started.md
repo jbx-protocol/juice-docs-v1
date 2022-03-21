@@ -15,7 +15,7 @@ function launchProjectFor(
   uint256 _mustStartAtOrAfter,
   JBGroupedSplits[] memory _groupedSplits,
   JBFundAccessConstraints[] memory _fundAccessConstraints,
-  IJBTerminal[] memory _terminals
+  IJBPaymentTerminal[] memory _terminals
 ) external returns (uint256 projectId) { ... }
 ```
 
@@ -110,7 +110,7 @@ A project's fund access conatraints can found in the [`JBController`](../api/con
 function distributionLimitOf(
   uint256 _projectId,
   uint256 _configuration,
-  IJBTerminal _terminal
+  IJBPaymentTerminal _terminal
 ) external view override returns (uint256) { ... }
 ```
 
@@ -118,7 +118,7 @@ function distributionLimitOf(
 function distributionLimitCurrencyOf(
   uint256 _projectId,
   uint256 _configuration,
-  IJBTerminal _terminal
+  IJBPaymentTerminal _terminal
 ) external view override returns (uint256) { ... }
 ```
 
@@ -128,7 +128,7 @@ It's overflow allowance from any payment terminal during any funding cycle confi
 function overflowAllowanceOf(
   uint256 _projectId,
   uint256 _configuration,
-  IJBTerminal _terminal
+  IJBPaymentTerminal _terminal
 ) external view override returns (uint256) { ... }
 ```
 
@@ -136,7 +136,7 @@ function overflowAllowanceOf(
 function overflowAllowanceCurrencyOf(
   uint256 _projectId,
   uint256 _configuration,
-  IJBTerminal _terminal
+  IJBPaymentTerminal _terminal
 ) external view override returns (uint256) { ... }
 ```
 
@@ -149,7 +149,7 @@ function overflowAllowanceCurrencyOf(
 The [`JBDirectory`](../api/contracts/jbdirectory/) contract stores addresses of payment terminals where a project is currently accepting funds through. A projects currently set terminals can be found using [`JBDirectory.terminalsOf(...)`](../api/contracts/jbdirectory/read/terminalsof.md).
 
 ```solidity
-function terminalsOf(uint256 _projectId) external view override returns (IJBTerminal[] memory) { ... }
+function terminalsOf(uint256 _projectId) external view override returns (IJBPaymentTerminal[] memory) { ... }
 ```
 
 If a project has multiple terminals for the same token, the primary terminal that it wishes to accept funds through of that token type can be found using [`JBDirectory.primaryTerminalOf(...)`](../api/contracts/jbdirectory/read/primaryterminalof.md).
@@ -159,7 +159,7 @@ function primaryTerminalOf(uint256 _projectId, address _token)
   public
   view
   override
-  returns (IJBTerminal) { ... }
+  returns (IJBPaymentTerminal) { ... }
 ```
 
 The [`JBDirectory`](../api/contracts/jbdirectory/) contract also stores the address of the controller that is managing a project's funding cycles and tokens. A projects current terminal can be found using [`JBDirectory.controllerOf(...)`](../api/contracts/jbdirectory/properties/controllerof.md).

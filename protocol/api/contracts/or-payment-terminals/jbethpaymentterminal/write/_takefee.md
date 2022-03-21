@@ -24,7 +24,7 @@ function _takeFee(uint256 _amount, address _beneficiary) private { ... }
 
     ```solidity
     // Get the terminal for the protocol project.
-    IJBTerminal _terminal = directory.primaryTerminalOf(1, token);
+    IJBPaymentTerminal _terminal = directory.primaryTerminalOf(1, token);
     ```
 
     _External references:_
@@ -56,7 +56,7 @@ function _takeFee(uint256 _amount, address _beneficiary) private { ... }
 */
 function _takeFee(uint256 _amount, address _beneficiary) private {
   // Get the terminal for the protocol project.
-  IJBTerminal _terminal = directory.primaryTerminalOf(1, token);
+  IJBPaymentTerminal _terminal = directory.primaryTerminalOf(1, token);
 
   // When processing the admin fee, save gas if the admin is using this contract as its terminal.
   _terminal == this

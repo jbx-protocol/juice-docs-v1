@@ -11,7 +11,7 @@ Contract: [`JBETHPaymentTerminalStore`](../)​‌
   @notice
   The associated payment terminal for which this contract stores data.
 */
-IJBTerminal public terminal;
+IJBPaymentTerminal public terminal;
 ```
 
 * The resulting view function can be accessed externally by anyone.

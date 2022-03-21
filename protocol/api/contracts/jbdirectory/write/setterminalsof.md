@@ -145,7 +145,7 @@ function setTerminalsOf(uint256 _projectId, IJBPaymentTerminal[] calldata _termi
 {% tab title="Events" %}
 | Name                                                                          | Data                                                                                          |
 | ----------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
-| [**`SetTerminals`**](events/setterminals.md)         | <ul><li><code>uint256 indexed projectId</code></li><li><code>[`IJBTerminal`](../../interfaces/ijbterminal.md)[] indexed terminals</code></li><li><code>address caller</code></li></ul>                                            |
+| [**`SetTerminals`**](events/setterminals.md)         | <ul><li><code>uint256 indexed projectId</code></li><li><code>[`IJBPaymentTerminal`](../../interfaces/ijbpaymentterminal.md)[] indexed terminals</code></li><li><code>address caller</code></li></ul>                                            |
 {% endtab %}
 
 

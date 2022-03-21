@@ -17,7 +17,7 @@ function launchProjectFor(
   uint256 _mustStartAtOrAfter,
   JBGroupedSplits[] memory _groupedSplits,
   JBFundAccessConstraints[] memory _fundAccessConstraints,
-  IJBTerminal[] memory _terminals
+  IJBPaymentTerminal[] memory _terminals
 ) external returns (uint256 projectId) { ... }
  { ... }
 ```

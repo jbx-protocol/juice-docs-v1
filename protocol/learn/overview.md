@@ -123,7 +123,7 @@ description: What's in the V2 protocol
 * <mark style="color:orange;">**Accept multiple tokens**</mark>\
   A project can specify any number of payment terminal contracts where it can receive funds denominated in various tokens. This allows projects to create distinct rules for accepting ETH, any ERC-20, or any asset in general.\
   \
-  Anyone can roll their own contract that adheres to `IJBTerminal` for projects to use, and a project can migrate funds between terminals that use the same token as it wishes.
+  Anyone can roll their own contract that adheres to `IJBPaymentTerminal` for projects to use, and a project can migrate funds between terminals that use the same token as it wishes.
 * <mark style="color:orange;">**Forkability and migratability.**</mark>\
   A project can migrate its treasury's controller to any other contract that adheres to `IJBController`. This allows a project to evolve into updated or custom operating rules over time as it wishes.
 * <mark style="color:orange;">**Operators**</mark>\

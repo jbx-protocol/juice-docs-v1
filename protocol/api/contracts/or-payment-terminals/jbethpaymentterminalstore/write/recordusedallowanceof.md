@@ -13,7 +13,7 @@ _Only the associated payment terminal can record a used allowance._
 ```solidity
 function recordUsedAllowanceOf(
   uint256 _projectId,
-  IJBTerminal _terminal,
+  IJBPaymentTerminal _terminal,
   uint256 _amount,
   uint256 _currency,
   uint256 _minReturnedWei

@@ -88,7 +88,7 @@
     * [IJBRedemptionDelegate](protocol/api/interfaces/ijbredemptiondelegate.md)
     * [IJBSplitAllocator](protocol/api/interfaces/ijbsplitallocator.md)
     * [IJBSplitsStore](protocol/api/interfaces/ijbsplitsstore.md)
-    * [IJBTerminal](protocol/api/interfaces/ijbterminal.md)
+    * [IJBPaymentTerminal](protocol/api/interfaces/ijbpaymentterminal.md)
     * [IJBToken](protocol/api/interfaces/ijbtoken.md)
     * [IJBTerminalUtility](protocol/api/interfaces/ijbterminalutility.md)
     * [IJBControllerUtility](protocol/api/interfaces/ijbcontrollerutility.md)

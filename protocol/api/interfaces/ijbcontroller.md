@@ -29,25 +29,25 @@ interface IJBController {
   function overflowAllowanceOf(
     uint256 _projectId,
     uint256 _configuration,
-    IJBTerminal _terminal
+    IJBPaymentTerminal _terminal
   ) external view returns (uint256);
 
   function overflowAllowanceCurrencyOf(
     uint256 _projectId,
     uint256 _configuration,
-    IJBTerminal _terminal
+    IJBPaymentTerminal _terminal
   ) external view returns (uint256);
 
   function distributionLimitOf(
     uint256 _projectId,
     uint256 _configuration,
-    IJBTerminal _terminal
+    IJBPaymentTerminal _terminal
   ) external view returns (uint256);
 
   function distributionLimitCurrencyOf(
     uint256 _projectId,
     uint256 _configuration,
-    IJBTerminal _terminal
+    IJBPaymentTerminal _terminal
   ) external view returns (uint256);
 }
 ```

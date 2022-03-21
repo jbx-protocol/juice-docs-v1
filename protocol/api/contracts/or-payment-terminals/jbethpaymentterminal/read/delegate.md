@@ -2,7 +2,7 @@
 
 Contract: [`JBETHPaymentTerminal`](../)​‌
 
-Interface: [`IJBTerminal`](../../../../interfaces/ijbterminal.md)
+Interface: [`IJBPaymentTerminal`](../../../../interfaces/ijbpaymentterminal.md)
 
 {% tabs %}
 {% tab title="Step by step" %}
@@ -16,7 +16,7 @@ function delegate() external view override returns (address) { ... }
 
 * The view function can be accessed externally by anyone.
 * The function does not alter state on the blockchain.
-* The resulting function overrides a function definition from the `IJBTerminal` interface.
+* The resulting function overrides a function definition from the `IJBPaymentTerminal` interface.
 * The function returns the delegate address
 
 #### Body

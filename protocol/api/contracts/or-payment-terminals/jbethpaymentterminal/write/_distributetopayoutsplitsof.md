@@ -97,10 +97,10 @@ function _distributeToPayoutSplitsOf(
         // Otherwise, if a project is specified, make a payment to it.
       } else if (_split.projectId != 0) {
         // Get a reference to the Juicebox terminal being used.
-        IJBTerminal _terminal = directory.primaryTerminalOf(_split.projectId, token);
+        IJBPaymentTerminal _terminal = directory.primaryTerminalOf(_split.projectId, token);
 
         // The project must have a terminal to send funds to.
-        if (_terminal == IJBTerminal(address(0))) {
+        if (_terminal == IJBPaymentTerminal(address(0))) {
           revert TERMINAL_IN_SPLIT_ZERO_ADDRESS();
         }
 
@@ -229,10 +229,10 @@ function _distributeToPayoutSplitsOf(
         // Otherwise, if a project is specified, make a payment to it.
       } else if (_split.projectId != 0) {
         // Get a reference to the Juicebox terminal being used.
-        IJBTerminal _terminal = directory.primaryTerminalOf(_split.projectId, token);
+        IJBPaymentTerminal _terminal = directory.primaryTerminalOf(_split.projectId, token);
 
         // The project must have a terminal to send funds to.
-        if (_terminal == IJBTerminal(address(0))) {
+        if (_terminal == IJBPaymentTerminal(address(0))) {
           revert TERMINAL_IN_SPLIT_ZERO_ADDRESS();
         }
 

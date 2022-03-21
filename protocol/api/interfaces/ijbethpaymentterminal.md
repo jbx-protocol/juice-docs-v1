@@ -3,7 +3,7 @@
 ```solidity
 interface IJBETHPaymentTerminal {
   event AddToBalance(uint256 indexed projectId, uint256 amount, string memo, address caller);
-  event Migrate(uint256 indexed projectId, IJBTerminal indexed to, uint256 amount, address caller);
+  event Migrate(uint256 indexed projectId, IJBPaymentTerminal indexed to, uint256 amount, address caller);
   event DistributePayouts(
     uint256 indexed fundingCycleConfiguration,
     uint256 indexed fundingCycleNumber,
@@ -101,6 +101,6 @@ interface IJBETHPaymentTerminal {
     address payable _beneficiary
   ) external;
 
-  function migrate(uint256 _projectId, IJBTerminal _to) external;
+  function migrate(uint256 _projectId, IJBPaymentTerminal _to) external;
 }
 ```
