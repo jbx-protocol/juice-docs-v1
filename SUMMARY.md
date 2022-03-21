@@ -250,7 +250,7 @@
         * [Read](protocol/api/contracts/jbpaymentterminalstore/read/README.md)
           * [currentOverflowOf](protocol/api/contracts/jbpaymentterminalstore/read/currentoverflowof.md)
           * [currentTotalOverflowOf](protocol/api/contracts/jbpaymentterminalstore/read/currenttotaloverflowof.md)
-          * [reclaimableOverflowOf](protocol/api/contracts/jbpaymentterminalstore/read/reclaimableoverflowof.md)
+          * [currentReclaimableOverflowOf](protocol/api/contracts/jbpaymentterminalstore/read/currentreclaimableoverflowof.md)
           * [\_reclaimableOverflowOf](protocol/api/contracts/jbpaymentterminalstore/read/\_reclaimableoverflowof.md)
           * [\_overflowDuring](protocol/api/contracts/jbpaymentterminalstore/read/\_overflowduring.md)
           * [\_totalOverflowDuring](protocol/api/contracts/jbpaymentterminalstore/read/\_totaloverflowduring.md)

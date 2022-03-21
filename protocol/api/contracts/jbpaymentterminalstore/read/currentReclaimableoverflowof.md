@@ -1,21 +1,21 @@
-# reclaimableOverflowOf
+# currentReclaimableOverflowOf
 
 Contract: [`JBPaymentTerminalStore`](../)​‌
 
 {% tabs %}
 {% tab title="Step by step" %}
-**The amount of overflowed tokens from a terminal that can be reclaimed by the specified number of tokens.**
+**The current amount of overflowed tokens from a terminal that can be reclaimed by the specified number of tokens.**
 
 _If the project has an active funding cycle reconfiguration ballot, the project's ballot redemption rate is used._
 
-_The reclaimable overflow is returned in terms of the specified terminal's currency._
+_The current reclaimable overflow is returned in terms of the specified terminal's currency._
 
 _The reclaimable overflow is represented as a fixed point number with the same amount of decimals as the specified terminal._
 
 #### Definition
 
 ```solidity
-function reclaimableOverflowOf(
+function currentReclaimableOverflowOf(
   IJBPaymentTerminal _terminal,
   uint256 _projectId,
   uint256 _tokenCount
@@ -60,13 +60,13 @@ function reclaimableOverflowOf(
 ```solidity
 /**
   @notice
-  The amount of overflowed tokens from a terminal that can be reclaimed by the specified number of tokens.
+  The current amount of overflowed tokens from a terminal that can be reclaimed by the specified number of tokens.
 
   @dev 
   If the project has an active funding cycle reconfiguration ballot, the project's ballot redemption rate is used.
 
   @dev
-  The reclaimable overflow is returned in terms of the specified terminal's currency.
+  The current reclaimable overflow is returned in terms of the specified terminal's currency.
 
   @dev
   The reclaimable overflow is represented as a fixed point number with the same amount of decimals as the specified terminal.
@@ -77,7 +77,7 @@ function reclaimableOverflowOf(
 
   @return The amount of overflowed tokens that can be reclaimed.
 */
-function reclaimableOverflowOf(
+function currentReclaimableOverflowOf(
   IJBPaymentTerminal _terminal,
   uint256 _projectId,
   uint256 _tokenCount
