@@ -6,7 +6,9 @@ Interface: [`IJBController`](../../../../interfaces/ijbcontroller.md)
 
 {% tabs %}
 {% tab title="Step by step" %}
-**The amount of token that a project can withdraw per funding cycle.**
+**The amount of token that a project can distribute per funding cycle, and the currency it's in terms of.**
+
+_The number of decimals in the returned fixed point amount is the same as that of the specified terminal._
 
 ### Definition
 
@@ -14,48 +16,65 @@ Interface: [`IJBController`](../../../../interfaces/ijbcontroller.md)
 function distributionLimitOf(
   uint256 _projectId,
   uint256 _configuration,
-  IJBTerminal _terminal
-) external view override returns (uint256) { ... }
+  IJBPaymentTerminal _terminal
+) external view override returns (uint256, uint256) { ... }
 ```
 
 * Arguments:
 * `_projectId` is the ID of the project to get the distribution limit of.
 * `_configuration` is the configuration during which the distribution limit applies.
-* `_terminal` is the [`IJBTerminal`](../../../../interfaces/ijbterminal.md) from which distributions are being limited.
+* `_terminal` is the [`IJBPaymentTerminal`](../../../../interfaces/ijbpaymentterminal.md) from which distributions are being limited.
 * The view function can be accessed externally by anyone.
-* The function does not alter state on the blockchain.
+* The view function does not alter state on the blockchain.
 * The function overrides a function definition from the [`IJBController`](../../../../interfaces/ijbcontroller.md) interface.
-* The function returns the distribution limit.
+* The function returns the distribution limit and the currency of the distribution limit.
 
 ### Body
 
-1.  Return the first 248 bits of the packed distribution limit data.
+1.  Get a reference to the packed distribution limit data.
 
     ```solidity
-    return uint256(uint248(_packedDistributionLimitDataOf[_projectId][_configuration][_terminal]));
+    // Get a reference to the packed data.
+    uint256 _data = _packedDistributionLimitDataOf[_projectId][_configuration][_terminal];
     ```
 
     _Internal references:_
 
     * [`_packedDistributionLimitDataOf`](../properties/\_packeddistributionlimitdataof.md)
+2.  Return the distribution limit, which is in the first 248 bits, and the currency the distribution limit is in terms of, which is in the last 8 bits.
+
+    ```solidity
+    // The limit is in bits 0-247. The currency is in bits 248-255.
+    return (uint256(uint248(_data)), _data >> 248);
+    ```
 {% endtab %}
 
 {% tab title="Code" %}
 ```solidity
 /**
-  @notice 
-  The amount of token that a project can withdraw per funding cycle.
+  @notice
+  The amount of token that a project can distribute per funding cycle, and the currency it's in terms of.
+
+  @dev
+  The number of decimals in the returned fixed point amount is the same as that of the specified terminal. 
 
   @param _projectId The ID of the project to get the distribution limit of.
   @param _configuration The configuration during which the distribution limit applies.
-  @param _terminal The terminal from which distributions are being limited. 
+  @param _terminal The terminal from which distributions are being limited.
+
+  @return The distribution limit, as a fixed point number with the same number of decimals as the provided terminal.
+  @return The currency of the distribution limit.
 */
 function distributionLimitOf(
   uint256 _projectId,
   uint256 _configuration,
-  IJBTerminal _terminal
-) external view override returns (uint256) {
-  return uint256(uint248(_packedDistributionLimitDataOf[_projectId][_configuration][_terminal]));
+  IJBPaymentTerminal _terminal
+) external view override returns (uint256, uint256) {
+  // Get a reference to the packed data.
+  uint256 _data = _packedDistributionLimitDataOf[_projectId][_configuration][_terminal];
+
+  // The limit is in bits 0-247. The currency is in bits 248-255.
+  return (uint256(uint248(_data)), _data >> 248);
 }
 ```
 {% endtab %}

@@ -6,7 +6,9 @@ Interface: [`IJBController`](../../../../interfaces/ijbcontroller.md)
 
 {% tabs %}
 {% tab title="Step by step" %}
-**The amount of overflow that a project is allowed to tap into on-demand throughout configuration.**
+**The amount of overflow that a project is allowed to tap into on-demand throughout a configuration, and the currency it's in terms of.**
+
+_The number of decimals in the returned fixed point amount is the same as that of the specified terminal._
 
 ### Definition
 
@@ -14,48 +16,65 @@ Interface: [`IJBController`](../../../../interfaces/ijbcontroller.md)
 function overflowAllowanceOf(
   uint256 _projectId,
   uint256 _configuration,
-  IJBTerminal _terminal
-) external view override returns (uint256) { ... }
+  IJBPaymentTerminal _terminal
+) external view override returns (uint256, uint256) { ... }
 ```
 
 * Arguments:
 * `_projectId` is the ID of the project to get the overflow allowance of.
 * `_configuration` is the configuration of the during which the allowance applies.
-* `_terminal` is the [`IJBTerminal`](../../../../interfaces/ijbterminal.md) managing the overflow.
+* `_terminal` is the [`IJBPaymentTerminal`](../../../../interfaces/ijbpaymentterminal.md) managing the overflow.
 * The view function can be accessed externally by anyone.
-* The function does not alter state on the blockchain.
+* The view function does not alter state on the blockchain.
 * The function overrides a function definition from the [`IJBController`](../../../../interfaces/ijbcontroller.md) interface.
-* The function returns the overflow allowance.
+* The function returns the overflow allowance and the currency of the overflow allowance.
 
 ### Body
 
-1.  Return the first 248 bits of the packed overflow allowance data.
+1.  Get a reference to the packed overflow allowance data.
 
     ```solidity
-    return uint256(uint248(_packedOverflowAllowanceDataOf[_projectId][_configuration][_terminal]));
+    // Get a reference to the packed data.
+    uint256 _data = _packedOverflowAllowanceDataOf[_projectId][_configuration][_terminal];
     ```
 
     _Internal references:_
 
     * [`_packedOverflowAllowanceDataOf`](../properties/\_packedoverflowallowancedataof.md)
+2.  Return the overflow allowance, which is in the first 248 bits, and the currency the overflow allowance is in terms of, which is in the last 8 bits.
+
+    ```solidity
+    // The allowance is in bits 0-247. The currency is in bits 248-255.
+    return (uint256(uint248(_data)), _data >> 248);
+    ```
 {% endtab %}
 
 {% tab title="Code" %}
 ```solidity
 /**
-  @notice 
-  The amount of overflow that a project is allowed to tap into on-demand throughout configuration.
+  @notice
+  The amount of overflow that a project is allowed to tap into on-demand throughout a configuration, and the currency it's in terms of.
+
+  @dev
+  The number of decimals in the returned fixed point amount is the same as that of the specified terminal. 
 
   @param _projectId The ID of the project to get the overflow allowance of.
   @param _configuration The configuration of the during which the allowance applies.
   @param _terminal The terminal managing the overflow.
+
+  @return The overflow allowance, as a fixed point number with the same number of decimals as the provided terminal.
+  @return The currency of the overflow allowance.
 */
 function overflowAllowanceOf(
   uint256 _projectId,
   uint256 _configuration,
-  IJBTerminal _terminal
-) external view override returns (uint256) {
-  return uint256(uint248(_packedOverflowAllowanceDataOf[_projectId][_configuration][_terminal]));
+  IJBPaymentTerminal _terminal
+) external view override returns (uint256, uint256) {
+  // Get a reference to the packed data.
+  uint256 _data = _packedOverflowAllowanceDataOf[_projectId][_configuration][_terminal];
+
+  // The allowance is in bits 0-247. The currency is in bits 248-255.
+  return (uint256(uint248(_data)), _data >> 248);
 }
 ```
 {% endtab %}

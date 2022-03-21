@@ -7,9 +7,10 @@ Contract: [`JBController`](../)​‌
 # Definition
 
 ```solidity
-/** 
+/**
   @notice
-  The difference between the processed token tracker of a project and the project's token's total supply is the amount of tokens that still need to have reserves minted against them.
+  The difference between the processed token tracker of a project and the project's token's total supply is the amount of tokens that
+  still need to have reserves minted against them.
 
   _projectId The ID of the project to get the tracker of.
 */

@@ -10,7 +10,7 @@ Emitted from:
 event MintTokens(
   address indexed beneficiary,
   uint256 indexed projectId,
-  uint256 indexed count,
+  uint256 indexed tokenCount,
   string memo,
   uint256 reservedRate,
   address caller
@@ -19,7 +19,7 @@ event MintTokens(
 
 * `beneficiary` is the address to which the tokens were minted.
 * `projectId` is the ID of the token's project.
-* `count` is the number of tokens that were minted.
+* `tokenCount` is the number of tokens that were minted.
 * `memo` is a note that was attached.
 * `reservedRate` is the project's current reserved rate.
 * `caller` is the address that issued the transaction within which the event was emitted.

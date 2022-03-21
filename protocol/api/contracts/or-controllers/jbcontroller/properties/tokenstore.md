@@ -18,4 +18,4 @@ IJBTokenStore public immutable tokenStore;
 
 * The value cannot be changed.
 * The resulting view function can be accessed externally by anyone.
-* The resulting function overrides a function definition from the `IJBController` interface.
+* The resulting function overrides a function definition from the [`IJBController`](../../../../interfaces/ijbcontroller.md) interface.
