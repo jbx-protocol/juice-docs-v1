@@ -130,7 +130,7 @@ function _distributeReservedTokensOf(uint256 _projectId, string memory _memo)
   @param _projectId The ID of the project to which the reserved tokens belong.
   @param _memo A memo to pass along to the emitted event.
 
-  @return The amount of minted reserved tokens.
+  @return tokenCount The amount of minted reserved tokens.
 */
 function _distributeReservedTokensOf(uint256 _projectId, string memory _memo)
   private
