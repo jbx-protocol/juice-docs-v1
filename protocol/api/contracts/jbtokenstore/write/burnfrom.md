@@ -91,17 +91,7 @@ function burnFrom(
     // The amount of unclaimed tokens to redeem.
     uint256 _unclaimedTokensToBurn = _amount - _claimedTokensToBurn;
     ```
-7.  If there are claimed tokens to burn, burn them from the holder's wallet.
-
-    ```solidity
-    // Burn the claimed tokens.
-    if (_claimedTokensToBurn > 0) _token.burn(_projectId, _holder, _claimedTokensToBurn);
-    ```
-
-    _External references:_
-
-    * [`burn`](../../jbtoken/write/burn.md)
-8.  If there are unclaimed tokens to burn, subtract the amount from the `unclaimedBalanceOf` the holder for the project, and from the `unclaimedTotalSupplyOf` the project.
+7.  If there are unclaimed tokens to burn, subtract the amount from the unclaimed balance of the holder for the project, and from the unclaimed total supply of the project.
 
     ```solidity
     // Subtract the tokens from the unclaimed balance and total supply.
@@ -120,6 +110,16 @@ function burnFrom(
 
     * [`unclaimedBalanceOf`](../properties/unclaimedbalanceof.md)
     * [`unclaimedTotalSupplyOf`](../properties/unclaimedtotalsupplyof.md)
+8.  If there are claimed tokens to burn, burn them from the holder's wallet.
+
+    ```solidity
+    // Burn the claimed tokens.
+    if (_claimedTokensToBurn > 0) _token.burn(_projectId, _holder, _claimedTokensToBurn);
+    ```
+
+    _External references:_
+
+    * [`burn`](../../jbtoken/write/burn.md)
 9.  Emit a `Burn` event with the relevant parameters.
 
     ```solidity
@@ -192,9 +192,6 @@ function burnFrom(
   // The amount of unclaimed tokens to redeem.
   uint256 _unclaimedTokensToBurn = _amount - _claimedTokensToBurn;
 
-  // Burn the claimed tokens.
-  if (_claimedTokensToBurn > 0) _token.burn(_projectId, _holder, _claimedTokensToBurn);
-
   // Subtract the tokens from the unclaimed balance and total supply.
   if (_unclaimedTokensToBurn > 0) {
     // Reduce the holders balance and the total supply.
@@ -205,6 +202,9 @@ function burnFrom(
       unclaimedTotalSupplyOf[_projectId] -
       _unclaimedTokensToBurn;
   }
+
+  // Burn the claimed tokens.
+  if (_claimedTokensToBurn > 0) _token.burn(_projectId, _holder, _claimedTokensToBurn);
 
   emit Burn(
     _holder,

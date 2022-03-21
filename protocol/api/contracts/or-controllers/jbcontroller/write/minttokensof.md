@@ -83,7 +83,7 @@ function mintTokensOf(
 
     * [`currentOf`](../../../jbfundingcyclestore/read/currentof.md)
     * [`isTerminalOf`](../../../jbdirectory/read/isterminalof.md)
-3.  If the operation should reserve 100% of the minted tokens, the token tracker should be updated to add a difference of the specified token count instead of minting the tokens directly. This will allow a future distribution of reserved tokens to mint the token count to reserved addresses. Otherwise, mint the unreserved tokens for the beneficiary and update the token tracker if there is no intent to reserve tokens alongside the mint.
+3.  If the operation should reserve 100% of the minted tokens, the token tracker should be updated to add a difference of the specified token count instead of minting the tokens directly. This will allow a future distribution of reserved tokens to mint the token count to reserved addresses. Otherwise, update the token tracker if there is no intent to reserve tokens alongside the mint and mint the unreserved tokens for the beneficiary.
 
     ```solidity
     if (_reservedRate == JBConstants.MAX_RESERVED_RATE)
@@ -99,14 +99,14 @@ function mintTokensOf(
         JBConstants.MAX_RESERVED_RATE
       );
 
-      // Mint the tokens.
-      tokenStore.mintFor(_beneficiary, _projectId, beneficiaryTokenCount, _preferClaimedTokens);
-
       if (_reservedRate == 0)
         // If there's no reserved rate, increment the tracker with the newly minted tokens.
         _processedTokenTrackerOf[_projectId] =
           _processedTokenTrackerOf[_projectId] +
           int256(beneficiaryTokenCount);
+
+      // Mint the tokens.
+      tokenStore.mintFor(_beneficiary, _projectId, beneficiaryTokenCount, _preferClaimedTokens);
     }
     ```
 
@@ -205,14 +205,14 @@ function mintTokensOf(
       JBConstants.MAX_RESERVED_RATE
     );
 
-    // Mint the tokens.
-    tokenStore.mintFor(_beneficiary, _projectId, beneficiaryTokenCount, _preferClaimedTokens);
-
     if (_reservedRate == 0)
       // If there's no reserved rate, increment the tracker with the newly minted tokens.
       _processedTokenTrackerOf[_projectId] =
         _processedTokenTrackerOf[_projectId] +
         int256(beneficiaryTokenCount);
+
+    // Mint the tokens.
+    tokenStore.mintFor(_beneficiary, _projectId, beneficiaryTokenCount, _preferClaimedTokens);
   }
 
   emit MintTokens(_beneficiary, _projectId, _tokenCount, _memo, _reservedRate, msg.sender);
