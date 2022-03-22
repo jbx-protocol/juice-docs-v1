@@ -96,6 +96,7 @@
     * [IJBTokenStore](protocol/api/interfaces/ijbtokenstore.md)
     * [IJBFeeGauge](protocol/api/interfaces/ijbfeegauge.md)
     * [IJBTokenUriResolver](protocol/api/interfaces/ijbtokenuriresolver.md)
+    * [IJBPayoutRedemptionPaymentTerminal](protocol/api/interfaces/ijbpayoutredemptionpaymentterminal.md)
   * [Contracts](protocol/api/contracts/README.md)
     * [JBProjects](protocol/api/contracts/jbprojects/README.md)
       * [Events](protocol/api/contracts/jbprojects/events/README.md)
