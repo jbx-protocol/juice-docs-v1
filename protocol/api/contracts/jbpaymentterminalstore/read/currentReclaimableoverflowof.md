@@ -2,6 +2,8 @@
 
 Contract: [`JBPaymentTerminalStore`](../)​‌
 
+Interface: [`JBPaymentTerminalStore`](../../../interfaces/ijbpaymentterminalstore.md)
+
 {% tabs %}
 {% tab title="Step by step" %}
 **The current amount of overflowed tokens from a terminal that can be reclaimed by the specified number of tokens.**
@@ -30,6 +32,7 @@ function currentReclaimableOverflowOf(
   * `_useLocalBalance` is a flag indicating whether the overflow used in the calculation should be limited to the overflow in the specified `_terminal`. If false, overflow is calculated from all of the project's terminals.
 * The view function can be accessed externally by anyone.
 * The view function does not alter state on the blockchain.
+* The resulting function overrides a function definition from the [`JBPaymentTerminalStore`](../../../interfaces/ijbpaymentterminalstore.md) interface.
 * The function returns the amount of overflowed tokens that can be reclaimed.
 
 #### Body
@@ -70,12 +73,10 @@ function currentReclaimableOverflowOf(
     * [`decimals`](../../../TODO)
     * [`currency`](../../../TODO)
 
-1.  Return the reclaimable overflow using the project's current funding cycle and the derived current overflow.
+1.  Return the reclaimable overflow using the project's current funding cycle and the derived current overflow. If there's no current overflow, there's no reclaimable overflow.
 
     ```solidity
-    return _reclaimableOverflowDuring(_projectId, _fundingCycle, _tokenCount, _currentOverflow);
-
-    // If there is no overflow, nothing is claimable.
+    // If there is no overflow, nothing is reclaimable.
     return
       _currentOverflow == 0
         ? 0
@@ -130,7 +131,7 @@ function currentReclaimableOverflowOf(
     )
     : _currentTotalOverflowOf(_projectId, _terminal.decimals(), _terminal.currency());
 
-  // If there is no overflow, nothing is claimable.
+  // If there is no overflow, nothing is reclaimable.
   return
     _currentOverflow == 0
       ? 0

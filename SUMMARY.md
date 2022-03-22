@@ -247,6 +247,7 @@
           * [balanceOf](protocol/api/contracts/jbpaymentterminalstore/properties/balanceof.md)
           * [usedOverflowAllowanceOf](protocol/api/contracts/jbpaymentterminalstore/properties/usedoverflowallowanceof.md)
           * [usedDistributionLimitOf](protocol/api/contracts/jbpaymentterminalstore/properties/useddistributionlimitof.md)
+          * [_MAX_FIXED_POINT_FIDELITY](protocol/api/contracts/jbpaymentterminalstore/properties/_max_fixed_point_fidelity.md)
         * [Read](protocol/api/contracts/jbpaymentterminalstore/read/README.md)
           * [currentOverflowOf](protocol/api/contracts/jbpaymentterminalstore/read/currentoverflowof.md)
           * [currentTotalOverflowOf](protocol/api/contracts/jbpaymentterminalstore/read/currenttotaloverflowof.md)

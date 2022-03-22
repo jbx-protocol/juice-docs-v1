@@ -30,11 +30,11 @@ function _overflowDuring(
 
 #### Body
 
-1.  Get a reference to the current balance of the funding cycle's project.
+1.  Get a reference to the current balance of the project.
 
     ```solidity
     // Get the current balance of the project.
-    uint256 _balanceOf = balanceOf[_fundingCycle.projectId];
+    uint256 _balanceOf = balanceOf[_terminal][_projectId];
     ```
 
     _Internal references:_
@@ -46,47 +46,40 @@ function _overflowDuring(
     // If there's no balance, there's no overflow.
     if (_balanceOf == 0) return 0;
     ```
-3.  Get a reference to the amount of the funding cycle's target that can still be distributed. This is the difference between its distribution limit and what has already been distributed during this funding cycle.
+3.  Get a reference to the current distribution limit of the project, along with the currency the limit is in terms of.
 
     ```solidity
-    // Get a reference to the amount still withdrawable during the funding cycle.
-    uint256 _distributionRemaining = directory.controllerOf(_projectId).distributionLimitOf(
-      _projectId,
-      _fundingCycle.configuration,
-      terminal
-    ) - usedDistributionLimitOf[_projectId][_fundingCycle.number];
+    // Get a reference to the distribution limit during the funding cycle.
+    (uint256 _distributionLimit, uint256 _distributionLimitCurrency) = directory
+      .controllerOf(_projectId)
+      .distributionLimitOf(_projectId, _fundingCycle.configuration, _terminal);
+    ```
+
+    _External references:_
+
+    * [`distributionLimitOf`](../../../or-controllers/jbcontroller/properties/distributionlimitof.md)
+4.  Get a reference to the amount of the funding cycle's target that can still be distributed. This is the difference between its distribution limit and what has already been distributed during this funding cycle.
+
+    ```solidity
+    // Get a reference to the amount still distributable during the funding cycle.
+    uint256 _distributionLimitRemaining = _distributionLimit -
+      usedDistributionLimitOf[_terminal][_projectId][_fundingCycle.number];
     ```
 
     _Internal references:_
 
     * [`usedDistributionLimitOf`](../properties/useddistributionlimitof.md)
 
-    _External references:_
-
-    * [`distributionLimitOf`](../../../or-controllers/jbcontroller/properties/distributionlimitof.md)
-4.  Get the currency for the distribution limit.
+5.  Convert the distribution remaining into the balance's currency using the appropriate price feed. The distribution remaining and balance fixed point numbers should already be using the same number of decimals.
 
     ```solidity
-    // Get a reference to the current funding cycle's currency for this terminal.
-    uint256 _currency = directory.controllerOf(_projectId).distributionLimitCurrencyOf(
-      _projectId,
-      _fundingCycle.configuration,
-      terminal
-    );
-    ```
-
-    _External references:_
-
-    * [`distributionLimitCurrencyOf`](../../../or-controllers/jbcontroller/properties/distributionlimitcurrencyof.md)
-5.  Convert the target remaining into ETH using the appropriate price feed. If the currency is 0, it is assumed that the currency is the same as the token being withdrawn so no conversion is necessary.
-
-    ```solidity
-    // Convert the _distributionRemaining to ETH.
-    uint256 _ethDistributionRemaining = _distributionRemaining == 0
-      ? 0
-      : (_currency == JBCurrencies.ETH)
-      ? _distributionRemaining
-      : PRBMathUD60x18.div(_distributionRemaining, prices.priceFor(_currency, JBCurrencies.ETH));
+    // Convert the _distributionRemaining to be in terms of the provided currency.
+    if (_distributionLimitRemaining != 0 && _distributionLimitCurrency != _balanceCurrency)
+      _distributionLimitRemaining = PRBMath.mulDiv(
+        _distributionLimitRemaining,
+        10**_MAX_FIXED_POINT_FIDELITY, // Use _MAX_FIXED_POINT_FIDELITY to keep as much of the `_amount.value`'s fidelity as possible when converting.
+        prices.priceFor(_distributionLimitCurrency, _balanceCurrency, _MAX_FIXED_POINT_FIDELITY)
+      );
     ```
 
     _Libraries used:_
@@ -94,14 +87,18 @@ function _overflowDuring(
     * [`JBCurrencies`](../../../../libraries/jbcurrencies.md)
       * `.ETH`
 
+    _Internal references:_
+
+    * [`_MAX_FIXED_POINT_FIDELITY`](../properties/_max_fixed_point_fidelity.md)
+
     _External references:_
 
     * [`priceFor`](../../../jbprices/read/pricefor.md)
 6.  If the current balance of the project is at most the target remaining, there is no overflow. Otherwise the difference between the project's current balance and the remaining distribution limit is the overflow.
 
     ```solidity
-    // Overflow is the balance of this project minus the amount that can still be withdrawn.
-    return _balanceOf <= _ethTargetRemaining ? 0 : _balanceOf - _ethTargetRemaining;
+    // Overflow is the balance of this project minus the amount that can still be distributed.
+    return _balanceOf > _distributionLimitRemaining ? _balanceOf - _distributionLimitRemaining : 0;
     ```
 {% endtab %}
 
