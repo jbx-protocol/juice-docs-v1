@@ -21,7 +21,7 @@ function currentReclaimableOverflowOf(
   IJBPaymentTerminal _terminal,
   uint256 _projectId,
   uint256 _tokenCount,
-  bool _useLocalBalance
+  bool _useTotalOverflow
 ) external view override returns (uint256) { ... }
 ```
 
@@ -29,7 +29,7 @@ function currentReclaimableOverflowOf(
   * `_terminal` is the terminal from which the reclaimable amount would come.
   * `_projectId` is the ID of the project to get the reclaimable overflow amount for.
   * `_tokenCount` is the number of tokens to make the calculation with, as a fixed point number with 18 decimals.
-  * `_useLocalBalance` is a flag indicating whether the overflow used in the calculation should be limited to the overflow in the specified `_terminal`. If false, overflow is calculated from all of the project's terminals.
+  * `_useTotalOverflow` is a flag indicating whether the overflow used in the calculation should be summed from all of the project's terminals. If false, overflow should be limited to the amount in the specified `_terminal`.
 * The view function can be accessed externally by anyone.
 * The view function does not alter state on the blockchain.
 * The resulting function overrides a function definition from the [`JBPaymentTerminalStore`](../../../interfaces/ijbpaymentterminalstore.md) interface.
@@ -48,19 +48,19 @@ function currentReclaimableOverflowOf(
 
     * [`currentOf`](../../../jbfundingcyclestore/read/currentof.md)
 
-2.  Get the amount of overflow to make the calculation with. Use the overflow of the provided terminal if a local balance should be used, otherwise use the total overflow of all of the project's terminals.
+2.  Get the amount of overflow to make the calculation with. Use the total overflow of all of the project's terminals if total overflow should be used, otherwise use the overflow of the provided terminal.
 
     ```solidity
     // Get the amount of current overflow.
-    // Use the local overflow if the funding cycle specifies that it should be used. Otherwise use the project's total overflow across all of its terminals.
-    uint256 _currentOverflow = _useLocalBalance
-      ? _overflowDuring(
+    // Use the project's total overflow across all of its terminals if the flag species specifies so. Otherwise, use the overflow local to the specified terminal.
+    uint256 _currentOverflow = _useTotalOverflow
+      ? _currentTotalOverflowOf(_projectId, _terminal.decimals(), _terminal.currency())
+      : _overflowDuring(
         IJBPaymentTerminal(msg.sender),
         _projectId,
         _fundingCycle,
         _terminal.currency()
-      )
-      : _currentTotalOverflowOf(_projectId, _terminal.decimals(), _terminal.currency());
+      );
     ```
 
     _Internal references:_
@@ -107,7 +107,7 @@ function currentReclaimableOverflowOf(
   @param _terminal The terminal from which the reclaimable amount would come.
   @param _projectId The ID of the project to get the reclaimable overflow amount for.
   @param _tokenCount The number of tokens to make the calculation with, as a fixed point number with 18 decimals.
-  @param _useLocalBalance A flag indicating whether the overflow used in the calculation should be limited to the overflow in the specified `_terminal`. If false, overflow is calculated from all of the project's terminals.
+  @param _useTotalOverflow A flag indicating whether the overflow used in the calculation should be summed from all of the project's terminals. If false, overflow should be limited to the amount in the specified `_terminal`.
 
   @return The amount of overflowed tokens that can be reclaimed.
 */
@@ -115,21 +115,21 @@ function currentReclaimableOverflowOf(
   IJBPaymentTerminal _terminal,
   uint256 _projectId,
   uint256 _tokenCount,
-  bool _useLocalBalance
+  bool _useTotalOverflow
 ) external view override returns (uint256) {
   // Get a reference to the project's current funding cycle.
   JBFundingCycle memory _fundingCycle = fundingCycleStore.currentOf(_projectId);
 
   // Get the amount of current overflow.
-  // Use the local overflow if the funding cycle specifies that it should be used. Otherwise use the project's total overflow across all of its terminals.
-  uint256 _currentOverflow = _useLocalBalance
-    ? _overflowDuring(
+  // Use the project's total overflow across all of its terminals if the flag species specifies so. Otherwise, use the overflow local to the specified terminal.
+  uint256 _currentOverflow = _useTotalOverflow
+    ? _currentTotalOverflowOf(_projectId, _terminal.decimals(), _terminal.currency())
+    : _overflowDuring(
       IJBPaymentTerminal(msg.sender),
       _projectId,
       _fundingCycle,
       _terminal.currency()
-    )
-    : _currentTotalOverflowOf(_projectId, _terminal.decimals(), _terminal.currency());
+    );
 
   // If there is no overflow, nothing is reclaimable.
   return
