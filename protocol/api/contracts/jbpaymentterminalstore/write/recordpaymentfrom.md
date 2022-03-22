@@ -17,7 +17,6 @@ function recordPaymentFrom(
   address _payer,
   JBTokenAmount calldata _amount,
   uint256 _projectId,
-  address _beneficiary,
   uint256 _baseWeightCurrency,
   string calldata _memo,
   bytes memory _metadata
@@ -37,7 +36,6 @@ function recordPaymentFrom(
   * `_payer` is the original address that sent the payment to the terminal.
   * `_amount` is a [`JBTokenAmount`](../../../interfaces/jbtokenamount.md) data structure specifying the amount of tokens being paid. Includes the token being paid, the value, the number of decimals included, and the currency of the amount.
   * `_projectId` is the ID of the project being paid.
-  * `_beneficiary` is the address that should receive benefits from the payment.
   * `_baseWeightCurrency` is the currency to base token issuance on.
   * `_memo` is a memo to pass along to the emitted event, and passed along to the funding cycle's data source.
   * `_metadata` are bytes to send along to the data source, if one is provided.
@@ -201,7 +199,6 @@ function recordPaymentFrom(
   @param _payer The original address that sent the payment to the terminal.
   @param _amount The amount of tokens being paid. Includes the token being paid, the value, the number of decimals included, and the currency of the amount.
   @param _projectId The ID of the project being paid.
-  @param _beneficiary The address that should receive benefits from the payment.
   @param _baseWeightCurrency The currency to base token issuance on.
   @param _memo A memo to pass along to the emitted event, and passed along to the funding cycle's data source.
   @param _metadata Bytes to send along to the data source, if one is provided.
@@ -215,7 +212,6 @@ function recordPaymentFrom(
   address _payer,
   JBTokenAmount calldata _amount,
   uint256 _projectId,
-  address _beneficiary,
   uint256 _baseWeightCurrency,
   string calldata _memo,
   bytes memory _metadata
@@ -252,7 +248,6 @@ function recordPaymentFrom(
       _projectId,
       fundingCycle.weight,
       fundingCycle.reservedRate(),
-      _beneficiary,
       _memo,
       _metadata
     );
