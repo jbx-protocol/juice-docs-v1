@@ -64,6 +64,7 @@
     * [JBRedeemParamsData](protocol/api/data-structures/jbredeemparamsdata.md)
     * [JBSplit](protocol/api/data-structures/jbsplit.md)
     * [JBGroupedSplits](protocol/api/data-structures/jbgroupedsplits.md)
+    * [JBTokenAmount](protocol/api/data-structures/jbtokenamount.md)
   * [Enums](protocol/api/enums/README.md)
     * [JBBallotState](protocol/api/enums/jbballotstate.md)
   * [Libraries](protocol/api/libraries/README.md)
