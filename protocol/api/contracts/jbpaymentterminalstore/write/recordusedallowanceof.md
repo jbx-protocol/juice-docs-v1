@@ -72,6 +72,7 @@ function recordUsedAllowanceOf(
 4.  Make sure there's enough allowance left to accomodate the new used amount.
 
     ```solidity
+    // Make sure the new used amount is within the allowance.
     if (_newUsedOverflowAllowanceOf > _overflowAllowanceOf || _overflowAllowanceOf == 0)
       revert INADEQUATE_CONTROLLER_ALLOWANCE();
     ```
@@ -206,6 +207,7 @@ function recordUsedAllowanceOf(
     .controllerOf(_projectId)
     .overflowAllowanceOf(_projectId, fundingCycle.configuration, IJBPaymentTerminal(msg.sender));
 
+  // Make sure the new used amount is within the allowance.
   if (_newUsedOverflowAllowanceOf > _overflowAllowanceOf || _overflowAllowanceOf == 0)
     revert INADEQUATE_CONTROLLER_ALLOWANCE();
 

@@ -85,6 +85,7 @@ function recordDistributionFor(
 5.  Make sure the new total amount distributed will be at most the distribution limit.
 
     ```solidity
+    // Make sure the new used amount is within the distribution limit.
     if (_newUsedDistributionLimitOf > _distributionLimitOf || _distributionLimitOf == 0)
       revert DISTRIBUTION_AMOUNT_LIMIT_REACHED();
     ```
@@ -201,6 +202,7 @@ function recordDistributionFor(
     .controllerOf(_projectId)
     .distributionLimitOf(_projectId, fundingCycle.configuration, IJBPaymentTerminal(msg.sender));
 
+  // Make sure the new used amount is within the distribution limit.
   if (_newUsedDistributionLimitOf > _distributionLimitOf || _distributionLimitOf == 0)
     revert DISTRIBUTION_AMOUNT_LIMIT_REACHED();
 
