@@ -32,34 +32,26 @@ Ethereum mainnet: _Not yet deployed_\\
 ```solidity
 constructor(
   IJBPrices _prices,
-  IJBProjects _projects,
   IJBDirectory _directory,
-  IJBFundingCycleStore _fundingCycleStore,
-  IJBTokenStore _tokenStore
+  IJBFundingCycleStore _fundingCycleStore
 ) {
   prices = _prices;
-  projects = _projects;
   directory = _directory;
   fundingCycleStore = _fundingCycleStore;
-  tokenStore = _tokenStore;
 }
 ```
 
 * **Arguments:**
   * `_prices` is an [`IJBPrices`](../../../interfaces/ijbprices.md) contract that exposes price feeds.
-  * `_projects` is an [`IJBProjects`](../../../interfaces/ijbprojects.md) contract which mints ERC-721's that represent project ownership and transfers.
   * `_directory` is an [`IJBDirectory`](../../../interfaces/ijbdirectory.md) contract storing directories of terminals and controllers for each project.
   * `_fundingCycleStore` is an [`IJBFundingCycleStore`](../../../interfaces/ijbfundingcyclestore.md) contract storing all funding cycle configurations.
-  * `_tokenStore` is an [`IJBTokenStore`](../../../interfaces/ijbtokenstore.md) contract that manages token minting and burning.
 
 ## Properties
 
 | Function                                                                 | Definition                                                                                                                                                                                                                                       |
 | ------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| [**`projects`**](properties/projects.md)                                 | <p><strong>Traits</strong></p><ul><li><code>immutable</code></li></ul><p><strong>Returns</strong></p><ul><li><code>[`IJBProjects`](../../../interfaces/ijbprojects.md)projects</code></li></ul>                            |
 | [**`directory`**](properties/directory.md)                               | <p><strong>Traits</strong></p><ul><li><code>immutable</code></li></ul><p><strong>Returns</strong></p><ul><li><code>[`IJBDirectory`](../../../interfaces/ijbdirectory.md)directory</code></li></ul>                         |
 | [**`fundingCycleStore`**](properties/fundingcyclestore.md)               | <p><strong>Traits</strong></p><ul><li><code>immutable</code></li></ul><p><strong>Returns</strong></p><ul><li><code>[`IJBFundingCycleStore`](../../../interfaces/ijbfundingcyclestore.md)fundingCycleStore</code></li></ul> |
-| [**`tokenStore`**](properties/tokenstore.md)                             | <p><strong>Traits</strong></p><ul><li><code>immutable</code></li></ul><p><strong>Returns</strong></p><ul><li><code>[`IJBTokenStore`](../../../interfaces/ijbtokenstore.md)tokenStore</code></li></ul>                      |
 | [**`prices`**](properties/prices.md)                                     | <p><strong>Traits</strong></p><ul><li><code>immutable</code></li></ul><p><strong>Returns</strong></p><ul><li><code>[`IJBPrices`](../../../interfaces/ijbprices.md)prices</code></li></ul>                                  |
 | [**`balanceOf`**](properties/balanceof.md)                               | <p><strong>Params</strong></p><ul><li><code>[`IJBPaymentTerminal`](../../interfaces/ijbpaymentterminal.md)_terminal</code></li><li><code>uint256 _projectId</code></li></ul><p><strong>Returns</strong></p><ul><li><code>uint256 balance</code></li></ul>                                                                                     |
 | [**`usedOverflowAllowanceOf`**](properties/usedoverflowallowanceof.md)   | <p><strong>Params</strong></p><ul><li><code>[`IJBPaymentTerminal`](../../interfaces/ijbpaymentterminal.md)_terminal</code></li><li><code>uint256 _projectId</code></li><li><code>uint256 _configuration</code></li></ul><p><strong>Returns</strong></p><ul><li><code>uint256 usedOverflowAllowance</code></li></ul>                           |
