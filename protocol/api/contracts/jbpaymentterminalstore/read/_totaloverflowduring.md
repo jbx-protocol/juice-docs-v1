@@ -37,7 +37,7 @@ function _currentTotalOverflowOf(
 
     _Internal references:_
 
-    * [`terminalsOf`](../../../jbdirectory/read/terminalsof.md)
+    * [`terminalsOf`](../../jbdirectory/read/terminalsof.md)
 2.  Create references where the total balance across all terminals is be stored in terms of ETH.
 
     ```solidity
@@ -73,7 +73,7 @@ function _currentTotalOverflowOf(
 
     _External references:_
 
-    * [`priceFor`](../../../jbprices/read/pricefor.md)
+    * [`priceFor`](../../jbprices/read/pricefor.md)
 5.  If the fixed point overflow is to be returned with a number of decimals other than 18, adjust the number accordingly. 
 
     ```solidity

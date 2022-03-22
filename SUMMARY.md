@@ -288,6 +288,7 @@
           * [distributionLimitOf](protocol/api/contracts/or-controllers/jbcontroller/read/distributionlimitof.md)
           * [overflowAllowanceOf](protocol/api/contracts/or-controllers/jbcontroller/read/overflowallowanceof.md)
           * [reservedTokenBalanceOf](protocol/api/contracts/or-controllers/jbcontroller/read/reservedtokenbalanceof.md)
+          * [totalOutstandingTokensOf](protocol/api/contracts/or-controllers/jbcontroller/read/totaloutstandingtokensof.md)
           * [\_reservedTokenAmountFrom](protocol/api/contracts/or-controllers/jbcontroller/read/\_reservedtokenamountfrom.md)
         * [Write](protocol/api/contracts/or-controllers/jbcontroller/write/README.md)
           * [launchProjectFor](protocol/api/contracts/or-controllers/jbcontroller/write/launchprojectfor.md)

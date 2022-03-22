@@ -56,7 +56,7 @@ function recordPaymentFrom(
 
     _External references:_
 
-    * [`currentOf`](../../../jbfundingcyclestore/read/currentof.md)
+    * [`currentOf`](../../jbfundingcyclestore/read/currentof.md)
 2.  Make sure the project has a funding cycle configured. This is done by checking if the project's current funding cycle number is non-zero.
 
     ```solidity
@@ -72,7 +72,7 @@ function recordPaymentFrom(
 
     _Libraries used:_
 
-    * [`JBFundingCycleMetadataResolver`](../../../../libraries/jbfundingcyclemetadataresolver.md)\
+    * [`JBFundingCycleMetadataResolver`](../../../libraries/jbfundingcyclemetadataresolver.md)\
       `.payPaused(...)`
 4.  Create a variable where the weight to use in subsquent calculations will be saved.
 
@@ -80,7 +80,7 @@ function recordPaymentFrom(
     // The weight according to which new token supply is to be minted, as a fixed point number with 18 decimals.
     uint256 _weight;
     ```
-5.  If the project's current funding cycle is configured to use a data source when receiving payments, ask the data source for the parameters that should be used throughout the rest of the function given provided contextual values in a [`JBPayParamsData`](../../../../data-structures/jbpayparamsdata.md) structure. Otherwise default parameters are used.
+5.  If the project's current funding cycle is configured to use a data source when receiving payments, ask the data source for the parameters that should be used throughout the rest of the function given provided contextual values in a [`JBPayParamsData`](../../../data-structures/jbpayparamsdata.md) structure. Otherwise default parameters are used.
 
     ```solidity
     // If the funding cycle has configured a data source, use it to derive a weight and memo.
@@ -107,7 +107,7 @@ function recordPaymentFrom(
 
     _Libraries used:_
 
-    * [`JBFundingCycleMetadataResolver`](../../../../libraries/jbfundingcyclemetadataresolver.md)\
+    * [`JBFundingCycleMetadataResolver`](../../../libraries/jbfundingcyclemetadataresolver.md)\
       `.useDataSourceForPay(...)`\
       `.dataSource(...)`\
       `.reservedRate(...)`

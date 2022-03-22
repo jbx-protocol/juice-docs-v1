@@ -30,21 +30,11 @@ function _reclaimableOverflowDuring(
 
 #### Body
 
-1.  Get a reference to the total amount of tokens for the funding cycle's project.
+1.  Get a reference to the total amount of outstanding tokens from the project's current controller.   
 
     ```solidity
-    // Get the total number of tokens in circulation.
-    uint256 _totalSupply = tokenStore.totalSupplyOf(_projectId);
-    ```
-
-    _External references:_
-
-    * [`totalSupplyOf`](../../../jbtokenstore/read/totalsupplyof.md)
-2.  Get a reference to the total amount of outstanding reserved tokens from the project's current controller. These tokens have not yet been distributed and added to the total supply, but they must still be taken into account as part of the total when calculating the claimable amount given a set of tokens.
-
-    ```solidity
-    // Get the number of reserved tokens the project has.
-    uint256 _reservedTokenAmount = directory.controllerOf(_projectId).reservedTokenBalanceOf(
+    // Get the number of outstanding tokens the project has.
+    uint256 _totalSupply = directory.controllerOf(_projectId).totalOutstandingTokensOf(
       _projectId,
       _fundingCycle.reservedRate()
     );
@@ -52,13 +42,13 @@ function _reclaimableOverflowDuring(
 
     _Libraries used:_
 
-    * [`JBFundingCycleMetadataResolver`](../../../../libraries/jbfundingcyclemetadataresolver.md)\
+    * [`JBFundingCycleMetadataResolver`](../../../libraries/jbfundingcyclemetadataresolver.md)\
       `.reservedRate(...)`
 
     _External references:_
 
-    * [`controllerOf`](../../../jbdirectory/properties/controllerof.md)
-    * [`reservedTokenBalanceOf`](../../../or-controllers/jbcontroller/read/reservedtokenbalanceof.md)
+    * [`controllerOf`](../../jbdirectory/properties/controllerof.md)
+    * [`totalOutstandingTokensOf`](../../or-controllers/jbcontroller/read/totaloutstandingtokensof.md)
 3.  If there are reserved tokens, add them to the total supply for the purposes of this calculation.
 
     ```solidity
@@ -83,13 +73,13 @@ function _reclaimableOverflowDuring(
 
     _Libraries used:_
 
-    * [`JBFundingCycleMetadataResolver`](../../../../libraries/jbfundingcyclemetadataresolver.md)\
+    * [`JBFundingCycleMetadataResolver`](../../../libraries/jbfundingcyclemetadataresolver.md)\
       `.ballotRedemptionRate(...)`\
       `.redemptionRate(...)`
 
     _External references:_
 
-    * [`currentBallotStateOf`](../../../jbfundingcyclestore/read/currentballotstateof.md)
+    * [`currentBallotStateOf`](../../jbfundingcyclestore/read/currentballotstateof.md)
 6.  If the redemption rate is 0%, nothing is claimable regardless of the amount of tokens.
 
     ```solidity
@@ -130,7 +120,7 @@ function _reclaimableOverflowDuring(
 
     * [`PRBMath`](https://github.com/hifi-finance/prb-math/blob/main/contracts/PRBMath.sol)
       * `.mulDiv(...)`
-    * [`JBConstants`](../../../../libraries/jbconstants.md)
+    * [`JBConstants`](../../../libraries/jbconstants.md)
       * `.MAX_REDEMPTION_RATE`
 {% endtab %}
 
@@ -156,11 +146,8 @@ function _reclaimableOverflowDuring(
   uint256 _tokenCount,
   uint256 _overflow
 ) private view returns (uint256) {
-  // Get the total number of tokens in circulation.
-  uint256 _totalSupply = tokenStore.totalSupplyOf(_projectId);
-
-  // Get the number of reserved tokens the project has.
-  uint256 _reservedTokenAmount = directory.controllerOf(_projectId).reservedTokenBalanceOf(
+  // Get the number of outstanding tokens the project has.
+  uint256 _totalSupply = directory.controllerOf(_projectId).totalOutstandingTokensOf(
     _projectId,
     _fundingCycle.reservedRate()
   );

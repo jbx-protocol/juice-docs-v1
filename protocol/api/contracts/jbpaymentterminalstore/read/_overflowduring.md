@@ -57,7 +57,7 @@ function _overflowDuring(
 
     _External references:_
 
-    * [`distributionLimitOf`](../../../or-controllers/jbcontroller/properties/distributionlimitof.md)
+    * [`distributionLimitOf`](../../or-controllers/jbcontroller/read/distributionlimitof.md)
 4.  Get a reference to the amount of the funding cycle's target that can still be distributed. This is the difference between its distribution limit and what has already been distributed during this funding cycle.
 
     ```solidity
@@ -84,7 +84,7 @@ function _overflowDuring(
 
     _Libraries used:_
 
-    * [`JBCurrencies`](../../../../libraries/jbcurrencies.md)
+    * [`JBCurrencies`](../../../libraries/jbcurrencies.md)
       * `.ETH`
 
     _Internal references:_
@@ -93,7 +93,7 @@ function _overflowDuring(
 
     _External references:_
 
-    * [`priceFor`](../../../jbprices/read/pricefor.md)
+    * [`priceFor`](../../jbprices/read/pricefor.md)
 6.  If the current balance of the project is at most the target remaining, there is no overflow. Otherwise the difference between the project's current balance and the remaining distribution limit is the overflow.
 
     ```solidity
