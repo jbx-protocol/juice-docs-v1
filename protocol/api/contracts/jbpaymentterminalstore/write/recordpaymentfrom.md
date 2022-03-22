@@ -4,52 +4,47 @@ Contract: [`JBPaymentTerminalStore`](../)​‌
 
 {% tabs %}
 {% tab title="Step by step" %}
-**Records newly contributed ETH to a project.**
+**Records newly contributed tokens to a project.**
 
 _Mint's the project's tokens according to values provided by a configured data source. If no data source is configured, mints tokens proportional to the amount of the contribution._
 
-_Only the associated payment terminal can record a payment._
+_The msg.sender must be an [`IJBPaymentTerminal`](../../../interfaces/ijbpaymentterminal.md). The amount specified in the params is in terms of the msg.senders tokens._
 
 #### Definition
 
 ```solidity
 function recordPaymentFrom(
   address _payer,
-  uint256 _amount,
+  JBTokenAmount calldata _amount,
   uint256 _projectId,
-  uint256 _preferClaimedTokensAndBeneficiary,
-  uint256 _minReturnedTokens,
-  string memory _memo,
-  bytes memory _delegateMetadata
+  address _beneficiary,
+  uint256 _baseWeightCurrency,
+  string calldata _memo,
+  bytes memory _metadata
 )
   external
-  onlyAssociatedPaymentTerminal
+  override
+  nonReentrant
   returns (
     JBFundingCycle memory fundingCycle,
-    uint256 weight,
     uint256 tokenCount,
+    IJBPayDelegate delegate,
     string memory memo
   ) { ... }
 ```
 
 * Arguments:
   * `_payer` is the original address that sent the payment to the terminal.
-  * `_amount` is the amount that is being paid in wei.
+  * `_amount` is a [`JBTokenAmount`](../../../interfaces/jbtokenamount.md) data structure specifying the amount of tokens being paid. Includes the token being paid, the value, the number of decimals included, and the currency of the amount.
   * `_projectId` is the ID of the project being paid.
-  *   `_preferClaimedTokensAndBeneficiary` Two properties are included in this packed uint256:
-
-      * The first bit contains the flag indicating whether the request prefers to issue tokens claimed as ERC-20s.
-      * The remaining bits contains the address that should receive benefits from the payment.
-
-      This design is necessary two prevent a "Stack too deep" compiler error that comes up if the variables are declared seperately.
-  * `_minReturnedTokens` is the minimum number of tokens expected to be minted in return.
-  * `_memo` is a memo that will be included in the published event.
-  * `_delegateMetadata` are bytes to send along to the delegate, if one is used.
-* Through the [`onlyAssociatedPaymentTerminal`](../modifiers/onlyassociatedpaymentterminal.md) modifier, the function is only accessible by the terminal that claimed this store.
+  * `_beneficiary` is the address that should receive benefits from the payment.
+  * `_baseWeightCurrency` is the currency to base token issuance on.
+  * `_memo` is a memo to pass along to the emitted event, and passed along to the funding cycle's data source.
+  * `_metadata` are bytes to send along to the data source, if one is provided.
 * The function returns:
   * `fundingCycle` is the project's funding cycle during which payment was made.
-  * `weight` is the weight according to which new token supply was minted.
-  * `tokenCount` is the number of tokens that were minted.
+  * `tokenCount` is the number of project tokens that were minted, as a fixed point number with 18 decimals.
+  * `delegate` is a delegate contract to use for subsequent calls.
   * `memo` is a memo that should be passed along to the emitted event.
 
 #### Body
@@ -195,46 +190,43 @@ function recordPaymentFrom(
 ```solidity
 /**
   @notice
-  Records newly contributed ETH to a project.
+  Records newly contributed tokens to a project.
 
   @dev
   Mint's the project's tokens according to values provided by a configured data source. If no data source is configured, mints tokens proportional to the amount of the contribution.
 
   @dev
-  Only the associated payment terminal can record a payment.
+  The msg.sender must be an IJBPaymentTerminal. The amount specified in the params is in terms of the msg.senders tokens.
 
   @param _payer The original address that sent the payment to the terminal.
-  @param _amount The amount that is being paid in wei.
+  @param _amount The amount of tokens being paid. Includes the token being paid, the value, the number of decimals included, and the currency of the amount.
   @param _projectId The ID of the project being paid.
-  @param _preferClaimedTokensAndBeneficiary Two properties are included in this packed uint256:
-    The first bit contains the flag indicating whether the request prefers to issue tokens claimed as ERC-20s.
-    The remaining bits contains the address that should receive benefits from the payment.
-
-    This design is necessary two prevent a "Stack too deep" compiler error that comes up if the variables are declared seperately.
-  @param _minReturnedTokens The minimum number of tokens expected to be minted in return.
-  @param _memo A memo that will be included in the published event.
-  @param _delegateMetadata Bytes to send along to the delegate, if one is used.
+  @param _beneficiary The address that should receive benefits from the payment.
+  @param _baseWeightCurrency The currency to base token issuance on.
+  @param _memo A memo to pass along to the emitted event, and passed along to the funding cycle's data source.
+  @param _metadata Bytes to send along to the data source, if one is provided.
 
   @return fundingCycle The project's funding cycle during which payment was made.
-  @return weight The weight according to which new token supply was minted.
-  @return tokenCount The number of tokens that were minted.
+  @return tokenCount The number of project tokens that were minted, as a fixed point number with 18 decimals.
+  @return delegate A delegate contract to use for subsequent calls.
   @return memo A memo that should be passed along to the emitted event.
 */
 function recordPaymentFrom(
   address _payer,
-  uint256 _amount,
+  JBTokenAmount calldata _amount,
   uint256 _projectId,
-  uint256 _preferClaimedTokensAndBeneficiary,
-  uint256 _minReturnedTokens,
-  string memory _memo,
-  bytes memory _delegateMetadata
+  address _beneficiary,
+  uint256 _baseWeightCurrency,
+  string calldata _memo,
+  bytes memory _metadata
 )
   external
-  onlyAssociatedPaymentTerminal
+  override
+  nonReentrant
   returns (
     JBFundingCycle memory fundingCycle,
-    uint256 weight,
     uint256 tokenCount,
+    IJBPayDelegate delegate,
     string memory memo
   )
 {
@@ -242,74 +234,58 @@ function recordPaymentFrom(
   fundingCycle = fundingCycleStore.currentOf(_projectId);
 
   // The project must have a funding cycle configured.
-  if (fundingCycle.number == 0) {
-    revert INVALID_FUNDING_CYCLE();
-  }
+  if (fundingCycle.number == 0) revert INVALID_FUNDING_CYCLE();
 
   // Must not be paused.
-  if (fundingCycle.payPaused()) {
-    revert FUNDING_CYCLE_PAYMENT_PAUSED();
-  }
+  if (fundingCycle.payPaused()) revert FUNDING_CYCLE_PAYMENT_PAUSED();
 
-  // Save a reference to the delegate to use.
-  IJBPayDelegate _delegate;
+  // The weight according to which new token supply is to be minted, as a fixed point number with 18 decimals.
+  uint256 _weight;
 
   // If the funding cycle has configured a data source, use it to derive a weight and memo.
   if (fundingCycle.useDataSourceForPay()) {
-    (weight, memo, _delegate, _delegateMetadata) = fundingCycle.dataSource().payParams(
-      JBPayParamsData(
-        _payer,
-        _amount,
-        _projectId,
-        fundingCycle.weight,
-        fundingCycle.reservedRate(),
-        address(uint160(_preferClaimedTokensAndBeneficiary >> 1)),
-        _memo,
-        _delegateMetadata
-      )
+    // Create the params that'll be sent to the data source.
+    JBPayParamsData memory _data = JBPayParamsData(
+      IJBPaymentTerminal(msg.sender),
+      _payer,
+      _amount,
+      _projectId,
+      fundingCycle.weight,
+      fundingCycle.reservedRate(),
+      _beneficiary,
+      _memo,
+      _metadata
     );
-    // Otherwise use the funding cycle's weight
-  } else {
-    weight = fundingCycle.weight;
+    (_weight, memo, delegate) = fundingCycle.dataSource().payParams(_data);
+  }
+  // Otherwise use the funding cycle's weight
+  else {
+    _weight = fundingCycle.weight;
     memo = _memo;
   }
 
-  // Multiply the amount by the weight to determine the amount of tokens to mint.
-  uint256 _weightedAmount = PRBMathUD60x18.mul(_amount, weight);
+  // If there's no amount being recorded, there's nothing left to do.
+  if (_amount.value == 0) return (fundingCycle, 0, delegate, memo);
 
-  // Add the amount to the ETH balance of the project if needed.
-  if (_amount > 0) balanceOf[_projectId] = balanceOf[_projectId] + _amount;
+  // Add the amount to the token balance of the project if needed.
+  balanceOf[IJBPaymentTerminal(msg.sender)][_projectId] =
+    balanceOf[IJBPaymentTerminal(msg.sender)][_projectId] +
+    _amount.value;
 
-  if (_weightedAmount > 0)
-    tokenCount = directory.controllerOf(_projectId).mintTokensOf(
-      _projectId,
-      _weightedAmount,
-      address(uint160(_preferClaimedTokensAndBeneficiary >> 1)),
-      '',
-      (_preferClaimedTokensAndBeneficiary & 1) == 1,
-      fundingCycle.reservedRate()
-    );
+  // If there's no weight, token count must be 0 so there's nothing left to do.
+  if (_weight == 0) return (fundingCycle, 0, delegate, memo);
 
-  // The token count for the beneficiary must be greater than or equal to the minimum expected.
-  if (tokenCount < _minReturnedTokens) {
-    revert INADEQUATE_TOKEN_COUNT();
-  }
+  // Get a reference to the number of decimals in the amount. (prevents stack too deep).
+  uint256 _decimals = _amount.decimals;
 
-  // If a delegate was returned by the data source, issue a callback to it.
-  if (_delegate != IJBPayDelegate(address(0))) {
-    JBDidPayData memory _data = JBDidPayData(
-      _payer,
-      _projectId,
-      _amount,
-      weight,
-      tokenCount,
-      payable(address(uint160(_preferClaimedTokensAndBeneficiary >> 1))),
-      memo,
-      _delegateMetadata
-    );
-    _delegate.didPay(_data);
-    emit DelegateDidPay(_delegate, _data);
-  }
+  // If the terminal should base its weight on a different currency from the terminal's currency, determine the factor.
+  // The weight is always a fixed point mumber with 18 decimals. To ensure this, the ratio should use the same number of decimals as the `_amount`.
+  uint256 _weightRatio = _amount.currency == _baseWeightCurrency
+    ? 10**_decimals
+    : prices.priceFor(_amount.currency, _baseWeightCurrency, _decimals);
+
+  // Find the number of tokens to mint, as a fixed point number with as many decimals as `weight` has.
+  tokenCount = PRBMath.mulDiv(_amount.value, _weight, _weightRatio);
 }
 ```
 {% endtab %}

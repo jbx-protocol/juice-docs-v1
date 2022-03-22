@@ -27,7 +27,9 @@ function distributionLimitOf(
 * The view function can be accessed externally by anyone.
 * The view function does not alter state on the blockchain.
 * The function overrides a function definition from the [`IJBController`](../../../../interfaces/ijbcontroller.md) interface.
-* The function returns the distribution limit and the currency of the distribution limit.
+* The function returns:
+  * `distributionLimit` is the distribution limit, as a fixed point number with the same number of decimals as the provided terminal.
+  * `distributionLimitCurrency` is the currency from [`JBCurrencies`](../../../../libraries/jbcurrencies.md) that the returned distribution limit is in terms of.
 
 ### Body
 

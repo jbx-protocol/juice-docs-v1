@@ -27,7 +27,9 @@ function overflowAllowanceOf(
 * The view function can be accessed externally by anyone.
 * The view function does not alter state on the blockchain.
 * The function overrides a function definition from the [`IJBController`](../../../../interfaces/ijbcontroller.md) interface.
-* The function returns the overflow allowance and the currency of the overflow allowance.
+* The function returns:
+  * `overflowAllowance` is the overflow allowance, as a fixed point number with the same number of decimals as the provided terminal.
+  * `overflowAllowanceCurrency` is the currency from [`JBCurrencies`](../../../../libraries/jbcurrencies.md) that the returned overflow allowance is in terms of.
 
 ### Body
 
