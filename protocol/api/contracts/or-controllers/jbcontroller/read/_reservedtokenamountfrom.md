@@ -63,7 +63,7 @@ function _reservedTokenAmountFrom(
     _Libraries used:_
 
     * [`PRBMath`](https://github.com/hifi-finance/prb-math/blob/main/contracts/PRBMath.sol)
-      * `.mulDiv`
+      * `.mulDiv(...)`
     * [`JBConstants`](../../../../libraries/jbconstants.md)
       * `.MAX_RESERVED_RATE`
 {% endtab %}

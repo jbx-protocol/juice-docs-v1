@@ -4,165 +4,134 @@ Contract: [`JBPaymentTerminalStore`](../)​‌
 
 {% tabs %}
 {% tab title="Step by step" %}
-**Gets the amount that is overflowing across all terminals when measured from the specified funding cycle.**
+**Gets the amount that is currently overflowing across all of a project's terminals.**
 
-_This amount changes as the price of ETH changes in relation to the currency being used to measure the distribution limits._
+_This amount changes as the value of the balances changes in relation to the currency being used to measure the project's distribution limits._
 
 #### Definition
 
 ```solidity
-function _totalOverflowDuring(uint256 _projectId, JBFundingCycle memory _fundingCycle)
-  private
-  view
-  returns (uint256) { ... }
+function _currentTotalOverflowOf(
+  uint256 _projectId,
+  uint256 _decimals,
+  uint256 _currency
+) private view returns (uint256) { ... }
 ```
 
 * Arguments:
-  * `_projectId` is the ID of the project to get total overflow for.
-  * `_fundingCycle` is the ID of the funding cycle to base the overflow on.
+  * `_projectId` is the ID of the project to get the total overflow for.
+  * `_decimals` is the number of decimals that the fixed point overflow should include.
+  * `_currency` is the currency that the overflow should be in terms of.
 * The view function is private to this contract.
-* The function does not alter state on the blockchain.
-* The function returns the the overflow of funds.
+* The view function does not alter state on the blockchain.
+* The function returns the total overflow of a project's funds.
 
 #### Body
 
 1.  Get a reference to all of the project's current terminals.
 
     ```solidity
+    // Get a reference to the project's terminals.
     IJBPaymentTerminal[] memory _terminals = directory.terminalsOf(_projectId);
     ```
 
     _Internal references:_
 
     * [`terminalsOf`](../../../jbdirectory/read/terminalsof.md)
-2.  Create references where the total ETH balance across all terminals and the total ETH distribution limits across all terminals will be stored.
+2.  Create references where the total balance across all terminals is be stored in terms of ETH.
 
     ```solidity
-    // Keep a reference to the current eth balance of the project across all terminals, and the current eth distribution limit across all terminals.
-    uint256 _ethBalanceOf;
-    uint256 _ethDistributionLimitRemaining;
+    // Keep a reference to the ETH overflow across all terminals, as a fixed point number with 18 decimals.
+    uint256 _ethOverflow;
     ```
-3.  For each terminal, add its ETH balance to the `_ethBalanceOf` value. Also increment the `_ethDistributionLimitRemaining` value with the distribution limit remaining for the terminal after converting its value from the currency the limit is measured in to ETH. If the currency is 0, it is assumed that the currency is the same as the token being withdrawn so no conversion is necessary.
+3.  For each terminal, add its balance in terms of ETH to the total ETH balance.
 
     ```solidity
-    for (uint256 _i = 0; _i < _terminals.length; _i++) {
-      _ethBalanceOf = _ethBalanceOf + _terminals[_i].ethBalanceOf(_projectId);
-
-      // Get a reference to the amount still withdrawable during the funding cycle.
-      uint256 _distributionRemaining = _terminals[_i].remainingDistributionLimitOf(
-        _projectId,
-        _fundingCycle.configuration,
-        _fundingCycle.number
-      );
-
-      // Get a reference to the current funding cycle's currency for this terminal.
-      uint256 _currency = directory.controllerOf(_projectId).distributionLimitCurrencyOf(
-        _projectId,
-        _fundingCycle.configuration,
-        _terminals[_i]
-      );
-
-      // Convert the _distributionRemaining to ETH.
-      _ethDistributionLimitRemaining =
-        _ethDistributionLimitRemaining +
-        (
-          _distributionRemaining == 0 ? 0 : (_currency == JBCurrencies.ETH)
-            ? _distributionRemaining
-            : PRBMathUD60x18.div(
-              _distributionRemaining,
-              prices.priceFor(_currency, JBCurrencies.ETH)
-            )
-        );
-    }
+    // Add the current ETH overflow for each terminal.
+    for (uint256 _i = 0; _i < _terminals.length; _i++)
+      _ethOverflow = _ethOverflow + _terminals[_i].currentEthOverflowOf(_projectId);
     ```
-
-    _Internal references:_
-
-    * [`usedDistributionLimitOf`](../properties/useddistributionlimitof.md)
-
-    _Libraries used:_
-
-    * [`PRBMathUD60x18`](https://github.com/hifi-finance/prb-math/blob/main/contracts/PRBMathUD60x18.sol)
-      * `.div`
 
     _External references:_
 
-    * [`ethBalanceOf`](../../jbethpaymentterminal/read/ethbalanceof.md)
-    * [`remainingDistributionLimitCurrencyOf`](../../jbethpaymentterminal/read/remainingdistributionlimitcurrencyof.md)
-    * [`currencyOf`](../../../or-controllers/jbcontroller/properties/currencyof.md)
-    * [`priceFor`](../../../jbprices/read/pricefor.md)
-4.  If the current balance of the project is at most the target remaining, there is no overflow. Otherwise the difference between the project's current balance and the remaining distribution limit is the overflow.
+    * [`currentEthOverflowOf`](../../jbethpaymentterminal/read/currentEthOverflow.md TODO)
+4.  If the total overflow is to be returned in a currency other than ETH, make the conversion while maintaining 18 decimals of fidelity.
 
     ```solidity
-    // Overflow is the balance of this project minus the amount that can still be distributed.
-    return
-      _ethBalanceOf <= _ethDistributionLimitRemaining
-        ? 0
-        : _ethBalanceOf - _ethDistributionLimitRemaining;
+    // Convert the ETH overflow to the specified currency if needed, maintaining a fixed point number with 18 decimals.
+    uint256 _totalOverflow18Decimal = _currency == JBCurrencies.ETH
+      ? _ethOverflow
+      : PRBMath.mulDiv(_ethOverflow, 10**18, prices.priceFor(JBCurrencies.ETH, _currency, 18));
     ```
+
+    _Libraries used:_
+
+    * [`PRBMath`](https://github.com/hifi-finance/prb-math/blob/main/contracts/PRBMath.sol)
+      * `.mulDiv(...)`
+    * [`JBCurrencies`](../../../libraries/jbcurrencies.md)
+      * `.ETH`
+
+    _External references:_
+
+    * [`priceFor`](../../../jbprices/read/pricefor.md)
+5.  If the fixed point overflow is to be returned with a number of decimals other than 18, adjust the number accordingly. 
+
+    ```solidity
+    // Adjust the decimals of the fixed point number if needed to match the target decimals.
+    return
+      (_decimals == 18)
+        ? _totalOverflow18Decimal
+        : JBFixedPointNumber.adjustDecimals(_totalOverflow18Decimal, 18, _decimals);
+    ```
+
+    _Libraries used:_
+
+    * [`PRBMath`](https://github.com/hifi-finance/prb-math/blob/main/contracts/PRBMath.sol)
+      * `.mulDiv(...)`
+    * [`JBFixedPointNumber`](../../../libraries/jbfixedpointnumber.md)
+      * `.adjustDecimals(...)`
 {% endtab %}
 
 {% tab title="Code" %}
 ```solidity
 /**
   @notice
-  Gets the amount that is overflowing across all terminals when measured from the specified funding cycle.
+  Gets the amount that is currently overflowing across all of a project's terminals. 
 
   @dev
-  This amount changes as the price of ETH changes in relation to the currency being used to measure the distribution limits.
+  This amount changes as the value of the balances changes in relation to the currency being used to measure the project's distribution limits.
 
-  @param _projectId The ID of the project to get total overflow for.
-  @param _fundingCycle The ID of the funding cycle to base the overflow on.
+  @param _projectId The ID of the project to get the total overflow for.
+  @param _decimals The number of decimals that the fixed point overflow should include.
+  @param _currency The currency that the overflow should be in terms of.
 
-  @return overflow The overflow of funds.
+  @return overflow The total overflow of a project's funds.
 */
-function _totalOverflowDuring(uint256 _projectId, JBFundingCycle memory _fundingCycle)
-  private
-  view
-  returns (uint256)
-{
+function _currentTotalOverflowOf(
+  uint256 _projectId,
+  uint256 _decimals,
+  uint256 _currency
+) private view returns (uint256) {
   // Get a reference to the project's terminals.
   IJBPaymentTerminal[] memory _terminals = directory.terminalsOf(_projectId);
 
-  // Keep a reference to the current eth balance of the project across all terminals, and the current eth distribution limit across all terminals.
-  uint256 _ethBalanceOf;
-  uint256 _ethDistributionLimitRemaining;
+  // Keep a reference to the ETH overflow across all terminals, as a fixed point number with 18 decimals.
+  uint256 _ethOverflow;
 
-  for (uint256 _i = 0; _i < _terminals.length; _i++) {
-    _ethBalanceOf = _ethBalanceOf + _terminals[_i].ethBalanceOf(_projectId);
+  // Add the current ETH overflow for each terminal.
+  for (uint256 _i = 0; _i < _terminals.length; _i++)
+    _ethOverflow = _ethOverflow + _terminals[_i].currentEthOverflowOf(_projectId);
 
-    // Get a reference to the amount still withdrawable during the funding cycle.
-    uint256 _distributionRemaining = _terminals[_i].remainingDistributionLimitOf(
-      _projectId,
-      _fundingCycle.configuration,
-      _fundingCycle.number
-    );
+  // Convert the ETH overflow to the specified currency if needed, maintaining a fixed point number with 18 decimals.
+  uint256 _totalOverflow18Decimal = _currency == JBCurrencies.ETH
+    ? _ethOverflow
+    : PRBMath.mulDiv(_ethOverflow, 10**18, prices.priceFor(JBCurrencies.ETH, _currency, 18));
 
-    // Get a reference to the current funding cycle's currency for this terminal.
-    uint256 _currency = directory.controllerOf(_projectId).distributionLimitCurrencyOf(
-      _projectId,
-      _fundingCycle.configuration,
-      _terminals[_i]
-    );
-
-    // Convert the _distributionRemaining to ETH.
-    _ethDistributionLimitRemaining =
-      _ethDistributionLimitRemaining +
-      (
-        _distributionRemaining == 0 ? 0 : (_currency == JBCurrencies.ETH)
-          ? _distributionRemaining
-          : PRBMathUD60x18.div(
-            _distributionRemaining,
-            prices.priceFor(_currency, JBCurrencies.ETH)
-          )
-      );
-  }
-
-  // Overflow is the balance of this project minus the amount that can still be distributed.
+  // Adjust the decimals of the fixed point number if needed to match the target decimals.
   return
-    _ethBalanceOf <= _ethDistributionLimitRemaining
-      ? 0
-      : _ethBalanceOf - _ethDistributionLimitRemaining;
+    (_decimals == 18)
+      ? _totalOverflow18Decimal
+      : JBFixedPointNumber.adjustDecimals(_totalOverflow18Decimal, 18, _decimals);
 }
 ```
 {% endtab %}

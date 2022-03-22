@@ -27,26 +27,26 @@ function currentOverflowOf(IJBPaymentTerminal _terminal, uint256 _projectId)
 
 #### Body
 
-1.  Get a reference to the project's current funding cycle.
-
-    ```solidity
-    // Get a reference to the project's current funding cycle.
-    JBFundingCycle memory _fundingCycle = fundingCycleStore.currentOf(_projectId);
-    ```
-
-    _External references:_
-
-    * [`currentOf`](../../../jbfundingcyclestore/read/currentOf.md)
-2.  Forward the call to the internal version of the function that is also used by other operations.
+1.  Forward the call to the internal version of the function that is also used by other operations, using the project's current funding cycle.
 
     ```solidity
     // Return the overflow during the project's current funding cycle.
-    return _overflowDuring(_terminal, _projectId, _fundingCycle, _terminal.currency());
+    return
+      _overflowDuring(
+        _terminal,
+        _projectId,
+        fundingCycleStore.currentOf(_projectId),
+        _terminal.currency()
+      );
     ```
 
     _Internal references:_
 
     * [`_overflowDuring`](\_overflowDuring.md)
+
+    _External references:_
+
+    * [`currentOf`](../../../jbfundingcyclestore/read/currentOf.md)
 {% endtab %}
 
 {% tab title="Code" %}
@@ -69,11 +69,14 @@ function currentOverflowOf(IJBPaymentTerminal _terminal, uint256 _projectId)
   override
   returns (uint256)
 {
-  // Get a reference to the project's current funding cycle.
-  JBFundingCycle memory _fundingCycle = fundingCycleStore.currentOf(_projectId);
-
   // Return the overflow during the project's current funding cycle.
-  return _overflowDuring(_terminal, _projectId, _fundingCycle, _terminal.currency());
+  return
+    _overflowDuring(
+      _terminal,
+      _projectId,
+      fundingCycleStore.currentOf(_projectId),
+      _terminal.currency()
+    );
 }
 ```
 {% endtab %}

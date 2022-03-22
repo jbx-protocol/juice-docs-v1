@@ -57,7 +57,7 @@ function currentPrice(uint256 _decimals) external view override returns (uint256
     _Libraries used:_
 
     * [`JBFixedPointNumber`](../../../../libraries/jbfixedpointnumber.md)
-      * `.adjustDecimals`
+      * `.adjustDecimals(...)`
 {% endtab %}
 
 {% tab title="Code" %}

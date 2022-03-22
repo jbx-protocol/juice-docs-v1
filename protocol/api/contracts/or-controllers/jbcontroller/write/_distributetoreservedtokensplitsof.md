@@ -75,7 +75,7 @@ function _distributeToReservedTokenSplitsOf(
         _Libraries used:_
 
         * [`PRBMath`](https://github.com/hifi-finance/prb-math/blob/main/contracts/PRBMath.sol)
-          * `.mulDiv`
+          * `.mulDiv(...)`
         * [`JBConstants`](../../../../libraries/jbconstants.md)
           * `.SPLITS_TOTAL_PERCENT`
     6.  If there are tokens to mint for the given split, do so. If the split has an allocator specified, the tokens should go to that address. Otherwise if the split has a project ID specified, the tokens should be directed to the project's owner. Otherwise, the tokens should be directed at the beneficiary address of the split if it has one, or to the message sender if not. Afterwards, if there's an allocator specified, let it know that tokens have been sent. Reduce the leftover amount by the tokens that were sent to the split.
