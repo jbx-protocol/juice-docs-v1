@@ -139,7 +139,7 @@ function recordPaymentFrom(
     // If there's no weight, token count must be 0 so there's nothing left to do.
     if (_weight == 0) return (fundingCycle, 0, delegate, memo);
     ```
-6.  Calculate the weight ratio. This allows a project to get paid in a certain token, but issue project tokens relative to a different base currency. The weight ratio will be used to divide the product of the paid amount and the weight to determine the number of tokens that should be distributed. Since the number of distributed tokens should be a fixed point number with 18 decimals, the weight ratio must have the same number of decimals as the amount to cancel it out and leave only the fidelity of the 18 decimal fixed point weight.
+9.  Calculate the weight ratio. This allows a project to get paid in a certain token, but issue project tokens relative to a different base currency. The weight ratio will be used to divide the product of the paid amount and the weight to determine the number of tokens that should be distributed. Since the number of distributed tokens should be a fixed point number with 18 decimals, the weight ratio must have the same number of decimals as the amount to cancel it out and leave only the fidelity of the 18 decimal fixed point weight.
 
     ```solidity
     // Get a reference to the number of decimals in the amount. (prevents stack too deep).
@@ -156,7 +156,7 @@ function recordPaymentFrom(
 
     * [`priceFor`](../../../contracts/jbprices/read/pricefor.md)
 
-7.  Determine the number of tokens to mint.
+10. Determine the number of tokens to mint.
 
     ```solidity
     // Find the number of tokens to mint, as a fixed point number with as many decimals as `weight` has.

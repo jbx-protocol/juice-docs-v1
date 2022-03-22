@@ -1,4 +1,4 @@
-# \_totalOverflowDuring
+# \_currentTotalOverflowOf
 
 Contract: [`JBPaymentTerminalStore`](../)​‌
 

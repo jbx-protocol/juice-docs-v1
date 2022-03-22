@@ -252,7 +252,7 @@
           * [currentReclaimableOverflowOf](protocol/api/contracts/jbpaymentterminalstore/read/currentreclaimableoverflowof.md)
           * [\_reclaimableOverflowDuring](protocol/api/contracts/jbpaymentterminalstore/read/\_reclaimableoverflowduring.md)
           * [\_overflowDuring](protocol/api/contracts/jbpaymentterminalstore/read/\_overflowduring.md)
-          * [\_totalOverflowDuring](protocol/api/contracts/jbpaymentterminalstore/read/\_totaloverflowduring.md)
+          * [\_currentTotalOverflowOf](protocol/api/contracts/jbpaymentterminalstore/read/_currenttotaloverflowof.md)
         * [Write](protocol/api/contracts/jbpaymentterminalstore/write/README.md)
           * [recordPaymentFrom](protocol/api/contracts/jbpaymentterminalstore/write/recordpaymentfrom.md)
           * [recordDistributionFor](protocol/api/contracts/jbpaymentterminalstore/write/recorddistributionfor.md)

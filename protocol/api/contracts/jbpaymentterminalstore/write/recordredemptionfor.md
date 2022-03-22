@@ -49,19 +49,7 @@ function recordRedemptionFor(
 
 #### Body
 
-1.  Make sure the holder has at least as many tokens as is being redeemed.
-
-    ```solidity
-    // The holder must have the specified number of the project's tokens.
-    if (tokenStore.balanceOf(_holder, _projectId) < _tokenCount) {
-      revert INSUFFICIENT_TOKENS();
-    }
-    ```
-
-    _External references:_
-
-    * [`balanceOf`](../../../jbtokenstore/read/balanceof.md)
-2.  Get a reference to the project's current funding cycle.
+1.  Get a reference to the project's current funding cycle.
 
     ```solidity
     // Get a reference to the project's current funding cycle.
@@ -70,45 +58,74 @@ function recordRedemptionFor(
 
     _External references:_
 
-    * [`currentOf`](../../../jbfundingcyclestore/read/currentof.md)
-3.  Make sure the project's funding cycle isn't configured to pause redemptions.
+    * [`currentOf`](../../jbfundingcyclestore/read/currentof.md)
+2.  Make sure the project's funding cycle isn't configured to pause redemptions.
 
     ```solidity
     // The current funding cycle must not be paused.
-    if (fundingCycle.redeemPaused()) {
-      revert FUNDING_CYCLE_REDEEM_PAUSED();
-    }
+    if (fundingCycle.redeemPaused()) revert FUNDING_CYCLE_REDEEM_PAUSED();
     ```
 
     _Libraries used:_
 
-    * [`JBFundingCycleMetadataResolver`](../../../../libraries/jbfundingcyclemetadataresolver.md)\
+    * [`JBFundingCycleMetadataResolver`](../../../libraries/jbfundingcyclemetadataresolver.md)\
       `.redeemPaused(...)`
-4.  Create a variable where a redemption delegate will be saved if there is one. This pay delegate will later have its method called if it exists.
+3.  Create a variable where a redemption delegate will be saved if there is one. This pay delegate will later have its method called if it exists.
 
     ```solidity
     // Save a reference to the delegate to use.
     IJBRedemptionDelegate _delegate;
     ```
+4.  Get a reference to the amount of overflow the project has. Either the project's total overflow or the overflow local to the msg.sender's balance will be used depending on how the project's funding cycle is configured. Store it in the reclaimed amount variable temporarily, if instead another variable were introduced it'd cause a "stack too deep" error.
+
+    ```solidity
+    // Get the amount of current overflow, temporarily store the value in the `reclaimAmount`. (Adding another var causes stack too deep)
+    // Use the local overflow if the funding cycle specifies that it should be used. Otherwise use the project's total overflow across all of its terminals.
+    reclaimAmount = fundingCycle.useTotalOverflowForRedemptions()
+      ? _currentTotalOverflowOf(_projectId, _balanceDecimals, _balanceCurrency)
+      : _overflowDuring(IJBPaymentTerminal(msg.sender), _projectId, fundingCycle, _balanceCurrency);
+    ```
+    _Libraries used:_
+
+    * [`JBFundingCycleMetadataResolver`](../../../../libraries/jbfundingcyclemetadataresolver.md)\
+      `.useTotalOverflowForRedemptions(...)`\
+
+    _Internal references:_
+
+    * [`_currentTotalOverflowOf`](../read/_currenttotaloverflowof.md)
+    * [`_overflowDuring`](../read/_overflowduring.md)
+
 5.  If the project's current funding cycle is configured to use a data source when making redemptions, ask the data source for the parameters that should be used throughout the rest of the function given provided contextual values in a [`JBRedeemParamsData`](../../../../data-structures/jbredeemparamsdata.md) structure. Otherwise default parameters are used.
 
     ```solidity
     // If the funding cycle has configured a data source, use it to derive a claim amount and memo.
     if (fundingCycle.useDataSourceForRedeem()) {
-      (reclaimAmount, memo, _delegate, _delegateMetadata) = fundingCycle.dataSource().redeemParams(
-        JBRedeemParamsData(
-          _holder,
-          _tokenCount,
-          _projectId,
-          fundingCycle.redemptionRate(),
-          fundingCycle.ballotRedemptionRate(),
-          _beneficiary,
-          _memo,
-          _delegateMetadata
-        )
+      // Create the params that'll be sent to the data source.
+      JBRedeemParamsData memory _data = JBRedeemParamsData(
+        IJBPaymentTerminal(msg.sender),
+        _holder,
+        _projectId,
+        _tokenCount,
+        _balanceDecimals,
+        _balanceCurrency,
+        reclaimAmount, // current overflow
+        fundingCycle.useTotalOverflowForRedemptions(),
+        fundingCycle.redemptionRate(),
+        fundingCycle.ballotRedemptionRate(),
+        _memo,
+        _metadata
       );
+      (reclaimAmount, memo, delegate) = fundingCycle.dataSource().redeemParams(_data);
     } else {
-      reclaimAmount = _reclaimableOverflowOf(_projectId, fundingCycle, _tokenCount);
+      // If there is no overflow, nothing is reclaimable.
+      reclaimAmount = reclaimAmount == 0
+        ? 0
+        : _reclaimableOverflowDuring(
+          _projectId,
+          fundingCycle,
+          _tokenCount,
+          reclaimAmount /* current overflow */
+        );
       memo = _memo;
     }
     ```
@@ -119,66 +136,33 @@ function recordRedemptionFor(
       `.useDataSourceForRedeem(...)`\
       `.dataSource(...)`\
       `.redemptionRate(...)`\
-      `.ballotRedemptionRate(...)`
+      `.ballotRedemptionRate(...)`\
+      `.useTotalOverflowForRedemptions(...)`
+
 6.  Make sure the amount being claimed is within the bounds of the project's balance.
 
     ```solidity
-    // The amount being claimed must be within the project's balance.
-    if (reclaimAmount > balanceOf[_projectId]) {
+    // The amount being reclaimed must be within the project's balance.
+    if (reclaimAmount > balanceOf[IJBPaymentTerminal(msg.sender)][_projectId])
       revert INADEQUATE_PAYMENT_TERMINAL_STORE_BALANCE();
-    }
-    ```
-7.  Make sure there is at least as much being claimed as expected.
-
-    ```solidity
-    // The amount being claimed must be at least as much as was expected.
-    if (reclaimAmount < _minReturnedWei) {
-      revert INADEQUATE_CLAIM_AMOUNT();
-    }
-    ```
-8.  Burn tokens if needed.
-
-    ```solidity
-    // Redeem the tokens, which burns them.
-    if (_tokenCount > 0)
-      directory.controllerOf(_projectId).burnTokensOf(_holder, _projectId, _tokenCount, '', false);
-    ```
-
-    _External references:_
-
-    * [`burnTokensOf`](../../../or-controllers/jbcontroller/write/burntokensof.md)
-9.  Decrement any claimed funds from the project's balance if needed.
-
-    ```solidity
-    // Remove the redeemed funds from the project's balance.
-    if (reclaimAmount > 0) balanceOf[_projectId] = balanceOf[_projectId] - reclaimAmount;
     ```
 
     _Internal references:_
 
     * [`balanceOf`](../properties/balanceof.md)
-10. If a redemption delegate was provided by the data source, call its `didRedeem` function with a [`JBDidRedeemData`](../../../../data-structures/jbdidredeemdata.md) payload including contextual information. When finished, emit a `DelegateDidRedeem` event with the relevant parameters.
+7.  Decrement any claimed funds from the project's balance if needed.
 
     ```solidity
-    // If a delegate was returned by the data source, issue a callback to it.
-    if (_delegate != IJBRedemptionDelegate(address(0))) {
-      JBDidRedeemData memory _data = JBDidRedeemData(
-        _holder,
-        _projectId,
-        _tokenCount,
-        reclaimAmount,
-        _beneficiary,
-        memo,
-        _delegateMetadata
-      );
-      _delegate.didRedeem(_data);
-      emit DelegateDidRedeem(_delegate, _data);
-    }
+    // Remove the reclaimed funds from the project's balance.
+    if (reclaimAmount > 0)
+      balanceOf[IJBPaymentTerminal(msg.sender)][_projectId] =
+        balanceOf[IJBPaymentTerminal(msg.sender)][_projectId] -
+        reclaimAmount;
     ```
 
-    _Event references:_
+    _Internal references:_
 
-    * [`DelegateDidRedeem`](../events/delegatedidredeem.md)
+    * [`balanceOf`](../properties/balanceof.md)
 {% endtab %}
 
 {% tab title="Code" %}
@@ -225,14 +209,17 @@ function recordRedemptionFor(
     string memory memo
   )
 {
-  // The holder must have the specified number of the project's tokens.
-  if (tokenStore.balanceOf(_holder, _projectId) < _tokenCount) revert INSUFFICIENT_TOKENS();
-
   // Get a reference to the project's current funding cycle.
   fundingCycle = fundingCycleStore.currentOf(_projectId);
 
   // The current funding cycle must not be paused.
   if (fundingCycle.redeemPaused()) revert FUNDING_CYCLE_REDEEM_PAUSED();
+
+  // Get the amount of current overflow, temporarily store the value in the `reclaimAmount`. (Adding another var causes stack too deep)
+  // Use the local overflow if the funding cycle specifies that it should be used. Otherwise use the project's total overflow across all of its terminals.
+  reclaimAmount = fundingCycle.useTotalOverflowForRedemptions()
+    ? _currentTotalOverflowOf(_projectId, _balanceDecimals, _balanceCurrency)
+    : _overflowDuring(IJBPaymentTerminal(msg.sender), _projectId, fundingCycle, _balanceCurrency);
 
   // If the funding cycle has configured a data source, use it to derive a claim amount and memo.
   if (fundingCycle.useDataSourceForRedeem()) {
@@ -240,32 +227,28 @@ function recordRedemptionFor(
     JBRedeemParamsData memory _data = JBRedeemParamsData(
       IJBPaymentTerminal(msg.sender),
       _holder,
+      _projectId,
       _tokenCount,
       _balanceDecimals,
-      _projectId,
+      _balanceCurrency,
+      reclaimAmount, // current overflow
+      fundingCycle.useTotalOverflowForRedemptions(),
       fundingCycle.redemptionRate(),
       fundingCycle.ballotRedemptionRate(),
-      _balanceCurrency,
       _memo,
       _metadata
     );
     (reclaimAmount, memo, delegate) = fundingCycle.dataSource().redeemParams(_data);
   } else {
-    // Get the amount of current overflow.
-    // Use the local overflow if the funding cycle specifies that it should be used. Otherwise use the project's total overflow across all of its terminals.
-    uint256 _currentOverflow = fundingCycle.useTotalOverflowForRedemptions()
-      ? _currentTotalOverflowOf(_projectId, _balanceDecimals, _balanceCurrency)
-      : _overflowDuring(
-        IJBPaymentTerminal(msg.sender),
+    // If there is no overflow, nothing is reclaimable.
+    reclaimAmount = reclaimAmount == 0
+      ? 0
+      : _reclaimableOverflowDuring(
         _projectId,
         fundingCycle,
-        _balanceCurrency
+        _tokenCount,
+        reclaimAmount /* current overflow */
       );
-
-    // If there is no overflow, nothing is reclaimable.
-    reclaimAmount = _currentOverflow == 0
-      ? 0
-      : _reclaimableOverflowDuring(_projectId, fundingCycle, _tokenCount, _currentOverflow);
     memo = _memo;
   }
 
@@ -285,16 +268,8 @@ function recordRedemptionFor(
 {% tab title="Errors" %}
 | String                                          | Description                                                                                  |
 | ----------------------------------------------- | -------------------------------------------------------------------------------------------- |
-| **`INSUFFICIENT_TOKENS`**                       | Thrown if holder doesn't have enough tokens in its balance to make the specified redemption. |
 | **`FUNDING_CYCLE_REDEEM_PAUSED`**               | Thrown if the project has configured its current funding cycle to pause redemptions.         |
 | **`INADEQUATE_PAYMENT_TERMINAL_STORE_BALANCE`** | Thrown if the project's balance isn't sufficient to fulfill the desired claim.               |
-| **`INADEQUATE_CLAIM_AMOUNT`**                   | Thrown if the claim amount is less than the minimum expected.                                |
-{% endtab %}
-
-{% tab title="Events" %}
-| Name                                                       | Data                                                                                                                                                                                                                                                      |
-| ---------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [**`DelegateDidRedeem`**](../events/delegatedidredeem.md)) | <ul><li><a href="../../../../interfaces/ijbredemptiondelegate.md"><code>JBRedemptionDelegate</code></a><code>delegate</code></li><li><a href="../../../../data-structures/jbdidredeemdata.md"><code>JBDidRedeemData</code></a><code>data</code></li></ul> |
 {% endtab %}
 
 {% tab title="Bug bounty" %}
