@@ -80,7 +80,7 @@ function recordRedemptionFor(
 
     ```solidity
     // Get the amount of current overflow, temporarily store the value in the `reclaimAmount`. (Adding another var causes stack too deep)
-    // Use the local overflow if the funding cycle specifies that it should be used. Otherwise use the project's total overflow across all of its terminals.
+    // Use the local overflow if the funding cycle specifies that it should be used. Otherwise, use the project's total overflow across all of its terminals.
     reclaimAmount = fundingCycle.useTotalOverflowForRedemptions()
       ? _currentTotalOverflowOf(_projectId, _balanceDecimals, _balanceCurrency)
       : _overflowDuring(IJBPaymentTerminal(msg.sender), _projectId, fundingCycle, _balanceCurrency);
@@ -216,7 +216,7 @@ function recordRedemptionFor(
   if (fundingCycle.redeemPaused()) revert FUNDING_CYCLE_REDEEM_PAUSED();
 
   // Get the amount of current overflow, temporarily store the value in the `reclaimAmount`. (Adding another var causes stack too deep)
-  // Use the local overflow if the funding cycle specifies that it should be used. Otherwise use the project's total overflow across all of its terminals.
+  // Use the local overflow if the funding cycle specifies that it should be used. Otherwise, use the project's total overflow across all of its terminals.
   reclaimAmount = fundingCycle.useTotalOverflowForRedemptions()
     ? _currentTotalOverflowOf(_projectId, _balanceDecimals, _balanceCurrency)
     : _overflowDuring(IJBPaymentTerminal(msg.sender), _projectId, fundingCycle, _balanceCurrency);
