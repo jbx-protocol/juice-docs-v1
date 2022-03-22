@@ -4,27 +4,27 @@ Contract: [`JBPaymentTerminalStore`](../)​‌
 
 {% tabs %}
 {% tab title="Step by step" %}
-**Records the migration of this terminal to another.**
+**Records the migration of funds from this store.**
 
-_Only the associated payment terminal can record an added balance._
+_The msg.sender must be an [`IJBPaymentTerminal`](../../../interfaces/ijbpaymentterminalstore.md)._
 
 #### Definition
 
 ```solidity
-function recordAddedBalanceFor(uint256 _projectId, uint256 _amount)
+function recordMigration(uint256 _projectId)
   external
-  onlyAssociatedPaymentTerminal
-  returns (JBFundingCycle memory fundingCycle) { ... }
+  override
+  nonReentrant
+  returns (uint256 balance) { ... }
 ```
 
 * Arguments:
   * `_projectId` is the ID of the project being migrated.
-* Through the [`onlyAssociatedPaymentTerminal`](../modifiers/onlyassociatedpaymentterminal.md) modifier, the function is only accessible by the terminal that claimed this store.
-* The function returns the project's current balance.
+* The function returns the project's migrated balance, as a fixed point number with the same amount of decimals as its relative terminal.
 
 #### Body
 
-1.  Get a reference to the project's current funding cycle that should be returned.
+1.  Get a reference to the project's current funding cycle.
 
     ```solidity
     // Get a reference to the project's current funding cycle.
@@ -33,25 +33,23 @@ function recordAddedBalanceFor(uint256 _projectId, uint256 _amount)
 
     _External references:_
 
-    * [`currentOf`](../../../jbfundingcyclestore/read/currentof.md)
+    * [`currentOf`](../../jbfundingcyclestore/read/currentof.md)
 2.  Make sure that migrating terminals is allowed by the current funding cycle.
 
     ```solidity
     // Migration must be allowed
-    if (!_fundingCycle.terminalMigrationAllowed()) {
-      revert PAYMENT_TERMINAL_MIGRATION_NOT_ALLOWED();
-    }
+    if (!_fundingCycle.terminalMigrationAllowed()) revert PAYMENT_TERMINAL_MIGRATION_NOT_ALLOWED();
     ```
 
     _Libraries used:_
 
-    * [`JBFundingCycleMetadataResolver`](../../../../libraries/jbfundingcyclemetadataresolver.md)\
+    * [`JBFundingCycleMetadataResolver`](../../../libraries/jbfundingcyclemetadataresolver.md)\
       `.terminalMigrationAllowed(...)`
 3.  Get a reference to the project's current balance. Set this to the value that the function will return.
 
     ```solidity
     // Return the current balance.
-    balance = balanceOf[_projectId];
+    balance = balanceOf[IJBPaymentTerminal(msg.sender)][_projectId];
     ```
 
     _Internal references:_
@@ -61,7 +59,7 @@ function recordAddedBalanceFor(uint256 _projectId, uint256 _amount)
 
     ```solidity
     // Set the balance to 0.
-    balanceOf[_projectId] = 0;
+    balanceOf[IJBPaymentTerminal(msg.sender)][_projectId] = 0;
     ```
 
     _Internal references:_
@@ -71,32 +69,34 @@ function recordAddedBalanceFor(uint256 _projectId, uint256 _amount)
 
 {% tab title="Code" %}
 ```solidity
-/** 
+/**
   @notice
-  Records the migration of this terminal to another.
+  Records the migration of funds from this store.
+
+  @dev
+  The msg.sender must be an IJBPaymentTerminal. 
 
   @param _projectId The ID of the project being migrated.
 
-  @return balance The project's current balance.
+  @return balance The project's migrated balance, as a fixed point number with the same amount of decimals as its relative terminal.
 */
 function recordMigration(uint256 _projectId)
   external
-  onlyAssociatedPaymentTerminal
+  override
+  nonReentrant
   returns (uint256 balance)
 {
   // Get a reference to the project's current funding cycle.
   JBFundingCycle memory _fundingCycle = fundingCycleStore.currentOf(_projectId);
 
   // Migration must be allowed
-  if (!_fundingCycle.terminalMigrationAllowed()) {
-    revert PAYMENT_TERMINAL_MIGRATION_NOT_ALLOWED();
-  }
+  if (!_fundingCycle.terminalMigrationAllowed()) revert PAYMENT_TERMINAL_MIGRATION_NOT_ALLOWED();
 
   // Return the current balance.
-  balance = balanceOf[_projectId];
+  balance = balanceOf[IJBPaymentTerminal(msg.sender)][_projectId];
 
   // Set the balance to 0.
-  balanceOf[_projectId] = 0;
+  balanceOf[IJBPaymentTerminal(msg.sender)][_projectId] = 0;
 }
 ```
 {% endtab %}
@@ -104,7 +104,7 @@ function recordMigration(uint256 _projectId)
 {% tab title="Errors" %}
 | String                  | Description                                                                  |
 | ----------------------- | ---------------------------------------------------------------------------- |
-| **`0x4a: NOT_ALLOWED`** | Thrown if the project's current funding cycle disallows terminal migrations. |
+| **`PAYMENT_TERMINAL_MIGRATION_NOT_ALLOWED`** | Thrown if the project's current funding cycle disallows terminal migrations. |
 {% endtab %}
 
 {% tab title="Bug bounty" %}

@@ -6,40 +6,30 @@ Contract: [`JBPaymentTerminalStore`](../)​‌
 {% tab title="Step by step" %}
 **Records newly added funds for the project.**
 
-_Only the associated payment terminal can record an added balance._
-
+_The msg.sender must be an [`IJBPaymentTerminal`](../../../interfaces/ijbpaymentterminal.md)._
 #### Definition
 
 ```solidity
 function recordAddedBalanceFor(uint256 _projectId, uint256 _amount)
   external
-  onlyAssociatedPaymentTerminal
-  returns (JBFundingCycle memory fundingCycle) { ... }
+  override
+  nonReentrant { ... }
 ```
 
 * Arguments:
   * `_projectId` is the ID of the project to which the funds being added belong.
-  * `_amount` is the amount added, in wei.
-* Through the [`onlyAssociatedPaymentTerminal`](../modifiers/onlyassociatedpaymentterminal.md) modifier, the function is only accessible by the terminal that claimed this store.
-* The function returns the current funding cycle for the project.
+  * `_amount` is the amount of temrinal tokens added, as a fixed point number with the same amount of decimals as its relative terminal.
+* The function doesn't return anything.
 
 #### Body
 
-1.  Get a reference to the project's current funding cycle that should be returned.
-
-    ```solidity
-    // Get a reference to the project's current funding cycle.
-    fundingCycle = fundingCycleStore.currentOf(_projectId);
-    ```
-
-    _External references:_
-
-    * [`currentOf`](../../../jbfundingcyclestore/read/currentof.md)
-2.  Increment the project's balance by the specified amount.
+1.  Increment the project's balance by the specified amount.
 
     ```solidity
     // Increment the balance.
-    balanceOf[_projectId] = balanceOf[_projectId] + _amount;
+    balanceOf[IJBPaymentTerminal(msg.sender)][_projectId] =
+      balanceOf[IJBPaymentTerminal(msg.sender)][_projectId] +
+      _amount;
     ```
 
     _Internal references:_
@@ -54,23 +44,20 @@ function recordAddedBalanceFor(uint256 _projectId, uint256 _amount)
   Records newly added funds for the project.
 
   @dev
-  Only the associated payment terminal can record an added balance.
+  The msg.sender must be an IJBPaymentTerminal. 
 
   @param _projectId The ID of the project to which the funds being added belong.
-  @param _amount The amount added, in wei.
-
-  @return fundingCycle The current funding cycle for the project.
+  @param _amount The amount of temrinal tokens added, as a fixed point number with the same amount of decimals as its relative terminal.
 */
 function recordAddedBalanceFor(uint256 _projectId, uint256 _amount)
   external
-  onlyAssociatedPaymentTerminal
-  returns (JBFundingCycle memory fundingCycle)
+  override
+  nonReentrant
 {
-  // Get a reference to the project's current funding cycle.
-  fundingCycle = fundingCycleStore.currentOf(_projectId);
-
   // Increment the balance.
-  balanceOf[_projectId] = balanceOf[_projectId] + _amount;
+  balanceOf[IJBPaymentTerminal(msg.sender)][_projectId] =
+    balanceOf[IJBPaymentTerminal(msg.sender)][_projectId] +
+    _amount;
 }
 ```
 {% endtab %}
