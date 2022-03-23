@@ -14,7 +14,7 @@ event UseAllowance(
   address beneficiary,
   uint256 amount,
   uint256 distributedAmount,
-  uint256 feeAmount,
+  uint256 fee,
   string memo,
   address caller
 );
@@ -26,6 +26,6 @@ event UseAllowance(
 * `beneficiary` is the address whose received the allowance.
 * `amount` is the amount of allowance that was used in terms of the funding cycle's currency.
 * `distributedAmount` is the total amount of tokens that were distributed from the project's balance.
-* `feeAmount` is the amount of tokens that were taken from the used allowance as fees.
+* `fee` is the amount of tokens that were taken from the used allowance as fees.
 * `memo` is a note that was attached.
 * `caller` is the address that issued the transaction within which the event was emitted.
