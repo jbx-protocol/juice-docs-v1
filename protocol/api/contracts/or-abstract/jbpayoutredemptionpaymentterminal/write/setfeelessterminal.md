@@ -74,7 +74,7 @@ function setFeelessTerminal(IJBPaymentTerminal _terminal, bool _flag)
 {% tab title="Events" %}
 | Name                                          | Data                                                                                                                                                    |
 | --------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [**`SetFeelessTerminal`**](../events/setfeelessterminal.md) | <ul><li><code>[`IJBPaymentTerminal`](../../../interfaces/ijbpaymentterminal.md)indexed terminal</code></li><li><code>bool indexed flag</code></li><li><code>address caller</code></li></ul> |
+| [**`SetFeelessTerminal`**](../events/setfeelessterminal.md) | <ul><li><code>[`IJBPaymentTerminal`](../../../../interfaces/ijbpaymentterminal.md)indexed terminal</code></li><li><code>bool indexed flag</code></li><li><code>address caller</code></li></ul> |
 {% endtab %}
 
 {% tab title="Bug bounty" %}

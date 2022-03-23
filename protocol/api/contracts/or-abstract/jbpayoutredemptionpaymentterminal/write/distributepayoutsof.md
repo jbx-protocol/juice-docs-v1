@@ -75,7 +75,7 @@ function distributePayoutsOf(
 
     ```solidity
     // Define variables that will be needed outside the scoped section below.
-    uint256 _feeAmount;
+    uint256 _fee;
     uint256 _leftoverDistributionAmount;
 
     // Scoped section prevents stack too deep. `_feeDiscount` and `_feeEligibleDistributionAmount` only used within scope.
@@ -136,7 +136,7 @@ function distributePayoutsOf(
 
         ```solidity
         // Take the fee.
-        _feeAmount = _feeDiscount == JBConstants.MAX_FEE_DISCOUNT ||
+        _fee = _feeDiscount == JBConstants.MAX_FEE_DISCOUNT ||
           _feeEligibleDistributionAmount == 0
           ? 0
           : _takeFeeFrom(
@@ -165,9 +165,13 @@ function distributePayoutsOf(
           _transferFrom(
             address(this),
             _projectOwner,
-            _leftoverDistributionAmount - _getFeeAmount(_leftoverDistributionAmount, _feeDiscount)
+            _leftoverDistributionAmount - _feeAmount(_leftoverDistributionAmount, _feeDiscount)
           );
         ```
+
+        _Internal references:_
+
+        * [`_feeAmount`](./_feeamount.md)
 
         _Virtual references:_
 
@@ -183,7 +187,7 @@ function distributePayoutsOf(
       _projectOwner,
       _amount,
       _distributedAmount,
-      _feeAmount,
+      _fee,
       _leftoverDistributionAmount,
       _memo,
       msg.sender
@@ -239,7 +243,7 @@ function distributePayoutsOf(
   address payable _projectOwner = payable(projects.ownerOf(_projectId));
 
   // Define variables that will be needed outside the scoped section below.
-  uint256 _feeAmount;
+  uint256 _fee;
   uint256 _leftoverDistributionAmount;
 
   // Scoped section prevents stack too deep. `_feeDiscount` and `_feeEligibleDistributionAmount` only used within scope.
@@ -266,7 +270,7 @@ function distributePayoutsOf(
     _feeEligibleDistributionAmount += _leftoverDistributionAmount;
 
     // Take the fee.
-    _feeAmount = _feeDiscount == JBConstants.MAX_FEE_DISCOUNT ||
+    _fee = _feeDiscount == JBConstants.MAX_FEE_DISCOUNT ||
       _feeEligibleDistributionAmount == 0
       ? 0
       : _takeFeeFrom(
@@ -282,7 +286,7 @@ function distributePayoutsOf(
       _transferFrom(
         address(this),
         _projectOwner,
-        _leftoverDistributionAmount - _getFeeAmount(_leftoverDistributionAmount, _feeDiscount)
+        _leftoverDistributionAmount - _feeAmount(_leftoverDistributionAmount, _feeDiscount)
       );
   }
 
@@ -293,7 +297,7 @@ function distributePayoutsOf(
     _projectOwner,
     _amount,
     _distributedAmount,
-    _feeAmount,
+    _fee,
     _leftoverDistributionAmount,
     _memo,
     msg.sender

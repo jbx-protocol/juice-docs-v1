@@ -2,8 +2,6 @@
 
 Contract: [`JBPayoutRedemptionPaymentTerminal`](../)​‌
 
-Interface: [`IJBPaymentTerminal`](../../../../interfaces/ijbtokenstore.md)
-
 {% tabs %}
 {% tab title="Step by step" %}
 **Receives funds belonging to the specified project.**
@@ -25,7 +23,6 @@ function addToBalanceOf(
 * The function can be accessed externally by anyone.
 * Through the [`isTerminalOf`](../modifiers/isterminalof.md) modifier, this transaction reverts if this terminal is not one of the project's terminals.
 * The function accepts ETH. The transaction reverts if receives ETH but the terminal's token type isn't ETH.
-* The resulting function overrides a function definition from the [`IJBPaymentTerminal`](../../../../interfaces/ijbpaymentterminal.md) interface.
 * The function doesn't return anything.
 
 #### Body

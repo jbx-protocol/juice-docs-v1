@@ -44,16 +44,35 @@ function addToBalanceOf(
     // If the terminal's token is ETH, override `_amount` with msg.value.
     else _amount = msg.value;
     ```
-2.  Forward the parameters to an internal version of the function.
+2.  Record the added funds.
 
     ```solidity
     // Record the added funds.
-    _addToBalance(_amount, _projectId, _memo);
+    store.recordAddedBalanceFor(_projectId, _amount);
+    ```
+
+    _External references:_
+
+    * [`recordAddedBalanceFor`](../../../jbpaymentterminalstore/write/recordaddedbalancefor.md)
+3.  Refund any held fees. This is useful to allow a project to distribute funds from the protocol and subsequently add them back without paying eventually having to pay double fees.
+
+    ```solidity
+    // Refund any held fees to make sure the project doesn't pay double for funds going in and out of the protocol.
+    _refundHeldFees(_projectId, _amount);
     ```
 
     _Internal references:_
 
-    * [`_addToBalance`](_addtobalance.md)
+    * [`_refundHeldFees`](\_refundheldfees.md)
+4.  Emit a `AddToBalance` event with the relevant parameters.
+
+    ```solidity
+    emit AddToBalance(_projectId, _amount, _memo, msg.sender);
+    ```
+
+    _Event references:_
+
+    * [`AddToBalance`](../events/addtobalance.md)
 {% endtab %}
 
 {% tab title="Code" %}
@@ -82,7 +101,13 @@ function addToBalanceOf(
   // If the terminal's token is ETH, override `_amount` with msg.value.
   else _amount = msg.value;
 
-  _addToBalance(_amount, _projectId, _memo);
+  // Record the added funds.
+  store.recordAddedBalanceFor(_projectId, _amount);
+
+  // Refund any held fees to make sure the project doesn't pay double for funds going in and out of the protocol.
+  _refundHeldFees(_projectId, _amount);
+
+  emit AddToBalance(_projectId, _amount, _memo, msg.sender);
 }
 ```
 {% endtab %}

@@ -13,41 +13,44 @@ function _distributeToPayoutSplitsOf(
   uint256 _projectId,
   JBFundingCycle memory _fundingCycle,
   uint256 _amount,
-  string memory _memo
-) private returns (uint256 leftoverAmount) { ... }
+  uint256 _feeDiscount
+) private returns (uint256 leftoverAmount, uint256 feeEligibleDistributionAmount) { ... }
 ```
 
 * Arguments:
   * `_projectId` is the ID of the project for which payout splits are being distributed.
   * `_fundingCycle` is the [`JBFundingCycle`](../../../../data-structures/jbfundingcycle.md) during which the distribution is being made.
   * `_amount` is the total amount being distributed.
-  * `_memo` is a memo to pass along to the emitted events.
+  * `_feeDiscount` is the amount of discount to apply to the fee, out of the MAX_FEE.
 * The function is private to this contract.
-* The function returns the leftover amount if the splits don't add up to 100%.
+* The function returns: the leftover amount if the splits don't add up to 100%
+* The function returns:
+  * `leftoverAmount` is leftover amount if the splits don't add up to 100%.
+  * `feeEligibleDistributionAmount` is the amount distributed to splits from which fees can be taken.
 
 #### Body
 
-1.  Save the passed in `_amount` as the `leftoverAmount` that will be returned. The subsequent routine will decrement the leftover amount as splits are settled.
+1.  Save the passed in amount as the leftover amount that will be returned. The subsequent routine will decrement the leftover amount as splits are settled.
 
     ```solidity
     // Set the leftover amount to the initial amount.
     leftoverAmount = _amount;
     ```
-2.  Get a reference to reserved token splits for the current funding cycle configuration of the project.
+
+2.  Get a reference to payout splits for the current funding cycle configuration of the project.
 
     ```solidity
     // Get a reference to the project's payout splits.
     JBSplit[] memory _splits = splitsStore.splitsOf(
       _projectId,
       _fundingCycle.configuration,
-      JBSplitsGroups.ETH_PAYOUT
+      payoutSplitsGroup
     );
     ```
 
-    _Libraries used:_
+    _Internal references:_
 
-    * [`JBSplitsGroups`](../../../../libraries/jbsplitsgroups.md)
-      * `.ETH_PAYOUT`
+    * [`payoutSplitsGroup`](../properties/payoutsplitsgroup.md)
 
     _External references:_
 
@@ -58,144 +61,193 @@ function _distributeToPayoutSplitsOf(
     //Transfer between all splits.
     for (uint256 _i = 0; _i < _splits.length; _i++) { ... }
     ```
-4.  Get a reference to the current split being iterated on.
 
-    ```solidity
-    // Get a reference to the mod being iterated on.
-    JBSplit memory _split = _splits[_i];
-    ```
-5.  Get a reference to the payout amount that should be sent to the current split. This amount is the total amount multiplied by the percentage of the split, which is a number out of 10000000.
+    1.  Get a reference to the current split being iterated on.
 
-    ```solidity
-    // The amount to send towards mods.
-    uint256 _payoutAmount = PRBMath.mulDiv(
-      _amount,
-      _split.percent,
-      JBConstants.SPLITS_TOTAL_PERCENT
-    );
-    ```
+        ```solidity
+        // Get a reference to the mod being iterated on.
+        JBSplit memory _split = _splits[_i];
+        ```
+    2.  Get a reference to the payout amount that should be sent to the current split. This amount is the total amount multiplied by the percentage of the split, which is a number out of 10000000.
 
-    _Libraries used:_
-
-    * [`PRBMath`](https://github.com/hifi-finance/prb-math/blob/main/contracts/PRBMath.sol)
-      * `.mulDiv(...)`
-    * [`JBConstants`](../../../../libraries/jbconstants.md)
-      * `.SPLITS_TOTAL_PERCENT`
-6.  If there's at least some funds to send to the payout, determine where they should go. If the split has an `allocator` set, send the funds to its `allocate` function, passing along any relevant params. Otherwise if a `projectId` is specified in the split, send the payout to that project and use the split's `beneficiary` as the address that should receive the project's tokens in return. Otherwise, send the funds directly to the `beneficiary` address from the split. Decrement the `leftoverAmount` once the split is settled.
-
-    ```solidity
-    if (_payoutAmount > 0) {
-      // Transfer ETH to the mod.
-      // If there's an allocator set, transfer to its `allocate` function.
-      if (_split.allocator != IJBSplitAllocator(address(0))) {
-        _split.allocator.allocate{value: _payoutAmount}(
-          _payoutAmount,
-          _projectId,
-          JBSplitsGroups.ETH_PAYOUT,
-          _split
+        ```solidity
+        // The amount to send towards mods.
+        uint256 _payoutAmount = PRBMath.mulDiv(
+          _amount,
+          _split.percent,
+          JBConstants.SPLITS_TOTAL_PERCENT
         );
-        // Otherwise, if a project is specified, make a payment to it.
-      } else if (_split.projectId != 0) {
-        // Get a reference to the Juicebox terminal being used.
-        IJBPaymentTerminal _terminal = directory.primaryTerminalOf(_split.projectId, token);
+        ```
 
-        // The project must have a terminal to send funds to.
-        if (_terminal == IJBPaymentTerminal(address(0))) {
-          revert TERMINAL_IN_SPLIT_ZERO_ADDRESS();
+        _Libraries used:_
+
+        * [`PRBMath`](https://github.com/hifi-finance/prb-math/blob/main/contracts/PRBMath.sol)
+          * `.mulDiv(...)`
+        * [`JBConstants`](../../../../libraries/jbconstants.md)
+          * `.SPLITS_TOTAL_PERCENT`
+    3.  If there's at least some funds to send to the payout, determine where they should go, making sure to only debit a fee if the funds are leaving this contract and not going to a feeless terminal. If the split has an `allocator` set, send the funds to its `allocate` function, passing along any relevant params. Otherwise if a `projectId` is specified in the split, send the payout to that project and use the split's `beneficiary` as the address that should receive the project's tokens in return. Otherwise, send the funds directly to the `beneficiary` address from the split if one was provided. If the split didn't give any routing information, send the amount to the messag sender. Decrement the `leftoverAmount` once the split is settled.
+
+        ```solidity
+        if (_payoutAmount > 0) {
+          // Transfer tokens to the mod.
+          // If there's an allocator set, transfer to its `allocate` function.
+          if (_split.allocator != IJBSplitAllocator(address(0))) {
+            _netPayoutAmount = _feeDiscount == JBConstants.MAX_FEE_DISCOUNT
+              ? _payoutAmount
+              : _payoutAmount - _feeAmount(_payoutAmount, _feeDiscount);
+
+            // This distribution is eligible for a fee since the funds are leaving the ecosystem.
+            feeEligibleDistributionAmount += _payoutAmount;
+
+            // Trigger any inherited pre-transfer logic.
+            _beforeTransferTo(address(_split.allocator), _netPayoutAmount);
+
+            // If this terminal's token is ETH, send it in msg.value.
+            uint256 _payableValue = token == JBTokens.ETH ? _netPayoutAmount : 0;
+
+            _split.allocator.allocate{value: _payableValue}(
+              _netPayoutAmount,
+              _projectId,
+              payoutSplitsGroup,
+              _split
+            );
+            // Otherwise, if a project is specified, make a payment to it.
+          } else if (_split.projectId != 0) {
+            // Get a reference to the Juicebox terminal being used.
+            IJBPaymentTerminal _terminal = directory.primaryTerminalOf(_split.projectId, token);
+
+            // The project must have a terminal to send funds to.
+            if (_terminal == IJBPaymentTerminal(address(0))) revert TERMINAL_IN_SPLIT_ZERO_ADDRESS();
+
+            // Save gas if this contract is being used as the terminal.
+            if (_terminal == this) {
+              // This distribution does not incur a fee.
+              _netPayoutAmount = _payoutAmount;
+
+              _pay(
+                _netPayoutAmount,
+                address(this),
+                _split.projectId,
+                _split.beneficiary,
+                0,
+                _split.preferClaimed,
+                '',
+                bytes('')
+              );
+            } else {
+              // If the terminal is set as feeless, this distribution is not eligible for a fee.
+              if (isFeelessTerminal[_terminal])
+                _netPayoutAmount = _payoutAmount;
+                // This distribution is eligible for a fee since the funds are leaving this contract and the terminal isn't listed as feeless.
+              else {
+                _netPayoutAmount = _feeDiscount == JBConstants.MAX_FEE_DISCOUNT
+                  ? _payoutAmount
+                  : _payoutAmount - _feeAmount(_payoutAmount, _feeDiscount);
+
+                feeEligibleDistributionAmount += _payoutAmount;
+              }
+
+              // Trigger any inherited pre-transfer logic.
+              _beforeTransferTo(address(_terminal), _netPayoutAmount);
+
+              // Get a reference to the destination terminal's decimals.
+              uint256 _decimals = _terminal.decimals();
+
+              // If the destination terminal uses a different number of decimals than this terminal, adjust the sent amount accordingly.
+              if (_decimals != decimals)
+                _amount = JBFixedPointNumber.adjustDecimals(_amount, decimals, _decimals);
+
+              // If this terminal's token is ETH, send it in msg.value.
+              uint256 _payableValue = token == JBTokens.ETH ? _netPayoutAmount : 0;
+
+              _terminal.pay{value: _payableValue}(
+                _netPayoutAmount,
+                _split.projectId,
+                _split.beneficiary,
+                0,
+                _split.preferClaimed,
+                '',
+                bytes('')
+              );
+            }
+          } else {
+            _netPayoutAmount = _feeDiscount == JBConstants.MAX_FEE_DISCOUNT
+              ? _payoutAmount
+              : _payoutAmount - _feeAmount(_payoutAmount, _feeDiscount);
+
+            // This distribution is eligible for a fee since the funds are leaving the ecosystem.
+            feeEligibleDistributionAmount += _payoutAmount;
+
+            // If there's a beneficiary, send the funds directly to the beneficiary. Otherwise send to the msg.sender
+            _transferFrom(
+              address(this),
+              _split.beneficiary != address(0) ? _split.beneficiary : payable(msg.sender),
+              _netPayoutAmount
+            );
+          }
+
+          // Subtract from the amount to be sent to the beneficiary.
+          leftoverAmount = leftoverAmount - _payoutAmount;
         }
+        ```
 
-        // Save gas if this contract is being used as the terminal.
-        if (_terminal == this) {
-          _pay(
-            _payoutAmount,
-            address(this),
-            _split.projectId,
-            _split.beneficiary,
-            0,
-            _split.preferClaimed,
-            '',
-            bytes('')
-          );
-        } else {
-          _terminal.pay{value: _payoutAmount}(
-            _split.projectId,
-            _split.beneficiary,
-            0,
-            _split.preferClaimed,
-            '',
-            bytes('')
-          );
-        }
-      } else {
-        // Otherwise, send the funds directly to the beneficiary.
-        Address.sendValue(_split.beneficiary, _payoutAmount);
-      }
+        _Libraries used:_
 
-      // Subtract from the amount to be sent to the beneficiary.
-      leftoverAmount = leftoverAmount - _payoutAmount;
-    }
-    ```
+        * [`JBConstants`](../../../../libraries/jbconstants.md)
+          * `.MAX_FEE_DISCOUNT(...)`
+        * [`JBTokens`](../../../../libraries/jbtokens.md)
+          * `.ETH`
 
-    _Libraries used:_
+        _Internal references:_
 
-    * [`JBSplitsGroups`](../../../../libraries/jbsplitsgroups.md)
-      * `.ETH_PAYOUT`
-    * [`Address`](https://docs.openzeppelin.com/contracts/2.x/api/utils#Address)
-      * `.sendValue(...)`
+        * [`isFeelessTerminal`](../properties/isfeelessterminal.md)
+        * [`pay`](pay.md)
+        * [`_pay`](\_pay.md)
+        * [`_feeAmount`](_feeamount.md)
+        * [`_transferFrom`](_transferfrom.md)
 
-    _Internal references:_
+        _External references:_
 
-    * [`pay`](pay.md)
-    * [`_pay`](\_pay.md)
+        * [`allocate`](../../../../interfaces/ijbsplitallocator.md)
+        * [`primaryTerminalOf`](../../../jbdirectory/read/primaryterminalof.md)
+    3.  Emit a `DistributeToPayoutSplit` event for the split being iterated on with the relevant parameters.
 
-    _External references:_
+        ```solidity
+        emit DistributeToPayoutSplit(
+          _fundingCycle.configuration,
+          _fundingCycle.number,
+          _projectId,
+          _split,
+          _netPayoutAmount,
+          msg.sender
+        );
+        ```
 
-    * [`primaryTerminalOf`](../../../jbdirectory/read/primaryterminalof.md)
-7.  Refund any held fees. This is useful to allow a project to withdraw funds from the protocol and subsequently add them back without paying eventually having to pay double fees.
+        _Event references:_
 
-    ```solidity
-    // Refund any held fees to make sure the project doesn't pay double for funds going in and out of the protocol.
-    _refundHeldFees(_projectId, msg.value, _fundingCycle.fee);
-    ```
-
-    _Internal references:_
-
-    * [`_refundHeldFees`](\_refundheldfees.md)
-8.  Emit a `DistributeToPayoutSplit` event for the split being iterated on with the relevant parameters.
-
-    ```solidity
-    emit DistributeToPayoutSplit(
-      _fundingCycle.configuration,
-      _fundingCycle.number,
-      _projectId,
-      _split,
-      _payoutAmount,
-      msg.sender
-    );
-    ```
-
-    _Event references:_
-
-    * [`DistributeToPayoutSplit`](../events/distributetopayoutsplit.md)
+        * [`DistributeToPayoutSplit`](../events/distributetopayoutsplit.md)
 {% endtab %}
 
 {% tab title="Code" %}
 ```solidity
-/** 
+/**
   @notice
   Pays out splits for a project's funding cycle configuration.
-  
+
   @param _projectId The ID of the project for which payout splits are being distributed.
   @param _fundingCycle The funding cycle during which the distribution is being made.
-  @param _amount The total amount being distributed.
+  @param _amount The total amount being distributed, as a fixed point number with the same number of decimals as this terminal.
+  @param _feeDiscount The amount of discount to apply to the fee, out of the MAX_FEE.
 
   @return leftoverAmount If the leftover amount if the splits don't add up to 100%.
+  @return feeEligibleDistributionAmount The total amount of distributions that are eligible to have fees taken from.
 */
 function _distributeToPayoutSplitsOf(
   uint256 _projectId,
   JBFundingCycle memory _fundingCycle,
-  uint256 _amount
-) private returns (uint256 leftoverAmount) {
+  uint256 _amount,
+  uint256 _feeDiscount
+) private returns (uint256 leftoverAmount, uint256 feeEligibleDistributionAmount) {
   // Set the leftover amount to the initial amount.
   leftoverAmount = _amount;
 
@@ -203,29 +255,44 @@ function _distributeToPayoutSplitsOf(
   JBSplit[] memory _splits = splitsStore.splitsOf(
     _projectId,
     _fundingCycle.configuration,
-    JBSplitsGroups.ETH_PAYOUT
+    payoutSplitsGroup
   );
 
   //Transfer between all splits.
   for (uint256 _i = 0; _i < _splits.length; _i++) {
-    // Get a reference to the mod being iterated on.
+    // Get a reference to the split being iterated on.
     JBSplit memory _split = _splits[_i];
 
-    // The amount to send towards mods.
+    // The amount to send towards the split.
     uint256 _payoutAmount = PRBMath.mulDiv(
       _amount,
       _split.percent,
       JBConstants.SPLITS_TOTAL_PERCENT
     );
 
+    // The payout amount substracting any applicable incurred fees.
+    uint256 _netPayoutAmount;
+
     if (_payoutAmount > 0) {
-      // Transfer ETH to the mod.
+      // Transfer tokens to the mod.
       // If there's an allocator set, transfer to its `allocate` function.
       if (_split.allocator != IJBSplitAllocator(address(0))) {
-        _split.allocator.allocate{value: _payoutAmount}(
-          _payoutAmount,
+        _netPayoutAmount = _feeDiscount == JBConstants.MAX_FEE_DISCOUNT
+          ? _payoutAmount
+          : _payoutAmount - _feeAmount(_payoutAmount, _feeDiscount);
+
+        // This distribution is eligible for a fee since the funds are leaving the ecosystem.
+        feeEligibleDistributionAmount += _payoutAmount;
+
+        _beforeTransferTo(address(_split.allocator), _netPayoutAmount);
+
+        // If this terminal's token is ETH, send it in msg.value.
+        uint256 _payableValue = token == JBTokens.ETH ? _netPayoutAmount : 0;
+
+        _split.allocator.allocate{value: _payableValue}(
+          _netPayoutAmount,
           _projectId,
-          JBSplitsGroups.ETH_PAYOUT,
+          payoutSplitsGroup,
           _split
         );
         // Otherwise, if a project is specified, make a payment to it.
@@ -234,14 +301,15 @@ function _distributeToPayoutSplitsOf(
         IJBPaymentTerminal _terminal = directory.primaryTerminalOf(_split.projectId, token);
 
         // The project must have a terminal to send funds to.
-        if (_terminal == IJBPaymentTerminal(address(0))) {
-          revert TERMINAL_IN_SPLIT_ZERO_ADDRESS();
-        }
+        if (_terminal == IJBPaymentTerminal(address(0))) revert TERMINAL_IN_SPLIT_ZERO_ADDRESS();
 
         // Save gas if this contract is being used as the terminal.
         if (_terminal == this) {
+          // This distribution does not incur a fee.
+          _netPayoutAmount = _payoutAmount;
+
           _pay(
-            _payoutAmount,
+            _netPayoutAmount,
             address(this),
             _split.projectId,
             _split.beneficiary,
@@ -251,7 +319,33 @@ function _distributeToPayoutSplitsOf(
             bytes('')
           );
         } else {
-          _terminal.pay{value: _payoutAmount}(
+          // If the terminal is set as feeless, this distribution is not eligible for a fee.
+          if (isFeelessTerminal[_terminal])
+            _netPayoutAmount = _payoutAmount;
+            // This distribution is eligible for a fee since the funds are leaving this contract and the terminal isn't listed as feeless.
+          else {
+            _netPayoutAmount = _feeDiscount == JBConstants.MAX_FEE_DISCOUNT
+              ? _payoutAmount
+              : _payoutAmount - _feeAmount(_payoutAmount, _feeDiscount);
+
+            feeEligibleDistributionAmount += _payoutAmount;
+          }
+
+          // Trigger any inherited pre-transfer logic.
+          _beforeTransferTo(address(_terminal), _netPayoutAmount);
+
+          // Get a reference to the destination terminal's decimals.
+          uint256 _decimals = _terminal.decimals();
+
+          // If the destination terminal uses a different number of decimals than this terminal, adjust the sent amount accordingly.
+          if (_decimals != decimals)
+            _amount = JBFixedPointNumber.adjustDecimals(_amount, decimals, _decimals);
+
+          // If this terminal's token is ETH, send it in msg.value.
+          uint256 _payableValue = token == JBTokens.ETH ? _netPayoutAmount : 0;
+
+          _terminal.pay{value: _payableValue}(
+            _netPayoutAmount,
             _split.projectId,
             _split.beneficiary,
             0,
@@ -261,8 +355,19 @@ function _distributeToPayoutSplitsOf(
           );
         }
       } else {
-        // Otherwise, send the funds directly to the beneficiary.
-        Address.sendValue(_split.beneficiary, _payoutAmount);
+        _netPayoutAmount = _feeDiscount == JBConstants.MAX_FEE_DISCOUNT
+          ? _payoutAmount
+          : _payoutAmount - _feeAmount(_payoutAmount, _feeDiscount);
+
+        // This distribution is eligible for a fee since the funds are leaving the ecosystem.
+        feeEligibleDistributionAmount += _payoutAmount;
+
+        // If there's a beneficiary, send the funds directly to the beneficiary. Otherwise send to the msg.sender
+        _transferFrom(
+          address(this),
+          _split.beneficiary != address(0) ? _split.beneficiary : payable(msg.sender),
+          _netPayoutAmount
+        );
       }
 
       // Subtract from the amount to be sent to the beneficiary.
@@ -274,7 +379,7 @@ function _distributeToPayoutSplitsOf(
       _fundingCycle.number,
       _projectId,
       _split,
-      _payoutAmount,
+      _netPayoutAmount,
       msg.sender
     );
   }
@@ -291,7 +396,7 @@ function _distributeToPayoutSplitsOf(
 {% tab title="Events" %}
 | Name                                                                  | Data                                                                                                                                                                                                                                                                                     |
 | --------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [**`DistributeToPayoutSplit`**](../events/distributetopayoutsplit.md) | <ul><li><code>uint256 indexed fundingCycleId</code></li><li><code>uint256 indexed projectId</code></li><li><a href="../../../../data-structures/jbsplit.md"><code>JBSplit</code></a><code>split</code></li><li><code>uint256 amount</code></li><li><code>address caller</code></li></ul> |
+| [**`DistributeToPayoutSplit`**](../events/distributetopayoutsplit.md) | <ul><li><code>uint256 indexed fundingCycleConfiguration</code></li><li><code>uint256 indexed fundingCycleNumber</code></li><li><code>uint256 indexed projectId</code></li><li><code>[`JBSplit`](../../../../data-structures/jbsplit.md)split</code></li><li><code>uint256 amount</code></li><li><code>address caller</code></li></ul>                                                                                                                                                                                           |
 {% endtab %}
 
 {% tab title="Bug bounty" %}

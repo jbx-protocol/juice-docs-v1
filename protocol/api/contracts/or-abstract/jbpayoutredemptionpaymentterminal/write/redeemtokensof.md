@@ -110,9 +110,10 @@ function redeemTokensOf(
 
         _External references:_
 
+        * [`controllerOf`](../../../jbdirectory/properties/controllerof.md)
         * [`burnTokensOf`](../../../or-controllers/jbcontroller/write/burntokensof.md)
 
-    5.  If a delegate was provided, callback to its `didRedeem` function, and emit an event.
+    5.  If a delegate was provided, callback to its `didRedeem` function, and emit an event with the relevant parameters..
 
         ```solidity
         // If a delegate was returned by the data source, issue a callback to it.
@@ -279,7 +280,7 @@ function redeemTokensOf(
 {% tab title="Events" %}
 | Name                                           | Data                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
 | ---------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [**`RedeemTokens`**](../events/processfees.md) | <ul><li><code>uint256 indexed fundingCycleId</code></li><li><code>uint256 indexed projectId</code></li><li><code>address indexed holder</code></li><li><a href="../../../../data-structures/jbfundingcycle.md"><code>JBFundingCycle</code></a><code>fundingCycle</code></li><li><code>address beneficiary</code></li><li><code>uint256 tokenCount</code></li><li><code>uint256 claimedAmount</code></li><li><code>string memo</code></li><li><code>address caller</code></li></ul> |
+| [**`RedeemTokens`**](../events/redeemtokens.md)                       | <ul><li><code>uint256 indexed fundingCycleConfiguration</code></li><li><code>uint256 indexed fundingCycleNumber</code></li><li><code>uint256 indexed projectId</code></li><li><code>address holder</code></li><li><code>address beneficiary</code></li><li><code>uint256 tokenCount</code></li><li><code>uint256 claimedAmount</code></li><li><code>string memo</code></li><li><code>address caller</code></li></ul> |
 {% endtab %}
 
 {% tab title="Bug bounty" %}

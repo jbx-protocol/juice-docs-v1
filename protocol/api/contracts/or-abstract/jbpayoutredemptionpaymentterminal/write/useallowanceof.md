@@ -125,7 +125,7 @@ function useAllowanceOf(
 
         ```solidity
         // The net amount is the withdrawn amount without the fee.
-        uint256 _netAmount = _distributedAmount - _feeAmount;
+        uint256 _netAmount = _distributedAmount - _fee;
 
         // Transfer any remaining balance to the beneficiary.
         if (_netAmount > 0) _transferFrom(address(this), _beneficiary, _netAmount);
@@ -145,7 +145,7 @@ function useAllowanceOf(
       _beneficiary,
       _amount,
       _distributedAmount,
-      _feeAmount,
+      _fee,
       _memo,
       msg.sender
     );
@@ -200,7 +200,7 @@ function useAllowanceOf(
   if (_distributedAmount < _minReturnedTokens) revert INADEQUATE_DISTRIBUTION_AMOUNT();
 
   // Define variables that will be needed outside the scoped section below.
-  uint256 _feeAmount;
+  uint256 _fee;
 
   // Scoped section prevents stack too deep. `_projectOwner`, `_feeDiscount`, and `_netAmount` only used within scope.
   {
@@ -214,12 +214,12 @@ function useAllowanceOf(
       : _currentFeeDiscount(_projectId);
 
     // Take a fee from the `_distributedAmount`, if needed.
-    _feeAmount = _feeDiscount == JBConstants.MAX_FEE_DISCOUNT
+    _fee = _feeDiscount == JBConstants.MAX_FEE_DISCOUNT
       ? 0
       : _takeFeeFrom(_projectId, _fundingCycle, _distributedAmount, _projectOwner, _feeDiscount);
 
     // The net amount is the withdrawn amount without the fee.
-    uint256 _netAmount = _distributedAmount - _feeAmount;
+    uint256 _netAmount = _distributedAmount - _fee;
 
     // Transfer any remaining balance to the beneficiary.
     if (_netAmount > 0) _transferFrom(address(this), _beneficiary, _netAmount);
@@ -232,7 +232,7 @@ function useAllowanceOf(
     _beneficiary,
     _amount,
     _distributedAmount,
-    _feeAmount,
+    _fee,
     _memo,
     msg.sender
   );

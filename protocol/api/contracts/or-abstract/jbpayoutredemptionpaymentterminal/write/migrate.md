@@ -54,6 +54,7 @@ function migrate(uint256 _projectId, IJBPaymentTerminal _to)
     ```solidity
     // Transfer the balance if needed.
     if (_balance > 0) {
+      // Trigger any inherited pre-transfer logic.
       _beforeTransferTo(address(_to), _balance);
 
       // If this terminal's token is ETH, send it in msg.value.
@@ -108,6 +109,7 @@ function migrate(uint256 _projectId, IJBPaymentTerminal _to)
 
   // Transfer the balance if needed.
   if (_balance > 0) {
+    // Trigger any inherited pre-transfer logic.
     _beforeTransferTo(address(_to), _balance);
 
     // If this terminal's token is ETH, send it in msg.value.
@@ -131,7 +133,7 @@ function migrate(uint256 _projectId, IJBPaymentTerminal _to)
 {% tab title="Events" %}
 | Name                                       | Data                                                                                                                                                                                                                                               |
 | ------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [**`Migrate`**](../events/migrate.md)                                 | <ul><li><code>uint256 indexed projectId</code></li><li><code>[`IJBPaymentTerminal`](../../../interfaces/ijbpaymentterminal.md)indexed to</code></li><li><code>uint256 amount</code></li><li><code>address caller</code></li></ul>                                                                                                                                                                                                                                 |
+| [**`Migrate`**](../events/migrate.md)                                 | <ul><li><code>uint256 indexed projectId</code></li><li><code>[`IJBPaymentTerminal`](../../../../interfaces/ijbpaymentterminal.md)indexed to</code></li><li><code>uint256 amount</code></li><li><code>address caller</code></li></ul>                                                                                                                                                                                                                                 |
 {% endtab %}
 
 {% tab title="Bug bounty" %}

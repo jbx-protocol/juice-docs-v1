@@ -68,7 +68,7 @@ function setFeeGauge(IJBFeeGauge _feeGauge) external virtual override onlyOwner 
 {% tab title="Events" %}
 | Name                                          | Data                                                                                                                                                    |
 | --------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [**`SetFeeGauge`**](../events/setfeegauge.md) | <ul><li><code>[`IJBFeeGauge`](../../../interfaces/ijbfeegauge.md)indexed feeGauge</code></li><li><code>address caller</code></li></ul> |
+| [**`SetFeeGauge`**](../events/setfeegauge.md) | <ul><li><code>[`IJBFeeGauge`](../../../../interfaces/ijbfeegauge.md)indexed feeGauge</code></li><li><code>address caller</code></li></ul> |
 {% endtab %}
 
 {% tab title="Bug bounty" %}

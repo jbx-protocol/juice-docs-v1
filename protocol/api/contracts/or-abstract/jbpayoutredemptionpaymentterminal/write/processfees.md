@@ -133,7 +133,7 @@ function processFees(uint256 _projectId)
 {% tab title="Events" %}
 | Name                                          | Data                                                                                                                                                       |
 | --------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [**`ProcessFees`**](../events/processfees.md)                         | <ul><li><a href="../../../data-structures/jbfee.md"><code>JBFee</code></a><code>[] fees</code></li><li><code>uint256 indexed projectId</code></li></ul>                                                                                                                                                                                                                                                                                                                         |
+| [**`ProcessFees`**](../events/processfees.md)                         | <ul><li><code>[`JBFee`](../../../../data-structures/jbfee.md)[] fees</code></li><li><code>uint256 indexed projectId</code></li></ul>                                                                                                                                                                                                                                                                                                                         |
 {% endtab %}
 
 {% tab title="Bug bounty" %}
