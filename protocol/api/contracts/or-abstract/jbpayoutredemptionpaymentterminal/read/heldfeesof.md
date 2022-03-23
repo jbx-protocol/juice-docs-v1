@@ -18,12 +18,12 @@ function heldFeesOf(uint256 _projectId) external view override returns (JBFee[] 
   * `_projectId` is the ID of the project for which fees are being held.
 * The view function can be accessed externally by anyone.
 * The function does not alter state on the blockchain.
-* The resulting function overrides a function definition from the `IJBPayoutRedemptionPaymentTerminal` interface.
+* The resulting function overrides a function definition from the [`IJBPayoutRedemptionPaymentTerminal`](../../../../interfaces/ijbpayoutredemptionpaymentterminal.md) interface.
 * The function returns an array of fees that are being held.
 
 #### Body
 
-1.  This function just reads and returns the stored `_heldFeesOf` the project.
+1.  This function just reads and returns the stored held fees of the project.
 
     ```solidity
     return _heldFeesOf[_projectId];
@@ -36,8 +36,8 @@ function heldFeesOf(uint256 _projectId) external view override returns (JBFee[] 
 
 {% tab title="Code" %}
 ```solidity
-/** 
-  @notice 
+/**
+  @notice
   The fees that are currently being held to be processed later for each project.
 
   @param _projectId The ID of the project for which fees are being held.

@@ -6,48 +6,104 @@ Interface: [`IJBPaymentTerminal`](../../../../interfaces/ijbpaymentterminal.md)
 
 {% tabs %}
 {% tab title="Step by step" %}
-**The ETH balance that this terminal holds for each project.**
+**Gets the current overflowed amount in this terminal for a specified project, in terms of ETH.**
+
+_The current overflow is represented as a fixed point number with 18 decimals._
 
 ### Definition
 
 ```solidity
-function ethBalanceOf(uint256 _projectId) external view override returns (uint256) { ... }
+function currentEthOverflowOf(uint256 _projectId) external view override returns (uint256) { ... }
 ```
 
 * Arguments:
-  * `_projectId` is the ID of the project to which the ETH balance belongs.
+  * `_projectId` is the ID of the project to which the ETH overflow belongs.
 * The view function can be accessed externally by anyone.
-* The function does not alter state on the blockchain.
-* The resulting function overrides a function definition from the `IJBPaymentTerminal` interface.
-* The function returns the ETH balance.
+* The view function does not alter state on the blockchain.
+* The resulting function overrides a function definition from the [`IJBPaymentTerminal`](../../../../interfaces/ijbpaymentterminal.md) interface.
+* The function returns the current amount of ETH overflow that project has in this terminal, as a fixed point number with 18 decimals.
 
 ### Body
 
-1.  Since this terminal stores ETH, simply return the project's ETH balance.
+1.  Get this terminal's current overflow, which is in terms of this terminal's token.
 
     ```solidity
-    // The store's balance is already in ETH.
-    return store.balanceOf(_projectId);
+    // Get this terminal's current overflow.
+    uint256 _overflow = store.currentOverflowOf(this, _projectId);
     ```
 
     _External references:_
 
-    * [`balanceOf`](../../jbpaymentterminalstore/properties/balanceof.md)
+    * [`currentOverflowOf`](../../../jbpaymentterminalstore/read/currentoverflowof.md)
+2.  If this terminal's fixed point accounting doesn't have 18 decimals, adjust the overflow to have 18 decimals.
+
+    ```solidity
+    // Adjust the decimals of the fixed point number if needed to have 18 decimals.
+    uint256 _adjustedOverflow = (decimals == 18)
+      ? _overflow
+      : JBFixedPointNumber.adjustDecimals(_overflow, decimals, 18);
+    ```
+
+    _Libraries used:_
+
+    * [`JBFixedPointNumber`](../../../../libraries/jbfixedpointnumber.md)
+      * `.adjustDecimals(...)`
+
+3.  If this terminal's currency isn't ETH, convert the overflow to ETH. Return the 18 decimal ETH fixed point overflow value.
+
+    ```solidity
+    // Return the amount converted to ETH.
+    return
+      (currency == JBCurrencies.ETH)
+        ? _adjustedOverflow
+        : PRBMath.mulDiv(
+          _adjustedOverflow,
+          10**decimals,
+          prices.priceFor(currency, JBCurrencies.ETH, decimals)
+        );
+    ```
+
+    _Libraries used:_
+
+    * [`PRBMath`](https://github.com/hifi-finance/prb-math/blob/main/contracts/PRBMath.sol)
+      * `.mulDiv(...)`
+
+    _External references:_
+
+    * [`priceFor`](../../../jbprices/read/pricefor.md)
 {% endtab %}
 
 {% tab title="Code" %}
 ```solidity
-/** 
-  @notice 
-  The ETH balance that this terminal holds for each project.
+/**
+  @notice
+  Gets the current overflowed amount in this terminal for a specified project, in terms of ETH.
 
-  @param _projectId The ID of the project to which the balance belongs.
+  @dev
+  The current overflow is represented as a fixed point number with 18 decimals.
 
-  @return The ETH balance.
+  @param _projectId The ID of the project to get overflow for.
+
+  @return The current amount of ETH overflow that project has in this terminal, as a fixed point number with 18 decimals.
 */
-function ethBalanceOf(uint256 _projectId) external view override returns (uint256) {
-  // The store's balance is already in ETH.
-  return store.balanceOf(_projectId);
+function currentEthOverflowOf(uint256 _projectId) external view override returns (uint256) {
+  // Get this terminal's current overflow.
+  uint256 _overflow = store.currentOverflowOf(this, _projectId);
+
+  // Adjust the decimals of the fixed point number if needed to have 18 decimals.
+  uint256 _adjustedOverflow = (decimals == 18)
+    ? _overflow
+    : JBFixedPointNumber.adjustDecimals(_overflow, decimals, 18);
+
+  // Return the amount converted to ETH.
+  return
+    (currency == JBCurrencies.ETH)
+      ? _adjustedOverflow
+      : PRBMath.mulDiv(
+        _adjustedOverflow,
+        10**decimals,
+        prices.priceFor(currency, JBCurrencies.ETH, decimals)
+      );
 }
 ```
 {% endtab %}
