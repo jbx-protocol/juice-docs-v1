@@ -39,7 +39,7 @@ function setPrimaryTerminalOf(uint256 _projectId, IJBPaymentTerminal _terminal)
 
     _External references:_
 
-    * [`token`](../../or-payment-terminals/jbethpaymentterminal/properties/token.md)
+    * [`token`](../../or-abstract/jbpayoutredemptionpaymentterminal/properties/token.md)
 2.  Add the terminal to the list of the project's terminals if it isn't included already.
 
     ```solidity

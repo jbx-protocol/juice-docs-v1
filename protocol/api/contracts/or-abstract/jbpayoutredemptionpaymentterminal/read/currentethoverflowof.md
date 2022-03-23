@@ -1,4 +1,4 @@
-# ethBalanceOf
+# currentEthOverflowOf
 
 Contract: [`JBETHPaymentTerminal`](../)​‌
 
