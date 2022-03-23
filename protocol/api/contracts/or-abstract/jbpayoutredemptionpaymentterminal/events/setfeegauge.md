@@ -7,7 +7,7 @@ Emitted from:
 ## Definition
 
 ```solidity
-event SetFeeGauge(IJBFeeGauge feeGauge, address caller);
+event SetFeeGauge(IJBFeeGauge indexed feeGauge, address caller);
 ```
 
 * `feeGauge` is the new [`feeGuage`](../../../../interfaces/ijbfeegauge.md).

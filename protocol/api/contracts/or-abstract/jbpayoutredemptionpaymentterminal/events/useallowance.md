@@ -13,8 +13,9 @@ event UseAllowance(
   uint256 indexed projectId,
   address beneficiary,
   uint256 amount,
+  uint256 distributedAmount,
   uint256 feeAmount,
-  uint256 transferAmount,
+  string memo,
   address caller
 );
 ```
@@ -24,6 +25,7 @@ event UseAllowance(
 * `projectId` is the ID of the project whose allowance was used.
 * `beneficiary` is the address whose received the allowance.
 * `amount` is the amount of allowance that was used in terms of the funding cycle's currency.
-* `feeAmount` is the amount of ETH protocol fees that were taken from the used allowance.
-* `transferAmount` is the amount of ETH that was transferred to the beneficiary.
+* `distributedAmount` is the total amount of tokens that were distributed from the project's balance.
+* `feeAmount` is the amount of tokens that were taken from the used allowance as fees.
+* `memo` is a note that was attached.
 * `caller` is the address that issued the transaction within which the event was emitted.
