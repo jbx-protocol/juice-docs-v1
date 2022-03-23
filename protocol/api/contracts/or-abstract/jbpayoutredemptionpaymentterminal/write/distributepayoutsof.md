@@ -12,6 +12,8 @@ _Payouts are sent to the preprogrammed splits. Any leftover is sent to the proje
 
 _Anyone can distribute payouts on a project's behalf. The project can preconfigure a wildcard split that is used to send funds to msg.sender. This can be used to incentivize calling this function._
 
+_All funds distributed outside of this contract or any feeless terminals incure the protocol fee._ 
+
 #### Definition
 
 ```solidity
@@ -205,6 +207,9 @@ function distributePayoutsOf(
   @dev
   Anyone can distribute payouts on a project's behalf. The project can preconfigure a wildcard split that is used to send funds to msg.sender. This can be used to incentivize calling this function.
 
+  @dev
+  All funds distributed outside of this contract or any feeless terminals incure the protocol fee.
+
   @param _projectId The ID of the project having its payouts distributed.
   @param _amount The amount of terminal tokens to distribute, as a fixed point number with same number of decimals as this terminal.
   @param _currency The expected currency of the amount being distributed. Must match the project's current funding cycle's distribution limit currency.
@@ -295,6 +300,13 @@ function distributePayoutsOf(
   );
 }
 ```
+{% endtab %}
+
+{% tab title="Errors" %}
+| String                       | Description                                             |
+| ---------------------------- | ------------------------------------------------------- |
+| **`INADEQUATE_DISTRIBUTION_AMOUNT`** | Thrown if the amount being distributed is less than the specified minimum. |
+
 {% endtab %}
 
 {% tab title="Events" %}

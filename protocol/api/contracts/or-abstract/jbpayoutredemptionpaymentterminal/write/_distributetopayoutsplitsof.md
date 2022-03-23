@@ -140,6 +140,8 @@ function _distributeToPayoutSplitsOf(
 
     * [`JBSplitsGroups`](../../../../libraries/jbsplitsgroups.md)
       * `.ETH_PAYOUT`
+    * [`Address`](https://docs.openzeppelin.com/contracts/2.x/api/utils#Address)
+      * `.sendValue(...)`
 
     _Internal references:_
 

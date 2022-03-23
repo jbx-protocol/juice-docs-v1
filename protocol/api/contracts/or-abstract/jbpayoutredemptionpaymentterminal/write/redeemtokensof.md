@@ -145,7 +145,7 @@ function redeemTokensOf(
     // Send the reclaimed funds to the beneficiary.
     if (reclaimAmount > 0) _transferFrom(address(this), _beneficiary, reclaimAmount);
     ```
-    
+
 5.  Emit a `RedeemTokens` event with the relevant parameters.
 
     ```solidity
@@ -225,7 +225,7 @@ function redeemTokensOf(
     // The amount being reclaimed must be at least as much as was expected.
     if (reclaimAmount < _minReturnedTokens) revert INADEQUATE_RECLAIM_AMOUNT();
 
-    // Redeem the project tokens, which burns them.
+    // Burn the project tokens.
     if (_tokenCount > 0)
       directory.controllerOf(_projectId).burnTokensOf(
         _holder,
@@ -273,6 +273,7 @@ function redeemTokensOf(
 | String                       | Description                                             |
 | ---------------------------- | ------------------------------------------------------- |
 | **`REDEEM_TO_ZERO_ADDRESS`** | Thrown if the zero address was sent as the beneficiary. |
+| **`INADEQUATE_RECLAIM_AMOUNT`** | Thrown if the amount being reclaimed is less than the specified minimum. |
 {% endtab %}
 
 {% tab title="Events" %}
