@@ -40,11 +40,19 @@ function _currentFeeDiscount(uint256 _projectId) private view returns (uint256 f
     _Internal references:_
 
     * [`token`](../properties/token.md)
-2.  If there's a gauge, ask it for the discount. Otherwise, there is no discount.
+2.  If there's a gauge, ask it for the discount. Otherwise, there is no discount. If the gauge reverts, set the discount to 0.
 
     ```solidity
     // Get the fee discount.
-    feeDiscount = feeGauge == IJBFeeGauge(address(0)) ? 0 : feeGauge.currentDiscountFor(_projectId);
+    if( feeGauge == IJBFeeGauge(address(0)) )
+      feeDiscount = 0;
+    else
+      // If the guage reverts, set the discount to 0.
+      try feeGauge.currentDiscountFor(_projectId) returns (uint256 discount) {
+        feeDiscount = discount;
+      } catch {
+        feeDiscount = 0;
+      }
     ```
 
     _Internal references:_
@@ -79,7 +87,15 @@ function _currentFeeDiscount(uint256 _projectId) private view returns (uint256 f
     return JBConstants.MAX_FEE_DISCOUNT;
 
   // Get the fee discount.
-  feeDiscount = feeGauge == IJBFeeGauge(address(0)) ? 0 : feeGauge.currentDiscountFor(_projectId);
+  if( feeGauge == IJBFeeGauge(address(0)) )
+    feeDiscount = 0;
+  else
+    // If the guage reverts, set the discount to 0.
+    try feeGauge.currentDiscountFor(_projectId) returns (uint256 discount) {
+      feeDiscount = discount;
+    } catch {
+      feeDiscount = 0;
+    }
 
   // If the fee discount is greater than the max, nullify the discount.
   if (feeDiscount > JBConstants.MAX_FEE_DISCOUNT) feeDiscount = 0;
