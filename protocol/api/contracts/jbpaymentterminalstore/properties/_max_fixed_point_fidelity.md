@@ -1,4 +1,4 @@
-# \_MAX\_FIXED\_POINT\_FIDELITY
+# _MAX_FIXED_POINT_FIDELITY
 
 Contract:[`JBPaymentTerminalStore`](../)​‌
 

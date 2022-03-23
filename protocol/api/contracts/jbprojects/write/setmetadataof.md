@@ -82,7 +82,7 @@ function setMetadataOf(uint256 _projectId, JBProjectMetadata calldata _metadata)
 {% tab title="Events" %}
 | Name                                             | Data                                                                                                                                        |
 | ------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------- |
-| [**`SetMetadata`**](../events/setmetadata.md) | <ul><li><code>uint256 indexed projectId</code></li><li><code>[`JBProjectMetadata`](../../data-structures/jbprojectmetadata.md)metadata</code></li><li><code>address caller</code></li></ul>                                                                                                         |
+| [**`SetMetadata`**](../events/setmetadata.md) | <ul><li><code>uint256 indexed projectId</code></li><li><code>[`JBProjectMetadata`](../../../data-structures/jbprojectmetadata.md)metadata</code></li><li><code>address caller</code></li></ul>                                                                                                         |
 {% endtab %}
 
 {% tab title="Bug bounty" %}

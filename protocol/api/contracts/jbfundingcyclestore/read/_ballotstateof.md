@@ -1,4 +1,4 @@
-# \_ballotStateOf
+# _ballotStateOf
 
 Contract:[`JBFundingCycleStore`](../)​
 

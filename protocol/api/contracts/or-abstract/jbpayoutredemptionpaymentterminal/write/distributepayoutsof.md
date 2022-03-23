@@ -171,7 +171,7 @@ function distributePayoutsOf(
 
         _Internal references:_
 
-        * [`_feeAmount`](./_feeamount.md)
+        * [`_feeAmount`](../read/_feeamount.md)
 
         _Virtual references:_
 

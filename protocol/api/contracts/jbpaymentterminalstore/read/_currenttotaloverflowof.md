@@ -1,4 +1,4 @@
-# \_currentTotalOverflowOf
+# _currentTotalOverflowOf
 
 Contract: [`JBPaymentTerminalStore`](../)​‌
 
@@ -54,7 +54,7 @@ function _currentTotalOverflowOf(
 
     _External references:_
 
-    * [`currentEthOverflowOf`](../../jbethpaymentterminal/read/currentEthOverflow.md TODO)
+    * [`currentEthOverflowOf`](../../or-abstract/jbpayoutredemptionpaymentterminal/read/currentethoverflowof.md)
 4.  If the total overflow is to be returned in a currency other than ETH, make the conversion while maintaining 18 decimals of fidelity.
 
     ```solidity

@@ -1,4 +1,4 @@
-# \_packAndStoreIntrinsicPropertiesOf
+# _packAndStoreIntrinsicPropertiesOf
 
 Contract:[`JBFundingCycleStore`](../)​
 
@@ -64,7 +64,7 @@ function _packAndStoreIntrinsicPropertiesOf(
 
     _Internal references:_
 
-    * [`_packedIntrinsicPropertiesOf`](../properties/\_packedintrinsicpropertiesof.md)
+    * [`_packedIntrinsicPropertiesOf`](../properties/_packedintrinsicpropertiesof.md)
 {% endtab %}
 
 {% tab title="Code" %}

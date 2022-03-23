@@ -38,7 +38,7 @@ function primaryTerminalOf(uint256 _projectId, address _token)
 
     Internal references:
 
-    * [`_primaryTerminalOf`](../properties/\_primaryterminalof.md)
+    * [`_primaryTerminalOf`](../properties/_primaryterminalof.md)
 2.  Loop through each of the project's terminals looking for one that uses the same token as the one specified. If one is found, return it.
 
     ```solidity
@@ -51,7 +51,7 @@ function primaryTerminalOf(uint256 _projectId, address _token)
 
     Internal references:
 
-    * [`_terminalsOf`](../properties/\_terminalsof.md)
+    * [`_terminalsOf`](../properties/_terminalsof.md)
 3.  Return an empty terminal if not found.
 
     ```solidity

@@ -66,8 +66,8 @@ function migrate(uint256 _projectId, IJBController _to)
 
     _Internal references:_
 
-    * [`_processedTokenTrackerOf`](../properties/\_processedtokentrackerof.md)
-    * [`_distributeReservedTokensOf`](\_distributereservedtokensof.md)
+    * [`_processedTokenTrackerOf`](../properties/_processedtokentrackerof.md)
+    * [`_distributeReservedTokensOf`](_distributereservedtokensof.md)
 
     _External references:_
 

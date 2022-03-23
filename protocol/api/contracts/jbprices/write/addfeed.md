@@ -95,7 +95,7 @@ function addFeedFor(
 {% tab title="Events" %}
 | Name                                  | Data                                                                                                                                                                                                                                                                                           |
 | ------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [**`AddFeed`**](../events/addfeed.md) | <ul><li><code>uint256 indexed currency</code></li><li><code>uint256 indexed base</code></li><li><code>[`IJBPriceFeed`](../../interfaces/ijbpricefeed.md)feed</code></li></ul> |
+| [**`AddFeed`**](../events/addfeed.md) | <ul><li><code>uint256 indexed currency</code></li><li><code>uint256 indexed base</code></li><li><code>[`IJBPriceFeed`](../../../interfaces/ijbpricefeed.md)feed</code></li></ul> |
 {% endtab %}
 
 {% tab title="Bug bounty" %}

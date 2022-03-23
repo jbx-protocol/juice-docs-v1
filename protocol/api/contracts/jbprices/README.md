@@ -12,7 +12,7 @@ description: Manages and normalizes price feeds.
 
 ### **Addresses**
 
-Ethereum mainnet: _Not yet deployed_\
+Ethereum mainnet: _Not yet deployed_
 
 ### **Interfaces**
 
@@ -53,7 +53,7 @@ constructor(address _owner) {
 
 | Function                                 | Definition                                                                                                                                                                                   |
 | ---------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [**`priceFor`**](read/getpricefor.md) | <p><strong>Params</strong></p><ul><li><code>uint256 _currency</code></li><li><code>uint256 _base</code></li><li><code>uint256 _decimals</code></li></ul><p><strong>Returns</strong></p><ul><li><code>uint256 price</code></li></ul> |
+| [**`priceFor`**](read/pricefor.md) | <p><strong>Params</strong></p><ul><li><code>uint256 _currency</code></li><li><code>uint256 _base</code></li><li><code>uint256 _decimals</code></li></ul><p><strong>Returns</strong></p><ul><li><code>uint256 price</code></li></ul> |
 
 ## Write
 

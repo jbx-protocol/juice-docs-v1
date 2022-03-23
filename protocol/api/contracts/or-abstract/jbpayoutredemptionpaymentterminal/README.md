@@ -12,7 +12,7 @@ description: Manages all inflows and outflows of ETH into the Juicebox ecosystem
 
 ### **Addresses**
 
-Ethereum mainnet: _Not yet deployed_\
+Ethereum mainnet: _Not yet deployed_
 
 ### **Interfaces**
 

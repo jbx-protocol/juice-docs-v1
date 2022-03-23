@@ -119,11 +119,11 @@ function mintTokensOf(
 
     _Internal references:_
 
-    * [`_processedTokenTrackerOf`](../properties/\_processedtokentrackerof.md)
+    * [`_processedTokenTrackerOf`](../properties/_processedtokentrackerof.md)
 
     _External references:_
 
-    * [`mintFor`](../../../jbtokenstore/write/mintFor.md)
+    * [`mintFor`](../../../jbtokenstore/write/mintfor.md)
 4.  Emit a `MintTokens` event with the relevant parameters.
 
     ```solidity

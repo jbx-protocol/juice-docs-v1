@@ -105,7 +105,7 @@ function shouldRequireClaimingFor(uint256 _projectId, bool _flag)
 {% tab title="Events" %}
 | Name                                                        | Data                                                                                                                                |
 | ----------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------- |
-| [**`ShouldRequireClaim`**](events/shouldrequireclaim.md) | <ul><li><code>uint256 indexed projectId</code></li><li><code>bool indexed flag</code></li><li><code>address caller</code></li></ul>                                                                                                                                           |
+| [**`ShouldRequireClaim`**](../events/shouldrequireclaim.md) | <ul><li><code>uint256 indexed projectId</code></li><li><code>bool indexed flag</code></li><li><code>address caller</code></li></ul>                                                                                                                                           |
 {% endtab %}
 
 {% tab title="Bug bounty" %}

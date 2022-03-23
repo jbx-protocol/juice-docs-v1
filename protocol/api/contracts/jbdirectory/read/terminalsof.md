@@ -31,7 +31,7 @@ function terminalsOf(uint256 _projectId)
 
     Internal references:
 
-    * [`_terminalsOf`](../properties/\_terminalsof.md)
+    * [`_terminalsOf`](../properties/_terminalsof.md)
 {% endtab %}
 
 {% tab title="Code" %}

@@ -1,10 +1,10 @@
-# \_MAX\_FEE
+# _MAX_FEE
 
 Contract:[`JBPayoutRedemptionPaymentTerminal`](../)​‌
 
 **Maximum fee that can be set for a funding cycle configuration.** 
 
-_Out of MAX\_FEE (50\_000\_000 / 1\_000\_000\_000)_
+_Out of MAX_FEE (50_000_000 / 1_000_000_000)_
 
 # Definition
 

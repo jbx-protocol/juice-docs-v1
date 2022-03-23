@@ -121,7 +121,7 @@ function setControllerOf(uint256 _projectId, IJBController _controller)
 {% tab title="Events" %}
 | Name                                              | Data                                                                                                                                                                                                             |
 | ------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [**`SetController`**](../events/setcontroller.md)           | <ul><li><code>int256 indexed projectId</code></li><li><code>[`IJBController`](../../interfaces/ijbcontroller.md)indexed controller</code></li><li><code>address caller</code></li></ul>                                       |
+| [**`SetController`**](../events/setcontroller.md)           | <ul><li><code>int256 indexed projectId</code></li><li><code>[`IJBController`](../../../interfaces/ijbcontroller.md)indexed controller</code></li><li><code>address caller</code></li></ul>                                       |
 {% endtab %}
 
 {% tab title="Bug bounty" %}

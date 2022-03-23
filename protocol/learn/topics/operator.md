@@ -23,7 +23,7 @@ For each project, the following functions can only be accessed by either the add
 
 An address can set operators for its project through the [`JBOperatorStore.setOperator(..`](../../api/contracts/jboperatorstore/write/setoperator.md)`.)` transaction, using the indexes from the [`JBOperations`](../../api/libraries/jboperations.md) library. The specific permissions a particular Operator is allowed depend on the specific parameters the admin allows them. Each of the following functions can be called by the admin, and also by any operator that has been granted permission to call the function by the admin.
 
-* [`JBController.launchFundingCyclesOf(...)`](../../api/contracts/or-controllers/jbcontroller/write/launchfundingcyclesof.md)
+* [`JBController.launchFundingCyclesFor(...)`](../../api/contracts/or-controllers/jbcontroller/write/launchfundingcyclesfor.md)
 * [`JBController.reconfigureFundingCyclesOf(...)`](../../api/contracts/or-controllers/jbcontroller/write/reconfigurefundingcyclesof.md)
 * [`JBController.mintTokensOf(...)`](../../api/contracts/or-controllers/jbcontroller/write/minttokensof.md)
 * [`JBController.issueTokenFor(...)`](../../api/contracts/or-controllers/jbcontroller/write/issuetokenfor.md)
@@ -36,12 +36,11 @@ An address can set operators for its project through the [`JBOperatorStore.setOp
 * [`JBSplitsStore.set(...)`](../../api/contracts/jbsplitsstore/write/set.md)
 * [`JBTokenStore.shouldRequireClaimingFor(...)`](../../api/contracts/jbtokenstore/write/shouldrequireclaimingfor.md)
 * [`JBDirectory.setControllerOf(...)`](../../api/contracts/jbdirectory/write/setcontrollerof.md)
-* [`JBDirectory.addTerminalsOf(...)`](../../api/contracts/jbdirectory/write/addterminalsof.md)
-* [`JBDirectory.removeTerminalOf(...)`](../../api/contracts/jbdirectory/write/removeterminalof.md)
+* [`JBDirectory.setTerminalsOf(...)`](../../api/contracts/jbdirectory/write/setterminalsof.md)
 * [`JBDirectory.setPrimaryTerminalOf(...)`](../../api/contracts/jbdirectory/write/setprimaryterminalof.md)
 
 The following transactions can be reached by token holders, or by operator addresses explicitly allowed by the address that owns the tokens.  If the tokens change hands, the operators for the address must be set again by the new holder.
 
 * [`JBController.burnTokensOf(...)`](../../api/contracts/or-controllers/jbcontroller/write/burntokensof.md)
 * [`JBPayoutRedemptionPaymentTerminal.redeemTokensOf(...)`](../../api/contracts/or-abstract/jbpayoutredemptionpaymentterminal/write/redeemtokensof.md)
-* [`JBTokenStore.transferTo(...)`](../../api/contracts/jbtokenstore/write/transferto.md)
+* [`JBTokenStore.transferFrom(...)`](../../api/contracts/jbtokenstore/write/transferfrom.md)

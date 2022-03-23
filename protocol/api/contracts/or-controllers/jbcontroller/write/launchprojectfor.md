@@ -78,7 +78,7 @@ function launchProjectFor(
 
     _Internal references:_
 
-    * [`_configure`](\_configure.md)
+    * [`_configure`](_configure.md)
 4.  If terminals were provided, add them to the list of terminals the project can accept funds through.
 
     ```solidity
@@ -88,7 +88,7 @@ function launchProjectFor(
 
     _External references:_
 
-    * [`addTerminalsOf`](../../../jbdirectory/write/addterminalsof.md)
+    * [`setTerminalsOf`](../../../jbdirectory/write/setterminalsof.md)
 5.  Emit a `LaunchProject` event with the relevant parameters.
 
     ```solidity

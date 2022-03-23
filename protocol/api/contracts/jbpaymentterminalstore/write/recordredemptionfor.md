@@ -90,7 +90,7 @@ function recordRedemptionFor(
     ```
     _Libraries used:_
 
-    * [`JBFundingCycleMetadataResolver`](../../../../libraries/jbfundingcyclemetadataresolver.md)\
+    * [`JBFundingCycleMetadataResolver`](../../../libraries/jbfundingcyclemetadataresolver.md)\
       `.useTotalOverflowForRedemptions(...)`\
 
     _Internal references:_
@@ -98,7 +98,7 @@ function recordRedemptionFor(
     * [`_currentTotalOverflowOf`](../read/_currenttotaloverflowof.md)
     * [`_overflowDuring`](../read/_overflowduring.md)
 
-5.  If the project's current funding cycle is configured to use a data source when making redemptions, ask the data source for the parameters that should be used throughout the rest of the function given provided contextual values in a [`JBRedeemParamsData`](../../../../data-structures/jbredeemparamsdata.md) structure. Otherwise default parameters are used.
+5.  If the project's current funding cycle is configured to use a data source when making redemptions, ask the data source for the parameters that should be used throughout the rest of the function given provided contextual values in a [`JBRedeemParamsData`](../../../data-structures/jbredeemparamsdata.md) structure. Otherwise default parameters are used.
 
     ```solidity
     // If the funding cycle has configured a data source, use it to derive a claim amount and memo.
@@ -135,7 +135,7 @@ function recordRedemptionFor(
 
     _Libraries used:_
 
-    * [`JBFundingCycleMetadataResolver`](../../../../libraries/jbfundingcyclemetadataresolver.md)\
+    * [`JBFundingCycleMetadataResolver`](../../../libraries/jbfundingcyclemetadataresolver.md)\
       `.useDataSourceForRedeem(...)`\
       `.dataSource(...)`\
       `.redemptionRate(...)`\

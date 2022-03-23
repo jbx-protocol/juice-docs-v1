@@ -88,7 +88,7 @@ function burnTokensOf(
 
     _Internal references:_
 
-    * [`_processedTokenTrackerOf`](../properties/\_processedtokentrackerof.md)
+    * [`_processedTokenTrackerOf`](../properties/_processedtokentrackerof.md)
 5.  Burn the tokens.
 
     ```solidity

@@ -6,7 +6,7 @@ Whether or not a project can still print premined tickets.
 
 **Params:**
 
-* **\_projectId**:The ID of the project to get the status of.
+* **_projectId**:The ID of the project to get the status of.
 
 **Returns:** Boolean flag.
 
@@ -21,14 +21,14 @@ function canPrintPreminedTickets(uint256 _projectId)
 
 The amount of tokens that can be claimed by the given address.
 
-The \_account must have at least \_count tickets for the specified project.\
+The _account must have at least _count tickets for the specified project.\
 If there is a funding cycle reconfiguration ballot open for the project, the project's current bonding curve is bypassed.
 
 **Params:**
 
-* **\_account**: The address to get an amount for.
-* **\_projectId**: The ID of the project to get a claimable amount for.
-*   **\_count**: The number of Tickets that would be redeemed to get the resulting amount.
+* **_account**: The address to get an amount for.
+* **_projectId**: The ID of the project to get a claimable amount for.
+*   **_count**: The number of Tickets that would be redeemed to get the resulting amount.
 
     **Returns**: The amount of tokens that can be claimed
 
@@ -46,7 +46,7 @@ Gets the current overflowed amount for a specified project.
 
 **Params:**
 
-* **\_projectId**: The ID of the project to get overflow for.
+* **_projectId**: The ID of the project to get overflow for.
 
 **Returns** The current overflow of funds for the project.
 
@@ -71,8 +71,8 @@ Gets the amount of reserved tickets that a project has.
 
 **Params:**
 
-* **\_projectId**: The ID of the project to get overflow for.
-* **\_reservedRate**: The reserved rate to use to make the calculation.
+* **_projectId**: The ID of the project to get overflow for.
+* **_reservedRate**: The reserved rate to use to make the calculation.
 
 **Returns:** amount overflow The current overflow of funds for the project.
 

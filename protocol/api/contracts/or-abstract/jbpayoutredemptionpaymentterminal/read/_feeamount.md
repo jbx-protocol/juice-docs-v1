@@ -1,4 +1,4 @@
-# \_feeAmount
+# _feeAmount
 
 Contract: [`JBPayoutRedemptionPaymentTerminal`](../)​‌
 

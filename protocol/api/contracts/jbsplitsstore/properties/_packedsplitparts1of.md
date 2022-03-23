@@ -1,4 +1,4 @@
-# \_packedsplitParts1Of
+# _packedsplitParts1Of
 
 Contract: [`JBSplitsStore`](../)​‌
 

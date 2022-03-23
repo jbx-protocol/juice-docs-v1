@@ -37,7 +37,7 @@ function currentTotalOverflowOf(
 
     _Internal references:_
 
-    * [`_currentTotalOverflowOf`](\_currenttotaloverflowof.md)
+    * [`_currentTotalOverflowOf`](_currenttotaloverflowof.md)
 {% endtab %}
 
 {% tab title="Code" %}

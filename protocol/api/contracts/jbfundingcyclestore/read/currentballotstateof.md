@@ -42,7 +42,7 @@ function currentBallotStateOf(uint256 _projectId) external view override returns
 
     _Internal references:_
 
-    * [`_getStructFor`](\_getstructfor.md)
+    * [`_getStructFor`](_getstructfor.md)
 3.  Return the ballot state of the latest funding cycle configuration as is determined by the current configuration and the funding cycle it's based on.
 
     ```solidity
@@ -51,7 +51,7 @@ function currentBallotStateOf(uint256 _projectId) external view override returns
 
     _Internal references:_
 
-    * [`_ballotStateOf`](\_ballotstateof.md)
+    * [`_ballotStateOf`](_ballotstateof.md)
 {% endtab %}
 
 {% tab title="Code" %}

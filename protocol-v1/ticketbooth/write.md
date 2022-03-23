@@ -7,9 +7,9 @@ Deploys an owner's Ticket ERC-20 token contract.
 
 **Params:**
 
-* \_**projectId:** The ID of the project being issued tickets.
-* **\_name:** The ERC-20's name. " Juicebox ticket" will be appended.
-* **\_symbol:** The ERC-20's symbol. "j" will be prepended.
+* _**projectId:** The ID of the project being issued tickets.
+* **_name:** The ERC-20's name. " Juicebox ticket" will be appended.
+* **_symbol:** The ERC-20's symbol. "j" will be prepended.
 
 ```
 function issue(
@@ -26,9 +26,9 @@ Only a ticket holder or an operator can lock its tickets.
 
 **Params:**
 
-* **\_holder:** The holder to lock tickets from.
-* **\_projectId:** The ID of the project whos tickets are being locked.
-* **\_amount:** The amount of tickets to lock.
+* **_holder:** The holder to lock tickets from.
+* **_projectId:** The ID of the project whos tickets are being locked.
+* **_amount:** The amount of tickets to lock.
 
 ```
 function lock(
@@ -45,9 +45,9 @@ The address that locked the tickets must be the address that unlocks the tickets
 
 **Params:**
 
-* **\_holder:** The holder to unlock tickets from.
-* **\_projectId:** The ID of the project whos tickets are being unlocked.
-* **\_amount:** The amount of tickets to unlock.
+* **_holder:** The holder to unlock tickets from.
+* **_projectId:** The ID of the project whos tickets are being unlocked.
+* **_amount:** The amount of tickets to unlock.
 
 ```
 function unlock(
@@ -64,10 +64,10 @@ Only a project's current terminal can print its tickets.
 
 **Params:**
 
-* **\_holder:** The address receiving the new tickets.
-* **\_projectId:** The project to which the tickets belong.
-* **\_amount:** The amount to print.
-* **\_preferUnstakedTickets:** Whether ERC20's should be converted automatically if they have been issued.
+* **_holder:** The address receiving the new tickets.
+* **_projectId:** The project to which the tickets belong.
+* **_amount:** The amount to print.
+* **_preferUnstakedTickets:** Whether ERC20's should be converted automatically if they have been issued.
 
 ```
 function print(
@@ -85,10 +85,10 @@ Only a project's current terminal can redeem its tickets.
 
 **Params:**
 
-* **\_holder:** The address that owns the tickets being redeemed.
-* **\_projectId:** The ID of the project of the tickets being redeemed.
-* **\_amount:** The amount of tickets being redeemed.
-* **\_preferUnstaked:** If the preference is to redeem tickets that have been converted to ERC-20s.
+* **_holder:** The address that owns the tickets being redeemed.
+* **_projectId:** The ID of the project of the tickets being redeemed.
+* **_amount:** The amount of tickets being redeemed.
+* **_preferUnstaked:** If the preference is to redeem tickets that have been converted to ERC-20s.
 
 ```
 function redeem(
@@ -106,9 +106,9 @@ Only a ticket holder or an operator can stake its tickets.
 
 **Params:**
 
-* **\_holder:** The owner of the tickets to stake.
-* **\_projectId:** The ID of the project whos tickets are being staked.
-* **\_amount:** The amount of tickets to stake.
+* **_holder:** The owner of the tickets to stake.
+* **_projectId:** The ID of the project whos tickets are being staked.
+* **_amount:** The amount of tickets to stake.
 
 ```
 function stake(
@@ -125,9 +125,9 @@ Only a ticket holder or an operator can unstake its tickets.
 
 **Params:**
 
-* **\_holder:** The owner of the tickets to unstake.
-* **\_projectId:** The ID of the project whos tickets are being unstaked.
-* **\_amount:** The amount of tickets to unstake.
+* **_holder:** The owner of the tickets to unstake.
+* **_projectId:** The ID of the project whos tickets are being unstaked.
+* **_amount:** The amount of tickets to unstake.
 
 ```
 function unstake(
@@ -144,10 +144,10 @@ Only a ticket holder or an operator can transfer its tickets.
 
 **Params:**
 
-* **\_holder:** The holder to transfer tickets from.
-* **\_projectId:** The ID of the project whos tickets are being transferred.
-* **\_amount:** The amount of tickets to transfer.
-* **\_recipient:** The recipient of the tickets.
+* **_holder:** The holder to transfer tickets from.
+* **_projectId:** The ID of the project whos tickets are being transferred.
+* **_amount:** The amount of tickets to transfer.
+* **_recipient:** The recipient of the tickets.
 
 ```
 function transfer(

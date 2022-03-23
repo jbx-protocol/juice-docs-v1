@@ -1,4 +1,4 @@
-# \_initFor
+# _initFor
 
 Contract:[`JBFundingCycleStore`](../)​
 
@@ -73,10 +73,10 @@ function _initFor(
 
     _Internal references:_
 
-    * [`_packAndStoreIntrinsicPropertiesOf`](\_packandstoreintrinsicpropertiesof.md)
-    * [`_deriveStartFrom`](../read/\_derivestartfrom.md)
-    * [`_deriveWeightFrom`](../read/\_deriveweightfrom.md)
-    * [`_deriveNumberFrom`](../read/\_derivenumberfrom.md)
+    * [`_packAndStoreIntrinsicPropertiesOf`](_packandstoreintrinsicpropertiesof.md)
+    * [`_deriveStartFrom`](../read/_derivestartfrom.md)
+    * [`_deriveWeightFrom`](../read/_deriveweightfrom.md)
+    * [`_deriveNumberFrom`](../read/_derivenumberfrom.md)
 2.  Store the initialized configuration as the latest of the project.
 
     ```solidity

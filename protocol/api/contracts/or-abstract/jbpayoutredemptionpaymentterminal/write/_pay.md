@@ -1,4 +1,4 @@
-# \_pay
+# _pay
 
 Contract: [`JBPayoutRedemptionPaymentTerminal`](../)​‌
 
@@ -82,7 +82,7 @@ function _pay(
 
         _External references:_
 
-        * [`recordPaymentFrom`](../../jbpaymentterminalstore/write/recordpaymentfrom.md)
+        * [`recordPaymentFrom`](../../../jbpaymentterminalstore/write/recordpaymentfrom.md)
 
     4.  Mint tokens if needed. Get a reference to the number of tokens sent to the specified beneificiary as opposed to reserved to be distributed to the project's reserved token splits.
 
@@ -264,7 +264,7 @@ function _pay(
 {% tab title="Events" %}
 | Name                          | Data                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
 | ----------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [**`Pay`**](events/pay.md)                                         | <ul><li><code>uint256 indexed fundingCycleConfiguration</code></li><li><code>uint256 indexed fundingCycleNumber</code></li><li><code>uint256 indexed projectId</code></li><li><code>address beneficiary</code></li><li><code>uint256 amount</code></li><li><code>uint256 beneficiaryTokenCount</code></li><li><code>string memo</code></li><li><code>address caller</code></li></ul>        |
+| [**`Pay`**](../events/pay.md)                                         | <ul><li><code>uint256 indexed fundingCycleConfiguration</code></li><li><code>uint256 indexed fundingCycleNumber</code></li><li><code>uint256 indexed projectId</code></li><li><code>address beneficiary</code></li><li><code>uint256 amount</code></li><li><code>uint256 beneficiaryTokenCount</code></li><li><code>string memo</code></li><li><code>address caller</code></li></ul>        |
 {% endtab %}
 
 {% tab title="Bug bounty" %}

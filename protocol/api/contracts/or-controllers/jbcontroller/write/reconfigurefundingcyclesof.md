@@ -57,7 +57,7 @@ function reconfigureFundingCyclesOf(
 
     _Internal references:_
 
-    * [`_configure`](\_configure.md)
+    * [`_configure`](_configure.md)
 5.  Emit a `ReconfigureFundingCycles` event with the relevant parameters.
 
     ```solidity

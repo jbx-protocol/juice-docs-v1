@@ -35,7 +35,7 @@ function useAllowanceOf(
   * `_currency` is the expected currency of the amount being distributed. Must match the project's current funding cycle's overflow allowance currency.
   * `_minReturnedTokens` is the minimum number of tokens that the `_amount` should be valued at in terms of this terminal's currency, as a fixed point number with the same amount of decimals as this terminal.
   * `_beneficiary` is the address to send the funds to.
-* Through the [`requirePermission`](../../../or-abstract/jboperatable/modifiers/requirepermission.md) modifier, the function is only accessible by the project's owner, or from an operator that has been given the [`JBOperations.USE_ALLOWANCE`](../../../libraries/jboperations.md) permission by the project owner for the provided `_projectId`.
+* Through the [`requirePermission`](../../../or-abstract/jboperatable/modifiers/requirepermission.md) modifier, the function is only accessible by the project's owner, or from an operator that has been given the [`JBOperations.USE_ALLOWANCE`](../../../../libraries/jboperations.md) permission by the project owner for the provided `_projectId`.
 * The resulting function overrides a function definition from the [`IJBPayoutRedemptionPaymentTerminal`](../../../../interfaces/ijbpayoutredemptionpaymentterminal.md) interface.
 * The function doesn't return anything.
 

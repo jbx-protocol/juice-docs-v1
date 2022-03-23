@@ -2,7 +2,7 @@
 
 Emitted from:
 
-* [`transferTo`](../write/transferto.md)
+* [`transferFrom`](../write/transferfrom.md)
 
 ## Definition
 

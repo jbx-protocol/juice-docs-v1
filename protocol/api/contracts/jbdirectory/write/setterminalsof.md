@@ -42,7 +42,7 @@ function setTerminalsOf(uint256 _projectId, IJBPaymentTerminal[] calldata _termi
 
     Internal references:
 
-    * [`_terminalsOf`](../properties/_termialsof.md)
+    * [`_terminalsOf`](../properties/_terminalsof.md)
 2.  Delete the project's current set of terminals from storage.
 
     ```solidity
@@ -52,7 +52,7 @@ function setTerminalsOf(uint256 _projectId, IJBPaymentTerminal[] calldata _termi
 
     Internal references:
 
-    * [`_terminalsOf`](../properties/_termialsof.md)
+    * [`_terminalsOf`](../properties/_terminalsof.md)
 
 3.  Make sure the same terminal isn't being set multiple times.
     ```solidity
@@ -145,7 +145,7 @@ function setTerminalsOf(uint256 _projectId, IJBPaymentTerminal[] calldata _termi
 {% tab title="Events" %}
 | Name                                                                          | Data                                                                                          |
 | ----------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
-| [**`SetTerminals`**](events/setterminals.md)         | <ul><li><code>uint256 indexed projectId</code></li><li><code>[`IJBPaymentTerminal`](../../interfaces/ijbpaymentterminal.md)[] indexed terminals</code></li><li><code>address caller</code></li></ul>                                            |
+| [**`SetTerminals`**](../events/setterminals.md)         | <ul><li><code>uint256 indexed projectId</code></li><li><code>[`IJBPaymentTerminal`](../../../interfaces/ijbpaymentterminal.md)[] indexed terminals</code></li><li><code>address caller</code></li></ul>                                            |
 {% endtab %}
 
 

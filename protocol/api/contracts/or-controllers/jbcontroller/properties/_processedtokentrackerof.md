@@ -1,4 +1,4 @@
-# \_processedTokenTrackerOf
+# _processedTokenTrackerOf
 
 Contract: [`JBController`](../)​‌
 

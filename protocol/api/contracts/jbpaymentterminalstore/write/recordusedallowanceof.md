@@ -101,8 +101,8 @@ function recordUsedAllowanceOf(
 
     _External references:_
 
-    * [`controllerOf`](../../../jbdirectory/properties/controllerof.md)
-    * [`distributionLimitOf`](../../../or-controllers/jbcontroller/read/distributionlimitof.md)
+    * [`controllerOf`](../../jbdirectory/properties/controllerof.md)
+    * [`distributionLimitOf`](../../or-controllers/jbcontroller/read/distributionlimitof.md)
 
 7.  Calculate how much of the balance will be used. If the currency of the allowance and the balance are the same, no price conversion is necessary. Otherwise, convert the allowance currency to that of the balance. 
 

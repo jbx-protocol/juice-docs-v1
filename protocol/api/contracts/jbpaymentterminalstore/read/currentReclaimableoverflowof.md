@@ -46,7 +46,7 @@ function currentReclaimableOverflowOf(
 
     _External references:_
 
-    * [`currentOf`](../../../jbfundingcyclestore/read/currentof.md)
+    * [`currentOf`](../../jbfundingcyclestore/read/currentof.md)
 
 2.  Get the amount of overflow to make the calculation with. Use the total overflow of all of the project's terminals if total overflow should be used, otherwise use the overflow of the provided terminal.
 
@@ -65,13 +65,13 @@ function currentReclaimableOverflowOf(
 
     _Internal references:_
 
-    * [`_overflowDuring`](\_overflowduring.md)
-    * [`_currentTotalOverflowOf`](\_currenttotaloverflowof.md)
+    * [`_overflowDuring`](_overflowduring.md)
+    * [`_currentTotalOverflowOf`](_currenttotaloverflowof.md)
 
     _External references:_
 
-    * [`decimals`](../../../TODO)
-    * [`currency`](../../../TODO)
+    * [`decimals`](../../or-abstract/jbpayoutredemptionpaymentterminal/properties/decimals.md)
+    * [`currency`](../../or-abstract/jbpayoutredemptionpaymentterminal/properties/currency.md)
 
 1.  Return the reclaimable overflow using the project's current funding cycle and the derived current overflow. If there's no current overflow, there's no reclaimable overflow.
 
@@ -85,7 +85,7 @@ function currentReclaimableOverflowOf(
 
     _Internal references:_
 
-    * [`_reclaimableOverflowDuring`](\_reclaimableoverflowduring.md)
+    * [`_reclaimableOverflowDuring`](_reclaimableoverflowduring.md)
 
 {% endtab %}
 

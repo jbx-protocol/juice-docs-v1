@@ -12,7 +12,7 @@ description: Manages and normalizes price feeds.
 
 ### **Addresses**
 
-Ethereum mainnet: _Not yet deployed_\
+Ethereum mainnet: _Not yet deployed_
 
 ### **Interfaces**
 

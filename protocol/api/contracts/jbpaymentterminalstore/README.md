@@ -13,7 +13,7 @@ Overview
 
 ### **Addresses**
 
-Ethereum mainnet: _Not yet deployed_\\
+Ethereum mainnet: _Not yet deployed_\
 
 ### **Interfaces**
 

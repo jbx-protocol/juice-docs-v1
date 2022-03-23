@@ -1,4 +1,4 @@
-# \_currentFeeDiscount
+# _currentFeeDiscount
 
 Contract: [`JBPayoutRedemptionPaymentTerminal`](../)​‌
 

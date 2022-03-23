@@ -56,7 +56,7 @@ function pay(
 
     _Virtual references:_
 
-    * [`_transferFrom`](\_transferFrom.md)
+    * [`_transferFrom`](_transferfrom.md)
 
 1.  Forward the call to the internal version of the function that is also used by other operations.
 
@@ -76,7 +76,7 @@ function pay(
 
     _Internal references:_
 
-    * [`_pay`](\_pay.md)
+    * [`_pay`](_pay.md)
 {% endtab %}
 
 {% tab title="Code" %}

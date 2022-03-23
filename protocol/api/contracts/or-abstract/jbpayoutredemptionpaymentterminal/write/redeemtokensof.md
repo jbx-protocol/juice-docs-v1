@@ -37,7 +37,7 @@ function redeemTokensOf(
   * `_beneficiary` is the address to send the terminal tokens to.
   * `_memo` is a memo to pass along to the emitted event.
   * `_metadata` are bytes to send along to the data source and delegate, if provided.
-* Through the [`requirePermission`](../../../or-abstract/jboperatable/modifiers/requirepermission.md) modifier, the function is only accessible by the token holder, or from an operator that has been given the [`JBOperations.REDEEM`](../../../libraries/jboperations.md) permission by the token holder.
+* Through the [`requirePermission`](../../../or-abstract/jboperatable/modifiers/requirepermission.md) modifier, the function is only accessible by the token holder, or from an operator that has been given the [`JBOperations.REDEEM`](../../../../libraries/jboperations.md) permission by the token holder.
 * The resulting function overrides a function definition from the [`IJBPayoutRedemptionPaymentTerminal`](../../../../interfaces/ijbpayoutredemptionpaymentterminal.md) interface.
 * The function returns the amount of terminal tokens that the tokens were redeemed for, as a fixed point number with the same amount of decimals as this terminal.
 

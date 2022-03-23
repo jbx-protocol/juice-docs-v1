@@ -37,7 +37,7 @@ function splitsOf(
 
     Internal references:
 
-    * [`_getStructsFor`](\_getstructsfor.md)
+    * [`_getStructsFor`](_getstructsfor.md)
 {% endtab %}
 
 {% tab title="Code" %}

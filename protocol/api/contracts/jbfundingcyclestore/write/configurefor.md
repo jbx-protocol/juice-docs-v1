@@ -76,7 +76,7 @@ function configureFor(
 
     _Internal references:_
 
-    * [`_configureIntrinsicpropertiesFor`](\_configureintrinsicpropertiesfor.md)
+    * [`_configureIntrinsicpropertiesFor`](_configureintrinsicpropertiesfor.md)
 6.  Store all of the user configuration properties provided. These properties can all be packed into one `uint256` storage slot. No need to store if the resulting stored value would be 0 since the storage slot defaults to 0.
 
     ```solidity
@@ -103,7 +103,7 @@ function configureFor(
 
     _Internal references:_
 
-    * [`_packAndStoreUserPropertiesOf`](\_packandstoreuserpropertiesof.md)
+    * [`_packedUserPropertiesOf`](../properties/_packeduserpropertiesof.md)
 7.  Store the provided metadata for the configuration. No need to store if the value is 0 since the storage slot defaults to 0.
 
     ```solidity
@@ -113,7 +113,7 @@ function configureFor(
 
     _Internal references:_
 
-    * [`_metadataOf`](../properties/\_metadataof.md)
+    * [`_metadataOf`](../properties/_metadataof.md)
 8.  Emit a `Configure` event with the relevant parameters.
 
     ```solidity
@@ -132,7 +132,7 @@ function configureFor(
 
     _Internal references:_
 
-    * [`_getStructFor`](../read/\_getstructfor.md)
+    * [`_getStructFor`](../read/_getstructfor.md)
 {% endtab %}
 
 {% tab title="Code" %}
@@ -220,7 +220,7 @@ function configureFor(
 {% tab title="Events" %}
 | Name                                      | Data                                                                                                                                                                                                                                                                                                                                                                                                         |
 | ----------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| [**`Configure`**](../events/configure.md) | <ul><li><code>uint256 indexed configuration</code></li><li><code>uint256 indexed projectId</code></li><code>[`JBFundingCycleData`](../../data-structures/jbfundingcycledata.md)data</code></li><li><code>uint256 metadata</code></li><li><code>uint256 mustStartAtOrAfter</code></li><li><code>address caller</code></li></ul> |
+| [**`Configure`**](../events/configure.md) | <ul><li><code>uint256 indexed configuration</code></li><li><code>uint256 indexed projectId</code></li><code>[`JBFundingCycleData`](../../../data-structures/jbfundingcycledata.md)data</code></li><li><code>uint256 metadata</code></li><li><code>uint256 mustStartAtOrAfter</code></li><li><code>address caller</code></li></ul> |
 {% endtab %}
 
 {% tab title="Bug bounty" %}

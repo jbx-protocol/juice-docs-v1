@@ -52,8 +52,8 @@ function totalOutstandingTokensOf(uint256 _projectId, uint256 _reservedRate)
 
     _Internal references:_
 
-    * [`_reservedTokenAmountFrom`](\_reservedtokenamountfrom.md)
-    * [`_processedTokenTrackerOf`](../properties/\_processedtokentrackerof.md)
+    * [`_reservedTokenAmountFrom`](_reservedtokenamountfrom.md)
+    * [`_processedTokenTrackerOf`](../properties/_processedtokentrackerof.md)
 
 3.  Return the sum of the total supply and the reserved tokens.
 

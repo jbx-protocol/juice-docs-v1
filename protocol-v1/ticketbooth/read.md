@@ -9,7 +9,7 @@ The total balance of tickets a holder has for a specified project, including sta
 **Params:**
 
 * **holder:** The ticket holder to get a balance for.
-* **\_projectId:** The project to get the \`\_hodler\`s balance of.
+* **_projectId:** The project to get the \`_hodler\`s balance of.
 
 **Returns:** The balance.
 

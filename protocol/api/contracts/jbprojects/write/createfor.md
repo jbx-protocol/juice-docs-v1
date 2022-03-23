@@ -47,7 +47,7 @@ function createFor(address _owner, JBProjectMetadata calldata _metadata)
 
     _Internal references:_
 
-    * [`_safeMint`](https://docs.openzeppelin.com/contracts/2.x/api/token/erc721#ERC721-\_safeMint-address-uint256-bytes-)
+    * [`_safeMint`](https://docs.openzeppelin.com/contracts/2.x/api/token/erc721#ERC721-_safeMint-address-uint256-bytes-)
 3.  If metadata was provided (meaning it's content is not an empty string), store it for newly created project under the provided domain.
 
     ```solidity
@@ -107,7 +107,7 @@ function createFor(address _owner, JBProjectMetadata calldata _metadata)
 {% tab title="Events" %}
 | Name                                | Data                                                                                                                                                                                                                                                  |
 | ----------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [**`Create`**](../events/create.md)                                                                          | <ul><li><code>uint256 indexed projectId</code></li><li><code>address indexed owner</code></li><li><code>[`JBProjectMetadata`](../../data-structures/jbprojectmetadata.md)metadata</code></li><li><code>address caller</code></li></ul>                  |{% endtab %}
+| [**`Create`**](../events/create.md)                                                                          | <ul><li><code>uint256 indexed projectId</code></li><li><code>address indexed owner</code></li><li><code>[`JBProjectMetadata`](../../../data-structures/jbprojectmetadata.md)metadata</code></li><li><code>address caller</code></li></ul>                  |{% endtab %}
 
 {% tab title="Bug bounty" %}
 | Category          | Description                                                                                                                            | Reward |

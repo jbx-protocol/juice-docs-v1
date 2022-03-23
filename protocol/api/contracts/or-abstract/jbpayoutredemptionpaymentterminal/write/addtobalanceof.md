@@ -63,7 +63,7 @@ function addToBalanceOf(
 
     _Internal references:_
 
-    * [`_refundHeldFees`](\_refundheldfees.md)
+    * [`_refundHeldFees`](_refundheldfees.md)
 4.  Emit a `AddToBalance` event with the relevant parameters.
 
     ```solidity

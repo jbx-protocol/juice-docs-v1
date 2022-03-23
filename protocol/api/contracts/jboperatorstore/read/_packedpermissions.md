@@ -1,4 +1,4 @@
-# \_packedPermissions
+# _packedPermissions
 
 Contract:[`JBOperatorStore`](../)​‌
 

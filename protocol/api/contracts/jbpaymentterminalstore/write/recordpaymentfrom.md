@@ -36,7 +36,7 @@ function recordPaymentFrom(
 
 * Arguments:
   * `_payer` is the original address that sent the payment to the terminal.
-  * `_amount` is a [`JBTokenAmount`](../../../interfaces/jbtokenamount.md) data structure specifying the amount of tokens being paid. Includes the token being paid, the value, the number of decimals included, and the currency of the amount.
+  * `_amount` is a [`JBTokenAmount`](../../../data-structures/jbtokenamount.md) data structure specifying the amount of tokens being paid. Includes the token being paid, the value, the number of decimals included, and the currency of the amount.
   * `_projectId` is the ID of the project being paid.
   * `_baseWeightCurrency` is the currency to base token issuance on.
   * `_memo` is a memo to pass along to the emitted event, and passed along to the funding cycle's data source.

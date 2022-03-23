@@ -34,7 +34,7 @@ function distributeReservedTokensOf(uint256 _projectId, string memory _memo)
 
     _Internal references:_
 
-    * [`_distributeReservedTokensOf`](\_distributereservedtokensof.md)
+    * [`_distributeReservedTokensOf`](_distributereservedtokensof.md)
 {% endtab %}
 
 {% tab title="Code" %}

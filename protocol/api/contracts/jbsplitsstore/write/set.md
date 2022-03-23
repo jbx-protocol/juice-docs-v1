@@ -51,7 +51,7 @@ function set(
 
     _Internal references:_
 
-    * [`_getStructsFor`](../read/\_getstructsfor.md)
+    * [`_getStructsFor`](../read/_getstructsfor.md)
     * two
 2.  Loop through each current split to make sure the new splits being set respect any current split bound by a lock constraint.
 
@@ -148,7 +148,7 @@ function set(
 
         _Internal references:_
 
-        * [`_packedSplitParts1Of`](../properties/\_packedsplitparts1of.md)
+        * [`_packedSplitParts1Of`](../properties/_packedsplitparts1of.md)
     6.  Pack less common split properties into another storage slot if needed. Otherwise, delete any content in storage at the index being iterated on.
 
        ```solidity
@@ -172,7 +172,7 @@ function set(
 
        _Internal references:_
 
-       * [`_packedSplitParts2Of`](../properties/\_packedsplitparts2of.md)
+       * [`_packedSplitParts2Of`](../properties/_packedsplitparts2of.md)
     7.  For each added split, emit a `SetSplit` event with all relevant parameters.
 
         ```solidity
@@ -191,7 +191,7 @@ function set(
 
     _Internal references:_
 
-    * [`_splitCountOf`](../properties/\_splitcountof.md)
+    * [`_splitCountOf`](../properties/_splitcountof.md)
 {% endtab %}
 
 {% tab title="Code" %}
@@ -319,7 +319,7 @@ function set(
 {% tab title="Events" %}
 | Name                                    | Data                                                                                                                                                                                                                 |
 | --------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [**`SetSplit`**](../events/setsplit.md) | <ul><li><code>uint256 indexed projectId</code></li><li><code>uint256 indexed domain</code></li><li><code>uint256 indexed group</code></li><li><code>[`JBSplit`](../../data-structures/jbsplit.md)split</code></li><li><code>address caller</code></li></ul> |
+| [**`SetSplit`**](../events/setsplit.md) | <ul><li><code>uint256 indexed projectId</code></li><li><code>uint256 indexed domain</code></li><li><code>uint256 indexed group</code></li><li><code>[`JBSplit`](../../../data-structures/jbsplit.md)split</code></li><li><code>address caller</code></li></ul> |
 {% endtab %}
 
 {% tab title="Bug bounty" %}

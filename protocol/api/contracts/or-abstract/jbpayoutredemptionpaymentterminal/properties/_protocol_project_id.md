@@ -1,4 +1,4 @@
-# \_PROTOCOL\_PROJECT\_ID
+# _PROTOCOL_PROJECT_ID
 
 Contract:[`JBPayoutRedemptionPaymentTerminal`](../)​‌
 

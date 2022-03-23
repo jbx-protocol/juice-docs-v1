@@ -1,4 +1,4 @@
-# \_distributeToPayoutSplitsOf
+# _distributeToPayoutSplitsOf
 
 Contract: [`JBPayoutRedemptionPaymentTerminal`](../)​‌
 
@@ -202,8 +202,8 @@ function _distributeToPayoutSplitsOf(
 
         * [`isFeelessTerminal`](../properties/isfeelessterminal.md)
         * [`pay`](pay.md)
-        * [`_pay`](\_pay.md)
-        * [`_feeAmount`](_feeamount.md)
+        * [`_pay`](_pay.md)
+        * [`_feeAmount`](../read/_feeamount.md)
         * [`_transferFrom`](_transferfrom.md)
 
         _External references:_

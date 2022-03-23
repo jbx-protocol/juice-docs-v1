@@ -38,7 +38,7 @@ function burn(
 
     _Inherited references:_
 
-    * [`_burn`](https://docs.openzeppelin.com/contracts/4.x/api/token/erc20#ERC20-\_burn-address-uint256-)
+    * [`_burn`](https://docs.openzeppelin.com/contracts/4.x/api/token/erc20#ERC20-_burn-address-uint256-)
 {% endtab %}
 
 {% tab title="Code" %}

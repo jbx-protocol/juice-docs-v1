@@ -1,4 +1,4 @@
-# \_splitCountOf
+# _splitCountOf
 
 Contract: [`JBSplitsStore`](../)​‌
 

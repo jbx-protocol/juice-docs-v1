@@ -32,7 +32,7 @@ _Only an address can set its own operators._
 
     _Internal references:_
 
-    * [`_packedPermissions`](../read/\_packedpermissions.md)
+    * [`_packedPermissions`](../read/_packedpermissions.md)
 2.  Store the packed permissions as the permissions of the provided operator, on behalf of the `msg.sender`, specifically for the provided domain.
 
      ```solidity

@@ -1,4 +1,4 @@
-# \_configureIntrinsicPropertiesFor
+# _configureIntrinsicPropertiesFor
 
 Contract:[`JBFundingCycleStore`](../)​
 
@@ -40,8 +40,8 @@ function _configureIntrinsicPropertiesFor(
     _Internal references:_
 
     * [`latestConfigurationOf`](../properties/latestconfigurationof.md)
-    * [`_initFor`](\_initfor.md)
-    * [`_getStructFor`](../read/\_getstructfor.md)
+    * [`_initFor`](_initfor.md)
+    * [`_getStructFor`](../read/_getstructfor.md)
 2.  If there's no standby funding cycle, get a reference to the project's eligible funding cycle. The configurable funding cycle will have to be initialized based on the eligible cycle.
 
     ```solidity
@@ -51,7 +51,7 @@ function _configureIntrinsicPropertiesFor(
 
     _Internal references:_
 
-    * [`_eligibleOf`](../read/\_eligibleof.md)
+    * [`_eligibleOf`](../read/_eligibleof.md)
 3.  If there is no eligible funding cycle for the project, get a reference instead to the project's latest funding cycle configuration, which may have been initialized long into the past.
 
     ```solidity
@@ -73,7 +73,7 @@ function _configureIntrinsicPropertiesFor(
 
     _Internal references:_
 
-    * [`_getStructFor`](../read/\_getstructfor.md)
+    * [`_getStructFor`](../read/_getstructfor.md)
 5.  If the configuration isn't approved, get a reference to the configuration it's based on which must be the latest approved configuration.
 
     ```solidity
@@ -85,8 +85,8 @@ function _configureIntrinsicPropertiesFor(
 
     _Internal references:_
 
-    * [`_isApproved`](../read/\_isapproved.md)
-    * [`_getStructFor`](../read/\_getstructfor.md)
+    * [`_isApproved`](../read/_isapproved.md)
+    * [`_getStructFor`](../read/_getstructfor.md)
 6.  At this point, the current configuration being referenced is the funding cycle configuration that the initialized one should be based on. Get a reference to the [`JBFundingCycle`](../../../data-structures/jbfundingcycle.md) for the configuration.
 
     ```solidity
@@ -96,7 +96,7 @@ function _configureIntrinsicPropertiesFor(
 
     _Internal references:_
 
-    * [`_getStructFor`](../read/\_getstructfor.md)
+    * [`_getStructFor`](../read/_getstructfor.md)
 7.  Get a reference to the time after which the base funding cycle's ballot will be resolved. The funding cycle that will be initialized can start any time after the base funding cycle's ballot's duration is up.
 
     ```solidity
@@ -125,7 +125,7 @@ function _configureIntrinsicPropertiesFor(
 
     _Internal references:_
 
-    * [`_initFor`](../read/\_initfor.md)
+    * [`_initFor`](./_initfor.md)
 {% endtab %}
 
 {% tab title="Code" %}

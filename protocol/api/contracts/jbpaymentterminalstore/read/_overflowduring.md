@@ -1,4 +1,4 @@
-# \_overflowDuring
+# _overflowDuring
 
 Contract: [`JBPaymentTerminalStore`](../)​‌
 

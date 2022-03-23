@@ -42,7 +42,7 @@ function overflowAllowanceOf(
 
     _Internal references:_
 
-    * [`_packedOverflowAllowanceDataOf`](../properties/\_packedoverflowallowancedataof.md)
+    * [`_packedOverflowAllowanceDataOf`](../properties/_packedoverflowallowancedataof.md)
 2.  Return the overflow allowance, which is in the first 248 bits, and the currency the overflow allowance is in terms of, which is in the last 8 bits.
 
     ```solidity

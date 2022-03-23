@@ -1,4 +1,4 @@
-# \_reclaimableOverflowDuring
+# _reclaimableOverflowDuring
 
 Contract: [`JBPaymentTerminalStore`](../)​‌
 

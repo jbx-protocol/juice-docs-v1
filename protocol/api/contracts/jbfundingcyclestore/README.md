@@ -12,7 +12,7 @@ description: Manages funding cycle configurations and scheduling.
 
 ### **Addresses**
 
-Ethereum mainnet: _Not yet deployed_\
+Ethereum mainnet: _Not yet deployed_
 
 ### **Interfaces**
 
@@ -33,7 +33,7 @@ constructor(IJBDirectory _directory) JBControllerUtility(_directory) {}
 ```
 
 * **Arguments:**
-  * `_directory` is an [`IJBDirectory`](../../../../protocol/interfaces/ijbdirectory.md) contract storing directories of terminals and controllers for each project.
+  * `_directory` is an [`IJBDirectory`](../../interfaces/ijbdirectory.md) contract storing directories of terminals and controllers for each project.
 
 ## Events
 
@@ -61,4 +61,4 @@ constructor(IJBDirectory _directory) JBControllerUtility(_directory) {}
 
 | Function                                    | Definition                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
 | ------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| [**`configureFor`**](write/configurefor.md) | <p><strong>Traits</strong></p><ul><li><code>[`onlyController`](../../../../protocol/api/contracts/jbcontrollerutility/modifiers/onlycontroller.md)</code></li></ul><p><strong>Params</strong></p><ul><li><code>uint256 _projectId</code></li><li><code>[`JBFundingCycleData`](../../../../protocol/data-structures/jbfundingcycledata.md)</code>_data</code></li><li><code>uint256 _metadata</code></li><li><code>uint256 _mustStartAtOrAfter</code></li></ul><p><strong>Returns</strong></p><ul><li><a href=""><code>[`JBFundingCycle`](../../../../protocol/data-structures/jbfundingcycle.md)fundingCycle</code></li></ul> |
+| [**`configureFor`**](write/configurefor.md) | <p><strong>Traits</strong></p><ul><li><code>[`onlyController`](../or-abstract/jbcontrollerutility/modifiers/onlycontroller.md)</code></li></ul><p><strong>Params</strong></p><ul><li><code>uint256 _projectId</code></li><li><code>[`JBFundingCycleData`](../../data-structures/jbfundingcycledata.md)</code>_data</code></li><li><code>uint256 _metadata</code></li><li><code>uint256 _mustStartAtOrAfter</code></li></ul><p><strong>Returns</strong></p><ul><li><a href=""><code>[`JBFundingCycle`](../../data-structures/jbfundingcycle.md)fundingCycle</code></li></ul> |

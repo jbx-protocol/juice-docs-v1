@@ -45,11 +45,11 @@ function currentOverflowOf(IJBPaymentTerminal _terminal, uint256 _projectId)
 
     _Internal references:_
 
-    * [`_overflowDuring`](\_overflowDuring.md)
+    * [`_overflowDuring`](_overflowduring.md)
 
     _External references:_
 
-    * [`currentOf`](../../../jbfundingcyclestore/read/currentOf.md)
+    * [`currentOf`](../../jbfundingcyclestore/read/currentof.md)
 {% endtab %}
 
 {% tab title="Code" %}

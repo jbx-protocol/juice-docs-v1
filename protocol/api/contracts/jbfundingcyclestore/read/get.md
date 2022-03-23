@@ -36,7 +36,7 @@ function get(uint256 _projectId, uint256 _configuration)
 
     _Internal references:_
 
-    * [`_getStructFor`](\_getstructfor.md)
+    * [`_getStructFor`](_getstructfor.md)
 {% endtab %}
 
 {% tab title="Code" %}

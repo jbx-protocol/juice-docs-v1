@@ -398,9 +398,9 @@ At any point, anyone can inject funds into a project's treasury via one of its t
  function addToBalanceOf(uint256 _projectId, string memory _memo) external payable override { ... }
 ```
 
-At any time after the project has been created, its owner can issue ERC-20 tokens for the protocol to use as its community token by calling [`JBController.issueTokenFor(...)`](../api/contracts/jbtokenstore/write/issuetokenfor.md). By default the protocol uses an internal accounting mechanism to account for projects' tokens.
+At any time after the project has been created, its owner can issue ERC-20 tokens for the protocol to use as its community token by calling [`JBController.issueTokenFor(...)`](../api/contracts/jbtokenstore/write/issuefor.md). By default the protocol uses an internal accounting mechanism to account for projects' tokens.
 
-A project can instead bring their own token, so long as it adheres to the [`IJBToken`](../api/interfaces/ijbtoken.md) interface. They can do so by calling [`JBController.changeTokenFor(...)`](../api/contracts/jbtokenstore/write/changetokenfor.md) This makes it easy to use ERC-1155's or custom contracts, and to change tokens over time to acheive a more creative design.
+A project can instead bring their own token, so long as it adheres to the [`IJBToken`](../api/interfaces/ijbtoken.md) interface. They can do so by calling [`JBController.changeTokenFor(...)`](../api/contracts/jbtokenstore/write/changefor.md) This makes it easy to use ERC-1155's or custom contracts, and to change tokens over time to acheive a more creative design.
 
 ```solidity
 function issueTokenFor(

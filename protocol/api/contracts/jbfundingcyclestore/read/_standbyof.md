@@ -1,4 +1,4 @@
-# \_standbyOf
+# _standbyOf
 
 Contract:[`JBFundingCycleStore`](../)​
 
@@ -43,7 +43,7 @@ function _standbyOf(uint256 _projectId) private view returns (uint256 configurat
 
     _Internal references:_
 
-    * [`_getStructFor`](\_getstructfor.md)
+    * [`_getStructFor`](_getstructfor.md)
 3.  If the cycle has started, return 0 since there is not a stored funding cycle in standby.
 
     ```solidity
@@ -65,7 +65,7 @@ function _standbyOf(uint256 _projectId) private view returns (uint256 configurat
 
     _Internal references:_
 
-    * [`_getStructFor`](\_getstructfor.md)
+    * [`_getStructFor`](_getstructfor.md)
 6.  It's possible that the latest cycle was configured to start at or after a date in the future that comes after another iteration of the currently active funding cycle. If this is the case, there is no immediately queued funding cycle.
 
     ```solidity

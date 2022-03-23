@@ -1,4 +1,4 @@
-# \_isApproved
+# _isApproved
 
 Contract:[`JBFundingCycleStore`](../)​
 
@@ -34,7 +34,7 @@ function _isApproved(uint256 _projectId, JBFundingCycle memory _fundingCycle)
 
     _Internal references:_
 
-    * [`_ballotStateOf`](\_ballotstateof.md)
+    * [`_ballotStateOf`](_ballotstateof.md)
 {% endtab %}
 
 {% tab title="Code" %}

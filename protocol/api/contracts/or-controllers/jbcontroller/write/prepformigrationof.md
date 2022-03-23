@@ -43,7 +43,7 @@ function prepForMigrationOf(uint256 _projectId, IJBController) external override
 
     _Internal references:_
 
-    * [`_processedTokenTrackerOf`](../properties/\_processedtokentrackerof.md)
+    * [`_processedTokenTrackerOf`](../properties/_processedtokentrackerof.md)
 3.  Emit a `PrepMigration` event with the relevant parameters.
 
     ```solidity

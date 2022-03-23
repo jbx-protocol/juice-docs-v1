@@ -1,4 +1,4 @@
-# \_addTerminalIfNeeded
+# _addTerminalIfNeeded
 
 Contract:[`JBDirectory`](../)​‌
 
@@ -41,7 +41,7 @@ function _addTerminalIfNeeded(uint256 _projectId, IJBPaymentTerminal _terminal) 
 
     Internal references:
 
-    * [`_terminalsOf`](../properties/\_terminalsof.md)
+    * [`_terminalsOf`](../properties/_terminalsof.md)
 3.  Emit a `AddTerminal` event with the relevant parameters.
 
     ```solidity

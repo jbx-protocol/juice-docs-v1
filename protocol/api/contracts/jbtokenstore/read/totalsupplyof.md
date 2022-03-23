@@ -52,7 +52,7 @@ function totalSupplyOf(uint256 _projectId) external view override returns (uint2
 
     _External references:_
 
-    * [`totalSupply`](../../jbtoken/read/totalsuppy.md)
+    * [`totalSupply`](../../jbtoken/read/totalsupply.md)
 {% endtab %}
 
 {% tab title="Code" %}

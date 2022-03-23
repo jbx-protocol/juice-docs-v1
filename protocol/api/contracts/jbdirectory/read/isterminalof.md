@@ -33,7 +33,7 @@ function isTerminalOf(uint256 _projectId, IJBPaymentTerminal _terminal)
 
     Internal references:
 
-    * [`_terminalsOf`](../properties/\_terminalsof.md)
+    * [`_terminalsOf`](../properties/_terminalsof.md)
 2.  If a terminal is not found, return false.
 
     ```solidity

@@ -1,4 +1,4 @@
-# \_configure
+# _configure
 
 {% tabs %}
 {% tab title="Step by step" %}
@@ -147,8 +147,8 @@ function _configure(
 
     _Internal references:_
 
-    * [`_packedDistributionLimitDataOf`](../properties/\_packeddistributionlimitdataof.md)
-    * [`_packedOverflowAllowanceDataOf`](../properties/\_packedoverflowallowancedataof.md)
+    * [`_packedDistributionLimitDataOf`](../properties/_packeddistributionlimitdataof.md)
+    * [`_packedOverflowAllowanceDataOf`](../properties/_packedoverflowallowancedataof.md)
 
     _Event references:_
 

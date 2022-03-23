@@ -139,7 +139,7 @@ function transferFrom(
 {% tab title="Events" %}
 | Name                                    | Data                                                                                                                                                                                                                        |
 | --------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [**`Transfer`**](events/transfer.md)                     | <ul><li><code>address indexed holder</code></li><li><code>uint256 indexed projectId</code></li><li><code>address indexed recipient</code></li><li><code>uint256 amount</code></li><li><code>address caller</code></li></ul>                                                   |
+| [**`Transfer`**](../events/transfer.md)                     | <ul><li><code>address indexed holder</code></li><li><code>uint256 indexed projectId</code></li><li><code>address indexed recipient</code></li><li><code>uint256 amount</code></li><li><code>address caller</code></li></ul>                                                   |
 {% endtab %}
 
 {% tab title="Bug bounty" %}

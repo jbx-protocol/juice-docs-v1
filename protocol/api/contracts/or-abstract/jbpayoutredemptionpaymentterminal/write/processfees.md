@@ -28,7 +28,7 @@ function processFees(uint256 _projectId)
 
 * Arguments:
   * `_projectId` is the ID of the project whos held fees should be processed.
-* Through the [`requirePermissionAllowingOverride`](../../../or-abstract/jboperatable/modifiers/requirepermissionallowingoverride.md) modifier, the function is only accessible by the project's owner, from an operator that has been given the [`JBOperations.PROCESS_FEES`](../../../libraries/jboperations.md) permission by the project owner for the provided `_projectId`, or from the owner of this contract.
+* Through the [`requirePermissionAllowingOverride`](../../../or-abstract/jboperatable/modifiers/requirepermissionallowingoverride.md) modifier, the function is only accessible by the project's owner, from an operator that has been given the [`JBOperations.PROCESS_FEES`](../../../../libraries/jboperations.md) permission by the project owner for the provided `_projectId`, or from the owner of this contract.
 * The function cannot be accessed recursively or while other `nonReentrant` functions in this contract are in progress.
 * The resulting function overrides a function definition from the [`IJBPayoutRedemptionPaymentTerminal`](../../../../interfaces/ijbpayoutredemptionpaymentterminal.md) interface.
 * The function doesn't return anything.
@@ -44,7 +44,7 @@ function processFees(uint256 _projectId)
 
     _Internal references:_
 
-    * [`_heldFeesOf`](../properties/\_heldFeesOf.md)
+    * [`_heldFeesOf`](../properties/_heldfeesof.md)
 2.  Remove all fees.
 
     ```solidity
@@ -54,7 +54,7 @@ function processFees(uint256 _projectId)
 
     _Internal references:_
 
-    * [`_heldFeesOf`](../properties/\_heldFeesOf.md)
+    * [`_heldFeesOf`](../properties/_heldfeesof.md)
 2.  Iterate through the array. Take fee's for each [`JBFee`](../../../../data-structures/jbfee.md) data structure.
 
     ```solidity

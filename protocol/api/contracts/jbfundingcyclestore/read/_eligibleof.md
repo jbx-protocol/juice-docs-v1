@@ -1,4 +1,4 @@
-# \_eligibleOf
+# _eligibleOf
 
 Contract:[`JBFundingCycleStore`](../)​
 
@@ -43,7 +43,7 @@ function _eligibleOf(uint256 _projectId) private view returns (uint256 configura
 
     _Internal references:_
 
-    * [`_getStructFor`](\_getstructfor.md)
+    * [`_getStructFor`](_getstructfor.md)
 3.  If the latest is expired, return an empty funding cycle since there can't be a stored eligible cycle.
 
     ```solidity
@@ -68,7 +68,7 @@ function _eligibleOf(uint256 _projectId) private view returns (uint256 configura
 
     _Internal references:_
 
-    * [`_getStructFor`](\_getstructfor.md)
+    * [`_getStructFor`](_getstructfor.md)
 6.  If the base is expired, return an empty funding cycle since there can't be a stored eligible cycle.
 
     ```solidity

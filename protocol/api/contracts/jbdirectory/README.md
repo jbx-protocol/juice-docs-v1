@@ -13,7 +13,7 @@ description: >-
 
 ### **Addresses**
 
-Ethereum mainnet: _Not yet deployed_\
+Ethereum mainnet: _Not yet deployed_
 
 ### **Interfaces**
 
@@ -54,7 +54,7 @@ constructor(IJBOperatorStore _operatorStore, IJBProjects _projects) JBOperatable
 
 | Function                                                                                   | Definition                                                                                                                                                                                                         |
 | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| [**`projects`**](../jbpaymentterminalstore/properties/projects.md) | <p><strong>Traits</strong></p><ul><li><code>immutable</code></li></ul><p><strong>Returns</strong></p><ul><li><code>[`IJBProjects`](../../interfaces/ijbprojects.md)projects</code></li></ul> |
+| [**`projects`**](properties/projects.md) | <p><strong>Traits</strong></p><ul><li><code>immutable</code></li></ul><p><strong>Returns</strong></p><ul><li><code>[`IJBProjects`](../../interfaces/ijbprojects.md)projects</code></li></ul> |
 | [**`controllerOf`**](properties/controllerof.md)                                           | <p><strong>Params</strong></p><ul><li><code>uint256 _projectId</code></li></ul><p><strong>Returns</strong></p><ul><li><code>[`IJBController`](../../interfaces/ijbcontroller.md)controllerOf</code></li></ul> |
 | [**`isAllowedToSetFirstController`**](properties/isallowedtosetfirstcontroller.md)                                           | <p><strong>Params</strong></p><ul><li><code>address _address</code></li></ul><p><strong>Returns</strong></p><ul><li><code>bool isAllowedToSetFirstController</code></li></ul> |
 

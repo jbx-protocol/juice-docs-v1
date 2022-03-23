@@ -49,7 +49,7 @@ function setPrimaryTerminalOf(uint256 _projectId, IJBPaymentTerminal _terminal)
 
     Internal references:
 
-    * [`_addTerminalIfNeeded`](\_addTerminalIfNeeded.md)
+    * [`_addTerminalIfNeeded`](./_addterminalifneeded.md)
 3.  Store the new terminal as the primary.
 
     ```solidity
@@ -59,7 +59,7 @@ function setPrimaryTerminalOf(uint256 _projectId, IJBPaymentTerminal _terminal)
 
     Internal references:
 
-    * [`_primaryTerminalOf`](../read/primaryTerminalOf.md)
+    * [`_primaryTerminalOf`](../properties/_primaryterminalof.md)
 4.  Emit a `SetPrimaryTerminal` event with the relevant parameters.
 
     ```solidity
@@ -106,7 +106,7 @@ function setPrimaryTerminalOf(uint256 _projectId, IJBPaymentTerminal _terminal)
 {% tab title="Events" %}
 | Name                                                        | Data                                                                                                                                                                                                                                                   |
 | ----------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| [**`SetPrimaryTerminal`**](events/setprimaryterminal.md) | <ul><li><code>uint256 indexed projectId</code></li><li><code>address indexed token</code></li><li><code>[`IJBPaymentTerminal`](../../interfaces/ijbpaymentterminal.md)indexed terminal</code></li><li><code>address caller</code></li></ul> |
+| [**`SetPrimaryTerminal`**](../events/setprimaryterminal.md) | <ul><li><code>uint256 indexed projectId</code></li><li><code>address indexed token</code></li><li><code>[`IJBPaymentTerminal`](../../../interfaces/ijbpaymentterminal.md)indexed terminal</code></li><li><code>address caller</code></li></ul> |
 {% endtab %}
 
 {% tab title="Bug bounty" %}
