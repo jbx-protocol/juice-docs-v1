@@ -20,7 +20,7 @@ function launchFundingCyclesFor(
   JBFundingCycleData calldata _data,
   JBFundingCycleMetadata calldata _metadata,
   uint256 _mustStartAtOrAfter,
-  JBGroupedSplits[] memory _groupedSplits,
+  JBGroupedSplits[] calldata _groupedSplits,
   JBFundAccessConstraints[] memory _fundAccessConstraints,
   IJBPaymentTerminal[] memory _terminals,
   string calldata _memo
@@ -133,7 +133,7 @@ function launchFundingCyclesFor(
   JBFundingCycleData calldata _data,
   JBFundingCycleMetadata calldata _metadata,
   uint256 _mustStartAtOrAfter,
-  JBGroupedSplits[] memory _groupedSplits,
+  JBGroupedSplits[] calldata _groupedSplits,
   JBFundAccessConstraints[] memory _fundAccessConstraints,
   IJBPaymentTerminal[] memory _terminals,
   string calldata _memo

@@ -19,9 +19,9 @@ function launchProjectFor(
   JBFundingCycleData calldata _data,
   JBFundingCycleMetadata calldata _metadata,
   uint256 _mustStartAtOrAfter,
-  JBGroupedSplits[] memory _groupedSplits,
-  JBFundAccessConstraints[] memory _fundAccessConstraints,
-  IJBPaymentTerminal[] memory _terminals,
+  JBGroupedSplits[] calldata _groupedSplits,
+  JBFundAccessConstraints[] calldata _fundAccessConstraints,
+  IJBPaymentTerminal[] calldata _terminals,
   string calldata _memo
 ) external override returns (uint256 projectId) { ... }
 ```
@@ -130,9 +130,9 @@ function launchProjectFor(
   JBFundingCycleData calldata _data,
   JBFundingCycleMetadata calldata _metadata,
   uint256 _mustStartAtOrAfter,
-  JBGroupedSplits[] memory _groupedSplits,
-  JBFundAccessConstraints[] memory _fundAccessConstraints,
-  IJBPaymentTerminal[] memory _terminals,
+  JBGroupedSplits[] calldata _groupedSplits,
+  JBFundAccessConstraints[] calldata _fundAccessConstraints,
+  IJBPaymentTerminal[] calldata _terminals,
   string calldata _memo
 ) external override returns (uint256 projectId) {
   // Mint the project into the wallet of the message sender.
