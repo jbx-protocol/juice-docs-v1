@@ -44,7 +44,7 @@ function addToBalanceOf(
     // If the terminal's token is ETH, override `_amount` with msg.value.
     else _amount = msg.value;
     ```
-2.  Forward the parameters to an internal version of the function.
+2.  Record the added balance.
 
     ```solidity
     // Record the added funds.
@@ -54,6 +54,25 @@ function addToBalanceOf(
     _Internal references:_
 
     * [`_addToBalance`](_addtobalance.md)
+3.  Refund any held fees. This is useful to allow a project to withdraw funds from the protocol and subsequently add them back without paying eventually having to pay double fees.
+
+    ```solidity
+    // Refund any held fees to make sure the project doesn't pay double for funds going in and out of the protocol.
+    _refundHeldFees(_projectId, msg.value);
+    ```
+
+    _Internal references:_
+
+    * [`_refundHeldFees`](\_refundheldfees.md)
+4.  Emit a `AddToBalance` event with the relevant parameters.
+
+    ```solidity
+    emit AddToBalance(_projectId, msg.value, _memo, msg.sender);
+    ```
+
+    _Event references:_
+
+    * [`AddToBalance`](../events/addtobalance.md)
 {% endtab %}
 
 {% tab title="Code" %}
@@ -88,9 +107,15 @@ function addToBalanceOf(
 {% endtab %}
 
 {% tab title="Errors" %}
-| String                       | Description                                             |
-| ---------------------------- | ------------------------------------------------------- |
-| **`NO_MSG_VALUE_ALLOWED`** | Thrown if ETH was sent to a non-ETH terminal. |
+| String                | Description                             |
+| --------------------- | --------------------------------------- |
+| **`ZERO_VALUE_SENT`** | Thrown if the transaction had no value. |
+{% endtab %}
+
+{% tab title="Events" %}
+| Name                                            | Data                                                                                                                                                             |
+| ----------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [**`AddToBalance`**](../events/addtobalance.md) | <ul><li><code>uint256 indexed projectId</code></li><li><code>uint256 value</code></li><li><code>string memo</code></li><li><code>address caller</code></li></ul> |
 {% endtab %}
 
 {% tab title="Bug bounty" %}

@@ -121,12 +121,14 @@ function useAllowanceOf(
 
         * [`_takeFeeFrom`](./_takefeefrom.md)
 
-    4.  Send the net amount to the beneficiary.
+    4.  Send the net amount to the beneficiary if needed.
 
         ```solidity
+        // The net amount is the withdrawn amount without the fee.
+        uint256 _netAmount = _distributedAmount - _feeAmount;
+
         // Transfer any remaining balance to the beneficiary.
-        if (_netAmount > 0)
-          _transferFrom(address(this), _beneficiary, _distributedAmount - _feeAmount);
+        if (_netAmount > 0) _transferFrom(address(this), _beneficiary, _netAmount);
         ```
 
         _Virtual references:_
@@ -200,7 +202,7 @@ function useAllowanceOf(
   // Define variables that will be needed outside the scoped section below.
   uint256 _feeAmount;
 
-  // Scoped section prevents stack too deep. `_projectOwner` and `_feeDiscount` only used within scope.
+  // Scoped section prevents stack too deep. `_projectOwner`, `_feeDiscount`, and `_netAmount` only used within scope.
   {
     // Get a reference to the project owner, which will receive tokens from paying the platform fee.
     address _projectOwner = projects.ownerOf(_projectId);
@@ -216,9 +218,11 @@ function useAllowanceOf(
       ? 0
       : _takeFeeFrom(_projectId, _fundingCycle, _distributedAmount, _projectOwner, _feeDiscount);
 
+    // The net amount is the withdrawn amount without the fee.
+    uint256 _netAmount = _distributedAmount - _feeAmount;
+
     // Transfer any remaining balance to the beneficiary.
-    if (_netAmount > 0)
-      _transferFrom(address(this), _beneficiary, _distributedAmount - _feeAmount);
+    if (_netAmount > 0) _transferFrom(address(this), _beneficiary, _netAmount);
   }
 
   emit UseAllowance(

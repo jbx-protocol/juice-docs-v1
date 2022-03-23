@@ -2,9 +2,11 @@
 
 Contract: [`JBPayoutRedemptionPaymentTerminal`](../)​‌
 
+Interface: [`IJBPayoutRedemptionPaymentTerminal`](../../../../interfaces/ijbpayoutredemptionpaymentterminal.md)
+
 {% tabs %}
 {% tab title="Step by step" %}
-**Allows the fee to be updated for subsequent funding cycle configurations.**
+**Allows the fee to be updated.**
 
 _Only the owner of this contract can change the fee._
 
@@ -15,20 +17,22 @@ function setFee(uint256 _fee) external onlyOwner { ... }
 ```
 
 * Arguments:
-  * `_fee` is the new fee.
-* Through the `onlyOwner` modifier, the function can only be accessed by the owner of this contract.
+  * `_fee` is the new fee, out of MAX_FEE.
+* Through the [`onlyOwner`](https://docs.openzeppelin.com/contracts/2.x/api/ownership#Ownable-onlyOwner--) modifier, the function can only be accessed by the owner of this contract.
 * The function doesn't return anything.
 
 #### Body
 
-1.  Make sure the proposed fee is less than the max fee of 5%.
+1.  Make sure the proposed fee is less than the max fee.
 
     ```solidity
-    // The max fee is 5%.
-    if (_fee > _MAX_FEE) {
-      revert FEE_TOO_HIGH();
-    }
+    // The provided fee must be within the max.
+    if (_fee > _FEE_CAP) revert FEE_TOO_HIGH();
     ```
+
+    _Internal references:_
+
+    * [`_FEE_CAP`](../properties/_fee_cap.md)
 2.  Store the new fee.
 
     ```solidity
@@ -48,20 +52,18 @@ function setFee(uint256 _fee) external onlyOwner { ... }
 
 {% tab title="Code" %}
 ```solidity
-/** 
+/**
   @notice
-  Allows the fee to be updated for subsequent funding cycle configurations.
+  Allows the fee to be updated.
 
   @dev
   Only the owner of this contract can change the fee.
 
-  @param _fee The new fee.
+  @param _fee The new fee, out of MAX_FEE.
 */
-function setFee(uint256 _fee) external onlyOwner {
-  // The max fee is 5%.
-  if (_fee > _MAX_FEE) {
-    revert FEE_TOO_HIGH();
-  }
+function setFee(uint256 _fee) external virtual override onlyOwner {
+  // The provided fee must be within the max.
+  if (_fee > _FEE_CAP) revert FEE_TOO_HIGH();
 
   // Store the new fee.
   fee = _fee;
@@ -80,7 +82,7 @@ function setFee(uint256 _fee) external onlyOwner {
 {% tab title="Events" %}
 | Name                                | Data                                                                           |
 | ----------------------------------- | ------------------------------------------------------------------------------ |
-| [**`SetFee`**](../events/setfee.md) | <ul><li><code>uint256 fee</code></li><li><code>address caller</code></li></ul> |
+| [**`SetFee`**](../events/setfee.md)                                                 | <ul><li><code>uint256 fee</code></li><li><code>address caller</code></li></ul>                                                                                                                                                                                                                                            |
 {% endtab %}
 
 {% tab title="Bug bounty" %}

@@ -6,7 +6,7 @@ Interface: [`IJBPayoutRedemptionPaymentTerminal`](../../../../interfaces/ijbpayo
 
 {% tabs %}
 {% tab title="Step by step" %}
-**Allows a project owner to migrate its funds and operations to a new terminal.**
+**Allows a project owner to migrate its funds and operations to a new terminal of the same token type.**
 
 _Only a project's owner or a designated operator can migrate it._
 
@@ -15,8 +15,8 @@ _Only a project's owner or a designated operator can migrate it._
 ```solidity
 function migrate(uint256 _projectId, IJBPaymentTerminal _to)
   external
+  virtual
   override
-  nonReentrant
   requirePermission(projects.ownerOf(_projectId), _projectId, JBOperations.MIGRATE_TERMINAL) { ... }
 ```
 
@@ -24,8 +24,7 @@ function migrate(uint256 _projectId, IJBPaymentTerminal _to)
   * `_projectId` is the ID of the project being migrated.
   * `_to` is the terminal contract that will gain the project's funds.
 * Through the [`requirePermission`](../../../or-abstract/jboperatable/modifiers/requirepermission.md) modifier, the function is only accessible by the project's owner, or from an operator that has been given the [`JBOperations.MIGRATE_TERMINAL`](../../../libraries/jboperations.md) permission by the project owner for the provided `_projectId`.
-* The function cannot be accessed recursively or while other `nonReentrant` functions in this contract are in progress.
-* The resulting function overrides a function definition from the `IJBPayoutRedemptionPaymentTerminal` interface.
+* The resulting function overrides a function definition from the [`IJBPayoutRedemptionPaymentTerminal`](../../../../interfaces/ijbpayoutredemptionpaymentterminal.md) interface.
 * The function doesn't return anything.
 
 #### Body
@@ -34,9 +33,7 @@ function migrate(uint256 _projectId, IJBPaymentTerminal _to)
 
     ```solidity
     // The terminal being migrated to must accept the same token as this terminal.
-    if (token != _to.token()) {
-      revert TERMINAL_TOKENS_INCOMPATIBLE();
-    }
+    if (token != _to.token()) revert TERMINAL_TOKENS_INCOMPATIBLE();
     ```
 
     _Internal references:_
@@ -51,14 +48,25 @@ function migrate(uint256 _projectId, IJBPaymentTerminal _to)
 
     _External references:_
 
-    * [`recordMigration`](../../jbpaymentterminalstore/write/recordmigration.md)
-3.  If there's a balance to migrate, move the funds over to the new terminal.
+    * [`recordMigration`](../../../jbpaymentterminalstore/write/recordmigration.md)
+3.  If there's a balance to migrate, move the funds over to the new terminal. Send ETH along with the transaction if this terminal is an ETH terminal. Make sure any inherited pre-transfer logic is called before transfering. 
 
     ```solidity
-    if (_balance > 0)
+    // Transfer the balance if needed.
+    if (_balance > 0) {
+      _beforeTransferTo(address(_to), _balance);
+
+      // If this terminal's token is ETH, send it in msg.value.
+      uint256 _payableValue = token == JBTokens.ETH ? _balance : 0;
+
       // Withdraw the balance to transfer to the new terminal;
-      _to.addToBalanceOf{value: _balance}(_projectId, '');
+      _to.addToBalanceOf{value: _payableValue}(_balance, _projectId, '');
+    }
     ```
+
+    _Virtual references:_
+
+    * [`_beforeTransferTo`](_beforetransferto.md)
 
     _Internal references:_
 
@@ -78,7 +86,7 @@ function migrate(uint256 _projectId, IJBPaymentTerminal _to)
 ```solidity
 /**
   @notice
-  Allows a project owner to migrate its funds and operations to a new terminal.
+  Allows a project owner to migrate its funds and operations to a new terminal of the same token type.
 
   @dev
   Only a project's owner or a designated operator can migrate it.
@@ -88,21 +96,26 @@ function migrate(uint256 _projectId, IJBPaymentTerminal _to)
 */
 function migrate(uint256 _projectId, IJBPaymentTerminal _to)
   external
+  virtual
   override
-  nonReentrant
   requirePermission(projects.ownerOf(_projectId), _projectId, JBOperations.MIGRATE_TERMINAL)
 {
   // The terminal being migrated to must accept the same token as this terminal.
-  if (token != _to.token()) {
-    revert TERMINAL_TOKENS_INCOMPATIBLE();
-  }
+  if (token != _to.token()) revert TERMINAL_TOKENS_INCOMPATIBLE();
 
   // Record the migration in the store.
   uint256 _balance = store.recordMigration(_projectId);
 
-  if (_balance > 0)
+  // Transfer the balance if needed.
+  if (_balance > 0) {
+    _beforeTransferTo(address(_to), _balance);
+
+    // If this terminal's token is ETH, send it in msg.value.
+    uint256 _payableValue = token == JBTokens.ETH ? _balance : 0;
+
     // Withdraw the balance to transfer to the new terminal;
-    _to.addToBalanceOf{value: _balance}(_projectId, '');
+    _to.addToBalanceOf{value: _payableValue}(_balance, _projectId, '');
+  }
 
   emit Migrate(_projectId, _to, _balance, msg.sender);
 }
@@ -118,7 +131,7 @@ function migrate(uint256 _projectId, IJBPaymentTerminal _to)
 {% tab title="Events" %}
 | Name                                       | Data                                                                                                                                                                                                                                               |
 | ------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [**`Migrate`**](../events/addtobalance.md) | <ul><li><code>uint256 indexed projectId</code></li><li><a href="../../../../interfaces/ijbpaymentterminal.md"><code>IJBPaymentTerminal</code></a><code>indexed terminal</code></li><li><code>uint256 amount</code></li><li><code>address caller</code></li></ul> |
+| [**`Migrate`**](../events/migrate.md)                                 | <ul><li><code>uint256 indexed projectId</code></li><li><code>[`IJBPaymentTerminal`](../../../interfaces/ijbpaymentterminal.md)indexed to</code></li><li><code>uint256 amount</code></li><li><code>address caller</code></li></ul>                                                                                                                                                                                                                                 |
 {% endtab %}
 
 {% tab title="Bug bounty" %}
