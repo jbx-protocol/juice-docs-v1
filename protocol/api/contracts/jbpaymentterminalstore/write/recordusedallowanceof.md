@@ -2,6 +2,8 @@
 
 Contract: [`JBPaymentTerminalStore`](../)​‌
 
+Interface: [`JBPaymentTerminalStore`](../../../interfaces/ijbpaymentterminalstore.md)
+
 {% tabs %}
 {% tab title="Step by step" %}
 **Records newly used allowance funds of a project.**
@@ -28,6 +30,7 @@ function recordUsedAllowanceOf(
   * `_amount` is the amount to use from the allowance, as a fixed point number. 
   * `_currency` is the currency of the `_amount`. Must match the currency of the overflow allowance.
   * `_balanceCurrency` is the currency that the balance is expected to be in terms of.
+* The resulting function overrides a function definition from the [`JBPaymentTerminalStore`](../../../interfaces/ijbpaymentterminalstore.md) interface.
 * The function returns:
   * `fundingCycle` is the funding cycle during which the withdrawal was made.
   * `usedAmount` is the amount of terminal tokens used, as a fixed point number with the same amount of decimals as its relative terminal.

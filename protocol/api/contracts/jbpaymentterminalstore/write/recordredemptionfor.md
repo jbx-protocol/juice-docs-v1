@@ -2,6 +2,8 @@
 
 Contract: [`JBPaymentTerminalStore`](../)​‌
 
+Interface: [`JBPaymentTerminalStore`](../../../interfaces/ijbpaymentterminalstore.md)
+
 {% tabs %}
 {% tab title="Step by step" %}
 **Records newly redeemed tokens of a project.**
@@ -41,6 +43,7 @@ function recordRedemptionFor(
   * `_balanceCurrency` is the currency that the returned `reclaimAmount` is expected to be in terms of.
   * `_memo` is a memo to pass along to the emitted event.
   * `_metadata` are bytes to send along to the data source, if one is provided.
+* The resulting function overrides a function definition from the [`JBPaymentTerminalStore`](../../../interfaces/ijbpaymentterminalstore.md) interface.
 * The function returns:
   * `fundingCycle` is the funding cycle during which the redemption was made.
   * `reclaimAmount` is the amount of terminal tokens reclaimed, as a fixed point number with 18 decimals.

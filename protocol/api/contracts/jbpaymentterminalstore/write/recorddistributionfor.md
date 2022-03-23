@@ -2,6 +2,8 @@
 
 Contract: [`JBPaymentTerminalStore`](../../../jbdirectory/write/)​‌
 
+Interface: [`JBPaymentTerminalStore`](../../../interfaces/ijbpaymentterminalstore.md)
+
 {% tabs %}
 {% tab title="Step by step" %}
 **Records newly distributed funds for a project.**
@@ -28,6 +30,7 @@ function recordDistributionFor(
   * `_amount` is the amount to use from the distribution limit, as a fixed point number.
   * `_currency` is the currency of the `_amount`. This must match the project's current funding cycle's currency.
   * `_balanceCurrency` is the currency that the balance is expected to be in terms of.
+* The resulting function overrides a function definition from the [`JBPaymentTerminalStore`](../../../interfaces/ijbpaymentterminalstore.md) interface.
 * The function returns:
   * `fundingCycle` is the funding cycle during which the withdrawal was made.
   * `distributedAmount` is the amount of terminal tokens distributed, as a fixed point number with the same amount of decimals as its relative terminal.

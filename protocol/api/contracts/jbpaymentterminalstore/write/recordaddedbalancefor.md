@@ -2,6 +2,8 @@
 
 Contract: [`JBPaymentTerminalStore`](../)​‌
 
+Interface: [`JBPaymentTerminalStore`](../../../interfaces/ijbpaymentterminalstore.md)
+
 {% tabs %}
 {% tab title="Step by step" %}
 **Records newly added funds for the project.**
@@ -19,6 +21,7 @@ function recordAddedBalanceFor(uint256 _projectId, uint256 _amount)
 * Arguments:
   * `_projectId` is the ID of the project to which the funds being added belong.
   * `_amount` is the amount of temrinal tokens added, as a fixed point number with the same amount of decimals as its relative terminal.
+* The resulting function overrides a function definition from the [`JBPaymentTerminalStore`](../../../interfaces/ijbpaymentterminalstore.md) interface.
 * The function doesn't return anything.
 
 #### Body

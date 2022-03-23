@@ -2,6 +2,8 @@
 
 Contract: [`JBPaymentTerminalStore`](../)​‌
 
+Interface: [`JBPaymentTerminalStore`](../../../interfaces/ijbpaymentterminalstore.md)
+
 {% tabs %}
 {% tab title="Step by step" %}
 **Records newly contributed tokens to a project.**
@@ -39,6 +41,7 @@ function recordPaymentFrom(
   * `_baseWeightCurrency` is the currency to base token issuance on.
   * `_memo` is a memo to pass along to the emitted event, and passed along to the funding cycle's data source.
   * `_metadata` are bytes to send along to the data source, if one is provided.
+* The resulting function overrides a function definition from the [`JBPaymentTerminalStore`](../../../interfaces/ijbpaymentterminalstore.md) interface.
 * The function returns:
   * `fundingCycle` is the project's funding cycle during which payment was made.
   * `tokenCount` is the number of project tokens that were minted, as a fixed point number with 18 decimals.

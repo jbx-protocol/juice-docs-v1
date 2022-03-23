@@ -2,6 +2,8 @@
 
 Contract: [`JBPaymentTerminalStore`](../)​‌
 
+Interface: [`JBPaymentTerminalStore`](../../../interfaces/ijbpaymentterminalstore.md)
+
 {% tabs %}
 {% tab title="Step by step" %}
 **Records the migration of funds from this store.**
@@ -20,6 +22,7 @@ function recordMigration(uint256 _projectId)
 
 * Arguments:
   * `_projectId` is the ID of the project being migrated.
+* The resulting function overrides a function definition from the [`JBPaymentTerminalStore`](../../../interfaces/ijbpaymentterminalstore.md) interface.
 * The function returns the project's migrated balance, as a fixed point number with the same amount of decimals as its relative terminal.
 
 #### Body
