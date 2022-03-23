@@ -1,6 +1,6 @@
 # _heldFeesOf
 
-Contract:[`JBETHPaymentTerminal`](../)​‌
+Contract:[`JBPayoutRedemptionPaymentTerminal`](../)​‌
 
 **Fees that are being held to be processed later.** 
 
@@ -8,7 +8,7 @@ Contract:[`JBETHPaymentTerminal`](../)​‌
 
 ```solidity
 /**
-  @notice 
+  @notice
   Fees that are being held to be processed later.
 
   _projectId The ID of the project for which fees are being held.

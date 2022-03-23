@@ -1,6 +1,6 @@
 # \_takeFee
 
-Contract: [`JBETHPaymentTerminal`](../)​‌
+Contract: [`JBPayoutRedemptionPaymentTerminal`](../)​‌
 
 {% tabs %}
 {% tab title="Step by step" %}

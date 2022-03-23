@@ -1,19 +1,19 @@
-# token
+# decimals
 
 Contract: [`JBPayoutRedemptionPaymentTerminal`](../)​‌
 
 Interface: [`IJBPaymentTerminal`](../../../../interfaces/ijbpaymentterminal.md)
 
-**The token that this terminal accepts.**
+**The currency to use when resolving price feeds for this terminal.**
 
 # Definition
 
 ```solidity
 /**
   @notice
-  The token that this terminal accepts.
+  The currency to use when resolving price feeds for this terminal.
 */
-address public immutable override token;
+uint256 public immutable override currency;
 ```
 
 * The value cannot be changed.

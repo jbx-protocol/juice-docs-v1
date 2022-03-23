@@ -1,6 +1,6 @@
 # pay
 
-Contract: [`JBETHPaymentTerminal`](../)​‌
+Contract: [`JBPayoutRedemptionPaymentTerminal`](../)​‌
 
 Interface: [`IJBPaymentTerminal`](../../../../interfaces/ijbpaymentterminal.md)
 

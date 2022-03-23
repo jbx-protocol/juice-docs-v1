@@ -1,6 +1,6 @@
 # addToBalanceOf
 
-Contract: [`JBETHPaymentTerminal`](../)​‌
+Contract: [`JBPayoutRedemptionPaymentTerminal`](../)​‌
 
 Interface: [`IJBPaymentTerminal`](../../../../interfaces/ijbtokenstore.md)
 

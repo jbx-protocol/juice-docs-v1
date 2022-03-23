@@ -1,19 +1,19 @@
-# token
+# decimals
 
 Contract: [`JBPayoutRedemptionPaymentTerminal`](../)​‌
 
 Interface: [`IJBPaymentTerminal`](../../../../interfaces/ijbpaymentterminal.md)
 
-**The token that this terminal accepts.**
+**The number of decimals the token fixed point amounts are expected to have.**
 
 # Definition
 
 ```solidity
 /**
   @notice
-  The token that this terminal accepts.
+  The number of decimals the token fixed point amounts are expected to have.
 */
-address public immutable override token;
+uint256 public immutable override decimals;
 ```
 
 * The value cannot be changed.

@@ -17,5 +17,5 @@ event Migrate(
 
 * `projectId` is the ID of the project that was migrated.
 * `to` is the terminal that was migrated to.
-* `amount` is the total ETH amount that was migrated.
+* `amount` is the total token amount that was migrated.
 * `caller` is the address that issued the transaction within which the event was emitted.

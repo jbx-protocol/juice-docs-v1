@@ -1,6 +1,6 @@
 # processFees
 
-Contract: [`JBETHPaymentTerminal`](../)​‌
+Contract: [`JBPayoutRedemptionPaymentTerminal`](../)​‌
 
 {% tabs %}
 {% tab title="Step by step" %}
@@ -26,7 +26,7 @@ function processFees(uint256 _projectId)
   * `_projectId` is thhe ID of the project whos held fees should be processed.
 * Through the [`requirePermissionAllowingOverride`](../../../or-abstract/jboperatable/modifiers/requirepermissionallowingoverride.md) modifier, the function is only accessible by the project's owner, from an operator that has been given the [`JBOperations.PROCESS_FEES](../../../libraries/jboperations.md)` permission by the project owner for the provided `_projectId`, or from the owner of this contract.
 * The function cannot be accessed recursively or while other `nonReentrant` functions in this contract are in progress.
-* The resulting function overrides a function definition from the `IJBETHPaymentTerminal` interface.
+* The resulting function overrides a function definition from the `IJBPayoutRedemptionPaymentTerminal` interface.
 * The function doesn't return anything.
 
 #### Body

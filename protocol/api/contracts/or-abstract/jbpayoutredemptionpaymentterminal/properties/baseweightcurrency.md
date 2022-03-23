@@ -1,25 +1,26 @@
-# fee
+# decimals
 
 Contract: [`JBPayoutRedemptionPaymentTerminal`](../)​‌
 
 Interface: [`IJBPayoutRedemptionPaymentTerminal`](../../../../interfaces/ijbpayoutredemptionpaymentterminal.md)
 
-**The platform fee percent.**
+**The currency to base token issuance on.**
 
-_Out of 200._
+_If this differs from `currency`, there must be a price feed available to convert `currency` to `baseWeightCurrency`._
 
 # Definition
 
 ```solidity
 /**
   @notice
-  The platform fee percent.
+  The currency to base token issuance on.
 
   @dev
-  Out of MAX_FEE (25_000_000 / 1_000_000_000)
+  If this differs from `currency`, there must be a price feed available to convert `currency` to `baseWeightCurrency`.
 */
-uint256 public override fee = 25_000_000; // 2.5%
+uint256 public immutable override baseWeightCurrency;
 ```
 
+* The value cannot be changed.
 * The resulting view function can be accessed externally by anyone.
 * The resulting function overrides a function definition from the [`IJBPayoutRedemptionPaymentTerminal`](../../../../interfaces/ijbpayoutredemptionpaymentterminal.md) interface.

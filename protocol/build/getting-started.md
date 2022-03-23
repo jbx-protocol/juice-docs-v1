@@ -170,7 +170,7 @@ function controllerOf(uint256 _projectId) external view override returns (IJBCon
 
 </details>
 
-Once a project has been created, it can begin accepting funds from anyone. ETH can be sent to the project by calling [`JBETHPaymentTerminal.pay(...)`](../api/contracts/or-abstract/jbpayoutredemptionpaymentterminal/write/pay.md).
+Once a project has been created, it can begin accepting funds from anyone. ETH can be sent to the project by calling [`JBPayoutRedemptionPaymentTerminal.pay(...)`](../api/contracts/or-abstract/jbpayoutredemptionpaymentterminal/write/pay.md).
 
 ```solidity
 function pay(
@@ -240,7 +240,7 @@ function reservedTokenBalanceOf(uint256 _projectId, uint256 _reservedRate)
 
 </details>
 
-At any point, anyone can distribute a project's funds up to its current funding cycle's distribution limit to its preprogrammed payout splits by calling [`JBETHPaymentTerminal.distributePayoutsOf(...)`](../api/contracts/or-abstract/jbpayoutredemptionpaymentterminal/write/distributepayoutsof.md).
+At any point, anyone can distribute a project's funds up to its current funding cycle's distribution limit to its preprogrammed payout splits by calling [`JBPayoutRedemptionPaymentTerminal.distributePayoutsOf(...)`](../api/contracts/or-abstract/jbpayoutredemptionpaymentterminal/write/distributepayoutsof.md).
 
 ```solidity
 function distributePayoutsOf(
@@ -265,7 +265,7 @@ function usedDistributionLimitOf(
 ) external view override returns (uint256) { ... }
 ```
 
-The remaining allowed distribution a project can make from a terminal during a funding cycle can be found using [`JBETHPaymentTerminal.remainingDistributionLimitOf(...)`](../api/contracts/or-abstract/jbpayoutredemptionpaymentterminal/read/remainingdistributionlimitof.md).
+The remaining allowed distribution a project can make from a terminal during a funding cycle can be found using [`JBPayoutRedemptionPaymentTerminal.remainingDistributionLimitOf(...)`](../api/contracts/or-abstract/jbpayoutredemptionpaymentterminal/read/remainingdistributionlimitof.md).
 
 ```solidity
 function remainingDistributionLimitOf(
@@ -358,7 +358,7 @@ function distributeReservedTokensOf(uint256 _projectId, string memory _memo)
   returns (uint256) { ... }
 ```
 
-Anyone who holds your project's tokens can burn them for a proportional share of the project's overflow by calling [`JBETHPaymentTerminal.redeemTokensOf(...)`](../api/contracts/or-abstract/jbpayoutredemptionpaymentterminal/write/redeemtokensof.md). The overflow amount is the treasury's balance minus the current funding cycle's distribution limit.
+Anyone who holds your project's tokens can burn them for a proportional share of the project's overflow by calling [`JBPayoutRedemptionPaymentTerminal.redeemTokensOf(...)`](../api/contracts/or-abstract/jbpayoutredemptionpaymentterminal/write/redeemtokensof.md). The overflow amount is the treasury's balance minus the current funding cycle's distribution limit.
 
 Redeeming tokens allows your token holders to exit the community at any time with their share of the funds.
 
@@ -407,7 +407,7 @@ function currentBallotStateOf(uint256 _projectId) external view override returns
 
 </details>
 
-At any point, anyone can inject funds into a project's treasury by calling [`JBETHPaymentTerminal.addToBalanceOf(...)`](../api/contracts/or-abstract/jbpayoutredemptionpaymentterminal/write/addtobalanceof.md).
+At any point, anyone can inject funds into a project's treasury by calling [`JBPayoutRedemptionPaymentTerminal.addToBalanceOf(...)`](../api/contracts/or-abstract/jbpayoutredemptionpaymentterminal/write/addtobalanceof.md).
 
 ```solidity
  function addToBalanceOf(uint256 _projectId, string memory _memo) external payable override { ... }

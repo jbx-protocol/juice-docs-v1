@@ -1,25 +1,24 @@
-# fee
+# isFeelessTerminal
 
 Contract: [`JBPayoutRedemptionPaymentTerminal`](../)​‌
 
 Interface: [`IJBPayoutRedemptionPaymentTerminal`](../../../../interfaces/ijbpayoutredemptionpaymentterminal.md)
 
-**The platform fee percent.**
-
-_Out of 200._
+**Terminals that can be paid towards from this terminal without incurring a fee.**
 
 # Definition
 
 ```solidity
 /**
   @notice
-  The platform fee percent.
+  Terminals that can be paid towards from this terminal without incurring a fee.
 
-  @dev
-  Out of MAX_FEE (25_000_000 / 1_000_000_000)
+  _terminal The terminal that can be paid toward.
 */
-uint256 public override fee = 25_000_000; // 2.5%
+mapping(IJBPaymentTerminal => bool) public override isFeelessTerminal;
 ```
 
+* Arguments:
+  * `_terminal` is the terminal that can be paid toward.
 * The resulting view function can be accessed externally by anyone.
 * The resulting function overrides a function definition from the [`IJBPayoutRedemptionPaymentTerminal`](../../../../interfaces/ijbpayoutredemptionpaymentterminal.md) interface.

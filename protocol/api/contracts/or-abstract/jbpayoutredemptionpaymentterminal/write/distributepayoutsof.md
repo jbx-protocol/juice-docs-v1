@@ -2,7 +2,7 @@
 
 Contract: [`JBPaymentTerminalStore`](../)​‌
 
-Interface: [`IJBETHPaymentTerminal`](../../../../interfaces/ijbethpaymentterminal.md)
+Interface: [`IJBPayoutRedemptionPaymentTerminal`](../../../../interfaces/ijbpayoutredemptionpaymentterminal.md)
 
 {% tabs %}
 {% tab title="Step by step" %}
@@ -31,7 +31,7 @@ function distributePayoutsOf(
   * `_minReturnedWei` is the minimum number of wei that the amount should be valued at.
 * The function can be accessed externally by anyone.
 * The function cannot be accessed recursively or while other `nonReentrant` functions in this contract are in progress.
-* The resulting function overrides a function definition from the `IJBETHPaymentTerminal` interface.
+* The resulting function overrides a function definition from the `IJBPayoutRedemptionPaymentTerminal` interface.
 * The function returns doesn't return anything.
 
 #### Body

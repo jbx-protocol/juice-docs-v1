@@ -1,7 +1,7 @@
-# IJBETHPaymentTerminal
+# IJBPayoutRedemptionPaymentTerminal
 
 ```solidity
-interface IJBETHPaymentTerminal {
+interface IJBPayoutRedemptionPaymentTerminal {
   event AddToBalance(uint256 indexed projectId, uint256 amount, string memo, address caller);
   event Migrate(uint256 indexed projectId, IJBPaymentTerminal indexed to, uint256 amount, address caller);
   event DistributePayouts(

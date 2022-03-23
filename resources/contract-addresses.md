@@ -90,4 +90,4 @@ JBController: [`0xd2eEEdB22f075eBFf0a2A7D38781AA320CBc357E`](https://rinkeby.eth
 
 JBPaymentTerminalStore: [`0x92239434A7d0D17c4d8F876C7DB75E54680Bc85e`](https://rinkeby.etherscan.io/address/0x92239434A7d0D17c4d8F876C7DB75E54680Bc85e)
 
-JBETHPaymentTerminal: [`0x9d5687A9A175308773Bb289159Aa61D326E3aDB5`](https://rinkeby.etherscan.io/address/0x9d5687A9A175308773Bb289159Aa61D326E3aDB5)
+JBPayoutRedemptionPaymentTerminal: [`0x9d5687A9A175308773Bb289159Aa61D326E3aDB5`](https://rinkeby.etherscan.io/address/0x9d5687A9A175308773Bb289159Aa61D326E3aDB5)

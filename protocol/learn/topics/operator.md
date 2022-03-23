@@ -29,9 +29,9 @@ An address can set operators for its project through the [`JBOperatorStore.setOp
 * [`JBController.issueTokenFor(...)`](../../api/contracts/or-controllers/jbcontroller/write/issuetokenfor.md)
 * [`JBController.changeTokenOf(...)`](../../api/contracts/or-controllers/jbcontroller/write/changetokenof.md)
 * [`JBController.migrate(...)`](../../api/contracts/or-abstract/jbpayoutredemptionpaymentterminal/write/migrate.md)
-* [`JBETHPaymentTerminal.useAllowanceOf(...)`](../../api/contracts/or-abstract/jbpayoutredemptionpaymentterminal/write/useallowanceof.md)
-* [`JBETHPaymentTerminal.migrate(...)`](../../api/contracts/or-abstract/jbpayoutredemptionpaymentterminal/write/migrate.md)
-* [`JBETHPaymentTerminal.processFees(...)`](../../api/contracts/or-abstract/jbpayoutredemptionpaymentterminal/write/processfees.md)
+* [`JBPayoutRedemptionPaymentTerminal.useAllowanceOf(...)`](../../api/contracts/or-abstract/jbpayoutredemptionpaymentterminal/write/useallowanceof.md)
+* [`JBPayoutRedemptionPaymentTerminal.migrate(...)`](../../api/contracts/or-abstract/jbpayoutredemptionpaymentterminal/write/migrate.md)
+* [`JBPayoutRedemptionPaymentTerminal.processFees(...)`](../../api/contracts/or-abstract/jbpayoutredemptionpaymentterminal/write/processfees.md)
 * [`JBProjects.setMetadataOf(...)`](../../api/contracts/jbprojects/write/setmetadataof.md)
 * [`JBSplitsStore.set(...)`](../../api/contracts/jbsplitsstore/write/set.md)
 * [`JBTokenStore.shouldRequireClaimingFor(...)`](../../api/contracts/jbtokenstore/write/shouldrequireclaimingfor.md)
@@ -43,5 +43,5 @@ An address can set operators for its project through the [`JBOperatorStore.setOp
 The following transactions can be reached by token holders, or by operator addresses explicitly allowed by the address that owns the tokens.  If the tokens change hands, the operators for the address must be set again by the new holder.
 
 * [`JBController.burnTokensOf(...)`](../../api/contracts/or-controllers/jbcontroller/write/burntokensof.md)
-* [`JBETHPaymentTerminal.redeemTokensOf(...)`](../../api/contracts/or-abstract/jbpayoutredemptionpaymentterminal/write/redeemtokensof.md)
+* [`JBPayoutRedemptionPaymentTerminal.redeemTokensOf(...)`](../../api/contracts/or-abstract/jbpayoutredemptionpaymentterminal/write/redeemtokensof.md)
 * [`JBTokenStore.transferTo(...)`](../../api/contracts/jbtokenstore/write/transferto.md)

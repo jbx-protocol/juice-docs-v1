@@ -1,21 +1,21 @@
 # splitStore
 
-Contract: [`JBETHPaymentTerminal`](../)​‌
+Contract: [`JBPayoutRedemptionPaymentTerminal`](../)​‌
 
-Interface: [`IJBETHPaymentTerminal`](../../../../interfaces/ijbethpaymentterminal.md)
+Interface: [`IJBPayoutRedemptionPaymentTerminal`](../../../../interfaces/ijbpayoutredemptionpaymentterminal.md)
 
 **The contract that stores splits for each project.**
 
 # Definition
 
 ```solidity
-/** 
-  @notice 
+/**
+  @notice
   The contract that stores splits for each project.
 */
-IJBSplitsStore public immutable splitsStore;
+IJBSplitsStore public immutable override splitsStore;
 ```
 
 * The value cannot be changed.
 * The resulting view function can be accessed externally by anyone.
-* The resulting function overrides a function definition from the `IJBETHPaymentTerminal` interface.
+* The resulting function overrides a function definition from the [`IJBPayoutRedemptionPaymentTerminal`](../../../../interfaces/ijbpayoutredemptionpaymentterminal.md) interface.

@@ -43,10 +43,10 @@ The last core contract stores info about which surface contracts each project is
 There are currently 3 surface contracts that manage how projects manage funds and define how all core contracts should be used together. Anyone can write new surface contracts for projects to use.
 
 * [`JBController`](../api/contracts/or-controllers/jbcontroller/) stitches together funding cycles and community tokens, allowing for curated control, accounting, and token management.
-* [`JBETHPaymentTerminal`](../api/contracts/or-abstract/jbpayoutredemptionpaymentterminal/) manages all inflows and outflows of ETH into the Juicebox ecosystem.
-* [`JBPaymentTerminalStore`](../api/contracts/jbpaymentterminalstore/) manages balance accounting data on the `JBETHPaymentTerminal`'s behalf.
+* [`JBPayoutRedemptionPaymentTerminal`](../api/contracts/or-abstract/jbpayoutredemptionpaymentterminal/) manages all inflows and outflows of ETH into the Juicebox ecosystem.
+* [`JBPaymentTerminalStore`](../api/contracts/jbpaymentterminalstore/) manages balance accounting data on the `JBPayoutRedemptionPaymentTerminal`'s behalf.
 
-The `JBETHPaymentTerminal` inherits from the `IJBPaymentTerminal` interface. Projects are welcome to roll their own `IJBPaymentTerminal` to accept funds through. This can be useful to accept other tokens as payment, bypass protocol fees, or attempt some other funky design. A project can add/remove terminals from the Core [`JBDirectory`](../api/contracts/jbdirectory/) Contract using the [`JBDirectory.addTerminalsOf(...)`](../api/contracts/jbdirectory/write/addterminalsof.md) and [`JBDirectory.removeTerminalOf(...)`](../api/contracts/jbdirectory/write/removeterminalof.md) functions.
+The `JBPayoutRedemptionPaymentTerminal` inherits from the `IJBPaymentTerminal` interface. Projects are welcome to roll their own `IJBPaymentTerminal` to accept funds through. This can be useful to accept other tokens as payment, bypass protocol fees, or attempt some other funky design. A project can add/remove terminals from the Core [`JBDirectory`](../api/contracts/jbdirectory/) Contract using the [`JBDirectory.addTerminalsOf(...)`](../api/contracts/jbdirectory/write/addterminalsof.md) and [`JBDirectory.removeTerminalOf(...)`](../api/contracts/jbdirectory/write/removeterminalof.md) functions.
 
 Likewise, a project can bring their own contract to serve as its controller. A project's controller is the only contract that has direct access to manipulate its tokens and funding cycles.
 
