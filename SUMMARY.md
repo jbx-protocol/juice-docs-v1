@@ -343,6 +343,8 @@
         * [Read](protocol/api/contracts/or-abstract/jbpayoutredemptionpaymentterminal/read/README.md)
           * [currentEthOverflowOf](protocol/api/contracts/or-abstract/jbpayoutredemptionpaymentterminal/read/currentethoverflowof.md)
           * [heldFeesOf](protocol/api/contracts/or-abstract/jbpayoutredemptionpaymentterminal/read/heldfeesof.md)
+          * [_feeAmount](protocol/api/contracts/or-abstract/jbpayoutredemptionpaymentterminal/read/_feeamount.md)
+          * [_currentFeeDiscount](protocol/api/contracts/or-abstract/jbpayoutredemptionpaymentterminal/read/_currentfeediscount.md)
         * [Write](protocol/api/contracts/or-abstract/jbpayoutredemptionpaymentterminal/write/README.md)
           * [pay](protocol/api/contracts/or-abstract/jbpayoutredemptionpaymentterminal/write/pay.md)
           * [distributePayoutsOf](protocol/api/contracts/or-abstract/jbpayoutredemptionpaymentterminal/write/distributepayoutsof.md)

@@ -21,7 +21,7 @@ function _getStructsFor(
   * `_domain` is an identifier within which the returned splits should be considered active.
   * `_group` is the identifying group of the splits.
 * The view function is private to this contract.
-* The function does not alter state on the blockchain.
+* The view function does not alter state on the blockchain.
 * The function returns an array of [`JBSplit`](../../../data-structures/jbsplit.md)s.
 
 #### Body
@@ -33,7 +33,7 @@ function _getStructsFor(
     uint256 _splitCount = _splitCountOf[_projectId][_domain][_group];
     ```
 
-    Internal references:
+    _Internal references:_
 
     * [`_splitCountOf`](../properties/\_splitcountof.md)
 2.  Inititalize an array with length equal to the number of splits expected.
@@ -77,7 +77,7 @@ function _getStructsFor(
     }
     ```
 
-    Internal references:
+    _Internal references:_
 
     * [`_packedSplitParts1Of`](../properties/\_packedsplitparts1of.md)
     * [`_packedSplitParts2Of`](../properties/\_packedsplitparts2of.md)
