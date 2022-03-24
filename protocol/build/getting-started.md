@@ -12,9 +12,14 @@ Add the ABI's to the project.
 npm install @jbx-protocol/contracts-v2
 ```
 
-If referencing from a contract, include the ABI's where you need them.
+If referencing from typescript:
+```typescript
+const contract = require(`@jbx-protocol/contracts-v2/deployments/${network}/${contractName}.json`)
+```
+
+If referencing from a contract:
 ```solidity
-import '@jbx-protocol/contracts-v2/[needed-files]'
+import '@jbx-protocol/contracts-v2/[file-path]'
 ```
 
 #### Workflows
