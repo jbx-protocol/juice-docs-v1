@@ -52,7 +52,7 @@ function queuedOf(uint256 _projectId)
 3.  If there is a stanby cycle and it is approved, it must be the queued funding cycle for the project. Otherwise get a reference to the funding cycle structure based on the yet-to-be-approved standby configuration.
 
     ```solidity
-    // If it exists, return it's funding cycle if it is approved
+    // If it exists, return its funding cycle if it is approved.
     if (_standbyFundingCycleConfiguration > 0) {
       fundingCycle = _getStructFor(_projectId, _standbyFundingCycleConfiguration);
 
@@ -150,7 +150,7 @@ function queuedOf(uint256 _projectId)
   // Get a reference to the configuration of the standby funding cycle.
   uint256 _standbyFundingCycleConfiguration = _standbyOf(_projectId);
 
-  // If it exists, return it's funding cycle if it is approved
+  // If it exists, return its funding cycle if it is approved.
   if (_standbyFundingCycleConfiguration > 0) {
     fundingCycle = _getStructFor(_projectId, _standbyFundingCycleConfiguration);
 

@@ -8,7 +8,7 @@ Interface: [`IJBPayoutRedemptionPaymentTerminal`](../../../../interfaces/ijbpayo
 {% tab title="Step by step" %}
 **Holders can redeem their tokens to claim the project's overflowed tokens, or to trigger rules determined by the project's current funding cycle's data source.**
 
-_Only a token holder or a designated operator can redeem it's tokens._
+_Only a token holder or a designated operator can redeem its tokens._
 
 #### Definition
 
@@ -175,7 +175,7 @@ function redeemTokensOf(
   Holders can redeem their tokens to claim the project's overflowed tokens, or to trigger rules determined by the project's current funding cycle's data source.
 
   @dev
-  Only a token holder or a designated operator can redeem it's tokens.
+  Only a token holder or a designated operator can redeem its tokens.
 
   @param _holder The account to redeem tokens for.
   @param _projectId The ID of the project to which the tokens being redeemed belong.

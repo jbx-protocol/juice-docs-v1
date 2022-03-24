@@ -53,4 +53,4 @@ In payment terminals based on the [`JBPayoutRedemptionPaymentTerminal`](../../ap
 
 ### Attaching
 
-An allocator contract should be deployed independently. Once deployed, it's address can be configured into a project's payout splits or reserved token splits so that any distribution triggered while the funding cycle is active sends the relevant token to the allocator contract's `allocat(...)` hook. 
+An allocator contract should be deployed independently. Once deployed, its address can be configured into a project's payout splits or reserved token splits so that any distribution triggered while the funding cycle is active sends the relevant token to the allocator contract's `allocat(...)` hook. 

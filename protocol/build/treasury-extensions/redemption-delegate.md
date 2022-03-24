@@ -53,4 +53,4 @@ Make sure to only allow trusted contracts to access the `didPay(...)` transactio
 
 ### Attaching
 
-A delegate contract should be deployed independently. Once deployed, it's address can be returned from a data source hook. See [how to build a data source](./data-source.md) for more.
+A delegate contract should be deployed independently. Once deployed, its address can be returned from a data source hook. See [how to build a data source](./data-source.md) for more.

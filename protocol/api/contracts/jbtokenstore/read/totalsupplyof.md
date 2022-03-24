@@ -43,10 +43,10 @@ function totalSupplyOf(uint256 _projectId) external view override returns (uint2
     _Internal references:_
 
     * [`tokenOf`](../properties/tokenof.md)
-3.  If the project has a current token, add it's total supply to the total.
+3.  If the project has a current token, add its total supply to the total.
 
     ```solidity
-    // If the project has a current token, add it's total supply to the total.
+    // If the project has a current token, add its total supply to the total.
     if (_token != IJBToken(address(0))) totalSupply = totalSupply + _token.totalSupply(_projectId);
     ```
 
