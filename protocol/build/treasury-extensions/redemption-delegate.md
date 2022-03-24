@@ -3,7 +3,7 @@
 Before implementing, learn about delegates [here](../../learn/topics/delegate.md).
 ### Specs
 
-A contract can become a treasury redemption delegate by adhering to [`IJBRedemptionDelegate`](../../api/interfaces/ijbredemptiondelegate.md:
+A contract can become a treasury redemption delegate by adhering to [`IJBRedemptionDelegate`](../../api/interfaces/ijbredemptiondelegate.md):
 
 ```solidity
 interface IJBRedemptionDelegate {
