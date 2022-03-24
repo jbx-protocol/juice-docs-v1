@@ -1,6 +1,6 @@
-## Build | Data source
+# Data source
 
-TBefore implementing, learn about data sources [here](../../learn/topics/data-source.md).
+Before implementing, learn about data sources [here](../../learn/topics/data-source.md).
 ### Specs
 
 A contract can become a treasury data source by adhering to [`IJBFundingCycleDataSource`](../../api/interfaces/ijbfundingcycledatasource.md):
