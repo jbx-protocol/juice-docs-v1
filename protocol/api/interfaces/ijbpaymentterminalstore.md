@@ -2,6 +2,29 @@
 
 ```solidity
 interface IJBPaymentTerminalStore {
+  function fundingCycleStore() external view returns (IJBFundingCycleStore);
+
+  function directory() external view returns (IJBDirectory);
+
+  function prices() external view returns (IJBPrices);
+
+  function balanceOf(IJBPaymentTerminal _terminal, uint256 _projectId)
+    external
+    view
+    returns (uint256);
+
+  function usedDistributionLimitOf(
+    IJBPaymentTerminal _terminal,
+    uint256 _projectId,
+    uint256 _fundingCycleNumber
+  ) external view returns (uint256);
+
+  function usedOverflowAllowanceOf(
+    IJBPaymentTerminal _terminal,
+    uint256 _projectId,
+    uint256 _fundingCycleConfiguration
+  ) external view returns (uint256);
+
   function currentOverflowOf(IJBPaymentTerminal _terminal, uint256 _projectId)
     external
     view
@@ -13,17 +36,17 @@ interface IJBPaymentTerminalStore {
     uint256 _currency
   ) external view returns (uint256);
 
-  function reclaimableOverflowOf(
+  function currentReclaimableOverflowOf(
     IJBPaymentTerminal _terminal,
     uint256 _projectId,
-    uint256 _tokenCount
+    uint256 _tokenCount,
+    bool _useTotalOverflow
   ) external view returns (uint256);
 
   function recordPaymentFrom(
     address _payer,
     JBTokenAmount memory _amount,
     uint256 _projectId,
-    address _beneficiary,
     uint256 _baseWeightCurrency,
     string calldata _memo,
     bytes calldata _metadata
@@ -33,6 +56,23 @@ interface IJBPaymentTerminalStore {
       JBFundingCycle memory fundingCycle,
       uint256 tokenCount,
       IJBPayDelegate delegate,
+      string memory memo
+    );
+
+  function recordRedemptionFor(
+    address _holder,
+    uint256 _projectId,
+    uint256 _tokenCount,
+    uint256 _balanceDecimals,
+    uint256 _balanceCurrency,
+    string calldata _memo,
+    bytes calldata _metadata
+  )
+    external
+    returns (
+      JBFundingCycle memory fundingCycle,
+      uint256 reclaimAmount,
+      IJBRedemptionDelegate delegate,
       string memory memo
     );
 
@@ -50,27 +90,7 @@ interface IJBPaymentTerminalStore {
     uint256 _balanceCurrency
   ) external returns (JBFundingCycle memory fundingCycle, uint256 withdrawnAmount);
 
-  function recordRedemptionFor(
-    address _holder,
-    uint256 _projectId,
-    uint256 _tokenCount,
-    uint256 _balanceDecimals,
-    uint256 _balanceCurrency,
-    address payable _beneficiary,
-    string calldata _memo,
-    bytes calldata _metadata
-  )
-    external
-    returns (
-      JBFundingCycle memory fundingCycle,
-      uint256 reclaimAmount,
-      IJBRedemptionDelegate delegate,
-      string memory memo
-    );
-
-  function recordAddedBalanceFor(uint256 _projectId, uint256 _amount)
-    external
-    returns (JBFundingCycle memory fundingCycle);
+  function recordAddedBalanceFor(uint256 _projectId, uint256 _amount) external;
 
   function recordMigration(uint256 _projectId) external returns (uint256 balance);
 }

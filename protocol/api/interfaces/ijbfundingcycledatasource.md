@@ -8,18 +8,16 @@ interface IJBFundingCycleDataSource {
     returns (
       uint256 weight,
       string memory memo,
-      IJBPayDelegate delegate,
-      bytes memory delegateMetadata
+      IJBPayDelegate delegate
     );
 
   function redeemParams(JBRedeemParamsData calldata _param)
     external
     view
     returns (
-      uint256 amount,
+      uint256 reclaimAmount,
       string memory memo,
-      IJBRedemptionDelegate delegate,
-      bytes memory delegateMetadata
+      IJBRedemptionDelegate delegate
     );
 }
 ```
