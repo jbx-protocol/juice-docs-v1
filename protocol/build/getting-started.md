@@ -292,10 +292,9 @@ function usedOverflowAllowanceOf(
 
 </details>
 
-The protocol 
-<details>
-
 The protocol uses price feeds to convert values from one currency to another when distributing payouts, using overflow allowance, issuing project tokens when payments are received in various currencies, and more Current currency indexes can be found in [`JBCurrencies`](../api/libraries/jbcurrencies.md), and new currencies and price feeds can be added by the protocol's maintainers in the future.
+
+<details>
 
 <summary>View price conversions</summary>
 
