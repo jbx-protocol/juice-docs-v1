@@ -4,7 +4,7 @@ Contract: [`JBPayoutRedemptionPaymentTerminal`](../)​‌
 
 {% tabs %}
 {% tab title="Step by step" %}
-**Logic to be triggered before transfering tokens from this terminal.**
+**Logic to be triggered before transferring tokens from this terminal.**
 
 # Definition
 
@@ -28,7 +28,7 @@ _Empty_
 ```solidity
 /** 
   @notice
-  Logic to be triggered before transfering tokens from this terminal.
+  Logic to be triggered before transferring tokens from this terminal.
 
   ignored: _to The address to which the transfer is going.
   ignored: _amount The amount of the transfer, as a fixed point number with the same number of decimals as this terminal.

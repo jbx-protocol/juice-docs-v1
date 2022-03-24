@@ -49,7 +49,7 @@ function migrate(uint256 _projectId, IJBPaymentTerminal _to)
     _External references:_
 
     * [`recordMigration`](../../../jbpaymentterminalstore/write/recordmigration.md)
-3.  If there's a balance to migrate, move the funds over to the new terminal. Send ETH along with the transaction if this terminal is an ETH terminal. Make sure any inherited pre-transfer logic is called before transfering. 
+3.  If there's a balance to migrate, move the funds over to the new terminal. Send ETH along with the transaction if this terminal is an ETH terminal. Make sure any inherited pre-transfer logic is called before transferring. 
 
     ```solidity
     // Transfer the balance if needed.

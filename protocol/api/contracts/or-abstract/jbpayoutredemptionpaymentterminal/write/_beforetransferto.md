@@ -2,14 +2,14 @@
 
 Contract: [`JBPayoutRedemptionPaymentTerminal`](../)​‌
 
-**Logic to be triggered before transfering tokens from this terminal.**
+**Logic to be triggered before transferring tokens from this terminal.**
 
 # Definition
 
 ```solidity
 /** 
   @notice
-  Logic to be triggered before transfering tokens from this terminal.
+  Logic to be triggered before transferring tokens from this terminal.
 
   @param _to The address to which the transfer is going.
   @param _amount The amount of the transfer, as a fixed point number with the same number of decimals as this terminal.

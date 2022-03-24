@@ -4,7 +4,7 @@ Contract: [`JBPayoutRedemptionPaymentTerminal`](../)​‌
 
 {% tabs %}
 {% tab title="Step by step" %}
-**Logic to be triggered before transfering tokens from this terminal.**
+**Logic to be triggered before transferring tokens from this terminal.**
 
 # Definition
 
@@ -20,7 +20,7 @@ function _beforeTransferTo(address, uint256) internal override { ...}
 
 #### Body
 
-1.  Before transfering tokens to another address, approve that address to pull the specified amount of tokens from this contract.
+1.  Before transferring tokens to another address, approve that address to pull the specified amount of tokens from this contract.
 
     ```solidity
     IERC20(token).approve(_to, _amount);
@@ -36,7 +36,7 @@ function _beforeTransferTo(address, uint256) internal override { ...}
 ```solidity
 /** 
   @notice
-  Logic to be triggered before transfering tokens from this terminal.
+  Logic to be triggered before transferring tokens from this terminal.
 
   @param _to The address to which the transfer is going.
   @param _amount The amount of the transfer, as a fixed point number with the same number of decimals as this terminal.
