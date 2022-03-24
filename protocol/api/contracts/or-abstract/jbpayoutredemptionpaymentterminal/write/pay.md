@@ -8,8 +8,6 @@ Interface: [`IJBPaymentTerminal`](../../../../interfaces/ijbpaymentterminal.md)
 {% tab title="Step by step" %}
 **Contribute tokens to a project.**
 
-_The msg.value is the amount of the contribution in wei._
-
 #### Definition
 
 ```solidity
