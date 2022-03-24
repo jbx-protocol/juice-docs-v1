@@ -1,4 +1,5 @@
-# Build | Data source
+### Build
+# Data source
 
 Before implementing, learn about data sources [here](../../learn/topics/data-source.md).
 ## Specs
