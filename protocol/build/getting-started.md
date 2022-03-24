@@ -6,7 +6,7 @@ description: How to begin interacting with the protocol.
 
 #### Import
 
-Add the ABI's to the project.
+Add the protocol files to the project.
 ```bash
 # command line
 npm install @jbx-protocol/contracts-v2
