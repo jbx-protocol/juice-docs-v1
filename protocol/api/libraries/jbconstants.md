@@ -1,10 +1,6 @@
 # JBConstant
 
 ```solidity
-/**
-  @notice
-  Global constants used across multiple Juicebox contracts.
-*/
 library JBConstants {
   /** 
     @notice
@@ -29,6 +25,12 @@ library JBConstants {
     Maximum splits percentage.
   */
   uint256 public constant SPLITS_TOTAL_PERCENT = 1000000000;
+
+  /** 
+    @notice
+    Maximum fee rate as a percentage out of 1000000000
+  */
+  uint256 public constant MAX_FEE = 1000000000;
 
   /** 
     @notice
