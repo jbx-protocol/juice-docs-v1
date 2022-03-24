@@ -31,7 +31,7 @@ There are two functions that must be implemented, `payParams(...)` and `redeemPa
 
 #### Pay
 
-When extending the pay functionality, the protocol will pass a [`JBPayParamsData`](../../api/data-structures/jbpayparamsdata.md) to the `payParams(...)` function:
+When extending the pay functionality with a data source, the protocol will pass a [`JBPayParamsData`](../../api/data-structures/jbpayparamsdata.md) to the `payParams(...)` function:
 
 ```solidity
 struct JBPayParamsData {
@@ -62,7 +62,7 @@ struct JBTokenAmount {
   uint256 value;
   // The number of decimals included in the value fixed point number.
   uint256 decimals;
-  // The expected currency index of the value.
+  // The expected currency of the value.
   uint256 currency;
 }
 ```
@@ -77,7 +77,7 @@ The `payParams(...)` function can also revert if it's presented with any conditi
 
 #### Redeem
  
-When extending the redeem functionality, the protocol will pass a [`JBRedeemParamsData`](../../api/data-structures/jbredeemparamsdata.md) to the `redeemParams(...)` function:
+When extending the redeem functionality with a data source, the protocol will pass a [`JBRedeemParamsData`](../../api/data-structures/jbredeemparamsdata.md) to the `redeemParams(...)` function:
 
 ```solidity
 struct JBRedeemParamsData {

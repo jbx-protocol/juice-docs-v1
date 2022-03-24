@@ -14,4 +14,4 @@
 * A data source contract can be specified in a funding cycle, along with flags that indicate if the funding cycle should `useDataSourceForPay` and/or `useDataSourceForRedeem`. These are set either in [`JBController.launchProjectFor(...)`](../../api/contracts/or-controllers/jbcontroller/write/launchprojectfor.md) or [`JBController.reconfigureFundingCyclesOf(...)`](../../api/contracts/or-controllers/jbcontroller/write/reconfigurefundingcyclesof.md).
 * A funding cycle's data source is called upon in [`JBPaymentTerminalStore.recordPaymentFrom(...)`](../../api/contracts/jbpaymentterminalstore/write/recordpaymentfrom.md) and in [`JBPaymentTerminalStore.recordRedemptionFor(...)`](../../api/contracts/jbpaymentterminalstore/write/recordredemptionfor.md).
 * If a data source is not specified in a funding cycle, or if flags aren't explicitly set, default protocol data will be used.
-* [Get started building data sources](../../build/treasury-extensions/funding-cycle-data-source.md).
+* [Get started building data sources](../../build/treasury-extensions/data-source.md).
