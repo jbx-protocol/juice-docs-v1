@@ -1,5 +1,5 @@
 ---
-description: Manages all inflows and outflows of ETH into the Juicebox ecosystem.
+description: Generic terminal managing all inflows and outflows of funds into the protocol ecosystem.
 ---
 
 # JBPayoutRedemptionPaymentTerminal
@@ -8,7 +8,7 @@ description: Manages all inflows and outflows of ETH into the Juicebox ecosystem
 
 ### Code
 
-{% embed url="https://github.com/jbx-protocol/juice-contracts-v2/blob/main/contracts/JBPayoutRedemptionPaymentTerminal.sol" %}
+{% embed url="https://github.com/jbx-protocol/juice-contracts-v2/blob/main/contracts/abstract/JBPayoutRedemptionPaymentTerminal.sol" %}
 
 ### **Addresses**
 
