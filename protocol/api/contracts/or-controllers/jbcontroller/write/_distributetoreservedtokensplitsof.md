@@ -102,10 +102,7 @@ function _distributeToReservedTokenSplitsOf(
           // If there's an allocator set, trigger its `allocate` function.
           if (_split.allocator != IJBSplitAllocator(address(0)))
             _split.allocator.allocate(
-              _tokenCount,
-              _projectId,
-              JBSplitsGroups.RESERVED_TOKENS,
-              _split
+              JBSplitAllocationData(_tokenCount, _projectId, JBSplitsGroups.RESERVED_TOKENS, _split)
             );
 
           // Subtract from the amount to be sent to the beneficiary.
@@ -121,6 +118,8 @@ function _distributeToReservedTokenSplitsOf(
         _External references:_
 
         * [`mintFor`](../../../jbtokenstore/write/mintfor.md)
+        * [`allocate`](../../../../interfaces/ijbsplitallocator.md)
+
 7.  Emit a `DistributeToReservedTokenSplit` event for the split being iterated on with the relevant parameters.
 
     ```solidity
@@ -199,10 +198,7 @@ function _distributeToReservedTokenSplitsOf(
       // If there's an allocator set, trigger its `allocate` function.
       if (_split.allocator != IJBSplitAllocator(address(0)))
         _split.allocator.allocate(
-          _tokenCount,
-          _projectId,
-          JBSplitsGroups.RESERVED_TOKENS,
-          _split
+          JBSplitAllocationData(_tokenCount, _projectId, JBSplitsGroups.RESERVED_TOKENS, _split)
         );
 
       // Subtract from the amount to be sent to the beneficiary.

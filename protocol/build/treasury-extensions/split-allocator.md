@@ -7,18 +7,23 @@ A contract can become a split allocator by adhering to [`IJBSplitAllocator`](../
 
 ```solidity
 interface IJBSplitAllocator {
-  function allocate(
-    uint256 _amount,
-    uint256 _projectId,
-    uint256 _group,
-    JBSplit calldata _split
-  ) external payable;
+  function allocate(JBSplitAllocationData calldata _data) external payable;
 }
 ```
 
-When extending the payout distribution or reserved token distribution functionality with an allocator, the protocol will pass a [`JBSplitAllocatorData`](../../api/data-structures/jbsplitallocatordata.md) to the `allocate(...)` function:
+When extending the payout distribution or reserved token distribution functionality with an allocator, the protocol will pass a [`JBSplitAllocationData`](../../api/data-structures/jbsplitallocationdata.md) to the `allocate(...)` function:
 
 ```solidity
+struct JBSplitAllocationData {
+  // The amount being sent to the split allocator, as a fixed point number. The number of decimals is unknown, but should be derivable by the allocator.
+  uint256 amount;
+  // The project to which the split belongs.
+  uint256 projectId;
+  // The group to which the split belongs.
+  uint256 group;
+  // The split that caused the allocation.
+  JBSplit split;
+}
 ```
 
 ```solidity

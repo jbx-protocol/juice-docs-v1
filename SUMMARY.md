@@ -64,6 +64,7 @@
     * [JBProjectMetadata](protocol/api/data-structures/jbprojectmetadata.md)
     * [JBRedeemParamsData](protocol/api/data-structures/jbredeemparamsdata.md)
     * [JBSplit](protocol/api/data-structures/jbsplit.md)
+    * [JBSplitAllocationData](protocol/api/data-structures/jbsplitallocationdata.md)
     * [JBTokenAmount](protocol/api/data-structures/jbtokenamount.md)
   * [Enums](protocol/api/enums/README.md)
     * [JBBallotState](protocol/api/enums/jbballotstate.md)
