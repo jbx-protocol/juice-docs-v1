@@ -6,13 +6,14 @@ description: How to begin interacting with the protocol.
 
 #### Import
 
+Add the ABI's to the project.
 ```bash
 # command line
 npm install @jbx-protocol/contracts-v2
 ```
 
+If referencing from a contract, include the ABI's where you need them.
 ```solidity
-// contract
 import '@jbx-protocol/contracts-v2/[needed-files]'
 ```
 
