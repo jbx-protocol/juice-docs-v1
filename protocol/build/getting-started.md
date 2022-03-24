@@ -292,13 +292,14 @@ function usedOverflowAllowanceOf(
 
 </details>
 
+The protocol 
 <details>
+
+The protocol uses price feeds to convert values from one currency to another when distributing payouts, using overflow allowance, issuing project tokens when payments are received in various currencies, and more Current currency indexes can be found in [`JBCurrencies`](../api/libraries/jbcurrencies.md), and new currencies and price feeds can be added by the protocol's maintainers in the future.
 
 <summary>View price conversions</summary>
 
-The protocol uses price feeds to convert values from one currency to another when distributing payouts, using overflow allowance, issuing project tokens when payments are received in various currencies, and more. The same price feeds the protocol uses internally can be accessed externally through the [`JBPrices`](../api/contracts/jbprices/) contract using [`JBPrices.priceFor(...)`](../api/contracts/jbprices/read/pricefor.md). This will revert if a feed is not found for the provided currency pair.
-
-Current currency indexes can be found in [`JBCurrencies`](../api/libraries/jbcurrencies.md). New currencies and price feeds can be added by the protocol's maintainers in the future.
+ The same price feeds the protocol uses internally can be accessed externally through the [`JBPrices`](../api/contracts/jbprices/) contract using [`JBPrices.priceFor(...)`](../api/contracts/jbprices/read/pricefor.md). This will revert if a feed is not found for the provided currency pair.
 
 ```solidity
 function priceFor(
