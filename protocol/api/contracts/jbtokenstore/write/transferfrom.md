@@ -23,7 +23,7 @@ function transferFrom(
 
 * Arguments:
   * `_holder` is the address to transfer tokens from.
-  * `_projectId` is the ID of the project whose tokens are being transfered.
+  * `_projectId` is the ID of the project whose tokens are being transferred.
   * `_recipient` is thhe recipient of the tokens.
   * `_amount` is the amount of tokens to transfer.
 * Through the [`requirePermission`](../../or-abstract/jboperatable/modifiers/requirepermission.md) modifier, the function is only accessible by the token holder, or from an operator that has been given the [`JBOperations.TRANSFER`](../../../libraries/jboperations.md) permission by the token holder. 
@@ -97,7 +97,7 @@ function transferFrom(
   Only a token holder or an operator can transfer its unclaimed tokens.
 
   @param _holder The address to transfer tokens from.
-  @param _projectId The ID of the project whose tokens are being transfered.
+  @param _projectId The ID of the project whose tokens are being transferred.
   @param _recipient The recipient of the tokens.
   @param _amount The amount of tokens to transfer.
 */

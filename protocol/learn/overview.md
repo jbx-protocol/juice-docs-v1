@@ -38,7 +38,7 @@ description: What's in the V2 protocol
 <!---->
 
 * <mark style="color:orange;">**Weight**</mark>\
-  A number used to determine how many of the project's tokens should be minted and transfered when payments are received during the funding cycle.
+  A number used to determine how many of the project's tokens should be minted and transferred when payments are received during the funding cycle.
 
 <!---->
 
