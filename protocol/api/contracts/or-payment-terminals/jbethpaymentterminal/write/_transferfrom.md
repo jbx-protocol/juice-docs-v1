@@ -2,6 +2,8 @@
 
 Contract: [`JBPayoutRedemptionPaymentTerminal`](../)​‌
 
+{% tabs %}
+{% tab title="Step by step" %}
 **Transfers tokens.**
 
 # Definition

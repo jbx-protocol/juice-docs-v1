@@ -2,6 +2,8 @@
 
 Contract: [`JBPayoutRedemptionPaymentTerminal`](../)​‌
 
+{% tabs %}
+{% tab title="Step by step" %}
 **Logic to be triggered before transfering tokens from this terminal.**
 
 # Definition
