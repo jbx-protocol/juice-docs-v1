@@ -150,13 +150,6 @@ function _distributeToPayoutSplitsOf(
               // Trigger any inherited pre-transfer logic.
               _beforeTransferTo(address(_terminal), _netPayoutAmount);
 
-              // Get a reference to the destination terminal's decimals.
-              uint256 _decimals = _terminal.decimals();
-
-              // If the destination terminal uses a different number of decimals than this terminal, adjust the sent amount accordingly.
-              if (_decimals != decimals)
-                _amount = JBFixedPointNumber.adjustDecimals(_amount, decimals, _decimals);
-
               // If this terminal's token is ETH, send it in msg.value.
               uint256 _payableValue = token == JBTokens.ETH ? _netPayoutAmount : 0;
 
@@ -333,13 +326,6 @@ function _distributeToPayoutSplitsOf(
 
           // Trigger any inherited pre-transfer logic.
           _beforeTransferTo(address(_terminal), _netPayoutAmount);
-
-          // Get a reference to the destination terminal's decimals.
-          uint256 _decimals = _terminal.decimals();
-
-          // If the destination terminal uses a different number of decimals than this terminal, adjust the sent amount accordingly.
-          if (_decimals != decimals)
-            _amount = JBFixedPointNumber.adjustDecimals(_amount, decimals, _decimals);
 
           // If this terminal's token is ETH, send it in msg.value.
           uint256 _payableValue = token == JBTokens.ETH ? _netPayoutAmount : 0;

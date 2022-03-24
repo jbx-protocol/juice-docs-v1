@@ -63,33 +63,6 @@ function _processFee(uint256 _amount, address _beneficiary) { ... }
 
         * [`_beforeTransferTo`](_beforetransferto.md)
 
-    2.  Get a reference to the number of decimals used by the destination terminal.
-
-        ```solidity
-        // Get a reference to the destination terminal's decimals.
-        uint256 _decimals = _terminal.decimals();
-        ```
-
-        _External references:_
-
-        * [`decimals`](../properties/decimals.md)
-
-    3.  If the destination terminal uses a different number of decimals than this terminal, adjust the amount sent accordingly.
-
-        ```solidity
-        // If the destination terminal uses a different number of decimals than this terminal, adjust the sent amount accordingly.
-        if (_decimals != decimals)
-          _amount = JBFixedPointNumber.adjustDecimals(_amount, decimals, _decimals);
-        ```
-
-        _Libraries used:_
-
-        * [`JBFixedPointNumber`](../../../../libraries/jbfixedpointnumber.md)
-          * `.adjustDecimals(...)`
-
-        _Internal references:_
-
-        * [`decimals`](../properties/decimals.md)
     4.  Get a reference to the ETH amount that should be attached to the transaction. Only attach anything if the token being paid is ETH.
 
         ```solidity
@@ -137,13 +110,6 @@ function _processFee(uint256 _amount, address _beneficiary) private {
   else {
     // Trigger any inherited pre-transfer logic.
     _beforeTransferTo(address(_terminal), _amount);
-
-    // Get a reference to the destination terminal's decimals.
-    uint256 _decimals = _terminal.decimals();
-
-    // If the destination terminal uses a different number of decimals than this terminal, adjust the sent amount accordingly.
-    if (_decimals != decimals)
-      _amount = JBFixedPointNumber.adjustDecimals(_amount, decimals, _decimals);
 
     // If this terminal's token is ETH, send it in msg.value.
     uint256 _payableValue = token == JBTokens.ETH ? _amount : 0;
