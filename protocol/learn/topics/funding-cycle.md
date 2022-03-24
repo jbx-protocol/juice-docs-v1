@@ -1,4 +1,4 @@
-# Funding cycle
+# Learn | Funding cycle
 
 #### What everyone needs to know
 
