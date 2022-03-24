@@ -4,6 +4,18 @@ description: How to begin interacting with the protocol.
 
 # Getting started
 
+#### Import
+
+```bash
+npm install @jbx-protocol/contracts-v2
+```
+
+```solidity
+import '@jbx-protocol/contracts-v2/[needed-files]
+```
+
+#### Workflows
+
 The first transaction to call when getting started is [`JBController.launchProjectFor(...)`](../api/contracts/or-controllers/jbcontroller/write/launchprojectfor.md).
 
 ```solidity
