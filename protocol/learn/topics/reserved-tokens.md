@@ -1,4 +1,4 @@
-# Learn | Reserved tokens
+# Reserved tokens
 
 #### What everyone needs to know
 

@@ -1,4 +1,4 @@
-# Learn | Splits
+# Splits
 
 #### What everyone needs to know
 

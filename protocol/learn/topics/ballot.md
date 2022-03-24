@@ -1,4 +1,4 @@
-# Learn | Ballot
+# Ballot
 
 #### What everyone needs to know
 

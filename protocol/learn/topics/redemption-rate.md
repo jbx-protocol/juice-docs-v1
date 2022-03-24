@@ -1,4 +1,4 @@
-# Learn | Redemption rate
+# Redemption rate
 
 #### What everyone needs to know
 

@@ -1,4 +1,4 @@
-# Learn | Data source
+# Data source
 
 #### What everyone needs to know
 

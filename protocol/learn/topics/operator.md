@@ -1,4 +1,4 @@
-# Learn | Operator
+# Operator
 
 #### What everyone needs to know
 

@@ -1,4 +1,4 @@
-# Learn | Tokens
+# Tokens
 
 #### What everyone needs to know
 

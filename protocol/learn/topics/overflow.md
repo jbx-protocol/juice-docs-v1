@@ -1,4 +1,4 @@
-# Learn | Overflow
+# Overflow
 
 #### What everyone needs to know
 

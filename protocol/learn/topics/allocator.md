@@ -1,4 +1,4 @@
-# Learn | Allocator
+# Allocator
 
 #### What everyone needs to know
 
