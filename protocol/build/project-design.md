@@ -60,7 +60,7 @@ Here are some examples, starting with the simplest version:
       allowTerminalMigration: false, 
       allowControllerMigration: false, 
       holdFees: false, 
-      useLocalBalanceForRedemptions: false,
+      useTotalOverflowForRedemptions: false,
       useDataSourceForPay: false, 
       useDataSourceForRedeem: false, 
       dataSource: 0x0000000000000000000000000000000000000000, 

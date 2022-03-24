@@ -4,10 +4,10 @@ description: What's in the V2 protocol
 
 # Overview
 
-* <mark style="color:orange;">**Deploy an NFT that represents ownership over your project**</mark>\
+* <mark style="color:orange;">**Deploy an NFT that represents ownership over a project**</mark>\
   Whichever address owns this NFT has administrative privileges to configure treasury parameters within the Juicebox ecosystem. It can also be used by other Web3 ecosystems to extend functionality to projects.
-* <mark style="color:orange;">**Configure funding cycles for your project**</mark>\
-  Funding cycles define contractual constraints according to which your project will operate.\
+* <mark style="color:orange;">**Configure funding cycles for a project**</mark>\
+  Funding cycles define contractual constraints according to which the project will operate.\
   The following properties can be configured into a funding cycle:
 
 <details>
@@ -97,7 +97,7 @@ description: What's in the V2 protocol
 <!---->
 
 * <mark style="color:orange;">**Data source**</mark>\
-  The address of a contract that adheres to [`IJBFundingCycleDataSource`](../api/interfaces/ijbfundingcycledatasource.md), which can be used to extend or override what happens when your treasury is receiving funds, and what happens when someone tries to redeem from your treasury.
+  The address of a contract that adheres to [`IJBFundingCycleDataSource`](../api/interfaces/ijbfundingcycledatasource.md), which can be used to extend or override what happens when the treasury receives funds, and what happens when someone tries to redeem from the treasury.
 
 </details>
 
@@ -119,7 +119,7 @@ description: What's in the V2 protocol
   \
   ETH splits to Allocators get sent directly to the `allocate` function. Distribution of other assets to Allocator contracts (ERC-20's, ERC-721's, ERC-1155's, etc) will trigger the `allocate` function after a successful transfer.
 * <mark style="color:orange;">**Custom treasury strategies**</mark>\
-  Funding cycles can be configured to use an [`IJBFundingCycleDataSource`](../api/interfaces/ijbfundingcycledatasource.md), [`IJBPayDelegate`](../api/interfaces/ijbpaydelegate.md), and [`IJBRedemptionDelegate`](../api/interfaces/ijbredemptiondelegate.md) to extend or override the default Juicebox protocol's behavior that defines what happens when an address tries to make a payment to your project's treasury, and what happens when someone tries to redeem your tokens during any particular funding cycle.
+  Funding cycles can be configured to use an [`IJBFundingCycleDataSource`](../api/interfaces/ijbfundingcycledatasource.md), [`IJBPayDelegate`](../api/interfaces/ijbpaydelegate.md), and [`IJBRedemptionDelegate`](../api/interfaces/ijbredemptiondelegate.md) to extend or override the default Juicebox protocol's behavior that defines what happens when an address tries to make a payment to the project's treasury, and what happens when someone tries to redeem the project tokens during any particular funding cycle.
 * <mark style="color:orange;">**Accept multiple tokens**</mark>\
   A project can specify any number of payment terminal contracts where it can receive funds denominated in various tokens. This allows projects to create distinct rules for accepting ETH, any ERC-20, or any asset in general.\
   \

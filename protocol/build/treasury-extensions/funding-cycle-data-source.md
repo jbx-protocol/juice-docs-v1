@@ -1,2 +1,0 @@
-# Funding cycle data source
-

@@ -73,32 +73,52 @@ function recordRedemptionFor(
 
     * [`JBFundingCycleMetadataResolver`](../../../libraries/jbfundingcyclemetadataresolver.md)\
       `.redeemPaused(...)`
-3.  Create a variable where a redemption delegate will be saved if there is one. This pay delegate will later have its method called if it exists.
+3.  The following scoped block is a bit of a hack to prevent a "Stack too deep" error. 
 
     ```solidity
-    // Save a reference to the delegate to use.
-    IJBRedemptionDelegate _delegate;
+    // Scoped section prevents stack too deep. `_currentOverflow` only used within scope.
+    { ... }
     ```
-4.  Get a reference to the amount of overflow the project has. Either the project's total overflow or the overflow local to the msg.sender's balance will be used depending on how the project's funding cycle is configured. Store it in the reclaimed amount variable temporarily, if instead another variable were introduced it'd cause a "stack too deep" error.
 
-    ```solidity
-    // Get the amount of current overflow, temporarily store the value in the `reclaimAmount`. (Adding another var causes stack too deep)
-    // Use the local overflow if the funding cycle specifies that it should be used. Otherwise, use the project's total overflow across all of its terminals.
-    reclaimAmount = fundingCycle.useTotalOverflowForRedemptions()
-      ? _currentTotalOverflowOf(_projectId, _balanceDecimals, _balanceCurrency)
-      : _overflowDuring(IJBPaymentTerminal(msg.sender), _projectId, fundingCycle, _balanceCurrency);
-    ```
-    _Libraries used:_
+    1.  Get a reference to the amount of overflow the project has. Either the project's total overflow or the overflow local to the msg.sender's balance will be used depending on how the project's funding cycle is configured. 
 
-    * [`JBFundingCycleMetadataResolver`](../../../libraries/jbfundingcyclemetadataresolver.md)\
-      `.useTotalOverflowForRedemptions(...)`\
+        ```solidity
+        // Get the amount of current overflow.
+        // Use the local overflow if the funding cycle specifies that it should be used. Otherwise, use the project's total overflow across all of its terminals.
+        uint256 _currentOverflow = fundingCycle.useTotalOverflowForRedemptions()
+          ? _currentTotalOverflowOf(_projectId, _balanceDecimals, _balanceCurrency)
+          : _overflowDuring(
+            IJBPaymentTerminal(msg.sender),
+            _projectId,
+            fundingCycle,
+            _balanceCurrency
+          );
+        ```
 
-    _Internal references:_
+        _Libraries used:_
 
-    * [`_currentTotalOverflowOf`](../read/_currenttotaloverflowof.md)
-    * [`_overflowDuring`](../read/_overflowduring.md)
+        * [`JBFundingCycleMetadataResolver`](../../../libraries/jbfundingcyclemetadataresolver.md)\
+          `.useTotalOverflowForRedemptions(...)`\
 
-5.  If the project's current funding cycle is configured to use a data source when making redemptions, ask the data source for the parameters that should be used throughout the rest of the function given provided contextual values in a [`JBRedeemParamsData`](../../../data-structures/jbredeemparamsdata.md) structure. Otherwise default parameters are used.
+        _Internal references:_
+
+        * [`_currentTotalOverflowOf`](../read/_currenttotaloverflowof.md)
+        * [`_overflowDuring`](../read/_overflowduring.md)
+
+    2.  Get a reference to the reclaimable overflow if there is overflow. 
+
+        ```solidity
+        // Calculate reclaim amount using the current overflow amount.
+        reclaimAmount = _currentOverflow == 0
+          ? 0
+          : _reclaimableOverflowDuring(_projectId, fundingCycle, _tokenCount, _currentOverflow);
+        ```
+
+        _Internal references:_
+
+        * [`_reclaimableOverflowDuring`](../read/_reclaimableoverflowduring.md)
+
+4.  If the project's current funding cycle is configured to use a data source when making redemptions, ask the data source for the parameters that should be used throughout the rest of the function given provided contextual values in a [`JBRedeemParamsData`](../../../data-structures/jbredeemparamsdata.md) structure. Otherwise default parameters are used.
 
     ```solidity
     // If the funding cycle has configured a data source, use it to derive a claim amount and memo.
@@ -111,7 +131,7 @@ function recordRedemptionFor(
         _tokenCount,
         _balanceDecimals,
         _balanceCurrency,
-        reclaimAmount, // current overflow
+        reclaimAmount,
         fundingCycle.useTotalOverflowForRedemptions(),
         fundingCycle.redemptionRate(),
         fundingCycle.ballotRedemptionRate(),
@@ -120,15 +140,6 @@ function recordRedemptionFor(
       );
       (reclaimAmount, memo, delegate) = fundingCycle.dataSource().redeemParams(_data);
     } else {
-      // If there is no overflow, nothing is reclaimable.
-      reclaimAmount = reclaimAmount == 0
-        ? 0
-        : _reclaimableOverflowDuring(
-          _projectId,
-          fundingCycle,
-          _tokenCount,
-          reclaimAmount /* current overflow */
-        );
       memo = _memo;
     }
     ```
@@ -142,7 +153,7 @@ function recordRedemptionFor(
       `.ballotRedemptionRate(...)`\
       `.useTotalOverflowForRedemptions(...)`
 
-6.  Make sure the amount being claimed is within the bounds of the project's balance.
+5.  Make sure the amount being claimed is within the bounds of the project's balance.
 
     ```solidity
     // The amount being reclaimed must be within the project's balance.
@@ -153,7 +164,7 @@ function recordRedemptionFor(
     _Internal references:_
 
     * [`balanceOf`](../properties/balanceof.md)
-7.  Decrement any claimed funds from the project's balance if needed.
+6.  Decrement any claimed funds from the project's balance if needed.
 
     ```solidity
     // Remove the reclaimed funds from the project's balance.
@@ -218,11 +229,24 @@ function recordRedemptionFor(
   // The current funding cycle must not be paused.
   if (fundingCycle.redeemPaused()) revert FUNDING_CYCLE_REDEEM_PAUSED();
 
-  // Get the amount of current overflow, temporarily store the value in the `reclaimAmount`. (Adding another var causes stack too deep)
-  // Use the local overflow if the funding cycle specifies that it should be used. Otherwise, use the project's total overflow across all of its terminals.
-  reclaimAmount = fundingCycle.useTotalOverflowForRedemptions()
-    ? _currentTotalOverflowOf(_projectId, _balanceDecimals, _balanceCurrency)
-    : _overflowDuring(IJBPaymentTerminal(msg.sender), _projectId, fundingCycle, _balanceCurrency);
+  // Scoped section prevents stack too deep. `_currentOverflow` only used within scope.
+  {
+    // Get the amount of current overflow.
+    // Use the local overflow if the funding cycle specifies that it should be used. Otherwise, use the project's total overflow across all of its terminals.
+    uint256 _currentOverflow = fundingCycle.useTotalOverflowForRedemptions()
+      ? _currentTotalOverflowOf(_projectId, _balanceDecimals, _balanceCurrency)
+      : _overflowDuring(
+        IJBPaymentTerminal(msg.sender),
+        _projectId,
+        fundingCycle,
+        _balanceCurrency
+      );
+
+    // Calculate reclaim amount using the current overflow amount.
+    reclaimAmount = _currentOverflow == 0
+      ? 0
+      : _reclaimableOverflowDuring(_projectId, fundingCycle, _tokenCount, _currentOverflow);
+  }
 
   // If the funding cycle has configured a data source, use it to derive a claim amount and memo.
   if (fundingCycle.useDataSourceForRedeem()) {
@@ -234,7 +258,7 @@ function recordRedemptionFor(
       _tokenCount,
       _balanceDecimals,
       _balanceCurrency,
-      reclaimAmount, // current overflow
+      reclaimAmount,
       fundingCycle.useTotalOverflowForRedemptions(),
       fundingCycle.redemptionRate(),
       fundingCycle.ballotRedemptionRate(),
@@ -243,15 +267,6 @@ function recordRedemptionFor(
     );
     (reclaimAmount, memo, delegate) = fundingCycle.dataSource().redeemParams(_data);
   } else {
-    // If there is no overflow, nothing is reclaimable.
-    reclaimAmount = reclaimAmount == 0
-      ? 0
-      : _reclaimableOverflowDuring(
-        _projectId,
-        fundingCycle,
-        _tokenCount,
-        reclaimAmount /* current overflow */
-      );
     memo = _memo;
   }
 
