@@ -1,6 +1,6 @@
 # Redemption delegate
 
-Before implementing, learn about delegates [here](../../learn/topics/delegate.md).
+Before implementing, learn about delegates [here](../../learn/glossary/delegate.md).
 ### Specs
 
 A contract can become a treasury redemption delegate by adhering to [`IJBRedemptionDelegate`](../../api/interfaces/ijbredemptiondelegate.md):

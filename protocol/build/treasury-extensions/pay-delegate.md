@@ -1,6 +1,6 @@
 # Pay delegate
 
-Before implementing, learn about delegates [here](../../learn/topics/delegate.md).
+Before implementing, learn about delegates [here](../../learn/glossary/delegate.md).
 ### Specs
 
 A contract can become a treasury pay delegate by adhering to [`IJBPayDelegate`](../../api/interfaces/ijbpaydelegate.md):
