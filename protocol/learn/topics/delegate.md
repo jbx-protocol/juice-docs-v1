@@ -1,4 +1,4 @@
-# Delegate
+# Learn | Delegate
 
 #### What everyone needs to know
 

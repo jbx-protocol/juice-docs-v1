@@ -1,4 +1,4 @@
-# Project
+# Learn | Project
 
 #### What everyone needs to know
 

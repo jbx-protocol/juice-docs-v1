@@ -1,4 +1,4 @@
-# Discount rate
+# Learn | Discount rate
 
 #### What everyone needs to know
 
