@@ -145,7 +145,7 @@ Only a ticket holder or an operator can transfer its tickets.
 **Params:**
 
 * **_holder:** The holder to transfer tickets from.
-* **_projectId:** The ID of the project whos tickets are being transferred.
+* **_projectId:** The ID of the project whos tickets are being transfered.
 * **_amount:** The amount of tickets to transfer.
 * **_recipient:** The recipient of the tickets.
 
