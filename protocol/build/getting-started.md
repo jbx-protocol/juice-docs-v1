@@ -7,11 +7,13 @@ description: How to begin interacting with the protocol.
 #### Import
 
 ```bash
+# command line
 npm install @jbx-protocol/contracts-v2
 ```
 
 ```solidity
-import '@jbx-protocol/contracts-v2/[needed-files]
+// contract
+import '@jbx-protocol/contracts-v2/[needed-files]'
 ```
 
 #### Workflows
