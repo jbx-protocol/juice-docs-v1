@@ -146,6 +146,7 @@ function changeFor(
 | String                              | Description                                               |
 | ----------------------------------- | --------------------------------------------------------- |
 | **`CANT_REMOVE_TOKEN_IF_ITS_REQUIRED`**    | Thrown if the token is being removed but claiming is required.        |
+| **`TOKENS_MUST_HAVE_18_DECIMALS`**    | Thrown if the token being attached doesn't use 18 decimals.        |
 {% endtab %}
 
 {% tab title="Events" %}
