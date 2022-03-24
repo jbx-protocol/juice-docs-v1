@@ -2,6 +2,6 @@
 
 ```solidity
 interface IJBPayDelegate {
-  function didPay(JBDidPayData calldata _param) external;
+  function didPay(JBDidPayData calldata _data) external;
 }
 ```

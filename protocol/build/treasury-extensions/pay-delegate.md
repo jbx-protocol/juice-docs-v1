@@ -7,7 +7,7 @@ A contract can become a treasury pay delegate by adhering to [`IJBPayDelegate`](
 
 ```solidity
 interface IJBPayDelegate {
-  function didPay(JBDidPayData calldata _param) external;
+  function didPay(JBDidPayData calldata _data) external;
 }
 ```
 

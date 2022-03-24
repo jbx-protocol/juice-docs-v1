@@ -2,6 +2,6 @@
 
 ```solidity
 interface IJBRedemptionDelegate {
-  function didRedeem(JBDidRedeemData calldata _param) external;
+  function didRedeem(JBDidRedeemData calldata _data) external;
 }
 ```

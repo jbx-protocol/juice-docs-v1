@@ -7,7 +7,7 @@ A contract can become a treasury redemption delegate by adhering to [`IJBRedempt
 
 ```solidity
 interface IJBRedemptionDelegate {
-  function didRedeem(JBDidRedeemData calldata _param) external;
+  function didRedeem(JBDidRedeemData calldata _data) external;
 }
 ```
 
