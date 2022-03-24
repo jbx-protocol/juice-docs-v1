@@ -49,6 +49,8 @@ The `msg.sender` to the delegate will be the payment terminal that facilitated t
 
 In payment terminals based on the [`JBPayoutRedemptionPaymentTerminal`](../../api/contracts/or-abstract/jbpayoutredemptionpaymentterminal), such as [`JBETHPaymentTerminal`](../../api/contracts/or-payment-terminals/jbethpaymentterminal/)'s and [`JBERC20PaymentTerminal`](../../api/contracts/or-payment-terminals/jberc20paymentterminal/)'s, the redemption delegate hook gets called _before_ the reclaimed amount is sent to the redemption beneficiary, but after all internal accounting has been updated.  [View the docs](../../api/contracts/or-abstract/jbpayoutredemptionpaymentterminal/write/redeemtokensof.md). 
 
+Make sure to only allow trusted contracts to access the `didPay(...)` transaction.
+
 ### Attaching
 
 A delegate contract should be deployed independently. Once deployed, it's address can be returned from a data source hook. See [how to build a data source](./data-source.md) for more.
