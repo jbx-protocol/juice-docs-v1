@@ -104,7 +104,7 @@ function _distributeToReservedTokenSplitsOf(
             _split.allocator.allocate(
               JBSplitAllocationData(
                 _tokenCount,
-                18,
+                18, // 18 decimals.
                 _projectId,
                 JBSplitsGroups.RESERVED_TOKENS,
                 _split
@@ -206,7 +206,7 @@ function _distributeToReservedTokenSplitsOf(
         _split.allocator.allocate(
           JBSplitAllocationData(
             _tokenCount,
-            18,
+            18, // 18 decimals.
             _projectId,
             JBSplitsGroups.RESERVED_TOKENS,
             _split
