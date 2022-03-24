@@ -8,10 +8,9 @@ The protocol is nuanced, however. The goal of this section is for you to find an
 
 Looking for general guides on how the protocol works? See the [Learn](learn/overview.md) section.
 
-Looking for a user flow and how to launch a project? See the [Build](build/getting-started.md) section.
+Looking for guides to launch and program a treasury? See the [Build](build/getting-started.md) section.
 
 Looking for an outline of the protocol's API, or a deep dive on each line of code? Click around in the [API](api/contracts/) section. There are bug bounties posted for each documented function.
 
 Reach out to contributors of the DAO on Discord to call attention to something that could be made more clear. You can also submit PR's directly to the documentation repo [here](https://github.com/jbx-protocol/juice-docs).
 
-All contracts are fully documented. In the coming week there will be several more deep dive tutorials written about how you can use `IJBFundingCycleDataSource` , `IJBPayDelegate`, `IJBRedemptionDelegate`, `IJBSplitAllocator`, and `IJBFundingCycleBallot `to pull off creative custom treasury strategies, and posts explaining how to forward funds from your own smart contracts into Juicebox projects.
