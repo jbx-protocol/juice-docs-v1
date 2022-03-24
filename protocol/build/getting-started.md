@@ -292,6 +292,24 @@ function usedOverflowAllowanceOf(
 
 </details>
 
+<details>
+
+<summary>View price conversions</summary>
+
+The protocol uses price feeds to convert values from one currency to another when distributing payouts, using overflow allowance, issuing project tokens when payments are received in various currencies, and more. The same price feeds the protocol uses internally can be accessed externally through the [`JBPrices`](../api/contracts/jbprices/) contract using [`JBPrices.priceFor(...)`](../api/contracts/jbprices/read/pricefor.md). This will revert if a feed is not found for the provided currency pair.
+
+Current currency indexes can be found in [`JBCurrencies`](../api/libraries/jbcurrencies.md). New currencies and price feeds can be added by the protocol's maintainers in the future.
+
+```solidity
+function priceFor(
+  uint256 _currency,
+  uint256 _base,
+  uint256 _decimals
+) external view override returns (uint256) { ... }
+```
+
+</details>
+
 A project's owner can mint more of its token by calling [`JBController.mintTokensOf(...)`](../api/contracts/jbtokenstore/write/mintfor.md). Anyone can burn their tokens by calling [`JBController.burnFrom(...)`](../api/contracts/jbtokenstore/write/burnfrom.md).
 
 ```solidity

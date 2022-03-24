@@ -1,25 +1,25 @@
 ---
 description: >-
-  Here you'll find information about how the Juicebox protocol is organized and
+  Here you'll find information about how the protocol is organized and
   implemented. All documentation in this section refers to the upcoming V2
   version of the protocol.
 ---
 
 # Architecture
 
-The Juicebox protocol is made up of 7 core contracts and 3 surface contracts.
+The protocol is made up of 7 core contracts and 3 surface contracts.
 
 * Core contracts store all the independent components that make the protocol work.
 * Surface contracts glue core contracts together and manage funds. Anyone can write new surface contracts for projects to use.
 
 ## Core contracts
 
-The first two core contracts are pretty self explanatory. They store the core Juicebox components of the protocol.
+The first two core contracts are pretty self explanatory. They store the core opinionated components of the protocol.
 
 * [`JBTokenStore`](../api/contracts/jbtokenstore/) manages token minting and burning for all projects.
 * [`JBFundingCycleStore`](../api/contracts/jbfundingcyclestore/) manages funding cycle configurations and scheduling. Funding cycles are represented as a [`JBFundingCycle`](../api/data-structures/jbfundingcycle.md) data structure.
 
-The next few are a little more generic. They don't know anything specific to Juicebox, and are open for use by other protocols or future Juicebox extensions.
+The next few are a little more generic. They don't know anything specific to the ecosystem, and are open for use by other protocols or future extensions.
 
 *   [`JBProjects`](../api/contracts/jbprojects/) manages and tracks ownership over projects, which are represented as ERC-721 tokens.
 
@@ -43,13 +43,15 @@ The last core contract stores info about which surface contracts each project is
 There are currently 3 surface contracts that manage how projects manage funds and define how all core contracts should be used together. Anyone can write new surface contracts for projects to use.
 
 * [`JBController`](../api/contracts/or-controllers/jbcontroller/) stitches together funding cycles and community tokens, allowing for curated control, accounting, and token management.
-* [`JBPayoutRedemptionPaymentTerminal`](../api/contracts/or-abstract/jbpayoutredemptionpaymentterminal/) manages all inflows and outflows of ETH into the Juicebox ecosystem.
-* [`JBPaymentTerminalStore`](../api/contracts/jbpaymentterminalstore/) manages balance accounting data on the `JBPayoutRedemptionPaymentTerminal`'s behalf.
+* [`JBPayoutRedemptionPaymentTerminal`](../api/contracts/or-abstract/jbpayoutredemptionpaymentterminal/) manages all inflows and outflows of funds into the ecosystem. This is an abstract implementation that can be used by any number of payment terminals, such as [`JBETHPaymentTerminal`](../../api/contracts/or-payment-terminals/jbethpaymentterminal/)'s and [`JBERC20PaymentTerminal`](../../api/contracts/or-payment-terminals/jberc20paymentterminal/)'s.
+* [`JBPaymentTerminalStore`](../api/contracts/jbpaymentterminalstore/) manages balance accounting data on payment terminals' behalf.
 
-The `JBPayoutRedemptionPaymentTerminal` inherits from the `IJBPaymentTerminal` interface. Projects are welcome to roll their own `IJBPaymentTerminal` to accept funds through. This can be useful to accept other tokens as payment, bypass protocol fees, or attempt some other funky design. A project can add/remove terminals from the Core [`JBDirectory`](../api/contracts/jbdirectory/) Contract using the [`JBDirectory.setTerminalsOf(...)`](../api/contracts/jbdirectory/write/setterminalsof.md) function.
+The abstract [`JBPayoutRedemptionPaymentTerminal`](../api/contracts/or-abstract/jbpayoutredemptionpaymentterminal/) implements the [`IJBPaymentTerminal`](../api/interfaces/ijbpaymentterminal.md) interface to provide outflow mechanics, and [`JBETHPaymentTerminal`](../../api/contracts/or-payment-terminals/jbethpaymentterminal/)'s and [`JBERC20PaymentTerminal`](../../api/contracts/or-payment-terminals/jberc20paymentterminal/)'s in-turn extend the [`JBPayoutRedemptionPaymentTerminal`](../api/contracts/or-abstract/jbpayoutredemptionpaymentterminal/) to provide scoped inflow/outflow environments for specific tokens. Projects are welcome to roll their own [`IJBPaymentTerminal`](../api/interfaces/ijbpaymentterminal.md) implementations to accept funds through. This can be useful to accept other tokens as payment, bypass protocol fees, or attempt some other funky design. A project can add/remove terminals from the core [`JBDirectory`](../api/contracts/jbdirectory/) contract using the [`JBDirectory.setTerminalsOf(...)`](../api/contracts/jbdirectory/write/setterminalsof.md) transaction.
 
-Likewise, a project can bring their own contract to serve as its controller. A project's controller is the only contract that has direct access to manipulate its tokens and funding cycles.
+Likewise, a project can bring their own contract to serve as its controller. A project's controller is the only contract that has direct access to manipulate its tokens and funding cycles. A project can set its controller from the core [`JBDirectory`](../api/contracts/jbdirectory/) contract using the [`JBDirectory.setControllerOf(...)`](../api/contracts/jbdirectory/write/setcontrollerof.md) transaction.
 
 ## Visual map
+
+(outdated, needs love)
 
 {% embed url="https://www.figma.com/file/qGZbvt4kWgDJOntra7L960/JBV2" %}
