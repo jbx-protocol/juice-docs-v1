@@ -475,22 +475,14 @@ function tokenOf(uint256 _projectId) external view override returns (IJBToken) {
 
 </details>
 
-If a project has issued its ERC-20's or is using a custom [`IJBToken`](../api/interfaces/ijbtoken.md), a holder can claim tokens that are being represented via the internal accounting mechanism into the token by calling [`JBTokenStore.claimFor(...)`](../api/contracts/jbtokenstore/write/claimfor.md). The project owner can also do this on the holder's behalf.
+If a project has issued its ERC-20's or is using a custom [`IJBToken`](../api/interfaces/ijbtoken.md), a holder can claim tokens that are being represented via the internal accounting mechanism into the token by calling [`JBTokenStore.claimFor(...)`](../api/contracts/jbtokenstore/write/claimfor.md).
 
 ```solidity
 function claimFor(
   address _holder,
   uint256 _projectId,
   uint256 _amount
-)
-  external
-  override
-  requirePermissionAllowingOverride(
-    _holder,
-    _projectId,
-    JBOperations.CLAIM,
-    msg.sender == projects.ownerOf(_projectId)
-  ) external { ... }
+) external override requirePermission(_holder, _projectId, JBOperations.CLAIM) { ... }
 ```
 
 <details>

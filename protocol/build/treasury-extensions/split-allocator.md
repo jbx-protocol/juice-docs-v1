@@ -15,8 +15,10 @@ When extending the payout distribution or reserved token distribution functional
 
 ```solidity
 struct JBSplitAllocationData {
-  // The amount being sent to the split allocator, as a fixed point number. The number of decimals is unknown, but should be derivable by the allocator.
+  // The amount being sent to the split allocator, as a fixed point number.
   uint256 amount;
+  // The number of decimals in the amount.
+  uint256 decimals;
   // The project to which the split belongs.
   uint256 projectId;
   // The group to which the split belongs.

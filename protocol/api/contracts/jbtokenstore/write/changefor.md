@@ -43,7 +43,19 @@ function changeFor(
     _Internal references:_
 
     * [`requireClaimFor`](../properties/requireclaimfor.md)
-2.  Get a reference to the project's current token.
+
+2.  Make sure the token has 18 decimals.
+
+    ```solidity
+    // Can't add a token that doesn't use 18 decimals.
+    if (_token.decimals() != 18) revert TOKENS_MUST_HAVE_18_DECIMALS();
+    ```
+
+    _External references:_
+
+    * [`decimals`](../../../interfaces/ijbtoken.md)
+
+3.  Get a reference to the project's current token.
 
     ```solidity
     // Get a reference to the current token for the project.
@@ -53,7 +65,7 @@ function changeFor(
     _Internal references:_
 
     * [`tokenOf`](../properties/tokenof.md)
-3.  Store the provided token as the token of the project.
+4.  Store the provided token as the token of the project.
 
     ```solidity
     // Store the new token.
@@ -63,7 +75,7 @@ function changeFor(
     _Internal references:_
 
     * [`tokenOf`](../properties/tokenof.md)
-4.  If there's a current token and a new owner address was provided, transfer the ownership of the current token from this contract to the new owner.
+5.  If there's a current token and a new owner address was provided, transfer the ownership of the current token from this contract to the new owner.
 
     ```solidity
     // If there's a current token and a new owner was provided, transfer ownership of the old token to the new owner.
@@ -74,7 +86,7 @@ function changeFor(
     _External references:_
 
     * [`transferOwnership`](../../jbtoken/write/transferownership.md)
-5.  Emit a `Change` event with the relevant parameters.
+6.  Emit a `Change` event with the relevant parameters.
 
     ```solidity
     emit Change(_projectId, _token, oldToken, _newOwner, msg.sender);
@@ -111,6 +123,9 @@ function changeFor(
   // Can't remove the project's token if the project requires claiming tokens.
   if (_token == IJBToken(address(0)) && requireClaimFor[_projectId])
     revert CANT_REMOVE_TOKEN_IF_ITS_REQUIRED();
+
+  // Can't add a token that doesn't use 18 decimals.
+  if (_token.decimals() != 18) revert TOKENS_MUST_HAVE_18_DECIMALS();
 
   // Get a reference to the current token for the project.
   oldToken = tokenOf[_projectId];

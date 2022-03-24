@@ -108,6 +108,7 @@ function _distributeToPayoutSplitsOf(
             // Create the data to send to the allocator.
             JBSplitAllocationData memory _data = JBSplitAllocationData(
               _netPayoutAmount,
+              decimals,
               _projectId,
               payoutSplitsGroup,
               _split
@@ -198,6 +199,7 @@ function _distributeToPayoutSplitsOf(
 
         _Internal references:_
 
+        * [`decimals`](../properties/decimals.md)
         * [`isFeelessTerminal`](../properties/isfeelessterminal.md)
         * [`pay`](pay.md)
         * [`_pay`](_pay.md)
@@ -290,6 +292,7 @@ function _distributeToPayoutSplitsOf(
         // Create the data to send to the allocator.
         JBSplitAllocationData memory _data = JBSplitAllocationData(
           _netPayoutAmount,
+          decimals,
           _projectId,
           payoutSplitsGroup,
           _split
