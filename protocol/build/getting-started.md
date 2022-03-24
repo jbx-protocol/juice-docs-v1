@@ -19,7 +19,7 @@ const contract = require(`@jbx-protocol/contracts-v2/deployments/${network}/${co
 
 If referencing from a contract:
 ```solidity
-import '@jbx-protocol/contracts-v2/[file-path]'
+import '@jbx-protocol/contracts-v2/contracts/[file-path].sol'
 ```
 
 #### Workflows
