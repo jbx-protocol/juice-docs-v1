@@ -2,6 +2,8 @@
 
 ```solidity
 interface IJBToken {
+  function decimals() external view returns (uint8);
+
   function totalSupply(uint256 _projectId) external view returns (uint256);
 
   function balanceOf(address _account, uint256 _projectId) external view returns (uint256);

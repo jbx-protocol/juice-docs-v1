@@ -41,6 +41,7 @@ constructor(string memory _name, string memory _symbol)
 
 | Function                                                            | Definition                                                                                                                                                                                                                                                                                                      |
 | ------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [**`decimals`**](read/decimals.md)                                 |  |
 | [**`totalSupply`**](read/totalsupply.md)                                 | <p><strong>Params</strong></p><ul><li><code>uint256 _projectId</code></li></ul> |
 | [**`balanceOf`**](read/balanceof.md)                                 | <p><strong>Params</strong></p><ul><li><code>uint256 _projectId</code></li><li><code>address _account</code></li></ul> |
 ## Write

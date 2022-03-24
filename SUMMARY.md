@@ -208,6 +208,7 @@
         * [setOperators](protocol/api/contracts/jboperatorstore/write/setoperators.md)
     * [JBToken](protocol/api/contracts/jbtoken/README.md)
       * [Read](protocol/api/contracts/jbtoken/read/README.md)
+        * [decimals](protocol/api/contracts/jbtoken/read/decimals.md)
         * [totalSupply](protocol/api/contracts/jbtoken/read/totalsupply.md)
         * [balanceOf](protocol/api/contracts/jbtoken/read/balanceof.md)
       * [Write](protocol/api/contracts/jbtoken/write/README.md)
