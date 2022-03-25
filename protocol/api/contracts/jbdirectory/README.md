@@ -39,6 +39,7 @@ constructor(IJBOperatorStore _operatorStore, IJBProjects _projects) JBOperatable
 * **Arguments:**
   * `_operatorStore` is an [`IJBOperatorStore`](../../interfaces/ijboperatorstore.md) contract storing operator assignments.
   * `_projects` is an [`IJBProjects`](../../interfaces/ijbprojects.md) contract which mints ERC-721's that represent project ownership and transfers.
+  * `_owner` is the address that will own the contract.
 
 ## Events
 
