@@ -6,7 +6,7 @@ Interface: [`IJBPrices`](../../../interfaces/ijbprices.md)
 
 {% tabs %}
 {% tab title="Step by step" %}
-**Gets the current price of the provided currency in terms of the provided base currency.**
+**Gets the number of `_currency` units that can be converted to 1 `_base` unit.**
 
 ### Definition
 
@@ -19,8 +19,8 @@ function priceFor(
 ```
 
 * Arguments:
-  * `_currency` is the currency to get a price for.
-  * `_base` is the currency to base the price on.
+  * `_currency` is the currency units the feed's resulting price is in terms of.
+  * `_base` is the base currency unit being priced by the feed.
   * `_decimals` is the number of decimals the returned fixed point price should include.
 * The view function can be accessed externally by anyone.
 * The view function does not alter state on the blockchain.
@@ -63,10 +63,10 @@ function priceFor(
 ```solidity
 /** 
   @notice 
-  Gets the current price of the provided currency in terms of the provided base currency.
+  Gets the number of `_currency` units that can be converted to 1 `_base` unit.
   
-  @param _currency The currency to get a price for.
-  @param _base The currency to base the price on.
+  @param _currency The currency units the feed's resulting price is in terms of.
+  @param _base The base currency unit being priced by the feed.
   @param _decimals The number of decimals the returned fixed point price should include.
   
   @return The price of the currency in terms of the base, as a fixed point number with the specified number of decimals.
