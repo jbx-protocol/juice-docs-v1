@@ -8,7 +8,7 @@ description: What's in the V2 protocol
   Whichever address owns this NFT has administrative privileges to configure treasury parameters within the Juicebox ecosystem. It can also be used by other Web3 ecosystems to extend functionality to projects.\
   \
   [Learn more about projects](../learn/glossary/project.md)\
-  \
+  
 
 * **Configure funding cycles for a project**\
   Funding cycles define contractual constraints according to which the project will operate.\
