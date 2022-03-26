@@ -12,13 +12,13 @@ The following functions can only be accessed by a privileged administrating addr
   Allows the owner of the [`JBDirectory`](../api/contracts/jbdirectory/) contract to add/remove addresses that can set a project's first controller on its behalf. 
   <br>
 * **[`JBETHPaymentTerminal.setFee(...)`](../api/contracts/or-abstract/jbpayoutredemptionpaymentterminal/write/setfee.md)**\
-  Allows the owner of the [`JBETHPaymentTerminal`](../api/contracts/or-payment-terminals/jbethpaymentterminal/) (any any other terminal inheriting from [`JBPayoutRedemptionPaymentTerminal`](../api/contracts/or-abstract/jbpayoutredemptionpaymentterminal/)) to change the protocol fee incurred when projects distribute their treasury funds outside of the protocol ecosystem. The max fee is 5%.
+  Allows the owner of the [`JBETHPaymentTerminal`](../api/contracts/or-payment-terminals/jbethpaymentterminal/) (or any other terminal inheriting from [`JBPayoutRedemptionPaymentTerminal`](../api/contracts/or-abstract/jbpayoutredemptionpaymentterminal/)) to change the protocol fee incurred when projects distribute their treasury funds outside of the protocol ecosystem. The max fee is 5%.
   <br>
 * **[`JBETHPaymentTerminal.setFeeGauge(...)`](../api/contracts/or-abstract/jbpayoutredemptionpaymentterminal/write/setfeegauge.md)**\
-  Allows the owner of the [`JBETHPaymentTerminal`](../api/contracts/or-payment-terminals/jbethpaymentterminal/) (any any other terminal inheriting from [`JBPayoutRedemptionPaymentTerminal`](../api/contracts/or-abstract/jbpayoutredemptionpaymentterminal/)) to change the fee gauge used to provide fee discounts on a per-project basis. 
+  Allows the owner of the [`JBETHPaymentTerminal`](../api/contracts/or-payment-terminals/jbethpaymentterminal/) (or any other terminal inheriting from [`JBPayoutRedemptionPaymentTerminal`](../api/contracts/or-abstract/jbpayoutredemptionpaymentterminal/)) to change the fee gauge used to provide fee discounts on a per-project basis. 
   <br>
 * **[`JBETHPaymentTerminal.setFeelessTerminal(...)`](../api/contracts/or-abstract/jbpayoutredemptionpaymentterminal/write/setfeelessterminal.md)**\
-  Allows the owner of the [`JBETHPaymentTerminal`](../api/contracts/or-payment-terminals/jbethpaymentterminal/) (any any other terminal inheriting from [`JBPayoutRedemptionPaymentTerminal`](../api/contracts/or-abstract/jbpayoutredemptionpaymentterminal/)) to add/remove any other [`IJBTerminal`](../api/interfaces/ijbpaymentterminal.md) used by other projects from a list of terminals to which distributed funds can be sent without incurring protocol fees. 
+  Allows the owner of the [`JBETHPaymentTerminal`](../api/contracts/or-payment-terminals/jbethpaymentterminal/) (or any other terminal inheriting from [`JBPayoutRedemptionPaymentTerminal`](../api/contracts/or-abstract/jbpayoutredemptionpaymentterminal/)) to add/remove any other [`IJBTerminal`](../api/interfaces/ijbpaymentterminal.md) used by other projects from a list of terminals to which distributed funds can be sent without incurring protocol fees. 
   <br>
 
 Ownership for each contract is managed independently.
