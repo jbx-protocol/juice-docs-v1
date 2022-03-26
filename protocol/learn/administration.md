@@ -21,4 +21,4 @@ The following functions can only be accessed by a privileged administrating addr
   Allows the owner of the [`JBETHPaymentTerminal`](../api/contracts/or-payment-terminals/jbethpaymentterminal/) (any any other terminal inheriting from [`JBPayoutRedemptionPaymentTerminal`](../api/contracts/or-abstract/jbpayoutredemptionpaymentterminal/)) to add/remove any other [`IJBTerminal`](../api/interfaces/ijbpaymentterminal.md) used by other projects from a list of terminals to which distributed funds can be sent without incurring protocol fees. 
   <br>
 
-  Ownership for each contract is managed independently.
+Ownership for each contract is managed independently.
