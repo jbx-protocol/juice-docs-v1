@@ -1,3 +1,7 @@
+---
+description: >-
+  How administrators can change the protocol.
+---
 # Administration
 
 The following functions can only be accessed by a privileged administrating address, initially the JuiceboxDAO multisig:

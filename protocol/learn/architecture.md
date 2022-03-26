@@ -1,7 +1,7 @@
 ---
 description: >-
-  Here you'll find information about how the protocol is organized and
-  implemented. All documentation in this section refers to the upcoming V2
+  How the protocol is organized and implemented. 
+  All documentation in this section refers to the upcoming V2
   version of the protocol.
 ---
 
