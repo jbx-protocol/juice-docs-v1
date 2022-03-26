@@ -138,11 +138,13 @@ description: What's in the V2 protocol
   A project can pre-program token distributions to splits. The destination of a split can be an Ethereum address, the project ID of another project's Juicebox treasury (the split will allow you to configure the beneficiary of that project's tokens that get minted in response to the contribution), or to the `allocate(...)` function of any contract that adheres to [`IJBSplitAllocator`](../api/interfaces/ijbsplitallocator.md).\
   \
   [Learn more about splits](../learn/glossary/splits.md)\
+  \
   [Learn more about allocators](../learn/glossary/split-allocator.md)
 * **Custom treasury strategies**\
   Funding cycles can be configured to use an [`IJBFundingCycleDataSource`](../api/interfaces/ijbfundingcycledatasource.md), [`IJBPayDelegate`](../api/interfaces/ijbpaydelegate.md), and [`IJBRedemptionDelegate`](../api/interfaces/ijbredemptiondelegate.md) to extend or override the default protocol's behavior that defines what happens when an address tries to make a payment to the project's treasury, and what happens when someone tries to redeem the project tokens during any particular funding cycle.\
   \
-  [Learn more about data sources](../learn/glossary/data-source.md)
+  [Learn more about data sources](../learn/glossary/data-source.md)\
+  \
   [Learn more about delegates](../learn/glossary/delegate.md)
 * **Accept multiple tokens**\
   A project can specify any number of payment terminal contracts where it can receive funds denominated in various tokens. This allows projects to create distinct rules for accepting ETH, any ERC-20, or any asset in general.\
