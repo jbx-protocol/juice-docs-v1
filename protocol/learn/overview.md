@@ -6,9 +6,11 @@ description: What's in the V2 protocol
 
 * <mark style="color:orange;">**Deploy an NFT that represents ownership over a project**</mark>\
   Whichever address owns this NFT has administrative privileges to configure treasury parameters within the Juicebox ecosystem. It can also be used by other Web3 ecosystems to extend functionality to projects.
+  <p>[Learn more](../learn/glossary/project.md)</p>
 * <mark style="color:orange;">**Configure funding cycles for a project**</mark>\
   Funding cycles define contractual constraints according to which the project will operate.\
   The following properties can be configured into a funding cycle:
+  <p>[Learn more](../learn/glossary/funding-cycle.md)</p>
 
 <details>
 
@@ -38,7 +40,7 @@ description: What's in the V2 protocol
 <!---->
 
 * <mark style="color:orange;">**Weight**</mark>\
-  A number used to determine how many of the project's tokens should be minted and transferred when payments are received during the funding cycle.
+  A number used to determine how many of the project's tokens should be minted and transferred when payments are received during the funding cycle. Project owner's can configure this directly, or allow it to be derived automatically from the previous funding cycle's weight and discount rate. 
 
 <!---->
 
@@ -59,7 +61,7 @@ description: What's in the V2 protocol
 <!---->
 
 * <mark style="color:orange;">**Reserved rate**</mark>\
-  The percent of newly minted tokens during the funding cycle that a project wishes to withhold for custom distributions. The project owner can pre-program a list of destinations to split reserved tokens.
+  The percent of newly minted tokens during the funding cycle that a project wishes to withhold for custom distributions. The project owner can pre-program a list of destinations to split reserved tokens among.
 
 <!---->
 
