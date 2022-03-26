@@ -369,6 +369,7 @@
           * [processFees](protocol/api/contracts/or-abstract/jbpayoutredemptionpaymentterminal/write/processfees.md)
           * [setFee](protocol/api/contracts/or-abstract/jbpayoutredemptionpaymentterminal/write/setfee.md)
           * [setFeeGauge](protocol/api/contracts/or-abstract/jbpayoutredemptionpaymentterminal/write/setfeegauge.md)
+          * [setFeelessTerminal](protocol/api/contracts/or-abstract/jbpayoutredemptionpaymentterminal/write/setfeelessterminal.md)
           * [_distributeToPayoutSplitsOf](protocol/api/contracts/or-abstract/jbpayoutredemptionpaymentterminal/write/_distributetopayoutsplitsof.md)
           * [_takeFeeFrom](protocol/api/contracts/or-abstract/jbpayoutredemptionpaymentterminal/write/_takefeefrom.md)
           * [_processFee](protocol/api/contracts/or-abstract/jbpayoutredemptionpaymentterminal/write/_processfee.md)
