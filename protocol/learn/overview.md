@@ -7,7 +7,8 @@ description: What's in the V2 protocol
 * **Deploy an NFT that represents ownership over a project**\
   Whichever address owns this NFT has administrative privileges to configure treasury parameters within the Juicebox ecosystem. It can also be used by other Web3 ecosystems to extend functionality to projects.\
   \
-  [Learn more about projects](../learn/glossary/project.md)\
+  [Learn more about projects](../learn/glossary/project.md)
+  <br>
   
 
 * **Configure funding cycles for a project**\
