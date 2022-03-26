@@ -8,6 +8,9 @@ description: What's in the V2 protocol
   Whichever address owns this NFT has administrative privileges to configure treasury parameters within the Juicebox ecosystem. It can also be used by other Web3 ecosystems to extend functionality to projects.\
   \
   [Learn more about projects](../learn/glossary/project.md)
+
+<!---->
+
 * **Configure funding cycles for a project**\
   Funding cycles define contractual constraints according to which the project will operate.\
   \
@@ -154,7 +157,7 @@ description: What's in the V2 protocol
   A project can specify any number of payment terminal contracts where it can receive funds denominated in various tokens. This allows projects to create distinct rules for accepting ETH, any ERC-20, or any asset in general.\
   \
   Anyone can roll their own contract that adheres to [`IJBPaymentTerminal`](../api/interfaces/ijbpaymentterminal.md) for projects to use, and a project can migrate funds between terminals that use the same token as it wishes.
-* **Forkability and migratability.**\
+* **Forkability and migratability**\
   A project can migrate its treasury's controller to any other contract that adheres to [`IJBController`](../api/interfaces/ijbcontroller.md). This allows a project to evolve into updated or custom treasury dynamics rules over time as it wishes.
 * **Operators**\
   A project owner can specify addresses that are allowed to operate certain administrative treasury transactions on its behalf.\
