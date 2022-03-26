@@ -1,6 +1,6 @@
 ---
 description: >-
-  The following terms are used frequently to describe ideas and mechanisms
+  Frequently used terms to describe ideas and mechanisms
   within the Juicebox protocol.
 ---
 
