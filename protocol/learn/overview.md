@@ -7,11 +7,11 @@ description: What's in the V2 protocol
 * **Deploy an NFT that represents ownership over a project**\
   Whichever address owns this NFT has administrative privileges to configure treasury parameters within the Juicebox ecosystem. It can also be used by other Web3 ecosystems to extend functionality to projects.\
   \
-  [Learn more](../learn/glossary/project.md)
+  [Learn more about projects](../learn/glossary/project.md)
 * **Configure funding cycles for a project**\
   Funding cycles define contractual constraints according to which the project will operate.\
   \
-  [Learn more](../learn/glossary/funding-cycle.md)\
+  [Learn more about funding cycles](../learn/glossary/funding-cycle.md)\
   \
   The following properties can be configured into a funding cycle:
 
@@ -57,7 +57,7 @@ description: What's in the V2 protocol
   \
   The discount rate only applies if the project owner doesn't explicitly reconfigure the subsequent cycle's weight to a custom value.\
   \
-  [Learn more](../learn/glossary/discount-rate.md)
+  [Learn more about discount rates](../learn/glossary/discount-rate.md)
 
 <!---->
 
@@ -68,14 +68,14 @@ description: What's in the V2 protocol
   \
   More complex implementation might include on-chain governance.\
   \
-  [Learn more](../learn/glossary/ballot.md)
+  [Learn more ballots](../learn/glossary/ballot.md)
 
 <!---->
 
 * **Reserved rate**\
   The percent of newly minted tokens during the funding cycle that a project wishes to withhold for custom distributions. The project owner can pre-program a list of destinations to split reserved tokens among.\
   \
-  [Learn more](../learn/glossary/reserved-tokens.md)
+  [Learn more about reserved rates](../learn/glossary/reserved-tokens.md)
 
 <!---->
 
@@ -84,7 +84,7 @@ description: What's in the V2 protocol
   \
   A rate of 100% suggests a linear proportion, meaning X% of treasury funds can be reclaimed by redeeming X% of the token supply.\
   \
-  [Learn more](../learn/glossary/redemption-rate.md)
+  [Learn more about redemption rates](../learn/glossary/redemption-rate.md)
 
 <!---->
 
@@ -117,7 +117,7 @@ description: What's in the V2 protocol
 * **Data source**\
   The address of a contract that adheres to [`IJBFundingCycleDataSource`](../api/interfaces/ijbfundingcycledatasource.md), which can be used to extend or override what happens when the treasury receives funds, and what happens when someone tries to redeem from the treasury.\
   \
-  [Learn more](../learn/glossary/data-source.md)
+  [Learn more about data sources](../learn/glossary/data-source.md)
 
 </details>
 
@@ -139,6 +139,12 @@ description: What's in the V2 protocol
   \
   [Learn more about splits](../learn/glossary/splits.md)\
   [Learn more about allocators](../learn/glossary/split-allocator.md)
+* **Protocol fees**\
+  All funds distributed by projects from their treasuries to destinations outside of the juicebox ecosystem will incure a protocol fee. This fee is sent to the JuiceboxDAO treasury which runs on the Juicebox protocol itself (project ID of 1), triggering the same functionality as a payment directly to JuiceboxDAO (by default, minting JBX for the fee payer according to JuiceboxDAO's current funding cycle configuration) from an external source.\
+  \
+  This fee is adjustable by JuiceboxDAO, with a max value of 5%.\
+  \
+  Any funds sent from one juicebox treasury to another via splits do not incur fees.
 * **Custom treasury strategies**\
   Funding cycles can be configured to use an [`IJBFundingCycleDataSource`](../api/interfaces/ijbfundingcycledatasource.md), [`IJBPayDelegate`](../api/interfaces/ijbpaydelegate.md), and [`IJBRedemptionDelegate`](../api/interfaces/ijbredemptiondelegate.md) to extend or override the default protocol's behavior that defines what happens when an address tries to make a payment to the project's treasury, and what happens when someone tries to redeem the project tokens during any particular funding cycle.\
   \
@@ -149,8 +155,8 @@ description: What's in the V2 protocol
   \
   Anyone can roll their own contract that adheres to [`IJBPaymentTerminal`](../api/interfaces/ijbpaymentterminal.md) for projects to use, and a project can migrate funds between terminals that use the same token as it wishes.
 * **Forkability and migratability.**\
-  A project can migrate its treasury's controller to any other contract that adheres to [`IJBController`](../api/interfaces/ijbcontroller.md). This allows a project to evolve into updated or custom operating rules over time as it wishes.
+  A project can migrate its treasury's controller to any other contract that adheres to [`IJBController`](../api/interfaces/ijbcontroller.md). This allows a project to evolve into updated or custom treasury dynamics rules over time as it wishes.
 * **Operators**\
   A project owner can specify addresses that are allowed to operate certain administrative treasury transactions on its behalf.\
   \
-  [Learn more](../learn/glossary/operator.md)
+  [Learn more about operators](../learn/glossary/operator.md)
