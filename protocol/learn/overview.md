@@ -5,13 +5,24 @@ description: What's in the V2 protocol
 # Overview
 
 * <mark style="color:orange;">**Deploy an NFT that represents ownership over a project**</mark>\
-  Whichever address owns this NFT has administrative privileges to configure treasury parameters within the Juicebox ecosystem. It can also be used by other Web3 ecosystems to extend functionality to projects.[Learn more](../learn/glossary/project.md).
+  Whichever address owns this NFT has administrative privileges to configure treasury parameters within the Juicebox ecosystem. It can also be used by other Web3 ecosystems to extend functionality to projects.\
+  \
+  [Learn more](../learn/glossary/project.md).
 * <mark style="color:orange;">**Configure funding cycles for a project**</mark>\
-  Funding cycles define contractual constraints according to which the project will operate. [Learn more](../learn/glossary/funding-cycle.md).<br><p>The following properties can be configured into a funding cycle:<p>
+  Funding cycles define contractual constraints according to which the project will operate.\
+  \
+  [Learn more](../learn/glossary/funding-cycle.md).\
+  \
+  The following properties can be configured into a funding cycle:
 
 <details>
 
 <summary><em>Funding cycle properties</em></summary>
+
+* <mark style="color:orange;">**Start timestamp**</mark>\
+  The timestamp at which the funding cycle is considered active. Projects can configure the start time of their first funding cycle to be in the future, and can ensure future reconfigurations don't take effect before a specified timestamp.\
+  \
+  Once a funding cycle ends, a new one is created automatically that starts right away. If there's an approved queued reconfiguration allowed to start at this time, it will be used, otherwise a copy of the previous funding cycle will be used.
 
 * <mark style="color:orange;">**Duration**</mark>\
   How long each funding cycle lasts, specified in seconds. All funding cycle properties are unchangeable while it is in progress. Any proposed reconfigurations are only able to take effect during a subsequent cycle.\
@@ -44,7 +55,9 @@ description: What's in the V2 protocol
 * <mark style="color:orange;">**Discount rate**</mark>\
   The percent to automatically decrease the subsequent cycle's weight from the current cycle's weight.\
   \
-  The discount rate only applies if the project owner doesn't explicitly reconfigure the subsequent cycle's weight to a custom value.
+  The discount rate only applies if the project owner doesn't explicitly reconfigure the subsequent cycle's weight to a custom value.\
+  \
+  [Learn more](../learn/glossary/discount-rate.md)
 
 <!---->
 
@@ -53,19 +66,25 @@ description: What's in the V2 protocol
   \
   A simple implementation commonly used by Juicebox projects is to force reconfigurations to be submitted by the project owner at least X days before the end of the current funding cycle, giving the community foresight into any misconfigurations of abuses of power before they take effect.\
   \
-  More complex implementation might include on-chain governance.
+  More complex implementation might include on-chain governance.\
+  \
+  [Learn more](../learn/glossary/ballot.md)
 
 <!---->
 
 * <mark style="color:orange;">**Reserved rate**</mark>\
-  The percent of newly minted tokens during the funding cycle that a project wishes to withhold for custom distributions. The project owner can pre-program a list of destinations to split reserved tokens among.
+  The percent of newly minted tokens during the funding cycle that a project wishes to withhold for custom distributions. The project owner can pre-program a list of destinations to split reserved tokens among.\
+  \
+  [Learn more](../learn/glossary/reserved-tokens.md)
 
 <!---->
 
 * <mark style="color:orange;">**Redemption rate**</mark>\
   The percentage of a project's treasury funds that can be reclaimed by community members by burning the project's tokens during the funding cycle.\
   \
-  A rate of 100% suggests a linear proportion, meaning X% of treasury funds can be reclaimed by redeeming X% of the token supply.
+  A rate of 100% suggests a linear proportion, meaning X% of treasury funds can be reclaimed by redeeming X% of the token supply.\
+  \
+  [Learn more](../learn/glossary/redemption-rate.md)
 
 <!---->
 
@@ -96,34 +115,42 @@ description: What's in the V2 protocol
 <!---->
 
 * <mark style="color:orange;">**Data source**</mark>\
-  The address of a contract that adheres to [`IJBFundingCycleDataSource`](../api/interfaces/ijbfundingcycledatasource.md), which can be used to extend or override what happens when the treasury receives funds, and what happens when someone tries to redeem from the treasury.
+  The address of a contract that adheres to [`IJBFundingCycleDataSource`](../api/interfaces/ijbfundingcycledatasource.md), which can be used to extend or override what happens when the treasury receives funds, and what happens when someone tries to redeem from the treasury.\
+  \
+  [Learn more](../learn/glossary/data-source.md)
 
 </details>
 
 * <mark style="color:orange;">**Mint tokens**</mark>\
   By default, a project starts with 0 tokens and mints them when its treasury receives contributions.\
-  A project can mint and distribute more of its own tokens on demand if it its current funding cycle isn't configured to pause minting.
+  A project can mint and distribute more of its own tokens on demand if its current funding cycle isn't configured to pause minting.
 * <mark style="color:orange;">**Burn tokens**</mark>\
   Anyone can burn a project's tokens, if the project's current funding cycle isn't configured to paused burning.
 * <mark style="color:orange;">**Bring-your-own token**</mark>\
-  A project can bring its own token, as long as it adheres to `IJBToken`.\
+  A project can bring its own token, as long as it adheres to [`IJBToken`](../api/interfaces/ijbtoken.md) and uses fixed point accounting with 18 decimals.\
   \
   This allows a project to use ERC-721's, ERC-1155's, or any other custom contract that'll be called upon when the protocol asks to mint or burn tokens.\
   \
-  A project can change its token during any of its funding cycles that are explicitly configured to allow it.\
+  A project can change its token during any of its funding cycles that are explicitly configured to allow changes.\
   \
-  By default, the protocol provides a transaction for projects to deploy ERC-20 tokens, which can be used in on-chain voting governor contracts. 
+  By default, the protocol provides a transaction for projects to deploy [`JBToken`](../api/contracts/jbtoken/) ERC-20 tokens. 
 * <mark style="color:orange;">**Splits**</mark>\
-  A project can pre-program token distributions to splits. The destination of a split can be an Ethereum address, the project ID of another project's Juicebox treasury (the split will allow you to configure the beneficiary of that project's tokens that get minted in response to the distribution), or to the `allocate` function of any contract that adheres to [`IJBSplitAllocator`](../api/interfaces/ijbsplitallocator.md).\
+  A project can pre-program token distributions to splits. The destination of a split can be an Ethereum address, the project ID of another project's Juicebox treasury (the split will allow you to configure the beneficiary of that project's tokens that get minted in response to the contribution), or to the `allocate(...)` function of any contract that adheres to [`IJBSplitAllocator`](../api/interfaces/ijbsplitallocator.md).\
   \
-  ETH splits to Allocators get sent directly to the `allocate` function. Distribution of other assets to Allocator contracts (ERC-20's, ERC-721's, ERC-1155's, etc) will trigger the `allocate` function after a successful transfer.
+  [Learn more about splits](../learn/glossary/splits.md)\
+  [Learn more about allocators](../learn/glossary/split-allocator.md)
 * <mark style="color:orange;">**Custom treasury strategies**</mark>\
-  Funding cycles can be configured to use an [`IJBFundingCycleDataSource`](../api/interfaces/ijbfundingcycledatasource.md), [`IJBPayDelegate`](../api/interfaces/ijbpaydelegate.md), and [`IJBRedemptionDelegate`](../api/interfaces/ijbredemptiondelegate.md) to extend or override the default Juicebox protocol's behavior that defines what happens when an address tries to make a payment to the project's treasury, and what happens when someone tries to redeem the project tokens during any particular funding cycle.
+  Funding cycles can be configured to use an [`IJBFundingCycleDataSource`](../api/interfaces/ijbfundingcycledatasource.md), [`IJBPayDelegate`](../api/interfaces/ijbpaydelegate.md), and [`IJBRedemptionDelegate`](../api/interfaces/ijbredemptiondelegate.md) to extend or override the default protocol's behavior that defines what happens when an address tries to make a payment to the project's treasury, and what happens when someone tries to redeem the project tokens during any particular funding cycle.\
+  \
+  [Learn more about data sources](../learn/glossary/data-source.md)
+  [Learn more about delegates](../learn/glossary/delegate.md)
 * <mark style="color:orange;">**Accept multiple tokens**</mark>\
   A project can specify any number of payment terminal contracts where it can receive funds denominated in various tokens. This allows projects to create distinct rules for accepting ETH, any ERC-20, or any asset in general.\
   \
-  Anyone can roll their own contract that adheres to `IJBPaymentTerminal` for projects to use, and a project can migrate funds between terminals that use the same token as it wishes.
+  Anyone can roll their own contract that adheres to [`IJBPaymentTerminal`](../api/interfaces/ijbpaymentterminal.md) for projects to use, and a project can migrate funds between terminals that use the same token as it wishes.
 * <mark style="color:orange;">**Forkability and migratability.**</mark>\
-  A project can migrate its treasury's controller to any other contract that adheres to `IJBController`. This allows a project to evolve into updated or custom operating rules over time as it wishes.
+  A project can migrate its treasury's controller to any other contract that adheres to [`IJBController`](../api/interfaces/ijbcontroller.md). This allows a project to evolve into updated or custom operating rules over time as it wishes.
 * <mark style="color:orange;">**Operators**</mark>\
-  A project owner can specify addresses that are allowed to operate certain administrative treasury transactions on its behalf.
+  A project owner can specify addresses that are allowed to operate certain administrative treasury transactions on its behalf.\
+  \
+  [Learn more](../learn/glossary/operator.md)
