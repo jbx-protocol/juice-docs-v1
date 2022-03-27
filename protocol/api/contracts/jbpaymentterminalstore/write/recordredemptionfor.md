@@ -147,44 +147,44 @@ function recordRedemptionFor(
 
         * [`_reclaimableOverflowDuring`](../read/_reclaimableoverflowduring.md)
 
-4.  If the project's current funding cycle is configured to use a data source when making redemptions, ask the data source for the parameters that should be used throughout the rest of the function given provided contextual values in a [`JBRedeemParamsData`](../../../data-structures/jbredeemparamsdata.md) structure. Otherwise default parameters are used.
+    4.  If the project's current funding cycle is configured to use a data source when making redemptions, ask the data source for the parameters that should be used throughout the rest of the function given provided contextual values in a [`JBRedeemParamsData`](../../../data-structures/jbredeemparamsdata.md) structure. Otherwise default parameters are used.
 
-    ```solidity
-    // If the funding cycle has configured a data source, use it to derive a claim amount and memo.
-    if (fundingCycle.useDataSourceForRedeem()) {
-      // Create the params that'll be sent to the data source.
-      JBRedeemParamsData memory _data = JBRedeemParamsData(
-        IJBPaymentTerminal(msg.sender),
-        _holder,
-        _projectId,
-        _tokenCount,
-        _totalSupply,
-        _currentOverflow,
-        _balanceDecimals,
-        _balanceCurrency,
-        reclaimAmount,
-        fundingCycle.useTotalOverflowForRedemptions(),
-        fundingCycle.redemptionRate(),
-        fundingCycle.ballotRedemptionRate(),
-        _memo,
-        _metadata
-      );
-      (reclaimAmount, memo, delegate) = fundingCycle.dataSource().redeemParams(_data);
-    } else {
-      memo = _memo;
-    }
-    ```
+        ```solidity
+        // If the funding cycle has configured a data source, use it to derive a claim amount and memo.
+        if (fundingCycle.useDataSourceForRedeem()) {
+          // Create the params that'll be sent to the data source.
+          JBRedeemParamsData memory _data = JBRedeemParamsData(
+            IJBPaymentTerminal(msg.sender),
+            _holder,
+            _projectId,
+            _tokenCount,
+            _totalSupply,
+            _currentOverflow,
+            _balanceDecimals,
+            _balanceCurrency,
+            reclaimAmount,
+            fundingCycle.useTotalOverflowForRedemptions(),
+            fundingCycle.redemptionRate(),
+            fundingCycle.ballotRedemptionRate(),
+            _memo,
+            _metadata
+          );
+          (reclaimAmount, memo, delegate) = fundingCycle.dataSource().redeemParams(_data);
+        } else {
+          memo = _memo;
+        }
+        ```
 
-    _Libraries used:_
+        _Libraries used:_
 
-    * [`JBFundingCycleMetadataResolver`](../../../libraries/jbfundingcyclemetadataresolver.md)\
-      `.useDataSourceForRedeem(...)`\
-      `.dataSource(...)`\
-      `.redemptionRate(...)`\
-      `.ballotRedemptionRate(...)`\
-      `.useTotalOverflowForRedemptions(...)`
+        * [`JBFundingCycleMetadataResolver`](../../../libraries/jbfundingcyclemetadataresolver.md)\
+          `.useDataSourceForRedeem(...)`\
+          `.dataSource(...)`\
+          `.redemptionRate(...)`\
+          `.ballotRedemptionRate(...)`\
+          `.useTotalOverflowForRedemptions(...)`
 
-5.  Make sure the amount being claimed is within the bounds of the project's balance.
+4.  Make sure the amount being claimed is within the bounds of the project's balance.
 
     ```solidity
     // The amount being reclaimed must be within the project's balance.
@@ -195,7 +195,7 @@ function recordRedemptionFor(
     _Internal references:_
 
     * [`balanceOf`](../properties/balanceof.md)
-6.  Decrement any claimed funds from the project's balance if needed.
+5.  Decrement any claimed funds from the project's balance if needed.
 
     ```solidity
     // Remove the reclaimed funds from the project's balance.
