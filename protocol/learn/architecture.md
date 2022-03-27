@@ -14,7 +14,7 @@ The protocol is made up of 7 core contracts and 3 surface contracts.
 
 ## Core contracts
 
-The first two core contracts are pretty self explanatory. They store the core opinionated components of the protocol.
+The first two core contracts are self explanatory. They store the core opinionated components of the protocol.
 
 * [`JBTokenStore`](../api/contracts/jbtokenstore/) manages token minting and burning for all projects.
 * [`JBFundingCycleStore`](../api/contracts/jbfundingcyclestore/) manages funding cycle configurations and scheduling. Funding cycles are represented as a [`JBFundingCycle`](../api/data-structures/jbfundingcycle.md) data structure.
