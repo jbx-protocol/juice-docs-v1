@@ -6,7 +6,7 @@ Interface: [`JBPaymentTerminalStore`](../../../interfaces/ijbpaymentterminalstor
 
 {% tabs %}
 {% tab title="Step by step" %}
-**The current amount of overflowed tokens from a terminal that can be reclaimed by the specified number of tokens.**
+**The current amount of overflowed tokens from a terminal that can be reclaimed by the specified number of tokens, using the total token supply and overflow in the ecosystem.**
 
 _If the project has an active funding cycle reconfiguration ballot, the project's ballot redemption rate is used._
 
@@ -33,7 +33,7 @@ function currentReclaimableOverflowOf(
 * The view function can be accessed externally by anyone.
 * The view function does not alter state on the blockchain.
 * The resulting function overrides a function definition from the [`JBPaymentTerminalStore`](../../../interfaces/ijbpaymentterminalstore.md) interface.
-* The function returns the amount of overflowed tokens that can be reclaimed.
+* The function returns the amount of overflowed tokens that can be reclaimed, as a fixed point number with the same number of decimals as the provided `_terminal`.
 
 #### Body
 
@@ -73,14 +73,49 @@ function currentReclaimableOverflowOf(
     * [`decimals`](../../or-abstract/jbpayoutredemptionpaymentterminal/properties/decimals.md)
     * [`currency`](../../or-abstract/jbpayoutredemptionpaymentterminal/properties/currency.md)
 
-1.  Return the reclaimable overflow using the project's current funding cycle and the derived current overflow. If there's no current overflow, there's no reclaimable overflow.
+3.  If there's no overflow, there's nothing reclaimable.
 
     ```solidity
-    // If there is no overflow, nothing is reclaimable.
+    // If there's no overflow, there's no reclaimable overflow.
+    if (_currentOverflow == 0) return 0;
+    ```
+
+4.  Get a reference to the total outstanding supply of project tokens that should be used in the calculation.
+
+    ```solidity
+    // Get the number of outstanding tokens the project has.
+    uint256 _totalSupply = directory.controllerOf(_projectId).totalOutstandingTokensOf(
+      _projectId,
+      _fundingCycle.reservedRate()
+    );
+    ```
+
+    _Libraries used:_
+
+    * [`JBFundingCycleMetadataResolver`](../../../libraries/jbfundingcyclemetadataresolver.md)
+      * `.reservedRate(...)`
+
+    _Internal references:_
+
+    * [`directory`](../properties/directory.md)
+
+    _External references:_
+
+    * [`controllerOf`](../../jbdirectory/properties/controllerof.md)
+    * [`totalOutstandingTokensOf`](../../or-controllers/jbcontroller/read/totaloutstandingtokensof.md)
+
+5.  Return the reclaimable overflow using the project's current funding cycle and the derived current overflow. 
+
+    ```solidity
+    // Return the reclaimable overflow amount.
     return
-      _currentOverflow == 0
-        ? 0
-        : _reclaimableOverflowDuring(_projectId, _fundingCycle, _tokenCount, _currentOverflow);
+      _reclaimableOverflowDuring(
+        _projectId,
+        _fundingCycle,
+        _tokenCount,
+        _totalSupply,
+        _currentOverflow
+      );
     ```
 
     _Internal references:_
@@ -93,7 +128,7 @@ function currentReclaimableOverflowOf(
 ```solidity
 /**
   @notice
-  The current amount of overflowed tokens from a terminal that can be reclaimed by the specified number of tokens.
+  The current amount of overflowed tokens from a terminal that can be reclaimed by the specified number of tokens, using the total token supply and overflow in the ecosystem.
 
   @dev 
   If the project has an active funding cycle reconfiguration ballot, the project's ballot redemption rate is used.
@@ -109,7 +144,7 @@ function currentReclaimableOverflowOf(
   @param _tokenCount The number of tokens to make the calculation with, as a fixed point number with 18 decimals.
   @param _useTotalOverflow A flag indicating whether the overflow used in the calculation should be summed from all of the project's terminals. If false, overflow should be limited to the amount in the specified `_terminal`.
 
-  @return The amount of overflowed tokens that can be reclaimed.
+  @return The amount of overflowed tokens that can be reclaimed, as a fixed point number with the same number of decimals as the provided `_terminal`.
 */
 function currentReclaimableOverflowOf(
   IJBPaymentTerminal _terminal,
@@ -131,11 +166,24 @@ function currentReclaimableOverflowOf(
       _terminal.currency()
     );
 
-  // If there is no overflow, nothing is reclaimable.
+  // If there's no overflow, there's no reclaimable overflow.
+  if (_currentOverflow == 0) return 0;
+
+  // Get the number of outstanding tokens the project has.
+  uint256 _totalSupply = directory.controllerOf(_projectId).totalOutstandingTokensOf(
+    _projectId,
+    _fundingCycle.reservedRate()
+  );
+  
+  // Return the reclaimable overflow amount.
   return
-    _currentOverflow == 0
-      ? 0
-      : _reclaimableOverflowDuring(_projectId, _fundingCycle, _tokenCount, _currentOverflow);
+    _reclaimableOverflowDuring(
+      _projectId,
+      _fundingCycle,
+      _tokenCount,
+      _totalSupply,
+      _currentOverflow
+    );
 }
 ```
 {% endtab %}

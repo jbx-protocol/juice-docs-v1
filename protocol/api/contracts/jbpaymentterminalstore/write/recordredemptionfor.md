@@ -21,8 +21,8 @@ function recordRedemptionFor(
   uint256 _tokenCount,
   uint256 _balanceDecimals,
   uint256 _balanceCurrency,
-  string calldata _memo,
-  bytes calldata _metadata
+  string memory _memo,
+  bytes memory _metadata
 )
   external
   override
@@ -76,7 +76,7 @@ function recordRedemptionFor(
 3.  The following scoped block is a bit of a hack to prevent a "Stack too deep" error. 
 
     ```solidity
-    // Scoped section prevents stack too deep. `_currentOverflow` only used within scope.
+    // Scoped section prevents stack too deep. `_currentOverflow`, `_totalSupply`, and `_data` only used within scope.
     { ... }
     ```
 
@@ -105,13 +105,42 @@ function recordRedemptionFor(
         * [`_currentTotalOverflowOf`](../read/_currenttotaloverflowof.md)
         * [`_overflowDuring`](../read/_overflowduring.md)
 
-    2.  Get a reference to the reclaimable overflow if there is overflow. 
+    2.  Get a reference to the total outstanding supply of project tokens.
 
         ```solidity
-        // Calculate reclaim amount using the current overflow amount.
-        reclaimAmount = _currentOverflow == 0
-          ? 0
-          : _reclaimableOverflowDuring(_projectId, fundingCycle, _tokenCount, _currentOverflow);
+        // Get the number of outstanding tokens the project has.
+        uint256 _totalSupply = directory.controllerOf(_projectId).totalOutstandingTokensOf(
+          _projectId,
+          fundingCycle.reservedRate()
+        );
+        ```
+
+        _Libraries used:_
+
+        * [`JBFundingCycleMetadataResolver`](../../../libraries/jbfundingcyclemetadataresolver.md)
+          * `.reservedRate(...)`
+
+        _Internal references:_
+
+        * [`directory`](../properties/directory.md)
+
+        _External references:_
+
+        * [`controllerOf`](../../jbdirectory/properties/controllerof.md)
+        * [`totalOutstandingTokensOf`](../../or-controllers/jbcontroller/read/totaloutstandingtokensof.md)
+
+    3.  Get a reference to the reclaimable overflow if there is overflow. 
+
+        ```solidity
+        if (_currentOverflow > 0)
+          // Calculate reclaim amount using the current overflow amount.
+          reclaimAmount = _reclaimableOverflowDuring(
+            _projectId,
+            fundingCycle,
+            _tokenCount,
+            _totalSupply,
+            _currentOverflow
+          );
         ```
 
         _Internal references:_
@@ -129,6 +158,8 @@ function recordRedemptionFor(
         _holder,
         _projectId,
         _tokenCount,
+        _totalSupply,
+        _currentOverflow,
         _balanceDecimals,
         _balanceCurrency,
         reclaimAmount,
@@ -210,8 +241,8 @@ function recordRedemptionFor(
   uint256 _tokenCount,
   uint256 _balanceDecimals,
   uint256 _balanceCurrency,
-  string calldata _memo,
-  bytes calldata _metadata
+  string memory _memo,
+  bytes memory _metadata
 )
   external
   override
@@ -229,7 +260,7 @@ function recordRedemptionFor(
   // The current funding cycle must not be paused.
   if (fundingCycle.redeemPaused()) revert FUNDING_CYCLE_REDEEM_PAUSED();
 
-  // Scoped section prevents stack too deep. `_currentOverflow` only used within scope.
+  // Scoped section prevents stack too deep. `_currentOverflow`, `_totalSupply`, and `_data` only used within scope.
   {
     // Get the amount of current overflow.
     // Use the local overflow if the funding cycle specifies that it should be used. Otherwise, use the project's total overflow across all of its terminals.
@@ -242,32 +273,45 @@ function recordRedemptionFor(
         _balanceCurrency
       );
 
-    // Calculate reclaim amount using the current overflow amount.
-    reclaimAmount = _currentOverflow == 0
-      ? 0
-      : _reclaimableOverflowDuring(_projectId, fundingCycle, _tokenCount, _currentOverflow);
-  }
-
-  // If the funding cycle has configured a data source, use it to derive a claim amount and memo.
-  if (fundingCycle.useDataSourceForRedeem()) {
-    // Create the params that'll be sent to the data source.
-    JBRedeemParamsData memory _data = JBRedeemParamsData(
-      IJBPaymentTerminal(msg.sender),
-      _holder,
+    // Get the number of outstanding tokens the project has.
+    uint256 _totalSupply = directory.controllerOf(_projectId).totalOutstandingTokensOf(
       _projectId,
-      _tokenCount,
-      _balanceDecimals,
-      _balanceCurrency,
-      reclaimAmount,
-      fundingCycle.useTotalOverflowForRedemptions(),
-      fundingCycle.redemptionRate(),
-      fundingCycle.ballotRedemptionRate(),
-      _memo,
-      _metadata
+      fundingCycle.reservedRate()
     );
-    (reclaimAmount, memo, delegate) = fundingCycle.dataSource().redeemParams(_data);
-  } else {
-    memo = _memo;
+
+    if (_currentOverflow > 0)
+      // Calculate reclaim amount using the current overflow amount.
+      reclaimAmount = _reclaimableOverflowDuring(
+        _projectId,
+        fundingCycle,
+        _tokenCount,
+        _totalSupply,
+        _currentOverflow
+      );
+
+    // If the funding cycle has configured a data source, use it to derive a claim amount and memo.
+    if (fundingCycle.useDataSourceForRedeem()) {
+      // Create the params that'll be sent to the data source.
+      JBRedeemParamsData memory _data = JBRedeemParamsData(
+        IJBPaymentTerminal(msg.sender),
+        _holder,
+        _projectId,
+        _tokenCount,
+        _totalSupply,
+        _currentOverflow,
+        _balanceDecimals,
+        _balanceCurrency,
+        reclaimAmount,
+        fundingCycle.useTotalOverflowForRedemptions(),
+        fundingCycle.redemptionRate(),
+        fundingCycle.ballotRedemptionRate(),
+        _memo,
+        _metadata
+      );
+      (reclaimAmount, memo, delegate) = fundingCycle.dataSource().redeemParams(_data);
+    } else {
+      memo = _memo;
+    }
   }
 
   // The amount being reclaimed must be within the project's balance.
