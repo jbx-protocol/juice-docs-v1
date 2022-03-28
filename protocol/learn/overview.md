@@ -39,14 +39,18 @@ description: What's in the V2 protocol
 * **Distribution limit**\
   The amount of funds that can be distributed from the project's treasury during a funding cycle. The project owner can pre-program a list of destinations to split distributions.\
   \
-  Distributing is a public transaction that anyone can call on a project's behalf.
+  Distributing is a public transaction that anyone can call on a project's behalf.\
+  \
+  Distribution limits can be specified in any currency that the [`JBPrices`](../api/contracts/jbprices/) contract has a price feed for converting the underlying treasury asset's currency to.  
 
 <!---->
 
 * **Overflow allowance**\
   The amount of treasury funds that the project owner can distribute discretionarily on-demand.\
   \
-  This allowance does not reset per-funding cycle, it instead lasts until the project owner explicitly proposes a reconfiguration with a new allowance.
+  This allowance does not reset per-funding cycle, it instead lasts until the project owner explicitly proposes a reconfiguration with a new allowance.\
+  \
+  Overflow allowances can be specified in any currency that the [`JBPrices`](../api/contracts/jbprices/) contract has a price feed for converting the underlying treasury asset's currency to.  
 
 <!---->
 
@@ -141,7 +145,7 @@ description: What's in the V2 protocol
   By default, the protocol provides a transaction for projects to deploy [`JBToken`](../api/contracts/jbtoken/) ERC-20 tokens. 
   <br>
 * **Splits**\
-  A project can pre-program token distributions to splits. The destination of a split can be an Ethereum address, the project ID of another project's Juicebox treasury (the split will allow you to configure the beneficiary of that project's tokens that get minted in response to the contribution), or to the `allocate(...)` function of any contract that adheres to [`IJBSplitAllocator`](../api/interfaces/ijbsplitallocator.md).\
+  A project can pre-program token distributions to splits. The destination of a split can be an Ethereum address, the project ID of another project's Juicebox treasury (the split will allow you to configure the beneficiary of that project's tokens that get minted in response to the contribution), to the `allocate(...)` function of any contract that adheres to [`IJBSplitAllocator`](../api/interfaces/ijbsplitallocator.md), or to the address that initiated the transaction that distributes tokens to the splits.\
   \
   [Learn more about splits](../learn/glossary/splits.md)\
   [Learn more about allocators](../learn/glossary/split-allocator.md)

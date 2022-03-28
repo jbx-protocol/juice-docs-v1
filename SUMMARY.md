@@ -38,6 +38,7 @@
     * [Splits](protocol/learn/glossary/splits.md)
     * [Split allocator](protocol/learn/glossary/split-allocator.md)
     * [Ballot](protocol/learn/glossary/ballot.md)
+    * [Payment terminal](protocol/learn/glossary/payment-terminal.md)
     * [Data source](protocol/learn/glossary/data-source.md)
     * [Delegate](protocol/learn/glossary/delegate.md)
     * [Operator](protocol/learn/glossary/operator.md)
