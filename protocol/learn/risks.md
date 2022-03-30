@@ -1,7 +1,6 @@
-
 ---
 description: >-
-  Risks to understand before interacting with the protocol.
+  Risks to understand before interacting with the protocol. 
 ---
 # Risks 
 
