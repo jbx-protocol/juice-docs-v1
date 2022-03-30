@@ -27,6 +27,7 @@
   * [Overview](protocol/learn/overview.md)
   * [Architecture](protocol/learn/architecture.md)
   * [Administration](protocol/learn/administration.md)
+  * [Risks](protocol/learn/risks.md)
   * [Glossary](protocol/learn/glossary/README.md)
     * [Project](protocol/learn/glossary/project.md)
     * [Funding cycle](protocol/learn/glossary/funding-cycle.md)
