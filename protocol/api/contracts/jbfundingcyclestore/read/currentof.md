@@ -120,7 +120,19 @@ function currentOf(uint256 _projectId)
     _Internal references:_
 
     * [`_getStructFor`](_getstructfor.md)
-8.  Return a funding cycle based on the one currently referenced. The mock funding cycle is allowed to have started already, which is why a `true` flag is passed in.
+
+8.  If the base has a duration of 0, it must still be current.
+
+    ```solidity
+    // If the base has no duration, it's still the current one.
+    if (_fundingCycle.duration == 0) return _fundingCycle;
+    ```
+
+    _Internal references:_
+
+    * [`_getStructFor`](_getstructfor.md)
+
+9.  Return a funding cycle based on the one currently referenced. The mock funding cycle is allowed to have started already, which is why a `true` flag is passed in.
 
     ```solidity
     // Return a mock of the current funding cycle.
@@ -190,6 +202,9 @@ function currentOf(uint256 _projectId)
 
   // The funding cycle to base a current one on.
   _fundingCycle = _getStructFor(_projectId, _fundingCycleConfiguration);
+
+  // If the base has no duration, it's still the current one.
+  if (_fundingCycle.duration == 0) return _fundingCycle;
 
   // Return a mock of the current funding cycle.
   return _mockFundingCycleBasedOn(_fundingCycle, true);

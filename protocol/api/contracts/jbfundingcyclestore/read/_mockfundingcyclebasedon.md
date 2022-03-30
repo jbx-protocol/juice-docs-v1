@@ -8,6 +8,7 @@ Contract:[`JBFundingCycleStore`](../)​
 
 _Returns an empty funding cycle if there can't be a mock funding cycle based on the provided one._
 
+_Assumes a funding cycle with a duration of 0 will never be asked to be the base of a mock._
 ### Definition
 
 ```solidity
@@ -34,8 +35,7 @@ function _mockFundingCycleBasedOn(JBFundingCycle memory _baseFundingCycle, bool 
     ```solidity
     // Get the distance of the current time to the start of the next possible funding cycle.
     // If the returned mock cycle must not yet have started, the start time of the mock must be in the future.
-    // If the base funding cycle doesn't have a duration, no adjustment is necessary because the next cycle can start immediately.
-    uint256 _mustStartAtOrAfter = !_allowMidCycle || _baseFundingCycle.duration == 0
+    uint256 _mustStartAtOrAfter = !_allowMidCycle
       ? block.timestamp + 1
       : block.timestamp - _baseFundingCycle.duration + 1;
     ```
@@ -90,6 +90,9 @@ function _mockFundingCycleBasedOn(JBFundingCycle memory _baseFundingCycle, bool 
   @dev
   Returns an empty funding cycle if there can't be a mock funding cycle based on the provided one.
 
+  @dev
+  Assumes a funding cycle with a duration of 0 will never be asked to be the base of a mock.
+
   @param _baseFundingCycle The funding cycle that the resulting funding cycle should follow.
   @param _allowMidCycle A flag indicating if the mocked funding cycle is allowed to already be mid cycle.
 
@@ -102,8 +105,7 @@ function _mockFundingCycleBasedOn(JBFundingCycle memory _baseFundingCycle, bool 
 {
   // Get the distance of the current time to the start of the next possible funding cycle.
   // If the returned mock cycle must not yet have started, the start time of the mock must be in the future.
-  // If the base funding cycle doesn't have a duration, no adjustment is necessary because the next cycle can start immediately.
-  uint256 _mustStartAtOrAfter = !_allowMidCycle || _baseFundingCycle.duration == 0
+  uint256 _mustStartAtOrAfter = !_allowMidCycle
     ? block.timestamp + 1
     : block.timestamp - _baseFundingCycle.duration + 1;
 
