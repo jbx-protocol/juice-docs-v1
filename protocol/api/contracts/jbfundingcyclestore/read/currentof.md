@@ -59,7 +59,7 @@ function currentOf(uint256 _projectId)
 4.  If there's a candidate funding cycle configuration, check to see if it is approved. If so, return the funding cycle as the current funding cycle of the project. Otherwise, get a reference to the funding cycle that the candidate is based on. A current funding cycle will be one derived from this reference.
 
     ```solidity
-    // If a standby funding cycle exists...
+    // If an eligible funding cycle exists...
     if (_fundingCycleConfiguration > 0) {
       // Resolve the funding cycle for the eligible configuration.
       _fundingCycle = _getStructFor(_projectId, _fundingCycleConfiguration);
@@ -160,7 +160,7 @@ function currentOf(uint256 _projectId)
   // Keep a reference to the eligible funding cycle.
   JBFundingCycle memory _fundingCycle;
 
-  // If a standby funding cycle exists...
+  // If an eligible funding cycle exists...
   if (_fundingCycleConfiguration > 0) {
     // Resolve the funding cycle for the eligible configuration.
     _fundingCycle = _getStructFor(_projectId, _fundingCycleConfiguration);
