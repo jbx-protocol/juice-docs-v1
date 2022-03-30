@@ -433,7 +433,11 @@ function currentBallotStateOf(uint256 _projectId) external view override returns
 At any point, anyone can inject funds into a project's treasury via one of its terminals. For example, if the project has added the [`JBETHPaymentTerminal`](../api/contracts/or-payment-terminals/jbethpaymentterminal), it can add ETH to its treasury by calling the terminal's [`addToBalanceOf(...)`](../api/contracts/or-abstract/jbpayoutredemptionpaymentterminal/write/addtobalanceof.md) transaction.
 
 ```solidity
- function addToBalanceOf(uint256 _projectId, string memory _memo) external payable override { ... }
+function addToBalanceOf(
+  uint256 _projectId,
+  uint256 _amount,
+  string calldata _memo
+) external payable virtual override isTerminalOf(_projectId) { ... }
 ```
 
 At any time after the project has been created, its owner can issue ERC-20 tokens for the protocol to use as its community token by calling [`JBController.issueTokenFor(...)`](../api/contracts/jbtokenstore/write/issuefor.md). By default the protocol uses an internal accounting mechanism to account for projects' tokens.
