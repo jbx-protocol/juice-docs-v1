@@ -53,7 +53,43 @@ function setControllerOf(uint256 _projectId, IJBController _controller)
     _External references:_
 
     * [`count`](../../jbprojects/properties/count.md)
-3.  Store the provided controller as the controller of the project.
+
+2.  Get a reference to the project's current funding cycle.
+
+    ```solidity
+    // Get a reference to the project's current funding cycle.
+    JBFundingCycle memory _fundingCycle = fundingCycleStore.currentOf(_projectId);
+    ```
+
+    _Internal references:_
+
+    * [`fundingCycleStore`](../properties/fundingcyclestore.md)
+
+    _External references:_
+
+    * [`currentOf`](../../jbfundingcyclestore/read/currentof.md)
+
+3.  Make sure the project's current funding cycle is set to allow setting its controller, or the request to set the controller is coming from the project's current controller or is setting the first controller.
+
+    ```solidity
+    // Setting controller must be allowed if not called from the current controller or if the project already has a controller.
+    if (
+      msg.sender != address(controllerOf[_projectId]) &&
+      controllerOf[_projectId] != IJBController(address(0)) &&
+      !_fundingCycle.setControllerAllowed()
+    ) revert SET_CONTROLLER_NOT_ALLOWED();
+    ```
+
+    _Libraries used:_
+
+    * [`JBFundingCycleMetadataResolver`](../../../libraries/jbfundingcyclemetadataresolver.md)\
+      `.setControllerAllowed(...)`
+
+    _Internal references:_
+
+    * [`controllerOf`](../properties/controllerof.md)
+
+4.  Store the provided controller as the controller of the project.
 
     ```solidity
     // Set the new controller.
@@ -104,6 +140,16 @@ function setControllerOf(uint256 _projectId, IJBController _controller)
   // The project must exist.
   if (projects.count() < _projectId) revert INVALID_PROJECT_ID_IN_DIRECTORY();
 
+  // Get a reference to the project's current funding cycle.
+  JBFundingCycle memory _fundingCycle = fundingCycleStore.currentOf(_projectId);
+
+  // Setting controller must be allowed if not called from the current controller or if the project already has a controller.
+  if (
+    msg.sender != address(controllerOf[_projectId]) &&
+    controllerOf[_projectId] != IJBController(address(0)) &&
+    !_fundingCycle.setControllerAllowed()
+  ) revert SET_CONTROLLER_NOT_ALLOWED();
+
   // Set the new controller.
   controllerOf[_projectId] = _controller;
 
@@ -116,6 +162,7 @@ function setControllerOf(uint256 _projectId, IJBController _controller)
 | String                            | Description                                                      |
 | --------------------------------- | ---------------------------------------------------------------- |
 | **`INVALID_PROJECT_ID`**          | Thrown if the provided project doesn't yet exist.                |
+| **`SET_CONTROLLER_NOT_ALLOWED`**          | Thrown if the provided project isn't currently allowed to set its controller.                |
 {% endtab %}
 
 {% tab title="Events" %}

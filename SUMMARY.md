@@ -229,6 +229,7 @@
         * [SetIsAllowedToSetFirstController](protocol/api/contracts/jbdirectory/events/setisallowedtosetfirstcontroller.md)
       * [Properties](protocol/api/contracts/jbdirectory/properties/README.md)
         * [projects](protocol/api/contracts/jbdirectory/properties/projects.md)
+        * [fundingCycleStore](protocol/api/contracts/jbdirectory/properties/fundingcyclestore.md)
         * [controllerOf](protocol/api/contracts/jbdirectory/properties/controllerof.md)
         * [isAllowedToSetFirstController](protocol/api/contracts/jbdirectory/properties/isallowedtosetfirstcontroller.md)
         * [_terminalsOf](protocol/api/contracts/jbdirectory/properties/_terminalsof.md)

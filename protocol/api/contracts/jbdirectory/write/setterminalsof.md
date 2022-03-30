@@ -33,28 +33,67 @@ function setTerminalsOf(uint256 _projectId, IJBPaymentTerminal[] calldata _termi
 
 ### Body
 
-1.  Get a reference to the project's current terminals.
+1.  Get a reference to the project's current funding cycle.
+
+    ```solidity
+    // Get a reference to the project's current funding cycle.
+    JBFundingCycle memory _fundingCycle = fundingCycleStore.currentOf(_projectId);
+    ```
+
+    _External references:_
+
+    * [`currentOf`](../../jbfundingcyclestore/read/currentof.md)
+
+2.  Make sure the project's current funding cycle is set to allow setting terminals, or the request to set the terminals is coming from the project's current controller.
+
+    ```solidity
+    // Setting terminals must be allowed if not called from the current controller.
+    if (msg.sender != address(controllerOf[_projectId]) && !_fundingCycle.setTerminalsAllowed())
+      revert SET_TERMINALS_NOT_ALLOWED();
+    ```
+
+    _Libraries used:_
+
+    * [`JBFundingCycleMetadataResolver`](../../../libraries/jbfundingcyclemetadataresolver.md)\
+      `.setTerminalsAllowed(...)`
+
+    _Internal references:_
+
+    * [`controllerOf`](../properties/controllerof.md)
+
+3.  Get a reference to the project's current funding cycle.
+
+    ```solidity
+    // Get a reference to the project's current funding cycle.
+    JBFundingCycle memory _fundingCycle = fundingCycleStore.currentOf(_projectId);
+    ```
+
+    _External references:_
+
+    * [`currentOf`](../../jbfundingcyclestore/read/currentof.md)
+
+4.  Get a reference to the project's current terminals.
 
     ```solidity
     // Get a reference to the terminals of the project.
     IJBPaymentTerminal[] memory _oldTerminals = _terminalsOf[_projectId];
     ```
 
-    Internal references:
+    _Internal references:_
 
     * [`_terminalsOf`](../properties/_terminalsof.md)
-2.  Delete the project's current set of terminals from storage.
+5.  Delete the project's current set of terminals from storage.
 
     ```solidity
     // Delete the stored terminals for the project.
     _terminalsOf[_projectId] = _terminals;
     ```
 
-    Internal references:
+    _Internal references:_
 
     * [`_terminalsOf`](../properties/_terminalsof.md)
 
-3.  Make sure the same terminal isn't being set multiple times.
+6.  Make sure the same terminal isn't being set multiple times.
     ```solidity
     // Make sure duplicates were not added.
     if (_terminals.length > 1)
@@ -63,7 +102,7 @@ function setTerminalsOf(uint256 _projectId, IJBPaymentTerminal[] calldata _termi
           if (_terminals[_i] == _terminals[_j]) revert DUPLICATE_TERMINALS();
     ```
 
-4.  If any of the project's primary terminals are being removed, also remove their status as a primary terminal.
+7.  If any of the project's primary terminals are being removed, also remove their status as a primary terminal.
 
     ```solidity
     // If one of the old terminals was set as a primary terminal but is not included in the new terminals, remove it from being a primary terminal.
@@ -74,11 +113,11 @@ function setTerminalsOf(uint256 _projectId, IJBPaymentTerminal[] calldata _termi
       ) delete _primaryTerminalOf[_projectId][_oldTerminals[_i].token()];
     ```
 
-    Internal references:
+    _Internal references:_
 
     * [`_primaryTerminalOf`](../properties/_primaryterminalof.md)
     * [`_contains`](../read/_contains.md)
-5.  Emit a `SetTerminals` event with the relevant parameters.
+8.  Emit a `SetTerminals` event with the relevant parameters.
 
     ```solidity
     emit SetTerminals(_projectId, _terminals, msg.sender);
@@ -111,6 +150,13 @@ function setTerminalsOf(uint256 _projectId, IJBPaymentTerminal[] calldata _termi
     msg.sender == address(controllerOf[_projectId])
   )
 {
+  // Get a reference to the project's current funding cycle.
+  JBFundingCycle memory _fundingCycle = fundingCycleStore.currentOf(_projectId);
+
+  // Setting terminals must be allowed if not called from the current controller.
+  if (msg.sender != address(controllerOf[_projectId]) && !_fundingCycle.setTerminalsAllowed())
+    revert SET_TERMINALS_NOT_ALLOWED();
+
   // Get a reference to the terminals of the project.
   IJBPaymentTerminal[] memory _oldTerminals = _terminalsOf[_projectId];
 
@@ -140,6 +186,7 @@ function setTerminalsOf(uint256 _projectId, IJBPaymentTerminal[] calldata _termi
 | ------------------------------- | --------------------------------------------------------- |
 | **`ADD_TERMINAL_ZERO_ADDRESS`** | Thrown if a provided terminal to add is the zero address. |
 | **`DUPLICATE_TERMINALS`** | Thrown if the same terminal is being set multiple times. |
+| **`SET_TERMINALS_NOT_ALLOWED`**          | Thrown if the provided project isn't currently allowed to set its terminals.                |
 {% endtab %}
 
 {% tab title="Events" %}

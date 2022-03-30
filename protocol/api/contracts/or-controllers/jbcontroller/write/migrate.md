@@ -48,7 +48,7 @@ function migrate(uint256 _projectId, IJBController _to)
 3.  Make sure the project's current funding cycle is configured to allow controller migrations.
 
     ```solidity
-    // Migration must be allowed
+    // Migration must be allowed.
     if (!_fundingCycle.controllerMigrationAllowed()) revert MIGRATION_NOT_ALLOWED();
     ```
 
@@ -126,7 +126,7 @@ function migrate(uint256 _projectId, IJBController _to)
   // Get a reference to the project's current funding cycle.
   JBFundingCycle memory _fundingCycle = fundingCycleStore.currentOf(_projectId);
 
-  // Migration must be allowed
+  // Migration must be allowed.
   if (!_fundingCycle.controllerMigrationAllowed()) revert MIGRATION_NOT_ALLOWED();
 
   // All reserved tokens must be minted before migrating.

@@ -31,14 +31,23 @@ Ethereum mainnet: _Not yet deployed_
 ## Constructor
 
 ```solidity
-constructor(IJBOperatorStore _operatorStore, IJBProjects _projects) JBOperatable(_operatorStore) {
-  projects = _projects;
-}
+  constructor(
+    IJBOperatorStore _operatorStore,
+    IJBProjects _projects,
+    IJBFundingCycleStore _fundingCycleStore,
+    address _owner
+  ) JBOperatable(_operatorStore) {
+    projects = _projects;
+    fundingCycleStore = _fundingCycleStore;
+
+    _transferOwnership(_owner);
+  }
 ```
 
 * **Arguments:**
   * `_operatorStore` is an [`IJBOperatorStore`](../../interfaces/ijboperatorstore.md) contract storing operator assignments.
   * `_projects` is an [`IJBProjects`](../../interfaces/ijbprojects.md) contract which mints ERC-721's that represent project ownership and transfers.
+  * `_fundingCycleStore` is an [`IJBFundingCycleStore`](../../../interfaces/ijbfundingcyclestore.md) contract storing all funding cycle configurations.
   * `_owner` is the address that will own the contract.
 
 ## Events
@@ -56,6 +65,7 @@ constructor(IJBOperatorStore _operatorStore, IJBProjects _projects) JBOperatable
 | Function                                                                                   | Definition                                                                                                                                                                                                         |
 | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | [**`projects`**](properties/projects.md) | <p><strong>Traits</strong></p><ul><li><code>immutable</code></li></ul><p><strong>Returns</strong></p><ul><li><code>[`IJBProjects`](../../interfaces/ijbprojects.md)projects</code></li></ul> |
+| [**`fundingCycleStore`**](properties/fundingcyclestore.md)            | <p><strong>Traits</strong></p><ul><li><code>immutable</code></li></ul><p><strong>Returns</strong></p><ul><li><code>[`IJBFundingCycleStore`](../../../interfaces/ijbfundingcyclestore.md)fundingCycleStore</code></li></ul>                                                                             |
 | [**`controllerOf`**](properties/controllerof.md)                                           | <p><strong>Params</strong></p><ul><li><code>uint256 _projectId</code></li></ul><p><strong>Returns</strong></p><ul><li><code>[`IJBController`](../../interfaces/ijbcontroller.md)controllerOf</code></li></ul> |
 | [**`isAllowedToSetFirstController`**](properties/isallowedtosetfirstcontroller.md)                                           | <p><strong>Params</strong></p><ul><li><code>address _address</code></li></ul><p><strong>Returns</strong></p><ul><li><code>bool isAllowedToSetFirstController</code></li></ul> |
 

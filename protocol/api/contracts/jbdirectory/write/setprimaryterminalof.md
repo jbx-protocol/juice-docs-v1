@@ -12,6 +12,8 @@ Interface: [`IJBDirectory`](../../../interfaces/ijbdirectory.md)
 
 _The terminal will be set as the primary terminal where ecosystem contracts should route tokens._
 
+_If setting a newly added terminal and the funding cycle doesn't allow new terminals, the caller must be the current controller._
+
 ### Definition
 
 ```solidity
@@ -40,7 +42,7 @@ function setPrimaryTerminalOf(uint256 _projectId, IJBPaymentTerminal _terminal)
     _External references:_
 
     * [`token`](../../or-abstract/jbpayoutredemptionpaymentterminal/properties/token.md)
-2.  Add the terminal to the list of the project's terminals if it isn't included already.
+2.  Make sure the project's current funding cycle is set to allow setting terminals, or the request to set the terminals is coming from the project's current controller.
 
     ```solidity
     // Add the terminal to the project if it hasn't been already.
@@ -80,6 +82,9 @@ function setPrimaryTerminalOf(uint256 _projectId, IJBPaymentTerminal _terminal)
 
   @dev
   The terminal will be set as the primary terminal where ecosystem contracts should route tokens.
+
+  @dev
+  If setting a newly added terminal and the funding cycle doesn't allow new terminals, the caller must be the current controller.
 
   @param _projectId The ID of the project for which a primary token is being set.
   @param _terminal The terminal to make primary.
