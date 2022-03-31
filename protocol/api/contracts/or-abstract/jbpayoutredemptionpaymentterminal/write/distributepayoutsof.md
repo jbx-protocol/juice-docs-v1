@@ -75,6 +75,7 @@ function distributePayoutsOf(
 
     ```solidity
     // Define variables that will be needed outside the scoped section below.
+    // Keep a reference to the fee amount that was paid, and the distribution amount leftover after distributing to the splits.
     uint256 _fee;
     uint256 _leftoverDistributionAmount;
 
@@ -243,6 +244,7 @@ function distributePayoutsOf(
   address payable _projectOwner = payable(projects.ownerOf(_projectId));
 
   // Define variables that will be needed outside the scoped section below.
+  // Keep a reference to the fee amount that was paid, and the distribution amount leftover after distributing to the splits.
   uint256 _fee;
   uint256 _leftoverDistributionAmount;
 

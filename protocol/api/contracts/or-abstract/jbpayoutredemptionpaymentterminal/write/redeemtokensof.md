@@ -52,6 +52,7 @@ function redeemTokensOf(
 2.  Define a reference to the project's funding cycle during which the redemption is being made.
 
     ```solidity
+    // Define variables that will be needed outside the scoped section below.
     // Keep a reference to the funding cycle during which the redemption is being made.
     JBFundingCycle memory _fundingCycle;
     ```
@@ -205,6 +206,7 @@ function redeemTokensOf(
   // Can't send reclaimed funds to the zero address.
   if (_beneficiary == address(0)) revert REDEEM_TO_ZERO_ADDRESS();
 
+  // Define variables that will be needed outside the scoped section below.
   // Keep a reference to the funding cycle during which the redemption is being made.
   JBFundingCycle memory _fundingCycle;
 

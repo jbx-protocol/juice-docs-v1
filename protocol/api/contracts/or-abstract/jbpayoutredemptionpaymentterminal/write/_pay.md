@@ -45,6 +45,8 @@ function _pay(
 2.  The following scoped block is a bit of a hack to prevent a "Stack too deep" error. Define a few variables outside of the scope that'll be set within the scope but later referenced again outside.
 
     ```solidity
+    // Define variables that will be needed outside the scoped section below.
+    // Keep a reference to the funding cycle during which the payment is being made, and the number of tokens minted for the beneficiary.
     JBFundingCycle memory _fundingCycle;
     uint256 _beneficiaryTokenCount;
 
@@ -188,6 +190,8 @@ function _pay(
   // Cant send tokens to the zero address.
   if (_beneficiary == address(0)) revert PAY_TO_ZERO_ADDRESS();
 
+  // Define variables that will be needed outside the scoped section below.
+  // Keep a reference to the funding cycle during which the payment is being made, and the number of tokens minted for the beneficiary.
   JBFundingCycle memory _fundingCycle;
   uint256 _beneficiaryTokenCount;
 
